@@ -1,0 +1,212 @@
+/* Tailwind CSS Directives */
+/* These will work if Tailwind is installed, but won't break if it's not */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base Reset & Normalization */
+/* Works alongside Tailwind without conflicts */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  line-height: 1.5;
+  color: #212121;
+  background-color: #ffffff;
+}
+
+/* Material Design Text Styles */
+/* Typography scale following Material Design guidelines */
+
+/* Display Styles */
+.material-display-large {
+  font-size: 3.5625rem; /* 57px */
+  font-weight: 400;
+  line-height: 4rem; /* 64px */
+  letter-spacing: -0.015625rem; /* -0.25px */
+}
+
+.material-display-medium {
+  font-size: 2.8125rem; /* 45px */
+  font-weight: 400;
+  line-height: 3.25rem; /* 52px */
+  letter-spacing: 0;
+}
+
+.material-display-small {
+  font-size: 2.25rem; /* 36px */
+  font-weight: 400;
+  line-height: 2.75rem; /* 44px */
+  letter-spacing: 0;
+}
+
+/* Headline Styles */
+.material-headline-large {
+  font-size: 2rem; /* 32px */
+  font-weight: 400;
+  line-height: 2.5rem; /* 40px */
+  letter-spacing: 0;
+}
+
+.material-headline-medium {
+  font-size: 1.75rem; /* 28px */
+  font-weight: 400;
+  line-height: 2.25rem; /* 36px */
+  letter-spacing: 0;
+}
+
+.material-headline-small {
+  font-size: 1.5rem; /* 24px */
+  font-weight: 400;
+  line-height: 2rem; /* 32px */
+  letter-spacing: 0;
+}
+
+/* Title Styles */
+.material-title-large {
+  font-size: 1.375rem; /* 22px */
+  font-weight: 400;
+  line-height: 1.75rem; /* 28px */
+  letter-spacing: 0;
+}
+
+.material-title-medium {
+  font-size: 1rem; /* 16px */
+  font-weight: 500;
+  line-height: 1.5rem; /* 24px */
+  letter-spacing: 0.009375rem; /* 0.15px */
+}
+
+.material-title-small {
+  font-size: 0.875rem; /* 14px */
+  font-weight: 500;
+  line-height: 1.25rem; /* 20px */
+  letter-spacing: 0.00625rem; /* 0.1px */
+}
+
+/* Label Styles */
+.material-label-large {
+  font-size: 0.875rem; /* 14px */
+  font-weight: 500;
+  line-height: 1.25rem; /* 20px */
+  letter-spacing: 0.00625rem; /* 0.1px */
+}
+
+.material-label-medium {
+  font-size: 0.75rem; /* 12px */
+  font-weight: 500;
+  line-height: 1rem; /* 16px */
+  letter-spacing: 0.03125rem; /* 0.5px */
+}
+
+.material-label-small {
+  font-size: 0.6875rem; /* 11px */
+  font-weight: 500;
+  line-height: 1rem; /* 16px */
+  letter-spacing: 0.03125rem; /* 0.5px */
+}
+
+/* Body Styles */
+.material-body-large {
+  font-size: 1rem; /* 16px */
+  font-weight: 400;
+  line-height: 1.5rem; /* 24px */
+  letter-spacing: 0.03125rem; /* 0.5px */
+}
+
+.material-body-medium {
+  font-size: 0.875rem; /* 14px */
+  font-weight: 400;
+  line-height: 1.25rem; /* 20px */
+  letter-spacing: 0.015625rem; /* 0.25px */
+}
+
+.material-body-small {
+  font-size: 0.75rem; /* 12px */
+  font-weight: 400;
+  line-height: 1rem; /* 16px */
+  letter-spacing: 0.025rem; /* 0.4px */
+}
+
+/* Utility Classes for Traditional CSS */
+/* These work independently of Tailwind */
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.gap-1 { gap: 0.25rem; }
+.gap-2 { gap: 0.5rem; }
+.gap-3 { gap: 0.75rem; }
+.gap-4 { gap: 1rem; }
+.gap-5 { gap: 1.25rem; }
+.gap-6 { gap: 1.5rem; }
+
+/* Custom Properties for Theming */
+:root {
+  --color-primary: #1976d2;
+  --color-secondary: #dc004e;
+  --color-surface: #ffffff;
+  --color-background: #ffffff;
+  --color-error: #b00020;
+  --color-on-primary: #ffffff;
+  --color-on-secondary: #ffffff;
+  --color-on-surface: #000000;
+  --color-on-background: #000000;
+  --color-on-error: #ffffff;
+}
+
+/* Scrollbar Styling (works with traditional CSS) */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3B5379;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #FFDA49;
+}
+
