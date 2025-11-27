@@ -89,39 +89,6 @@ const isActive = (href: string) => {
 }
 
 
-.logo {
-  width: 44px;
-  height: 44px;
-  border: 2px solid #00a09b;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(145deg, #e1f8f7, #ffffff);
-}
-
-.logo-dot {
-  width: 16px;
-  height: 16px;
-  background: #00a09b;
-  border-radius: 50%;
-  display: inline-block;
-}
-
-.brand-title {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: #1c1c1c;
-  margin: 0;
-}
-
-.brand-subtitle {
-  font-size: 0.75rem;
-  color: #666;
-  margin: 0;
-  letter-spacing: 0.02em;
-}
-
 .nav {
   flex: 1;
 }
@@ -141,19 +108,19 @@ const isActive = (href: string) => {
   gap: 12px;
   padding: 10px 12px;
   border-radius: 8px;
-  color: #2f2f2f;
+  color: var(--color-black);
   text-decoration: none;
   font-weight: 500;
   transition: background-color 0.2s, color 0.2s;
 }
 
 .nav-item:hover {
-  background-color: #f5f5f5;
+  background-color: var(--color-tertiary);
 }
 
 .nav-item.active {
-  background-color: #f4c542;
-  color: #2f2f2f;
+  background-color: var(--color-highlight);
+  color: var(--color-black);
   font-weight: 600;
 }
 

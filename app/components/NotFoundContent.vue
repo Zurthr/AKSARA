@@ -6,7 +6,7 @@
     <p class="body">
       The link you followed might be broken or the page may have been removed.
     </p>
-    <NuxtLink to="/" class="back-home">Back to dashboard</NuxtLink>
+    <NuxtLink to="/" class="back-home">Back to Home</NuxtLink>
   </section>
 </template>
 
@@ -17,20 +17,21 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 12px;
+  gap: 4px;
   padding: 16px 20px;
   border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
   align-items: center;
   justify-items: center;
 }
 
 .eyebrow {
+  padding: 0 2px;
   font-size: 14px;
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #f97316;
+  color: var(--color-black);
+  background-color: var(--color-highlight);
 }
 
 h1 {
@@ -43,8 +44,9 @@ h1 {
 .body {
   margin: 0;
   max-width: 420px;
-  color: #4b5563;
+  color: var(--color-secondary);
   line-height: 1.6;
+  text-align: center;
 }
 
 .back-home {
@@ -52,9 +54,9 @@ h1 {
   align-items: center;
   gap: 8px;
   margin-top: 12px;
-  padding: 10px 20px;
-  border-radius: 999px;
-  background: #2563eb;
+  padding: 8px 32px;
+  border-radius:12px;
+  background: var(--color-primary);
   color: #ffffff;
   font-weight: 600;
   text-decoration: none;
@@ -62,7 +64,7 @@ h1 {
 }
 
 .back-home:hover {
-  background: #1d4ed8;
+  background: var(--color-secondary);
 }
 </style>
 
