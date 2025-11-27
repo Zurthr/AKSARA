@@ -24,7 +24,7 @@ body {
     sans-serif;
   line-height: 1.5;
   color: #212121;
-  background-color: #ffffff;
+  background-color: #F9FAFB;
 }
 
 /* Material Design Text Styles */
@@ -179,16 +179,24 @@ body {
 
 /* Custom Properties for Theming */
 :root {
-  --color-primary: #1976d2;
-  --color-secondary: #dc004e;
-  --color-surface: #ffffff;
-  --color-background: #ffffff;
-  --color-error: #b00020;
-  --color-on-primary: #ffffff;
-  --color-on-secondary: #ffffff;
-  --color-on-surface: #000000;
-  --color-on-background: #000000;
-  --color-on-error: #ffffff;
+    --color-black: #191F28;
+    --color-primary: #3B5379;
+    --color-secondary: #2C3542;
+    --color-tertiary: #E6EDF7;
+    --color-blue: #3B5379;
+    --color-dark-blue: #2C3542;
+    --color-yellow: #FFDA49;
+    --color-highlight: #FFDA49;
+    --color-accent: #FFDA49;
+    
+    /* whites */
+    --color-background: #FBFDFF;
+    --color-white: #F9FAFB;
+    --color-light-blue: #E6EDF7;
+    --color-light-blue-II: #F4F8FF;
+    --color-gray: #BCC3CC;
+    --color-dark-gray: #4F5763;
+
 }
 
 /* Scrollbar Styling (works with traditional CSS) */
