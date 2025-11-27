@@ -1,0 +1,217 @@
+/*! tailwindcss v4.1.17 | MIT License | https://tailwindcss.com */
+@layer properties;
+.container {
+  width: 100%;
+}
+.flex {
+  display: flex;
+}
+.flex-col {
+  flex-direction: column;
+}
+.items-center {
+  align-items: center;
+}
+.justify-between {
+  justify-content: space-between;
+}
+.justify-center {
+  justify-content: center;
+}
+.border {
+  border-style: var(--tw-border-style);
+  border-width: 1px;
+}
+.transition {
+  transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to, opacity, box-shadow, transform, translate, scale, rotate, filter, -webkit-backdrop-filter, backdrop-filter, display, content-visibility, overlay, pointer-events;
+  transition-timing-function: var(--tw-ease, ease);
+  transition-duration: var(--tw-duration, 0s);
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  line-height: 1.5;
+  color: #212121;
+  background-color: #F9FAFB;
+}
+.material-display-large {
+  font-size: 3.5625rem;
+  font-weight: 400;
+  line-height: 4rem;
+  letter-spacing: -0.015625rem;
+}
+.material-display-medium {
+  font-size: 2.8125rem;
+  font-weight: 400;
+  line-height: 3.25rem;
+  letter-spacing: 0;
+}
+.material-display-small {
+  font-size: 2.25rem;
+  font-weight: 400;
+  line-height: 2.75rem;
+  letter-spacing: 0;
+}
+.material-headline-large {
+  font-size: 2rem;
+  font-weight: 400;
+  line-height: 2.5rem;
+  letter-spacing: 0;
+}
+.material-headline-medium {
+  font-size: 1.75rem;
+  font-weight: 400;
+  line-height: 2.25rem;
+  letter-spacing: 0;
+}
+.material-headline-small {
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 2rem;
+  letter-spacing: 0;
+}
+.material-title-large {
+  font-size: 1.375rem;
+  font-weight: 400;
+  line-height: 1.75rem;
+  letter-spacing: 0;
+}
+.material-title-medium {
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5rem;
+  letter-spacing: 0.009375rem;
+}
+.material-title-small {
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+  letter-spacing: 0.00625rem;
+}
+.material-label-large {
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+  letter-spacing: 0.00625rem;
+}
+.material-label-medium {
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1rem;
+  letter-spacing: 0.03125rem;
+}
+.material-label-small {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  line-height: 1rem;
+  letter-spacing: 0.03125rem;
+}
+.material-body-large {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5rem;
+  letter-spacing: 0.03125rem;
+}
+.material-body-medium {
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.25rem;
+  letter-spacing: 0.015625rem;
+}
+.material-body-small {
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1rem;
+  letter-spacing: 0.025rem;
+}
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+.flex {
+  display: flex;
+}
+.flex-col {
+  flex-direction: column;
+}
+.items-center {
+  align-items: center;
+}
+.justify-center {
+  justify-content: center;
+}
+.justify-between {
+  justify-content: space-between;
+}
+.gap-1 {
+  gap: 0.25rem;
+}
+.gap-2 {
+  gap: 0.5rem;
+}
+.gap-3 {
+  gap: 0.75rem;
+}
+.gap-4 {
+  gap: 1rem;
+}
+.gap-5 {
+  gap: 1.25rem;
+}
+.gap-6 {
+  gap: 1.5rem;
+}
+:root {
+  --color-black: #191F28;
+  --color-primary: #3B5379;
+  --color-secondary: #2C3542;
+  --color-tertiary: #E6EDF7;
+  --color-blue: #3B5379;
+  --color-dark-blue: #2C3542;
+  --color-yellow: #FFDA49;
+  --color-highlight: #FFDA49;
+  --color-accent: #FFDA49;
+  --color-background: #FBFDFF;
+  --color-white: #F9FAFB;
+  --color-light-blue: #E6EDF7;
+  --color-light-blue-II: #F4F8FF;
+  --color-gray: #BCC3CC;
+  --color-dark-gray: #4F5763;
+}
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: #3B5379;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #FFDA49;
+}
+@property --tw-border-style {
+  syntax: "*";
+  inherits: false;
+  initial-value: solid;
+}
+@layer properties {
+  @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
+    *, ::before, ::after, ::backdrop {
+      --tw-border-style: solid;
+    }
+  }
+}
