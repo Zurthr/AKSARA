@@ -60,11 +60,6 @@ const navItems = [
     href: '/embeds',
     icon: 'M5 5h14v14H5zm2 2v10h10V7z'
   },
-  {
-    label: 'My Embeds',
-    href: '/embeds/mine',
-    icon: 'M6 4h11l3 3v13H6z'
-  }
 ];
 
 const isActive = (href: string) => {
