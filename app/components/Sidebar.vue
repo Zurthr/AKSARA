@@ -1,13 +1,7 @@
 <template>
   <aside class="sidebar">
     <div class="brand">
-      <div class="logo">
-        <span class="logo-dot" />
-      </div>
-      <div>
-        <p class="brand-title">SALIRA</p>
-        <p class="brand-subtitle">Pusat Literasi Jawa Barat</p>
-      </div>
+      <img src="assets/images/AKSARALogo.png">
     </div>
 
     <nav class="nav">
@@ -18,11 +12,12 @@
             class="nav-item"
             :class="{ active: isActive(item.href) }"
           >
-            <span class="nav-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" focusable="false">
-                <path :d="item.icon" fill="currentColor" />
-              </svg>
-            </span>
+            <img
+              class="nav-icon"
+              :src="item.icon"
+              alt=""
+              aria-hidden="true"
+            >
             <span>{{ item.label }}</span>
           </NuxtLink>
         </li>
@@ -56,11 +51,6 @@ const navItems = [
     icon: 'M4 4h16v10H7l-3 3z'
   },
   {
-    label: 'Groups',
-    href: '/groups',
-    icon: 'M7 10a3 3 0 1 1 3-3 3 3 0 0 1-3 3zm10 0a3 3 0 1 1 3-3 3 3 0 0 1-3 3zm-10 3a4 4 0 0 0-4 4v2h8v-2a4 4 0 0 0-4-4zm10 0a4 4 0 0 0-4 4v2h8v-2a4 4 0 0 0-4-4z'
-  },
-  {
     label: 'Events',
     href: '/events',
     icon: 'M7 3v2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2V3h-2v2H9V3zm0 8h4v4H7z'
@@ -74,11 +64,6 @@ const navItems = [
     label: 'My Embeds',
     href: '/embeds/mine',
     icon: 'M6 4h11l3 3v13H6z'
-  },
-  {
-    label: 'Create an Embed',
-    href: '/embeds/create',
-    icon: 'M11 11V7h2v4h4v2h-4v4h-2v-4H7v-2z'
   }
 ];
 

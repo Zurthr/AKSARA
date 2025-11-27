@@ -1,4 +1,5 @@
 <template>
+  <div class="app-container">
     <Sidebar />
     <div class="content">
       <Navbar />
@@ -6,6 +7,7 @@
         <slot />
       </Slug>
     </div>
+  </div>
 </template>
 
 <style>
@@ -17,10 +19,12 @@
 
 .content {
   flex: 1;
-  margin-left: 250px;
+  margin-left: 240px;
   display: flex;
   flex-direction: column;
-  width: calc(100vw - 250px);
+  width: calc(100vw - 240px);
+  height: 100vh;
+  overflow-y: auto;
   overflow-x: hidden;
 }
 </style>
