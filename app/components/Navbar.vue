@@ -1,13 +1,15 @@
 <template>
   <header class="navbar">
-    <div class="search-wrapper">
-      <!-- TODO: replace with actual search icon component -->
-      <span class="icon-placeholder">!</span>
-      <input
-        type="search"
-        class="search-input"
-        placeholder="Search something..."
-      />
+    <div class="search-center">
+        <div class="search-wrapper">
+          <!-- TODO: replace with actual search icon component -->
+          <span class="icon-placeholder">!</span>
+          <input
+            type="search"
+            class="search-input"
+            placeholder="Search something..."
+          />
+        </div>
     </div>
     <div class="action-icons">
       <!-- TODO: swap placeholders with bell/profile icons -->
@@ -30,7 +32,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
 }
 
 .search-wrapper {
@@ -40,13 +41,22 @@
   align-items: center;
   gap: 10px;
   border-radius: 16px;
-  width:465px;
+  width:50vw;
+  max-width: 800px;
+  min-width: 420px;
+  margin-left: 92px;
   background-color: var(--color-light-blue);
 }
 
 .icon-placeholder {
   font-size: 14px;
   color: #94a3b8;
+}
+
+.search-center {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
 }
 
 .search-input {
@@ -82,6 +92,15 @@
   font-size: 16px;
 }
 
+
+@media screen and (max-width: 1040px) {
+  .search-center {
+    justify-content: start;
+  }
+  .search-wrapper {
+    margin: 0;
+  }
+}
 .icon-button:focus-visible {
   outline: 2px solid #3b82f6;
   outline-offset: 2px;
