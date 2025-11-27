@@ -1,5 +1,6 @@
 <template>
   <section class="not-found">
+    <img src="assets/images/404.png" style="width:480px;">
     <p class="eyebrow">Error 404</p>
     <h1>Oops, that page isn't available</h1>
     <p class="body">
@@ -16,12 +17,12 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: center;
   gap: 12px;
-  padding: 40px 20px;
-  background: #ffffff;
+  padding: 16px 20px;
   border-radius: 12px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  align-items: center;
+  justify-items: center;
 }
 
 .eyebrow {

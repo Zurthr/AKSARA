@@ -1,7 +1,7 @@
 <template>
   <aside class="sidebar">
-    <div class="brand">
-      <img src="assets/images/AKSARALogo.png">
+    <div style="padding-left:4px;">
+      <img src="assets/images/AKSARALogo.png" style="width:160px;">
     </div>
 
     <nav class="nav">
@@ -76,7 +76,7 @@ const isActive = (href: string) => {
   min-height: 100vh;
   background-color: #fdfdfd;
   border-right: 1px solid #e0e0e0;
-  padding: 24px 18px;
+  padding: 16px;
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -88,11 +88,6 @@ const isActive = (href: string) => {
   z-index: 100;
 }
 
-.brand {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-}
 
 .logo {
   width: 44px;
