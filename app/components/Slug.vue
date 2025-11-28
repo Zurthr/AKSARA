@@ -6,9 +6,11 @@
 
 <style scoped>
 .slug {
-  width: 960px;
+  width: 100%;
+  max-width: 1280px;
   flex: 1;
   padding: 16px 24px;
+  margin: 0 auto;
 }
 </style>
 
