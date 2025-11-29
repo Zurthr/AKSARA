@@ -381,9 +381,10 @@ const relatedCommunities = computed(() => community.value.related);
 }
 
 .community-detail-content {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(240px, 24vw, 320px);
   gap: 24px;
-  align-items: flex-start;
+  align-items: start;
 }
 
 .community-detail-main {
@@ -395,6 +396,7 @@ const relatedCommunities = computed(() => community.value.related);
   overflow-y: auto;
   padding-right: 4px;
   scrollbar-width: thin;
+  min-width: 0;
 }
 
 .community-detail-main::-webkit-scrollbar {
@@ -590,7 +592,8 @@ const relatedCommunities = computed(() => community.value.related);
 }
 
 .community-detail-sidebar {
-  width: 320px;
+  width: clamp(240px, 24vw, 320px);
+  flex: 0 0 clamp(240px, 24vw, 320px);
   position: sticky;
   top: 32px;
   align-self: flex-start;
@@ -789,11 +792,25 @@ const relatedCommunities = computed(() => community.value.related);
 
 @media (max-width: 1280px) {
   .community-detail-content {
-    flex-direction: column;
+    grid-template-columns: minmax(0, 1fr) clamp(220px, 30vw, 300px);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .community-detail-content {
+    grid-template-columns: minmax(0, 1fr) clamp(200px, 36vw, 260px);
+    gap: 18px;
+  }
+}
+
+@media (max-width: 768px) {
+  .community-detail-content {
+    grid-template-columns: 1fr;
+    gap: 16px;
   }
 
-  .community-detail-main,
-  .community-detail-sidebar {
+  .community-detail-main {
     max-height: none;
     overflow: visible;
     padding-right: 0;
@@ -802,10 +819,9 @@ const relatedCommunities = computed(() => community.value.related);
   .community-detail-sidebar {
     width: 100%;
     position: static;
+    margin-top: 16px;
   }
-}
 
-@media (max-width: 768px) {
   .hero-overlay {
     padding: 20px;
   }

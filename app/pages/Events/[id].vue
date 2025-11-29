@@ -274,9 +274,10 @@ const getTagClass = (tag: string): string => {
 }
 
 .event-detail-content {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(240px, 24vw, 320px);
   gap: 24px;
-  align-items: flex-start;
+  align-items: start;
 }
 
 .event-detail-main {
@@ -288,6 +289,7 @@ const getTagClass = (tag: string): string => {
   overflow-y: auto;
   padding-right: 4px;
   scrollbar-width: thin;
+  min-width: 0;
 }
 
 .event-detail-main::-webkit-scrollbar {
@@ -579,17 +581,30 @@ const getTagClass = (tag: string): string => {
 
 @media (max-width: 1280px) {
   .event-detail-content {
-    flex-direction: column;
+    grid-template-columns: minmax(0, 1fr) clamp(220px, 30vw, 300px);
+    gap: 20px;
   }
-  
+}
+
+@media (max-width: 1024px) {
+  .event-detail-content {
+    grid-template-columns: minmax(0, 1fr) clamp(200px, 36vw, 260px);
+    gap: 18px;
+  }
+}
+
+@media (max-width: 768px) {
+  .event-detail-content {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
   .event-detail-main {
     max-height: none;
     overflow: visible;
     padding-right: 0;
   }
-}
 
-@media (max-width: 768px) {
   .hero-media-container {
     height: 280px;
     border-radius: 16px;
@@ -613,6 +628,11 @@ const getTagClass = (tag: string): string => {
   
   .event-info {
     padding: 20px;
+  }
+
+  .events-detail-sidebar,
+  .event-detail-content > *:last-child {
+    width: 100%;
   }
   
   .details-grid {
