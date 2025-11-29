@@ -9,13 +9,39 @@
         />
       </main>
       
-      <TrendingSidebar />
+      <div class="sidebar-wrapper">
+        <NuxtLink to="/forums/create" class="btn-create-thread">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+          Create New Thread
+        </NuxtLink>
+        <TrendingSidebar />
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-const posts = [
+import type { PropType } from 'vue';
+
+interface Post {
+  id: number;
+  author: {
+    name: string;
+    avatar: string;
+    tagline: string;
+    badge?: string;
+  };
+  timeAgo: string;
+  title: string;
+  content: string;
+  tags: { label: string; type: 'category' | 'topic' }[];
+  stars: number;
+}
+
+const posts: Post[] = [
   {
     id: 1,
     author: {
@@ -94,5 +120,33 @@ const posts = [
 .feed-section {
   flex: 1;
   min-width: 0;
+}
+
+.sidebar-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.btn-create-thread {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: #FFDA49;
+  color: #0f172a;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 12px 24px;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+  margin-left: 24px; /* Align with sidebar padding */
+  width: 300px; /* Match sidebar width */
+}
+
+.btn-create-thread:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 </style>
