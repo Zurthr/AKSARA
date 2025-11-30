@@ -75,52 +75,9 @@
 </template>
 
 <script setup lang="ts">
-const events = [
-  {
-    id: 'creative-writing-workshop',
-    title: 'Creative Writing Workshop',
-    subtitle: 'A BIG WRITING WORKSHOP',
-    description: 'Bigger, bolder, and more inspiring than ever. Step into a world of stories, creativity, and imagination with hands-on sessions, live readings, and workshops waiting to be written!',
-    image: 'https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=800&q=80',
-    location: 'Zoom (Online Feeding)',
-    date: '29 Desember, 2025',
-    category: 'Workshop',
-    tags: ['#Workshop', '#Literasi', '#CreativeWriting', '#Menulis', '#Inspirasi']
-  },
-  {
-    id: 'book-knowledge-sharing',
-    title: 'Book Events',
-    subtitle: 'MANY BOOK MANY KNOWLEDGE',
-    description: 'Come together for an evening of reading insights. Share the joy of waiting to be shared. Join us for a heartwarming reading experience where words connect people, ideas spark conversations, and every voice matters.',
-    image: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=800&q=80',
-    location: 'Tahura, Bandung',
-    date: '12 Desember, 2025',
-    category: 'Reading',
-    tags: ['#Book', '#Knowledge', '#Reading']
-  },
-  {
-    id: 'book-festival-2025',
-    title: 'Book Festivals 2025',
-    subtitle: 'BOOK FESTIVAL 2025',
-    description: 'Step into a world of words and wonder as stories come alive, ideas take flight, and imagination knows no bounds. In celebrating writers, and creators in celebrating the magic of books through talks, workshops, and performances.',
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80',
-    location: 'Dispuspida Jabar',
-    date: '22 November, 2025',
-    category: 'Festival',
-    tags: ['#Festival', '#Book', '#Literature']
-  },
-  {
-    id: 'litverse-2025',
-    title: 'LitVerse 2025',
-    subtitle: 'LitVerse 2025: Festival Literasi dan Imajinasi',
-    description: 'A celebration of reading, writing, and creativity where readers, writers, and communities come together to explore new worlds and find inspiration!',
-    image: 'https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=800&q=80',
-    location: 'Bandung Convention Center',
-    date: '29 Desember, 2025',
-    category: 'Festival',
-    tags: ['#LitVerse', '#Festival', '#Imajinasi']
-  }
-];
+import eventsData from '~/data/events.json';
+
+const events = eventsData;
 
 const popularTags = [
   { name: 'Harry Potter', class: 'tag-primary' },
