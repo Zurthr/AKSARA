@@ -1,7 +1,7 @@
 <template>
   <div class="events-section">
     <div class="section-header">
-      <h2 class="section-title">Events being held, curated for you.</h2>
+      <div class="section-title"><div style="background-color: var(--color-highlight);">Events</div> being held, curated for you.</div>
       <NuxtLink to="/events" class="see-more-link">
         <span>See more</span>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -10,81 +10,83 @@
       </NuxtLink>
     </div>
 
-    <div class="events-carousel">
-      <div class="carousel-container" :style="{ transform: `translateX(-${currentIndex * 100}%)` }">
-        <div
-          v-for="event in events"
-          :key="event.id"
-          class="event-card"
-        >
-          <div class="event-image-wrapper">
-            <img :src="event.image" :alt="event.title" class="event-background" />
-            <div class="event-overlay">
-              <h3 class="event-title-overlay">{{ event.subtitle }}</h3>
+    <div class="events-carousel-wrapper">
+      <div class="events-carousel">
+        <div class="carousel-container" :style="{ transform: `translateX(-${currentIndex * 100}%)` }">
+          <div
+            v-for="event in events"
+            :key="event.id"
+            class="event-card"
+          >
+            <div class="event-image-wrapper">
+              <img :src="event.image" :alt="event.title" class="event-background" />
+              <div class="event-overlay">
+                <h3 class="event-title-overlay">{{ event.subtitle }}</h3>
+              </div>
             </div>
-          </div>
-          
-          <div class="event-content">
-            <h3 class="event-title">{{ event.title }} - {{ event.subtitle }}</h3>
-            <p class="event-description">{{ event.description }}</p>
             
-            <div class="event-details">
-              <div class="event-location">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z" fill="currentColor"/>
-                </svg>
-                {{ event.location }}
+            <div class="event-content">
+              <h3 class="event-title">{{ event.title }} - {{ event.subtitle }}</h3>
+              <p class="event-description">{{ event.description }}</p>
+              
+              <div class="event-details">
+                <div class="event-location">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z" fill="currentColor"/>
+                  </svg>
+                  {{ event.location }}
+                </div>
+                
+                <div class="event-date">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z" fill="currentColor"/>
+                  </svg>
+                  {{ event.date }}
+                </div>
               </div>
               
-              <div class="event-date">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z" fill="currentColor"/>
-                </svg>
-                {{ event.date }}
-              </div>
+              <NuxtLink :to="`/events/${event.id}`" class="explore-btn">
+                Explore Event
+              </NuxtLink>
             </div>
-            
-            <NuxtLink :to="`/events/${event.id}`" class="explore-btn">
-              Explore Event
-            </NuxtLink>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="carousel-controls">
-      <button 
-        class="carousel-arrow" 
-        :disabled="currentIndex === 0"
-        @click="previousSlide"
-        aria-label="Previous event"
-      >
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
-      
-      <div class="carousel-dots">
-        <button
-          v-for="(event, index) in events"
-          :key="event.id"
-          class="dot"
-          :class="{ active: index === currentIndex }"
-          @click="goToSlide(index)"
-          :aria-label="`Go to event ${index + 1}`"
-        />
+      <div class="carousel-controls">
+        <button 
+          class="carousel-arrow" 
+          :disabled="currentIndex === 0"
+          @click="previousSlide"
+          aria-label="Previous event"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        
+        <div class="carousel-dots">
+          <button
+            v-for="(evt, index) in events"
+            :key="evt.id"
+            class="dot"
+            :class="{ active: index === currentIndex }"
+            @click="goToSlide(index)"
+            :aria-label="`Go to event ${index + 1}`"
+          />
+        </div>
+        
+        <button 
+          class="carousel-arrow" 
+          :disabled="currentIndex === events.length - 1"
+          @click="nextSlide"
+          aria-label="Next event"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
       </div>
-      
-      <button 
-        class="carousel-arrow" 
-        :disabled="currentIndex === events.length - 1"
-        @click="nextSlide"
-        aria-label="Next event"
-      >
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
     </div>
   </div>
 </template>
@@ -114,25 +116,31 @@ const goToSlide = (index: number) => {
 
 <style scoped>
 .events-section {
+  display: flex;
+  flex-direction: column;
   width: 100%;
+  box-sizing: border-box;
   background-color: #ffffff;
   border-radius: 12px;
-  padding: 32px;
+  padding: 8px 32px;
   margin-bottom: 20px;
+  gap: 12px;
 }
 
 .section-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 24px;
 }
 
 .section-title {
   font-size: 24px;
-  font-weight: 700;
+  font-weight: 400;
   color: #111827;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .see-more-link {
@@ -150,11 +158,18 @@ const goToSlide = (index: number) => {
   color: #1d4ed8;
 }
 
+.events-carousel-wrapper {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
 .events-carousel {
   position: relative;
   overflow: hidden;
   border-radius: 16px;
-  margin-bottom: 20px;
+  flex: 1;
 }
 
 .carousel-container {
@@ -166,11 +181,19 @@ const goToSlide = (index: number) => {
   min-width: 100%;
   height: 320px;
   display: flex;
+  flex-direction: row;
   gap: 0;
   background: #ffffff;
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 1040px) {
+  .event-card {
+    flex-direction: column;
+    height: auto;
+    min-height: 320px;
+  }
 }
 
 .event-image-wrapper {
@@ -179,6 +202,13 @@ const goToSlide = (index: number) => {
   height: 100%;
   overflow: hidden;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+@media (max-width: 1040px) {
+  .event-image-wrapper {
+    height: 200px;
+    flex: none;
+  }
 }
 
 .event-background {
@@ -202,17 +232,23 @@ const goToSlide = (index: number) => {
   font-weight: 700;
   color: #ffffff;
   margin: 0;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .event-content {
-  width: 480px;
+  width: 320px;
   flex-shrink: 0;
-  padding: 24px;
+  padding: 8px 24px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   height: 100%;
+}
+
+@media (max-width: 1040px) {
+  .event-content {
+    width: 100%;
+    padding: 20px;
+  }
 }
 
 .event-title {
@@ -230,6 +266,7 @@ const goToSlide = (index: number) => {
   margin: 0 0 16px 0;
   display: -webkit-box;
   -webkit-line-clamp: 3;
+  line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -279,6 +316,8 @@ const goToSlide = (index: number) => {
   align-items: center;
   justify-content: center;
   gap: 16px;
+  margin-top: 20px;
+  position: relative;
 }
 
 .carousel-arrow {
@@ -333,22 +372,4 @@ const goToSlide = (index: number) => {
   background: #9ca3af;
 }
 
-@media (max-width: 1024px) {
-  .event-card {
-    flex-direction: column;
-    height: auto;
-    min-height: 320px;
-  }
-
-  .event-image-wrapper {
-    width: 100%;
-    height: 200px;
-    flex: none;
-  }
-
-  .event-content {
-    width: 100%;
-    padding: 20px;
-  }
-}
 </style>
