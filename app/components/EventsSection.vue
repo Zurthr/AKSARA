@@ -1,7 +1,7 @@
 <template>
   <div class="events-section">
     <div class="section-header">
-      <div class="section-title"><div style="background-color: var(--color-highlight);">Events</div> being held, curated for you.</div>
+      <div class="section-title"><div style="background-color: var(--color-highlight); width:fit-content; text-decoration: underline;">Events</div> being held, curated for you.</div>
       <NuxtLink to="/events" class="see-more-link">
         <span>See more</span>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -26,6 +26,7 @@
             </div>
             
             <div class="event-content">
+              <div>
               <h3 class="event-title">{{ event.title }} - {{ event.subtitle }}</h3>
               <p class="event-description">{{ event.description }}</p>
               
@@ -44,7 +45,7 @@
                   {{ event.date }}
                 </div>
               </div>
-              
+            </div>
               <NuxtLink :to="`/events/${event.id}`" class="explore-btn">
                 Explore Event
               </NuxtLink>
@@ -134,12 +135,12 @@ const goToSlide = (index: number) => {
 }
 
 .section-title {
-  font-size: 24px;
+  font-size: 18px;
   font-weight: 400;
   color: #111827;
   margin: 0;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 8px;
 }
 
@@ -240,7 +241,7 @@ const goToSlide = (index: number) => {
   padding: 8px 24px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
   height: 100%;
 }
 
@@ -298,8 +299,8 @@ const goToSlide = (index: number) => {
   align-items: center;
   justify-content: center;
   padding: 12px 24px;
-  background: #fbbf24;
-  color: #111827;
+  background: var(--color-highlight);
+  color: var(--color-black);
   font-weight: 600;
   text-decoration: none;
   border-radius: 8px;
@@ -308,7 +309,7 @@ const goToSlide = (index: number) => {
 }
 
 .explore-btn:hover {
-  background: #f59e0b;
+  background: #ffc549;
 }
 
 .carousel-controls {
