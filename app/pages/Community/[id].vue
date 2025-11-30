@@ -480,7 +480,7 @@ const relatedCommunities = computed(() => community.value.related);
 
 .hero-button.primary {
   background: #facc15;
-  color: #0f172a;
+  color: var(--color-black);
   box-shadow: 0 12px 24px rgba(250, 204, 21, 0.4);
 }
 
@@ -502,7 +502,7 @@ const relatedCommunities = computed(() => community.value.related);
 .community-posts header h2 {
   font-size: 20px;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--color-black);
 }
 
 .community-posts header p {
@@ -535,7 +535,7 @@ const relatedCommunities = computed(() => community.value.related);
 
 .author-name {
   font-weight: 600;
-  color: #0f172a;
+  color: var(--color-black);
 }
 
 .author-role {
@@ -553,7 +553,7 @@ const relatedCommunities = computed(() => community.value.related);
   font-size: 18px;
   font-weight: 700;
   margin-bottom: 8px;
-  color: #0f172a;
+  color: var(--color-black);
 }
 
 .post-body p {
@@ -581,7 +581,7 @@ const relatedCommunities = computed(() => community.value.related);
   background-color: #f1f5f9;
   font-size: 13px;
   font-weight: 600;
-  color: #0f172a;
+  color: var(--color-black);
 }
 
 .post-stats {
@@ -629,7 +629,7 @@ const relatedCommunities = computed(() => community.value.related);
 .sidebar-card h3 {
   font-size: 18px;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--color-black);
 }
 
 .details-header {
@@ -730,7 +730,7 @@ const relatedCommunities = computed(() => community.value.related);
 
 .info-label {
   font-weight: 600;
-  color: #0f172a;
+  color: var(--color-black);
 }
 
 .info-value {
@@ -782,7 +782,7 @@ const relatedCommunities = computed(() => community.value.related);
 
 .related-name {
   font-weight: 600;
-  color: #0f172a;
+  color: var(--color-black);
 }
 
 .related-meta {

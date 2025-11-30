@@ -65,7 +65,7 @@
   background: transparent;
   outline: none;
   font-size: 14px;
-  color: #0f172a;
+  color: var(--color-black);
 }
 
 .search-input::placeholder {

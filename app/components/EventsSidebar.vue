@@ -107,7 +107,7 @@ defineProps<{
 .sidebar-card h3 {
   font-size: 18px;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--color-black);
 }
 
 .info-list {
@@ -140,7 +140,7 @@ defineProps<{
 
 .info-label {
   font-weight: 600;
-  color: #0f172a;
+  color: var(--color-black);
   font-size: 14px;
   margin-bottom: 4px;
 }
@@ -209,7 +209,7 @@ defineProps<{
 
 .event-title {
   font-weight: 600;
-  color: #0f172a;
+  color: var(--color-black);
   font-size: 14px;
   margin-bottom: 4px;
 }
@@ -232,7 +232,7 @@ defineProps<{
 .more-events-btn {
   width: 100%;
   background: #fbbf24;
-  color: #0f172a;
+  color: var(--color-black);
   padding: 10px 16px;
   border: none;
   border-radius: 12px;

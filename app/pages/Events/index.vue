@@ -159,7 +159,7 @@ const popularTags = [
 .events-header h1 {
   font-size: 32px;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--color-black);
   margin-bottom: 8px;
 }
 
@@ -233,7 +233,7 @@ const popularTags = [
 .event-meta h4 {
   font-size: 18px;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--color-black);
   margin-bottom: 8px;
 }
 
@@ -267,7 +267,7 @@ const popularTags = [
 
 .event-detail-btn {
   background: #fbbf24;
-  color: #0f172a;
+  color: var(--color-black);
   padding: 8px 20px;
   border: none;
   border-radius: 8px;
@@ -323,7 +323,7 @@ const popularTags = [
 .sidebar-card h3 {
   font-size: 18px;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--color-black);
   margin-bottom: 16px;
 }
 
@@ -374,7 +374,7 @@ const popularTags = [
 }
 
 .initiate-btn:hover {
-  background: #0f172a;
+  background: var(--color-black);
   transform: translateY(-2px);
 }
 

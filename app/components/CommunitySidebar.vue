@@ -120,7 +120,7 @@ defineProps<{
 .sidebar-card header h3 {
   font-size: 18px;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--color-black);
 }
 
 .sidebar-card header p {
@@ -138,7 +138,7 @@ defineProps<{
   padding: 6px 12px;
   border-radius: 999px;
   background-color: #f1f5f9;
-  color: #0f172a;
+  color: var(--color-black);
   font-size: 13px;
   font-weight: 600;
 }
@@ -150,7 +150,7 @@ defineProps<{
 .action-button {
   padding: 12px 20px;
   border-radius: 14px;
-  background: #0f172a;
+  background: var(--color-black);
   color: #ffffff;
   font-weight: 600;
   cursor: pointer;
@@ -185,12 +185,12 @@ defineProps<{
   align-items: center;
   justify-content: center;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--color-black);
 }
 
 .tweet-author {
   font-weight: 600;
-  color: #0f172a;
+  color: var(--color-black);
 }
 
 .tweet-handle {
@@ -212,7 +212,7 @@ defineProps<{
 }
 
 .tweet-body {
-  color: #0f172a;
+  color: var(--color-black);
   font-size: 14px;
   line-height: 1.6;
 }
@@ -248,7 +248,7 @@ defineProps<{
 
 .related-name {
   font-weight: 600;
-  color: #0f172a;
+  color: var(--color-black);
 }
 
 .related-meta {

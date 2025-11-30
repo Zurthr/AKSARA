@@ -218,7 +218,7 @@ const relatedCommunities = [
   border: none;
   background: transparent;
   font-size: 15px;
-  color: #0f172a;
+  color: var(--color-black);
   outline: none;
 }
 
@@ -227,7 +227,7 @@ const relatedCommunities = [
   height: 48px;
   border-radius: 16px;
   border: 1px solid #e2e8f0;
-  background-color: #0f172a;
+  background-color: var(--color-black);
   color: #fff;
   display: inline-flex;
   align-items: center;
@@ -275,7 +275,7 @@ const relatedCommunities = [
 .community-title h1 {
   font-size: 28px;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--color-black);
 }
 
 .community-title p {
@@ -321,7 +321,7 @@ const relatedCommunities = [
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: #0f172a;
+  color: var(--color-black);
 }
 
 .community-icon svg {
@@ -332,7 +332,7 @@ const relatedCommunities = [
 .community-card h2 {
   font-size: 18px;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--color-black);
 }
 
 .community-tags {
@@ -381,7 +381,7 @@ const relatedCommunities = [
   border-radius: 14px;
   border: none;
   background-color: #facc15;
-  color: #0f172a;
+  color: var(--color-black);
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.2s ease, box-shadow 0.2s ease;
@@ -398,14 +398,14 @@ const relatedCommunities = [
   border-radius: 14px;
   border: 1px solid #e2e8f0;
   background: #ffffff;
-  color: #0f172a;
+  color: var(--color-black);
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .load-more:hover {
-  background-color: #0f172a;
+  background-color: var(--color-black);
   color: #ffffff;
 }
 

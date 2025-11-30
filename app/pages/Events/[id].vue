@@ -417,14 +417,14 @@ const getTagClass = (tag: string): string => {
 .event-header h2 {
   font-size: 24px;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--color-black);
   margin-bottom: 8px;
 }
 
 .event-title {
   font-size: 32px;
   font-weight: 800;
-  color: #0f172a;
+  color: var(--color-black);
   margin-bottom: 12px;
   line-height: 1.2;
 }
@@ -452,7 +452,7 @@ const getTagClass = (tag: string): string => {
 .event-tags h3 {
   font-size: 18px;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--color-black);
   margin-bottom: 12px;
 }
 
@@ -554,7 +554,7 @@ const getTagClass = (tag: string): string => {
 
 .register-btn {
   background: #fbbf24;
-  color: #0f172a;
+  color: var(--color-black);
   flex: 1;
 }
 

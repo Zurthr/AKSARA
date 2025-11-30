@@ -252,7 +252,7 @@ const cancel = () => {
 .page-header h1 {
   font-size: 28px;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--color-black);
   margin-bottom: 8px;
 }
 
@@ -454,7 +454,7 @@ const cancel = () => {
 
 .button.primary {
   background: #fbbf24;
-  color: #0f172a;
+  color: var(--color-black);
   box-shadow: 0 4px 12px rgba(251, 191, 36, 0.3);
 }
 
