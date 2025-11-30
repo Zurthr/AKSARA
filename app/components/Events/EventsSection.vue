@@ -57,7 +57,6 @@
       <div class="carousel-controls">
         <button 
           class="carousel-arrow" 
-          :disabled="currentIndex === 0"
           @click="previousSlide"
           aria-label="Previous event"
         >
@@ -79,9 +78,10 @@
         
         <button 
           class="carousel-arrow" 
-          :disabled="currentIndex === events.length - 1"
           @click="nextSlide"
           aria-label="Next event"
+          style="border-radius: 4px 8px 8px 4px;   padding: 0 0px 0 4px;
+"
         >
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -97,22 +97,45 @@ import eventsData from '~/data/events.json';
 
 const events = eventsData;
 const currentIndex = ref(0);
+let autoPlayInterval: ReturnType<typeof setInterval> | null = null;
 
 const nextSlide = () => {
-  if (currentIndex.value < events.length - 1) {
-    currentIndex.value++;
-  }
+  currentIndex.value = (currentIndex.value + 1) % events.length;
+  resetAutoPlay();
 };
 
 const previousSlide = () => {
-  if (currentIndex.value > 0) {
-    currentIndex.value--;
-  }
+  currentIndex.value = (currentIndex.value - 1 + events.length) % events.length;
+  resetAutoPlay();
 };
 
 const goToSlide = (index: number) => {
   currentIndex.value = index;
+  resetAutoPlay();
 };
+
+const startAutoPlay = () => {
+  autoPlayInterval = setInterval(() => {
+    currentIndex.value = (currentIndex.value + 1) % events.length;
+  }, 10000); // 10 seconds
+};
+
+const resetAutoPlay = () => {
+  if (autoPlayInterval) {
+    clearInterval(autoPlayInterval);
+  }
+  startAutoPlay();
+};
+
+onMounted(() => {
+  startAutoPlay();
+});
+
+onUnmounted(() => {
+  if (autoPlayInterval) {
+    clearInterval(autoPlayInterval);
+  }
+});
 </script>
 
 <style scoped>
@@ -298,36 +321,39 @@ const goToSlide = (index: number) => {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 12px 24px;
+  padding: 8px 24px;
   background: var(--color-highlight);
   color: var(--color-black);
   font-weight: 600;
   text-decoration: none;
-  border-radius: 8px;
+  border-radius: 12px;
   transition: background-color 0.2s ease;
   align-self: flex-start;
+  width:100%;
 }
 
 .explore-btn:hover {
-  background: #ffc549;
+  background: var(--color-highlight2);
 }
 
 .carousel-controls {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
+  padding-right: 80px;
   gap: 16px;
-  margin-top: 20px;
+  margin-top: 8px;
   position: relative;
 }
 
 .carousel-arrow {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
+  width: 32px;
+  height: 28px;
+  border-radius: 8px 4px 4px 8px;
+  padding: 0 4px 0 0;
   border: 1px solid #e5e7eb;
-  background: #ffffff;
-  color: #374151;
+  background: var(--color-secondary);
+  color: var(--color-tertiary);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -335,14 +361,8 @@ const goToSlide = (index: number) => {
   transition: all 0.2s ease;
 }
 
-.carousel-arrow:hover:not(:disabled) {
-  background: #f3f4f6;
-  border-color: #d1d5db;
-}
-
-.carousel-arrow:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
+.carousel-arrow:hover {
+  background: var(--color-primary);
 }
 
 .carousel-dots {
