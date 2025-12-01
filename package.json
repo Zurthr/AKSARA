@@ -1,5 +1,5 @@
 {
-  "name": "Salira",
+  "name": "salira",
   "type": "module",
   "private": true,
   "scripts": {
@@ -7,7 +7,10 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "mock:server": "json-server --watch db.json --port 3002",
+    "mock:simple": "json-server --watch db.json --port 3002",
+    "mock:prod": "json-server --host 0.0.0.0 --port 3002 db.json"
   },
   "dependencies": {
     "@tailwindcss/cli": "^4.1.17",
@@ -18,7 +21,22 @@
   "devDependencies": {
     "@types/node": "^24.10.1",
     "autoprefixer": "^10.4.22",
+    "json-server": "^1.0.0-beta.3",
     "postcss": "^8.5.6",
     "tailwindcss": "^4.1.17"
-  }
+  },
+  "version": "1.0.0",
+  "description": "This is a project for DISPUSIPDA Jawa Barat",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zurthr/AKSARA.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Zurthr/AKSARA/issues"
+  },
+  "homepage": "https://github.com/Zurthr/AKSARA#readme"
 }
