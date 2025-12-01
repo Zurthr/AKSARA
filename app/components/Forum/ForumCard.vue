@@ -74,6 +74,8 @@ const navigateToDetail = () => {
 
 <style scoped>
 .forum-card {
+  margin-left:16px;
+  width:100%;
   background: none;
   border-radius: 16px;
   padding: 24px;

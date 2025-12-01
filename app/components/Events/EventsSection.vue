@@ -64,7 +64,6 @@
             <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </button>
-        
         <div class="carousel-dots">
           <button
             v-for="(evt, index) in events"
@@ -75,7 +74,7 @@
             :aria-label="`Go to event ${index + 1}`"
           />
         </div>
-        
+
         <button 
           class="carousel-arrow" 
           @click="nextSlide"
@@ -144,7 +143,6 @@ onUnmounted(() => {
   flex-direction: column;
   width: 100%;
   box-sizing: border-box;
-  background-color: #ffffff;
   border-radius: 12px;
   padding: 8px 32px;
   margin-bottom: 20px;
@@ -339,8 +337,8 @@ onUnmounted(() => {
 .carousel-controls {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  padding-right: 80px;
+  justify-content: space-between;
+  padding: 0 16px;
   gap: 16px;
   margin-top: 8px;
   position: relative;
