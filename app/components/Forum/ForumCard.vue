@@ -74,6 +74,8 @@ const navigateToDetail = () => {
 
 <style scoped>
 .forum-card {
+  margin-left:16px;
+  width:100%;
   background: none;
   border-radius: 16px;
   padding: 24px;
@@ -174,7 +176,6 @@ const navigateToDetail = () => {
   line-height: 1.6;
   margin-bottom: 20px;
   display: -webkit-box;
-  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }

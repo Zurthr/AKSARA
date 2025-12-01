@@ -19,7 +19,7 @@ html {
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: inter,-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   line-height: 1.5;
@@ -188,7 +188,8 @@ body {
     --color-yellow: #FFDA49;
     --color-highlight: #FFDA49;
     --color-accent: #FFDA49;
-    
+    --color-highlight2: #FFC549;
+    --color-accent2: #FFC549;
     /* whites */
     --color-background: #FBFDFF;
     --color-white: #F9FAFB;
