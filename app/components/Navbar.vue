@@ -8,6 +8,8 @@
             type="search"
             class="search-input"
             placeholder="Search something..."
+            v-model="searchQuery"
+            @keyup.enter="handleSearch"
           />
         </div>
     </div>
@@ -18,6 +20,46 @@
     </div>
   </header>
 </template>
+
+<script setup lang="ts">
+const route = useRoute();
+const router = useRouter();
+
+const searchQuery = ref<string>((route.query.q as string) || (route.query.search as string) || '');
+
+// Update search query from URL when route changes
+watch(() => route.query, (newQuery) => {
+  searchQuery.value = (newQuery.q as string) || (newQuery.search as string) || '';
+}, { immediate: true });
+
+const handleSearch = () => {
+  if (searchQuery.value.trim()) {
+    // Redirect to literature page with search query
+    // You can add logic here to determine content type (literature, forums, events, etc.)
+    // For now, defaulting to literature
+    const query: Record<string, string | string[]> = {
+      q: searchQuery.value.trim()
+    };
+    
+    // Preserve filter params if already on literature page
+    if (route.path === '/literature') {
+      if (route.query.copyType) query.copyType = route.query.copyType as string;
+      if (route.query.licensingType) query.licensingType = route.query.licensingType as string;
+      if (route.query.sources) query.sources = route.query.sources as string;
+      if (route.query.tags) {
+        query.tags = Array.isArray(route.query.tags) 
+          ? route.query.tags
+          : [route.query.tags as string];
+      }
+    }
+    
+    router.push({
+      path: '/literature',
+      query
+    });
+  }
+};
+</script>
 
 <style scoped>
 .navbar {

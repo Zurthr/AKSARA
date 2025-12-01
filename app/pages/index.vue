@@ -10,15 +10,16 @@
           :post="post" 
         />
       </div>
-      <div>
+      <RightSideBar>
         <TrendingSidebar />
-      </div>
+      </RightSideBar>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 // Auto import not working gatau kenapa jirr
+import RightSideBar from '~/components/General/RightSideBar.vue';
 import ReadsSection from '~/components/Literature/ReadsSection.vue';
 
 const posts = [
