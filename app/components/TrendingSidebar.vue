@@ -28,20 +28,22 @@
 
 <style scoped>
 .trending-sidebar {
-  width: 300px;
+  position: sticky;
+  top: 80px;
+  margin-top: 20px;
+  width: 320px;
   padding-left: 24px;
 }
 
 .sidebar-title {
+  font-weight: 400;
   font-size: 18px;
-  font-weight: 600;
-  color: #1e293b;
   margin-bottom: 24px;
 }
 
 .highlight {
-  background-color: #FFDA49;
-  padding: 0 4px;
+  background-color: var(--color-highlight);
+  text-decoration: underline;
 }
 
 .trending-group {
@@ -50,15 +52,15 @@
 
 .group-label {
   display: block;
-  font-size: 12px;
-  color: #64748b;
+  font-size: 14px;
+  color: var(--color-secondary);
   margin-bottom: 8px;
 }
 
 .tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 4px;
 }
 
 .tag {
@@ -66,7 +68,7 @@
   color: white;
   padding: 4px 12px;
   border-radius: 16px;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
 }
 </style>

@@ -30,6 +30,11 @@
 const route = useRoute();
 import HomeIcon from '~/assets/icons/Home.svg';
 import BookOpenIcon from '~/assets/icons/BookOpen.svg';
+import Community from '~/assets/icons/Community.svg';
+import Forum from '~/assets/icons/Forum.svg';
+import Events from '~/assets/icons/Event.svg';
+import Embeds from '~/assets/icons/Embed.svg';
+import Bookmarks from '~/assets/icons/Bookmarks.svg';
 
 
 const navItems = [
@@ -46,27 +51,27 @@ const navItems = [
   {
     label: 'Community',
     href: '/community',
-    icon: new URL('../assets/icons/Community.svg', import.meta.url).href
+    icon: Community
   },
   {
     label: 'Forums',
     href: '/forums',
-    icon: new URL('../assets/icons/Forum.svg', import.meta.url).href
+    icon: Forum
   },
   {
     label: 'Events',
     href: '/events',
-    icon: new URL('../assets/icons/Event.svg', import.meta.url).href
+    icon: Events
   },
   {
     label: 'Embeds',
     href: '/embeds',
-    icon: new URL('../assets/icons/Embed.svg', import.meta.url).href
+    icon: Embeds
   },
   {
     label: 'My Bookmarks',
     href: '/bookmarks',
-    icon: new URL('../assets/icons/Bookmarks.svg', import.meta.url).href
+    icon: Bookmarks
   }
 ];
 
