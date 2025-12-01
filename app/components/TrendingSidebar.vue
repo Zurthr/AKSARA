@@ -28,11 +28,7 @@
 
 <style scoped>
 .trending-sidebar {
-  position: sticky;
-  top: 80px;
-  margin-top: 20px;
-  width: 320px;
-  padding-left: 24px;
+  width:100%;
 }
 
 .sidebar-title {
