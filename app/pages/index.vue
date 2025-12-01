@@ -11,7 +11,7 @@
         />
       </div>
       <div>
-        <!-- <Sidebars /> -->
+        <TrendingSidebar />
       </div>
     </div>
   </div>
