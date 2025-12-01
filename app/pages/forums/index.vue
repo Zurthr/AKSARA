@@ -8,13 +8,15 @@
         />
       </main>
       
-    <div>
+    <RightSideBar>
       <TrendingSidebar />
-    </div>
+    </RightSideBar>
   </div>
 </template>
 
 <script setup lang="ts">
+import RightSideBar from '~/components/General/RightSideBar.vue';
+
 const posts = [
   {
     id: 1,
