@@ -2,11 +2,16 @@
   <div class="forum-page">
     <div class="forum-container">
       <main class="forum-main">
-        <ForumPost :post="post" />
+        <div v-if="post">
+          <ForumPost :post="post" />
+        </div>
+        <div v-else>
+          Loading...
+        </div>
 
         <div class="comments-section">
           <div class="comments-header">
-            <h3>Comments ({{ comments.length }})</h3>
+            <h3>Comments ({{ comments?.length || 0 }})</h3>
             <div class="sort-options">
               <button class="active">Top</button>
               <button>Newest</button>
@@ -24,7 +29,7 @@
           </div>
 
           <div class="comments-list">
-            <div v-for="comment in comments" :key="comment.id" class="comment-item">
+            <div v-for="comment in comments || []" :key="comment.id" class="comment-item">
               <div class="comment-avatar">
                 <img :src="comment.author.avatar" :alt="comment.author.name">
               </div>
@@ -76,67 +81,93 @@
         </div>
       </main>
 
-      <ForumRightSidebar />
+      <ForumRightSidebar 
+        :related-community="relatedCommunity"
+        :related-books="relatedBooks"
+      />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-const post = {
-  author: {
-    name: "User123",
-    avatar: "https://i.pravatar.cc/150?u=user123",
-    badge: "PRO"
-  },
-  timeAgo: "2 hours ago",
-  title: "The Evolution of Indonesian Literature in the Digital Age",
-  content: "In recent years, we've seen a significant shift in how Indonesian literature is consumed and produced. The rise of digital platforms has democratized access to stories, but has it diluted the quality? From Wattpad sensations to Twitter threads becoming novels, the landscape is changing rapidly. What are your thoughts on this evolution?",
-  tags: ["Literature", "Indonesia", "Digital"],
-  stats: {
-    comments: 21,
-    likes: 50,
-    shares: 12
-  }
-};
+const route = useRoute();
+const postId = route.params.id;
 
-const comments = [
-  {
-    id: 1,
-    author: {
-      name: "SastraLover",
-      avatar: "https://i.pravatar.cc/150?u=sastra",
-      isPro: false
-    },
-    timeAgo: "1 hour ago",
-    text: "This is such an important discussion! I think digital platforms have actually helped discover new voices that wouldn't have been published otherwise.",
-    likes: 15,
-    replies: [
-      {
-        id: 11,
-        author: {
-          name: "BookWorm99",
-          avatar: "https://i.pravatar.cc/150?u=bookworm",
-        },
-        timeAgo: "45 min ago",
-        text: "Totally agree! Access is key.",
-        likes: 5
-      }
-    ]
-  },
-  {
-    id: 2,
-    author: {
-      name: "CritiqueMaster",
-      avatar: "https://i.pravatar.cc/150?u=critique",
-      isPro: true
-    },
-    timeAgo: "30 min ago",
-    text: "While access is great, I do worry about the lack of editorial oversight in some digital spaces. Quantity over quality seems to be the trend.",
-    likes: 8,
-    replies: []
-  }
-];
+interface Post {
+  id: number;
+  author: {
+    name: string;
+    avatar: string;
+    tagline: string;
+  };
+  timeAgo: string;
+  title: string;
+  content: string;
+  tags: Array<{ label: string; type: string }>;
+  stars: number;
+  community_id: string;
+  related_books?: number[];
+  created_at: string;
+  updated_at: string;
+}
+
+const { data: post, error } = await useFetch<Post>(`http://localhost:3002/posts/${postId}`);
+
+if (error.value) {
+  console.error('Error fetching post:', error.value);
+}
+
+// Fetch related community
+const relatedCommunity = ref<Community | null>(null);
+if (post.value?.community_id) {
+  const { data } = await useFetch<Community>(`http://localhost:3002/communities/${post.value.community_id}`);
+  relatedCommunity.value = data.value ?? null;
+}
+
+// Fetch related books
+const relatedBooks = ref<Book[] | null>(null);
+if (post.value?.related_books?.length) {
+  const query = post.value.related_books.map(id => `id=${id}`).join('&');
+  const { data } = await useFetch<Book[]>(`http://localhost:3002/books?${query}`);
+  relatedBooks.value = data.value ?? null;
+}
+
+interface Comment {
+  id: number;
+  post_id: number;
+  author: {
+    name: string;
+    avatar: string;
+    isPro?: boolean;
+  };
+  timeAgo: string;
+  text: string;
+  likes: number;
+  replies: Comment[];
+}
+
+const { data: comments, error: commentsError } = await useFetch<Comment[]>(`http://localhost:3002/posts/${postId}/comments`);
+
+if (commentsError.value) {
+  console.error('Error fetching comments:', commentsError.value);
+}
+
+interface Community {
+  id: string;
+  name: string;
+  icon: string;
+  members: string;
+}
+
+interface Book {
+  id: number;
+  title: string;
+  author: string;
+  cover: string;
+  rating: number;
+}
 </script>
+
 
 <style scoped>
 .forum-page {

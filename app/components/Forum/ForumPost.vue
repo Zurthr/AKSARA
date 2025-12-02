@@ -25,7 +25,7 @@
     </div>
 
     <div class="post-tags">
-      <span v-for="tag in post.tags" :key="tag" class="post-tag">#{{ tag }}</span>
+      <span v-for="tag in post.tags" :key="tag.label" class="post-tag">#{{ tag.label }}</span>
     </div>
 
     <div class="post-actions">
@@ -34,13 +34,13 @@
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
           </svg>
-          {{ post.stats.comments }}
+          {{ post.stats?.comments || 0 }}
         </button>
         <button class="btn-action">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/>
           </svg>
-          {{ post.stats.likes }} Upvotes
+          {{ post.stars || post.stats?.likes || 0 }} Upvotes
         </button>
         <button class="btn-action">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -48,7 +48,7 @@
             <polyline points="16 6 12 2 8 6"/>
             <line x1="12" y1="2" x2="12" y2="15"/>
           </svg>
-          {{ post.stats.shares }}
+          {{ post.stats?.shares || 0 }}
         </button>
       </div>
       <button class="btn-action">
@@ -71,8 +71,10 @@ defineProps<{
     timeAgo: string;
     title: string;
     content: string;
-    tags: string[];
-    stats: {
+    tags: Array<{ label: string; type: string }>;
+    stars: number;
+    // Optional stats if we want to keep them or if they come from elsewhere
+    stats?: {
       comments: number;
       likes: number;
       shares: number;

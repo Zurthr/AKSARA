@@ -1,0 +1,614 @@
+[
+    {
+        "id": 1,
+        "post_id": 1,
+        "author": {
+            "name": "Alfan Gunadar",
+            "avatar": "https://i.pravatar.cc/150?u=alfan"
+        },
+        "timeAgo": "1 hour ago",
+        "text": "The 2-minute rule is gold. I use it for gym too. Just putting on my shoes is the victory.",
+        "likes": 45,
+        "replies": []
+    },
+    {
+        "id": 2,
+        "post_id": 1,
+        "author": {
+            "name": "Rachel Zane",
+            "avatar": "https://i.pravatar.cc/150?u=rachel"
+        },
+        "timeAgo": "30 min ago",
+        "text": "James Clear is a genius. Good luck with Vue!",
+        "likes": 20,
+        "replies": []
+    },
+    {
+        "id": 3,
+        "post_id": 2,
+        "author": {
+            "name": "Louis Litt",
+            "avatar": "https://i.pravatar.cc/150?u=louis"
+        },
+        "timeAgo": "2 hours ago",
+        "text": "Clean Code is timeless. The syntax changes, but humans reading code doesn't change.",
+        "likes": 67,
+        "replies": []
+    },
+    {
+        "id": 4,
+        "post_id": 3,
+        "author": {
+            "name": "Orang Kmplang",
+            "avatar": "https://i.pravatar.cc/150?u=kmplang"
+        },
+        "timeAgo": "1 hour ago",
+        "text": "Good morning! We don't want any adventures here, thank you! 🧙‍♂️",
+        "likes": 120,
+        "replies": []
+    },
+    {
+        "id": 5,
+        "post_id": 4,
+        "author": {
+            "name": "Sarah Chen",
+            "avatar": "https://i.pravatar.cc/150?u=sarah"
+        },
+        "timeAgo": "3 hours ago",
+        "text": "Crockford was right about a lot of things. 'This' binding in JS still confuses me sometimes.",
+        "likes": 34,
+        "replies": []
+    },
+    {
+        "id": 6,
+        "post_id": 5,
+        "author": {
+            "name": "Orang Kmplang",
+            "avatar": "https://i.pravatar.cc/150?u=kmplang"
+        },
+        "timeAgo": "5 hours ago",
+        "text": "Dead Space UI is the peak of HCI in gaming. No HUD, everything in the world.",
+        "likes": 88,
+        "replies": []
+    },
+    {
+        "id": 7,
+        "post_id": 6,
+        "author": {
+            "name": "John Doe",
+            "avatar": "https://i.pravatar.cc/150?u=john"
+        },
+        "timeAgo": "9 hours ago",
+        "text": "Fail fast, fail cheap. Best advice I ever got.",
+        "likes": 56,
+        "replies": []
+    },
+    {
+        "id": 8,
+        "post_id": 7,
+        "author": {
+            "name": "Donna Paulsen",
+            "avatar": "https://i.pravatar.cc/150?u=donna"
+        },
+        "timeAgo": "11 hours ago",
+        "text": "The power of 'Not Yet' is real. Keep going!",
+        "likes": 90,
+        "replies": []
+    },
+    {
+        "id": 9,
+        "post_id": 8,
+        "author": {
+            "name": "Mike Ross",
+            "avatar": "https://i.pravatar.cc/150?u=mike"
+        },
+        "timeAgo": "13 hours ago",
+        "text": "It's heavy on probability theory too. Takes time to digest.",
+        "likes": 15,
+        "replies": []
+    },
+    {
+        "id": 10,
+        "post_id": 9,
+        "author": {
+            "name": "Alfan Gunadar",
+            "avatar": "https://i.pravatar.cc/150?u=alfan"
+        },
+        "timeAgo": "1 day ago",
+        "text": "Just don't overuse Singletons! They make testing a nightmare.",
+        "likes": 42,
+        "replies": []
+    },
+    {
+        "id": 11,
+        "post_id": 10,
+        "author": {
+            "name": "Mike Ross",
+            "avatar": "https://i.pravatar.cc/150?u=mike"
+        },
+        "timeAgo": "20 hours ago",
+        "text": "Laravel is basically Rails for PHP. It's amazing.",
+        "likes": 30,
+        "replies": []
+    },
+    {
+        "id": 12,
+        "post_id": 11,
+        "author": {
+            "name": "Donna Paulsen",
+            "avatar": "https://i.pravatar.cc/150?u=donna"
+        },
+        "timeAgo": "1 day ago",
+        "text": "Div soup is a crime against accessibility. Use <main>, <article>, <nav>!",
+        "likes": 105,
+        "replies": []
+    },
+    {
+        "id": 13,
+        "post_id": 12,
+        "author": {
+            "name": "John Doe",
+            "avatar": "https://i.pravatar.cc/150?u=john"
+        },
+        "timeAgo": "1 day ago",
+        "text": "It sits on my shelf to make me look smart. I read 50 pages and my brain hurt.",
+        "likes": 200,
+        "replies": []
+    },
+    {
+        "id": 14,
+        "post_id": 13,
+        "author": {
+            "name": "Sarah Chen",
+            "avatar": "https://i.pravatar.cc/150?u=sarah"
+        },
+        "timeAgo": "2 days ago",
+        "text": "Habit stacking works! I do audiobooks while commuting.",
+        "likes": 55,
+        "replies": []
+    },
+    {
+        "id": 15,
+        "post_id": 14,
+        "author": {
+            "name": "Harvey Specter",
+            "avatar": "https://i.pravatar.cc/150?u=harvey"
+        },
+        "timeAgo": "2 days ago",
+        "text": "Don't live with broken windows. Fix bad code as soon as you see it.",
+        "likes": 77,
+        "replies": []
+    },
+    {
+        "id": 16,
+        "post_id": 15,
+        "author": {
+            "name": "Sarah Chen",
+            "avatar": "https://i.pravatar.cc/150?u=sarah"
+        },
+        "timeAgo": "2 days ago",
+        "text": "Jakob's Law: Users spend most of their time on other sites. Make yours work like they expect.",
+        "likes": 60,
+        "replies": []
+    },
+    {
+        "id": 17,
+        "post_id": 16,
+        "author": {
+            "name": "John Doe",
+            "avatar": "https://i.pravatar.cc/150?u=john"
+        },
+        "timeAgo": "3 days ago",
+        "text": "Negotiation is a skill, not a talent. 100% agree.",
+        "likes": 40,
+        "replies": []
+    },
+    {
+        "id": 18,
+        "post_id": 17,
+        "author": {
+            "name": "Alfan Gunadar",
+            "avatar": "https://i.pravatar.cc/150?u=alfan"
+        },
+        "timeAgo": "4 days ago",
+        "text": "Hoping for a new arc announcement for One Piece!",
+        "likes": 150,
+        "replies": []
+    },
+    {
+        "id": 19,
+        "post_id": 18,
+        "author": {
+            "name": "Jane Smith",
+            "avatar": "https://i.pravatar.cc/150?u=jane"
+        },
+        "timeAgo": "4 days ago",
+        "text": "The golden ratio is everywhere, in nature and in websites.",
+        "likes": 25,
+        "replies": []
+    },
+    {
+        "id": 20,
+        "post_id": 19,
+        "author": {
+            "name": "Mike Ross",
+            "avatar": "https://i.pravatar.cc/150?u=mike"
+        },
+        "timeAgo": "5 days ago",
+        "text": "Copilot is a junior dev on steroids. Needs supervision.",
+        "likes": 98,
+        "replies": []
+    },
+    {
+        "id": 21,
+        "post_id": 20,
+        "author": {
+            "name": "Orang Kmplang",
+            "avatar": "https://i.pravatar.cc/150?u=kmplang"
+        },
+        "timeAgo": "5 days ago",
+        "text": "I feel your pain. Refactoring that safely needs test coverage first.",
+        "likes": 33,
+        "replies": []
+    },
+    {
+        "id": 22,
+        "post_id": 21,
+        "author": {
+            "name": "Sarah Chen",
+            "avatar": "https://i.pravatar.cc/150?u=sarah"
+        },
+        "timeAgo": "5 days ago",
+        "text": "Composition API is great for code reuse. Hooks are life.",
+        "likes": 44,
+        "replies": []
+    },
+    {
+        "id": 23,
+        "post_id": 22,
+        "author": {
+            "name": "Louis Litt",
+            "avatar": "https://i.pravatar.cc/150?u=louis"
+        },
+        "timeAgo": "6 days ago",
+        "text": "Try 'Dune' if you want deep politics and ecology, or 'Wheel of Time' for scale.",
+        "likes": 89,
+        "replies": []
+    },
+    {
+        "id": 24,
+        "post_id": 23,
+        "author": {
+            "name": "Alfan Gunadar",
+            "avatar": "https://i.pravatar.cc/150?u=alfan"
+        },
+        "timeAgo": "1 week ago",
+        "text": "Third Normal Form saves headaches. Redundant data is the enemy.",
+        "likes": 22,
+        "replies": []
+    },
+    {
+        "id": 25,
+        "post_id": 24,
+        "author": {
+            "name": "Rachel Zane",
+            "avatar": "https://i.pravatar.cc/150?u=rachel"
+        },
+        "timeAgo": "1 week ago",
+        "text": "Accessibility helps everyone, not just those with disabilities. SEO loves it too.",
+        "likes": 56,
+        "replies": []
+    },
+    {
+        "id": 26,
+        "post_id": 25,
+        "author": {
+            "name": "John Doe",
+            "avatar": "https://i.pravatar.cc/150?u=john"
+        },
+        "timeAgo": "1 week ago",
+        "text": "Pivot or persevere. The hardest question in business.",
+        "likes": 67,
+        "replies": []
+    },
+    {
+        "id": 27,
+        "post_id": 26,
+        "author": {
+            "name": "Sarah Chen",
+            "avatar": "https://i.pravatar.cc/150?u=sarah"
+        },
+        "timeAgo": "1 week ago",
+        "text": "Take a break. Your code will be better when you come back.",
+        "likes": 110,
+        "replies": []
+    },
+    {
+        "id": 28,
+        "post_id": 27,
+        "author": {
+            "name": "Mike Ross",
+            "avatar": "https://i.pravatar.cc/150?u=mike"
+        },
+        "timeAgo": "2 weeks ago",
+        "text": "Identity based habits are powerful. 'I am a reader' vs 'I want to read'.",
+        "likes": 45,
+        "replies": []
+    },
+    {
+        "id": 29,
+        "post_id": 28,
+        "author": {
+            "name": "Alfan Gunadar",
+            "avatar": "https://i.pravatar.cc/150?u=alfan"
+        },
+        "timeAgo": "2 weeks ago",
+        "text": "I'm still stuck on Gradient Descent concepts. Math is rusty.",
+        "likes": 18,
+        "replies": []
+    },
+    {
+        "id": 30,
+        "post_id": 29,
+        "author": {
+            "name": "Donna Paulsen",
+            "avatar": "https://i.pravatar.cc/150?u=donna"
+        },
+        "timeAgo": "2 weeks ago",
+        "text": "Figma components are basically coding classes for designers.",
+        "likes": 92,
+        "replies": []
+    },
+    {
+        "id": 31,
+        "post_id": 30,
+        "author": {
+            "name": "John Doe",
+            "avatar": "https://i.pravatar.cc/150?u=john"
+        },
+        "timeAgo": "2 weeks ago",
+        "text": "Knuth is a legend. His dedication to TeX alone is inspiring.",
+        "likes": 77,
+        "replies": []
+    },
+    {
+        "id": 32,
+        "post_id": 31,
+        "author": {
+            "name": "Sarah Chen",
+            "avatar": "https://i.pravatar.cc/150?u=sarah"
+        },
+        "timeAgo": "3 weeks ago",
+        "text": "Grid + Flexbox is the dream team. I barely touch media queries now.",
+        "likes": 55,
+        "replies": []
+    },
+    {
+        "id": 33,
+        "post_id": 32,
+        "author": {
+            "name": "Orang Kmplang",
+            "avatar": "https://i.pravatar.cc/150?u=kmplang"
+        },
+        "timeAgo": "3 weeks ago",
+        "text": "And he stole the Ring! Sneaky hobbit.",
+        "likes": 66,
+        "replies": []
+    },
+    {
+        "id": 34,
+        "post_id": 33,
+        "author": {
+            "name": "Harvey Specter",
+            "avatar": "https://i.pravatar.cc/150?u=harvey"
+        },
+        "timeAgo": "3 weeks ago",
+        "text": "Patterns are tools, not rules. Use them where they fit.",
+        "likes": 41,
+        "replies": []
+    },
+    {
+        "id": 35,
+        "post_id": 34,
+        "author": {
+            "name": "Alfan Gunadar",
+            "avatar": "https://i.pravatar.cc/150?u=alfan"
+        },
+        "timeAgo": "3 weeks ago",
+        "text": "Inline validation is a must. Don't wait for submit to show errors.",
+        "likes": 83,
+        "replies": []
+    },
+    {
+        "id": 36,
+        "post_id": 35,
+        "author": {
+            "name": "Mike Ross",
+            "avatar": "https://i.pravatar.cc/150?u=mike"
+        },
+        "timeAgo": "1 month ago",
+        "text": "Data doesn't lie, but our interpretation of it often does.",
+        "likes": 39,
+        "replies": []
+    },
+    {
+        "id": 37,
+        "post_id": 36,
+        "author": {
+            "name": "Jane Smith",
+            "avatar": "https://i.pravatar.cc/150?u=jane"
+        },
+        "timeAgo": "1 month ago",
+        "text": "Systems > Goals. Goals have an end point, systems are for life.",
+        "likes": 120,
+        "replies": []
+    },
+    {
+        "id": 38,
+        "post_id": 37,
+        "author": {
+            "name": "Donna Paulsen",
+            "avatar": "https://i.pravatar.cc/150?u=donna"
+        },
+        "timeAgo": "1 month ago",
+        "text": "Bias in AI is a reflection of bias in society. We need to curate data better.",
+        "likes": 65,
+        "replies": []
+    },
+    {
+        "id": 39,
+        "post_id": 38,
+        "author": {
+            "name": "Harvey Specter",
+            "avatar": "https://i.pravatar.cc/150?u=harvey"
+        },
+        "timeAgo": "1 month ago",
+        "text": "Time to market is key. PHP wins there for small to mid projects.",
+        "likes": 28,
+        "replies": []
+    },
+    {
+        "id": 40,
+        "post_id": 39,
+        "author": {
+            "name": "Sarah Chen",
+            "avatar": "https://i.pravatar.cc/150?u=sarah"
+        },
+        "timeAgo": "1 month ago",
+        "text": "Norman Doors! Once you see them, you can't unsee bad UX.",
+        "likes": 99,
+        "replies": []
+    },
+    {
+        "id": 41,
+        "post_id": 40,
+        "author": {
+            "name": "Mike Ross",
+            "avatar": "https://i.pravatar.cc/150?u=mike"
+        },
+        "timeAgo": "1 month ago",
+        "text": "Nine women can't make a baby in one month. Brook's Law.",
+        "likes": 150,
+        "replies": []
+    },
+    {
+        "id": 42,
+        "post_id": 41,
+        "author": {
+            "name": "Alfan Gunadar",
+            "avatar": "https://i.pravatar.cc/150?u=alfan"
+        },
+        "timeAgo": "1 month ago",
+        "text": "Pinia is a breath of fresh air. Goodbye mutations!",
+        "likes": 47,
+        "replies": []
+    },
+    {
+        "id": 43,
+        "post_id": 42,
+        "author": {
+            "name": "Orang Kmplang",
+            "avatar": "https://i.pravatar.cc/150?u=kmplang"
+        },
+        "timeAgo": "1 month ago",
+        "text": "What have I got in my pocket?",
+        "likes": 210,
+        "replies": []
+    },
+    {
+        "id": 44,
+        "post_id": 43,
+        "author": {
+            "name": "Louis Litt",
+            "avatar": "https://i.pravatar.cc/150?u=louis"
+        },
+        "timeAgo": "2 months ago",
+        "text": "Self-documenting code is the goal. Naming is the hardest part of CS.",
+        "likes": 88,
+        "replies": []
+    },
+    {
+        "id": 45,
+        "post_id": 44,
+        "author": {
+            "name": "Sarah Chen",
+            "avatar": "https://i.pravatar.cc/150?u=sarah"
+        },
+        "timeAgo": "2 months ago",
+        "text": "Blue is trust, red is urgency. But culture context matters too.",
+        "likes": 35,
+        "replies": []
+    },
+    {
+        "id": 46,
+        "post_id": 45,
+        "author": {
+            "name": "Harvey Specter",
+            "avatar": "https://i.pravatar.cc/150?u=harvey"
+        },
+        "timeAgo": "2 months ago",
+        "text": "Revenue and retention are the only metrics that matter.",
+        "likes": 62,
+        "replies": []
+    },
+    {
+        "id": 47,
+        "post_id": 46,
+        "author": {
+            "name": "Rachel Zane",
+            "avatar": "https://i.pravatar.cc/150?u=rachel"
+        },
+        "timeAgo": "2 months ago",
+        "text": "Recursion clicks eventually. Draw out the stack frames!",
+        "likes": 40,
+        "replies": []
+    },
+    {
+        "id": 48,
+        "post_id": 47,
+        "author": {
+            "name": "Orang Kmplang",
+            "avatar": "https://i.pravatar.cc/150?u=kmplang"
+        },
+        "timeAgo": "2 months ago",
+        "text": "Positive reinforcement systems works better than bans.",
+        "likes": 55,
+        "replies": []
+    },
+    {
+        "id": 49,
+        "post_id": 48,
+        "author": {
+            "name": "John Doe",
+            "avatar": "https://i.pravatar.cc/150?u=john"
+        },
+        "timeAgo": "2 months ago",
+        "text": "Calculus is the language of the universe (and AI).",
+        "likes": 33,
+        "replies": []
+    },
+    {
+        "id": 50,
+        "post_id": 49,
+        "author": {
+            "name": "Mike Ross",
+            "avatar": "https://i.pravatar.cc/150?u=mike"
+        },
+        "timeAgo": "2 months ago",
+        "text": "Typescript fixes this. Just sayin'.",
+        "likes": 76,
+        "replies": []
+    },
+    {
+        "id": 51,
+        "post_id": 50,
+        "author": {
+            "name": "Louis Litt",
+            "avatar": "https://i.pravatar.cc/150?u=louis"
+        },
+        "timeAgo": "3 months ago",
+        "text": "Code is poetry. Or spaghetti. Usually spaghetti.",
+        "likes": 112,
+        "replies": []
+    }
+]

@@ -9,6 +9,10 @@
       </main>
       
     <RightSideBar>
+      <NuxtLink to="/forums/create" class="btn-create-post">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+        Create New Post
+      </NuxtLink>
       <TrendingSidebar />
     </RightSideBar>
   </div>
@@ -17,65 +21,28 @@
 <script setup lang="ts">
 import RightSideBar from '~/components/General/RightSideBar.vue';
 
-const posts = [
-  {
-    id: 1,
-    author: {
-      name: "Orang Kmplang",
-      avatar: "https://i.pravatar.cc/150?u=kmplang",
-      tagline: "A stupid one"
-    },
-    timeAgo: "an hr ago",
-    title: "LF Best Books for Aspiring Web Developers",
-    content: "Hey everyone! I've been diving deeper into web development lately, and I realized there's a ton of great books out there that can really help you level up beyond just YouTube tutorials. Thought I'd share a few and see what you all recommend too!",
-    tags: [
-      { label: "A Level", type: "category" },
-      { label: "Web Dev", type: "topic" },
-      { label: "#NewDev", type: "topic" },
-      { label: "#WebDev", type: "topic" },
-      { label: "#Stacking", type: "topic" }
-    ],
-    stars: 80
-  },
-  {
-    id: 2,
-    author: {
-      name: "Alfan Gunadar",
-      avatar: "https://i.pravatar.cc/150?u=alfan",
-      tagline: "Something Vanity!"
-    },
-    timeAgo: "3 hrs ago",
-    title: "Is FNAF 2 going to debut in Minecraft alongside Herobrine",
-    content: "Okay, so I've been seeing some weird stuff in the latest Minecraft teasers and community rumors — people are saying there might be a crossover event bringing FNAF 2 elements into Minecraft?? Like animatronics, the pizzeria setting, and even a Herobrine tie-in?! Not sure if it's a mod collab, an ARG, or just wild fan theory fuel, but if Mojang actually drops a spooky update mixing Herobrine lore with FNAF 2 jumpscares, that would be insane. Anyone else heard about this or seen the leaks? What do you think — hype or hoax? 👻",
-    tags: [
-      { label: "Hobbies", type: "category" },
-      { label: "FNAF", type: "topic" },
-      { label: "#FNAF", type: "topic" },
-      { label: "#Booo", type: "topic" },
-      { label: "#Horror", type: "topic" }
-    ],
-    stars: 21
-  },
-  {
-    id: 3,
-    author: {
-      name: "Alfan Gunadar",
-      avatar: "https://i.pravatar.cc/150?u=alfan",
-      tagline: "Something Vanity!"
-    },
-    timeAgo: "3 hrs ago",
-    title: "Is FNAF 2 going to debut in Minecraft alongside Herobrine",
-    content: "Okay, so I've been seeing some weird stuff in the latest Minecraft teasers and community rumors — people are saying there might be a crossover event bringing FNAF 2 elements into Minecraft?? Like animatronics, the pizzeria setting, and even a Herobrine tie-in?! Not sure if it's a mod collab, an ARG, or just wild fan theory fuel, but if Mojang actually drops a spooky update mixing Herobrine lore with FNAF 2 jumpscares, that would be insane. Anyone else heard about this or seen the leaks? What do you think — hype or hoax? 👻",
-    tags: [
-      { label: "Hobbies", type: "category" },
-      { label: "FNAF", type: "topic" },
-      { label: "#FNAF", type: "topic" },
-      { label: "#Booo", type: "topic" },
-      { label: "#Horror", type: "topic" }
-    ],
-    stars: 21
-  }
-];
+interface Post {
+  id: number;
+  author: {
+    name: string;
+    avatar: string;
+    tagline: string;
+  };
+  timeAgo: string;
+  title: string;
+  content: string;
+  tags: Array<{ label: string; type: 'category' | 'topic' }>;
+  stars: number;
+  community_id: string;
+  created_at: string;
+  updated_at: string;
+}
+
+const { data: posts, error } = await useFetch<Post[]>('http://localhost:3002/posts');
+
+if (error.value) {
+  console.error('Error fetching posts:', error.value);
+}
 </script>
 
 <style scoped>
@@ -94,5 +61,28 @@ const posts = [
 .feed-section {
   flex: 1;
   min-width: 0;
+}
+
+.btn-create-post {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: #FFDA49;
+  color: var(--color-black);
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+.btn-create-post:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 </style>
