@@ -1,5 +1,5 @@
 <template>
-  <aside class="community-sidebar">
+  <aside class="community-sidebar" :class="layout === 'inline' ? 'layout-inline' : ''">
     <section class="sidebar-card">
       <header>
         <h3>Communities</h3>
@@ -70,11 +70,14 @@ interface RelatedCommunity {
   members: string;
 }
 
-defineProps<{
+const props = defineProps<{
   hashtags: string[];
   tweet: Tweet;
   relatedCommunities: RelatedCommunity[];
+  layout?: 'default' | 'inline';
 }>();
+
+const { layout = 'default' } = props;
 </script>
 
 <style scoped>
@@ -91,6 +94,17 @@ defineProps<{
 
 .community-sidebar:hover {
   scrollbar-color: #94a3b8 transparent;
+}
+
+.community-sidebar.layout-inline {
+  max-height: none;
+  overflow: visible;
+  padding-right: 0;
+  height: auto;
+}
+
+.community-sidebar.layout-inline:hover {
+  scrollbar-color: auto;
 }
 
 .community-sidebar::-webkit-scrollbar {
@@ -120,7 +134,7 @@ defineProps<{
 .sidebar-card header h3 {
   font-size: 18px;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--color-black);
 }
 
 .sidebar-card header p {
@@ -138,7 +152,7 @@ defineProps<{
   padding: 6px 12px;
   border-radius: 999px;
   background-color: #f1f5f9;
-  color: #0f172a;
+  color: var(--color-black);
   font-size: 13px;
   font-weight: 600;
 }
@@ -150,7 +164,7 @@ defineProps<{
 .action-button {
   padding: 12px 20px;
   border-radius: 14px;
-  background: #0f172a;
+  background: var(--color-black);
   color: #ffffff;
   font-weight: 600;
   cursor: pointer;
@@ -185,12 +199,12 @@ defineProps<{
   align-items: center;
   justify-content: center;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--color-black);
 }
 
 .tweet-author {
   font-weight: 600;
-  color: #0f172a;
+  color: var(--color-black);
 }
 
 .tweet-handle {
@@ -212,7 +226,7 @@ defineProps<{
 }
 
 .tweet-body {
-  color: #0f172a;
+  color: var(--color-black);
   font-size: 14px;
   line-height: 1.6;
 }
@@ -248,7 +262,7 @@ defineProps<{
 
 .related-name {
   font-weight: 600;
-  color: #0f172a;
+  color: var(--color-black);
 }
 
 .related-meta {

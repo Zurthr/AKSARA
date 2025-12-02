@@ -1,14 +1,13 @@
 <template>
   <section class="community-page">
-   
+    <div class="community-header" role="search">
+      
+    </div>
 
-    <div class="community-content">
-      <div class="community-main" tabindex="0">
-        <header class="community-title">
-          <h1>Community</h1>
-          <p>Discover, join, and grow with communities that match your interests.</p>
-        </header>
+    <div class="community-main" tabindex="0">
+      
 
+      <div class="community-body">
         <div class="community-grid">
           <NuxtLink
             v-for="community in communities"
@@ -65,15 +64,29 @@
           </NuxtLink>
         </div>
 
-        <button type="button" class="load-more">Load More Communities</button>
+        <div class="community-insights" aria-label="Community highlights">
+          <section class="insights-card">
+            <header>
+              <h3>Communities</h3>
+              <p>Discover and join communities that match your interests</p>
+            </header>
+            <div class="hashtag-list">
+              <span v-for="hashtag in hashtags" :key="hashtag" class="hashtag">{{ hashtag }}</span>
+            </div>
+          </section>
+
+
+          
+           <section class="insights-card action-card">
+            <h3>Initiate a Community</h3>
+            <p>Start a new conversation space and invite others to collaborate.</p>
+            <NuxtLink to="/community/create" class="action-button">Create Community</NuxtLink>
+          </section>
+        </div>
       </div>
-      <div class="community-sidebar-container" tabindex="0">
-        <CommunitySidebar
-          :hashtags="hashtags"
-          :tweet="tweet"
-          :related-communities="relatedCommunities"
-        />
-      </div>
+      
+
+      <button type="button" class="load-more">Load More Communities</button>
     </div>
   </section>
 </template>
@@ -180,17 +193,168 @@ const relatedCommunities = [
 </script>
 
 <style scoped>
+.insights-card {
+  background: #ffffff;
+  border-radius: 20px;
+  border: 1px solid #e2e8f0;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.05);
+}
+
+.insights-card header h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-black);
+}
+
+.insights-card header p {
+  color: #475569;
+  font-size: 14px;
+}
+
+.hashtag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.hashtag {
+  padding: 6px 12px;
+  border-radius: 999px;
+  background-color: #3B5379;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.action-card h3 {
+  margin-bottom: -8px;
+}
+
+.action-button {
+  padding: 12px 20px;
+  border-radius: 14px;
+  background: var(--color-black);
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.action-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(15, 23, 42, 0.2);
+}
+
+.tweet-card {
+  gap: 12px;
+}
+
+.tweet-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  background-color: #e2e8f0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: var(--color-black);
+}
+
+.tweet-author {
+  font-weight: 600;
+  color: var(--color-black);
+}
+
+.tweet-handle {
+  font-size: 13px;
+  color: #64748b;
+}
+
+.close-button {
+  margin-left: auto;
+  width: 32px;
+  height: 32px;
+  border-radius: 12px;
+  border: none;
+  background-color: #f1f5f9;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+  color: #475569;
+}
+
+.tweet-body {
+  color: var(--color-black);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.tweet-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: #64748b;
+  font-size: 12px;
+}
+
+.tweet-stats {
+  display: flex;
+  gap: 12px;
+  color: #475569;
+}
+
+.related-card ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.related-card li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.related-name {
+  font-weight: 600;
+  color: var(--color-black);
+}
+
+.related-meta {
+  font-size: 13px;
+  color: #64748b;
+}
+
 .community-page {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 32px;
   width: 100%;
   padding-bottom: 40px;
 }
 
 .community-header {
   display: flex;
-  gap: 16px;
+  flex-wrap: wrap;
+  gap: 12px;
   align-items: center;
 }
 
@@ -218,7 +382,7 @@ const relatedCommunities = [
   border: none;
   background: transparent;
   font-size: 15px;
-  color: #0f172a;
+  color: var(--color-black);
   outline: none;
 }
 
@@ -227,7 +391,7 @@ const relatedCommunities = [
   height: 48px;
   border-radius: 16px;
   border: 1px solid #e2e8f0;
-  background-color: #0f172a;
+  background-color: var(--color-black);
   color: #fff;
   display: inline-flex;
   align-items: center;
@@ -241,41 +405,32 @@ const relatedCommunities = [
   transform: translateY(-2px);
 }
 
-
-.community-content {
-  display: flex;
-  gap: 24px;
-  align-items: stretch;
-}
-
 .community-main {
-  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 24px;
-  max-height: calc(100vh - 160px);
-  overflow-y: auto;
-  padding-right: 4px;
-  scrollbar-width: thin;
+  width: 100%;
 }
 
-.community-main::-webkit-scrollbar {
-  width: 4px;
+.community-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 32px;
+  align-items: start;
 }
 
-.community-main::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.community-main::-webkit-scrollbar-thumb {
-  background-color: rgba(148, 163, 184, 0.35);
-  border-radius: 999px;
+.community-insights {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  position: sticky;
+  top: 70px;
 }
 
 .community-title h1 {
   font-size: 28px;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--color-black);
 }
 
 .community-title p {
@@ -287,6 +442,7 @@ const relatedCommunities = [
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 20px;
+  align-items: stretch;
 }
 
 .community-card {
@@ -301,6 +457,7 @@ const relatedCommunities = [
   text-decoration: none;
   color: inherit;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  height: 100%;
 }
 
 .community-card:hover {
@@ -321,7 +478,7 @@ const relatedCommunities = [
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: #0f172a;
+  color: var(--color-black);
 }
 
 .community-icon svg {
@@ -332,7 +489,7 @@ const relatedCommunities = [
 .community-card h2 {
   font-size: 18px;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--color-black);
 }
 
 .community-tags {
@@ -345,8 +502,8 @@ const relatedCommunities = [
 .tag {
   padding: 4px 10px;
   border-radius: 999px;
-  background-color: #f1f5f9;
-  color: #475569;
+  background-color: #3B5379;
+  color: #ffffff;
   font-size: 12px;
   font-weight: 600;
 }
@@ -355,6 +512,11 @@ const relatedCommunities = [
   color: #475569;
   font-size: 14px;
   line-height: 1.6;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 68px;
 }
 
 .community-stats {
@@ -381,10 +543,11 @@ const relatedCommunities = [
   border-radius: 14px;
   border: none;
   background-color: #facc15;
-  color: #0f172a;
+  color: var(--color-black);
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  margin-top: auto;
 }
 
 .join-button:hover {
@@ -398,43 +561,24 @@ const relatedCommunities = [
   border-radius: 14px;
   border: 1px solid #e2e8f0;
   background: #ffffff;
-  color: #0f172a;
+  color: var(--color-black);
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .load-more:hover {
-  background-color: #0f172a;
+  background-color: var(--color-black);
   color: #ffffff;
 }
-
-
-.community-sidebar-container {
-  width: 320px;
-  position: sticky;
-  top: 32px;
-  align-self: flex-start;
-  max-height: calc(100vh - 160px);
-  overflow: hidden;
-}
-
 @media (max-width: 1280px) {
-  .community-content {
-    flex-direction: column;
+  .community-body {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
   }
 
-  .community-sidebar-container {
-    width: 100%;
+  .community-insights {
     position: static;
-    max-height: none;
-    overflow: visible;
-  }
-
-  .community-main {
-    max-height: none;
-    overflow: visible;
-    padding-right: 0;
   }
 }
 

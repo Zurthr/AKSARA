@@ -1,0 +1,2121 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "author": {
+        "name": "Orang Kmplang",
+        "avatar": "https://i.pravatar.cc/150?u=kmplang",
+        "tagline": "A stupid one"
+      },
+      "timeAgo": "an hr ago",
+      "title": "LF Best Books for Aspiring Web Developers",
+      "content": "Hey everyone! I've been diving deeper into web development lately, and I realized there's a ton of great books out there that can really help you level up beyond just YouTube tutorials. Thought I'd share a few and see what you all recommend too!",
+      "tags": [
+        {
+          "label": "A Level",
+          "type": "category"
+        },
+        {
+          "label": "Web Dev",
+          "type": "topic"
+        },
+        {
+          "label": "#NewDev",
+          "type": "topic"
+        },
+        {
+          "label": "#WebDev",
+          "type": "topic"
+        },
+        {
+          "label": "#Stacking",
+          "type": "topic"
+        }
+      ],
+      "stars": 80,
+      "community_id": "literacy-circle",
+      "created_at": "2023-10-01T12:00:00Z",
+      "updated_at": "2023-10-01T12:00:00Z"
+    },
+    {
+      "id": 2,
+      "author": {
+        "name": "Alfan Gunadar",
+        "avatar": "https://i.pravatar.cc/150?u=alfan",
+        "tagline": "Something Vanity!"
+      },
+      "timeAgo": "3 hrs ago",
+      "title": "Is FNAF 2 going to debut in Minecraft alongside Herobrine",
+      "content": "Okay, so I've been seeing some weird stuff in the latest Minecraft teasers and community rumors — people are saying there might be a crossover event bringing FNAF 2 elements into Minecraft?? Like animatronics, the pizzeria setting, and even a Herobrine tie-in?! Not sure if it's a mod collab, an ARG, or just wild fan theory fuel, but if Mojang actually drops a spooky update mixing Herobrine lore with FNAF 2 jumpscares, that would be insane. Anyone else heard about this or seen the leaks? What do you think — hype or hoax? 👻",
+      "tags": [
+        {
+          "label": "Hobbies",
+          "type": "category"
+        },
+        {
+          "label": "FNAF",
+          "type": "topic"
+        },
+        {
+          "label": "#FNAF",
+          "type": "topic"
+        },
+        {
+          "label": "#Booo",
+          "type": "topic"
+        },
+        {
+          "label": "#Horror",
+          "type": "topic"
+        }
+      ],
+      "stars": 21,
+      "community_id": "gaming-hub",
+      "created_at": "2023-10-01T11:00:00Z",
+      "updated_at": "2023-10-01T11:00:00Z"
+    },
+    {
+      "id": 3,
+      "author": {
+        "name": "Sarah Chen",
+        "avatar": "https://i.pravatar.cc/150?u=sarah",
+        "tagline": "Photography enthusiast"
+      },
+      "timeAgo": "5 hrs ago",
+      "title": "Tips for Street Photography Beginners",
+      "content": "Just wanted to share some tips I've learned from my street photography journey over the past year. The most important thing is to be patient and observe your surroundings. Don't be afraid to ask people for permission, and always carry your camera! What are your go-to spots for street photography?",
+      "tags": [
+        {
+          "label": "Photography",
+          "type": "category"
+        },
+        {
+          "label": "Tips",
+          "type": "topic"
+        },
+        {
+          "label": "#StreetPhoto",
+          "type": "topic"
+        },
+        {
+          "label": "#Beginner",
+          "type": "topic"
+        }
+      ],
+      "stars": 45,
+      "community_id": "photography-club",
+      "created_at": "2023-10-01T09:00:00Z",
+      "updated_at": "2023-10-01T09:00:00Z"
+    }
+  ],
+  "communities": [
+    {
+      "id": "jump-fest-2025",
+      "name": "JUMP FEST 2025 - BRED THROUGH",
+      "icon": "spark",
+      "accent": "#E6F2FF",
+      "tags": [
+        "#HarryPotter",
+        "#WIBU",
+        "#AnimeX"
+      ],
+      "description": "Festival fandom terbesar tahun ini. Dapatkan bocoran rilis anime, sesi temu kreator, dan event eksklusif lainnya.",
+      "members": "21k",
+      "postsToday": 42,
+      "memberCount": 21000,
+      "isJoined": false,
+      "created_at": "2023-09-01T12:00:00Z",
+      "updated_at": "2023-10-01T12:00:00Z"
+    },
+    {
+      "id": "literacy-circle",
+      "name": "Literacy Circle",
+      "icon": "heart",
+      "accent": "#FFE5EC",
+      "tags": [
+        "Harry Potter",
+        "LoTR",
+        "Book Talk",
+        "Reading"
+      ],
+      "description": "Komunitas pecinta buku untuk diskusi sastra, review, dan menemukan penulis baru.",
+      "members": "324",
+      "postsToday": 18,
+      "memberCount": 324,
+      "isJoined": true,
+      "created_at": "2023-08-15T12:00:00Z",
+      "updated_at": "2023-10-01T12:00:00Z"
+    },
+    {
+      "id": "wellness-warriors",
+      "name": "Wellness Warriors",
+      "icon": "spark",
+      "accent": "#E6F2FF",
+      "tags": [
+        "Mindful",
+        "Balance",
+        "Habits"
+      ],
+      "description": "Berbagi rutinitas sehat, dukung perjalanan mindfulness, dan saling menguatkan.",
+      "members": "512",
+      "postsToday": 24,
+      "memberCount": 512,
+      "isJoined": false,
+      "created_at": "2023-09-20T12:00:00Z",
+      "updated_at": "2023-10-01T12:00:00Z"
+    },
+    {
+      "id": "photography-club",
+      "name": "Photography Club",
+      "icon": "camera",
+      "accent": "#F0F9F5",
+      "tags": [
+        "Photo Walk",
+        "Tips",
+        "Critique"
+      ],
+      "description": "Belajar teknik fotografi, ikut photo walk, dan diskusi kritik konstruktif setiap minggu.",
+      "members": "287",
+      "postsToday": 12,
+      "memberCount": 287,
+      "isJoined": true,
+      "created_at": "2023-07-10T12:00:00Z",
+      "updated_at": "2023-10-01T12:00:00Z"
+    },
+    {
+      "id": "gaming-hub",
+      "name": "Gaming Hub Indonesia",
+      "icon": "chat",
+      "accent": "#FFF8E1",
+      "tags": [
+        "Esports",
+        "Co-op",
+        "Livestream"
+      ],
+      "description": "Tempat berkumpulnya gamer untuk mabar, update turnamen, dan berbagi tips build meta.",
+      "members": "1.2k",
+      "postsToday": 33,
+      "memberCount": 1200,
+      "isJoined": false,
+      "created_at": "2023-06-05T12:00:00Z",
+      "updated_at": "2023-10-01T12:00:00Z"
+    },
+    {
+      "id": "creative-atelier",
+      "name": "Creative Atelier",
+      "icon": "heart",
+      "accent": "#FEEAE6",
+      "tags": [
+        "Illustration",
+        "UI/UX",
+        "Workshop"
+      ],
+      "description": "Komunitas kreator visual. Ada feedback session, challenge mingguan, dan kelas desain gratis.",
+      "members": "648",
+      "postsToday": 21,
+      "memberCount": 648,
+      "isJoined": true,
+      "created_at": "2023-08-01T12:00:00Z",
+      "updated_at": "2023-10-01T12:00:00Z"
+    }
+  ],
+  "events": [
+    {
+      "id": 1,
+      "title": "Photo Walk Jakarta",
+      "community_id": "photography-club",
+      "community_name": "Photography Club",
+      "date": "2023-10-15T08:00:00Z",
+      "location": "Kota Tua, Jakarta",
+      "description": "Join us for a morning photo walk through the historic streets of Kota Tua. We'll explore colonial architecture, street photography techniques, and end with a gallery review session at a local café.",
+      "attendees": [
+        {
+          "id": 1,
+          "name": "Sarah Chen",
+          "avatar": "https://i.pravatar.cc/150?u=sarah"
+        },
+        {
+          "id": 2,
+          "name": "Mike Johnson",
+          "avatar": "https://i.pravatar.cc/150?u=mike"
+        }
+      ],
+      "attendeeCount": 12,
+      "maxAttendees": 20,
+      "status": "upcoming",
+      "created_at": "2023-10-01T12:00:00Z",
+      "updated_at": "2023-10-01T12:00:00Z"
+    },
+    {
+      "id": 2,
+      "title": "Book Club: Harry Potter Marathon",
+      "community_id": "literacy-circle",
+      "community_name": "Literacy Circle",
+      "date": "2023-10-20T14:00:00Z",
+      "location": "Periplus Bookstore, Jakarta",
+      "description": "A full day marathon discussing all seven Harry Potter books. Bring your favorite theories and cosplay as your favorite character!",
+      "attendees": [
+        {
+          "id": 1,
+          "name": "Orang Kmplang",
+          "avatar": "https://i.pravatar.cc/150?u=kmplang"
+        }
+      ],
+      "attendeeCount": 8,
+      "maxAttendees": 15,
+      "status": "upcoming",
+      "created_at": "2023-10-01T10:00:00Z",
+      "updated_at": "2023-10-01T10:00:00Z"
+    },
+    {
+      "id": 3,
+      "title": "Wellness Workshop: Mindfulness Basics",
+      "community_id": "wellness-warriors",
+      "community_name": "Wellness Warriors",
+      "date": "2023-09-28T09:00:00Z",
+      "location": "Online - Zoom",
+      "description": "Learn the basics of mindfulness meditation and daily practices for mental wellness. Perfect for beginners!",
+      "attendees": [],
+      "attendeeCount": 25,
+      "maxAttendees": 100,
+      "status": "completed",
+      "created_at": "2023-09-20T12:00:00Z",
+      "updated_at": "2023-09-28T17:00:00Z"
+    }
+  ],
+  "books": [
+    {
+      "id": 1,
+      "title": "lean Code: A Handbook of Agile Software Craftsmanship",
+      "author": "Robert C. Martin",
+      "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1436202607l/3735293.jpg",
+      "rating": 4.5,
+      "description": "Even bad code can function. But if code isn't clean, it can bring a development organization to its knees. Every year, countless hours and significant resources are lost because of poorly written code. But it doesn't have to be that way.",
+      "year_edition": "2023 2nd Edition",
+      "total_bookmarked": 3420,
+      "tags": [
+        {
+          "name": "Software Engineering",
+          "type": "primary"
+        },
+        {
+          "name": "Programming",
+          "type": "secondary"
+        },
+        {
+          "name": "Best Practices",
+          "type": "secondary"
+        },
+        {
+          "name": "Code Quality",
+          "type": "secondary"
+        }
+      ],
+      "copy_types": {
+        "Physical": {
+          "description": "Physical paperback/hardcover edition available at retail locations",
+          "sources": [
+            {
+              "name": "Amazon",
+              "url": "https://amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350884",
+              "type": "online_retailer",
+              "shipping_available": true
+            },
+            {
+              "name": "Barnes & Noble - Union Square",
+              "url": "https://www.barnesandnoble.com",
+              "maps_url": "https://maps.google.com/?q=Barnes+%26+Noble+Union+Square+NYC",
+              "address": "33 E 17th St, New York, NY 10003",
+              "type": "bookstore_chain",
+              "phone": "(212) 673-2155",
+              "real_time_inventory": true
+            },
+            {
+              "name": "The Strand Book Store",
+              "url": "https://www.strandbooks.com",
+              "maps_url": "https://maps.google.com/?q=The+Strand+Book+Store+NYC",
+              "address": "828 Broadway, New York, NY 10003",
+              "type": "independent_bookstore",
+              "phone": "(212) 473-1452",
+              "real_time_inventory": false
+            },
+            {
+              "name": "New York Public Library - Tech Collection",
+              "url": "https://nypl.org/locations/schwarzman",
+              "maps_url": "https://maps.google.com/?q=New+York+Public+Library+Main+Branch",
+              "address": "476 5th Ave, New York, NY 10018",
+              "type": "public_library",
+              "phone": "(917) 275-6975",
+              "real_time_inventory": true
+            },
+            {
+              "name": "MIT Library - Engineering Collection",
+              "url": "https://libraries.mit.edu/",
+              "maps_url": "https://maps.google.com/?q=MIT+Library+Cambridge+MA",
+              "address": "77 Massachusetts Ave, Cambridge, MA 02139",
+              "type": "university_library",
+              "real_time_inventory": true
+            }
+          ]
+        },
+        "Digital": {
+          "description": "Digital edition for online reading",
+          "sources": [
+            {
+              "name": "Amazon Kindle",
+              "url": "https://amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350884",
+              "type": "purchase"
+            },
+            {
+              "name": "Google Books",
+              "url": "https://books.google.com/books?id=CpA5DwAAQBAJ",
+              "type": "preview"
+            }
+          ]
+        }
+      },
+      "licensing_type": "Pay-to-own",
+      "sources": [
+        {
+          "name": "IEEE Xplore",
+          "url": "https://ieeexplore.ieee.org/document/6196583"
+        },
+        {
+          "name": "Springer",
+          "url": "https://link.springer.com/book/10.1007/978-0-13-597444-5"
+        },
+        {
+          "name": "ACM Digital Library",
+          "url": "https://dl.acm.org/doi/10.5555/1413532"
+        }
+      ],
+      "twitter_embeds": [
+        {
+          "embed_url": "https://twitter.com/unclebobmartin/status/123456789",
+          "keyword": "Clean Code",
+          "generated_at": "2023-10-01T12:00:00Z"
+        },
+        {
+          "embed_url": "https://twitter.com/martinfowler/status/987654321",
+          "keyword": "Software Engineering",
+          "generated_at": "2023-10-01T12:00:00Z"
+        }
+      ],
+      "related_posts": [
+        1,
+        8
+      ],
+      "community_id": "literacy-circle",
+      "created_at": "2023-10-01T12:00:00Z",
+      "updated_at": "2023-10-01T12:00:00Z"
+    },
+    {
+      "id": 2,
+      "title": "The Hobbit",
+      "author": "J.R.R. Tolkien",
+      "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1546071216l/5907.jpg",
+      "rating": 4.3,
+      "description": "Bilbo Baggins is a hobbit who enjoys a comfortable, unambitious life, rarely traveling any farther than his pantry or cellar. But his contentment is disturbed when the wizard Gandalf and a company of dwarves arrive on his doorstep one day.",
+      "year_edition": "2012 75th Anniversary Edition",
+      "total_bookmarked": 8934,
+      "tags": [
+        {
+          "name": "Fantasy",
+          "type": "primary"
+        },
+        {
+          "name": "Adventure",
+          "type": "secondary"
+        },
+        {
+          "name": "Classic Literature",
+          "type": "secondary"
+        },
+        {
+          "name": "Epic",
+          "type": "secondary"
+        }
+      ],
+      "copy_types": {
+        "Physical": {
+          "description": "Physical paperback/hardcover edition available at retail locations",
+          "sources": [
+            {
+              "name": "Amazon",
+              "url": "https://amazon.com/Hobbit-J-R-R-Tolkien/dp/054792822X",
+              "type": "online_retailer",
+              "shipping_available": true
+            },
+            {
+              "name": "Barnes & Noble - Union Square",
+              "url": "https://www.barnesandnoble.com",
+              "maps_url": "https://maps.google.com/?q=Barnes+%26+Noble+Union+Square+NYC",
+              "address": "33 E 17th St, New York, NY 10003",
+              "type": "bookstore_chain",
+              "phone": "(212) 673-2155",
+              "real_time_inventory": true
+            },
+            {
+              "name": "Powell's City of Books",
+              "url": "https://www.powells.com",
+              "maps_url": "https://maps.google.com/?q=Powells+City+of+Books+Portland+OR",
+              "address": "1005 W Burnside St, Portland, OR 97209",
+              "type": "independent_bookstore",
+              "phone": "(800) 878-7323",
+              "real_time_inventory": true
+            },
+            {
+              "name": "Los Angeles Public Library - Central",
+              "url": "https://lapl.org/locations/central-library",
+              "maps_url": "https://maps.google.com/?q=Los+Angeles+Public+Library+Central",
+              "address": "630 W 5th St, Los Angeles, CA 90071",
+              "type": "public_library",
+              "phone": "(213) 228-7000",
+              "real_time_inventory": true
+            },
+            {
+              "name": "Oxford University Press Bookshop",
+              "url": "https://oup.com.au/shop",
+              "maps_url": "https://maps.google.com/?q=Oxford+University+Press+Bookshop+Oxford+UK",
+              "address": "116-117 High St, Oxford OX1 4BZ, UK",
+              "type": "specialty_bookstore",
+              "phone": "+44 1865 242913",
+              "real_time_inventory": false
+            }
+          ]
+        },
+        "Audio": {
+          "description": "Audiobook edition",
+          "sources": [
+            {
+              "name": "Audible",
+              "url": "https://audible.com/pd/The-Hobbit-Audiobook/B002V1HSP2",
+              "type": "purchase"
+            }
+          ]
+        },
+        "Digital": {
+          "description": "Digital edition for online reading",
+          "sources": [
+            {
+              "name": "Amazon Kindle",
+              "url": "https://amazon.com/Hobbit-J-R-R-Tolkien/dp/054792822X",
+              "type": "purchase"
+            },
+            {
+              "name": "Internet Archive",
+              "url": "https://archive.org/details/thehobbit00tolk_0",
+              "type": "free"
+            }
+          ]
+        }
+      },
+      "licensing_type": "Pay-to-own",
+      "sources": [
+        {
+          "name": "Project Gutenberg",
+          "url": "https://www.gutenberg.org/ebooks/2701"
+        },
+        {
+          "name": "Internet Archive",
+          "url": "https://archive.org/details/thehobbit00tolk_0"
+        }
+      ],
+      "twitter_embeds": [
+        {
+          "embed_url": "https://twitter.com/Tolkien/status/1122334455",
+          "keyword": "The Hobbit",
+          "generated_at": "2023-10-01T12:00:00Z"
+        }
+      ],
+      "related_posts": [
+        2,
+        12
+      ],
+      "community_id": "literacy-circle",
+      "created_at": "2023-10-01T12:00:00Z",
+      "updated_at": "2023-10-01T12:00:00Z"
+    },
+    {
+      "id": 3,
+      "title": "Atomic Habits: An Easy & Proven Way to Build Good Habits & Break Bad Ones",
+      "author": "James Clear",
+      "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1535115320l/40121378.jpg",
+      "rating": 4.7,
+      "description": "No matter your goals, Atomic Habits offers a proven framework for improving--every day. James Clear, one of the world's leading experts on habit formation, reveals practical strategies that will teach you exactly how to form good habits, break bad ones, and master the tiny behaviors that lead to remarkable results.",
+      "year_edition": "2023 Paperback Edition",
+      "total_bookmarked": 15678,
+      "tags": [
+        {
+          "name": "Self-Help",
+          "type": "primary"
+        },
+        {
+          "name": "Personal Development",
+          "type": "secondary"
+        },
+        {
+          "name": "Productivity",
+          "type": "secondary"
+        },
+        {
+          "name": "Psychology",
+          "type": "secondary"
+        }
+      ],
+      "copy_types": {
+        "Physical": {
+          "description": "Physical paperback/hardcover edition available at retail locations",
+          "sources": [
+            {
+              "name": "Amazon",
+              "url": "https://amazon.com/Atomic-Habits-Proven-Build-Break/dp/0735211299",
+              "type": "online_retailer",
+              "shipping_available": true
+            },
+            {
+              "name": "Barnes & Noble - Union Square",
+              "url": "https://www.barnesandnoble.com",
+              "maps_url": "https://maps.google.com/?q=Barnes+%26+Noble+Union+Square+NYC",
+              "address": "33 E 17th St, New York, NY 10003",
+              "type": "bookstore_chain",
+              "phone": "(212) 673-2155",
+              "real_time_inventory": true
+            },
+            {
+              "name": "Books & Books - Coral Gables",
+              "url": "https://www.booksandbooks.com",
+              "maps_url": "https://maps.google.com/?q=Books+%26+Books+Coral+Gables+FL",
+              "address": "265 Aragon Ave, Coral Gables, FL 33134",
+              "type": "independent_bookstore",
+              "phone": "(305) 442-4408",
+              "real_time_inventory": false
+            },
+            {
+              "name": "Chicago Public Library - Harold Washington",
+              "url": "https://chipublib.org/locations/26",
+              "maps_url": "https://maps.google.com/?q=Chicago+Public+Library+Harold+Washington",
+              "address": "400 S State St, Chicago, IL 60605",
+              "type": "public_library",
+              "phone": "(312) 747-4300",
+              "real_time_inventory": true
+            }
+          ]
+        },
+        "Digital": {
+          "description": "Digital edition for online reading",
+          "sources": [
+            {
+              "name": "Amazon Kindle",
+              "url": "https://amazon.com/Atomic-Habits-Proven-Build-Break/dp/0735211299",
+              "type": "purchase"
+            },
+            {
+              "name": "Apple Books",
+              "url": "https://books.apple.com/us/book/atomic-habits/id1442369036",
+              "type": "purchase"
+            }
+          ]
+        },
+        "Subscription": {
+          "description": "Available via subscription services",
+          "sources": [
+            {
+              "name": "Scribd",
+              "url": "https://www.scribd.com/book/403734241/Atomic-Habits",
+              "type": "subscription"
+            }
+          ]
+        }
+      },
+      "licensing_type": "Rent",
+      "sources": [
+        {
+          "name": "Psychology Today",
+          "url": "https://www.psychologytoday.com/us/blog/habits"
+        },
+        {
+          "name": "Harvard Business Review",
+          "url": "https://hbr.org/2018/10/atomic-habits"
+        }
+      ],
+      "twitter_embeds": [
+        {
+          "embed_url": "https://twitter.com/JamesClear/status/9988776655",
+          "keyword": "Atomic Habits",
+          "generated_at": "2023-10-01T12:00:00Z"
+        },
+        {
+          "embed_url": "https://twitter.com/JamesClear/status/8877665544",
+          "keyword": "Habits",
+          "generated_at": "2023-10-01T12:00:00Z"
+        }
+      ],
+      "related_posts": [
+        5,
+        9
+      ],
+      "community_id": "wellness-warriors",
+      "created_at": "2023-10-01T12:00:00Z",
+      "updated_at": "2023-10-01T12:00:00Z"
+    },
+    {
+      "id": 4,
+      "title": "Design Patterns: Elements of Reusable Object-Oriented Software",
+      "author": "Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides",
+      "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1435589748l/850099.jpg",
+      "rating": 4.2,
+      "description": "Capturing a wealth of experience about the design of object-oriented software, four top-notch designers present a catalog of simple and succinct solutions to commonly occurring design problems.",
+      "year_edition": "2019 25th Anniversary Edition",
+      "total_bookmarked": 5678,
+      "tags": [
+        {
+          "name": "Software Design",
+          "type": "primary"
+        },
+        {
+          "name": "Object-Oriented Programming",
+          "type": "secondary"
+        },
+        {
+          "name": "Architecture",
+          "type": "secondary"
+        },
+        {
+          "name": "Design Patterns",
+          "type": "secondary"
+        }
+      ],
+      "copy_types": {
+        "Physical": {
+          "description": "Physical paperback/hardcover edition available at retail locations",
+          "sources": [
+            {
+              "name": "Amazon",
+              "url": "https://amazon.com/Design-Patterns-Elements-Reusable-Object-Oriented/dp/0201633612",
+              "type": "online_retailer",
+              "shipping_available": true
+            },
+            {
+              "name": "Stanford Bookstore",
+              "url": "https://stanfordbookstore.com",
+              "maps_url": "https://maps.google.com/?q=Stanford+Bookstore+Palo+Alto+CA",
+              "address": "519 Lasuen Mall, Stanford, CA 94305",
+              "type": "university_bookstore",
+              "phone": "(650) 329-1217",
+              "real_time_inventory": true
+            },
+            {
+              "name": "Books Inc - Opera Plaza",
+              "url": "https://www.booksinc.net",
+              "maps_url": "https://maps.google.com/?q=Books+Inc+Opera+Plaza+San+Francisco+CA",
+              "address": "601 Van Ness Ave, San Francisco, CA 94102",
+              "type": "independent_bookstore",
+              "phone": "(415) 776-1111",
+              "real_time_inventory": false
+            },
+            {
+              "name": "Harvard University Library - Widener",
+              "url": "https://library.harvard.edu/libraries/widener",
+              "maps_url": "https://maps.google.com/?q=Harvard+University+Library+Widener+Cambridge+MA",
+              "address": "1 Harvard Yard, Cambridge, MA 02138",
+              "type": "university_library",
+              "phone": "(617) 495-2413",
+              "real_time_inventory": true
+            }
+          ]
+        },
+        "Digital": {
+          "description": "Digital edition for online reading",
+          "sources": [
+            {
+              "name": "Amazon Kindle",
+              "url": "https://amazon.com/Design-Patterns-Elements-Reusable-Object-Oriented/dp/0201633612",
+              "type": "purchase"
+            },
+            {
+              "name": "IEEE Xplore",
+              "url": "https://ieeexplore.ieee.org/document/5353680",
+              "type": "institutional"
+            }
+          ]
+        }
+      },
+      "licensing_type": "Pay-to-own",
+      "sources": [
+        {
+          "name": "IEEE Xplore",
+          "url": "https://ieeexplore.ieee.org/document/5353680"
+        },
+        {
+          "name": "ACM Digital Library",
+          "url": "https://dl.acm.org/doi/book/10.5555/197730"
+        }
+      ],
+      "twitter_embeds": [
+        {
+          "embed_url": "https://twitter.com/martinfowler/status/7766554433",
+          "keyword": "Design Patterns",
+          "generated_at": "2023-10-01T12:00:00Z"
+        }
+      ],
+      "related_posts": [
+        7,
+        11
+      ],
+      "community_id": "creative-atelier",
+      "created_at": "2023-10-01T12:00:00Z",
+      "updated_at": "2023-10-01T12:00:00Z"
+    },
+    {
+      "id": 5,
+      "title": "The Pragmatic Programmer: Your Journey to Mastery",
+      "author": "David Thomas, Andrew Hunt",
+      "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/4070553672l/4099",
+      "rating": 4.4,
+      "description": "Written as a series of self-contained sections and filled with classic and fresh anecdotes, thoughtful examples, and interesting analogies, The Pragmatic Programmer illustrates the best approaches and major pitfalls of many different aspects of software development.",
+      "year_edition": "2023 20th Anniversary Edition",
+      "total_bookmarked": 8912,
+      "tags": [
+        {
+          "name": "Programming",
+          "type": "primary"
+        },
+        {
+          "name": "Career Development",
+          "type": "secondary"
+        },
+        {
+          "name": "Software Development",
+          "type": "secondary"
+        },
+        {
+          "name": "Best Practices",
+          "type": "secondary"
+        }
+      ],
+      "copy_types": {
+        "Physical": {
+          "description": "Physical paperback/hardcover edition available at retail locations",
+          "sources": [
+            {
+              "name": "Amazon",
+              "url": "https://amazon.com/Pragmatic-Programmer-journey-mastery-20th/dp/0135957059",
+              "type": "online_retailer",
+              "shipping_available": true
+            },
+            {
+              "name": "O'Reilly Media - Sebastopol",
+              "url": "https://www.oreilly.com",
+              "maps_url": "https://maps.google.com/?q=OReilly+Media+Sebastopol+CA",
+              "address": "1005 Gravenstein Hwy N, Sebastopol, CA 95472",
+              "type": "specialty_bookstore",
+              "phone": "(707) 827-7000",
+              "real_time_inventory": false
+            },
+            {
+              "name": "University of Washington Computer Store",
+              "url": "https://www.washington.edu/techstore",
+              "maps_url": "https://maps.google.com/?q=University+of+Washington+Computer+Store+Seattle+WA",
+              "address": "4333 Brooklyn Ave NE, Seattle, WA 98105",
+              "type": "university_bookstore",
+              "phone": "(206) 543-1200",
+              "real_time_inventory": true
+            },
+            {
+              "name": "Seattle Public Library - Central",
+              "url": "https://www.spl.org/locations/central-library",
+              "maps_url": "https://maps.google.com/?q=Seattle+Public+Library+Central+Library",
+              "address": "1000 4th Ave, Seattle, WA 98104",
+              "type": "public_library",
+              "phone": "(206) 386-4636",
+              "real_time_inventory": true
+            }
+          ]
+        },
+        "Digital": {
+          "description": "Digital edition for online reading",
+          "sources": [
+            {
+              "name": "Amazon Kindle",
+              "url": "https://amazon.com/Pragmatic-Programmer-journey-mastery-20th/dp/0135957059",
+              "type": "purchase"
+            },
+            {
+              "name": "O'Reilly",
+              "url": "https://www.oreilly.com/library/view/the-pragmatic-programmer/9780135957059/",
+              "type": "subscription"
+            }
+          ]
+        },
+        "Institutional": {
+          "description": "Available through academic/professional institutions",
+          "sources": [
+            {
+              "name": "ACM Digital Library",
+              "url": "https://dl.acm.org/doi/10.5555/333458",
+              "type": "institutional"
+            }
+          ]
+        }
+      },
+      "licensing_type": "Pay-to-own",
+      "sources": [
+        {
+          "name": "ACM Digital Library",
+          "url": "https://dl.acm.org/doi/10.5555/333458"
+        },
+        {
+          "name": "O'Reilly",
+          "url": "https://www.oreilly.com/library/view/the-pragmatic-programmer/9780135957059/"
+        }
+      ],
+      "twitter_embeds": [
+        {
+          "embed_url": "https://twitter.com/pragdave/status/6655443322",
+          "keyword": "Pragmatic Programmer",
+          "generated_at": "2023-10-01T12:00:00Z"
+        }
+      ],
+      "related_posts": [
+        1,
+        6
+      ],
+      "community_id": "literacy-circle",
+      "created_at": "2023-10-01T12:00:00Z",
+      "updated_at": "2023-10-01T12:00:00Z"
+    },
+    {
+      "id": 6,
+      "title": "Deep Learning",
+      "author": "Ian Goodfellow, Yoshua Bengio, Aaron Courville",
+      "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1857111902l/24775616.jpg",
+      "rating": 4.6,
+      "description": "The text offers mathematical and conceptual background, covering relevant concepts in linear algebra, probability theory and information theory, numerical computation, and machine learning. It describes deep learning techniques used by practitioners in industry.",
+      "year_edition": "2016 First Edition",
+      "total_bookmarked": 12450,
+      "tags": [
+        {
+          "name": "Machine Learning",
+          "type": "primary"
+        },
+        {
+          "name": "Artificial Intelligence",
+          "type": "secondary"
+        },
+        {
+          "name": "Neural Networks",
+          "type": "secondary"
+        },
+        {
+          "name": "Computer Science",
+          "type": "secondary"
+        }
+      ],
+      "copy_types": {
+        "Online": {
+          "description": "Free online edition with full access",
+          "sources": [
+            {
+              "name": "MIT Press",
+              "url": "https://mitpress.mit.edu/books/deep-learning",
+              "type": "free"
+            },
+            {
+              "name": "PDF Download",
+              "url": "https://www.deeplearningbook.org/",
+              "type": "free_download"
+            }
+          ]
+        },
+        "Academic": {
+          "description": "Academic preprint and research version",
+          "sources": [
+            {
+              "name": "arXiv",
+              "url": "https://arxiv.org/abs/1609.04947",
+              "type": "free"
+            }
+          ]
+        },
+        "Physical": {
+          "description": "Physical edition available through academic channels",
+          "sources": [
+            {
+              "name": "MIT Press Bookstore",
+              "url": "https://mitpress.mit.edu",
+              "maps_url": "https://maps.google.com/?q=MIT+Press+Bookstore+Cambridge+MA",
+              "address": "30 Carleton St E, Cambridge, MA 02142",
+              "type": "academic_bookstore",
+              "phone": "(617) 253-5249",
+              "real_time_inventory": false
+            },
+            {
+              "name": "UC Berkeley Library - Engineering",
+              "url": "https://www.lib.berkeley.edu/eng",
+              "maps_url": "https://maps.google.com/?q=UC+Berkeley+Library+Engineering+Berkeley+CA",
+              "address": "110 Bechtel Engineering Center, Berkeley, CA 94720",
+              "type": "university_library",
+              "phone": "(510) 642-3339",
+              "real_time_inventory": true
+            },
+            {
+              "name": "Carnegie Mellon University Library",
+              "url": "https://www.library.cmu.edu",
+              "maps_url": "https://maps.google.com/?q=Carnegie+Mellon+University+Library+Pittsburgh+PA",
+              "address": "5000 Forbes Ave, Pittsburgh, PA 15213",
+              "type": "university_library",
+              "phone": "(412) 268-2464",
+              "real_time_inventory": true
+            }
+          ]
+        }
+      },
+      "licensing_type": "Free",
+      "sources": [
+        {
+          "name": "arXiv",
+          "url": "https://arxiv.org/abs/1609.04947"
+        },
+        {
+          "name": "MIT Press",
+          "url": "https://mitpress.mit.edu/books/deep-learning"
+        }
+      ],
+      "twitter_embeds": [
+        {
+          "embed_url": "https://twitter.com/ylecun/status/5544332211",
+          "keyword": "Deep Learning",
+          "generated_at": "2023-10-01T12:00:00Z"
+        },
+        {
+          "embed_url": "https://twitter.com/goodfellow_ian/status/4433221100",
+          "keyword": "Neural Networks",
+          "generated_at": "2023-10-01T12:00:00Z"
+        }
+      ],
+      "related_posts": [
+        3,
+        10
+      ],
+      "community_id": "literacy-circle",
+      "created_at": "2023-10-01T12:00:00Z",
+      "updated_at": "2023-10-01T12:00:00Z"
+    },
+    {
+      "id": 7,
+      "title": "The Lean Startup: How Today's Entrepreneurs Use Continuous Innovation",
+      "author": "Eric Ries",
+      "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1388266938l/10127019.jpg",
+      "rating": 3.9,
+      "description": "Most startups fail. But many of those failures are preventable. The Lean Startup is a new approach being adopted across the globe, changing the way companies are built and new products are launched.",
+      "year_edition": "2011 First Edition",
+      "total_bookmarked": 9876,
+      "tags": [
+        {
+          "name": "Business",
+          "type": "primary"
+        },
+        {
+          "name": "Entrepreneurship",
+          "type": "secondary"
+        },
+        {
+          "name": "Innovation",
+          "type": "secondary"
+        },
+        {
+          "name": "Startup",
+          "type": "secondary"
+        }
+      ],
+      "copy_types": {
+        "Physical": {
+          "description": "Physical paperback/hardcover edition available at retail locations",
+          "sources": [
+            {
+              "name": "Amazon",
+              "url": "https://amazon.com/Lean-Startup-Entrepreneurs-Continuous-Innovation/dp/0307887898",
+              "type": "online_retailer",
+              "shipping_available": true
+            },
+            {
+              "name": "Books-A-Million - Jacksonville",
+              "url": "https://www.booksamillion.com",
+              "maps_url": "https://maps.google.com/?q=Books-A-Million+Jacksonville+FL",
+              "address": "10280 San Jose Blvd, Jacksonville, FL 32257",
+              "type": "bookstore_chain",
+              "phone": "(904) 645-3984",
+              "real_time_inventory": false
+            },
+            {
+              "name": "Silicon Valley Innovation Center",
+              "url": "https://svic.com",
+              "maps_url": "https://maps.google.com/?q=Silicon+Valley+Innovation+Center+Palo+Alto+CA",
+              "address": "440 California Ave, Palo Alto, CA 94301",
+              "type": "educational_center",
+              "phone": "(650) 321-4000",
+              "real_time_inventory": false
+            },
+            {
+              "name": "Austin Public Library - Central",
+              "url": "https://library.austintexas.gov/central",
+              "maps_url": "https://maps.google.com/?q=Austin+Public+Library+Central+Austin+TX",
+              "address": "710 W Cesar Chavez St, Austin, TX 78701",
+              "type": "public_library",
+              "phone": "(512) 974-7400",
+              "real_time_inventory": true
+            }
+          ]
+        },
+        "Digital": {
+          "description": "Digital edition for online reading",
+          "sources": [
+            {
+              "name": "Amazon Kindle",
+              "url": "https://amazon.com/Lean-Startup-Entrepreneurs-Continuous-Innovation/dp/0307887898",
+              "type": "purchase"
+            }
+          ]
+        }
+      },
+      "licensing_type": "Pay-to-own",
+      "sources": [
+        {
+          "name": "Harvard Business Review",
+          "url": "https://hbr.org/2011/05/the-lean-startup"
+        },
+        {
+          "name": "Forbes",
+          "url": "https://www.forbes.com/sites/steveblank/2013/04/03/the-lean-startup-movement/"
+        }
+      ],
+      "twitter_embeds": [
+        {
+          "embed_url": "https://twitter.com/ericries/status/3322110099",
+          "keyword": "Lean Startup",
+          "generated_at": "2023-10-01T12:00:00Z"
+        }
+      ],
+      "related_posts": [
+        13
+      ],
+      "community_id": "creative-atelier",
+      "created_at": "2023-10-01T12:00:00Z",
+      "updated_at": "2023-10-01T12:00:00Z"
+    },
+    {
+      "id": 8,
+      "title": "Human-Computer Interaction",
+      "author": "Alan Dix, Janet Finlay, Gregory D. Abowd, Russell Beale",
+      "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1348365968l/4010806.jpg",
+      "rating": 3.7,
+      "description": "Much has changed since the first edition of Human-Computer Interaction was published. Ubiquitous computing and rich sensor-filled environments are finding their way out of the laboratory, not just into movies but also into our workplaces and homes.",
+      "year_edition": "2017 4th Edition",
+      "total_bookmarked": 3456,
+      "tags": [
+        {
+          "name": "User Experience",
+          "type": "primary"
+        },
+        {
+          "name": "HCI",
+          "type": "secondary"
+        },
+        {
+          "name": "Interface Design",
+          "type": "secondary"
+        },
+        {
+          "name": "Usability",
+          "type": "secondary"
+        }
+      ],
+      "copy_types": {
+        "Physical": {
+          "description": "Physical paperback/hardcover edition available at retail locations",
+          "sources": [
+            {
+              "name": "Amazon",
+              "url": "https://amazon.com/Human-Computer-Interaction-Alan-Dix/dp/0134460989",
+              "type": "online_retailer",
+              "shipping_available": true
+            },
+            {
+              "name": "MIT Press Bookstore",
+              "url": "https://mitpress.mit.edu",
+              "maps_url": "https://maps.google.com/?q=MIT+Press+Bookstore+Cambridge+MA",
+              "address": "30 Carleton St E, Cambridge, MA 02142",
+              "type": "academic_bookstore",
+              "phone": "(617) 253-5249",
+              "real_time_inventory": false
+            },
+            {
+              "name": "Carnegie Mellon University Store",
+              "url": "https://cmu.edu/store",
+              "maps_url": "https://maps.google.com/?q=Carnegie+Mellon+University+Store+Pittsburgh+PA",
+              "address": "5000 Forbes Ave, Pittsburgh, PA 15213",
+              "type": "university_bookstore",
+              "phone": "(412) 268-2047",
+              "real_time_inventory": true
+            }
+          ]
+        },
+        "Digital": {
+          "description": "Digital edition for online reading",
+          "sources": [
+            {
+              "name": "Amazon Kindle",
+              "url": "https://amazon.com/Human-Computer-Interaction-Alan-Dix/dp/0134460989",
+              "type": "purchase"
+            },
+            {
+              "name": "ACM Digital Library",
+              "url": "https://dl.acm.org/doi/book/10.5555/307809",
+              "type": "institutional"
+            },
+            {
+              "name": "IEEE Xplore",
+              "url": "https://ieeexplore.ieee.org/document/7473862",
+              "type": "institutional"
+            }
+          ]
+        }
+      },
+      "licensing_type": "Pay-to-own",
+      "sources": [
+        {
+          "name": "ACM Digital Library",
+          "url": "https://dl.acm.org/doi/book/10.5555/307809"
+        },
+        {
+          "name": "IEEE Xplore",
+          "url": "https://ieeexplore.ieee.org/document/7473862"
+        }
+      ],
+      "twitter_embeds": [
+        {
+          "embed_url": "https://twitter.com/alancix/status/2211009988",
+          "keyword": "Human Computer Interaction",
+          "generated_at": "2023-10-01T12:00:00Z"
+        }
+      ],
+      "related_posts": [
+        14
+      ],
+      "community_id": "creative-atelier",
+      "created_at": "2023-10-01T12:00:00Z",
+      "updated_at": "2023-10-01T12:00:00Z"
+    },
+    {
+      "id": 9,
+      "title": "Mindset: The New Psychology of Success",
+      "author": "Carol S. Dweck",
+      "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1473448322l/40745899.jpg",
+      "rating": 4.1,
+      "description": "After decades of research, world-renowned Stanford University psychologist Carol S. Dweck, Ph.D., discovered a simple but groundbreaking idea: the power of mindset. In this brilliant book, she shows how success in school, work, sports, the arts, and almost every area of human endeavor can be dramatically influenced by how we think about our talents and abilities.",
+      "year_edition": "2016 Updated Edition",
+      "total_bookmarked": 7890,
+      "tags": [
+        {
+          "name": "Psychology",
+          "type": "primary"
+        },
+        {
+          "name": "Personal Growth",
+          "type": "secondary"
+        },
+        {
+          "name": "Motivation",
+          "type": "secondary"
+        },
+        {
+          "name": "Education",
+          "type": "secondary"
+        }
+      ],
+      "copy_types": {
+        "Physical": {
+          "description": "Physical paperback/hardcover edition available at retail locations",
+          "sources": [
+            {
+              "name": "Amazon",
+              "url": "https://amazon.com/Mindset-Psychology-Carol-S-Dweck/dp/0345472322",
+              "type": "online_retailer",
+              "shipping_available": true
+            },
+            {
+              "name": "Barnes & Noble - Union Square",
+              "url": "https://www.barnesandnoble.com",
+              "maps_url": "https://maps.google.com/?q=Barnes+%26+Noble+Union+Square+NYC",
+              "address": "33 E 17th St, New York, NY 10003",
+              "type": "bookstore_chain",
+              "phone": "(212) 673-2155",
+              "real_time_inventory": true
+            },
+            {
+              "name": "Stanford Bookstore",
+              "url": "https://stanfordbookstore.com",
+              "maps_url": "https://maps.google.com/?q=Stanford+Bookstore+Palo+Alto+CA",
+              "address": "519 Lasuen Mall, Stanford, CA 94305",
+              "type": "university_bookstore",
+              "phone": "(650) 329-1217",
+              "real_time_inventory": true
+            },
+            {
+              "name": "Harvard Book Store",
+              "url": "https://harvard.com/store",
+              "maps_url": "https://maps.google.com/?q=Harvard+Book+Store+Cambridge+MA",
+              "address": "1256 Massachusetts Ave, Cambridge, MA 02138",
+              "type": "independent_bookstore",
+              "phone": "(617) 661-1515",
+              "real_time_inventory": true
+            }
+          ]
+        },
+        "Digital": {
+          "description": "Digital edition for online reading",
+          "sources": [
+            {
+              "name": "Amazon Kindle",
+              "url": "https://amazon.com/Mindset-Psychology-Carol-S-Dweck/dp/0345472322",
+              "type": "purchase"
+            },
+            {
+              "name": "Apple Books",
+              "url": "https://books.apple.com/us/book/mindset/id1101477091",
+              "type": "purchase"
+            }
+          ]
+        }
+      },
+      "licensing_type": "Rent",
+      "sources": [
+        {
+          "name": "Psychology Today",
+          "url": "https://www.psychologytoday.com/us/blog/mindset"
+        },
+        {
+          "name": "Harvard Graduate School",
+          "url": "https://www.gse.harvard.edu/news/uk/16/01/mindset"
+        }
+      ],
+      "twitter_embeds": [
+        {
+          "embed_url": "https://twitter.com/CarolDweck/status/1099887766",
+          "keyword": "Growth Mindset",
+          "generated_at": "2023-10-01T12:00:00Z"
+        }
+      ],
+      "related_posts": [
+        5,
+        15
+      ],
+      "community_id": "wellness-warriors",
+      "created_at": "2023-10-01T12:00:00Z",
+      "updated_at": "2023-10-01T12:00:00Z"
+    },
+    {
+      "id": 10,
+      "title": "The Art of Computer Programming",
+      "author": "Donald E. Knuth",
+      "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1401490415l/527659.jpg",
+      "rating": 4.6,
+      "description": "This multivolume work on the analysis of algorithms has long been recognized as the definitive description of classical computer science. The three complete volumes published to date already comprise a unique and invaluable resource in programming theory and practice.",
+      "year_edition": "2011 3rd Edition",
+      "total_bookmarked": 4321,
+      "tags": [
+        {
+          "name": "Computer Science",
+          "type": "primary"
+        },
+        {
+          "name": "Algorithms",
+          "type": "secondary"
+        },
+        {
+          "name": "Programming Theory",
+          "type": "secondary"
+        },
+        {
+          "name": "Mathematical Foundations",
+          "type": "secondary"
+        }
+      ],
+      "copy_types": {
+        "Physical": {
+          "description": "Physical paperback/hardcover edition available at retail locations",
+          "sources": [
+            {
+              "name": "Amazon",
+              "url": "https://amazon.com/Art-Computer-Programming-Volume/dp/0201896842",
+              "type": "online_retailer",
+              "shipping_available": true
+            },
+            {
+              "name": "Stanford Bookstore",
+              "url": "https://stanfordbookstore.com",
+              "maps_url": "https://maps.google.com/?q=Stanford+Bookstore+Palo+Alto+CA",
+              "address": "519 Lasuen Mall, Stanford, CA 94305",
+              "type": "university_bookstore",
+              "phone": "(650) 329-1217",
+              "real_time_inventory": true
+            },
+            {
+              "name": "MIT Press Bookstore",
+              "url": "https://mitpress.mit.edu",
+              "maps_url": "https://maps.google.com/?q=MIT+Press+Bookstore+Cambridge+MA",
+              "address": "30 Carleton St E, Cambridge, MA 02142",
+              "type": "academic_bookstore",
+              "phone": "(617) 253-5249",
+              "real_time_inventory": false
+            },
+            {
+              "name": "University of Chicago Bookstore",
+              "url": "https://bookstore.uchicago.edu",
+              "maps_url": "https://maps.google.com/?q=University+of+Chicago+Bookstore+Chicago+IL",
+              "address": "970 E 58th St, Chicago, IL 60637",
+              "type": "university_bookstore",
+              "phone": "(773) 752-3412",
+              "real_time_inventory": true
+            }
+          ]
+        },
+        "Digital": {
+          "description": "Digital edition for online reading",
+          "sources": [
+            {
+              "name": "Amazon Kindle",
+              "url": "https://amazon.com/Art-Computer-Programming-Volume/dp/0201896842",
+              "type": "purchase"
+            },
+            {
+              "name": "Stanford University",
+              "url": "https://cs.stanford.edu/~knuth/taocp.html",
+              "type": "free"
+            }
+          ]
+        }
+      },
+      "licensing_type": "Pay-to-own",
+      "sources": [
+        {
+          "name": "ACM Digital Library",
+          "url": "https://dl.acm.org/doi/book/10.5555/578145"
+        },
+        {
+          "name": "Stanford University",
+          "url": "https://cs.stanford.edu/~knuth/taocp.html"
+        }
+      ],
+      "twitter_embeds": [
+        {
+          "embed_url": "https://twitter.com/DonaldKnuth/status/887665543",
+          "keyword": "Computer Programming",
+          "generated_at": "2023-10-01T12:00:00Z"
+        }
+      ],
+      "related_posts": [
+        16
+      ],
+      "community_id": "literacy-circle",
+      "created_at": "2023-10-01T12:00:00Z",
+      "updated_at": "2023-10-01T12:00:00Z"
+    },
+    {
+      "id": 11,
+      "title": "PHP and MySQL Web Development",
+      "author": "Luke Welling, Laura Thomson",
+      "cover": "https://images-na.ssl-images-amazon.com/images/I/51TJA-BOgEL._SX331_BO1,204,203,200_.jpg",
+      "rating": 4.2,
+      "description": "Learn PHP and MySQL programming - the practical guide to developing dynamic web applications using PHP and MySQL database. This comprehensive book covers everything from basic PHP syntax to advanced database interactions, form processing, security, and modern best practices for building robust web applications.",
+      "year_edition": "2018 5th Edition",
+      "total_bookmarked": 1542,
+      "tags": [
+        {
+          "name": "Web Development",
+          "type": "primary"
+        },
+        {
+          "name": "PHP",
+          "type": "primary"
+        },
+        {
+          "name": "MySQL",
+          "type": "secondary"
+        },
+        {
+          "name": "Backend Development",
+          "type": "secondary"
+        },
+        {
+          "name": "Database",
+          "type": "secondary"
+        }
+      ],
+      "copy_types": {
+        "Physical": {
+          "description": "Physical paperback/hardcover edition available at retail locations",
+          "sources": [
+            {
+              "name": "Amazon",
+              "url": "https://www.amazon.com/PHP-MySQL-Web-Development/dp/0134492663",
+              "type": "online_retailer",
+              "shipping_available": true
+            },
+            {
+              "name": "Barnes & Noble - Union Square",
+              "url": "https://www.barnesandnoble.com",
+              "maps_url": "https://maps.google.com/?q=Barnes+%26+Noble+Union+Square+NYC",
+              "address": "33 E 17th St, New York, NY 10003",
+              "type": "bookstore_chain",
+              "phone": "(212) 673-2155",
+              "real_time_inventory": true
+            },
+            {
+              "name": "Micro Center - Tustin",
+              "url": "https://www.microcenter.com",
+              "maps_url": "https://maps.google.com/?q=Micro+Center+Tustin+CA",
+              "address": "2752 Main St, Tustin, CA 92782",
+              "type": "tech_bookstore",
+              "phone": "(714) 258-0245",
+              "real_time_inventory": true
+            }
+          ]
+        },
+        "Digital": {
+          "description": "Digital edition for online reading",
+          "sources": [
+            {
+              "name": "Amazon Kindle",
+              "url": "https://www.amazon.com/PHP-MySQL-Web-Development/dp/0134492663",
+              "type": "purchase"
+            },
+            {
+              "name": "Pearson",
+              "url": "https://www.pearson.com/en-us/subject-catalog/p/php-and-mysql-web-development/P200000003256/9780134492660",
+              "type": "free"
+            }
+          ]
+        }
+      },
+      "licensing_type": "Pay-to-own",
+      "sources": [
+        {
+          "name": "Developer PHP Community",
+          "url": "https://www.php.net/manual/en/",
+          "description": "Official PHP documentation with examples"
+        }
+      ],
+      "twitter_embeds": [
+        {
+          "id": "1823456789",
+          "text": "Just finished PHP and MySQL Web Development - excellent resource for anyone starting with backend development! The database design chapters are gold. #PHP #WebDev",
+          "author": "DevMaster",
+          "author_handle": "@devmaster",
+          "likes": 456,
+          "retweets": 123,
+          "created_at": "2023-11-10T16:30:00Z"
+        }
+      ],
+      "created_at": "2023-10-01T12:00:00Z",
+      "updated_at": "2023-10-01T12:00:00Z"
+    },
+    {
+      "id": 12,
+      "title": "JavaScript: The Good Parts",
+      "author": "Douglas Crockford",
+      "cover": "https://images-na.ssl-images-amazon.com/images/I/51OL85-f0TL._SX331_BO1,204,203,200_.jpg",
+      "rating": 4,
+      "description": "Most programming languages contain good and bad parts, but JavaScript has more than its share of the bad, having been developed and released in a hurry before it could be refined. This book scrapes away these bad features to reveal a subset of JavaScript that is more reliable, readable, and maintainable.",
+      "year_edition": "2008",
+      "total_bookmarked": 2876,
+      "tags": [
+        {
+          "name": "Web Development",
+          "type": "primary"
+        },
+        {
+          "name": "JavaScript",
+          "type": "primary"
+        },
+        {
+          "name": "Frontend Development",
+          "type": "secondary"
+        },
+        {
+          "name": "Programming Languages",
+          "type": "secondary"
+        }
+      ],
+      "copy_types": {
+        "Physical": {
+          "description": "Physical paperback/hardcover edition available at retail locations",
+          "sources": [
+            {
+              "name": "Amazon",
+              "url": "https://www.amazon.com/JavaScript-Good-Parts/dp/0596517742",
+              "type": "online_retailer",
+              "shipping_available": true
+            },
+            {
+              "name": "Barnes & Noble - Union Square",
+              "url": "https://www.barnesandnoble.com",
+              "maps_url": "https://maps.google.com/?q=Barnes+%26+Noble+Union+Square+NYC",
+              "address": "33 E 17th St, New York, NY 10003",
+              "type": "bookstore_chain",
+              "phone": "(212) 673-2155",
+              "real_time_inventory": true
+            },
+            {
+              "name": "O'Reilly Media - Sebastopol",
+              "url": "https://www.oreilly.com",
+              "maps_url": "https://maps.google.com/?q=OReilly+Media+Sebastopol+CA",
+              "address": "1005 Gravenstein Hwy N, Sebastopol, CA 95472",
+              "type": "specialty_bookstore",
+              "phone": "(707) 827-7000",
+              "real_time_inventory": false
+            },
+            {
+              "name": "NYU Bookstore",
+              "url": "https://nyu bookstore.com",
+              "maps_url": "https://maps.google.com/?q=NYU+Bookstore+New+York+NY",
+              "address": "726 Broadway, New York, NY 10003",
+              "type": "university_bookstore",
+              "phone": "(212) 998-4678",
+              "real_time_inventory": true
+            }
+          ]
+        },
+        "Digital": {
+          "description": "Digital edition for online reading",
+          "sources": [
+            {
+              "name": "Amazon Kindle",
+              "url": "https://www.amazon.com/JavaScript-Good-Parts/dp/0596517742",
+              "type": "purchase"
+            },
+            {
+              "name": "O'Reilly",
+              "url": "https://www.oreilly.com/library/view/javascript-the-good/9780596517748/",
+              "type": "subscription"
+            }
+          ]
+        }
+      },
+      "licensing_type": "Pay-to-own",
+      "sources": [
+        {
+          "name": "Mozilla Developer Network",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+          "description": "Comprehensive JavaScript guide and reference"
+        }
+      ],
+      "twitter_embeds": [
+        {
+          "id": "1728390123",
+          "text": "JavaScript: The Good Parts completely changed how I write JS. Every frontend developer should read this at least twice! #JavaScript #WebDev",
+          "author": "FrontendGuru",
+          "author_handle": "@frontendguru",
+          "likes": 892,
+          "retweets": 456,
+          "created_at": "2023-10-05T14:15:00Z"
+        }
+      ],
+      "created_at": "2023-10-01T12:00:00Z",
+      "updated_at": "2023-10-01T12:00:00Z"
+    },
+    {
+      "id": 13,
+      "title": "Modern PHP: New Features and Good Practices",
+      "author": "Josh Lockhart",
+      "cover": "https://images-na.ssl-images-amazon.com/images/I/51ZIlx%2BByTL._SX331_BO1,204,203,200_.jpg",
+      "rating": 4.3,
+      "description": "PHP has transformed from a simple scripting language into a powerful, modern programming language capable of handling complex web applications. This book teaches you modern PHP features and best practices, covering namespaces, traits, generators, closures, and the latest PHP standards.",
+      "year_edition": "2015",
+      "total_bookmarked": 1234,
+      "tags": [
+        {
+          "name": "Web Development",
+          "type": "primary"
+        },
+        {
+          "name": "PHP",
+          "type": "primary"
+        },
+        {
+          "name": "Modern PHP",
+          "type": "secondary"
+        },
+        {
+          "name": "Best Practices",
+          "type": "secondary"
+        },
+        {
+          "name": "Backend Development",
+          "type": "secondary"
+        }
+      ],
+      "copy_types": {
+        "Physical": {
+          "description": "Physical paperback/hardcover edition available at retail locations",
+          "sources": [
+            {
+              "name": "Amazon",
+              "url": "https://www.amazon.com/Modern-PHP-Features-Practices/dp/1491905018",
+              "type": "online_retailer",
+              "shipping_available": true
+            },
+            {
+              "name": "Barnes & Noble - Union Square",
+              "url": "https://www.barnesandnoble.com",
+              "maps_url": "https://maps.google.com/?q=Barnes+%26+Noble+Union+Square+NYC",
+              "address": "33 E 17th St, New York, NY 10003",
+              "type": "bookstore_chain",
+              "phone": "(212) 673-2155",
+              "real_time_inventory": true
+            },
+            {
+              "name": "Powell's Technical Books",
+              "url": "https://www.powells.com",
+              "maps_url": "https://maps.google.com/?q=Powells+City+of+Books+Portland+OR",
+              "address": "1005 W Burnside St, Portland, OR 97209",
+              "type": "independent_bookstore",
+              "phone": "(800) 878-7323",
+              "real_time_inventory": true
+            }
+          ]
+        },
+        "Digital": {
+          "description": "Digital edition for online reading",
+          "sources": [
+            {
+              "name": "Amazon Kindle",
+              "url": "https://www.amazon.com/Modern-PHP-Features-Practices/dp/1491905018",
+              "type": "purchase"
+            },
+            {
+              "name": "GitHub",
+              "url": "https://github.com/Pact-Foundation/modern-php-guide",
+              "type": "free"
+            },
+            {
+              "name": "PHP The Right Way",
+              "url": "https://phptherightway.com/",
+              "type": "free"
+            }
+          ]
+        }
+      },
+      "licensing_type": "Free",
+      "sources": [
+        {
+          "name": "PHP The Right Way",
+          "url": "https://phptherightway.com/",
+          "description": "Modern PHP best practices and standards"
+        }
+      ],
+      "twitter_embeds": [
+        {
+          "id": "1923456788",
+          "text": "Modern PHP by Josh Lockhart is a game-changer for PHP developers. Shows how far PHP has come as a serious programming language! #PHP #ModernPHP",
+          "author": "PHPSavant",
+          "author_handle": "@phpsavant",
+          "likes": 567,
+          "retweets": 234,
+          "created_at": "2023-11-15T10:45:00Z"
+        }
+      ],
+      "created_at": "2023-10-01T12:00:00Z",
+      "updated_at": "2023-10-01T12:00:00Z"
+    },
+    {
+      "id": 14,
+      "title": "HTML and CSS: Design and Build Websites",
+      "author": "Jon Duckett",
+      "cover": "https://images-na.ssl-images-amazon.com/images/I/51SLxsDWURL._SX331_BO1,204,203,200_.jpg",
+      "rating": 4.4,
+      "description": "A full-color introduction to the fundamentals of HTML and CSS for creating beautiful, standards-compliant websites. Every page is packed with visually engaging examples, practical techniques, and clear explanations that make learning HTML and CSS intuitive and enjoyable.",
+      "year_edition": "2014",
+      "total_bookmarked": 3456,
+      "tags": [
+        {
+          "name": "Web Development",
+          "type": "primary"
+        },
+        {
+          "name": "HTML",
+          "type": "primary"
+        },
+        {
+          "name": "CSS",
+          "type": "primary"
+        },
+        {
+          "name": "Frontend Development",
+          "type": "secondary"
+        },
+        {
+          "name": "Web Design",
+          "type": "secondary"
+        }
+      ],
+      "copy_types": {
+        "Physical": {
+          "description": "Physical paperback/hardcover edition available at retail locations",
+          "sources": [
+            {
+              "name": "Amazon",
+              "url": "https://www.amazon.com/HTML-CSS-Design-Build-Websites/dp/1118008189",
+              "type": "online_retailer",
+              "shipping_available": true
+            },
+            {
+              "name": "Barnes & Noble - Union Square",
+              "url": "https://www.barnesandnoble.com",
+              "maps_url": "https://maps.google.com/?q=Barnes+%26+Noble+Union+Square+NYC",
+              "address": "33 E 17th St, New York, NY 10003",
+              "type": "bookstore_chain",
+              "phone": "(212) 673-2155",
+              "real_time_inventory": true
+            },
+            {
+              "name": "Prairie Lights Books",
+              "url": "https://www.prairielightsbooks.com",
+              "maps_url": "https://maps.google.com/?q=Prairie+Lights+Books+Iowa+City+IA",
+              "address": "15 S Dubuque St, Iowa City, IA 52240",
+              "type": "independent_bookstore",
+              "phone": "(319) 337-2681",
+              "real_time_inventory": false
+            }
+          ]
+        },
+        "Digital": {
+          "description": "Digital edition for online reading",
+          "sources": [
+            {
+              "name": "Amazon Kindle",
+              "url": "https://www.amazon.com/HTML-CSS-Design-Build-Websites/dp/1118008189",
+              "type": "purchase"
+            },
+            {
+              "name": "Wiley",
+              "url": "https://www.wiley.com/en-us/HTML+and+CSS%3A+Design+and+Build+Websites",
+              "type": "free"
+            },
+            {
+              "name": "W3Schools",
+              "url": "https://www.w3schools.com/html/",
+              "type": "free"
+            }
+          ]
+        }
+      },
+      "licensing_type": "Pay-to-own",
+      "sources": [
+        {
+          "name": "W3Schools",
+          "url": "https://www.w3schools.com/html/",
+          "description": "Interactive HTML and CSS tutorials with examples"
+        }
+      ],
+      "twitter_embeds": [
+        {
+          "id": "1823456790",
+          "text": "HTML and CSS by Jon Duckett is the most beautifully designed programming book I have ever seen. Perfect for beginners! #HTML #CSS #WebDesign",
+          "author": "DesignWizard",
+          "author_handle": "@designwizard",
+          "likes": 789,
+          "retweets": 345,
+          "created_at": "2023-10-20T13:20:00Z"
+        }
+      ],
+      "created_at": "2023-10-01T12:00:00Z",
+      "updated_at": "2023-10-01T12:00:00Z"
+    },
+    {
+      "id": 15,
+      "title": "Vue.js: Up and Running",
+      "author": "Callum Macrae",
+      "cover": "https://images-na.ssl-images-amazon.com/images/I/51W7H3N73IL._SX331_BO1,204,203,200_.jpg",
+      "rating": 4.1,
+      "description": "Get up and running with Vue.js quickly and build production-ready applications with this comprehensive guide. Learn Vue fundamentals, component architecture, state management, routing, and modern development practices for building interactive web applications.",
+      "year_edition": "2020",
+      "total_bookmarked": 1987,
+      "tags": [
+        {
+          "name": "Web Development",
+          "type": "primary"
+        },
+        {
+          "name": "JavaScript",
+          "type": "primary"
+        },
+        {
+          "name": "Vue.js",
+          "type": "primary"
+        },
+        {
+          "name": "Frontend Frameworks",
+          "type": "secondary"
+        },
+        {
+          "name": "Single Page Applications",
+          "type": "secondary"
+        }
+      ],
+      "copy_types": {
+        "Physical": {
+          "description": "Physical paperback/hardcover edition available at retail locations",
+          "sources": [
+            {
+              "name": "Amazon",
+              "url": "https://www.amazon.com/Vue-js-Running-Callum-Macrae/dp/1491995667",
+              "type": "online_retailer",
+              "shipping_available": true
+            },
+            {
+              "name": "Barnes & Noble - Union Square",
+              "url": "https://www.barnesandnoble.com",
+              "maps_url": "https://maps.google.com/?q=Barnes+%26+Noble+Union+Square+NYC",
+              "address": "33 E 17th St, New York, NY 10003",
+              "type": "bookstore_chain",
+              "phone": "(212) 673-2155",
+              "real_time_inventory": true
+            },
+            {
+              "name": "Books Inc - Opera Plaza",
+              "url": "https://www.booksinc.net",
+              "maps_url": "https://maps.google.com/?q=Books+Inc+Opera+Plaza+San+Francisco+CA",
+              "address": "601 Van Ness Ave, San Francisco, CA 94102",
+              "type": "independent_bookstore",
+              "phone": "(415) 776-1111",
+              "real_time_inventory": false
+            }
+          ]
+        },
+        "Digital": {
+          "description": "Digital edition for online reading",
+          "sources": [
+            {
+              "name": "Amazon Kindle",
+              "url": "https://www.amazon.com/Vue-js-Running-Callum-Macrae/dp/1491995667",
+              "type": "purchase"
+            },
+            {
+              "name": "O'Reilly",
+              "url": "https://www.oreilly.com/library/view/vue-js-up/9781491995665/",
+              "type": "subscription"
+            },
+            {
+              "name": "Vue.js Official Guide",
+              "url": "https://vuejs.org/guide/",
+              "type": "free"
+            }
+          ]
+        }
+      },
+      "licensing_type": "Rent",
+      "sources": [
+        {
+          "name": "Vue.js Official Guide",
+          "url": "https://vuejs.org/guide/",
+          "description": "Official Vue.js documentation with interactive examples"
+        }
+      ],
+      "twitter_embeds": [
+        {
+          "id": "1923456789",
+          "text": "Vue.js: Up and Running is perfect for developers who want to quickly master Vue 3 and Composition API. The practical examples are invaluable! #VueJS #JavaScript",
+          "author": "VueExpert",
+          "author_handle": "@vueexpert",
+          "likes": 645,
+          "retweets": 287,
+          "created_at": "2023-11-25T16:50:00Z"
+        }
+      ],
+      "created_at": "2023-10-01T12:00:00Z",
+      "updated_at": "2023-10-01T12:00:00Z"
+    }
+  ],
+  "reviews": [
+    {
+      "id": 1,
+      "book_id": 1,
+      "user_name": "John Developer",
+      "avatar": "https://i.pravatar.cc/150?u=johndev",
+      "rating": 5,
+      "review": "This book completely changed how I write code. Every developer should read this - it's not just about writing clean code, it's about thinking like a software craftsman. The examples are practical and the principles have stood the test of time.",
+      "verified_purchase": true,
+      "helpful_count": 42,
+      "source": "Amazon Review",
+      "created_at": "2023-09-15T12:00:00Z"
+    },
+    {
+      "id": 2,
+      "book_id": 2,
+      "user_name": "Fantasy Reader",
+      "avatar": "https://i.pravatar.cc/150?u=fantasyreader",
+      "rating": 5,
+      "review": "A timeless classic that transports you to another world. Tolkien's world-building is unmatched. The prose is beautiful, the characters are memorable, and the story is both epic and intimate. Essential reading for any fantasy lover.",
+      "verified_purchase": true,
+      "helpful_count": 38,
+      "source": "Goodreads",
+      "created_at": "2023-09-20T12:00:00Z"
+    },
+    {
+      "id": 3,
+      "book_id": 3,
+      "user_name": "Sarah Chen",
+      "avatar": "https://i.pravatar.cc/150?u=sarahchen",
+      "rating": 4,
+      "review": "Practical and actionable advice. Some concepts felt repetitive, but the overall framework is solid. I've already started implementing small habits and seeing results. Would recommend to anyone struggling with consistency.",
+      "verified_purchase": true,
+      "helpful_count": 25,
+      "source": "Amazon Review",
+      "created_at": "2023-09-22T14:30:00Z"
+    },
+    {
+      "id": 4,
+      "book_id": 1,
+      "user_name": "Michael Roberts",
+      "avatar": "https://i.pravatar.cc/150?u=michael",
+      "rating": 4,
+      "review": "Great book with solid principles, though some examples feel a bit dated. The core concepts are still relevant and have improved my code quality significantly. A must-read for any serious developer.",
+      "verified_purchase": true,
+      "helpful_count": 18,
+      "source": "Amazon Review",
+      "created_at": "2023-09-25T09:15:00Z"
+    },
+    {
+      "id": 5,
+      "book_id": 4,
+      "user_name": "Lisa Wang",
+      "avatar": "https://i.pravatar.cc/150?u=lisawang",
+      "rating": 5,
+      "review": "The GoF patterns are timeless classics. This book is dense but incredibly valuable. It's not something you read once - it's a reference you'll return to throughout your career. Essential for any software architect.",
+      "verified_purchase": false,
+      "helpful_count": 31,
+      "source": "Goodreads",
+      "created_at": "2023-09-28T16:45:00Z"
+    },
+    {
+      "id": 6,
+      "book_id": 5,
+      "user_name": "David Kumar",
+      "avatar": "https://i.pravatar.cc/150?u=davidk",
+      "rating": 5,
+      "review": "This book is worth its weight in gold. The practical advice and real-world examples make it immediately applicable. I've been programming for 10 years and still learned so much. Every developer should read this.",
+      "verified_purchase": true,
+      "helpful_count": 56,
+      "source": "O'Reilly Review",
+      "created_at": "2023-10-01T11:20:00Z"
+    },
+    {
+      "id": 7,
+      "book_id": 6,
+      "user_name": "Emma Thompson",
+      "avatar": "https://i.pravatar.cc/150?u=emma",
+      "rating": 4,
+      "review": "Comprehensive and well-written introduction to deep learning. The mathematical foundations are solid and the examples are clear. Can be quite dense at times, but worth the effort for anyone serious about ML.",
+      "verified_purchase": false,
+      "helpful_count": 29,
+      "source": "ACM Digital Library",
+      "created_at": "2023-10-02T13:10:00Z"
+    },
+    {
+      "id": 8,
+      "book_id": 3,
+      "user_name": "Robert Martinez",
+      "avatar": "https://i.pravatar.cc/150?u=robert",
+      "rating": 5,
+      "review": "Life-changing book! The 1% better every day concept is revolutionary. I've applied these principles to both my personal and professional life with amazing results. Highly recommended!",
+      "verified_purchase": true,
+      "helpful_count": 67,
+      "source": "Amazon Review",
+      "created_at": "2023-10-03T10:30:00Z"
+    },
+    {
+      "id": 9,
+      "book_id": 7,
+      "user_name": "Alex Turner",
+      "avatar": "https://i.pravatar.cc/150?u=alex",
+      "rating": 3,
+      "review": "Interesting concepts but feels repetitive after a while. The lean methodology is valuable, but the book could have been more concise. Good for entrepreneurs but less so for established businesses.",
+      "verified_purchase": true,
+      "helpful_count": 12,
+      "source": "Harvard Business Review",
+      "created_at": "2023-10-04T15:25:00Z"
+    },
+    {
+      "id": 10,
+      "book_id": 8,
+      "user_name": "Maria Garcia",
+      "avatar": "https://i.pravatar.cc/150?u=maria",
+      "rating": 4,
+      "review": "Solid textbook for HCI students. Covers the fundamental concepts well with good examples. Some sections feel a bit dated given how rapidly the field evolves, but the core principles remain valuable.",
+      "verified_purchase": false,
+      "helpful_count": 21,
+      "source": "ACM Digital Library",
+      "created_at": "2023-10-05T09:40:00Z"
+    },
+    {
+      "id": 11,
+      "book_id": 9,
+      "user_name": "Jennifer Park",
+      "avatar": "https://i.pravatar.cc/150?u=jennifer",
+      "rating": 5,
+      "review": "Mindset changed my perspective on learning and growth. The distinction between growth and fixed mindset is powerful and has helped me overcome many self-imposed limitations. Should be required reading for educators and parents.",
+      "verified_purchase": true,
+      "helpful_count": 84,
+      "source": "Psychology Today",
+      "created_at": "2023-10-06T14:15:00Z"
+    },
+    {
+      "id": 12,
+      "book_id": 10,
+      "user_name": "Thomas Anderson",
+      "avatar": "https://i.pravatar.cc/150?u=thomas",
+      "rating": 5,
+      "review": "The bible of algorithms and computer programming. Knuth's writing is brilliant and the exercises are challenging but rewarding. This is not for beginners, but essential for anyone serious about computer science theory.",
+      "verified_purchase": false,
+      "helpful_count": 92,
+      "source": "Stanford CS Review",
+      "created_at": "2023-10-07T11:55:00Z"
+    }
+  ],
+  "trending": [
+    {
+      "id": 1,
+      "title": "New AI Tools for Developers",
+      "category": "Technology",
+      "heat": "Hot",
+      "posts_count": 142,
+      "engagement": "2.3k"
+    },
+    {
+      "id": 2,
+      "title": "Best Camera Setup for Beginners",
+      "category": "Photography",
+      "heat": "Trending",
+      "posts_count": 89,
+      "engagement": "1.1k"
+    },
+    {
+      "id": 3,
+      "title": "Mindfulness in Daily Life",
+      "category": "Wellness",
+      "heat": "Rising",
+      "posts_count": 67,
+      "engagement": "892"
+    },
+    {
+      "id": 4,
+      "title": "Indie Game Development Journey",
+      "category": "Gaming",
+      "heat": "Hot",
+      "posts_count": 203,
+      "engagement": "4.5k"
+    }
+  ]
+}

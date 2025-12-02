@@ -118,7 +118,7 @@ defineProps<{
 
 .author-name {
   font-weight: 600;
-  color: #0f172a;
+  color: var(--color-black);
 }
 
 .author-badge {
@@ -138,7 +138,7 @@ defineProps<{
 .post-title {
   font-size: 24px;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--color-black);
   margin-bottom: 16px;
   line-height: 1.3;
 }
@@ -196,7 +196,7 @@ defineProps<{
 
 .btn-action:hover {
   background: #f1f5f9;
-  color: #0f172a;
+  color: var(--color-black);
 }
 
 .btn-more {
