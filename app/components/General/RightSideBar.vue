@@ -1,5 +1,5 @@
 <template>
-    <div style="width: 320px;">
+    <div style="width: 348px;">
     <div class="Right-sidebar">
         <slot />
     </div>
@@ -12,7 +12,9 @@
   top: 80px;
   margin-top: 20px;
   width: 320px;
-  padding-left: 24px;
+  padding-left: 0px;
+  margin-left:24px;
+  margin-bottom: 400px;
 }
 
 </style>
