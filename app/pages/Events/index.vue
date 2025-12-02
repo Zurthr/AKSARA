@@ -13,9 +13,7 @@
           >
             <div class="event-image">
               <img :src="event.image" :alt="event.title" />
-              <div class="event-overlay">
-                <h3>{{ event.title }}</h3>
-              </div>
+
             </div>
 
             <div class="event-content">
@@ -114,7 +112,7 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue';
-import eventsData from '~/data/events.json';
+import eventsData from '~/../mock-backend/data/events.json';
 
 const originalEvents = eventsData;
 
@@ -151,7 +149,14 @@ const openEndPicker = () => openPicker(endInput);
 
 const parseEventDate = (dateStr?: string | null): Date | null => {
   if (!dateStr) return null;
-  // Try ISO first
+  
+  // Try ISO first (for mock-backend data like "2023-10-15T08:00:00Z")
+  if (dateStr.includes('T')) {
+    const iso = new Date(dateStr as string);
+    if (!isNaN(iso.getTime())) return iso;
+  }
+  
+  // Try plain ISO date format
   const iso = new Date(dateStr as string);
   if (!isNaN(iso.getTime())) return iso;
 
@@ -185,14 +190,17 @@ const formatEventDate = (dateStr?: string | null) => {
   const d = parseEventDate(dateStr || undefined);
   const monthsShort = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
   const monthsFull = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
-  if (!d) {
+  if (!d || isNaN(d.getTime())) {
     return { day: '--', monthShort: '---', year: '', full: (dateStr as string) || '' };
   }
-  const day = String(d.getDate()).padStart(2, '0');
-  const monthIdx = d.getMonth();
+  
+  // Convert UTC to WIB (UTC+7) for display
+  const wibDate = new Date(d.getTime() + 7 * 60 * 60 * 1000);
+  const day = String(wibDate.getUTCDate()).padStart(2, '0');
+  const monthIdx = wibDate.getUTCMonth();
   const monthShort = monthsShort[monthIdx] || '';
   const monthFull = monthsFull[monthIdx] || '';
-  const year = String(d.getFullYear());
+  const year = String(wibDate.getUTCFullYear());
   const full = `${day} ${monthFull} ${year}`;
   return { day, monthShort, monthFull, year, full };
 };
@@ -331,7 +339,7 @@ const popularTags = [
 .event-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.8), rgba(37, 99, 235, 0.9));
+
   display: flex;
   align-items: center;
   justify-content: center;
