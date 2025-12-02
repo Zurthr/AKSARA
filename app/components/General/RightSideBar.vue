@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div style="width: 320px;">
     <div class="Right-sidebar">
         <slot />
     </div>

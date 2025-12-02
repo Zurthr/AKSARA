@@ -43,8 +43,16 @@ const handleSearch = () => {
     
     // Preserve filter params if already on literature page
     if (route.path === '/literature') {
-      if (route.query.copyType) query.copyType = route.query.copyType as string;
-      if (route.query.licensingType) query.licensingType = route.query.licensingType as string;
+      if (route.query.copyType) {
+        query.copyType = Array.isArray(route.query.copyType) 
+          ? route.query.copyType as string[]
+          : [route.query.copyType as string];
+      }
+      if (route.query.licensingType) {
+        query.licensingType = Array.isArray(route.query.licensingType) 
+          ? route.query.licensingType as string[]
+          : [route.query.licensingType as string];
+      }
       if (route.query.sources) query.sources = route.query.sources as string;
       if (route.query.tags) {
         query.tags = Array.isArray(route.query.tags) 

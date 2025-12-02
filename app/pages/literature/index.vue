@@ -164,8 +164,16 @@ const allBooks: Book[] = [
 const searchQuery = computed(() => route.query.q as string || route.query.search as string || '');
 
 const filters = computed(() => ({
-  copyType: route.query.copyType as string || '',
-  licensingType: route.query.licensingType as string || '',
+  copyType: Array.isArray(route.query.copyType) 
+    ? route.query.copyType as string[]
+    : route.query.copyType 
+      ? [route.query.copyType as string]
+      : [],
+  licensingType: Array.isArray(route.query.licensingType) 
+    ? route.query.licensingType as string[]
+    : route.query.licensingType 
+      ? [route.query.licensingType as string]
+      : [],
   sources: route.query.sources as string || '',
   tags: Array.isArray(route.query.tags) 
     ? route.query.tags as string[]
@@ -175,8 +183,8 @@ const filters = computed(() => ({
 }));
 
 const hasActiveFilters = computed(() => {
-  return filters.value.copyType || 
-         filters.value.licensingType || 
+  return filters.value.copyType.length > 0 || 
+         filters.value.licensingType.length > 0 || 
          filters.value.sources || 
          filters.value.tags.length > 0;
 });
@@ -196,13 +204,13 @@ const filteredBooks = computed(() => {
   }
 
   // Filter by copy type
-  if (filters.value.copyType) {
-    books = books.filter(book => book.copyType === filters.value.copyType);
+  if (filters.value.copyType.length > 0) {
+    books = books.filter(book => book.copyType && filters.value.copyType.includes(book.copyType));
   }
 
   // Filter by licensing type
-  if (filters.value.licensingType) {
-    books = books.filter(book => book.licensingType === filters.value.licensingType);
+  if (filters.value.licensingType.length > 0) {
+    books = books.filter(book => book.licensingType && filters.value.licensingType.includes(book.licensingType));
   }
 
   // Filter by sources
@@ -271,7 +279,7 @@ const suggestedBooks = computed(() => {
 .literature-page {
   display: flex;
   flex-direction: row;
-  gap: 24px;
+  gap: 8px;
   width: 100%;
 }
 

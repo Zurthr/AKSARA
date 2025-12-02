@@ -8,14 +8,15 @@
         <label 
           v-for="option in copyTypeOptions" 
           :key="option.value"
-          class="filter-option"
+          class="filter-option-checkbox"
+          :class="{ 'filter-option-checkbox--active': filters.copyType.includes(option.value) }"
         >
           <input 
-            type="radio" 
-            name="copyType" 
+            type="checkbox" 
             :value="option.value"
-            :checked="filters.copyType === option.value"
-            @change="updateFilter('copyType', option.value)"
+            :checked="filters.copyType.includes(option.value)"
+            @change="handleCopyTypeChange(option.value, ($event.target as HTMLInputElement).checked)"
+            class="filter-option-checkbox-input"
           />
           <span>{{ option.label }}</span>
         </label>
@@ -28,14 +29,15 @@
         <label 
           v-for="option in licensingTypeOptions" 
           :key="option.value"
-          class="filter-option"
+          class="filter-option-checkbox"
+          :class="{ 'filter-option-checkbox--active': filters.licensingType.includes(option.value) }"
         >
           <input 
-            type="radio" 
-            name="licensingType" 
+            type="checkbox" 
             :value="option.value"
-            :checked="filters.licensingType === option.value"
-            @change="updateFilter('licensingType', option.value)"
+            :checked="filters.licensingType.includes(option.value)"
+            @change="handleLicensingTypeChange(option.value, ($event.target as HTMLInputElement).checked)"
+            class="filter-option-checkbox-input"
           />
           <span>{{ option.label }}</span>
         </label>
@@ -114,8 +116,8 @@ const route = useRoute();
 const router = useRouter();
 
 interface Filters {
-  copyType: string;
-  licensingType: string;
+  copyType: string[];
+  licensingType: string[];
   sources: string;
   tags: string[];
 }
@@ -155,8 +157,16 @@ const tagOptions = [
 ];
 
 const filters = ref<Filters>({
-  copyType: (route.query.copyType as string) || '',
-  licensingType: (route.query.licensingType as string) || '',
+  copyType: Array.isArray(route.query.copyType) 
+    ? route.query.copyType as string[]
+    : route.query.copyType 
+      ? [route.query.copyType as string]
+      : [],
+  licensingType: Array.isArray(route.query.licensingType) 
+    ? route.query.licensingType as string[]
+    : route.query.licensingType 
+      ? [route.query.licensingType as string]
+      : [],
   sources: (route.query.sources as string) || '',
   tags: Array.isArray(route.query.tags) 
     ? route.query.tags as string[]
@@ -167,6 +177,24 @@ const filters = ref<Filters>({
 
 const updateFilter = (key: keyof Filters, value: string) => {
   filters.value[key] = value as any;
+  updateQueryParams();
+};
+
+const handleCopyTypeChange = (value: string, checked: boolean) => {
+  if (checked) {
+    filters.value.copyType = [...filters.value.copyType, value];
+  } else {
+    filters.value.copyType = filters.value.copyType.filter(v => v !== value);
+  }
+  updateQueryParams();
+};
+
+const handleLicensingTypeChange = (value: string, checked: boolean) => {
+  if (checked) {
+    filters.value.licensingType = [...filters.value.licensingType, value];
+  } else {
+    filters.value.licensingType = filters.value.licensingType.filter(v => v !== value);
+  }
   updateQueryParams();
 };
 
@@ -186,16 +214,16 @@ const removeTag = (tag: string) => {
 };
 
 const hasActiveFilters = computed(() => {
-  return filters.value.copyType || 
-         filters.value.licensingType || 
+  return filters.value.copyType.length > 0 || 
+         filters.value.licensingType.length > 0 || 
          filters.value.sources || 
          filters.value.tags.length > 0;
 });
 
 const clearAllFilters = () => {
   filters.value = {
-    copyType: '',
-    licensingType: '',
+    copyType: [],
+    licensingType: [],
     sources: '',
     tags: []
   };
@@ -237,11 +265,11 @@ const updateQueryParams = () => {
   });
   
   // Add filter params if they have values
-  if (filters.value.copyType) {
+  if (filters.value.copyType.length > 0) {
     query.copyType = filters.value.copyType;
   }
   
-  if (filters.value.licensingType) {
+  if (filters.value.licensingType.length > 0) {
     query.licensingType = filters.value.licensingType;
   }
   
@@ -258,8 +286,16 @@ const updateQueryParams = () => {
 
 watch(() => route.query, (newQuery) => {
   filters.value = {
-    copyType: (newQuery.copyType as string) || '',
-    licensingType: (newQuery.licensingType as string) || '',
+    copyType: Array.isArray(newQuery.copyType) 
+      ? newQuery.copyType as string[]
+      : newQuery.copyType 
+        ? [newQuery.copyType as string]
+        : [],
+    licensingType: Array.isArray(newQuery.licensingType) 
+      ? newQuery.licensingType as string[]
+      : newQuery.licensingType 
+        ? [newQuery.licensingType as string]
+        : [],
     sources: (newQuery.sources as string) || '',
     tags: Array.isArray(newQuery.tags) 
       ? newQuery.tags as string[]
@@ -308,6 +344,11 @@ watch(() => route.query, (newQuery) => {
   gap: 8px;
 }
 
+.filter-group:has(.filter-option-checkbox) .filter-options {
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
 .filter-option {
   display: flex;
   align-items: center;
@@ -323,6 +364,48 @@ watch(() => route.query, (newQuery) => {
 
 .filter-option:hover {
   color: var(--color-primary);
+}
+
+.filter-option-checkbox {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #475569;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.filter-option-checkbox:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.filter-option-checkbox--active {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+.filter-option-checkbox--active:hover {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-white);
+  opacity: 0.9;
+}
+
+.filter-option-checkbox-input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
 }
 
 .filter-select {
