@@ -9,31 +9,6 @@
         <span v-for="hashtag in hashtags" :key="hashtag" class="hashtag">{{ hashtag }}</span>
       </div>
     </section>
-
-    <section class="sidebar-card action-card">
-      <h3>Initiate a Community</h3>
-      <p>Start a new conversation space and invite others to collaborate.</p>
-      <NuxtLink to="/community/create" class="action-button">Create Community</NuxtLink>
-    </section>
-
-    <section class="sidebar-card tweet-card">
-      <header class="tweet-header">
-        <div class="avatar" aria-hidden="true">{{ tweet.initials }}</div>
-        <div>
-          <p class="tweet-author">{{ tweet.author }}</p>
-          <p class="tweet-handle">{{ tweet.handle }}</p>
-        </div>
-        <button type="button" class="close-button" aria-label="Dismiss tweet">&times;</button>
-      </header>
-      <p class="tweet-body">{{ tweet.body }}</p>
-      <footer class="tweet-footer">
-        <span>{{ tweet.time }}</span>
-        <div class="tweet-stats">
-          <span v-for="metric in tweet.metrics" :key="metric.label">{{ metric.value }} {{ metric.label }}</span>
-        </div>
-      </footer>
-    </section>
-
     <section class="sidebar-card related-card">
       <h3>Related Communities</h3>
       <ul>
@@ -45,6 +20,11 @@
           </div>
         </li>
       </ul>
+    </section>
+    <section class="sidebar-card action-card">
+      <h3>Initiate a Community</h3>
+      <p>Start a new conversation space and invite others to collaborate.</p>
+      <NuxtLink to="/community/create" class="action-button">Create Community</NuxtLink>
     </section>
   </aside>
 </template>
@@ -151,8 +131,8 @@ const { layout = 'default' } = props;
 .hashtag {
   padding: 6px 12px;
   border-radius: 999px;
-  background-color: #f1f5f9;
-  color: var(--color-black);
+  background-color: #3B5379;
+  color: #ffffff;
   font-size: 13px;
   font-weight: 600;
 }
