@@ -804,16 +804,21 @@ onBeforeUnmount(() => {
 }
 
 .community-detail-content {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(240px, 24vw, 320px);
   gap: 24px;
+  align-items: start;
 }
 
 .community-detail-main {
   display: flex;
   flex-direction: column;
   gap: 24px;
-  width: 100%;
+  max-height: calc(100vh - 160px);
+  overflow-y: auto;
+  padding-right: 4px;
+  scrollbar-width: thin;
+  min-width: 0;
 }
 
 .community-detail-body {
@@ -1029,7 +1034,7 @@ onBeforeUnmount(() => {
   background-color: #3B5379;
   font-size: 13px;
   font-weight: 600;
-  color: #ffffff;
+  color: var(--color-black);
 }
 
 .post-stats {
@@ -1039,8 +1044,28 @@ onBeforeUnmount(() => {
   font-size: 13px;
 }
 
-.community-detail-insights .sidebar-card {
-  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+.community-detail-sidebar {
+  width: clamp(240px, 24vw, 320px);
+  flex: 0 0 clamp(240px, 24vw, 320px);
+  position: sticky;
+  top: 32px;
+  align-self: flex-start;
+  max-height: calc(100vh - 160px);
+  overflow-y: auto;
+  padding-right: 4px;
+  scrollbar-width: thin;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.community-detail-sidebar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.community-detail-sidebar::-webkit-scrollbar-thumb {
+  background-color: rgba(148, 163, 184, 0.35);
+  border-radius: 999px;
 }
 
 .sidebar-card {
@@ -1055,10 +1080,9 @@ onBeforeUnmount(() => {
 }
 
 .sidebar-card h3 {
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 18px;
+  font-weight: 700;
   color: var(--color-black);
-  margin: 0;
 }
 
 .details-location,
@@ -1254,19 +1278,26 @@ onBeforeUnmount(() => {
 }
 
 @media (max-width: 1280px) {
-  .community-detail-body {
-    grid-template-columns: minmax(0, 1fr) clamp(240px, 32vw, 300px);
+  .community-detail-content {
+    grid-template-columns: minmax(0, 1fr) clamp(220px, 30vw, 300px);
     gap: 20px;
   }
 }
 
 @media (max-width: 1024px) {
-  .community-detail-body {
-    grid-template-columns: minmax(0, 1fr) clamp(220px, 40vw, 280px);
+  .community-detail-content {
+    grid-template-columns: minmax(0, 1fr) clamp(200px, 36vw, 260px);
     gap: 18px;
   }
+}
 
-  .community-detail-insights {
+@media (max-width: 768px) {
+  .community-detail-content {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .community-detail-main {
     max-height: none;
     overflow: visible;
   }
@@ -1280,6 +1311,7 @@ onBeforeUnmount(() => {
 
   .community-detail-insights {
     position: static;
+    margin-top: 16px;
   }
 
   .hero-overlay {

@@ -74,18 +74,20 @@ const navigateToDetail = () => {
 
 <style scoped>
 .forum-card {
-  background: white;
+  margin-left:16px;
+  width:100%;
+  background: none;
   border-radius: 16px;
   padding: 24px;
   margin-bottom: 24px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s;
-  border: 1px solid transparent;
+  border-bottom: #e2e8f0 1.6px solid;
 }
 
 .forum-card:hover {
   transform: translateY(-2px);
+  border: 1px solid transparent;
   box-shadow: 0 4px 6px rgba(0,0,0,0.05);
   border-color: #e2e8f0;
 }
@@ -122,7 +124,7 @@ const navigateToDetail = () => {
 
 .author-name {
   font-weight: 700;
-  color: #0f172a;
+  color: var(--color-black);
   font-size: 16px;
 }
 
@@ -136,8 +138,9 @@ const navigateToDetail = () => {
 }
 
 .author-tagline {
-  font-size: 13px;
-  color: #64748b;
+  font-size: 14px;
+  font-weight:400;
+  color: var(--color-dark-gray);
 }
 
 .meta-section {
@@ -162,7 +165,7 @@ const navigateToDetail = () => {
 .post-title {
   font-size: 18px;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--color-black);
   margin-bottom: 8px;
   line-height: 1.4;
 }
@@ -173,7 +176,6 @@ const navigateToDetail = () => {
   line-height: 1.6;
   margin-bottom: 20px;
   display: -webkit-box;
-  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -195,24 +197,22 @@ const navigateToDetail = () => {
   padding: 4px 12px;
   border-radius: 16px;
   font-weight: 600;
+  background-color: var(--color-primary);
+  color: white;
 }
 
 .tag.category {
-  background-color: #a16207; /* Dark yellow/brown for categories like 'A Level', 'Hobbies' */
   color: white;
 }
-/* Specific overrides based on design colors */
-.tag:nth-child(1) { background-color: #a16207; } /* A Level / Hobbies */
-.tag:nth-child(2) { background-color: #1e293b; } /* Web Dev / FNAF */
-.tag:nth-child(3) { background-color: #3B5379; } /* Hashtags */
-.tag:nth-child(4) { background-color: #3B5379; }
-.tag:nth-child(5) { background-color: #3B5379; }
+/* Specific overrides based on design colors */ /* A Level / Hobbies */
+.tag:nth-child(1) { background-color: var(--color-secondary) }
+.tag:nth-child(2) { background-color: var(--color-secondary) }
 
 .stats {
   display: flex;
   align-items: center;
   gap: 4px;
-  color: #0f172a;
+  color: var(--color-black);
   font-weight: 600;
   font-size: 14px;
 }

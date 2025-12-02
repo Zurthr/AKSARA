@@ -1,6 +1,5 @@
 <template>
   <div class="forum-index">
-    <div class="forum-container">
       <main class="feed-section">
         <ForumCard 
           v-for="post in posts" 
@@ -9,12 +8,15 @@
         />
       </main>
       
+    <RightSideBar>
       <TrendingSidebar />
-    </div>
+    </RightSideBar>
   </div>
 </template>
 
 <script setup lang="ts">
+import RightSideBar from '~/components/General/RightSideBar.vue';
+
 const posts = [
   {
     id: 1,
@@ -82,14 +84,12 @@ const posts = [
   padding: 24px;
   background-color: #f8fafc;
   min-height: 100%;
-}
-
-.forum-container {
   display: flex;
   max-width: 1200px;
   margin: 0 auto;
   gap: 24px;
 }
+
 
 .feed-section {
   flex: 1;

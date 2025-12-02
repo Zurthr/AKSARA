@@ -62,7 +62,7 @@
 
 .tool-btn:hover {
   background: #e2e8f0;
-  color: #0f172a;
+  color: var(--color-black);
 }
 
 .divider {

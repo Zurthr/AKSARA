@@ -9,7 +9,7 @@
   width: 100%;
   max-width: 1280px;
   flex: 1;
-  padding: 16px 24px;
+  padding: 16px 0px;
   margin: 0 auto;
 }
 </style>

@@ -82,7 +82,7 @@
 .page-title {
   font-size: 24px;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--color-black);
   margin-bottom: 8px;
 }
 
@@ -116,7 +116,7 @@
   border: 1px solid #cbd5e1;
   border-radius: 8px;
   font-size: 14px;
-  color: #0f172a;
+  color: var(--color-black);
   outline: none;
   transition: border-color 0.2s;
 }
@@ -163,7 +163,7 @@
 
 .btn-preview:hover {
   background: #f1f5f9;
-  color: #0f172a;
+  color: var(--color-black);
 }
 
 .btn-draft {
@@ -180,7 +180,7 @@
 
 .btn-draft:hover {
   border-color: #94a3b8;
-  color: #0f172a;
+  color: var(--color-black);
 }
 
 .btn-post {

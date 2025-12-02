@@ -151,8 +151,8 @@ const { layout = 'default' } = props;
 .hashtag {
   padding: 6px 12px;
   border-radius: 999px;
-  background-color: #3B5379;
-  color: #ffffff;
+  background-color: #f1f5f9;
+  color: var(--color-black);
   font-size: 13px;
   font-weight: 600;
 }

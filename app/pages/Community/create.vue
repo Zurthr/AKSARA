@@ -120,7 +120,7 @@ const selectedTags = ['#WebDev', '#Novel', '#UIUX'];
 .page-header h1 {
   font-size: 28px;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--color-black);
 }
 
 .page-header p {
@@ -153,7 +153,7 @@ const selectedTags = ['#WebDev', '#Novel', '#UIUX'];
 
 label {
   font-weight: 600;
-  color: #0f172a;
+  color: var(--color-black);
 }
 
 input[type="text"],
@@ -232,7 +232,7 @@ textarea {
 
 .privacy-title {
   font-weight: 600;
-  color: #0f172a;
+  color: var(--color-black);
 }
 
 .privacy-desc {
@@ -255,7 +255,7 @@ textarea {
   padding: 6px 12px;
   border-radius: 999px;
   background: #e2e8f0;
-  color: #0f172a;
+  color: var(--color-black);
   font-size: 13px;
   font-weight: 600;
 }
