@@ -72,95 +72,97 @@
             <div class="details-and-related-grid">
               <!-- Detail Event Section -->
               <section class="event-details-section">
-                <h3>Detail Event</h3>
-                <div class="details-grid"> <div class="detail-item">
-                    <div class="detail-icon location">
-                      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z" fill="currentColor" />
-                      </svg>
-                    </div>
-                    <div>
-                      <p class="detail-label">Tipe Lokasi</p>
-                      <p class="detail-value">{{ event.locationType }}</p>
-                    </div>
-                  </div>
+                <div class="details-grid"> 
 
-                  <div class="detail-item">
-                    <div class="detail-icon time">
-                      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z" fill="currentColor" />
-                      </svg>
-                    </div>
-                    <div>
-                      <p class="detail-label">Tanggal & Waktu</p>
-                      <p class="detail-value">{{ event.datetime }}</p>
-                    </div>
-                  </div>
-
-                  <div class="detail-item">
-                    <div class="detail-icon location">
-                      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z" fill="currentColor" />
-                      </svg>
-                    </div>
-                    <div>
-                      <p class="detail-label">Alamat</p>
-                      <p class="detail-value">
-                        <button
-                          type="button"
-                          class="detail-address-toggle"
-                          @click="toggleAddress"
-                          :aria-expanded="showFullAddress"
-                        >
-                          {{ displayedAddress }}
-                          <span class="detail-address-hint">
-                            {{ showFullAddress ? 'Sembunyikan detail' : 'Lihat detail' }}
-                          </span>
-                        </button>
-                      </p>
-                      <p v-if="showFullAddress" class="detail-address-full">{{ event.address }}</p>
-                    </div>
-                  </div>
-                </div>
-
-                
-              </section>
-
-              <!-- Related Events Section -->
-              <section class="related-events-card">
-                <div class="card-header">
-                  <h3>Related Events</h3>
-                  <span class="events-count">{{ relatedEvents.length }} Events</span>
-                </div>
-                
-                <div class="related-events-list">
-                  <div v-for="relatedEvent in relatedEvents" :key="relatedEvent.title" class="related-event-item">
-                    <div class="event-indicator" :class="`indicator-${relatedEvent.color}`"></div>
-                    <div class="event-info">
-                      <h4 class="event-title">{{ relatedEvent.title }}</h4>
-                      <div class="event-meta">
-                        <span class="event-type">{{ relatedEvent.type }}</span>
-                        <span class="event-date">{{ relatedEvent.date }}</span>
+                  <!-- Date/time -->
+                    <div class="detail-item">
+                      <div class="detail-icon time">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z" fill="currentColor" />
+                        </svg>
+                      </div>
+                      <div>
+                        <p class="detail-label">Tanggal & Waktu</p>
+                        <p class="detail-value">{{ event.datetime }}</p>
                       </div>
                     </div>
-                    <button class="event-action-btn">
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-                
-                <div class="card-footer">
-                  <button class="view-all-events-btn">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    View All Related Events
-                  </button>
+
+                  <!-- Location (online/offline) -->
+                    <div class="detail-item">
+                      <div class="detail-icon location">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z" fill="currentColor" />
+                        </svg>
+                      </div>
+                      <div>
+                        <p class="detail-label">Lokasi</p>
+                        <div class="detail-value">
+                          <template v-if="isOnlineEvent">
+                            <div class="location-title">{{ event.shortAddress || 'Online (Zoom Meeting)' }}</div>
+                            <div class="location-link">
+                              <a :href="extractLink(event.address) || '#'" target="_blank" rel="noopener">{{ extractLink(event.address) ? extractLink(event.address) : event.address }}</a>
+                            </div>
+                          </template>
+                          <template v-else>
+                            <div class="location-title">{{ event.shortAddress || event.address }}</div>
+                          </template>
+                        </div>
+                      </div>
+                    </div>
                 </div>
               </section>
             </div>
+          </section>
+
+          <!-- Related events carousel (moved below details) -->
+          <section class="related-events-card carousel-card">
+            <div class="card-header">
+              <h3>Related Events</h3>
+              <span class="events-count">{{ carouselItems.length }} Events</span>
+            </div>
+
+            <div class="carousel-wrapper related-carousel">
+              <button v-if="carouselItems.length > visibleCount" class="carousel-nav carousel-nav-left" @click="previousRelated" :disabled="relatedIndex===0" aria-label="Previous">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+
+              <div class="carousel-container">
+                <div class="carousel-track" :style="{ transform: `translateX(-${relatedIndex * (cardWidth + gap)}px)` }">
+                  <div v-for="item in carouselItems" :key="item.title" class="related-card">
+                    <NuxtLink v-if="item.id" :to="`/events/${item.id}`" class="related-card-inner related-link">
+                      <div class="related-thumb">
+                        <img class="related-thumb-img" :src="item.image" :alt="item.title" />
+                      </div>
+                      <div class="related-body">
+                        <h4 class="related-title">{{ item.title }}</h4>
+                        <div class="related-meta">
+                          <span class="related-type">{{ item.type }}</span>
+                          <span class="related-date">{{ item.date }}</span>
+                        </div>
+                      </div>
+                    </NuxtLink>
+                    <div v-else class="related-card-inner">
+                      <div class="related-thumb">
+                        <img class="related-thumb-img" :src="item.image" :alt="item.title" />
+                      </div>
+                      <div class="related-body">
+                        <h4 class="related-title">{{ item.title }}</h4>
+                        <div class="related-meta">
+                          <span class="related-type">{{ item.type }}</span>
+                          <span class="related-date">{{ item.date }}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <button v-if="carouselItems.length > visibleCount" class="carousel-nav carousel-nav-right" @click="nextRelated" :disabled="relatedIndex >= maxRelatedIndex" aria-label="Next">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+
+            
           </section>
         </div>
       </div>
@@ -180,6 +182,7 @@
 import { computed, ref, watch } from 'vue';
 import { useRoute } from '#imports';
 import RightSideBar from '~/components/General/RightSideBar.vue';
+import eventsDataRaw from '~/../mock-backend/data/events.json';
 
 interface EventData {
   id: string;
@@ -218,88 +221,66 @@ interface RelatedEventCard {
   type: string;
   date: string;
   color: string;
+  image?: string;
+  id?: string;
 }
 
-const eventDetails: Record<string, EventData> = {
-  'creative-writing-workshop': {
-    id: 'creative-writing-workshop',
-    title: 'Creative Writing Workshop',
-    subtitle: 'Workshop Creative Writing: Menulis Cerita yang Menginspirasi',
-    hostedBy: 'Komunitas Literasi Bandung',
-    description: 'Bergabunglah dengan workshop creative writing yang akan mengasah kemampuan menulis Anda! Dalam sesi ini, Anda akan mempelajari teknik dasar penulisan kreatif mulai dari pengembangan karakter, alur, hingga gaya penulisan yang menarik.',
-    objectives: 'Peserta akan mendapatkan panduan praktis dan latihan yang dapat langsung diterapkan untuk memperkuat kepercayaan diri menulis.',
-    benefits: 'Dapatkan kesempatan berbagi karya dan menerima umpan balik konstruktif dari mentor literasi berpengalaman.',
-    image: 'https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=800&q=80',
-    category: 'Workshop',
-    locationType: 'Online (Zoom Meeting)',
-    datetime: 'Rabu, 20 November 2025 • 19:00 - 21:00 WIB',
-    address: 'Link Zoom akan dikirim setelah registrasi melalui email resmi peserta.',
-    shortAddress: 'Zoom Meeting (Link via email)',
-    capacity: '100 peserta',
-    price: 'Gratis',
-    certificate: 'E-sertifikat tersedia',
-    contact: 'literasi@aksara.id',
-    tags: ['#Workshop', '#Literasi', '#CreativeWriting', '#Menulis', '#Inspirasi']
-  },
-  'book-knowledge-sharing': {
-    id: 'book-knowledge-sharing',
-    title: 'Book Events',
-    subtitle: 'Many Book Many Knowledge',
-    hostedBy: 'Komunitas Buku Nusantara',
-    description: 'Sesi berbagi pengetahuan dari para pembaca setia untuk mengulas buku-buku terbaru, diskusi tematik, dan membangun jejaring antar pecinta literasi.',
-    objectives: 'Menghadirkan ruang berdiskusi seputar buku dan memperkaya perspektif membaca melalui sesi tanya jawab.',
-    benefits: 'Bangun koneksi dengan komunitas literasi dan dapatkan referensi bacaan baru yang dikurasi langsung oleh para kurator buku.',
-    image: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=800&q=80',
-    category: 'Reading',
-    locationType: 'Offline (Tahura Bandung)',
-    datetime: 'Sabtu, 14 Desember 2025 • 15:00 - 18:00 WIB',
-    address: 'Taman Hutan Raya Ir. H. Djuanda, Jl. Ir. H. Juanda No. 99, Bandung',
-    shortAddress: 'Tahura, Bandung',
-    capacity: '150 peserta',
-    price: 'Rp 25.000',
-    certificate: 'Tanpa sertifikat',
-    contact: 'buku@aksara.id',
-    tags: ['#Book', '#Knowledge', '#Reading']
-  },
-  'book-festival-2025': {
-    id: 'book-festival-2025',
-    title: 'Book Festivals 2025',
-    subtitle: 'Book Festival 2025',
-    hostedBy: 'Dispusipda Jawa Barat',
-    description: 'Festival literasi tahunan yang mempertemukan penulis, penerbit, dan pembaca melalui diskusi panel, launching buku, serta pertunjukan seni.',
-    objectives: 'Menginspirasi pengunjung untuk mengeksplorasi ragam genre buku dan mendukung ekosistem literasi lokal.',
-    benefits: 'Nikmati diskon buku khusus festival dan akses eksklusif ke sesi meet and greet dengan penulis.',
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80',
-    category: 'Festival',
-    locationType: 'Offline (Dispusipda Jawa Barat)',
-    datetime: 'Sabtu, 22 November 2025 • 09:00 - 17:00 WIB',
-    address: 'Dispusipda Jawa Barat, Jl. Kawaluyaan Indah II No.4, Bandung',
-    shortAddress: 'Dispusipda Jabar, Bandung',
-    capacity: '500 pengunjung',
-    price: 'Gratis',
-    certificate: 'Merchandise eksklusif',
-    contact: 'festival@aksara.id',
-    tags: ['#Festival', '#Book', '#Literature']
-  },
-  'litverse-2025': {
-    id: 'litverse-2025',
-    title: 'LitVerse 2025',
-    subtitle: 'LitVerse 2025: Festival Literasi dan Imajinasi',
-    hostedBy: 'Aksara Collective',
-    description: 'Perayaan literasi dan kreativitas dengan sesi tematik, kelas master, dan instalasi interaktif untuk mengeksplorasi dunia imajinasi.',
-    objectives: 'Menyajikan pengalaman hybrid yang mempertemukan pembaca dengan kreator konten literasi lintas medium.',
-    benefits: 'Akses ke rekaman sesi premium dan jaringan komunitas kreatif nasional.',
-    image: 'https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=800&q=80',
-    category: 'Festival',
-    locationType: 'Hybrid (Bandung Convention Center + Livestream)',
-    datetime: 'Minggu, 29 Desember 2025 • 10:00 - 21:00 WIB',
-    address: 'Bandung Convention Center, Jl. Soekarno Hatta No. 354, Bandung',
-    shortAddress: 'Bandung Convention Center',
-    capacity: '1,200 peserta onsite & online',
-    price: 'Mulai Rp 99.000',
-    certificate: 'E-sertifikat & rekaman sesi',
-    contact: 'litverse@aksara.id',
-    tags: ['#LitVerse', '#Festival', '#Imajinasi']
+// Transform mock-backend events to EventData format
+const eventDetails = computed<Record<string, EventData>>(() => {
+  const result: Record<string, EventData> = {};
+  
+  eventsDataRaw.forEach((event: any) => {
+    const eventId = String(event.id);
+    const dateStr = event.date || '';
+    const isOnline = (event.location || '').toLowerCase().includes('online');
+    
+    result[eventId] = {
+      id: eventId,
+      title: event.title,
+      subtitle: event.subtitle || '',
+      hostedBy: event.community_name || 'Community',
+      description: event.description || '',
+      image: event.image || fallbackHeroImage,
+      category: event.category || 'Event',
+      locationType: event.location || 'TBA',
+      datetime: formatFullDateTime(dateStr),
+      address: event.location || 'TBA',
+      shortAddress: event.location || 'TBA',
+      capacity: `${event.maxAttendees || 0} peserta`,
+      price: 'TBA',
+      certificate: 'TBA',
+      contact: event.community_id || '',
+      tags: event.tags || []
+    };
+  });
+  
+  return result;
+});
+
+// Helper function to format date from ISO format with WIB timezone (+7)
+const formatFullDateTime = (dateStr: string): string => {
+  if (!dateStr) return 'TBA';
+  
+  try {
+    const date = new Date(dateStr);
+    if (isNaN(date.getTime())) return dateStr;
+    
+    const monthsFull = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+    const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+    
+    // Convert UTC to WIB (UTC+7) by adding 7 hours
+    const wibDate = new Date(date.getTime() + 7 * 60 * 60 * 1000);
+    
+    const dayName = days[wibDate.getUTCDay()];
+    const dayNum = String(wibDate.getUTCDate()).padStart(2, '0');
+    const monthName = monthsFull[wibDate.getUTCMonth()];
+    const year = wibDate.getUTCFullYear();
+    const hours = String(wibDate.getUTCHours()).padStart(2, '0');
+    const minutes = String(wibDate.getUTCMinutes()).padStart(2, '0');
+    
+    return `${dayName}, ${dayNum} ${monthName} ${year} • ${hours}:${minutes} WIB`;
+  } catch (e) {
+    return dateStr;
   }
 };
 
@@ -307,11 +288,28 @@ const route = useRoute();
 const showFullAddress = ref(false);
 const heroImage = ref('');
 const fallbackHeroImage = 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80';
-const fallbackEvent = eventDetails['creative-writing-workshop'];
 
 const event = computed<EventData>(() => {
   const id = String(route.params.id ?? '');
-  return (eventDetails[id] ?? fallbackEvent) as EventData;
+  const fallback: EventData = {
+    id: 'not-found',
+    title: 'Event not found',
+    subtitle: '',
+    hostedBy: '',
+    description: '',
+    image: fallbackHeroImage,
+    category: '',
+    locationType: '',
+    datetime: '',
+    address: '',
+    shortAddress: '',
+    capacity: '',
+    price: '',
+    certificate: '',
+    contact: '',
+    tags: []
+  };
+  return (eventDetails.value[id] ?? fallback) as EventData;
 });
 
 watch(
@@ -345,16 +343,82 @@ const popularEventTags = computed<SidebarTag[]>(() =>
   event.value.tags.map((tag) => ({ name: tag, class: 'tag-default' }))
 );
 
-const relatedEventsSource: RelatedEventCard[] = [
-  { title: 'Creative Writing Workshop', type: 'Online', date: '20 Nov 2025', color: 'green' },
-  { title: 'Book Events', type: 'Offline', date: '14 Des 2025', color: 'green' },
-  { title: 'Book Festivals 2025', type: 'Offline', date: '22 Nov 2025', color: 'green' },
-  { title: 'LitVerse 2025', type: 'Hybrid', date: '29 Des 2025', color: 'green' }
-];
+const relatedEventsSource = computed<RelatedEventCard[]>(() => {
+  return eventsDataRaw
+    .filter((e: any) => String(e.id) !== String(route.params.id))
+    .map((e: any) => ({
+      title: e.title,
+      type: e.location || 'Event',
+      date: formatEventDateShort(e.date),
+      color: 'green',
+      image: e.image,
+      id: String(e.id)
+    }));
+});
 
+const formatEventDateShort = (dateStr: string): string => {
+  if (!dateStr) return 'TBA';
+  try {
+    const date = new Date(dateStr);
+    if (isNaN(date.getTime())) return dateStr;
+    
+    const monthsShort = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
+    
+    // Convert UTC to WIB (UTC+7)
+    const wibDate = new Date(date.getTime() + 7 * 60 * 60 * 1000);
+    const dayNum = wibDate.getUTCDate();
+    const monthName = monthsShort[wibDate.getUTCMonth()];
+    const year = wibDate.getUTCFullYear();
+    
+    return `${dayNum} ${monthName} ${year}`;
+  } catch (e) {
+    return dateStr;
+  }
+};
+
+// Map related source to include image URLs and ids from eventDetails when possible
 const relatedEvents = computed<RelatedEventCard[]>(() =>
-  relatedEventsSource.filter((item) => item.title !== event.value.title).slice(0, 3)
+  relatedEventsSource.value
+    .filter((item) => item.title !== event.value.title)
+    .slice(0, 3)
 );
+
+// Carousel for related events (all available related items with images and ids)
+const carouselItems = computed<RelatedEventCard[]>(() =>
+  relatedEventsSource.value
+    .filter((item) => item.title !== event.value.title)
+);
+
+const relatedIndex = ref(0);
+const cardWidth = 300; // px
+const gap = 8; // px
+// visibleCount adapts to how many items exist (max 3)
+const visibleCount = computed(() => Math.min(3, carouselItems.value.length));
+const maxRelatedIndex = computed(() => Math.max(0, carouselItems.value.length - visibleCount.value));
+
+const nextRelated = () => {
+  if (relatedIndex.value < maxRelatedIndex.value) {
+    relatedIndex.value = Math.min(relatedIndex.value + 1, maxRelatedIndex.value);
+  }
+};
+
+const previousRelated = () => {
+  if (relatedIndex.value > 0) {
+    relatedIndex.value = Math.max(0, relatedIndex.value - 1);
+  }
+};
+
+// Helpers for location display
+const isOnlineEvent = computed(() => {
+  const loc = (event.value.locationType || '').toString().toLowerCase();
+  return loc.includes('online') || loc.includes('zoom');
+});
+
+const extractLink = (text: string) => {
+  if (!text) return '';
+  const m = text.match(/https?:\/\/[\S]+/i);
+  return m ? m[0] : '';
+};
 
 const handleImageError = () => {
   heroImage.value = fallbackHeroImage;
@@ -594,18 +658,20 @@ const getTagClass = (tag: string): string => {
 
 .details-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
 }
 
 .detail-item {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 12px;
-  padding: 16px;
+  padding: 10px 12px;
   background: #f8fafc;
   border-radius: 12px;
   border: 1px solid #e2e8f0;
+  flex: 1;
+  min-width: 0;
 }
 
 .detail-icon {
@@ -965,6 +1031,7 @@ const getTagClass = (tag: string): string => {
   grid-template-columns: 1fr 1fr;
   gap: 16px;
   margin-top: 16px;
+  align-items: start;
 }
 
 .event-details-section {
@@ -983,8 +1050,8 @@ const getTagClass = (tag: string): string => {
 }
 
 .details-grid {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
   margin-bottom: 16px;
 }
@@ -1125,14 +1192,117 @@ const getTagClass = (tag: string): string => {
 
 /* Related Events Card Styles */
 .related-events-card {
-  background: #ffffff;
-  border-radius: 20px;
-  border: 1px solid #e2e8f0;
+  /* remove white background and outer chrome so the related area blends with page */
+  background: transparent;
+  border-radius: 0;
+  border: none;
   padding: 0;
-  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.05);
-  overflow: hidden;
-  height: fit-content;
+  box-shadow: none;
+  overflow: visible;
+  height: auto;
 }
+
+/* Related events carousel styles */
+.carousel-card .carousel-wrapper {
+  position: relative;
+  padding: 12px 16px;
+}
+
+.related-carousel .carousel-container {
+  overflow: hidden;
+  width: 100%;
+}
+
+.related-carousel .carousel-track {
+  display: flex;
+  gap: 8px;
+  transition: transform 0.36s ease;
+  padding: 12px 16px 20px;
+  will-change: transform;
+}
+
+.related-card {
+  flex-shrink: 0;
+  width: 320px; 
+  display: flex;
+  align-items: stretch;
+}
+
+.related-card-inner {
+  background: #f8fafc;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  padding: 12px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.related-thumb {
+  width: 112px;   
+  height: 112px; 
+  border-radius: 10px;
+  flex-shrink: 0;
+  display: block;
+  overflow: hidden;
+  background: #eaeef3;
+  box-shadow: 0 6px 14px rgba(15,23,42,0.04);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.related-thumb-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;       
+  object-position: 50% 50%;
+  display: block;
+}
+
+/* make the whole card a clickable link when wrapped by NuxtLink */
+.related-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  color: inherit;
+  text-decoration: none;
+}
+
+.related-link:hover {
+  transform: translateY(-4px);
+  transition: transform 0.18s ease;
+}
+
+.related-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.related-title {
+  font-size: 14px;
+  font-weight: 700;
+  margin: 0 0 6px 0;
+  color: #1e293b;
+  line-height: 1.2;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.related-meta { display:flex; gap:8px; align-items:center; color:#64748b; font-size:12px }
+
+.carousel-nav { position: absolute; top: 50%; transform: translateY(-50%); z-index: 10; }
+.carousel-nav-left { left: 8px; }
+.carousel-nav-right { right: 8px; }
+
 
 .related-events-card .card-header {
   padding: 24px 24px 0;
@@ -1317,7 +1487,8 @@ const getTagClass = (tag: string): string => {
   }
 
   .details-grid {
-    grid-template-columns: 1fr;
+    flex-direction: column;
+    gap: 12px;
   }
 
   .details-and-related-grid {
@@ -1350,4 +1521,33 @@ const getTagClass = (tag: string): string => {
     padding: 6px 10px;
   }
 }
+
+/* Override to ensure details grid shows two columns on desktop and stacks on mobile */
+.event-info .event-details-section .details-grid {
+  /* static two-column layout: center the pair and give each card a fixed width */
+  display: flex !important;
+  gap: 16px !important;
+  align-items: stretch !important;
+  justify-content: center !important;
+  flex-wrap: nowrap !important;
+  padding: 12px 8px;
+}
+
+.event-info .event-details-section .detail-item {
+  flex: 0 0 380px !important;
+  width: 380px !important;
+  max-width: 380px !important;
+}
+
+/* Truncate long detail text (single line) to keep cards compact */
+.event-info .event-details-section .detail-value,
+.event-info .event-details-section .detail-value a {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Make sure carousel nav sits above content and is visible on all sizes */
+.related-carousel .carousel-nav { z-index: 20 !important; }
 </style>
