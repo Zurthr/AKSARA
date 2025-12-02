@@ -11,6 +11,15 @@
             v-model="searchQuery"
             @keyup.enter="handleSearch"
           />
+          <button
+            v-if="searchQuery"
+            type="button"
+            class="clear-search-button"
+            @click="clearSearch"
+            aria-label="Clear search"
+          >
+            ×
+          </button>
         </div>
     </div>
     <div class="action-icons">
@@ -67,6 +76,44 @@ const handleSearch = () => {
     });
   }
 };
+
+const clearSearch = () => {
+  searchQuery.value = '';
+
+  const query: Record<string, string | string[]> = {};
+
+  // If we're on the literature page, preserve filters but drop search params
+  if (route.path === '/literature') {
+    if (route.query.copyType) {
+      query.copyType = Array.isArray(route.query.copyType)
+        ? route.query.copyType as string[]
+        : [route.query.copyType as string];
+    }
+    if (route.query.licensingType) {
+      query.licensingType = Array.isArray(route.query.licensingType)
+        ? route.query.licensingType as string[]
+        : [route.query.licensingType as string];
+    }
+    if (route.query.sources) {
+      query.sources = route.query.sources as string;
+    }
+    if (route.query.tags) {
+      query.tags = Array.isArray(route.query.tags)
+        ? route.query.tags as string[]
+        : (route.query.tags as string ? [route.query.tags as string] : []);
+    }
+
+    router.push({
+      path: '/literature',
+      query
+    });
+  } else {
+    // From any other page, go to root literature without search
+    router.push({
+      path: '/literature'
+    });
+  }
+};
 </script>
 
 <style scoped>
@@ -116,6 +163,22 @@ const handleSearch = () => {
   outline: none;
   font-size: 14px;
   color: var(--color-black);
+}
+
+.clear-search-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0 4px;
+  font-size: 16px;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.clear-search-button:hover {
+  color: #64748b;
 }
 
 .search-input::placeholder {
