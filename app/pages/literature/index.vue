@@ -25,7 +25,7 @@
         </div>
 
         <div v-else-if="searchQuery || hasActiveFilters" class="search-results">
-          <BookSection
+          <BookGrid
             :title="searchQuery ? `Results for '${searchQuery}'` : 'Filtered Results'"
             :books="filteredBooks"
             see-more-link="/literature"
@@ -79,9 +79,9 @@ interface Book {
   tags: string[];
   rating?: number;
   bookmarks?: number;
-  copyType?: 'onsite' | 'physical' | 'online';
-  licensingType?: 'pay-to-own' | 'rent' | 'free';
-  sources?: string;
+  copyType?: ('onsite' | 'physical' | 'online')[];
+  licensingType?: ('pay-to-own' | 'rent' | 'free')[];
+  sources?: string[];
 }
 
 const route = useRoute();
@@ -96,9 +96,9 @@ const allBooks: Book[] = [
     tags: ['Web Development'],
     rating: 4.2,
     bookmarks: 120,
-    copyType: 'online',
-    licensingType: 'free',
-    sources: 'IEEE'
+    copyType: ['online', 'onsite'],
+    licensingType: ['free', 'rent'],
+    sources: ['IEEE', 'Google Books']
   },
   {
     id: 2,
@@ -108,9 +108,9 @@ const allBooks: Book[] = [
     tags: ['Web Development', 'PHP'],
     rating: 4.8,
     bookmarks: 95,
-    copyType: 'online',
-    licensingType: 'rent',
-    sources: 'IEEE'
+    copyType: ['online'],
+    licensingType: ['rent'],
+    sources: ['IEEE']
   },
   {
     id: 3,
@@ -120,9 +120,9 @@ const allBooks: Book[] = [
     tags: ['Web Development'],
     rating: 3.5,
     bookmarks: 80,
-    copyType: 'physical',
-    licensingType: 'pay-to-own',
-    sources: 'ACM'
+    copyType: ['physical', 'onsite'],
+    licensingType: ['pay-to-own'],
+    sources: ['ACM', 'Springer']
   },
   {
     id: 4,
@@ -131,9 +131,9 @@ const allBooks: Book[] = [
     tags: ['Web Development'],
     rating: 4.0,
     bookmarks: 150,
-    copyType: 'online',
-    licensingType: 'free',
-    sources: 'IEEE'
+    copyType: ['online', 'physical'],
+    licensingType: ['free'],
+    sources: ['IEEE', 'Project Gutenberg']
   },
   {
     id: 5,
@@ -143,9 +143,9 @@ const allBooks: Book[] = [
     tags: ['Programming', 'Software Engineering'],
     rating: 4.9,
     bookmarks: 200,
-    copyType: 'physical',
-    licensingType: 'pay-to-own',
-    sources: 'Springer'
+    copyType: ['physical'],
+    licensingType: ['pay-to-own', 'rent'],
+    sources: ['Springer', 'Wiley']
   },
   {
     id: 6,
@@ -155,9 +155,9 @@ const allBooks: Book[] = [
     tags: ['Software Engineering', 'Programming'],
     rating: 4.3,
     bookmarks: 180,
-    copyType: 'online',
-    licensingType: 'rent',
-    sources: 'Elsevier'
+    copyType: ['online', 'onsite'],
+    licensingType: ['rent', 'pay-to-own'],
+    sources: ['Elsevier', 'ACM']
   }
 ];
 
@@ -203,19 +203,28 @@ const filteredBooks = computed(() => {
     );
   }
 
-  // Filter by copy type
+  // Filter by copy type - check if any of the book's copy types match any filter
   if (filters.value.copyType.length > 0) {
-    books = books.filter(book => book.copyType && filters.value.copyType.includes(book.copyType));
+    books = books.filter(book => 
+      book.copyType && 
+      book.copyType.some(bookCopyType => filters.value.copyType.includes(bookCopyType))
+    );
   }
 
-  // Filter by licensing type
+  // Filter by licensing type - check if any of the book's licensing types match any filter
   if (filters.value.licensingType.length > 0) {
-    books = books.filter(book => book.licensingType && filters.value.licensingType.includes(book.licensingType));
+    books = books.filter(book => 
+      book.licensingType && 
+      book.licensingType.some(bookLicensingType => filters.value.licensingType.includes(bookLicensingType))
+    );
   }
 
-  // Filter by sources
+  // Filter by sources - check if any of the book's sources match the filter
   if (filters.value.sources) {
-    books = books.filter(book => book.sources === filters.value.sources);
+    books = books.filter(book => 
+      book.sources && 
+      book.sources.includes(filters.value.sources)
+    );
   }
 
   // Filter by tags
