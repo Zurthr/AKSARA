@@ -4,8 +4,8 @@
       <img :src="book.image" :alt="book.title || `Book ${book.id}`" />
     </div>
     <div class="book-info">
-      <h4 class="book-title">{{ book.title }}</h4>
-      <p class="book-author" v-if="book.author">by {{ book.author }}</p>
+      <h4 class="book-title">{{ displayTitle }}</h4>
+      <p class="book-author" v-if="book.author">by {{ displayAuthor }}</p>
       <div class="book-tags" v-if="book.tags && book.tags.length > 0">
         <span class="book-tag">
           {{ displayTag }}
@@ -72,6 +72,28 @@ const displayTag = computed(() => {
     return firstTag.substring(0, 8) + '..';
   }
   return firstTag;
+});
+
+const displayTitle = computed(() => {
+  const title = props.book.title || '';
+  if (title.length > 36) {
+    return title.substring(0, 36) + '..';
+  }
+  return title;
+});
+
+const displayAuthor = computed(() => {
+  const author = props.book.author || '';
+  if (!author) return '';
+  
+  // Split by comma and trim each author name
+  const authors = author.split(',').map(a => a.trim()).filter(a => a.length > 0);
+  
+  if (authors.length <= 1) {
+    return authors[0];
+  } else {
+    return `${authors[0]} and ${authors.length - 1} others`;
+  }
 });
 </script>
 
