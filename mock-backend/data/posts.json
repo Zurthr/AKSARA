@@ -33,6 +33,10 @@
     ],
     "stars": 80,
     "community_id": "literacy-circle",
+    "related_books": [
+      1,
+      4
+    ],
     "created_at": "2023-10-01T12:00:00Z",
     "updated_at": "2023-10-01T12:00:00Z"
   },
@@ -103,6 +107,9 @@
     ],
     "stars": 45,
     "community_id": "photography-club",
+    "related_books": [
+      2
+    ],
     "created_at": "2023-10-01T09:00:00Z",
     "updated_at": "2023-10-01T09:00:00Z"
   }

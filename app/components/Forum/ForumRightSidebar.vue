@@ -1,16 +1,31 @@
 <template>
   <aside class="forum-sidebar">
-    <div class="sidebar-section">
+    <div class="sidebar-section" v-if="relatedCommunity || (relatedBooks && relatedBooks.length > 0)">
       <h3 class="section-title">Related Topics</h3>
-      <div class="related-topic-card">
-        <div class="book-cover">
-          <!-- Placeholder for book cover -->
-          <div class="cover-placeholder"></div>
+      
+      <!-- Related Community -->
+      <div v-if="relatedCommunity" class="related-topic-card">
+        <div class="topic-icon">
+          <!-- Placeholder icon if no specific icon logic -->
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
         </div>
         <div class="topic-info">
-          <h4>Indonesian Literature</h4>
-          <span class="tag">History</span>
-          <button class="btn-subscribe">Subscribe</button>
+          <h4>{{ relatedCommunity.name }}</h4>
+          <span class="tag">{{ relatedCommunity.members }} members</span>
+          <button class="btn-subscribe">Join</button>
+        </div>
+      </div>
+
+      <!-- Related Books -->
+      <div v-for="book in relatedBooks" :key="book.title" class="related-topic-card">
+        <div class="book-cover">
+          <img v-if="book.cover" :src="book.cover" :alt="book.title" class="cover-img">
+          <div v-else class="cover-placeholder"></div>
+        </div>
+        <div class="topic-info">
+          <h4>{{ book.title }}</h4>
+          <span class="tag">{{ book.author }}</span>
+          <button class="btn-subscribe">View</button>
         </div>
       </div>
     </div>
@@ -77,6 +92,22 @@
   </aside>
 </template>
 
+<script setup lang="ts">
+defineProps<{
+  relatedCommunity?: {
+    name: string;
+    icon: string;
+    members: string;
+  } | null;
+  relatedBooks?: Array<{
+    title: string;
+    author: string;
+    cover: string;
+    rating: number;
+  }> | null;
+}>();
+</script>
+
 <style scoped>
 .forum-sidebar {
   width: 300px;
@@ -102,6 +133,18 @@
   padding: 12px;
   border-radius: 12px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  margin-bottom: 12px;
+}
+
+.topic-icon {
+  width: 48px;
+  height: 48px;
+  background-color: #f1f5f9;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #64748b;
 }
 
 .book-cover {
@@ -110,6 +153,13 @@
   background-color: #e2e8f0;
   border-radius: 4px;
   overflow: hidden;
+  flex-shrink: 0;
+}
+
+.cover-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .cover-placeholder {
@@ -122,12 +172,15 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  flex: 1;
 }
 
 .topic-info h4 {
   font-size: 14px;
   font-weight: 600;
   margin: 0;
+  color: var(--color-black);
+  line-height: 1.3;
 }
 
 .tag {
@@ -137,6 +190,7 @@
   padding: 2px 8px;
   border-radius: 12px;
   width: fit-content;
+  margin-top: 4px;
 }
 
 .btn-subscribe {
@@ -148,6 +202,7 @@
   cursor: pointer;
   font-weight: 600;
   width: fit-content;
+  margin-top: auto;
 }
 
 .social-card {

@@ -81,7 +81,10 @@
         </div>
       </main>
 
-      <ForumRightSidebar />
+      <ForumRightSidebar 
+        :related-community="relatedCommunity"
+        :related-books="relatedBooks"
+      />
     </div>
   </div>
 </template>
@@ -103,6 +106,7 @@ interface Post {
   tags: Array<{ label: string; type: string }>;
   stars: number;
   community_id: string;
+  related_books?: number[];
   created_at: string;
   updated_at: string;
 }
@@ -111,6 +115,21 @@ const { data: post, error } = await useFetch<Post>(`http://localhost:3002/posts/
 
 if (error.value) {
   console.error('Error fetching post:', error.value);
+}
+
+// Fetch related community
+const relatedCommunity = ref<Community | null>(null);
+if (post.value?.community_id) {
+  const { data } = await useFetch<Community>(`http://localhost:3002/communities/${post.value.community_id}`);
+  relatedCommunity.value = data.value ?? null;
+}
+
+// Fetch related books
+const relatedBooks = ref<Book[] | null>(null);
+if (post.value?.related_books?.length) {
+  const query = post.value.related_books.map(id => `id=${id}`).join('&');
+  const { data } = await useFetch<Book[]>(`http://localhost:3002/books?${query}`);
+  relatedBooks.value = data.value ?? null;
 }
 
 interface Comment {
@@ -132,7 +151,23 @@ const { data: comments, error: commentsError } = await useFetch<Comment[]>(`http
 if (commentsError.value) {
   console.error('Error fetching comments:', commentsError.value);
 }
+
+interface Community {
+  id: string;
+  name: string;
+  icon: string;
+  members: string;
+}
+
+interface Book {
+  id: number;
+  title: string;
+  author: string;
+  cover: string;
+  rating: number;
+}
 </script>
+
 
 <style scoped>
 .forum-page {
