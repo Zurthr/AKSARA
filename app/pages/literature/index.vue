@@ -358,6 +358,7 @@ const suggestedBooks = computed(() => {
 
 .search-results {
   display: flex;
+  width:920px;
   flex-direction: column;
   gap: 20px;
 }

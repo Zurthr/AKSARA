@@ -39,58 +39,7 @@
             :key="book.id"
             class="book-card"
           >
-            <NuxtLink :to="`/literature/${book.id}`" class="book-link">
-              <div class="book-cover">
-                <img :src="book.image" :alt="book.title || `Book ${book.id}`" />
-              </div>
-              <div class="book-info">
-                <h4 class="book-title">{{ book.title }}</h4>
-                <p class="book-author" v-if="book.author">by {{ book.author }}</p>
-                <div class="book-tags">
-                  <span 
-                    v-for="tag in book.tags" 
-                    :key="tag" 
-                    class="book-tag"
-                  >
-                    {{ tag }}
-                  </span>
-                </div>
-                <div class="book-rating" v-if="book.rating">
-                  <span class="rating-number">{{ book.rating.toFixed(1) }}</span>
-                  <div class="stars-container">
-                    <div
-                      v-for="starIndex in 5"
-                      :key="starIndex"
-                      class="star-wrapper"
-                    >
-                      <img 
-                        v-if="starIndex > book.rating"
-                        src="~/assets/icons/StarDark.svg" 
-                        alt="star" 
-                        class="star star-empty" 
-                      />
-                      <template v-else>
-                        <img 
-                          src="~/assets/icons/StarDark.svg" 
-                          alt="star" 
-                          class="star star-background" 
-                        />
-                        <img 
-                          src="~/assets/icons/Star.svg" 
-                          alt="star" 
-                          class="star star-filled" 
-                          :style="{ 
-                            clipPath: starIndex < book.rating
-                              ? 'inset(0 0% 0 0)' 
-                              : `inset(0 ${100 - ((book.rating - (starIndex - 1)) * 100)}% 0 0)` 
-                          }"
-                        />
-                      </template>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </NuxtLink>
+            <BookCard :book="book" />
           </div>
         </div>
       </div>
@@ -111,14 +60,10 @@
 </template>
 
 <script setup lang="ts">
-interface Book {
-  id: number;
-  title: string;
-  author?: string;
+import BookCard, { type BookCardBook } from '~/components/Literature/BookCard.vue';
+
+interface Book extends BookCardBook {
   description?: string;
-  image: string;
-  tags: string[];
-  rating?: number;
 }
 
 const props = defineProps<{
@@ -237,125 +182,6 @@ const refresh = () => {
   flex-direction: column;
   gap: 8px;
   align-items: center;
-}
-
-.book-link {
-  text-decoration: none;
-  color: inherit;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  width: 100%;
-}
-
-.book-cover {
-  width: 160px;
-  height: 240px;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  background: #f3f4f6;
-}
-
-.book-cover img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.book-info {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  align-items: center;
-  text-align: center;
-  width: 100%;
-  margin-top: 4px;
-}
-
-.book-title {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--color-black);
-  margin: 0;
-  line-height: 1.3;
-}
-
-.book-author {
-  font-size: 12px;
-  color: #64748b;
-  margin: 0;
-}
-
-.book-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-  justify-content: center;
-  margin-top: 4px;
-}
-
-.book-tag {
-  display: inline-block;
-  padding: 4px 12px;
-  background-color: var(--color-primary);
-  color: var(--color-white);
-  border-radius: 12px;
-  font-size: 12px;
-  font-weight: 500;
-  width: fit-content;
-  text-align: center;
-}
-
-.book-rating {
-  display: flex;
-  width: fit-content;
-  gap: 6px;
-  align-items: center;
-  margin-top: 4px;
-}
-
-.rating-number {
-  margin-top: 2px;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--color-black);
-  line-height: 1;
-}
-
-.stars-container {
-  display: flex;
-  gap: 2px;
-  align-items: center;
-}
-
-.star-wrapper {
-  position: relative;
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-}
-
-.star {
-  width: 16px;
-  height: 16px;
-  display: block;
-  object-fit: contain;
-}
-
-.star-empty {
-  opacity: 0.6;
-}
-
-.star-background {
-  opacity: 0.6;
-}
-
-.star-filled {
-  position: absolute;
-  top: 0;
-  left: 0;
 }
 
 .carousel-nav {
