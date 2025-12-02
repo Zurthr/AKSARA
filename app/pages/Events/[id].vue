@@ -651,7 +651,7 @@ const getTagClass = (tag: string): string => {
 .register-btn {
   background: #fbbf24;
   color: var(--color-black);
-  flex: 1;
+  flex: 1;}
 
 .detail-address-toggle:hover .detail-address-hint {
   text-decoration: underline;
