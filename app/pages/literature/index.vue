@@ -1,13 +1,6 @@
 <template>
   <div class="literature-page">
       <div class="literature-main">
-        <header class="literature-header" v-if="searchQuery">
-          <h1>Search Results for "{{ searchQuery }}"</h1>
-          <p v-if="filteredBooks.length > 0">
-            Found {{ filteredBooks.length }} result{{ filteredBooks.length !== 1 ? 's' : '' }}
-          </p>
-          <p v-else>No results found. Try adjusting your filters or search query.</p>
-        </header>
 
         <div v-if="!searchQuery && !hasActiveFilters" class="literature-sections">
           <BookSection
@@ -30,6 +23,7 @@
             :books="filteredBooks"
             see-more-link="/literature"
           />
+          <p v-if="filteredBooks.length === 0" style="color: #64748b; font-size: 16px; line-height: 1.6; align-self: center; justify-self: center; margin-bottom:32px;">No results found. Try adjusting your filters or search query.</p>
         </div>
 
         <div v-else class="literature-sections">
@@ -135,7 +129,7 @@ const normalizeKey = (value: string | undefined | null) => {
     .replace(/\s+/g, '-');
 };
 
-const rawBooks = rawBooksData as RawBook[];
+const rawBooks = rawBooksData as unknown as RawBook[];
 
 // Map backend books.json structure into the simpler Book shape used by the UI
 const allBooks: Book[] = (rawBooks || []).map((book) => {

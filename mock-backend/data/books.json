@@ -1654,419 +1654,1077 @@
   },
   {
     "id": 16,
-    "title": "Generated Book 16",
-    "author": "Author 16",
-    "cover": "https://images-na.ssl-images-amazon.com/images/I/51NKhnjhpGL._SX331_BO1,204,203,200_.jpg",
-    "rating": 4.0,
-    "description": "Description for generated book 16.",
-    "year_edition": "2024",
-    "total_bookmarked": 116,
+    "title": "Harry Potter and the Sorcerer's Stone",
+    "author": "J.K. Rowling",
+    "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1474154022l/3.jpg",
+    "rating": 4.5,
+    "description": "'Harry Potter and the Sorcerer's Stone' by J.K. Rowling \u2014 a bestselling work that explores themes of love.",
+    "year_edition": "2018",
+    "total_bookmarked": 4539,
     "tags": [
       {
-        "name": "General",
+        "name": "Fantasy",
         "type": "primary"
+      },
+      {
+        "name": "Fiction",
+        "type": "secondary"
       }
     ],
     "copy_types": {
       "Physical": {
-        "description": "Standard physical copy",
-        "sources": []
+        "description": "Available in major retailers and bookstores",
+        "sources": [
+          {
+            "name": "Amazon",
+            "url": "https://www.amazon.com",
+            "type": "online_retailer",
+            "shipping_available": true
+          },
+          {
+            "name": "Barnes & Noble",
+            "url": "https://www.barnesandnoble.com",
+            "type": "bookstore_chain",
+            "real_time_inventory": false
+          }
+        ]
+      },
+      "Digital": {
+        "description": "Available digitally",
+        "sources": [
+          {
+            "name": "Kindle",
+            "url": "https://www.amazon.com/",
+            "type": "purchase"
+          },
+          {
+            "name": "Google Books",
+            "url": "https://books.google.com/",
+            "type": "preview"
+          }
+        ]
       }
     },
     "licensing_type": "Pay-to-own",
-    "sources": [],
-    "twitter_embeds": [],
+    "sources": [
+      {
+        "name": "Goodreads",
+        "url": "https://goodreads.com"
+      },
+      {
+        "name": "Wikipedia",
+        "url": "https://en.wikipedia.org"
+      }
+    ],
+    "twitter_embeds": [
+      {
+        "embed_url": "https://twitter.com/example/status/1341091",
+        "keyword": "Harry",
+        "generated_at": "2025-12-02T15:04:35.060935Z"
+      }
+    ],
     "related_posts": [],
     "community_id": "literacy-circle",
-    "created_at": "2025-12-02T14:55:30.496031Z",
-    "updated_at": "2025-12-02T14:55:30.496031Z"
+    "created_at": "2025-12-02T15:04:35.060935Z",
+    "updated_at": "2025-12-02T15:04:35.060935Z"
   },
   {
     "id": 17,
-    "title": "Generated Book 17",
-    "author": "Author 17",
-    "cover": "https://images-na.ssl-images-amazon.com/images/I/51NKhnjhpGL._SX331_BO1,204,203,200_.jpg",
-    "rating": 4.0,
-    "description": "Description for generated book 17.",
-    "year_edition": "2024",
-    "total_bookmarked": 117,
+    "title": "The Name of the Wind",
+    "author": "Patrick Rothfuss",
+    "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1520518281l/186074.jpg",
+    "rating": 4.6,
+    "description": "'The Name of the Wind' by Patrick Rothfuss \u2014 a compelling narrative that explores themes of society.",
+    "year_edition": "2023",
+    "total_bookmarked": 22596,
     "tags": [
       {
-        "name": "General",
+        "name": "Fantasy",
         "type": "primary"
+      },
+      {
+        "name": "Fiction",
+        "type": "secondary"
       }
     ],
     "copy_types": {
       "Physical": {
-        "description": "Standard physical copy",
-        "sources": []
+        "description": "Available in major retailers and bookstores",
+        "sources": [
+          {
+            "name": "Amazon",
+            "url": "https://www.amazon.com",
+            "type": "online_retailer",
+            "shipping_available": true
+          },
+          {
+            "name": "Barnes & Noble",
+            "url": "https://www.barnesandnoble.com",
+            "type": "bookstore_chain",
+            "real_time_inventory": false
+          }
+        ]
+      },
+      "Digital": {
+        "description": "Available digitally",
+        "sources": [
+          {
+            "name": "Kindle",
+            "url": "https://www.amazon.com/",
+            "type": "purchase"
+          },
+          {
+            "name": "Google Books",
+            "url": "https://books.google.com/",
+            "type": "preview"
+          }
+        ]
       }
     },
     "licensing_type": "Pay-to-own",
-    "sources": [],
-    "twitter_embeds": [],
+    "sources": [
+      {
+        "name": "Goodreads",
+        "url": "https://goodreads.com"
+      },
+      {
+        "name": "Wikipedia",
+        "url": "https://en.wikipedia.org"
+      }
+    ],
+    "twitter_embeds": [
+      {
+        "embed_url": "https://twitter.com/example/status/6552890",
+        "keyword": "The",
+        "generated_at": "2025-12-02T15:04:35.060935Z"
+      }
+    ],
     "related_posts": [],
     "community_id": "literacy-circle",
-    "created_at": "2025-12-02T14:55:30.496031Z",
-    "updated_at": "2025-12-02T14:55:30.496031Z"
+    "created_at": "2025-12-02T15:04:35.060935Z",
+    "updated_at": "2025-12-02T15:04:35.060935Z"
   },
   {
     "id": 18,
-    "title": "Generated Book 18",
-    "author": "Author 18",
-    "cover": "https://images-na.ssl-images-amazon.com/images/I/51NKhnjhpGL._SX331_BO1,204,203,200_.jpg",
-    "rating": 4.0,
-    "description": "Description for generated book 18.",
-    "year_edition": "2024",
-    "total_bookmarked": 118,
+    "title": "Mistborn: The Final Empire",
+    "author": "Brandon Sanderson",
+    "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1617768316l/68428.jpg",
+    "rating": 3.8,
+    "description": "'Mistborn: The Final Empire' by Brandon Sanderson \u2014 a bestselling work that explores themes of power.",
+    "year_edition": "2015",
+    "total_bookmarked": 4067,
     "tags": [
       {
-        "name": "General",
+        "name": "Fantasy",
         "type": "primary"
+      },
+      {
+        "name": "Fiction",
+        "type": "secondary"
       }
     ],
     "copy_types": {
       "Physical": {
-        "description": "Standard physical copy",
-        "sources": []
+        "description": "Available in major retailers and bookstores",
+        "sources": [
+          {
+            "name": "Amazon",
+            "url": "https://www.amazon.com",
+            "type": "online_retailer",
+            "shipping_available": true
+          },
+          {
+            "name": "Barnes & Noble",
+            "url": "https://www.barnesandnoble.com",
+            "type": "bookstore_chain",
+            "real_time_inventory": false
+          }
+        ]
+      },
+      "Digital": {
+        "description": "Available digitally",
+        "sources": [
+          {
+            "name": "Kindle",
+            "url": "https://www.amazon.com/",
+            "type": "purchase"
+          },
+          {
+            "name": "Google Books",
+            "url": "https://books.google.com/",
+            "type": "preview"
+          }
+        ]
       }
     },
-    "licensing_type": "Pay-to-own",
-    "sources": [],
-    "twitter_embeds": [],
+    "licensing_type": "Free",
+    "sources": [
+      {
+        "name": "Goodreads",
+        "url": "https://goodreads.com"
+      },
+      {
+        "name": "Wikipedia",
+        "url": "https://en.wikipedia.org"
+      }
+    ],
+    "twitter_embeds": [
+      {
+        "embed_url": "https://twitter.com/example/status/8800006",
+        "keyword": "Mistborn:",
+        "generated_at": "2025-12-02T15:04:35.060935Z"
+      }
+    ],
     "related_posts": [],
     "community_id": "literacy-circle",
-    "created_at": "2025-12-02T14:55:30.496031Z",
-    "updated_at": "2025-12-02T14:55:30.496031Z"
+    "created_at": "2025-12-02T15:04:35.060935Z",
+    "updated_at": "2025-12-02T15:04:35.060935Z"
   },
   {
     "id": 19,
-    "title": "Generated Book 19",
-    "author": "Author 19",
-    "cover": "https://images-na.ssl-images-amazon.com/images/I/51NKhnjhpGL._SX331_BO1,204,203,200_.jpg",
-    "rating": 4.0,
-    "description": "Description for generated book 19.",
-    "year_edition": "2024",
-    "total_bookmarked": 119,
+    "title": "Dune",
+    "author": "Frank Herbert",
+    "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1555447414l/44767458.jpg",
+    "rating": 3.9,
+    "description": "'Dune' by Frank Herbert \u2014 an influential novel that explores themes of adventure.",
+    "year_edition": "2010",
+    "total_bookmarked": 1971,
     "tags": [
       {
-        "name": "General",
+        "name": "Fantasy",
         "type": "primary"
+      },
+      {
+        "name": "Fiction",
+        "type": "secondary"
       }
     ],
     "copy_types": {
       "Physical": {
-        "description": "Standard physical copy",
-        "sources": []
+        "description": "Available in major retailers and bookstores",
+        "sources": [
+          {
+            "name": "Amazon",
+            "url": "https://www.amazon.com",
+            "type": "online_retailer",
+            "shipping_available": true
+          },
+          {
+            "name": "Barnes & Noble",
+            "url": "https://www.barnesandnoble.com",
+            "type": "bookstore_chain",
+            "real_time_inventory": false
+          }
+        ]
+      },
+      "Digital": {
+        "description": "Available digitally",
+        "sources": [
+          {
+            "name": "Kindle",
+            "url": "https://www.amazon.com/",
+            "type": "purchase"
+          },
+          {
+            "name": "Google Books",
+            "url": "https://books.google.com/",
+            "type": "preview"
+          }
+        ]
       }
     },
     "licensing_type": "Pay-to-own",
-    "sources": [],
-    "twitter_embeds": [],
+    "sources": [
+      {
+        "name": "Goodreads",
+        "url": "https://goodreads.com"
+      },
+      {
+        "name": "Wikipedia",
+        "url": "https://en.wikipedia.org"
+      }
+    ],
+    "twitter_embeds": [
+      {
+        "embed_url": "https://twitter.com/example/status/9567057",
+        "keyword": "Dune",
+        "generated_at": "2025-12-02T15:04:35.060935Z"
+      }
+    ],
     "related_posts": [],
     "community_id": "literacy-circle",
-    "created_at": "2025-12-02T14:55:30.496031Z",
-    "updated_at": "2025-12-02T14:55:30.496031Z"
+    "created_at": "2025-12-02T15:04:35.060935Z",
+    "updated_at": "2025-12-02T15:04:35.060935Z"
   },
   {
     "id": 20,
-    "title": "Generated Book 20",
-    "author": "Author 20",
-    "cover": "https://images-na.ssl-images-amazon.com/images/I/51NKhnjhpGL._SX331_BO1,204,203,200_.jpg",
-    "rating": 4.0,
-    "description": "Description for generated book 20.",
-    "year_edition": "2024",
-    "total_bookmarked": 120,
+    "title": "1984",
+    "author": "George Orwell",
+    "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1532714506l/40961427.jpg",
+    "rating": 3.8,
+    "description": "'1984' by George Orwell \u2014 a modern classic that explores themes of adventure.",
+    "year_edition": "2010",
+    "total_bookmarked": 18322,
     "tags": [
       {
-        "name": "General",
+        "name": "Dystopia",
         "type": "primary"
+      },
+      {
+        "name": "Fiction",
+        "type": "secondary"
       }
     ],
     "copy_types": {
       "Physical": {
-        "description": "Standard physical copy",
-        "sources": []
+        "description": "Available in major retailers and bookstores",
+        "sources": [
+          {
+            "name": "Amazon",
+            "url": "https://www.amazon.com",
+            "type": "online_retailer",
+            "shipping_available": true
+          },
+          {
+            "name": "Barnes & Noble",
+            "url": "https://www.barnesandnoble.com",
+            "type": "bookstore_chain",
+            "real_time_inventory": false
+          }
+        ]
+      },
+      "Digital": {
+        "description": "Available digitally",
+        "sources": [
+          {
+            "name": "Kindle",
+            "url": "https://www.amazon.com/",
+            "type": "purchase"
+          },
+          {
+            "name": "Google Books",
+            "url": "https://books.google.com/",
+            "type": "preview"
+          }
+        ]
       }
     },
     "licensing_type": "Pay-to-own",
-    "sources": [],
-    "twitter_embeds": [],
+    "sources": [
+      {
+        "name": "Goodreads",
+        "url": "https://goodreads.com"
+      },
+      {
+        "name": "Wikipedia",
+        "url": "https://en.wikipedia.org"
+      }
+    ],
+    "twitter_embeds": [
+      {
+        "embed_url": "https://twitter.com/example/status/4796346",
+        "keyword": "1984",
+        "generated_at": "2025-12-02T15:04:35.060935Z"
+      }
+    ],
     "related_posts": [],
     "community_id": "literacy-circle",
-    "created_at": "2025-12-02T14:55:30.496031Z",
-    "updated_at": "2025-12-02T14:55:30.496031Z"
+    "created_at": "2025-12-02T15:04:35.060935Z",
+    "updated_at": "2025-12-02T15:04:35.060935Z"
   },
   {
     "id": 21,
-    "title": "Generated Book 21",
-    "author": "Author 21",
-    "cover": "https://images-na.ssl-images-amazon.com/images/I/51NKhnjhpGL._SX331_BO1,204,203,200_.jpg",
-    "rating": 4.0,
-    "description": "Description for generated book 21.",
-    "year_edition": "2024",
-    "total_bookmarked": 121,
+    "title": "Brave New World",
+    "author": "Aldous Huxley",
+    "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1575506423l/5129.jpg",
+    "rating": 4.6,
+    "description": "'Brave New World' by Aldous Huxley \u2014 a bestselling work that explores themes of adventure.",
+    "year_edition": "2018",
+    "total_bookmarked": 1164,
     "tags": [
       {
-        "name": "General",
+        "name": "Dystopia",
         "type": "primary"
+      },
+      {
+        "name": "Fiction",
+        "type": "secondary"
       }
     ],
     "copy_types": {
       "Physical": {
-        "description": "Standard physical copy",
-        "sources": []
+        "description": "Available in major retailers and bookstores",
+        "sources": [
+          {
+            "name": "Amazon",
+            "url": "https://www.amazon.com",
+            "type": "online_retailer",
+            "shipping_available": true
+          },
+          {
+            "name": "Barnes & Noble",
+            "url": "https://www.barnesandnoble.com",
+            "type": "bookstore_chain",
+            "real_time_inventory": false
+          }
+        ]
+      },
+      "Digital": {
+        "description": "Available digitally",
+        "sources": [
+          {
+            "name": "Kindle",
+            "url": "https://www.amazon.com/",
+            "type": "purchase"
+          },
+          {
+            "name": "Google Books",
+            "url": "https://books.google.com/",
+            "type": "preview"
+          }
+        ]
       }
     },
     "licensing_type": "Pay-to-own",
-    "sources": [],
-    "twitter_embeds": [],
+    "sources": [
+      {
+        "name": "Goodreads",
+        "url": "https://goodreads.com"
+      },
+      {
+        "name": "Wikipedia",
+        "url": "https://en.wikipedia.org"
+      }
+    ],
+    "twitter_embeds": [
+      {
+        "embed_url": "https://twitter.com/example/status/3272684",
+        "keyword": "Brave",
+        "generated_at": "2025-12-02T15:04:35.060935Z"
+      }
+    ],
     "related_posts": [],
     "community_id": "literacy-circle",
-    "created_at": "2025-12-02T14:55:30.496031Z",
-    "updated_at": "2025-12-02T14:55:30.496031Z"
+    "created_at": "2025-12-02T15:04:35.060935Z",
+    "updated_at": "2025-12-02T15:04:35.060935Z"
   },
   {
     "id": 22,
-    "title": "Generated Book 22",
-    "author": "Author 22",
-    "cover": "https://images-na.ssl-images-amazon.com/images/I/51NKhnjhpGL._SX331_BO1,204,203,200_.jpg",
-    "rating": 4.0,
-    "description": "Description for generated book 22.",
-    "year_edition": "2024",
-    "total_bookmarked": 122,
+    "title": "The Great Gatsby",
+    "author": "F. Scott Fitzgerald",
+    "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1490528560l/4671.jpg",
+    "rating": 4.2,
+    "description": "'The Great Gatsby' by F. Scott Fitzgerald \u2014 an influential novel that explores themes of survival.",
+    "year_edition": "2015",
+    "total_bookmarked": 23949,
     "tags": [
       {
-        "name": "General",
+        "name": "Classic Literature",
         "type": "primary"
+      },
+      {
+        "name": "Fiction",
+        "type": "secondary"
       }
     ],
     "copy_types": {
       "Physical": {
-        "description": "Standard physical copy",
-        "sources": []
+        "description": "Available in major retailers and bookstores",
+        "sources": [
+          {
+            "name": "Amazon",
+            "url": "https://www.amazon.com",
+            "type": "online_retailer",
+            "shipping_available": true
+          },
+          {
+            "name": "Barnes & Noble",
+            "url": "https://www.barnesandnoble.com",
+            "type": "bookstore_chain",
+            "real_time_inventory": false
+          }
+        ]
+      },
+      "Digital": {
+        "description": "Available digitally",
+        "sources": [
+          {
+            "name": "Kindle",
+            "url": "https://www.amazon.com/",
+            "type": "purchase"
+          },
+          {
+            "name": "Google Books",
+            "url": "https://books.google.com/",
+            "type": "preview"
+          }
+        ]
       }
     },
     "licensing_type": "Pay-to-own",
-    "sources": [],
-    "twitter_embeds": [],
+    "sources": [
+      {
+        "name": "Goodreads",
+        "url": "https://goodreads.com"
+      },
+      {
+        "name": "Wikipedia",
+        "url": "https://en.wikipedia.org"
+      }
+    ],
+    "twitter_embeds": [
+      {
+        "embed_url": "https://twitter.com/example/status/4397689",
+        "keyword": "The",
+        "generated_at": "2025-12-02T15:04:35.060935Z"
+      }
+    ],
     "related_posts": [],
     "community_id": "literacy-circle",
-    "created_at": "2025-12-02T14:55:30.496031Z",
-    "updated_at": "2025-12-02T14:55:30.496031Z"
+    "created_at": "2025-12-02T15:04:35.060935Z",
+    "updated_at": "2025-12-02T15:04:35.060935Z"
   },
   {
     "id": 23,
-    "title": "Generated Book 23",
-    "author": "Author 23",
-    "cover": "https://images-na.ssl-images-amazon.com/images/I/51NKhnjhpGL._SX331_BO1,204,203,200_.jpg",
-    "rating": 4.0,
-    "description": "Description for generated book 23.",
-    "year_edition": "2024",
-    "total_bookmarked": 123,
+    "title": "To Kill a Mockingbird",
+    "author": "Harper Lee",
+    "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1553383690l/2657.jpg",
+    "rating": 4.1,
+    "description": "'To Kill a Mockingbird' by Harper Lee \u2014 a bestselling work that explores themes of identity.",
+    "year_edition": "2010",
+    "total_bookmarked": 14429,
     "tags": [
       {
-        "name": "General",
+        "name": "Classic Literature",
         "type": "primary"
+      },
+      {
+        "name": "Fiction",
+        "type": "secondary"
       }
     ],
     "copy_types": {
       "Physical": {
-        "description": "Standard physical copy",
-        "sources": []
+        "description": "Available in major retailers and bookstores",
+        "sources": [
+          {
+            "name": "Amazon",
+            "url": "https://www.amazon.com",
+            "type": "online_retailer",
+            "shipping_available": true
+          },
+          {
+            "name": "Barnes & Noble",
+            "url": "https://www.barnesandnoble.com",
+            "type": "bookstore_chain",
+            "real_time_inventory": false
+          }
+        ]
+      },
+      "Digital": {
+        "description": "Available digitally",
+        "sources": [
+          {
+            "name": "Kindle",
+            "url": "https://www.amazon.com/",
+            "type": "purchase"
+          },
+          {
+            "name": "Google Books",
+            "url": "https://books.google.com/",
+            "type": "preview"
+          }
+        ]
       }
     },
     "licensing_type": "Pay-to-own",
-    "sources": [],
-    "twitter_embeds": [],
+    "sources": [
+      {
+        "name": "Goodreads",
+        "url": "https://goodreads.com"
+      },
+      {
+        "name": "Wikipedia",
+        "url": "https://en.wikipedia.org"
+      }
+    ],
+    "twitter_embeds": [
+      {
+        "embed_url": "https://twitter.com/example/status/7758643",
+        "keyword": "To",
+        "generated_at": "2025-12-02T15:04:35.060935Z"
+      }
+    ],
     "related_posts": [],
     "community_id": "literacy-circle",
-    "created_at": "2025-12-02T14:55:30.496031Z",
-    "updated_at": "2025-12-02T14:55:30.496031Z"
+    "created_at": "2025-12-02T15:04:35.060935Z",
+    "updated_at": "2025-12-02T15:04:35.060935Z"
   },
   {
     "id": 24,
-    "title": "Generated Book 24",
-    "author": "Author 24",
-    "cover": "https://images-na.ssl-images-amazon.com/images/I/51NKhnjhpGL._SX331_BO1,204,203,200_.jpg",
-    "rating": 4.0,
-    "description": "Description for generated book 24.",
-    "year_edition": "2024",
-    "total_bookmarked": 124,
+    "title": "The Catcher in the Rye",
+    "author": "J.D. Salinger",
+    "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1398034300l/5107.jpg",
+    "rating": 4.3,
+    "description": "'The Catcher in the Rye' by J.D. Salinger \u2014 a modern classic that explores themes of identity.",
+    "year_edition": "2010",
+    "total_bookmarked": 16861,
     "tags": [
       {
-        "name": "General",
+        "name": "Classic Literature",
         "type": "primary"
+      },
+      {
+        "name": "Fiction",
+        "type": "secondary"
       }
     ],
     "copy_types": {
       "Physical": {
-        "description": "Standard physical copy",
-        "sources": []
+        "description": "Available in major retailers and bookstores",
+        "sources": [
+          {
+            "name": "Amazon",
+            "url": "https://www.amazon.com",
+            "type": "online_retailer",
+            "shipping_available": true
+          },
+          {
+            "name": "Barnes & Noble",
+            "url": "https://www.barnesandnoble.com",
+            "type": "bookstore_chain",
+            "real_time_inventory": false
+          }
+        ]
+      },
+      "Digital": {
+        "description": "Available digitally",
+        "sources": [
+          {
+            "name": "Kindle",
+            "url": "https://www.amazon.com/",
+            "type": "purchase"
+          },
+          {
+            "name": "Google Books",
+            "url": "https://books.google.com/",
+            "type": "preview"
+          }
+        ]
       }
     },
-    "licensing_type": "Pay-to-own",
-    "sources": [],
-    "twitter_embeds": [],
+    "licensing_type": "Free",
+    "sources": [
+      {
+        "name": "Goodreads",
+        "url": "https://goodreads.com"
+      },
+      {
+        "name": "Wikipedia",
+        "url": "https://en.wikipedia.org"
+      }
+    ],
+    "twitter_embeds": [
+      {
+        "embed_url": "https://twitter.com/example/status/3292511",
+        "keyword": "The",
+        "generated_at": "2025-12-02T15:04:35.060935Z"
+      }
+    ],
     "related_posts": [],
     "community_id": "literacy-circle",
-    "created_at": "2025-12-02T14:55:30.496031Z",
-    "updated_at": "2025-12-02T14:55:30.496031Z"
+    "created_at": "2025-12-02T15:04:35.060935Z",
+    "updated_at": "2025-12-02T15:04:35.060935Z"
   },
   {
     "id": 25,
-    "title": "Generated Book 25",
-    "author": "Author 25",
-    "cover": "https://images-na.ssl-images-amazon.com/images/I/51NKhnjhpGL._SX331_BO1,204,203,200_.jpg",
-    "rating": 4.0,
-    "description": "Description for generated book 25.",
-    "year_edition": "2024",
-    "total_bookmarked": 125,
+    "title": "Pride and Prejudice",
+    "author": "Jane Austen",
+    "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1320399351l/1885.jpg",
+    "rating": 4.3,
+    "description": "'Pride and Prejudice' by Jane Austen \u2014 a modern classic that explores themes of adventure.",
+    "year_edition": "2023",
+    "total_bookmarked": 12771,
     "tags": [
       {
-        "name": "General",
+        "name": "Classic Literature",
         "type": "primary"
+      },
+      {
+        "name": "Fiction",
+        "type": "secondary"
       }
     ],
     "copy_types": {
       "Physical": {
-        "description": "Standard physical copy",
-        "sources": []
+        "description": "Available in major retailers and bookstores",
+        "sources": [
+          {
+            "name": "Amazon",
+            "url": "https://www.amazon.com",
+            "type": "online_retailer",
+            "shipping_available": true
+          },
+          {
+            "name": "Barnes & Noble",
+            "url": "https://www.barnesandnoble.com",
+            "type": "bookstore_chain",
+            "real_time_inventory": false
+          }
+        ]
+      },
+      "Digital": {
+        "description": "Available digitally",
+        "sources": [
+          {
+            "name": "Kindle",
+            "url": "https://www.amazon.com/",
+            "type": "purchase"
+          },
+          {
+            "name": "Google Books",
+            "url": "https://books.google.com/",
+            "type": "preview"
+          }
+        ]
       }
     },
-    "licensing_type": "Pay-to-own",
-    "sources": [],
-    "twitter_embeds": [],
+    "licensing_type": "Free",
+    "sources": [
+      {
+        "name": "Goodreads",
+        "url": "https://goodreads.com"
+      },
+      {
+        "name": "Wikipedia",
+        "url": "https://en.wikipedia.org"
+      }
+    ],
+    "twitter_embeds": [
+      {
+        "embed_url": "https://twitter.com/example/status/5094099",
+        "keyword": "Pride",
+        "generated_at": "2025-12-02T15:04:35.060935Z"
+      }
+    ],
     "related_posts": [],
     "community_id": "literacy-circle",
-    "created_at": "2025-12-02T14:55:30.496031Z",
-    "updated_at": "2025-12-02T14:55:30.496031Z"
+    "created_at": "2025-12-02T15:04:35.060935Z",
+    "updated_at": "2025-12-02T15:04:35.060935Z"
   },
   {
     "id": 26,
-    "title": "Generated Book 26",
-    "author": "Author 26",
-    "cover": "https://images-na.ssl-images-amazon.com/images/I/51NKhnjhpGL._SX331_BO1,204,203,200_.jpg",
-    "rating": 4.0,
-    "description": "Description for generated book 26.",
-    "year_edition": "2024",
-    "total_bookmarked": 126,
+    "title": "The Fellowship of the Ring",
+    "author": "J.R.R. Tolkien",
+    "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1507302018l/34.jpg",
+    "rating": 4.6,
+    "description": "'The Fellowship of the Ring' by J.R.R. Tolkien \u2014 a bestselling work that explores themes of survival.",
+    "year_edition": "2015",
+    "total_bookmarked": 2967,
     "tags": [
       {
-        "name": "General",
+        "name": "Fantasy",
         "type": "primary"
+      },
+      {
+        "name": "Fiction",
+        "type": "secondary"
       }
     ],
     "copy_types": {
       "Physical": {
-        "description": "Standard physical copy",
-        "sources": []
+        "description": "Available in major retailers and bookstores",
+        "sources": [
+          {
+            "name": "Amazon",
+            "url": "https://www.amazon.com",
+            "type": "online_retailer",
+            "shipping_available": true
+          },
+          {
+            "name": "Barnes & Noble",
+            "url": "https://www.barnesandnoble.com",
+            "type": "bookstore_chain",
+            "real_time_inventory": false
+          }
+        ]
+      },
+      "Digital": {
+        "description": "Available digitally",
+        "sources": [
+          {
+            "name": "Kindle",
+            "url": "https://www.amazon.com/",
+            "type": "purchase"
+          },
+          {
+            "name": "Google Books",
+            "url": "https://books.google.com/",
+            "type": "preview"
+          }
+        ]
       }
     },
     "licensing_type": "Pay-to-own",
-    "sources": [],
-    "twitter_embeds": [],
+    "sources": [
+      {
+        "name": "Goodreads",
+        "url": "https://goodreads.com"
+      },
+      {
+        "name": "Wikipedia",
+        "url": "https://en.wikipedia.org"
+      }
+    ],
+    "twitter_embeds": [
+      {
+        "embed_url": "https://twitter.com/example/status/2715203",
+        "keyword": "The",
+        "generated_at": "2025-12-02T15:04:35.060935Z"
+      }
+    ],
     "related_posts": [],
     "community_id": "literacy-circle",
-    "created_at": "2025-12-02T14:55:30.496031Z",
-    "updated_at": "2025-12-02T14:55:30.496031Z"
+    "created_at": "2025-12-02T15:04:35.060935Z",
+    "updated_at": "2025-12-02T15:04:35.060935Z"
   },
   {
     "id": 27,
-    "title": "Generated Book 27",
-    "author": "Author 27",
-    "cover": "https://images-na.ssl-images-amazon.com/images/I/51NKhnjhpGL._SX331_BO1,204,203,200_.jpg",
-    "rating": 4.0,
-    "description": "Description for generated book 27.",
-    "year_edition": "2024",
-    "total_bookmarked": 127,
+    "title": "The Two Towers",
+    "author": "J.R.R. Tolkien",
+    "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1546071216l/15241.jpg",
+    "rating": 3.8,
+    "description": "'The Two Towers' by J.R.R. Tolkien \u2014 a modern classic that explores themes of survival.",
+    "year_edition": "2022",
+    "total_bookmarked": 7399,
     "tags": [
       {
-        "name": "General",
+        "name": "Fantasy",
         "type": "primary"
+      },
+      {
+        "name": "Fiction",
+        "type": "secondary"
       }
     ],
     "copy_types": {
       "Physical": {
-        "description": "Standard physical copy",
-        "sources": []
+        "description": "Available in major retailers and bookstores",
+        "sources": [
+          {
+            "name": "Amazon",
+            "url": "https://www.amazon.com",
+            "type": "online_retailer",
+            "shipping_available": true
+          },
+          {
+            "name": "Barnes & Noble",
+            "url": "https://www.barnesandnoble.com",
+            "type": "bookstore_chain",
+            "real_time_inventory": false
+          }
+        ]
+      },
+      "Digital": {
+        "description": "Available digitally",
+        "sources": [
+          {
+            "name": "Kindle",
+            "url": "https://www.amazon.com/",
+            "type": "purchase"
+          },
+          {
+            "name": "Google Books",
+            "url": "https://books.google.com/",
+            "type": "preview"
+          }
+        ]
       }
     },
     "licensing_type": "Pay-to-own",
-    "sources": [],
-    "twitter_embeds": [],
+    "sources": [
+      {
+        "name": "Goodreads",
+        "url": "https://goodreads.com"
+      },
+      {
+        "name": "Wikipedia",
+        "url": "https://en.wikipedia.org"
+      }
+    ],
+    "twitter_embeds": [
+      {
+        "embed_url": "https://twitter.com/example/status/4751720",
+        "keyword": "The",
+        "generated_at": "2025-12-02T15:04:35.060935Z"
+      }
+    ],
     "related_posts": [],
     "community_id": "literacy-circle",
-    "created_at": "2025-12-02T14:55:30.496031Z",
-    "updated_at": "2025-12-02T14:55:30.496031Z"
+    "created_at": "2025-12-02T15:04:35.060935Z",
+    "updated_at": "2025-12-02T15:04:35.060935Z"
   },
   {
     "id": 28,
-    "title": "Generated Book 28",
-    "author": "Author 28",
-    "cover": "https://images-na.ssl-images-amazon.com/images/I/51NKhnjhpGL._SX331_BO1,204,203,200_.jpg",
-    "rating": 4.0,
-    "description": "Description for generated book 28.",
-    "year_edition": "2024",
-    "total_bookmarked": 128,
+    "title": "The Return of the King",
+    "author": "J.R.R. Tolkien",
+    "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1546071216l/18512.jpg",
+    "rating": 4.4,
+    "description": "'The Return of the King' by J.R.R. Tolkien \u2014 a modern classic that explores themes of adventure.",
+    "year_edition": "2005",
+    "total_bookmarked": 12568,
     "tags": [
       {
-        "name": "General",
+        "name": "Fantasy",
         "type": "primary"
+      },
+      {
+        "name": "Fiction",
+        "type": "secondary"
       }
     ],
     "copy_types": {
       "Physical": {
-        "description": "Standard physical copy",
-        "sources": []
+        "description": "Available in major retailers and bookstores",
+        "sources": [
+          {
+            "name": "Amazon",
+            "url": "https://www.amazon.com",
+            "type": "online_retailer",
+            "shipping_available": true
+          },
+          {
+            "name": "Barnes & Noble",
+            "url": "https://www.barnesandnoble.com",
+            "type": "bookstore_chain",
+            "real_time_inventory": false
+          }
+        ]
+      },
+      "Digital": {
+        "description": "Available digitally",
+        "sources": [
+          {
+            "name": "Kindle",
+            "url": "https://www.amazon.com/",
+            "type": "purchase"
+          },
+          {
+            "name": "Google Books",
+            "url": "https://books.google.com/",
+            "type": "preview"
+          }
+        ]
       }
     },
-    "licensing_type": "Pay-to-own",
-    "sources": [],
-    "twitter_embeds": [],
+    "licensing_type": "Free",
+    "sources": [
+      {
+        "name": "Goodreads",
+        "url": "https://goodreads.com"
+      },
+      {
+        "name": "Wikipedia",
+        "url": "https://en.wikipedia.org"
+      }
+    ],
+    "twitter_embeds": [
+      {
+        "embed_url": "https://twitter.com/example/status/6987880",
+        "keyword": "The",
+        "generated_at": "2025-12-02T15:04:35.060935Z"
+      }
+    ],
     "related_posts": [],
     "community_id": "literacy-circle",
-    "created_at": "2025-12-02T14:55:30.496031Z",
-    "updated_at": "2025-12-02T14:55:30.496031Z"
+    "created_at": "2025-12-02T15:04:35.060935Z",
+    "updated_at": "2025-12-02T15:04:35.060935Z"
   },
   {
     "id": 29,
-    "title": "Generated Book 29",
-    "author": "Author 29",
-    "cover": "https://images-na.ssl-images-amazon.com/images/I/51NKhnjhpGL._SX331_BO1,204,203,200_.jpg",
-    "rating": 4.0,
-    "description": "Description for generated book 29.",
-    "year_edition": "2024",
-    "total_bookmarked": 129,
+    "title": "The Alchemist",
+    "author": "Paulo Coelho",
+    "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1483412266l/865.jpg",
+    "rating": 4.7,
+    "description": "'The Alchemist' by Paulo Coelho \u2014 a bestselling work that explores themes of society.",
+    "year_edition": "2000",
+    "total_bookmarked": 4760,
     "tags": [
       {
-        "name": "General",
+        "name": "Non-Fiction",
         "type": "primary"
+      },
+      {
+        "name": "History",
+        "type": "secondary"
       }
     ],
     "copy_types": {
       "Physical": {
-        "description": "Standard physical copy",
-        "sources": []
+        "description": "Available in major retailers and bookstores",
+        "sources": [
+          {
+            "name": "Amazon",
+            "url": "https://www.amazon.com",
+            "type": "online_retailer",
+            "shipping_available": true
+          },
+          {
+            "name": "Barnes & Noble",
+            "url": "https://www.barnesandnoble.com",
+            "type": "bookstore_chain",
+            "real_time_inventory": false
+          }
+        ]
+      },
+      "Digital": {
+        "description": "Available digitally",
+        "sources": [
+          {
+            "name": "Kindle",
+            "url": "https://www.amazon.com/",
+            "type": "purchase"
+          },
+          {
+            "name": "Google Books",
+            "url": "https://books.google.com/",
+            "type": "preview"
+          }
+        ]
       }
     },
     "licensing_type": "Pay-to-own",
-    "sources": [],
-    "twitter_embeds": [],
+    "sources": [
+      {
+        "name": "Goodreads",
+        "url": "https://goodreads.com"
+      },
+      {
+        "name": "Wikipedia",
+        "url": "https://en.wikipedia.org"
+      }
+    ],
+    "twitter_embeds": [
+      {
+        "embed_url": "https://twitter.com/example/status/3476873",
+        "keyword": "The",
+        "generated_at": "2025-12-02T15:04:35.060935Z"
+      }
+    ],
     "related_posts": [],
     "community_id": "literacy-circle",
-    "created_at": "2025-12-02T14:55:30.496031Z",
-    "updated_at": "2025-12-02T14:55:30.496031Z"
+    "created_at": "2025-12-02T15:04:35.060935Z",
+    "updated_at": "2025-12-02T15:04:35.060935Z"
   },
   {
     "id": 30,
-    "title": "Generated Book 30",
-    "author": "Author 30",
-    "cover": "https://images-na.ssl-images-amazon.com/images/I/51NKhnjhpGL._SX331_BO1,204,203,200_.jpg",
-    "rating": 4.0,
-    "description": "Description for generated book 30.",
-    "year_edition": "2024",
-    "total_bookmarked": 130,
+    "title": "The Road",
+    "author": "Cormac McCarthy",
+    "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1439197219l/6288.jpg",
+    "rating": 4.2,
+    "description": "'The Road' by Cormac McCarthy \u2014 a compelling narrative that explores themes of adventure.",
+    "year_edition": "2010",
+    "total_bookmarked": 11547,
     "tags": [
       {
         "name": "General",
@@ -2075,16 +2733,1527 @@
     ],
     "copy_types": {
       "Physical": {
-        "description": "Standard physical copy",
-        "sources": []
+        "description": "Available in major retailers and bookstores",
+        "sources": [
+          {
+            "name": "Amazon",
+            "url": "https://www.amazon.com",
+            "type": "online_retailer",
+            "shipping_available": true
+          },
+          {
+            "name": "Barnes & Noble",
+            "url": "https://www.barnesandnoble.com",
+            "type": "bookstore_chain",
+            "real_time_inventory": false
+          }
+        ]
+      },
+      "Digital": {
+        "description": "Available digitally",
+        "sources": [
+          {
+            "name": "Kindle",
+            "url": "https://www.amazon.com/",
+            "type": "purchase"
+          },
+          {
+            "name": "Google Books",
+            "url": "https://books.google.com/",
+            "type": "preview"
+          }
+        ]
+      }
+    },
+    "licensing_type": "Free",
+    "sources": [
+      {
+        "name": "Goodreads",
+        "url": "https://goodreads.com"
+      },
+      {
+        "name": "Wikipedia",
+        "url": "https://en.wikipedia.org"
+      }
+    ],
+    "twitter_embeds": [
+      {
+        "embed_url": "https://twitter.com/example/status/7997048",
+        "keyword": "The",
+        "generated_at": "2025-12-02T15:04:35.060935Z"
+      }
+    ],
+    "related_posts": [],
+    "community_id": "literacy-circle",
+    "created_at": "2025-12-02T15:04:35.060935Z",
+    "updated_at": "2025-12-02T15:04:35.060935Z"
+  },
+  {
+    "id": 31,
+    "title": "The Shining",
+    "author": "Stephen King",
+    "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1353277730l/11588.jpg",
+    "rating": 3.9,
+    "description": "'The Shining' by Stephen King \u2014 a bestselling work that explores themes of society.",
+    "year_edition": "2000",
+    "total_bookmarked": 23933,
+    "tags": [
+      {
+        "name": "General",
+        "type": "primary"
+      }
+    ],
+    "copy_types": {
+      "Physical": {
+        "description": "Available in major retailers and bookstores",
+        "sources": [
+          {
+            "name": "Amazon",
+            "url": "https://www.amazon.com",
+            "type": "online_retailer",
+            "shipping_available": true
+          },
+          {
+            "name": "Barnes & Noble",
+            "url": "https://www.barnesandnoble.com",
+            "type": "bookstore_chain",
+            "real_time_inventory": false
+          }
+        ]
+      },
+      "Digital": {
+        "description": "Available digitally",
+        "sources": [
+          {
+            "name": "Kindle",
+            "url": "https://www.amazon.com/",
+            "type": "purchase"
+          },
+          {
+            "name": "Google Books",
+            "url": "https://books.google.com/",
+            "type": "preview"
+          }
+        ]
       }
     },
     "licensing_type": "Pay-to-own",
-    "sources": [],
-    "twitter_embeds": [],
+    "sources": [
+      {
+        "name": "Goodreads",
+        "url": "https://goodreads.com"
+      },
+      {
+        "name": "Wikipedia",
+        "url": "https://en.wikipedia.org"
+      }
+    ],
+    "twitter_embeds": [
+      {
+        "embed_url": "https://twitter.com/example/status/5920934",
+        "keyword": "The",
+        "generated_at": "2025-12-02T15:04:35.060935Z"
+      }
+    ],
     "related_posts": [],
     "community_id": "literacy-circle",
-    "created_at": "2025-12-02T14:55:30.496031Z",
-    "updated_at": "2025-12-02T14:55:30.496031Z"
+    "created_at": "2025-12-02T15:04:35.060935Z",
+    "updated_at": "2025-12-02T15:04:35.060935Z"
+  },
+  {
+    "id": 32,
+    "title": "It",
+    "author": "Stephen King",
+    "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1554223282l/830502.jpg",
+    "rating": 4.5,
+    "description": "'It' by Stephen King \u2014 a bestselling work that explores themes of survival.",
+    "year_edition": "2000",
+    "total_bookmarked": 21694,
+    "tags": [
+      {
+        "name": "General",
+        "type": "primary"
+      }
+    ],
+    "copy_types": {
+      "Physical": {
+        "description": "Available in major retailers and bookstores",
+        "sources": [
+          {
+            "name": "Amazon",
+            "url": "https://www.amazon.com",
+            "type": "online_retailer",
+            "shipping_available": true
+          },
+          {
+            "name": "Barnes & Noble",
+            "url": "https://www.barnesandnoble.com",
+            "type": "bookstore_chain",
+            "real_time_inventory": false
+          }
+        ]
+      },
+      "Digital": {
+        "description": "Available digitally",
+        "sources": [
+          {
+            "name": "Kindle",
+            "url": "https://www.amazon.com/",
+            "type": "purchase"
+          },
+          {
+            "name": "Google Books",
+            "url": "https://books.google.com/",
+            "type": "preview"
+          }
+        ]
+      }
+    },
+    "licensing_type": "Free",
+    "sources": [
+      {
+        "name": "Goodreads",
+        "url": "https://goodreads.com"
+      },
+      {
+        "name": "Wikipedia",
+        "url": "https://en.wikipedia.org"
+      }
+    ],
+    "twitter_embeds": [
+      {
+        "embed_url": "https://twitter.com/example/status/7379999",
+        "keyword": "It",
+        "generated_at": "2025-12-02T15:04:35.060935Z"
+      }
+    ],
+    "related_posts": [],
+    "community_id": "literacy-circle",
+    "created_at": "2025-12-02T15:04:35.060935Z",
+    "updated_at": "2025-12-02T15:04:35.060935Z"
+  },
+  {
+    "id": 33,
+    "title": "Dracula",
+    "author": "Bram Stoker",
+    "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1387151694l/17245.jpg",
+    "rating": 4.2,
+    "description": "'Dracula' by Bram Stoker \u2014 a bestselling work that explores themes of love.",
+    "year_edition": "2005",
+    "total_bookmarked": 8771,
+    "tags": [
+      {
+        "name": "General",
+        "type": "primary"
+      }
+    ],
+    "copy_types": {
+      "Physical": {
+        "description": "Available in major retailers and bookstores",
+        "sources": [
+          {
+            "name": "Amazon",
+            "url": "https://www.amazon.com",
+            "type": "online_retailer",
+            "shipping_available": true
+          },
+          {
+            "name": "Barnes & Noble",
+            "url": "https://www.barnesandnoble.com",
+            "type": "bookstore_chain",
+            "real_time_inventory": false
+          }
+        ]
+      },
+      "Digital": {
+        "description": "Available digitally",
+        "sources": [
+          {
+            "name": "Kindle",
+            "url": "https://www.amazon.com/",
+            "type": "purchase"
+          },
+          {
+            "name": "Google Books",
+            "url": "https://books.google.com/",
+            "type": "preview"
+          }
+        ]
+      }
+    },
+    "licensing_type": "Free",
+    "sources": [
+      {
+        "name": "Goodreads",
+        "url": "https://goodreads.com"
+      },
+      {
+        "name": "Wikipedia",
+        "url": "https://en.wikipedia.org"
+      }
+    ],
+    "twitter_embeds": [
+      {
+        "embed_url": "https://twitter.com/example/status/7382750",
+        "keyword": "Dracula",
+        "generated_at": "2025-12-02T15:04:35.060935Z"
+      }
+    ],
+    "related_posts": [],
+    "community_id": "literacy-circle",
+    "created_at": "2025-12-02T15:04:35.060935Z",
+    "updated_at": "2025-12-02T15:04:35.060935Z"
+  },
+  {
+    "id": 34,
+    "title": "Frankenstein",
+    "author": "Mary Shelley",
+    "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1381512375l/35031085.jpg",
+    "rating": 4.5,
+    "description": "'Frankenstein' by Mary Shelley \u2014 an influential novel that explores themes of love.",
+    "year_edition": "2020",
+    "total_bookmarked": 6744,
+    "tags": [
+      {
+        "name": "General",
+        "type": "primary"
+      }
+    ],
+    "copy_types": {
+      "Physical": {
+        "description": "Available in major retailers and bookstores",
+        "sources": [
+          {
+            "name": "Amazon",
+            "url": "https://www.amazon.com",
+            "type": "online_retailer",
+            "shipping_available": true
+          },
+          {
+            "name": "Barnes & Noble",
+            "url": "https://www.barnesandnoble.com",
+            "type": "bookstore_chain",
+            "real_time_inventory": false
+          }
+        ]
+      },
+      "Digital": {
+        "description": "Available digitally",
+        "sources": [
+          {
+            "name": "Kindle",
+            "url": "https://www.amazon.com/",
+            "type": "purchase"
+          },
+          {
+            "name": "Google Books",
+            "url": "https://books.google.com/",
+            "type": "preview"
+          }
+        ]
+      }
+    },
+    "licensing_type": "Pay-to-own",
+    "sources": [
+      {
+        "name": "Goodreads",
+        "url": "https://goodreads.com"
+      },
+      {
+        "name": "Wikipedia",
+        "url": "https://en.wikipedia.org"
+      }
+    ],
+    "twitter_embeds": [
+      {
+        "embed_url": "https://twitter.com/example/status/9044889",
+        "keyword": "Frankenstein",
+        "generated_at": "2025-12-02T15:04:35.060935Z"
+      }
+    ],
+    "related_posts": [],
+    "community_id": "literacy-circle",
+    "created_at": "2025-12-02T15:04:35.060935Z",
+    "updated_at": "2025-12-02T15:04:35.060935Z"
+  },
+  {
+    "id": 35,
+    "title": "The Picture of Dorian Gray",
+    "author": "Oscar Wilde",
+    "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1546112331l/5297.jpg",
+    "rating": 4.2,
+    "description": "'The Picture of Dorian Gray' by Oscar Wilde \u2014 a compelling narrative that explores themes of adventure.",
+    "year_edition": "2024",
+    "total_bookmarked": 1497,
+    "tags": [
+      {
+        "name": "General",
+        "type": "primary"
+      }
+    ],
+    "copy_types": {
+      "Physical": {
+        "description": "Available in major retailers and bookstores",
+        "sources": [
+          {
+            "name": "Amazon",
+            "url": "https://www.amazon.com",
+            "type": "online_retailer",
+            "shipping_available": true
+          },
+          {
+            "name": "Barnes & Noble",
+            "url": "https://www.barnesandnoble.com",
+            "type": "bookstore_chain",
+            "real_time_inventory": false
+          }
+        ]
+      },
+      "Digital": {
+        "description": "Available digitally",
+        "sources": [
+          {
+            "name": "Kindle",
+            "url": "https://www.amazon.com/",
+            "type": "purchase"
+          },
+          {
+            "name": "Google Books",
+            "url": "https://books.google.com/",
+            "type": "preview"
+          }
+        ]
+      }
+    },
+    "licensing_type": "Pay-to-own",
+    "sources": [
+      {
+        "name": "Goodreads",
+        "url": "https://goodreads.com"
+      },
+      {
+        "name": "Wikipedia",
+        "url": "https://en.wikipedia.org"
+      }
+    ],
+    "twitter_embeds": [
+      {
+        "embed_url": "https://twitter.com/example/status/1362441",
+        "keyword": "The",
+        "generated_at": "2025-12-02T15:04:35.060935Z"
+      }
+    ],
+    "related_posts": [],
+    "community_id": "literacy-circle",
+    "created_at": "2025-12-02T15:04:35.060935Z",
+    "updated_at": "2025-12-02T15:04:35.060935Z"
+  },
+  {
+    "id": 36,
+    "title": "The Hunger Games",
+    "author": "Suzanne Collins",
+    "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1586722941l/2767052.jpg",
+    "rating": 4.8,
+    "description": "'The Hunger Games' by Suzanne Collins \u2014 an influential novel that explores themes of power.",
+    "year_edition": "2021",
+    "total_bookmarked": 22647,
+    "tags": [
+      {
+        "name": "Dystopia",
+        "type": "primary"
+      },
+      {
+        "name": "Fiction",
+        "type": "secondary"
+      }
+    ],
+    "copy_types": {
+      "Physical": {
+        "description": "Available in major retailers and bookstores",
+        "sources": [
+          {
+            "name": "Amazon",
+            "url": "https://www.amazon.com",
+            "type": "online_retailer",
+            "shipping_available": true
+          },
+          {
+            "name": "Barnes & Noble",
+            "url": "https://www.barnesandnoble.com",
+            "type": "bookstore_chain",
+            "real_time_inventory": false
+          }
+        ]
+      },
+      "Digital": {
+        "description": "Available digitally",
+        "sources": [
+          {
+            "name": "Kindle",
+            "url": "https://www.amazon.com/",
+            "type": "purchase"
+          },
+          {
+            "name": "Google Books",
+            "url": "https://books.google.com/",
+            "type": "preview"
+          }
+        ]
+      }
+    },
+    "licensing_type": "Pay-to-own",
+    "sources": [
+      {
+        "name": "Goodreads",
+        "url": "https://goodreads.com"
+      },
+      {
+        "name": "Wikipedia",
+        "url": "https://en.wikipedia.org"
+      }
+    ],
+    "twitter_embeds": [
+      {
+        "embed_url": "https://twitter.com/example/status/3888941",
+        "keyword": "The",
+        "generated_at": "2025-12-02T15:04:35.060935Z"
+      }
+    ],
+    "related_posts": [],
+    "community_id": "literacy-circle",
+    "created_at": "2025-12-02T15:04:35.060935Z",
+    "updated_at": "2025-12-02T15:04:35.060935Z"
+  },
+  {
+    "id": 37,
+    "title": "Catching Fire",
+    "author": "Suzanne Collins",
+    "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1586722952l/6148028.jpg",
+    "rating": 4.8,
+    "description": "'Catching Fire' by Suzanne Collins \u2014 an influential novel that explores themes of power.",
+    "year_edition": "2015",
+    "total_bookmarked": 19411,
+    "tags": [
+      {
+        "name": "General",
+        "type": "primary"
+      }
+    ],
+    "copy_types": {
+      "Physical": {
+        "description": "Available in major retailers and bookstores",
+        "sources": [
+          {
+            "name": "Amazon",
+            "url": "https://www.amazon.com",
+            "type": "online_retailer",
+            "shipping_available": true
+          },
+          {
+            "name": "Barnes & Noble",
+            "url": "https://www.barnesandnoble.com",
+            "type": "bookstore_chain",
+            "real_time_inventory": false
+          }
+        ]
+      },
+      "Digital": {
+        "description": "Available digitally",
+        "sources": [
+          {
+            "name": "Kindle",
+            "url": "https://www.amazon.com/",
+            "type": "purchase"
+          },
+          {
+            "name": "Google Books",
+            "url": "https://books.google.com/",
+            "type": "preview"
+          }
+        ]
+      }
+    },
+    "licensing_type": "Pay-to-own",
+    "sources": [
+      {
+        "name": "Goodreads",
+        "url": "https://goodreads.com"
+      },
+      {
+        "name": "Wikipedia",
+        "url": "https://en.wikipedia.org"
+      }
+    ],
+    "twitter_embeds": [
+      {
+        "embed_url": "https://twitter.com/example/status/4266201",
+        "keyword": "Catching",
+        "generated_at": "2025-12-02T15:04:35.060935Z"
+      }
+    ],
+    "related_posts": [],
+    "community_id": "literacy-circle",
+    "created_at": "2025-12-02T15:04:35.060935Z",
+    "updated_at": "2025-12-02T15:04:35.060935Z"
+  },
+  {
+    "id": 38,
+    "title": "Mockingjay",
+    "author": "Suzanne Collins",
+    "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1586722919l/7260188.jpg",
+    "rating": 4.1,
+    "description": "'Mockingjay' by Suzanne Collins \u2014 a bestselling work that explores themes of power.",
+    "year_edition": "2000",
+    "total_bookmarked": 13700,
+    "tags": [
+      {
+        "name": "General",
+        "type": "primary"
+      }
+    ],
+    "copy_types": {
+      "Physical": {
+        "description": "Available in major retailers and bookstores",
+        "sources": [
+          {
+            "name": "Amazon",
+            "url": "https://www.amazon.com",
+            "type": "online_retailer",
+            "shipping_available": true
+          },
+          {
+            "name": "Barnes & Noble",
+            "url": "https://www.barnesandnoble.com",
+            "type": "bookstore_chain",
+            "real_time_inventory": false
+          }
+        ]
+      },
+      "Digital": {
+        "description": "Available digitally",
+        "sources": [
+          {
+            "name": "Kindle",
+            "url": "https://www.amazon.com/",
+            "type": "purchase"
+          },
+          {
+            "name": "Google Books",
+            "url": "https://books.google.com/",
+            "type": "preview"
+          }
+        ]
+      }
+    },
+    "licensing_type": "Free",
+    "sources": [
+      {
+        "name": "Goodreads",
+        "url": "https://goodreads.com"
+      },
+      {
+        "name": "Wikipedia",
+        "url": "https://en.wikipedia.org"
+      }
+    ],
+    "twitter_embeds": [
+      {
+        "embed_url": "https://twitter.com/example/status/9743216",
+        "keyword": "Mockingjay",
+        "generated_at": "2025-12-02T15:04:35.060935Z"
+      }
+    ],
+    "related_posts": [],
+    "community_id": "literacy-circle",
+    "created_at": "2025-12-02T15:04:35.060935Z",
+    "updated_at": "2025-12-02T15:04:35.060935Z"
+  },
+  {
+    "id": 39,
+    "title": "The Girl with the Dragon Tattoo",
+    "author": "Stieg Larsson",
+    "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1327868566l/2429135.jpg",
+    "rating": 4.4,
+    "description": "'The Girl with the Dragon Tattoo' by Stieg Larsson \u2014 a bestselling work that explores themes of society.",
+    "year_edition": "2022",
+    "total_bookmarked": 6490,
+    "tags": [
+      {
+        "name": "General",
+        "type": "primary"
+      }
+    ],
+    "copy_types": {
+      "Physical": {
+        "description": "Available in major retailers and bookstores",
+        "sources": [
+          {
+            "name": "Amazon",
+            "url": "https://www.amazon.com",
+            "type": "online_retailer",
+            "shipping_available": true
+          },
+          {
+            "name": "Barnes & Noble",
+            "url": "https://www.barnesandnoble.com",
+            "type": "bookstore_chain",
+            "real_time_inventory": false
+          }
+        ]
+      },
+      "Digital": {
+        "description": "Available digitally",
+        "sources": [
+          {
+            "name": "Kindle",
+            "url": "https://www.amazon.com/",
+            "type": "purchase"
+          },
+          {
+            "name": "Google Books",
+            "url": "https://books.google.com/",
+            "type": "preview"
+          }
+        ]
+      }
+    },
+    "licensing_type": "Free",
+    "sources": [
+      {
+        "name": "Goodreads",
+        "url": "https://goodreads.com"
+      },
+      {
+        "name": "Wikipedia",
+        "url": "https://en.wikipedia.org"
+      }
+    ],
+    "twitter_embeds": [
+      {
+        "embed_url": "https://twitter.com/example/status/2987997",
+        "keyword": "The",
+        "generated_at": "2025-12-02T15:04:35.060935Z"
+      }
+    ],
+    "related_posts": [],
+    "community_id": "literacy-circle",
+    "created_at": "2025-12-02T15:04:35.060935Z",
+    "updated_at": "2025-12-02T15:04:35.060935Z"
+  },
+  {
+    "id": 40,
+    "title": "Gone Girl",
+    "author": "Gillian Flynn",
+    "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1554086137l/19288043.jpg",
+    "rating": 3.9,
+    "description": "'Gone Girl' by Gillian Flynn \u2014 an influential novel that explores themes of society.",
+    "year_edition": "2000",
+    "total_bookmarked": 6388,
+    "tags": [
+      {
+        "name": "General",
+        "type": "primary"
+      }
+    ],
+    "copy_types": {
+      "Physical": {
+        "description": "Available in major retailers and bookstores",
+        "sources": [
+          {
+            "name": "Amazon",
+            "url": "https://www.amazon.com",
+            "type": "online_retailer",
+            "shipping_available": true
+          },
+          {
+            "name": "Barnes & Noble",
+            "url": "https://www.barnesandnoble.com",
+            "type": "bookstore_chain",
+            "real_time_inventory": false
+          }
+        ]
+      },
+      "Digital": {
+        "description": "Available digitally",
+        "sources": [
+          {
+            "name": "Kindle",
+            "url": "https://www.amazon.com/",
+            "type": "purchase"
+          },
+          {
+            "name": "Google Books",
+            "url": "https://books.google.com/",
+            "type": "preview"
+          }
+        ]
+      }
+    },
+    "licensing_type": "Free",
+    "sources": [
+      {
+        "name": "Goodreads",
+        "url": "https://goodreads.com"
+      },
+      {
+        "name": "Wikipedia",
+        "url": "https://en.wikipedia.org"
+      }
+    ],
+    "twitter_embeds": [
+      {
+        "embed_url": "https://twitter.com/example/status/8652718",
+        "keyword": "Gone",
+        "generated_at": "2025-12-02T15:04:35.060935Z"
+      }
+    ],
+    "related_posts": [],
+    "community_id": "literacy-circle",
+    "created_at": "2025-12-02T15:04:35.060935Z",
+    "updated_at": "2025-12-02T15:04:35.060935Z"
+  },
+  {
+    "id": 41,
+    "title": "The Da Vinci Code",
+    "author": "Dan Brown",
+    "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1579621267l/6054.jpg",
+    "rating": 3.9,
+    "description": "'The Da Vinci Code' by Dan Brown \u2014 a bestselling work that explores themes of identity.",
+    "year_edition": "2010",
+    "total_bookmarked": 5780,
+    "tags": [
+      {
+        "name": "General",
+        "type": "primary"
+      }
+    ],
+    "copy_types": {
+      "Physical": {
+        "description": "Available in major retailers and bookstores",
+        "sources": [
+          {
+            "name": "Amazon",
+            "url": "https://www.amazon.com",
+            "type": "online_retailer",
+            "shipping_available": true
+          },
+          {
+            "name": "Barnes & Noble",
+            "url": "https://www.barnesandnoble.com",
+            "type": "bookstore_chain",
+            "real_time_inventory": false
+          }
+        ]
+      },
+      "Digital": {
+        "description": "Available digitally",
+        "sources": [
+          {
+            "name": "Kindle",
+            "url": "https://www.amazon.com/",
+            "type": "purchase"
+          },
+          {
+            "name": "Google Books",
+            "url": "https://books.google.com/",
+            "type": "preview"
+          }
+        ]
+      }
+    },
+    "licensing_type": "Free",
+    "sources": [
+      {
+        "name": "Goodreads",
+        "url": "https://goodreads.com"
+      },
+      {
+        "name": "Wikipedia",
+        "url": "https://en.wikipedia.org"
+      }
+    ],
+    "twitter_embeds": [
+      {
+        "embed_url": "https://twitter.com/example/status/3223839",
+        "keyword": "The",
+        "generated_at": "2025-12-02T15:04:35.060935Z"
+      }
+    ],
+    "related_posts": [],
+    "community_id": "literacy-circle",
+    "created_at": "2025-12-02T15:04:35.060935Z",
+    "updated_at": "2025-12-02T15:04:35.060935Z"
+  },
+  {
+    "id": 42,
+    "title": "Angels & Demons",
+    "author": "Dan Brown",
+    "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1604611334l/960.jpg",
+    "rating": 4.5,
+    "description": "'Angels & Demons' by Dan Brown \u2014 a modern classic that explores themes of adventure.",
+    "year_edition": "2000",
+    "total_bookmarked": 21664,
+    "tags": [
+      {
+        "name": "General",
+        "type": "primary"
+      }
+    ],
+    "copy_types": {
+      "Physical": {
+        "description": "Available in major retailers and bookstores",
+        "sources": [
+          {
+            "name": "Amazon",
+            "url": "https://www.amazon.com",
+            "type": "online_retailer",
+            "shipping_available": true
+          },
+          {
+            "name": "Barnes & Noble",
+            "url": "https://www.barnesandnoble.com",
+            "type": "bookstore_chain",
+            "real_time_inventory": false
+          }
+        ]
+      },
+      "Digital": {
+        "description": "Available digitally",
+        "sources": [
+          {
+            "name": "Kindle",
+            "url": "https://www.amazon.com/",
+            "type": "purchase"
+          },
+          {
+            "name": "Google Books",
+            "url": "https://books.google.com/",
+            "type": "preview"
+          }
+        ]
+      }
+    },
+    "licensing_type": "Pay-to-own",
+    "sources": [
+      {
+        "name": "Goodreads",
+        "url": "https://goodreads.com"
+      },
+      {
+        "name": "Wikipedia",
+        "url": "https://en.wikipedia.org"
+      }
+    ],
+    "twitter_embeds": [
+      {
+        "embed_url": "https://twitter.com/example/status/2809431",
+        "keyword": "Angels",
+        "generated_at": "2025-12-02T15:04:35.060935Z"
+      }
+    ],
+    "related_posts": [],
+    "community_id": "literacy-circle",
+    "created_at": "2025-12-02T15:04:35.060935Z",
+    "updated_at": "2025-12-02T15:04:35.060935Z"
+  },
+  {
+    "id": 43,
+    "title": "The Martian",
+    "author": "Andy Weir",
+    "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1413706054l/18007564.jpg",
+    "rating": 4.7,
+    "description": "'The Martian' by Andy Weir \u2014 an influential novel that explores themes of love.",
+    "year_edition": "2023",
+    "total_bookmarked": 17043,
+    "tags": [
+      {
+        "name": "Science Fiction",
+        "type": "primary"
+      },
+      {
+        "name": "Speculative",
+        "type": "secondary"
+      }
+    ],
+    "copy_types": {
+      "Physical": {
+        "description": "Available in major retailers and bookstores",
+        "sources": [
+          {
+            "name": "Amazon",
+            "url": "https://www.amazon.com",
+            "type": "online_retailer",
+            "shipping_available": true
+          },
+          {
+            "name": "Barnes & Noble",
+            "url": "https://www.barnesandnoble.com",
+            "type": "bookstore_chain",
+            "real_time_inventory": false
+          }
+        ]
+      },
+      "Digital": {
+        "description": "Available digitally",
+        "sources": [
+          {
+            "name": "Kindle",
+            "url": "https://www.amazon.com/",
+            "type": "purchase"
+          },
+          {
+            "name": "Google Books",
+            "url": "https://books.google.com/",
+            "type": "preview"
+          }
+        ]
+      }
+    },
+    "licensing_type": "Pay-to-own",
+    "sources": [
+      {
+        "name": "Goodreads",
+        "url": "https://goodreads.com"
+      },
+      {
+        "name": "Wikipedia",
+        "url": "https://en.wikipedia.org"
+      }
+    ],
+    "twitter_embeds": [
+      {
+        "embed_url": "https://twitter.com/example/status/8179400",
+        "keyword": "The",
+        "generated_at": "2025-12-02T15:04:35.060935Z"
+      }
+    ],
+    "related_posts": [],
+    "community_id": "literacy-circle",
+    "created_at": "2025-12-02T15:04:35.060935Z",
+    "updated_at": "2025-12-02T15:04:35.060935Z"
+  },
+  {
+    "id": 44,
+    "title": "Ready Player One",
+    "author": "Ernest Cline",
+    "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1500935947l/9969571.jpg",
+    "rating": 4.3,
+    "description": "'Ready Player One' by Ernest Cline \u2014 a modern classic that explores themes of survival.",
+    "year_edition": "2024",
+    "total_bookmarked": 24582,
+    "tags": [
+      {
+        "name": "Science Fiction",
+        "type": "primary"
+      },
+      {
+        "name": "Speculative",
+        "type": "secondary"
+      }
+    ],
+    "copy_types": {
+      "Physical": {
+        "description": "Available in major retailers and bookstores",
+        "sources": [
+          {
+            "name": "Amazon",
+            "url": "https://www.amazon.com",
+            "type": "online_retailer",
+            "shipping_available": true
+          },
+          {
+            "name": "Barnes & Noble",
+            "url": "https://www.barnesandnoble.com",
+            "type": "bookstore_chain",
+            "real_time_inventory": false
+          }
+        ]
+      },
+      "Digital": {
+        "description": "Available digitally",
+        "sources": [
+          {
+            "name": "Kindle",
+            "url": "https://www.amazon.com/",
+            "type": "purchase"
+          },
+          {
+            "name": "Google Books",
+            "url": "https://books.google.com/",
+            "type": "preview"
+          }
+        ]
+      }
+    },
+    "licensing_type": "Pay-to-own",
+    "sources": [
+      {
+        "name": "Goodreads",
+        "url": "https://goodreads.com"
+      },
+      {
+        "name": "Wikipedia",
+        "url": "https://en.wikipedia.org"
+      }
+    ],
+    "twitter_embeds": [
+      {
+        "embed_url": "https://twitter.com/example/status/7386439",
+        "keyword": "Ready",
+        "generated_at": "2025-12-02T15:04:35.060935Z"
+      }
+    ],
+    "related_posts": [],
+    "community_id": "literacy-circle",
+    "created_at": "2025-12-02T15:04:35.060935Z",
+    "updated_at": "2025-12-02T15:04:35.060935Z"
+  },
+  {
+    "id": 45,
+    "title": "The Giver",
+    "author": "Lois Lowry",
+    "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1342493368l/3636.jpg",
+    "rating": 3.8,
+    "description": "'The Giver' by Lois Lowry \u2014 a modern classic that explores themes of power.",
+    "year_edition": "2024",
+    "total_bookmarked": 12059,
+    "tags": [
+      {
+        "name": "Dystopia",
+        "type": "primary"
+      },
+      {
+        "name": "Fiction",
+        "type": "secondary"
+      }
+    ],
+    "copy_types": {
+      "Physical": {
+        "description": "Available in major retailers and bookstores",
+        "sources": [
+          {
+            "name": "Amazon",
+            "url": "https://www.amazon.com",
+            "type": "online_retailer",
+            "shipping_available": true
+          },
+          {
+            "name": "Barnes & Noble",
+            "url": "https://www.barnesandnoble.com",
+            "type": "bookstore_chain",
+            "real_time_inventory": false
+          }
+        ]
+      },
+      "Digital": {
+        "description": "Available digitally",
+        "sources": [
+          {
+            "name": "Kindle",
+            "url": "https://www.amazon.com/",
+            "type": "purchase"
+          },
+          {
+            "name": "Google Books",
+            "url": "https://books.google.com/",
+            "type": "preview"
+          }
+        ]
+      }
+    },
+    "licensing_type": "Pay-to-own",
+    "sources": [
+      {
+        "name": "Goodreads",
+        "url": "https://goodreads.com"
+      },
+      {
+        "name": "Wikipedia",
+        "url": "https://en.wikipedia.org"
+      }
+    ],
+    "twitter_embeds": [
+      {
+        "embed_url": "https://twitter.com/example/status/5550156",
+        "keyword": "The",
+        "generated_at": "2025-12-02T15:04:35.060935Z"
+      }
+    ],
+    "related_posts": [],
+    "community_id": "literacy-circle",
+    "created_at": "2025-12-02T15:04:35.060935Z",
+    "updated_at": "2025-12-02T15:04:35.060935Z"
+  },
+  {
+    "id": 46,
+    "title": "The Fault in Our Stars",
+    "author": "John Green",
+    "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1335793152l/11870085.jpg",
+    "rating": 4.6,
+    "description": "'The Fault in Our Stars' by John Green \u2014 an influential novel that explores themes of identity.",
+    "year_edition": "2021",
+    "total_bookmarked": 9077,
+    "tags": [
+      {
+        "name": "General",
+        "type": "primary"
+      }
+    ],
+    "copy_types": {
+      "Physical": {
+        "description": "Available in major retailers and bookstores",
+        "sources": [
+          {
+            "name": "Amazon",
+            "url": "https://www.amazon.com",
+            "type": "online_retailer",
+            "shipping_available": true
+          },
+          {
+            "name": "Barnes & Noble",
+            "url": "https://www.barnesandnoble.com",
+            "type": "bookstore_chain",
+            "real_time_inventory": false
+          }
+        ]
+      },
+      "Digital": {
+        "description": "Available digitally",
+        "sources": [
+          {
+            "name": "Kindle",
+            "url": "https://www.amazon.com/",
+            "type": "purchase"
+          },
+          {
+            "name": "Google Books",
+            "url": "https://books.google.com/",
+            "type": "preview"
+          }
+        ]
+      }
+    },
+    "licensing_type": "Pay-to-own",
+    "sources": [
+      {
+        "name": "Goodreads",
+        "url": "https://goodreads.com"
+      },
+      {
+        "name": "Wikipedia",
+        "url": "https://en.wikipedia.org"
+      }
+    ],
+    "twitter_embeds": [
+      {
+        "embed_url": "https://twitter.com/example/status/9208058",
+        "keyword": "The",
+        "generated_at": "2025-12-02T15:04:35.060935Z"
+      }
+    ],
+    "related_posts": [],
+    "community_id": "literacy-circle",
+    "created_at": "2025-12-02T15:04:35.060935Z",
+    "updated_at": "2025-12-02T15:04:35.060935Z"
+  },
+  {
+    "id": 47,
+    "title": "The Kite Runner",
+    "author": "Khaled Hosseini",
+    "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1484565687l/77203.jpg",
+    "rating": 4.5,
+    "description": "'The Kite Runner' by Khaled Hosseini \u2014 a modern classic that explores themes of adventure.",
+    "year_edition": "2015",
+    "total_bookmarked": 23938,
+    "tags": [
+      {
+        "name": "Non-Fiction",
+        "type": "primary"
+      },
+      {
+        "name": "History",
+        "type": "secondary"
+      }
+    ],
+    "copy_types": {
+      "Physical": {
+        "description": "Available in major retailers and bookstores",
+        "sources": [
+          {
+            "name": "Amazon",
+            "url": "https://www.amazon.com",
+            "type": "online_retailer",
+            "shipping_available": true
+          },
+          {
+            "name": "Barnes & Noble",
+            "url": "https://www.barnesandnoble.com",
+            "type": "bookstore_chain",
+            "real_time_inventory": false
+          }
+        ]
+      },
+      "Digital": {
+        "description": "Available digitally",
+        "sources": [
+          {
+            "name": "Kindle",
+            "url": "https://www.amazon.com/",
+            "type": "purchase"
+          },
+          {
+            "name": "Google Books",
+            "url": "https://books.google.com/",
+            "type": "preview"
+          }
+        ]
+      }
+    },
+    "licensing_type": "Pay-to-own",
+    "sources": [
+      {
+        "name": "Goodreads",
+        "url": "https://goodreads.com"
+      },
+      {
+        "name": "Wikipedia",
+        "url": "https://en.wikipedia.org"
+      }
+    ],
+    "twitter_embeds": [
+      {
+        "embed_url": "https://twitter.com/example/status/2997746",
+        "keyword": "The",
+        "generated_at": "2025-12-02T15:04:35.060935Z"
+      }
+    ],
+    "related_posts": [],
+    "community_id": "literacy-circle",
+    "created_at": "2025-12-02T15:04:35.060935Z",
+    "updated_at": "2025-12-02T15:04:35.060935Z"
+  },
+  {
+    "id": 48,
+    "title": "A Thousand Splendid Suns",
+    "author": "Khaled Hosseini",
+    "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1349044625l/128029.jpg",
+    "rating": 4.4,
+    "description": "'A Thousand Splendid Suns' by Khaled Hosseini \u2014 a modern classic that explores themes of survival.",
+    "year_edition": "2005",
+    "total_bookmarked": 6435,
+    "tags": [
+      {
+        "name": "General",
+        "type": "primary"
+      }
+    ],
+    "copy_types": {
+      "Physical": {
+        "description": "Available in major retailers and bookstores",
+        "sources": [
+          {
+            "name": "Amazon",
+            "url": "https://www.amazon.com",
+            "type": "online_retailer",
+            "shipping_available": true
+          },
+          {
+            "name": "Barnes & Noble",
+            "url": "https://www.barnesandnoble.com",
+            "type": "bookstore_chain",
+            "real_time_inventory": false
+          }
+        ]
+      },
+      "Digital": {
+        "description": "Available digitally",
+        "sources": [
+          {
+            "name": "Kindle",
+            "url": "https://www.amazon.com/",
+            "type": "purchase"
+          },
+          {
+            "name": "Google Books",
+            "url": "https://books.google.com/",
+            "type": "preview"
+          }
+        ]
+      }
+    },
+    "licensing_type": "Pay-to-own",
+    "sources": [
+      {
+        "name": "Goodreads",
+        "url": "https://goodreads.com"
+      },
+      {
+        "name": "Wikipedia",
+        "url": "https://en.wikipedia.org"
+      }
+    ],
+    "twitter_embeds": [
+      {
+        "embed_url": "https://twitter.com/example/status/6903362",
+        "keyword": "A",
+        "generated_at": "2025-12-02T15:04:35.060935Z"
+      }
+    ],
+    "related_posts": [],
+    "community_id": "literacy-circle",
+    "created_at": "2025-12-02T15:04:35.060935Z",
+    "updated_at": "2025-12-02T15:04:35.060935Z"
+  },
+  {
+    "id": 49,
+    "title": "Sapiens",
+    "author": "Yuval Noah Harari",
+    "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1702562344l/23692271.jpg",
+    "rating": 4.1,
+    "description": "'Sapiens' by Yuval Noah Harari \u2014 a compelling narrative that explores themes of adventure.",
+    "year_edition": "2020",
+    "total_bookmarked": 10259,
+    "tags": [
+      {
+        "name": "Science Fiction",
+        "type": "primary"
+      },
+      {
+        "name": "Speculative",
+        "type": "secondary"
+      }
+    ],
+    "copy_types": {
+      "Physical": {
+        "description": "Available in major retailers and bookstores",
+        "sources": [
+          {
+            "name": "Amazon",
+            "url": "https://www.amazon.com",
+            "type": "online_retailer",
+            "shipping_available": true
+          },
+          {
+            "name": "Barnes & Noble",
+            "url": "https://www.barnesandnoble.com",
+            "type": "bookstore_chain",
+            "real_time_inventory": false
+          }
+        ]
+      },
+      "Digital": {
+        "description": "Available digitally",
+        "sources": [
+          {
+            "name": "Kindle",
+            "url": "https://www.amazon.com/",
+            "type": "purchase"
+          },
+          {
+            "name": "Google Books",
+            "url": "https://books.google.com/",
+            "type": "preview"
+          }
+        ]
+      }
+    },
+    "licensing_type": "Free",
+    "sources": [
+      {
+        "name": "Goodreads",
+        "url": "https://goodreads.com"
+      },
+      {
+        "name": "Wikipedia",
+        "url": "https://en.wikipedia.org"
+      }
+    ],
+    "twitter_embeds": [
+      {
+        "embed_url": "https://twitter.com/example/status/3691831",
+        "keyword": "Sapiens",
+        "generated_at": "2025-12-02T15:04:35.060935Z"
+      }
+    ],
+    "related_posts": [],
+    "community_id": "literacy-circle",
+    "created_at": "2025-12-02T15:04:35.060935Z",
+    "updated_at": "2025-12-02T15:04:35.060935Z"
+  },
+  {
+    "id": 50,
+    "title": "Educated",
+    "author": "Tara Westover",
+    "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1506026635l/35133922.jpg",
+    "rating": 4.2,
+    "description": "'Educated' by Tara Westover \u2014 an influential novel that explores themes of adventure.",
+    "year_edition": "2020",
+    "total_bookmarked": 13780,
+    "tags": [
+      {
+        "name": "Non-Fiction",
+        "type": "primary"
+      },
+      {
+        "name": "History",
+        "type": "secondary"
+      }
+    ],
+    "copy_types": {
+      "Physical": {
+        "description": "Available in major retailers and bookstores",
+        "sources": [
+          {
+            "name": "Amazon",
+            "url": "https://www.amazon.com",
+            "type": "online_retailer",
+            "shipping_available": true
+          },
+          {
+            "name": "Barnes & Noble",
+            "url": "https://www.barnesandnoble.com",
+            "type": "bookstore_chain",
+            "real_time_inventory": false
+          }
+        ]
+      },
+      "Digital": {
+        "description": "Available digitally",
+        "sources": [
+          {
+            "name": "Kindle",
+            "url": "https://www.amazon.com/",
+            "type": "purchase"
+          },
+          {
+            "name": "Google Books",
+            "url": "https://books.google.com/",
+            "type": "preview"
+          }
+        ]
+      }
+    },
+    "licensing_type": "Pay-to-own",
+    "sources": [
+      {
+        "name": "Goodreads",
+        "url": "https://goodreads.com"
+      },
+      {
+        "name": "Wikipedia",
+        "url": "https://en.wikipedia.org"
+      }
+    ],
+    "twitter_embeds": [
+      {
+        "embed_url": "https://twitter.com/example/status/2829914",
+        "keyword": "Educated",
+        "generated_at": "2025-12-02T15:04:35.060935Z"
+      }
+    ],
+    "related_posts": [],
+    "community_id": "literacy-circle",
+    "created_at": "2025-12-02T15:04:35.060935Z",
+    "updated_at": "2025-12-02T15:04:35.060935Z"
   }
 ]

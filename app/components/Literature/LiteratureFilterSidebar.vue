@@ -178,7 +178,7 @@ const toTitleCaseFromKey = (value: string) => {
     .join(' ');
 };
 
-const rawBooks = rawBooksData as RawBook[];
+const rawBooks = rawBooksData as unknown as RawBook[];
 
 const unique = <T>(items: T[]) => Array.from(new Set(items));
 
@@ -298,7 +298,7 @@ const tagSuggestions = computed(() => {
   if (!tagInput.value.trim()) return [];
   const input = tagInput.value.toLowerCase().trim();
   const currentTagsLower = filters.value.tags.map(t => t.toLowerCase());
-  return tagOptions.filter(tag => 
+  return tagOptions.value.filter((tag: any) => 
     tag.toLowerCase().includes(input) && 
     !currentTagsLower.includes(tag.toLowerCase())
   ).slice(0, 5);
@@ -355,9 +355,16 @@ const clearAllFilters = () => {
   
   const query: Record<string, string | string[]> = {};
   
-  // Copy only non-filter query params (like search query 'q')
+  // Copy only non-filter, non-search query params
   Object.keys(route.query).forEach(key => {
-    if (key !== 'copyType' && key !== 'licensingType' && key !== 'sources' && key !== 'tags') {
+    if (
+      key !== 'copyType' &&
+      key !== 'licensingType' &&
+      key !== 'sources' &&
+      key !== 'tags' &&
+      key !== 'q' &&
+      key !== 'search'
+    ) {
       const value = route.query[key];
       if (value !== null && value !== undefined) {
         if (Array.isArray(value)) {
@@ -375,9 +382,16 @@ const clearAllFilters = () => {
 const updateQueryParams = () => {
   const query: Record<string, string | string[]> = {};
   
-  // Copy existing non-filter query params (like search query 'q')
+  // Copy existing non-filter, non-search query params
   Object.keys(route.query).forEach(key => {
-    if (key !== 'copyType' && key !== 'licensingType' && key !== 'sources' && key !== 'tags') {
+    if (
+      key !== 'copyType' &&
+      key !== 'licensingType' &&
+      key !== 'sources' &&
+      key !== 'tags' &&
+      key !== 'q' &&
+      key !== 'search'
+    ) {
       const value = route.query[key];
       if (value !== null && value !== undefined) {
         if (Array.isArray(value)) {
