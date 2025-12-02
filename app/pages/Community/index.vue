@@ -595,6 +595,7 @@ const relatedCommunities = [
   gap: 26px;
   position: sticky;
   top: 70px;
+  padding-right: 40px;
 }
 
 .community-title h1 {
