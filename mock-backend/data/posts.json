@@ -2,115 +2,1606 @@
   {
     "id": 1,
     "author": {
-      "name": "Orang Kmplang",
-      "avatar": "https://i.pravatar.cc/150?u=kmplang",
-      "tagline": "A stupid one"
+      "name": "John Doe",
+      "avatar": "https://i.pravatar.cc/150?u=john",
+      "tagline": "Tech Explorer"
     },
-    "timeAgo": "an hr ago",
-    "title": "LF Best Books for Aspiring Web Developers",
-    "content": "Hey everyone! I've been diving deeper into web development lately, and I realized there's a ton of great books out there that can really help you level up beyond just YouTube tutorials. Thought I'd share a few and see what you all recommend too!",
+    "timeAgo": "10 hrs ago",
+    "title": "My Journey to Becoming a Senior Dev #1",
+    "content": "I'm struggling with this concept. Can anyone explain it in simple terms?",
     "tags": [
       {
-        "label": "A Level",
+        "label": "#Trending",
+        "type": "topic"
+      },
+      {
+        "label": "#Discussion",
+        "type": "topic"
+      },
+      {
+        "label": "#Review",
+        "type": "topic"
+      },
+      {
+        "label": "Lifestyle",
         "type": "category"
-      },
-      {
-        "label": "Web Dev",
-        "type": "topic"
-      },
-      {
-        "label": "#NewDev",
-        "type": "topic"
-      },
-      {
-        "label": "#WebDev",
-        "type": "topic"
-      },
-      {
-        "label": "#Stacking",
-        "type": "topic"
       }
     ],
-    "stars": 80,
-    "community_id": "literacy-circle",
-    "related_books": [
-      1,
-      4
-    ],
-    "created_at": "2023-10-01T12:00:00Z",
-    "updated_at": "2023-10-01T12:00:00Z"
+    "stars": 106,
+    "community_id": "travel-bugs",
+    "related_books": [],
+    "created_at": "2023-12-04T04:20:26.704Z",
+    "updated_at": "2023-12-04T04:20:26.704Z"
   },
   {
     "id": 2,
     "author": {
-      "name": "Alfan Gunadar",
-      "avatar": "https://i.pravatar.cc/150?u=alfan",
-      "tagline": "Something Vanity!"
+      "name": "John Doe",
+      "avatar": "https://i.pravatar.cc/150?u=john",
+      "tagline": "Tech Explorer"
+    },
+    "timeAgo": "18 hrs ago",
+    "title": "How to Build a PC from Scratch #2",
+    "content": "Here's a quick tutorial on how to get started with this. It's easier than you think!",
+    "tags": [
+      {
+        "label": "Travel",
+        "type": "category"
+      },
+      {
+        "label": "#Review",
+        "type": "topic"
+      },
+      {
+        "label": "Food",
+        "type": "category"
+      },
+      {
+        "label": "#New",
+        "type": "topic"
+      }
+    ],
+    "stars": 86,
+    "community_id": "travel-bugs",
+    "related_books": [],
+    "created_at": "2025-06-22T05:35:47.015Z",
+    "updated_at": "2025-06-22T05:35:47.015Z"
+  },
+  {
+    "id": 3,
+    "author": {
+      "name": "Orang Kmplang",
+      "avatar": "https://i.pravatar.cc/150?u=kmplang",
+      "tagline": "A stupid one"
     },
     "timeAgo": "3 hrs ago",
-    "title": "Is FNAF 2 going to debut in Minecraft alongside Herobrine",
-    "content": "Okay, so I've been seeing some weird stuff in the latest Minecraft teasers and community rumors — people are saying there might be a crossover event bringing FNAF 2 elements into Minecraft?? Like animatronics, the pizzeria setting, and even a Herobrine tie-in?! Not sure if it's a mod collab, an ARG, or just wild fan theory fuel, but if Mojang actually drops a spooky update mixing Herobrine lore with FNAF 2 jumpscares, that would be insane. Anyone else heard about this or seen the leaks? What do you think — hype or hoax? 👻",
+    "title": "Best Books for Aspiring Web Developers #3",
+    "content": "I've been thinking a lot about the future of this industry. With all the new tech coming out, it's hard to keep up. What are your predictions?",
+    "tags": [
+      {
+        "label": "Tech",
+        "type": "category"
+      },
+      {
+        "label": "#Help",
+        "type": "topic"
+      }
+    ],
+    "stars": 811,
+    "community_id": "tech-talk",
+    "related_books": [
+      10
+    ],
+    "created_at": "2024-08-23T01:13:46.321Z",
+    "updated_at": "2024-08-23T01:13:46.321Z"
+  },
+  {
+    "id": 4,
+    "author": {
+      "name": "Jane Smith",
+      "avatar": "https://i.pravatar.cc/150?u=jane",
+      "tagline": "Bookworm"
+    },
+    "timeAgo": "2 hrs ago",
+    "title": "Understanding Quantum Computing #4",
+    "content": "I've been thinking a lot about the future of this industry. With all the new tech coming out, it's hard to keep up. What are your predictions?",
+    "tags": [
+      {
+        "label": "#Discussion",
+        "type": "topic"
+      },
+      {
+        "label": "Tech",
+        "type": "category"
+      }
+    ],
+    "stars": 248,
+    "community_id": "literacy-circle",
+    "related_books": [
+      10
+    ],
+    "created_at": "2023-03-19T16:06:25.851Z",
+    "updated_at": "2023-03-19T16:06:25.851Z"
+  },
+  {
+    "id": 5,
+    "author": {
+      "name": "Mike Ross",
+      "avatar": "https://i.pravatar.cc/150?u=mike",
+      "tagline": "Legal Eagle"
+    },
+    "timeAgo": "17 hrs ago",
+    "title": "How to Cook the Perfect Steak #5",
+    "content": "Hey everyone! I've been diving deeper into this topic lately, and I realized there's a ton of great resources out there. Thought I'd share a few and see what you all recommend too!",
+    "tags": [
+      {
+        "label": "Lifestyle",
+        "type": "category"
+      },
+      {
+        "label": "Hobbies",
+        "type": "category"
+      }
+    ],
+    "stars": 293,
+    "community_id": "photography-club",
+    "related_books": [
+      10
+    ],
+    "created_at": "2023-12-16T16:57:46.901Z",
+    "updated_at": "2023-12-16T16:57:46.901Z"
+  },
+  {
+    "id": 6,
+    "author": {
+      "name": "Jane Smith",
+      "avatar": "https://i.pravatar.cc/150?u=jane",
+      "tagline": "Bookworm"
+    },
+    "timeAgo": "1 hrs ago",
+    "title": "Understanding Quantum Computing #6",
+    "content": "I've been thinking a lot about the future of this industry. With all the new tech coming out, it's hard to keep up. What are your predictions?",
+    "tags": [
+      {
+        "label": "#Review",
+        "type": "topic"
+      },
+      {
+        "label": "#Review",
+        "type": "topic"
+      }
+    ],
+    "stars": 31,
+    "community_id": "literacy-circle",
+    "related_books": [
+      9,
+      3,
+      5
+    ],
+    "created_at": "2024-08-07T01:53:49.118Z",
+    "updated_at": "2024-08-07T01:53:49.118Z"
+  },
+  {
+    "id": 7,
+    "author": {
+      "name": "Orang Kmplang",
+      "avatar": "https://i.pravatar.cc/150?u=kmplang",
+      "tagline": "A stupid one"
+    },
+    "timeAgo": "18 hrs ago",
+    "title": "Fitness Myths You Should Stop Believing #7",
+    "content": "Just finished this book and it blew my mind. Highly recommend it to everyone here.",
     "tags": [
       {
         "label": "Hobbies",
         "type": "category"
       },
       {
-        "label": "FNAF",
-        "type": "topic"
-      },
-      {
-        "label": "#FNAF",
-        "type": "topic"
-      },
-      {
-        "label": "#Booo",
-        "type": "topic"
-      },
-      {
-        "label": "#Horror",
+        "label": "#Trending",
         "type": "topic"
       }
     ],
-    "stars": 21,
+    "stars": 222,
     "community_id": "gaming-hub",
-    "created_at": "2023-10-01T11:00:00Z",
-    "updated_at": "2023-10-01T11:00:00Z"
+    "related_books": [],
+    "created_at": "2023-08-16T10:23:15.764Z",
+    "updated_at": "2023-08-16T10:23:15.764Z"
   },
   {
-    "id": 3,
+    "id": 8,
+    "author": {
+      "name": "Orang Kmplang",
+      "avatar": "https://i.pravatar.cc/150?u=kmplang",
+      "tagline": "A stupid one"
+    },
+    "timeAgo": "3 hrs ago",
+    "title": "The Best Coffee Shops in Tokyo #8",
+    "content": "Just wanted to share some tips I've learned from my journey over the past year. The most important thing is to be patient and observe your surroundings.",
+    "tags": [
+      {
+        "label": "Tech",
+        "type": "category"
+      },
+      {
+        "label": "Food",
+        "type": "category"
+      },
+      {
+        "label": "Lifestyle",
+        "type": "category"
+      }
+    ],
+    "stars": 941,
+    "community_id": "tech-talk",
+    "related_books": [
+      9
+    ],
+    "created_at": "2024-08-06T21:53:57.731Z",
+    "updated_at": "2024-08-06T21:53:57.731Z"
+  },
+  {
+    "id": 9,
+    "author": {
+      "name": "Alfan Gunadar",
+      "avatar": "https://i.pravatar.cc/150?u=alfan",
+      "tagline": "Something Vanity!"
+    },
+    "timeAgo": "18 hrs ago",
+    "title": "The Psychology of Color in Design #9",
+    "content": "I'm struggling with this concept. Can anyone explain it in simple terms?",
+    "tags": [
+      {
+        "label": "#Discussion",
+        "type": "topic"
+      },
+      {
+        "label": "Lifestyle",
+        "type": "category"
+      },
+      {
+        "label": "Lifestyle",
+        "type": "category"
+      }
+    ],
+    "stars": 647,
+    "community_id": "photography-club",
+    "related_books": [
+      2,
+      4
+    ],
+    "created_at": "2025-10-30T04:35:41.529Z",
+    "updated_at": "2025-10-30T04:35:41.529Z"
+  },
+  {
+    "id": 10,
+    "author": {
+      "name": "Jane Smith",
+      "avatar": "https://i.pravatar.cc/150?u=jane",
+      "tagline": "Bookworm"
+    },
+    "timeAgo": "22 hrs ago",
+    "title": "Is FNAF 2 going to debut in Minecraft alongside Herobrine #10",
+    "content": "Just wanted to share some tips I've learned from my journey over the past year. The most important thing is to be patient and observe your surroundings.",
+    "tags": [
+      {
+        "label": "#Discussion",
+        "type": "topic"
+      },
+      {
+        "label": "Hobbies",
+        "type": "category"
+      },
+      {
+        "label": "#New",
+        "type": "topic"
+      },
+      {
+        "label": "Tech",
+        "type": "category"
+      }
+    ],
+    "stars": 297,
+    "community_id": "travel-bugs",
+    "related_books": [
+      5
+    ],
+    "created_at": "2024-12-11T09:38:22.209Z",
+    "updated_at": "2024-12-11T09:38:22.209Z"
+  },
+  {
+    "id": 11,
     "author": {
       "name": "Sarah Chen",
       "avatar": "https://i.pravatar.cc/150?u=sarah",
       "tagline": "Photography enthusiast"
     },
-    "timeAgo": "5 hrs ago",
-    "title": "Tips for Street Photography Beginners",
-    "content": "Just wanted to share some tips I've learned from my street photography journey over the past year. The most important thing is to be patient and observe your surroundings. Don't be afraid to ask people for permission, and always carry your camera! What are your go-to spots for street photography?",
+    "timeAgo": "11 hrs ago",
+    "title": "Travel on a Budget: Tips and Tricks #11",
+    "content": "I'm looking for recommendations for a new project I'm working on. Any tools or libraries you swear by?",
     "tags": [
       {
-        "label": "Photography",
+        "label": "Travel",
         "type": "category"
       },
       {
-        "label": "Tips",
+        "label": "Travel",
+        "type": "category"
+      }
+    ],
+    "stars": 775,
+    "community_id": "photography-club",
+    "related_books": [
+      7
+    ],
+    "created_at": "2024-04-04T08:44:18.023Z",
+    "updated_at": "2024-04-04T08:44:18.023Z"
+  },
+  {
+    "id": 12,
+    "author": {
+      "name": "John Doe",
+      "avatar": "https://i.pravatar.cc/150?u=john",
+      "tagline": "Tech Explorer"
+    },
+    "timeAgo": "4 hrs ago",
+    "title": "My Journey to Becoming a Senior Dev #12",
+    "content": "Does anyone else feel like this is getting out of hand? I mean, the prices are skyrocketing and the quality is dropping.",
+    "tags": [
+      {
+        "label": "Tech",
+        "type": "category"
+      },
+      {
+        "label": "#Review",
         "type": "topic"
       },
       {
-        "label": "#StreetPhoto",
-        "type": "topic"
+        "label": "Travel",
+        "type": "category"
       },
       {
-        "label": "#Beginner",
+        "label": "Food",
+        "type": "category"
+      }
+    ],
+    "stars": 726,
+    "community_id": "tech-talk",
+    "related_books": [],
+    "created_at": "2024-07-27T04:30:26.438Z",
+    "updated_at": "2024-07-27T04:30:26.438Z"
+  },
+  {
+    "id": 13,
+    "author": {
+      "name": "Jane Smith",
+      "avatar": "https://i.pravatar.cc/150?u=jane",
+      "tagline": "Bookworm"
+    },
+    "timeAgo": "11 hrs ago",
+    "title": "Why I Switched from iOS to Android #13",
+    "content": "I recently visited this amazing place and I have to share it with you all. The food, the people, the views... everything was perfect.",
+    "tags": [
+      {
+        "label": "Tech",
+        "type": "category"
+      },
+      {
+        "label": "Lifestyle",
+        "type": "category"
+      },
+      {
+        "label": "#Review",
         "type": "topic"
       }
     ],
-    "stars": 45,
-    "community_id": "photography-club",
+    "stars": 2,
+    "community_id": "gaming-hub",
     "related_books": [
+      6,
       2
     ],
-    "created_at": "2023-10-01T09:00:00Z",
-    "updated_at": "2023-10-01T09:00:00Z"
+    "created_at": "2024-04-04T05:27:27.551Z",
+    "updated_at": "2024-04-04T05:27:27.551Z"
+  },
+  {
+    "id": 14,
+    "author": {
+      "name": "John Doe",
+      "avatar": "https://i.pravatar.cc/150?u=john",
+      "tagline": "Tech Explorer"
+    },
+    "timeAgo": "22 hrs ago",
+    "title": "Review: The Latest Marvel Movie #14",
+    "content": "I recently visited this amazing place and I have to share it with you all. The food, the people, the views... everything was perfect.",
+    "tags": [
+      {
+        "label": "Hobbies",
+        "type": "category"
+      },
+      {
+        "label": "Hobbies",
+        "type": "category"
+      },
+      {
+        "label": "#Trending",
+        "type": "topic"
+      },
+      {
+        "label": "Tech",
+        "type": "category"
+      }
+    ],
+    "stars": 785,
+    "community_id": "food-lovers",
+    "related_books": [
+      2,
+      6,
+      8
+    ],
+    "created_at": "2023-07-05T04:47:48.265Z",
+    "updated_at": "2023-07-05T04:47:48.265Z"
+  },
+  {
+    "id": 15,
+    "author": {
+      "name": "Mike Ross",
+      "avatar": "https://i.pravatar.cc/150?u=mike",
+      "tagline": "Legal Eagle"
+    },
+    "timeAgo": "7 hrs ago",
+    "title": "Fitness Myths You Should Stop Believing #15",
+    "content": "I recently visited this amazing place and I have to share it with you all. The food, the people, the views... everything was perfect.",
+    "tags": [
+      {
+        "label": "Tech",
+        "type": "category"
+      },
+      {
+        "label": "Lifestyle",
+        "type": "category"
+      }
+    ],
+    "stars": 651,
+    "community_id": "literacy-circle",
+    "related_books": [
+      3
+    ],
+    "created_at": "2025-04-15T17:41:03.516Z",
+    "updated_at": "2025-04-15T17:41:03.516Z"
+  },
+  {
+    "id": 16,
+    "author": {
+      "name": "John Doe",
+      "avatar": "https://i.pravatar.cc/150?u=john",
+      "tagline": "Tech Explorer"
+    },
+    "timeAgo": "18 hrs ago",
+    "title": "Travel on a Budget: Tips and Tricks #16",
+    "content": "Hey everyone! I've been diving deeper into this topic lately, and I realized there's a ton of great resources out there. Thought I'd share a few and see what you all recommend too!",
+    "tags": [
+      {
+        "label": "#Help",
+        "type": "topic"
+      },
+      {
+        "label": "Travel",
+        "type": "category"
+      }
+    ],
+    "stars": 744,
+    "community_id": "tech-talk",
+    "related_books": [
+      9,
+      4
+    ],
+    "created_at": "2023-11-01T07:46:06.776Z",
+    "updated_at": "2023-11-01T07:46:06.776Z"
+  },
+  {
+    "id": 17,
+    "author": {
+      "name": "Alfan Gunadar",
+      "avatar": "https://i.pravatar.cc/150?u=alfan",
+      "tagline": "Something Vanity!"
+    },
+    "timeAgo": "7 hrs ago",
+    "title": "Fitness Myths You Should Stop Believing #17",
+    "content": "Here's a quick tutorial on how to get started with this. It's easier than you think!",
+    "tags": [
+      {
+        "label": "#Review",
+        "type": "topic"
+      },
+      {
+        "label": "#Trending",
+        "type": "topic"
+      }
+    ],
+    "stars": 306,
+    "community_id": "gaming-hub",
+    "related_books": [
+      4,
+      3
+    ],
+    "created_at": "2023-10-17T22:46:42.681Z",
+    "updated_at": "2023-10-17T22:46:42.681Z"
+  },
+  {
+    "id": 18,
+    "author": {
+      "name": "Alfan Gunadar",
+      "avatar": "https://i.pravatar.cc/150?u=alfan",
+      "tagline": "Something Vanity!"
+    },
+    "timeAgo": "4 hrs ago",
+    "title": "Fitness Myths You Should Stop Believing #18",
+    "content": "Does anyone else feel like this is getting out of hand? I mean, the prices are skyrocketing and the quality is dropping.",
+    "tags": [
+      {
+        "label": "#Discussion",
+        "type": "topic"
+      },
+      {
+        "label": "Food",
+        "type": "category"
+      }
+    ],
+    "stars": 726,
+    "community_id": "food-lovers",
+    "related_books": [
+      7,
+      10
+    ],
+    "created_at": "2023-07-28T21:04:22.653Z",
+    "updated_at": "2023-07-28T21:04:22.653Z"
+  },
+  {
+    "id": 19,
+    "author": {
+      "name": "Orang Kmplang",
+      "avatar": "https://i.pravatar.cc/150?u=kmplang",
+      "tagline": "A stupid one"
+    },
+    "timeAgo": "18 hrs ago",
+    "title": "The History of Video Games #19",
+    "content": "I recently visited this amazing place and I have to share it with you all. The food, the people, the views... everything was perfect.",
+    "tags": [
+      {
+        "label": "Travel",
+        "type": "category"
+      },
+      {
+        "label": "Food",
+        "type": "category"
+      },
+      {
+        "label": "Lifestyle",
+        "type": "category"
+      },
+      {
+        "label": "Lifestyle",
+        "type": "category"
+      }
+    ],
+    "stars": 83,
+    "community_id": "food-lovers",
+    "related_books": [],
+    "created_at": "2023-12-11T12:20:47.685Z",
+    "updated_at": "2023-12-11T12:20:47.685Z"
+  },
+  {
+    "id": 20,
+    "author": {
+      "name": "Jane Smith",
+      "avatar": "https://i.pravatar.cc/150?u=jane",
+      "tagline": "Bookworm"
+    },
+    "timeAgo": "3 hrs ago",
+    "title": "How to Cook the Perfect Steak #20",
+    "content": "I've been thinking a lot about the future of this industry. With all the new tech coming out, it's hard to keep up. What are your predictions?",
+    "tags": [
+      {
+        "label": "#Trending",
+        "type": "topic"
+      },
+      {
+        "label": "#Trending",
+        "type": "topic"
+      },
+      {
+        "label": "Tech",
+        "type": "category"
+      }
+    ],
+    "stars": 81,
+    "community_id": "photography-club",
+    "related_books": [
+      5,
+      2
+    ],
+    "created_at": "2024-05-19T09:59:26.198Z",
+    "updated_at": "2024-05-19T09:59:26.198Z"
+  },
+  {
+    "id": 21,
+    "author": {
+      "name": "Alfan Gunadar",
+      "avatar": "https://i.pravatar.cc/150?u=alfan",
+      "tagline": "Something Vanity!"
+    },
+    "timeAgo": "5 hrs ago",
+    "title": "My Journey to Becoming a Senior Dev #21",
+    "content": "I've been thinking a lot about the future of this industry. With all the new tech coming out, it's hard to keep up. What are your predictions?",
+    "tags": [
+      {
+        "label": "Hobbies",
+        "type": "category"
+      },
+      {
+        "label": "Food",
+        "type": "category"
+      },
+      {
+        "label": "Tech",
+        "type": "category"
+      },
+      {
+        "label": "#New",
+        "type": "topic"
+      }
+    ],
+    "stars": 158,
+    "community_id": "gaming-hub",
+    "related_books": [
+      4,
+      6
+    ],
+    "created_at": "2024-01-06T08:04:51.030Z",
+    "updated_at": "2024-01-06T08:04:51.030Z"
+  },
+  {
+    "id": 22,
+    "author": {
+      "name": "Jane Smith",
+      "avatar": "https://i.pravatar.cc/150?u=jane",
+      "tagline": "Bookworm"
+    },
+    "timeAgo": "16 hrs ago",
+    "title": "Understanding Quantum Computing #22",
+    "content": "Does anyone else feel like this is getting out of hand? I mean, the prices are skyrocketing and the quality is dropping.",
+    "tags": [
+      {
+        "label": "#Trending",
+        "type": "topic"
+      },
+      {
+        "label": "#Review",
+        "type": "topic"
+      },
+      {
+        "label": "Travel",
+        "type": "category"
+      }
+    ],
+    "stars": 95,
+    "community_id": "photography-club",
+    "related_books": [
+      6,
+      2
+    ],
+    "created_at": "2023-12-18T23:47:58.848Z",
+    "updated_at": "2023-12-18T23:47:58.848Z"
+  },
+  {
+    "id": 23,
+    "author": {
+      "name": "Orang Kmplang",
+      "avatar": "https://i.pravatar.cc/150?u=kmplang",
+      "tagline": "A stupid one"
+    },
+    "timeAgo": "19 hrs ago",
+    "title": "Why I Switched from iOS to Android #23",
+    "content": "Just finished this book and it blew my mind. Highly recommend it to everyone here.",
+    "tags": [
+      {
+        "label": "#Discussion",
+        "type": "topic"
+      },
+      {
+        "label": "Tech",
+        "type": "category"
+      },
+      {
+        "label": "Hobbies",
+        "type": "category"
+      }
+    ],
+    "stars": 619,
+    "community_id": "travel-bugs",
+    "related_books": [
+      3,
+      9,
+      1
+    ],
+    "created_at": "2024-04-07T11:17:42.579Z",
+    "updated_at": "2024-04-07T11:17:42.579Z"
+  },
+  {
+    "id": 24,
+    "author": {
+      "name": "Louis Litt",
+      "avatar": "https://i.pravatar.cc/150?u=louis",
+      "tagline": "Cat Lover"
+    },
+    "timeAgo": "23 hrs ago",
+    "title": "Why You Should Learn Rust #24",
+    "content": "Just wanted to share some tips I've learned from my journey over the past year. The most important thing is to be patient and observe your surroundings.",
+    "tags": [
+      {
+        "label": "Tech",
+        "type": "category"
+      },
+      {
+        "label": "#Help",
+        "type": "topic"
+      },
+      {
+        "label": "Food",
+        "type": "category"
+      }
+    ],
+    "stars": 559,
+    "community_id": "tech-talk",
+    "related_books": [],
+    "created_at": "2023-08-31T02:23:57.169Z",
+    "updated_at": "2023-08-31T02:23:57.169Z"
+  },
+  {
+    "id": 25,
+    "author": {
+      "name": "Donna Paulsen",
+      "avatar": "https://i.pravatar.cc/150?u=donna",
+      "tagline": "I know everything"
+    },
+    "timeAgo": "23 hrs ago",
+    "title": "Travel on a Budget: Tips and Tricks #25",
+    "content": "I'm looking for recommendations for a new project I'm working on. Any tools or libraries you swear by?",
+    "tags": [
+      {
+        "label": "#Discussion",
+        "type": "topic"
+      },
+      {
+        "label": "Food",
+        "type": "category"
+      }
+    ],
+    "stars": 859,
+    "community_id": "food-lovers",
+    "related_books": [
+      10,
+      5
+    ],
+    "created_at": "2025-08-19T11:12:28.621Z",
+    "updated_at": "2025-08-19T11:12:28.621Z"
+  },
+  {
+    "id": 26,
+    "author": {
+      "name": "Jane Smith",
+      "avatar": "https://i.pravatar.cc/150?u=jane",
+      "tagline": "Bookworm"
+    },
+    "timeAgo": "12 hrs ago",
+    "title": "How to Build a PC from Scratch #26",
+    "content": "I recently visited this amazing place and I have to share it with you all. The food, the people, the views... everything was perfect.",
+    "tags": [
+      {
+        "label": "Travel",
+        "type": "category"
+      },
+      {
+        "label": "Food",
+        "type": "category"
+      },
+      {
+        "label": "Hobbies",
+        "type": "category"
+      }
+    ],
+    "stars": 122,
+    "community_id": "gaming-hub",
+    "related_books": [
+      5
+    ],
+    "created_at": "2024-05-11T01:46:51.947Z",
+    "updated_at": "2024-05-11T01:46:51.947Z"
+  },
+  {
+    "id": 27,
+    "author": {
+      "name": "Louis Litt",
+      "avatar": "https://i.pravatar.cc/150?u=louis",
+      "tagline": "Cat Lover"
+    },
+    "timeAgo": "15 hrs ago",
+    "title": "The Art of Minimalist Living #27",
+    "content": "Does anyone else feel like this is getting out of hand? I mean, the prices are skyrocketing and the quality is dropping.",
+    "tags": [
+      {
+        "label": "Travel",
+        "type": "category"
+      },
+      {
+        "label": "#Discussion",
+        "type": "topic"
+      },
+      {
+        "label": "Hobbies",
+        "type": "category"
+      },
+      {
+        "label": "#Review",
+        "type": "topic"
+      }
+    ],
+    "stars": 919,
+    "community_id": "tech-talk",
+    "related_books": [
+      6
+    ],
+    "created_at": "2024-11-14T07:37:59.066Z",
+    "updated_at": "2024-11-14T07:37:59.066Z"
+  },
+  {
+    "id": 28,
+    "author": {
+      "name": "Jane Smith",
+      "avatar": "https://i.pravatar.cc/150?u=jane",
+      "tagline": "Bookworm"
+    },
+    "timeAgo": "1 hrs ago",
+    "title": "Understanding Quantum Computing #28",
+    "content": "Does anyone else feel like this is getting out of hand? I mean, the prices are skyrocketing and the quality is dropping.",
+    "tags": [
+      {
+        "label": "#New",
+        "type": "topic"
+      },
+      {
+        "label": "#Discussion",
+        "type": "topic"
+      },
+      {
+        "label": "#Review",
+        "type": "topic"
+      }
+    ],
+    "stars": 463,
+    "community_id": "travel-bugs",
+    "related_books": [],
+    "created_at": "2025-07-29T21:40:59.317Z",
+    "updated_at": "2025-07-29T21:40:59.317Z"
+  },
+  {
+    "id": 29,
+    "author": {
+      "name": "Rachel Zane",
+      "avatar": "https://i.pravatar.cc/150?u=rachel",
+      "tagline": "Foodie"
+    },
+    "timeAgo": "11 hrs ago",
+    "title": "The History of Video Games #29",
+    "content": "I recently visited this amazing place and I have to share it with you all. The food, the people, the views... everything was perfect.",
+    "tags": [
+      {
+        "label": "#Discussion",
+        "type": "topic"
+      },
+      {
+        "label": "Lifestyle",
+        "type": "category"
+      },
+      {
+        "label": "Travel",
+        "type": "category"
+      }
+    ],
+    "stars": 331,
+    "community_id": "gaming-hub",
+    "related_books": [
+      3
+    ],
+    "created_at": "2023-07-08T06:55:24.592Z",
+    "updated_at": "2023-07-08T06:55:24.592Z"
+  },
+  {
+    "id": 30,
+    "author": {
+      "name": "Orang Kmplang",
+      "avatar": "https://i.pravatar.cc/150?u=kmplang",
+      "tagline": "A stupid one"
+    },
+    "timeAgo": "20 hrs ago",
+    "title": "Tips for Street Photography Beginners #30",
+    "content": "I've been thinking a lot about the future of this industry. With all the new tech coming out, it's hard to keep up. What are your predictions?",
+    "tags": [
+      {
+        "label": "Food",
+        "type": "category"
+      },
+      {
+        "label": "#Discussion",
+        "type": "topic"
+      },
+      {
+        "label": "#Review",
+        "type": "topic"
+      },
+      {
+        "label": "#New",
+        "type": "topic"
+      }
+    ],
+    "stars": 365,
+    "community_id": "food-lovers",
+    "related_books": [],
+    "created_at": "2025-06-19T07:11:31.205Z",
+    "updated_at": "2025-06-19T07:11:31.205Z"
+  },
+  {
+    "id": 31,
+    "author": {
+      "name": "Donna Paulsen",
+      "avatar": "https://i.pravatar.cc/150?u=donna",
+      "tagline": "I know everything"
+    },
+    "timeAgo": "8 hrs ago",
+    "title": "Is FNAF 2 going to debut in Minecraft alongside Herobrine #31",
+    "content": "Okay, so I've been seeing some weird stuff in the latest teasers and community rumors. People are saying there might be a huge update coming soon. What do you think?",
+    "tags": [
+      {
+        "label": "#Review",
+        "type": "topic"
+      },
+      {
+        "label": "Travel",
+        "type": "category"
+      }
+    ],
+    "stars": 804,
+    "community_id": "travel-bugs",
+    "related_books": [
+      10
+    ],
+    "created_at": "2025-06-27T05:44:03.170Z",
+    "updated_at": "2025-06-27T05:44:03.170Z"
+  },
+  {
+    "id": 32,
+    "author": {
+      "name": "Alfan Gunadar",
+      "avatar": "https://i.pravatar.cc/150?u=alfan",
+      "tagline": "Something Vanity!"
+    },
+    "timeAgo": "5 hrs ago",
+    "title": "Top 10 Hidden Gems in Southeast Asia #32",
+    "content": "I recently visited this amazing place and I have to share it with you all. The food, the people, the views... everything was perfect.",
+    "tags": [
+      {
+        "label": "Hobbies",
+        "type": "category"
+      },
+      {
+        "label": "Travel",
+        "type": "category"
+      },
+      {
+        "label": "#Help",
+        "type": "topic"
+      }
+    ],
+    "stars": 736,
+    "community_id": "travel-bugs",
+    "related_books": [
+      7,
+      9,
+      1
+    ],
+    "created_at": "2023-11-17T13:20:29.691Z",
+    "updated_at": "2023-11-17T13:20:29.691Z"
+  },
+  {
+    "id": 33,
+    "author": {
+      "name": "Donna Paulsen",
+      "avatar": "https://i.pravatar.cc/150?u=donna",
+      "tagline": "I know everything"
+    },
+    "timeAgo": "13 hrs ago",
+    "title": "How to Build a PC from Scratch #33",
+    "content": "Does anyone else feel like this is getting out of hand? I mean, the prices are skyrocketing and the quality is dropping.",
+    "tags": [
+      {
+        "label": "Food",
+        "type": "category"
+      },
+      {
+        "label": "Hobbies",
+        "type": "category"
+      },
+      {
+        "label": "#Help",
+        "type": "topic"
+      },
+      {
+        "label": "Hobbies",
+        "type": "category"
+      }
+    ],
+    "stars": 755,
+    "community_id": "photography-club",
+    "related_books": [],
+    "created_at": "2025-11-03T19:40:12.169Z",
+    "updated_at": "2025-11-03T19:40:12.169Z"
+  },
+  {
+    "id": 34,
+    "author": {
+      "name": "Orang Kmplang",
+      "avatar": "https://i.pravatar.cc/150?u=kmplang",
+      "tagline": "A stupid one"
+    },
+    "timeAgo": "3 hrs ago",
+    "title": "My Journey to Becoming a Senior Dev #34",
+    "content": "Hey everyone! I've been diving deeper into this topic lately, and I realized there's a ton of great resources out there. Thought I'd share a few and see what you all recommend too!",
+    "tags": [
+      {
+        "label": "Food",
+        "type": "category"
+      },
+      {
+        "label": "Hobbies",
+        "type": "category"
+      }
+    ],
+    "stars": 799,
+    "community_id": "literacy-circle",
+    "related_books": [
+      5
+    ],
+    "created_at": "2024-04-20T21:47:14.763Z",
+    "updated_at": "2024-04-20T21:47:14.763Z"
+  },
+  {
+    "id": 35,
+    "author": {
+      "name": "Louis Litt",
+      "avatar": "https://i.pravatar.cc/150?u=louis",
+      "tagline": "Cat Lover"
+    },
+    "timeAgo": "14 hrs ago",
+    "title": "Tips for Street Photography Beginners #35",
+    "content": "I'm looking for recommendations for a new project I'm working on. Any tools or libraries you swear by?",
+    "tags": [
+      {
+        "label": "#Discussion",
+        "type": "topic"
+      },
+      {
+        "label": "#Help",
+        "type": "topic"
+      },
+      {
+        "label": "#Help",
+        "type": "topic"
+      },
+      {
+        "label": "Food",
+        "type": "category"
+      }
+    ],
+    "stars": 634,
+    "community_id": "literacy-circle",
+    "related_books": [
+      6,
+      4,
+      2
+    ],
+    "created_at": "2025-11-01T12:43:00.341Z",
+    "updated_at": "2025-11-01T12:43:00.341Z"
+  },
+  {
+    "id": 36,
+    "author": {
+      "name": "Sarah Chen",
+      "avatar": "https://i.pravatar.cc/150?u=sarah",
+      "tagline": "Photography enthusiast"
+    },
+    "timeAgo": "15 hrs ago",
+    "title": "Top 10 Hidden Gems in Southeast Asia #36",
+    "content": "Just finished this book and it blew my mind. Highly recommend it to everyone here.",
+    "tags": [
+      {
+        "label": "#Discussion",
+        "type": "topic"
+      },
+      {
+        "label": "#Discussion",
+        "type": "topic"
+      },
+      {
+        "label": "#Discussion",
+        "type": "topic"
+      },
+      {
+        "label": "#New",
+        "type": "topic"
+      }
+    ],
+    "stars": 30,
+    "community_id": "tech-talk",
+    "related_books": [],
+    "created_at": "2025-03-12T11:23:58.849Z",
+    "updated_at": "2025-03-12T11:23:58.849Z"
+  },
+  {
+    "id": 37,
+    "author": {
+      "name": "Rachel Zane",
+      "avatar": "https://i.pravatar.cc/150?u=rachel",
+      "tagline": "Foodie"
+    },
+    "timeAgo": "3 hrs ago",
+    "title": "Review: The Latest Marvel Movie #37",
+    "content": "I recently visited this amazing place and I have to share it with you all. The food, the people, the views... everything was perfect.",
+    "tags": [
+      {
+        "label": "#Trending",
+        "type": "topic"
+      },
+      {
+        "label": "Lifestyle",
+        "type": "category"
+      },
+      {
+        "label": "#Discussion",
+        "type": "topic"
+      },
+      {
+        "label": "#Help",
+        "type": "topic"
+      }
+    ],
+    "stars": 470,
+    "community_id": "photography-club",
+    "related_books": [],
+    "created_at": "2025-03-02T14:25:50.986Z",
+    "updated_at": "2025-03-02T14:25:50.986Z"
+  },
+  {
+    "id": 38,
+    "author": {
+      "name": "Sarah Chen",
+      "avatar": "https://i.pravatar.cc/150?u=sarah",
+      "tagline": "Photography enthusiast"
+    },
+    "timeAgo": "18 hrs ago",
+    "title": "Meditation for Beginners #38",
+    "content": "I recently visited this amazing place and I have to share it with you all. The food, the people, the views... everything was perfect.",
+    "tags": [
+      {
+        "label": "#Trending",
+        "type": "topic"
+      },
+      {
+        "label": "Hobbies",
+        "type": "category"
+      },
+      {
+        "label": "#New",
+        "type": "topic"
+      },
+      {
+        "label": "#Review",
+        "type": "topic"
+      }
+    ],
+    "stars": 426,
+    "community_id": "gaming-hub",
+    "related_books": [
+      6
+    ],
+    "created_at": "2024-02-04T06:33:22.280Z",
+    "updated_at": "2024-02-04T06:33:22.280Z"
+  },
+  {
+    "id": 39,
+    "author": {
+      "name": "Rachel Zane",
+      "avatar": "https://i.pravatar.cc/150?u=rachel",
+      "tagline": "Foodie"
+    },
+    "timeAgo": "9 hrs ago",
+    "title": "Gardening 101: How to Keep Your Plants Alive #39",
+    "content": "Okay, so I've been seeing some weird stuff in the latest teasers and community rumors. People are saying there might be a huge update coming soon. What do you think?",
+    "tags": [
+      {
+        "label": "#Trending",
+        "type": "topic"
+      },
+      {
+        "label": "Lifestyle",
+        "type": "category"
+      },
+      {
+        "label": "#Discussion",
+        "type": "topic"
+      }
+    ],
+    "stars": 345,
+    "community_id": "literacy-circle",
+    "related_books": [
+      2,
+      10
+    ],
+    "created_at": "2024-09-19T22:22:41.741Z",
+    "updated_at": "2024-09-19T22:22:41.741Z"
+  },
+  {
+    "id": 40,
+    "author": {
+      "name": "Donna Paulsen",
+      "avatar": "https://i.pravatar.cc/150?u=donna",
+      "tagline": "I know everything"
+    },
+    "timeAgo": "4 hrs ago",
+    "title": "Is FNAF 2 going to debut in Minecraft alongside Herobrine #40",
+    "content": "I've been thinking a lot about the future of this industry. With all the new tech coming out, it's hard to keep up. What are your predictions?",
+    "tags": [
+      {
+        "label": "#New",
+        "type": "topic"
+      },
+      {
+        "label": "Lifestyle",
+        "type": "category"
+      },
+      {
+        "label": "#Help",
+        "type": "topic"
+      }
+    ],
+    "stars": 892,
+    "community_id": "gaming-hub",
+    "related_books": [],
+    "created_at": "2024-02-26T22:53:48.897Z",
+    "updated_at": "2024-02-26T22:53:48.897Z"
+  },
+  {
+    "id": 41,
+    "author": {
+      "name": "Orang Kmplang",
+      "avatar": "https://i.pravatar.cc/150?u=kmplang",
+      "tagline": "A stupid one"
+    },
+    "timeAgo": "14 hrs ago",
+    "title": "Review: The Latest Marvel Movie #41",
+    "content": "Hey everyone! I've been diving deeper into this topic lately, and I realized there's a ton of great resources out there. Thought I'd share a few and see what you all recommend too!",
+    "tags": [
+      {
+        "label": "Travel",
+        "type": "category"
+      },
+      {
+        "label": "#Review",
+        "type": "topic"
+      },
+      {
+        "label": "Food",
+        "type": "category"
+      },
+      {
+        "label": "Hobbies",
+        "type": "category"
+      }
+    ],
+    "stars": 619,
+    "community_id": "tech-talk",
+    "related_books": [
+      6
+    ],
+    "created_at": "2024-06-28T18:14:49.622Z",
+    "updated_at": "2024-06-28T18:14:49.622Z"
+  },
+  {
+    "id": 42,
+    "author": {
+      "name": "Mike Ross",
+      "avatar": "https://i.pravatar.cc/150?u=mike",
+      "tagline": "Legal Eagle"
+    },
+    "timeAgo": "11 hrs ago",
+    "title": "Meditation for Beginners #42",
+    "content": "Just finished this book and it blew my mind. Highly recommend it to everyone here.",
+    "tags": [
+      {
+        "label": "Lifestyle",
+        "type": "category"
+      },
+      {
+        "label": "Travel",
+        "type": "category"
+      },
+      {
+        "label": "#Discussion",
+        "type": "topic"
+      },
+      {
+        "label": "#Discussion",
+        "type": "topic"
+      }
+    ],
+    "stars": 690,
+    "community_id": "literacy-circle",
+    "related_books": [
+      6,
+      7
+    ],
+    "created_at": "2023-06-14T14:07:21.334Z",
+    "updated_at": "2023-06-14T14:07:21.334Z"
+  },
+  {
+    "id": 43,
+    "author": {
+      "name": "Harvey Specter",
+      "avatar": "https://i.pravatar.cc/150?u=harvey",
+      "tagline": "Closer"
+    },
+    "timeAgo": "20 hrs ago",
+    "title": "My Journey to Becoming a Senior Dev #43",
+    "content": "Does anyone else feel like this is getting out of hand? I mean, the prices are skyrocketing and the quality is dropping.",
+    "tags": [
+      {
+        "label": "Hobbies",
+        "type": "category"
+      },
+      {
+        "label": "#Trending",
+        "type": "topic"
+      }
+    ],
+    "stars": 807,
+    "community_id": "gaming-hub",
+    "related_books": [
+      10,
+      3,
+      4
+    ],
+    "created_at": "2023-11-14T15:30:44.949Z",
+    "updated_at": "2023-11-14T15:30:44.949Z"
+  },
+  {
+    "id": 44,
+    "author": {
+      "name": "Donna Paulsen",
+      "avatar": "https://i.pravatar.cc/150?u=donna",
+      "tagline": "I know everything"
+    },
+    "timeAgo": "23 hrs ago",
+    "title": "Is FNAF 2 going to debut in Minecraft alongside Herobrine #44",
+    "content": "I'm looking for recommendations for a new project I'm working on. Any tools or libraries you swear by?",
+    "tags": [
+      {
+        "label": "Travel",
+        "type": "category"
+      },
+      {
+        "label": "Food",
+        "type": "category"
+      }
+    ],
+    "stars": 469,
+    "community_id": "literacy-circle",
+    "related_books": [
+      1,
+      8,
+      2
+    ],
+    "created_at": "2024-02-16T22:45:20.342Z",
+    "updated_at": "2024-02-16T22:45:20.342Z"
+  },
+  {
+    "id": 45,
+    "author": {
+      "name": "Rachel Zane",
+      "avatar": "https://i.pravatar.cc/150?u=rachel",
+      "tagline": "Foodie"
+    },
+    "timeAgo": "19 hrs ago",
+    "title": "Why I Switched from iOS to Android #45",
+    "content": "Hey everyone! I've been diving deeper into this topic lately, and I realized there's a ton of great resources out there. Thought I'd share a few and see what you all recommend too!",
+    "tags": [
+      {
+        "label": "#Discussion",
+        "type": "topic"
+      },
+      {
+        "label": "#Trending",
+        "type": "topic"
+      }
+    ],
+    "stars": 224,
+    "community_id": "photography-club",
+    "related_books": [
+      8,
+      1,
+      6
+    ],
+    "created_at": "2025-07-15T01:27:54.581Z",
+    "updated_at": "2025-07-15T01:27:54.581Z"
+  },
+  {
+    "id": 46,
+    "author": {
+      "name": "Rachel Zane",
+      "avatar": "https://i.pravatar.cc/150?u=rachel",
+      "tagline": "Foodie"
+    },
+    "timeAgo": "5 hrs ago",
+    "title": "The History of Video Games #46",
+    "content": "Here's a quick tutorial on how to get started with this. It's easier than you think!",
+    "tags": [
+      {
+        "label": "#Trending",
+        "type": "topic"
+      },
+      {
+        "label": "Hobbies",
+        "type": "category"
+      },
+      {
+        "label": "#Help",
+        "type": "topic"
+      },
+      {
+        "label": "#Trending",
+        "type": "topic"
+      }
+    ],
+    "stars": 789,
+    "community_id": "gaming-hub",
+    "related_books": [],
+    "created_at": "2025-10-11T05:10:45.607Z",
+    "updated_at": "2025-10-11T05:10:45.607Z"
+  },
+  {
+    "id": 47,
+    "author": {
+      "name": "Harvey Specter",
+      "avatar": "https://i.pravatar.cc/150?u=harvey",
+      "tagline": "Closer"
+    },
+    "timeAgo": "5 hrs ago",
+    "title": "The Psychology of Color in Design #47",
+    "content": "Just finished this book and it blew my mind. Highly recommend it to everyone here.",
+    "tags": [
+      {
+        "label": "Food",
+        "type": "category"
+      },
+      {
+        "label": "#Review",
+        "type": "topic"
+      },
+      {
+        "label": "Travel",
+        "type": "category"
+      }
+    ],
+    "stars": 446,
+    "community_id": "gaming-hub",
+    "related_books": [
+      10
+    ],
+    "created_at": "2023-10-02T04:16:57.240Z",
+    "updated_at": "2023-10-02T04:16:57.240Z"
+  },
+  {
+    "id": 48,
+    "author": {
+      "name": "Donna Paulsen",
+      "avatar": "https://i.pravatar.cc/150?u=donna",
+      "tagline": "I know everything"
+    },
+    "timeAgo": "22 hrs ago",
+    "title": "My Journey to Becoming a Senior Dev #48",
+    "content": "Here's a quick tutorial on how to get started with this. It's easier than you think!",
+    "tags": [
+      {
+        "label": "#Review",
+        "type": "topic"
+      },
+      {
+        "label": "#Trending",
+        "type": "topic"
+      },
+      {
+        "label": "Hobbies",
+        "type": "category"
+      },
+      {
+        "label": "Lifestyle",
+        "type": "category"
+      }
+    ],
+    "stars": 652,
+    "community_id": "food-lovers",
+    "related_books": [],
+    "created_at": "2024-04-13T19:08:27.946Z",
+    "updated_at": "2024-04-13T19:08:27.946Z"
+  },
+  {
+    "id": 49,
+    "author": {
+      "name": "Harvey Specter",
+      "avatar": "https://i.pravatar.cc/150?u=harvey",
+      "tagline": "Closer"
+    },
+    "timeAgo": "17 hrs ago",
+    "title": "The History of Video Games #49",
+    "content": "I'm struggling with this concept. Can anyone explain it in simple terms?",
+    "tags": [
+      {
+        "label": "#Trending",
+        "type": "topic"
+      },
+      {
+        "label": "#Help",
+        "type": "topic"
+      }
+    ],
+    "stars": 12,
+    "community_id": "tech-talk",
+    "related_books": [
+      6,
+      3
+    ],
+    "created_at": "2024-09-29T19:47:44.412Z",
+    "updated_at": "2024-09-29T19:47:44.412Z"
+  },
+  {
+    "id": 50,
+    "author": {
+      "name": "Jane Smith",
+      "avatar": "https://i.pravatar.cc/150?u=jane",
+      "tagline": "Bookworm"
+    },
+    "timeAgo": "5 hrs ago",
+    "title": "How to Cook the Perfect Steak #50",
+    "content": "I've been thinking a lot about the future of this industry. With all the new tech coming out, it's hard to keep up. What are your predictions?",
+    "tags": [
+      {
+        "label": "#Review",
+        "type": "topic"
+      },
+      {
+        "label": "#Discussion",
+        "type": "topic"
+      },
+      {
+        "label": "#Discussion",
+        "type": "topic"
+      }
+    ],
+    "stars": 998,
+    "community_id": "literacy-circle",
+    "related_books": [
+      9,
+      4
+    ],
+    "created_at": "2025-10-27T02:40:34.414Z",
+    "updated_at": "2025-10-27T02:40:34.414Z"
   }
 ]
