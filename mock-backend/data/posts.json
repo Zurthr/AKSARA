@@ -2,1606 +2,1411 @@
   {
     "id": 1,
     "author": {
-      "name": "John Doe",
-      "avatar": "https://i.pravatar.cc/150?u=john",
-      "tagline": "Tech Explorer"
+      "name": "Sarah Chen",
+      "avatar": "https://i.pravatar.cc/150?u=sarah",
+      "tagline": "Product Designer"
     },
-    "timeAgo": "10 hrs ago",
-    "title": "My Journey to Becoming a Senior Dev #1",
-    "content": "I'm struggling with this concept. Can anyone explain it in simple terms?",
+    "timeAgo": "2 hours ago",
+    "title": "Applying 'Atomic Habits' to Learning to Code",
+    "content": "I've been struggling to stay consistent with my Vue.js learning. I started applying the '2-minute rule' from James Clear's book. Instead of saying 'I will code for 2 hours', I just say 'I will open VS Code'. It's surprisingly effective.",
     "tags": [
       {
-        "label": "#Trending",
+        "label": "#Productivity",
         "type": "topic"
       },
       {
-        "label": "#Discussion",
+        "label": "#Coding",
         "type": "topic"
-      },
-      {
-        "label": "#Review",
-        "type": "topic"
-      },
-      {
-        "label": "Lifestyle",
-        "type": "category"
       }
     ],
-    "stars": 106,
-    "community_id": "travel-bugs",
-    "related_books": [],
-    "created_at": "2023-12-04T04:20:26.704Z",
-    "updated_at": "2023-12-04T04:20:26.704Z"
+    "stars": 342,
+    "community_id": "wellness-warriors",
+    "related_books": [
+      3,
+      15
+    ],
+    "created_at": "2023-11-01T08:00:00Z",
+    "updated_at": "2023-11-01T08:00:00Z"
   },
   {
     "id": 2,
     "author": {
-      "name": "John Doe",
-      "avatar": "https://i.pravatar.cc/150?u=john",
-      "tagline": "Tech Explorer"
+      "name": "Mike Ross",
+      "avatar": "https://i.pravatar.cc/150?u=mike",
+      "tagline": "Backend Dev"
     },
-    "timeAgo": "18 hrs ago",
-    "title": "How to Build a PC from Scratch #2",
-    "content": "Here's a quick tutorial on how to get started with this. It's easier than you think!",
+    "timeAgo": "4 hours ago",
+    "title": "Is 'Clean Code' still relevant in 2024?",
+    "content": "Uncle Bob's examples are in Java, and some people say the advice is outdated. However, I feel the core principles of meaningful naming and small functions are timeless. Thoughts?",
     "tags": [
       {
-        "label": "Travel",
-        "type": "category"
-      },
-      {
-        "label": "#Review",
+        "label": "#Discussion",
         "type": "topic"
       },
       {
-        "label": "Food",
-        "type": "category"
-      },
-      {
-        "label": "#New",
+        "label": "#SoftwareEngineering",
         "type": "topic"
       }
     ],
-    "stars": 86,
-    "community_id": "travel-bugs",
-    "related_books": [],
-    "created_at": "2025-06-22T05:35:47.015Z",
-    "updated_at": "2025-06-22T05:35:47.015Z"
+    "stars": 128,
+    "community_id": "creative-atelier",
+    "related_books": [
+      1,
+      5
+    ],
+    "created_at": "2023-11-01T10:00:00Z",
+    "updated_at": "2023-11-01T10:00:00Z"
   },
   {
     "id": 3,
     "author": {
-      "name": "Orang Kmplang",
-      "avatar": "https://i.pravatar.cc/150?u=kmplang",
-      "tagline": "A stupid one"
+      "name": "Jane Smith",
+      "avatar": "https://i.pravatar.cc/150?u=jane",
+      "tagline": "Fantasy Reader"
     },
-    "timeAgo": "3 hrs ago",
-    "title": "Best Books for Aspiring Web Developers #3",
-    "content": "I've been thinking a lot about the future of this industry. With all the new tech coming out, it's hard to keep up. What are your predictions?",
+    "timeAgo": "5 hours ago",
+    "title": "The cozy beginning of The Hobbit",
+    "content": "Re-reading The Hobbit this weekend. I forgot how whimsical the opening chapter is compared to the epic scale of LOTR. Bilbo fretting over his doilies while Gandalf plots an adventure is peak comedy.",
     "tags": [
       {
-        "label": "Tech",
-        "type": "category"
+        "label": "#Tolkien",
+        "type": "topic"
       },
       {
-        "label": "#Help",
+        "label": "#Fantasy",
         "type": "topic"
       }
     ],
-    "stars": 811,
-    "community_id": "tech-talk",
+    "stars": 560,
+    "community_id": "literacy-circle",
     "related_books": [
-      10
+      2
     ],
-    "created_at": "2024-08-23T01:13:46.321Z",
-    "updated_at": "2024-08-23T01:13:46.321Z"
+    "created_at": "2023-11-01T11:00:00Z",
+    "updated_at": "2023-11-01T11:00:00Z"
   },
   {
     "id": 4,
     "author": {
-      "name": "Jane Smith",
-      "avatar": "https://i.pravatar.cc/150?u=jane",
-      "tagline": "Bookworm"
+      "name": "Alfan Gunadar",
+      "avatar": "https://i.pravatar.cc/150?u=alfan",
+      "tagline": "Frontend Ninja"
     },
-    "timeAgo": "2 hrs ago",
-    "title": "Understanding Quantum Computing #4",
-    "content": "I've been thinking a lot about the future of this industry. With all the new tech coming out, it's hard to keep up. What are your predictions?",
+    "timeAgo": "6 hours ago",
+    "title": "Why you should master Vanilla JS before Frameworks",
+    "content": "Reading 'JavaScript: The Good Parts' reminded me why understanding closures and prototypes is crucial, even if you use React or Vue every day. Don't skip the basics, guys.",
     "tags": [
       {
-        "label": "#Discussion",
+        "label": "#JavaScript",
         "type": "topic"
       },
       {
-        "label": "Tech",
-        "type": "category"
+        "label": "#Advice",
+        "type": "topic"
       }
     ],
-    "stars": 248,
-    "community_id": "literacy-circle",
+    "stars": 210,
+    "community_id": "creative-atelier",
     "related_books": [
-      10
+      12,
+      15
     ],
-    "created_at": "2023-03-19T16:06:25.851Z",
-    "updated_at": "2023-03-19T16:06:25.851Z"
+    "created_at": "2023-11-01T12:00:00Z",
+    "updated_at": "2023-11-01T12:00:00Z"
   },
   {
     "id": 5,
     "author": {
-      "name": "Mike Ross",
-      "avatar": "https://i.pravatar.cc/150?u=mike",
-      "tagline": "Legal Eagle"
+      "name": "Donna Paulsen",
+      "avatar": "https://i.pravatar.cc/150?u=donna",
+      "tagline": "UX Researcher"
     },
-    "timeAgo": "17 hrs ago",
-    "title": "How to Cook the Perfect Steak #5",
-    "content": "Hey everyone! I've been diving deeper into this topic lately, and I realized there's a ton of great resources out there. Thought I'd share a few and see what you all recommend too!",
+    "timeAgo": "8 hours ago",
+    "title": "HCI principles in modern Game UI",
+    "content": "I've been analyzing the inventory systems in RPGs. The principles from the 'Human-Computer Interaction' book regarding cognitive load are totally applicable here. Minimalist UI isn't just aesthetic; it's functional.",
     "tags": [
       {
-        "label": "Lifestyle",
-        "type": "category"
+        "label": "#UXDesign",
+        "type": "topic"
       },
       {
-        "label": "Hobbies",
-        "type": "category"
+        "label": "#Gaming",
+        "type": "topic"
       }
     ],
-    "stars": 293,
-    "community_id": "photography-club",
+    "stars": 89,
+    "community_id": "gaming-hub",
     "related_books": [
-      10
+      8,
+      14
     ],
-    "created_at": "2023-12-16T16:57:46.901Z",
-    "updated_at": "2023-12-16T16:57:46.901Z"
+    "created_at": "2023-11-01T14:00:00Z",
+    "updated_at": "2023-11-01T14:00:00Z"
   },
   {
     "id": 6,
     "author": {
-      "name": "Jane Smith",
-      "avatar": "https://i.pravatar.cc/150?u=jane",
-      "tagline": "Bookworm"
+      "name": "Harvey Specter",
+      "avatar": "https://i.pravatar.cc/150?u=harvey",
+      "tagline": "Startup Founder"
     },
-    "timeAgo": "1 hrs ago",
-    "title": "Understanding Quantum Computing #6",
-    "content": "I've been thinking a lot about the future of this industry. With all the new tech coming out, it's hard to keep up. What are your predictions?",
+    "timeAgo": "10 hours ago",
+    "title": "MVP vs Polished Product",
+    "content": "The Lean Startup methodology saved my latest project. We were about to spend 6 months building a feature nobody wanted. 'Build-Measure-Learn' is the only way to go.",
     "tags": [
       {
-        "label": "#Review",
+        "label": "#Business",
         "type": "topic"
       },
       {
-        "label": "#Review",
+        "label": "#Startup",
         "type": "topic"
       }
     ],
-    "stars": 31,
-    "community_id": "literacy-circle",
+    "stars": 445,
+    "community_id": "creative-atelier",
     "related_books": [
-      9,
-      3,
-      5
+      7
     ],
-    "created_at": "2024-08-07T01:53:49.118Z",
-    "updated_at": "2024-08-07T01:53:49.118Z"
+    "created_at": "2023-11-01T15:00:00Z",
+    "updated_at": "2023-11-01T15:00:00Z"
   },
   {
     "id": 7,
     "author": {
-      "name": "Orang Kmplang",
-      "avatar": "https://i.pravatar.cc/150?u=kmplang",
-      "tagline": "A stupid one"
+      "name": "Rachel Zane",
+      "avatar": "https://i.pravatar.cc/150?u=rachel",
+      "tagline": "Student"
     },
-    "timeAgo": "18 hrs ago",
-    "title": "Fitness Myths You Should Stop Believing #7",
-    "content": "Just finished this book and it blew my mind. Highly recommend it to everyone here.",
+    "timeAgo": "12 hours ago",
+    "title": "Growth Mindset changed how I study",
+    "content": "I used to think I was just 'bad at math'. After reading Carol Dweck's book, I realized I just hadn't found the right method yet. It's a subtle shift but it changes everything.",
     "tags": [
       {
-        "label": "Hobbies",
-        "type": "category"
+        "label": "#Psychology",
+        "type": "topic"
       },
       {
-        "label": "#Trending",
+        "label": "#Studying",
         "type": "topic"
       }
     ],
-    "stars": 222,
-    "community_id": "gaming-hub",
-    "related_books": [],
-    "created_at": "2023-08-16T10:23:15.764Z",
-    "updated_at": "2023-08-16T10:23:15.764Z"
+    "stars": 670,
+    "community_id": "wellness-warriors",
+    "related_books": [
+      9
+    ],
+    "created_at": "2023-11-01T16:00:00Z",
+    "updated_at": "2023-11-01T16:00:00Z"
   },
   {
     "id": 8,
     "author": {
-      "name": "Orang Kmplang",
-      "avatar": "https://i.pravatar.cc/150?u=kmplang",
-      "tagline": "A stupid one"
+      "name": "John Doe",
+      "avatar": "https://i.pravatar.cc/150?u=john",
+      "tagline": "AI Enthusiast"
     },
-    "timeAgo": "3 hrs ago",
-    "title": "The Best Coffee Shops in Tokyo #8",
-    "content": "Just wanted to share some tips I've learned from my journey over the past year. The most important thing is to be patient and observe your surroundings.",
+    "timeAgo": "14 hours ago",
+    "title": "The math behind Deep Learning",
+    "content": "Finally diving into the 'Deep Learning' book by Goodfellow. The linear algebra chapter is dense but necessary. Anyone else working through this text?",
     "tags": [
       {
-        "label": "Tech",
-        "type": "category"
+        "label": "#AI",
+        "type": "topic"
       },
       {
-        "label": "Food",
-        "type": "category"
-      },
-      {
-        "label": "Lifestyle",
-        "type": "category"
+        "label": "#Math",
+        "type": "topic"
       }
     ],
-    "stars": 941,
-    "community_id": "tech-talk",
+    "stars": 112,
+    "community_id": "creative-atelier",
     "related_books": [
-      9
+      6,
+      10
     ],
-    "created_at": "2024-08-06T21:53:57.731Z",
-    "updated_at": "2024-08-06T21:53:57.731Z"
+    "created_at": "2023-11-01T17:00:00Z",
+    "updated_at": "2023-11-01T17:00:00Z"
   },
   {
     "id": 9,
     "author": {
-      "name": "Alfan Gunadar",
-      "avatar": "https://i.pravatar.cc/150?u=alfan",
-      "tagline": "Something Vanity!"
+      "name": "Orang Kmplang",
+      "avatar": "https://i.pravatar.cc/150?u=kmplang",
+      "tagline": "Casual Reader"
     },
-    "timeAgo": "18 hrs ago",
-    "title": "The Psychology of Color in Design #9",
-    "content": "I'm struggling with this concept. Can anyone explain it in simple terms?",
+    "timeAgo": "1 day ago",
+    "title": "Design Patterns for Game Dev",
+    "content": "Observer pattern and Singleton are everywhere in Unity development. The Gang of Four book is dry, but the concepts are fundamental if you want scalable game architecture.",
     "tags": [
       {
-        "label": "#Discussion",
+        "label": "#GameDev",
         "type": "topic"
       },
       {
-        "label": "Lifestyle",
-        "type": "category"
-      },
-      {
-        "label": "Lifestyle",
-        "type": "category"
+        "label": "#Architecture",
+        "type": "topic"
       }
     ],
-    "stars": 647,
-    "community_id": "photography-club",
+    "stars": 230,
+    "community_id": "gaming-hub",
     "related_books": [
-      2,
       4
     ],
-    "created_at": "2025-10-30T04:35:41.529Z",
-    "updated_at": "2025-10-30T04:35:41.529Z"
+    "created_at": "2023-11-01T18:00:00Z",
+    "updated_at": "2023-11-01T18:00:00Z"
   },
   {
     "id": 10,
     "author": {
-      "name": "Jane Smith",
-      "avatar": "https://i.pravatar.cc/150?u=jane",
-      "tagline": "Bookworm"
+      "name": "Louis Litt",
+      "avatar": "https://i.pravatar.cc/150?u=louis",
+      "tagline": "History Buff"
     },
-    "timeAgo": "22 hrs ago",
-    "title": "Is FNAF 2 going to debut in Minecraft alongside Herobrine #10",
-    "content": "Just wanted to share some tips I've learned from my journey over the past year. The most important thing is to be patient and observe your surroundings.",
+    "timeAgo": "1 day ago",
+    "title": "PHP isn't dead, seriously.",
+    "content": "With Modern PHP practices and Laravel, the ecosystem is thriving. Stop hating on it if you haven't used it since 2010. 'Modern PHP' by Josh Lockhart is a great refresher.",
     "tags": [
       {
-        "label": "#Discussion",
+        "label": "#PHP",
         "type": "topic"
       },
       {
-        "label": "Hobbies",
-        "type": "category"
-      },
-      {
-        "label": "#New",
+        "label": "#WebDev",
         "type": "topic"
-      },
-      {
-        "label": "Tech",
-        "type": "category"
       }
     ],
-    "stars": 297,
-    "community_id": "travel-bugs",
+    "stars": 190,
+    "community_id": "creative-atelier",
     "related_books": [
-      5
+      13,
+      11
     ],
-    "created_at": "2024-12-11T09:38:22.209Z",
-    "updated_at": "2024-12-11T09:38:22.209Z"
+    "created_at": "2023-11-01T19:00:00Z",
+    "updated_at": "2023-11-01T19:00:00Z"
   },
   {
     "id": 11,
     "author": {
       "name": "Sarah Chen",
       "avatar": "https://i.pravatar.cc/150?u=sarah",
-      "tagline": "Photography enthusiast"
+      "tagline": "Product Designer"
     },
-    "timeAgo": "11 hrs ago",
-    "title": "Travel on a Budget: Tips and Tricks #11",
-    "content": "I'm looking for recommendations for a new project I'm working on. Any tools or libraries you swear by?",
+    "timeAgo": "1 day ago",
+    "title": "HTML semantics matter!",
+    "content": "Just finished Jon Duckett's HTML & CSS book. The visual explanation of the box model is the best I've seen. Beginners, please stop using divs for everything.",
     "tags": [
       {
-        "label": "Travel",
-        "type": "category"
+        "label": "#WebDesign",
+        "type": "topic"
       },
       {
-        "label": "Travel",
-        "type": "category"
+        "label": "#Beginner",
+        "type": "topic"
       }
     ],
-    "stars": 775,
-    "community_id": "photography-club",
+    "stars": 300,
+    "community_id": "creative-atelier",
     "related_books": [
-      7
+      14
     ],
-    "created_at": "2024-04-04T08:44:18.023Z",
-    "updated_at": "2024-04-04T08:44:18.023Z"
+    "created_at": "2023-10-30T09:00:00Z",
+    "updated_at": "2023-10-30T09:00:00Z"
   },
   {
     "id": 12,
     "author": {
-      "name": "John Doe",
-      "avatar": "https://i.pravatar.cc/150?u=john",
-      "tagline": "Tech Explorer"
+      "name": "Mike Ross",
+      "avatar": "https://i.pravatar.cc/150?u=mike",
+      "tagline": "Backend Dev"
     },
-    "timeAgo": "4 hrs ago",
-    "title": "My Journey to Becoming a Senior Dev #12",
-    "content": "Does anyone else feel like this is getting out of hand? I mean, the prices are skyrocketing and the quality is dropping.",
+    "timeAgo": "2 days ago",
+    "title": "Algorithms are hard.",
+    "content": "Donald Knuth's 'Art of Computer Programming' is intimidating. I treat it more like an encyclopedia than a reading book. Has anyone actually read it cover to cover?",
     "tags": [
       {
-        "label": "Tech",
-        "type": "category"
-      },
-      {
-        "label": "#Review",
+        "label": "#CS",
         "type": "topic"
       },
       {
-        "label": "Travel",
-        "type": "category"
-      },
-      {
-        "label": "Food",
-        "type": "category"
+        "label": "#Hardcore",
+        "type": "topic"
       }
     ],
-    "stars": 726,
-    "community_id": "tech-talk",
-    "related_books": [],
-    "created_at": "2024-07-27T04:30:26.438Z",
-    "updated_at": "2024-07-27T04:30:26.438Z"
+    "stars": 540,
+    "community_id": "creative-atelier",
+    "related_books": [
+      10
+    ],
+    "created_at": "2023-10-29T10:00:00Z",
+    "updated_at": "2023-10-29T10:00:00Z"
   },
   {
     "id": 13,
     "author": {
       "name": "Jane Smith",
       "avatar": "https://i.pravatar.cc/150?u=jane",
-      "tagline": "Bookworm"
+      "tagline": "Fantasy Reader"
     },
-    "timeAgo": "11 hrs ago",
-    "title": "Why I Switched from iOS to Android #13",
-    "content": "I recently visited this amazing place and I have to share it with you all. The food, the people, the views... everything was perfect.",
+    "timeAgo": "2 days ago",
+    "title": "Habit Stacking for Readers",
+    "content": "Using Atomic Habits techniques: After I pour my morning coffee (current habit), I will read one page of a book (new habit). It's helping me get through my TBR pile.",
     "tags": [
       {
-        "label": "Tech",
-        "type": "category"
-      },
-      {
-        "label": "Lifestyle",
-        "type": "category"
-      },
-      {
-        "label": "#Review",
-        "type": "topic"
-      }
-    ],
-    "stars": 2,
-    "community_id": "gaming-hub",
-    "related_books": [
-      6,
-      2
-    ],
-    "created_at": "2024-04-04T05:27:27.551Z",
-    "updated_at": "2024-04-04T05:27:27.551Z"
-  },
-  {
-    "id": 14,
-    "author": {
-      "name": "John Doe",
-      "avatar": "https://i.pravatar.cc/150?u=john",
-      "tagline": "Tech Explorer"
-    },
-    "timeAgo": "22 hrs ago",
-    "title": "Review: The Latest Marvel Movie #14",
-    "content": "I recently visited this amazing place and I have to share it with you all. The food, the people, the views... everything was perfect.",
-    "tags": [
-      {
-        "label": "Hobbies",
-        "type": "category"
-      },
-      {
-        "label": "Hobbies",
-        "type": "category"
-      },
-      {
-        "label": "#Trending",
+        "label": "#ReadingTips",
         "type": "topic"
       },
       {
-        "label": "Tech",
-        "type": "category"
+        "label": "#Habits",
+        "type": "topic"
       }
     ],
-    "stars": 785,
-    "community_id": "food-lovers",
-    "related_books": [
-      2,
-      6,
-      8
-    ],
-    "created_at": "2023-07-05T04:47:48.265Z",
-    "updated_at": "2023-07-05T04:47:48.265Z"
-  },
-  {
-    "id": 15,
-    "author": {
-      "name": "Mike Ross",
-      "avatar": "https://i.pravatar.cc/150?u=mike",
-      "tagline": "Legal Eagle"
-    },
-    "timeAgo": "7 hrs ago",
-    "title": "Fitness Myths You Should Stop Believing #15",
-    "content": "I recently visited this amazing place and I have to share it with you all. The food, the people, the views... everything was perfect.",
-    "tags": [
-      {
-        "label": "Tech",
-        "type": "category"
-      },
-      {
-        "label": "Lifestyle",
-        "type": "category"
-      }
-    ],
-    "stars": 651,
+    "stars": 412,
     "community_id": "literacy-circle",
     "related_books": [
       3
     ],
-    "created_at": "2025-04-15T17:41:03.516Z",
-    "updated_at": "2025-04-15T17:41:03.516Z"
+    "created_at": "2023-10-28T11:00:00Z",
+    "updated_at": "2023-10-28T11:00:00Z"
+  },
+  {
+    "id": 14,
+    "author": {
+      "name": "Alfan Gunadar",
+      "avatar": "https://i.pravatar.cc/150?u=alfan",
+      "tagline": "Frontend Ninja"
+    },
+    "timeAgo": "3 days ago",
+    "title": "The Pragmatic Programmer is a career guide",
+    "content": "The advice about 'Stone Soup and Boiled Frogs' explains so much about corporate software development. It's not just code; it's about responsibility.",
+    "tags": [
+      {
+        "label": "#Career",
+        "type": "topic"
+      },
+      {
+        "label": "#DevLife",
+        "type": "topic"
+      }
+    ],
+    "stars": 288,
+    "community_id": "creative-atelier",
+    "related_books": [
+      5
+    ],
+    "created_at": "2023-10-27T12:00:00Z",
+    "updated_at": "2023-10-27T12:00:00Z"
+  },
+  {
+    "id": 15,
+    "author": {
+      "name": "Donna Paulsen",
+      "avatar": "https://i.pravatar.cc/150?u=donna",
+      "tagline": "UX Researcher"
+    },
+    "timeAgo": "3 days ago",
+    "title": "Mental Models in Design",
+    "content": "Reading 'Design Patterns' made me realize we have similar patterns in UI. Users expect certain behaviors (like hamburger menus on mobile). Breaking these patterns causes friction.",
+    "tags": [
+      {
+        "label": "#Design",
+        "type": "topic"
+      },
+      {
+        "label": "#UI",
+        "type": "topic"
+      }
+    ],
+    "stars": 156,
+    "community_id": "creative-atelier",
+    "related_books": [
+      4,
+      8
+    ],
+    "created_at": "2023-10-26T13:00:00Z",
+    "updated_at": "2023-10-26T13:00:00Z"
   },
   {
     "id": 16,
     "author": {
-      "name": "John Doe",
-      "avatar": "https://i.pravatar.cc/150?u=john",
-      "tagline": "Tech Explorer"
+      "name": "Harvey Specter",
+      "avatar": "https://i.pravatar.cc/150?u=harvey",
+      "tagline": "Startup Founder"
     },
-    "timeAgo": "18 hrs ago",
-    "title": "Travel on a Budget: Tips and Tricks #16",
-    "content": "Hey everyone! I've been diving deeper into this topic lately, and I realized there's a ton of great resources out there. Thought I'd share a few and see what you all recommend too!",
+    "timeAgo": "3 days ago",
+    "title": "Mindset in Negotiation",
+    "content": "Fixed mindset says 'I am a bad negotiator'. Growth mindset says 'I can learn negotiation'. Dweck's research applies heavily to business strategy.",
     "tags": [
       {
-        "label": "#Help",
+        "label": "#Business",
         "type": "topic"
       },
       {
-        "label": "Travel",
-        "type": "category"
+        "label": "#Psychology",
+        "type": "topic"
       }
     ],
-    "stars": 744,
-    "community_id": "tech-talk",
+    "stars": 610,
+    "community_id": "wellness-warriors",
     "related_books": [
-      9,
-      4
+      9
     ],
-    "created_at": "2023-11-01T07:46:06.776Z",
-    "updated_at": "2023-11-01T07:46:06.776Z"
+    "created_at": "2023-10-25T14:00:00Z",
+    "updated_at": "2023-10-25T14:00:00Z"
   },
   {
     "id": 17,
     "author": {
-      "name": "Alfan Gunadar",
-      "avatar": "https://i.pravatar.cc/150?u=alfan",
-      "tagline": "Something Vanity!"
+      "name": "Orang Kmplang",
+      "avatar": "https://i.pravatar.cc/150?u=kmplang",
+      "tagline": "Casual Reader"
     },
-    "timeAgo": "7 hrs ago",
-    "title": "Fitness Myths You Should Stop Believing #17",
-    "content": "Here's a quick tutorial on how to get started with this. It's easier than you think!",
+    "timeAgo": "4 days ago",
+    "title": "Jump Fest 2025 Hype!",
+    "content": "Anyone else excited for the new shonen announcements? I'm hoping for some good fantasy adaptations, something with world-building like The Hobbit but anime style.",
     "tags": [
       {
-        "label": "#Review",
+        "label": "#Anime",
         "type": "topic"
       },
       {
-        "label": "#Trending",
+        "label": "#Events",
         "type": "topic"
       }
     ],
-    "stars": 306,
-    "community_id": "gaming-hub",
+    "stars": 890,
+    "community_id": "jump-fest-2025",
     "related_books": [
-      4,
-      3
+      2
     ],
-    "created_at": "2023-10-17T22:46:42.681Z",
-    "updated_at": "2023-10-17T22:46:42.681Z"
+    "created_at": "2023-10-24T15:00:00Z",
+    "updated_at": "2023-10-24T15:00:00Z"
   },
   {
     "id": 18,
     "author": {
-      "name": "Alfan Gunadar",
-      "avatar": "https://i.pravatar.cc/150?u=alfan",
-      "tagline": "Something Vanity!"
+      "name": "Sarah Chen",
+      "avatar": "https://i.pravatar.cc/150?u=sarah",
+      "tagline": "Product Designer"
     },
-    "timeAgo": "4 hrs ago",
-    "title": "Fitness Myths You Should Stop Believing #18",
-    "content": "Does anyone else feel like this is getting out of hand? I mean, the prices are skyrocketing and the quality is dropping.",
+    "timeAgo": "4 days ago",
+    "title": "Photography and Composition",
+    "content": "Just like in 'HTML & CSS', structure is everything. I'm trying to apply the rule of thirds from my design books to my weekend photography shots.",
     "tags": [
       {
-        "label": "#Discussion",
+        "label": "#Photography",
         "type": "topic"
       },
       {
-        "label": "Food",
-        "type": "category"
+        "label": "#Composition",
+        "type": "topic"
       }
     ],
-    "stars": 726,
-    "community_id": "food-lovers",
+    "stars": 120,
+    "community_id": "photography-club",
     "related_books": [
-      7,
-      10
+      14
     ],
-    "created_at": "2023-07-28T21:04:22.653Z",
-    "updated_at": "2023-07-28T21:04:22.653Z"
+    "created_at": "2023-10-23T16:00:00Z",
+    "updated_at": "2023-10-23T16:00:00Z"
   },
   {
     "id": 19,
     "author": {
-      "name": "Orang Kmplang",
-      "avatar": "https://i.pravatar.cc/150?u=kmplang",
-      "tagline": "A stupid one"
+      "name": "John Doe",
+      "avatar": "https://i.pravatar.cc/150?u=john",
+      "tagline": "AI Enthusiast"
     },
-    "timeAgo": "18 hrs ago",
-    "title": "The History of Video Games #19",
-    "content": "I recently visited this amazing place and I have to share it with you all. The food, the people, the views... everything was perfect.",
+    "timeAgo": "5 days ago",
+    "title": "AI generated code vs Clean Code",
+    "content": "Copilot is great, but it often violates 'Clean Code' principles. It repeats logic and creates massive functions. We still need to refactor AI output.",
     "tags": [
       {
-        "label": "Travel",
-        "type": "category"
+        "label": "#AI",
+        "type": "topic"
       },
       {
-        "label": "Food",
-        "type": "category"
-      },
-      {
-        "label": "Lifestyle",
-        "type": "category"
-      },
-      {
-        "label": "Lifestyle",
-        "type": "category"
+        "label": "#Refactoring",
+        "type": "topic"
       }
     ],
-    "stars": 83,
-    "community_id": "food-lovers",
-    "related_books": [],
-    "created_at": "2023-12-11T12:20:47.685Z",
-    "updated_at": "2023-12-11T12:20:47.685Z"
+    "stars": 333,
+    "community_id": "creative-atelier",
+    "related_books": [
+      1,
+      6
+    ],
+    "created_at": "2023-10-22T17:00:00Z",
+    "updated_at": "2023-10-22T17:00:00Z"
   },
   {
     "id": 20,
     "author": {
-      "name": "Jane Smith",
-      "avatar": "https://i.pravatar.cc/150?u=jane",
-      "tagline": "Bookworm"
+      "name": "Louis Litt",
+      "avatar": "https://i.pravatar.cc/150?u=louis",
+      "tagline": "History Buff"
     },
-    "timeAgo": "3 hrs ago",
-    "title": "How to Cook the Perfect Steak #20",
-    "content": "I've been thinking a lot about the future of this industry. With all the new tech coming out, it's hard to keep up. What are your predictions?",
+    "timeAgo": "5 days ago",
+    "title": "Legacy Code Nightmares",
+    "content": "I inherited a project with zero comments and variables named 'x', 'y', 'temp'. 'Working Effectively with Legacy Code' is my bible right now, alongside 'Clean Code'.",
     "tags": [
       {
-        "label": "#Trending",
+        "label": "#DevStruggles",
         "type": "topic"
       },
       {
-        "label": "#Trending",
+        "label": "#Legacy",
         "type": "topic"
-      },
-      {
-        "label": "Tech",
-        "type": "category"
       }
     ],
-    "stars": 81,
-    "community_id": "photography-club",
+    "stars": 245,
+    "community_id": "creative-atelier",
     "related_books": [
-      5,
-      2
+      1
     ],
-    "created_at": "2024-05-19T09:59:26.198Z",
-    "updated_at": "2024-05-19T09:59:26.198Z"
+    "created_at": "2023-10-21T18:00:00Z",
+    "updated_at": "2023-10-21T18:00:00Z"
   },
   {
     "id": 21,
     "author": {
       "name": "Alfan Gunadar",
       "avatar": "https://i.pravatar.cc/150?u=alfan",
-      "tagline": "Something Vanity!"
+      "tagline": "Frontend Ninja"
     },
-    "timeAgo": "5 hrs ago",
-    "title": "My Journey to Becoming a Senior Dev #21",
-    "content": "I've been thinking a lot about the future of this industry. With all the new tech coming out, it's hard to keep up. What are your predictions?",
+    "timeAgo": "5 days ago",
+    "title": "Vue 3 Composition API",
+    "content": "The new syntax in Vue 3 is so much cleaner. Reading 'Vue.js: Up and Running' helped bridge the gap from Options API for me.",
     "tags": [
       {
-        "label": "Hobbies",
-        "type": "category"
+        "label": "#VueJS",
+        "type": "topic"
       },
       {
-        "label": "Food",
-        "type": "category"
-      },
-      {
-        "label": "Tech",
-        "type": "category"
-      },
-      {
-        "label": "#New",
+        "label": "#Frontend",
         "type": "topic"
       }
     ],
-    "stars": 158,
-    "community_id": "gaming-hub",
+    "stars": 167,
+    "community_id": "creative-atelier",
     "related_books": [
-      4,
-      6
+      15
     ],
-    "created_at": "2024-01-06T08:04:51.030Z",
-    "updated_at": "2024-01-06T08:04:51.030Z"
+    "created_at": "2023-10-21T10:00:00Z",
+    "updated_at": "2023-10-21T10:00:00Z"
   },
   {
     "id": 22,
     "author": {
       "name": "Jane Smith",
       "avatar": "https://i.pravatar.cc/150?u=jane",
-      "tagline": "Bookworm"
+      "tagline": "Fantasy Reader"
     },
-    "timeAgo": "16 hrs ago",
-    "title": "Understanding Quantum Computing #22",
-    "content": "Does anyone else feel like this is getting out of hand? I mean, the prices are skyrocketing and the quality is dropping.",
+    "timeAgo": "6 days ago",
+    "title": "World Building 101",
+    "content": "Tolkien didn't just write a story; he created languages, maps, and histories. That's the standard for high fantasy. Any recommendations for books with similar depth?",
     "tags": [
       {
-        "label": "#Trending",
+        "label": "#Writing",
         "type": "topic"
       },
       {
-        "label": "#Review",
+        "label": "#Fantasy",
         "type": "topic"
-      },
-      {
-        "label": "Travel",
-        "type": "category"
       }
     ],
-    "stars": 95,
-    "community_id": "photography-club",
+    "stars": 490,
+    "community_id": "literacy-circle",
     "related_books": [
-      6,
       2
     ],
-    "created_at": "2023-12-18T23:47:58.848Z",
-    "updated_at": "2023-12-18T23:47:58.848Z"
+    "created_at": "2023-10-20T11:00:00Z",
+    "updated_at": "2023-10-20T11:00:00Z"
   },
   {
     "id": 23,
     "author": {
-      "name": "Orang Kmplang",
-      "avatar": "https://i.pravatar.cc/150?u=kmplang",
-      "tagline": "A stupid one"
+      "name": "Mike Ross",
+      "avatar": "https://i.pravatar.cc/150?u=mike",
+      "tagline": "Backend Dev"
     },
-    "timeAgo": "19 hrs ago",
-    "title": "Why I Switched from iOS to Android #23",
-    "content": "Just finished this book and it blew my mind. Highly recommend it to everyone here.",
+    "timeAgo": "1 week ago",
+    "title": "Database normalization",
+    "content": "Reviewing 'PHP and MySQL Web Development'. The chapter on database normalization is a great refresher. Many devs skip this and regret it later.",
     "tags": [
       {
-        "label": "#Discussion",
+        "label": "#Database",
         "type": "topic"
       },
       {
-        "label": "Tech",
-        "type": "category"
-      },
-      {
-        "label": "Hobbies",
-        "type": "category"
+        "label": "#SQL",
+        "type": "topic"
       }
     ],
-    "stars": 619,
-    "community_id": "travel-bugs",
+    "stars": 88,
+    "community_id": "creative-atelier",
     "related_books": [
-      3,
-      9,
-      1
+      11
     ],
-    "created_at": "2024-04-07T11:17:42.579Z",
-    "updated_at": "2024-04-07T11:17:42.579Z"
+    "created_at": "2023-10-19T12:00:00Z",
+    "updated_at": "2023-10-19T12:00:00Z"
   },
   {
     "id": 24,
     "author": {
-      "name": "Louis Litt",
-      "avatar": "https://i.pravatar.cc/150?u=louis",
-      "tagline": "Cat Lover"
+      "name": "Donna Paulsen",
+      "avatar": "https://i.pravatar.cc/150?u=donna",
+      "tagline": "UX Researcher"
     },
-    "timeAgo": "23 hrs ago",
-    "title": "Why You Should Learn Rust #24",
-    "content": "Just wanted to share some tips I've learned from my journey over the past year. The most important thing is to be patient and observe your surroundings.",
+    "timeAgo": "1 week ago",
+    "title": "Accessibility in Web Design",
+    "content": "Semantic HTML is the first step to accessibility. Screen readers rely on header tags and aria-labels. Duckett's book touches on this, but we need to go deeper.",
     "tags": [
       {
-        "label": "Tech",
-        "type": "category"
-      },
-      {
-        "label": "#Help",
+        "label": "#a11y",
         "type": "topic"
       },
       {
-        "label": "Food",
-        "type": "category"
+        "label": "#HTML",
+        "type": "topic"
       }
     ],
-    "stars": 559,
-    "community_id": "tech-talk",
-    "related_books": [],
-    "created_at": "2023-08-31T02:23:57.169Z",
-    "updated_at": "2023-08-31T02:23:57.169Z"
+    "stars": 312,
+    "community_id": "creative-atelier",
+    "related_books": [
+      14
+    ],
+    "created_at": "2023-10-18T13:00:00Z",
+    "updated_at": "2023-10-18T13:00:00Z"
   },
   {
     "id": 25,
     "author": {
-      "name": "Donna Paulsen",
-      "avatar": "https://i.pravatar.cc/150?u=donna",
-      "tagline": "I know everything"
+      "name": "Harvey Specter",
+      "avatar": "https://i.pravatar.cc/150?u=harvey",
+      "tagline": "Startup Founder"
     },
-    "timeAgo": "23 hrs ago",
-    "title": "Travel on a Budget: Tips and Tricks #25",
-    "content": "I'm looking for recommendations for a new project I'm working on. Any tools or libraries you swear by?",
+    "timeAgo": "1 week ago",
+    "title": "Pivoting your idea",
+    "content": "We realized our initial hypothesis was wrong. Following 'The Lean Startup', we pivoted instead of persevering on a dead end. Hard decision, but necessary.",
     "tags": [
       {
-        "label": "#Discussion",
+        "label": "#Entrepreneurship",
         "type": "topic"
       },
       {
-        "label": "Food",
-        "type": "category"
+        "label": "#Strategy",
+        "type": "topic"
       }
     ],
-    "stars": 859,
-    "community_id": "food-lovers",
+    "stars": 505,
+    "community_id": "creative-atelier",
     "related_books": [
-      10,
-      5
+      7
     ],
-    "created_at": "2025-08-19T11:12:28.621Z",
-    "updated_at": "2025-08-19T11:12:28.621Z"
+    "created_at": "2023-10-17T14:00:00Z",
+    "updated_at": "2023-10-17T14:00:00Z"
   },
   {
     "id": 26,
     "author": {
-      "name": "Jane Smith",
-      "avatar": "https://i.pravatar.cc/150?u=jane",
-      "tagline": "Bookworm"
+      "name": "Rachel Zane",
+      "avatar": "https://i.pravatar.cc/150?u=rachel",
+      "tagline": "Student"
     },
-    "timeAgo": "12 hrs ago",
-    "title": "How to Build a PC from Scratch #26",
-    "content": "I recently visited this amazing place and I have to share it with you all. The food, the people, the views... everything was perfect.",
+    "timeAgo": "1 week ago",
+    "title": "Dealing with burnout",
+    "content": "Programming is mentally exhausting. I'm using techniques from 'Mindset' to view this burnout as a signal to rest, not a sign of incompetence.",
     "tags": [
       {
-        "label": "Travel",
-        "type": "category"
+        "label": "#MentalHealth",
+        "type": "topic"
       },
       {
-        "label": "Food",
-        "type": "category"
-      },
-      {
-        "label": "Hobbies",
-        "type": "category"
+        "label": "#Dev",
+        "type": "topic"
       }
     ],
-    "stars": 122,
-    "community_id": "gaming-hub",
+    "stars": 780,
+    "community_id": "wellness-warriors",
     "related_books": [
-      5
+      9
     ],
-    "created_at": "2024-05-11T01:46:51.947Z",
-    "updated_at": "2024-05-11T01:46:51.947Z"
+    "created_at": "2023-10-16T15:00:00Z",
+    "updated_at": "2023-10-16T15:00:00Z"
   },
   {
     "id": 27,
     "author": {
-      "name": "Louis Litt",
-      "avatar": "https://i.pravatar.cc/150?u=louis",
-      "tagline": "Cat Lover"
+      "name": "Orang Kmplang",
+      "avatar": "https://i.pravatar.cc/150?u=kmplang",
+      "tagline": "Casual Reader"
     },
-    "timeAgo": "15 hrs ago",
-    "title": "The Art of Minimalist Living #27",
-    "content": "Does anyone else feel like this is getting out of hand? I mean, the prices are skyrocketing and the quality is dropping.",
+    "timeAgo": "2 weeks ago",
+    "title": "Gaming marathons vs Habits",
+    "content": "I love gaming, but it eats my time. Trying to use 'Atomic Habits' to limit sessions to 2 hours. Identity shift: 'I am a gamer who also sleeps'.",
     "tags": [
       {
-        "label": "Travel",
-        "type": "category"
-      },
-      {
-        "label": "#Discussion",
+        "label": "#Gaming",
         "type": "topic"
       },
       {
-        "label": "Hobbies",
-        "type": "category"
-      },
-      {
-        "label": "#Review",
+        "label": "#LifeBalance",
         "type": "topic"
       }
     ],
-    "stars": 919,
-    "community_id": "tech-talk",
-    "related_books": [
-      6
-    ],
-    "created_at": "2024-11-14T07:37:59.066Z",
-    "updated_at": "2024-11-14T07:37:59.066Z"
-  },
-  {
-    "id": 28,
-    "author": {
-      "name": "Jane Smith",
-      "avatar": "https://i.pravatar.cc/150?u=jane",
-      "tagline": "Bookworm"
-    },
-    "timeAgo": "1 hrs ago",
-    "title": "Understanding Quantum Computing #28",
-    "content": "Does anyone else feel like this is getting out of hand? I mean, the prices are skyrocketing and the quality is dropping.",
-    "tags": [
-      {
-        "label": "#New",
-        "type": "topic"
-      },
-      {
-        "label": "#Discussion",
-        "type": "topic"
-      },
-      {
-        "label": "#Review",
-        "type": "topic"
-      }
-    ],
-    "stars": 463,
-    "community_id": "travel-bugs",
-    "related_books": [],
-    "created_at": "2025-07-29T21:40:59.317Z",
-    "updated_at": "2025-07-29T21:40:59.317Z"
-  },
-  {
-    "id": 29,
-    "author": {
-      "name": "Rachel Zane",
-      "avatar": "https://i.pravatar.cc/150?u=rachel",
-      "tagline": "Foodie"
-    },
-    "timeAgo": "11 hrs ago",
-    "title": "The History of Video Games #29",
-    "content": "I recently visited this amazing place and I have to share it with you all. The food, the people, the views... everything was perfect.",
-    "tags": [
-      {
-        "label": "#Discussion",
-        "type": "topic"
-      },
-      {
-        "label": "Lifestyle",
-        "type": "category"
-      },
-      {
-        "label": "Travel",
-        "type": "category"
-      }
-    ],
-    "stars": 331,
+    "stars": 340,
     "community_id": "gaming-hub",
     "related_books": [
       3
     ],
-    "created_at": "2023-07-08T06:55:24.592Z",
-    "updated_at": "2023-07-08T06:55:24.592Z"
+    "created_at": "2023-10-15T16:00:00Z",
+    "updated_at": "2023-10-15T16:00:00Z"
+  },
+  {
+    "id": 28,
+    "author": {
+      "name": "John Doe",
+      "avatar": "https://i.pravatar.cc/150?u=john",
+      "tagline": "AI Enthusiast"
+    },
+    "timeAgo": "2 weeks ago",
+    "title": "Neural Networks for Dummies",
+    "content": "Even if you are a web dev, understanding basic Neural Networks is becoming essential. The introductory chapters of 'Deep Learning' are approachable.",
+    "tags": [
+      {
+        "label": "#FutureTech",
+        "type": "topic"
+      },
+      {
+        "label": "#Learning",
+        "type": "topic"
+      }
+    ],
+    "stars": 215,
+    "community_id": "creative-atelier",
+    "related_books": [
+      6
+    ],
+    "created_at": "2023-10-14T17:00:00Z",
+    "updated_at": "2023-10-14T17:00:00Z"
+  },
+  {
+    "id": 29,
+    "author": {
+      "name": "Sarah Chen",
+      "avatar": "https://i.pravatar.cc/150?u=sarah",
+      "tagline": "Product Designer"
+    },
+    "timeAgo": "2 weeks ago",
+    "title": "DRY Principle in Design",
+    "content": "Don't Repeat Yourself isn't just for code. In UI design, using components (like in 'Pragmatic Programmer') saves so much time when clients ask for changes.",
+    "tags": [
+      {
+        "label": "#DesignSystems",
+        "type": "topic"
+      },
+      {
+        "label": "#Workflow",
+        "type": "topic"
+      }
+    ],
+    "stars": 145,
+    "community_id": "creative-atelier",
+    "related_books": [
+      5,
+      4
+    ],
+    "created_at": "2023-10-13T18:00:00Z",
+    "updated_at": "2023-10-13T18:00:00Z"
   },
   {
     "id": 30,
     "author": {
-      "name": "Orang Kmplang",
-      "avatar": "https://i.pravatar.cc/150?u=kmplang",
-      "tagline": "A stupid one"
+      "name": "Louis Litt",
+      "avatar": "https://i.pravatar.cc/150?u=louis",
+      "tagline": "History Buff"
     },
-    "timeAgo": "20 hrs ago",
-    "title": "Tips for Street Photography Beginners #30",
-    "content": "I've been thinking a lot about the future of this industry. With all the new tech coming out, it's hard to keep up. What are your predictions?",
+    "timeAgo": "2 weeks ago",
+    "title": "History of Computing",
+    "content": "Reading Knuth's work gives you such an appreciation for the pioneers. Sorting algorithms we take for granted took years to perfect.",
     "tags": [
       {
-        "label": "Food",
-        "type": "category"
-      },
-      {
-        "label": "#Discussion",
+        "label": "#History",
         "type": "topic"
       },
       {
-        "label": "#Review",
-        "type": "topic"
-      },
-      {
-        "label": "#New",
+        "label": "#Algorithms",
         "type": "topic"
       }
     ],
-    "stars": 365,
-    "community_id": "food-lovers",
-    "related_books": [],
-    "created_at": "2025-06-19T07:11:31.205Z",
-    "updated_at": "2025-06-19T07:11:31.205Z"
+    "stars": 99,
+    "community_id": "literacy-circle",
+    "related_books": [
+      10
+    ],
+    "created_at": "2023-10-12T19:00:00Z",
+    "updated_at": "2023-10-12T19:00:00Z"
   },
   {
     "id": 31,
     "author": {
-      "name": "Donna Paulsen",
-      "avatar": "https://i.pravatar.cc/150?u=donna",
-      "tagline": "I know everything"
+      "name": "Alfan Gunadar",
+      "avatar": "https://i.pravatar.cc/150?u=alfan",
+      "tagline": "Frontend Ninja"
     },
-    "timeAgo": "8 hrs ago",
-    "title": "Is FNAF 2 going to debut in Minecraft alongside Herobrine #31",
-    "content": "Okay, so I've been seeing some weird stuff in the latest teasers and community rumors. People are saying there might be a huge update coming soon. What do you think?",
+    "timeAgo": "3 weeks ago",
+    "title": "CSS Grid is magic",
+    "content": "Remember float clearing? Dark times. Modern CSS is so powerful. If you are still using Bootstrap for everything, read a modern CSS book.",
     "tags": [
       {
-        "label": "#Review",
+        "label": "#CSS",
         "type": "topic"
       },
       {
-        "label": "Travel",
-        "type": "category"
+        "label": "#Web",
+        "type": "topic"
       }
     ],
-    "stars": 804,
-    "community_id": "travel-bugs",
+    "stars": 367,
+    "community_id": "creative-atelier",
     "related_books": [
-      10
+      14
     ],
-    "created_at": "2025-06-27T05:44:03.170Z",
-    "updated_at": "2025-06-27T05:44:03.170Z"
+    "created_at": "2023-10-11T10:00:00Z",
+    "updated_at": "2023-10-11T10:00:00Z"
   },
   {
     "id": 32,
     "author": {
-      "name": "Alfan Gunadar",
-      "avatar": "https://i.pravatar.cc/150?u=alfan",
-      "tagline": "Something Vanity!"
+      "name": "Jane Smith",
+      "avatar": "https://i.pravatar.cc/150?u=jane",
+      "tagline": "Fantasy Reader"
     },
-    "timeAgo": "5 hrs ago",
-    "title": "Top 10 Hidden Gems in Southeast Asia #32",
-    "content": "I recently visited this amazing place and I have to share it with you all. The food, the people, the views... everything was perfect.",
+    "timeAgo": "3 weeks ago",
+    "title": "Comfort characters",
+    "content": "Bilbo Baggins is the ultimate comfort character. He doesn't want to be a hero, he just wants his tea. Relatable.",
     "tags": [
       {
-        "label": "Hobbies",
-        "type": "category"
+        "label": "#Characters",
+        "type": "topic"
       },
       {
-        "label": "Travel",
-        "type": "category"
-      },
-      {
-        "label": "#Help",
+        "label": "#Books",
         "type": "topic"
       }
     ],
-    "stars": 736,
-    "community_id": "travel-bugs",
+    "stars": 520,
+    "community_id": "literacy-circle",
     "related_books": [
-      7,
-      9,
-      1
+      2
     ],
-    "created_at": "2023-11-17T13:20:29.691Z",
-    "updated_at": "2023-11-17T13:20:29.691Z"
+    "created_at": "2023-10-10T11:00:00Z",
+    "updated_at": "2023-10-10T11:00:00Z"
   },
   {
     "id": 33,
     "author": {
-      "name": "Donna Paulsen",
-      "avatar": "https://i.pravatar.cc/150?u=donna",
-      "tagline": "I know everything"
+      "name": "Mike Ross",
+      "avatar": "https://i.pravatar.cc/150?u=mike",
+      "tagline": "Backend Dev"
     },
-    "timeAgo": "13 hrs ago",
-    "title": "How to Build a PC from Scratch #33",
-    "content": "Does anyone else feel like this is getting out of hand? I mean, the prices are skyrocketing and the quality is dropping.",
+    "timeAgo": "3 weeks ago",
+    "title": "Factory Pattern use cases",
+    "content": "I used to think Design Patterns were academic fluff. Then I had to build a notification system supporting Email, SMS, and Push. Factory Pattern to the rescue.",
     "tags": [
       {
-        "label": "Food",
-        "type": "category"
-      },
-      {
-        "label": "Hobbies",
-        "type": "category"
-      },
-      {
-        "label": "#Help",
+        "label": "#Code",
         "type": "topic"
       },
       {
-        "label": "Hobbies",
-        "type": "category"
+        "label": "#DesignPatterns",
+        "type": "topic"
       }
     ],
-    "stars": 755,
-    "community_id": "photography-club",
-    "related_books": [],
-    "created_at": "2025-11-03T19:40:12.169Z",
-    "updated_at": "2025-11-03T19:40:12.169Z"
+    "stars": 255,
+    "community_id": "creative-atelier",
+    "related_books": [
+      4
+    ],
+    "created_at": "2023-10-09T12:00:00Z",
+    "updated_at": "2023-10-09T12:00:00Z"
   },
   {
     "id": 34,
     "author": {
-      "name": "Orang Kmplang",
-      "avatar": "https://i.pravatar.cc/150?u=kmplang",
-      "tagline": "A stupid one"
+      "name": "Donna Paulsen",
+      "avatar": "https://i.pravatar.cc/150?u=donna",
+      "tagline": "UX Researcher"
     },
-    "timeAgo": "3 hrs ago",
-    "title": "My Journey to Becoming a Senior Dev #34",
-    "content": "Hey everyone! I've been diving deeper into this topic lately, and I realized there's a ton of great resources out there. Thought I'd share a few and see what you all recommend too!",
+    "timeAgo": "3 weeks ago",
+    "title": "Forms are hard.",
+    "content": "Designing good forms is an art. 'Human-Computer Interaction' has a whole section on error recovery. Don't just show 'Invalid Error', tell users HOW to fix it.",
     "tags": [
       {
-        "label": "Food",
-        "type": "category"
+        "label": "#UX",
+        "type": "topic"
       },
       {
-        "label": "Hobbies",
-        "type": "category"
+        "label": "#Forms",
+        "type": "topic"
       }
     ],
-    "stars": 799,
-    "community_id": "literacy-circle",
+    "stars": 340,
+    "community_id": "creative-atelier",
     "related_books": [
-      5
+      8
     ],
-    "created_at": "2024-04-20T21:47:14.763Z",
-    "updated_at": "2024-04-20T21:47:14.763Z"
+    "created_at": "2023-10-08T13:00:00Z",
+    "updated_at": "2023-10-08T13:00:00Z"
   },
   {
     "id": 35,
     "author": {
-      "name": "Louis Litt",
-      "avatar": "https://i.pravatar.cc/150?u=louis",
-      "tagline": "Cat Lover"
+      "name": "Harvey Specter",
+      "avatar": "https://i.pravatar.cc/150?u=harvey",
+      "tagline": "Startup Founder"
     },
-    "timeAgo": "14 hrs ago",
-    "title": "Tips for Street Photography Beginners #35",
-    "content": "I'm looking for recommendations for a new project I'm working on. Any tools or libraries you swear by?",
+    "timeAgo": "1 month ago",
+    "title": "Validating assumptions",
+    "content": "The hardest part of 'The Lean Startup' is admitting you might be wrong. We utilize A/B testing for everything now.",
     "tags": [
       {
-        "label": "#Discussion",
+        "label": "#DataDriven",
         "type": "topic"
       },
       {
-        "label": "#Help",
+        "label": "#Growth",
         "type": "topic"
-      },
-      {
-        "label": "#Help",
-        "type": "topic"
-      },
-      {
-        "label": "Food",
-        "type": "category"
       }
     ],
-    "stars": 634,
-    "community_id": "literacy-circle",
+    "stars": 460,
+    "community_id": "creative-atelier",
     "related_books": [
-      6,
-      4,
-      2
+      7
     ],
-    "created_at": "2025-11-01T12:43:00.341Z",
-    "updated_at": "2025-11-01T12:43:00.341Z"
+    "created_at": "2023-10-07T14:00:00Z",
+    "updated_at": "2023-10-07T14:00:00Z"
   },
   {
     "id": 36,
     "author": {
-      "name": "Sarah Chen",
-      "avatar": "https://i.pravatar.cc/150?u=sarah",
-      "tagline": "Photography enthusiast"
+      "name": "Rachel Zane",
+      "avatar": "https://i.pravatar.cc/150?u=rachel",
+      "tagline": "Student"
     },
-    "timeAgo": "15 hrs ago",
-    "title": "Top 10 Hidden Gems in Southeast Asia #36",
-    "content": "Just finished this book and it blew my mind. Highly recommend it to everyone here.",
+    "timeAgo": "1 month ago",
+    "title": "Consistency > Intensity",
+    "content": "Atomic Habits key takeaway: You don't rise to the level of your goals, you fall to the level of your systems. I'm building a system for my finals.",
     "tags": [
       {
-        "label": "#Discussion",
+        "label": "#StudyHacks",
         "type": "topic"
       },
       {
-        "label": "#Discussion",
-        "type": "topic"
-      },
-      {
-        "label": "#Discussion",
-        "type": "topic"
-      },
-      {
-        "label": "#New",
+        "label": "#Motivation",
         "type": "topic"
       }
     ],
-    "stars": 30,
-    "community_id": "tech-talk",
-    "related_books": [],
-    "created_at": "2025-03-12T11:23:58.849Z",
-    "updated_at": "2025-03-12T11:23:58.849Z"
+    "stars": 710,
+    "community_id": "wellness-warriors",
+    "related_books": [
+      3
+    ],
+    "created_at": "2023-10-06T15:00:00Z",
+    "updated_at": "2023-10-06T15:00:00Z"
   },
   {
     "id": 37,
     "author": {
-      "name": "Rachel Zane",
-      "avatar": "https://i.pravatar.cc/150?u=rachel",
-      "tagline": "Foodie"
+      "name": "John Doe",
+      "avatar": "https://i.pravatar.cc/150?u=john",
+      "tagline": "AI Enthusiast"
     },
-    "timeAgo": "3 hrs ago",
-    "title": "Review: The Latest Marvel Movie #37",
-    "content": "I recently visited this amazing place and I have to share it with you all. The food, the people, the views... everything was perfect.",
+    "timeAgo": "1 month ago",
+    "title": "Ethics in AI",
+    "content": "Deep Learning is powerful, but we need to talk about bias in datasets. Goodfellow touches on this, but it needs more discussion in our community.",
     "tags": [
       {
-        "label": "#Trending",
+        "label": "#Ethics",
         "type": "topic"
       },
       {
-        "label": "Lifestyle",
-        "type": "category"
-      },
-      {
-        "label": "#Discussion",
-        "type": "topic"
-      },
-      {
-        "label": "#Help",
+        "label": "#AI",
         "type": "topic"
       }
     ],
-    "stars": 470,
-    "community_id": "photography-club",
-    "related_books": [],
-    "created_at": "2025-03-02T14:25:50.986Z",
-    "updated_at": "2025-03-02T14:25:50.986Z"
+    "stars": 198,
+    "community_id": "creative-atelier",
+    "related_books": [
+      6
+    ],
+    "created_at": "2023-10-05T16:00:00Z",
+    "updated_at": "2023-10-05T16:00:00Z"
   },
   {
     "id": 38,
     "author": {
-      "name": "Sarah Chen",
-      "avatar": "https://i.pravatar.cc/150?u=sarah",
-      "tagline": "Photography enthusiast"
+      "name": "Orang Kmplang",
+      "avatar": "https://i.pravatar.cc/150?u=kmplang",
+      "tagline": "Casual Reader"
     },
-    "timeAgo": "18 hrs ago",
-    "title": "Meditation for Beginners #38",
-    "content": "I recently visited this amazing place and I have to share it with you all. The food, the people, the views... everything was perfect.",
+    "timeAgo": "1 month ago",
+    "title": "JS vs PHP for freelancing",
+    "content": "Hot take: PHP (Laravel) is still faster for whipping up a quick freelance project than a full JS stack. 'Modern PHP' proves it's robust enough.",
     "tags": [
       {
-        "label": "#Trending",
+        "label": "#Freelance",
         "type": "topic"
       },
       {
-        "label": "Hobbies",
-        "type": "category"
-      },
-      {
-        "label": "#New",
-        "type": "topic"
-      },
-      {
-        "label": "#Review",
+        "label": "#TechStack",
         "type": "topic"
       }
     ],
-    "stars": 426,
-    "community_id": "gaming-hub",
+    "stars": 275,
+    "community_id": "creative-atelier",
     "related_books": [
-      6
+      13,
+      12
     ],
-    "created_at": "2024-02-04T06:33:22.280Z",
-    "updated_at": "2024-02-04T06:33:22.280Z"
+    "created_at": "2023-10-04T17:00:00Z",
+    "updated_at": "2023-10-04T17:00:00Z"
   },
   {
     "id": 39,
     "author": {
-      "name": "Rachel Zane",
-      "avatar": "https://i.pravatar.cc/150?u=rachel",
-      "tagline": "Foodie"
+      "name": "Sarah Chen",
+      "avatar": "https://i.pravatar.cc/150?u=sarah",
+      "tagline": "Product Designer"
     },
-    "timeAgo": "9 hrs ago",
-    "title": "Gardening 101: How to Keep Your Plants Alive #39",
-    "content": "Okay, so I've been seeing some weird stuff in the latest teasers and community rumors. People are saying there might be a huge update coming soon. What do you think?",
+    "timeAgo": "1 month ago",
+    "title": "Affordances in real life",
+    "content": "After reading about HCI, I can't stop seeing bad design everywhere. Doors you pull but look like push doors (Norman Doors). Design matters!",
     "tags": [
       {
-        "label": "#Trending",
+        "label": "#RealLife",
         "type": "topic"
       },
       {
-        "label": "Lifestyle",
-        "type": "category"
-      },
-      {
-        "label": "#Discussion",
+        "label": "#Design",
         "type": "topic"
       }
     ],
-    "stars": 345,
-    "community_id": "literacy-circle",
+    "stars": 380,
+    "community_id": "creative-atelier",
     "related_books": [
-      2,
-      10
+      8
     ],
-    "created_at": "2024-09-19T22:22:41.741Z",
-    "updated_at": "2024-09-19T22:22:41.741Z"
+    "created_at": "2023-10-03T18:00:00Z",
+    "updated_at": "2023-10-03T18:00:00Z"
   },
   {
     "id": 40,
     "author": {
-      "name": "Donna Paulsen",
-      "avatar": "https://i.pravatar.cc/150?u=donna",
-      "tagline": "I know everything"
+      "name": "Louis Litt",
+      "avatar": "https://i.pravatar.cc/150?u=louis",
+      "tagline": "History Buff"
     },
-    "timeAgo": "4 hrs ago",
-    "title": "Is FNAF 2 going to debut in Minecraft alongside Herobrine #40",
-    "content": "I've been thinking a lot about the future of this industry. With all the new tech coming out, it's hard to keep up. What are your predictions?",
+    "timeAgo": "1 month ago",
+    "title": "The mythical man-month",
+    "content": "Not on the list, but 'The Pragmatic Programmer' references it. Adding manpower to a late software project makes it later. Classic.",
     "tags": [
       {
-        "label": "#New",
+        "label": "#Management",
         "type": "topic"
       },
       {
-        "label": "Lifestyle",
-        "type": "category"
-      },
-      {
-        "label": "#Help",
+        "label": "#Classics",
         "type": "topic"
       }
     ],
-    "stars": 892,
-    "community_id": "gaming-hub",
-    "related_books": [],
-    "created_at": "2024-02-26T22:53:48.897Z",
-    "updated_at": "2024-02-26T22:53:48.897Z"
+    "stars": 220,
+    "community_id": "creative-atelier",
+    "related_books": [
+      5
+    ],
+    "created_at": "2023-10-02T19:00:00Z",
+    "updated_at": "2023-10-02T19:00:00Z"
   },
   {
     "id": 41,
     "author": {
-      "name": "Orang Kmplang",
-      "avatar": "https://i.pravatar.cc/150?u=kmplang",
-      "tagline": "A stupid one"
+      "name": "Alfan Gunadar",
+      "avatar": "https://i.pravatar.cc/150?u=alfan",
+      "tagline": "Frontend Ninja"
     },
-    "timeAgo": "14 hrs ago",
-    "title": "Review: The Latest Marvel Movie #41",
-    "content": "Hey everyone! I've been diving deeper into this topic lately, and I realized there's a ton of great resources out there. Thought I'd share a few and see what you all recommend too!",
+    "timeAgo": "1 month ago",
+    "title": "State Management in 2024",
+    "content": "Vue's Pinia is so much simpler than Vuex. The 'Vue.js: Up and Running' concepts about state flow still apply, but the boilerplate is gone.",
     "tags": [
       {
-        "label": "Travel",
-        "type": "category"
-      },
-      {
-        "label": "#Review",
+        "label": "#Vue",
         "type": "topic"
       },
       {
-        "label": "Food",
-        "type": "category"
-      },
-      {
-        "label": "Hobbies",
-        "type": "category"
+        "label": "#State",
+        "type": "topic"
       }
     ],
-    "stars": 619,
-    "community_id": "tech-talk",
+    "stars": 155,
+    "community_id": "creative-atelier",
     "related_books": [
-      6
+      15
     ],
-    "created_at": "2024-06-28T18:14:49.622Z",
-    "updated_at": "2024-06-28T18:14:49.622Z"
+    "created_at": "2023-10-01T10:00:00Z",
+    "updated_at": "2023-10-01T10:00:00Z"
   },
   {
     "id": 42,
     "author": {
-      "name": "Mike Ross",
-      "avatar": "https://i.pravatar.cc/150?u=mike",
-      "tagline": "Legal Eagle"
+      "name": "Jane Smith",
+      "avatar": "https://i.pravatar.cc/150?u=jane",
+      "tagline": "Fantasy Reader"
     },
-    "timeAgo": "11 hrs ago",
-    "title": "Meditation for Beginners #42",
-    "content": "Just finished this book and it blew my mind. Highly recommend it to everyone here.",
+    "timeAgo": "1 month ago",
+    "title": "Riddles in the Dark",
+    "content": "The chapter with Gollum in The Hobbit is a masterclass in tension. It's a children's book but that scene is genuinely creepy.",
     "tags": [
       {
-        "label": "Lifestyle",
-        "type": "category"
-      },
-      {
-        "label": "Travel",
-        "type": "category"
-      },
-      {
-        "label": "#Discussion",
+        "label": "#Storytelling",
         "type": "topic"
       },
       {
-        "label": "#Discussion",
+        "label": "#Suspense",
         "type": "topic"
       }
     ],
-    "stars": 690,
+    "stars": 600,
     "community_id": "literacy-circle",
     "related_books": [
-      6,
-      7
+      2
     ],
-    "created_at": "2023-06-14T14:07:21.334Z",
-    "updated_at": "2023-06-14T14:07:21.334Z"
+    "created_at": "2023-09-30T11:00:00Z",
+    "updated_at": "2023-09-30T11:00:00Z"
   },
   {
     "id": 43,
     "author": {
-      "name": "Harvey Specter",
-      "avatar": "https://i.pravatar.cc/150?u=harvey",
-      "tagline": "Closer"
+      "name": "Mike Ross",
+      "avatar": "https://i.pravatar.cc/150?u=mike",
+      "tagline": "Backend Dev"
     },
-    "timeAgo": "20 hrs ago",
-    "title": "My Journey to Becoming a Senior Dev #43",
-    "content": "Does anyone else feel like this is getting out of hand? I mean, the prices are skyrocketing and the quality is dropping.",
+    "timeAgo": "2 months ago",
+    "title": "Bad comments vs Clean Code",
+    "content": "Don't write comments that repeat the code. 'i++ // increment i'. Clean Code taught me that code should express itself. Comments are for 'Why', not 'What'.",
     "tags": [
       {
-        "label": "Hobbies",
-        "type": "category"
+        "label": "#BestPractices",
+        "type": "topic"
       },
       {
-        "label": "#Trending",
+        "label": "#Coding",
         "type": "topic"
       }
     ],
-    "stars": 807,
-    "community_id": "gaming-hub",
+    "stars": 410,
+    "community_id": "creative-atelier",
     "related_books": [
-      10,
-      3,
-      4
+      1
     ],
-    "created_at": "2023-11-14T15:30:44.949Z",
-    "updated_at": "2023-11-14T15:30:44.949Z"
+    "created_at": "2023-09-29T12:00:00Z",
+    "updated_at": "2023-09-29T12:00:00Z"
   },
   {
     "id": 44,
     "author": {
       "name": "Donna Paulsen",
       "avatar": "https://i.pravatar.cc/150?u=donna",
-      "tagline": "I know everything"
+      "tagline": "UX Researcher"
     },
-    "timeAgo": "23 hrs ago",
-    "title": "Is FNAF 2 going to debut in Minecraft alongside Herobrine #44",
-    "content": "I'm looking for recommendations for a new project I'm working on. Any tools or libraries you swear by?",
+    "timeAgo": "2 months ago",
+    "title": "Color Psychology",
+    "content": "Discussing color theory in web design. It's not just CSS hex codes; it's about emotion. HTML & CSS covers syntax, but we need to study art too.",
     "tags": [
       {
-        "label": "Travel",
-        "type": "category"
+        "label": "#Color",
+        "type": "topic"
       },
       {
-        "label": "Food",
-        "type": "category"
+        "label": "#Art",
+        "type": "topic"
       }
     ],
-    "stars": 469,
-    "community_id": "literacy-circle",
+    "stars": 290,
+    "community_id": "creative-atelier",
     "related_books": [
-      1,
-      8,
-      2
+      14
     ],
-    "created_at": "2024-02-16T22:45:20.342Z",
-    "updated_at": "2024-02-16T22:45:20.342Z"
+    "created_at": "2023-09-28T13:00:00Z",
+    "updated_at": "2023-09-28T13:00:00Z"
   },
   {
     "id": 45,
     "author": {
-      "name": "Rachel Zane",
-      "avatar": "https://i.pravatar.cc/150?u=rachel",
-      "tagline": "Foodie"
+      "name": "Harvey Specter",
+      "avatar": "https://i.pravatar.cc/150?u=harvey",
+      "tagline": "Startup Founder"
     },
-    "timeAgo": "19 hrs ago",
-    "title": "Why I Switched from iOS to Android #45",
-    "content": "Hey everyone! I've been diving deeper into this topic lately, and I realized there's a ton of great resources out there. Thought I'd share a few and see what you all recommend too!",
+    "timeAgo": "2 months ago",
+    "title": "Vanity Metrics",
+    "content": "Page views don't pay the bills. 'The Lean Startup' warns against vanity metrics. We focus on conversion and retention now.",
     "tags": [
       {
-        "label": "#Discussion",
+        "label": "#Metrics",
         "type": "topic"
       },
       {
-        "label": "#Trending",
+        "label": "#Business",
         "type": "topic"
       }
     ],
-    "stars": 224,
-    "community_id": "photography-club",
+    "stars": 550,
+    "community_id": "creative-atelier",
     "related_books": [
-      8,
-      1,
-      6
+      7
     ],
-    "created_at": "2025-07-15T01:27:54.581Z",
-    "updated_at": "2025-07-15T01:27:54.581Z"
+    "created_at": "2023-09-27T14:00:00Z",
+    "updated_at": "2023-09-27T14:00:00Z"
   },
   {
     "id": 46,
     "author": {
       "name": "Rachel Zane",
       "avatar": "https://i.pravatar.cc/150?u=rachel",
-      "tagline": "Foodie"
+      "tagline": "Student"
     },
-    "timeAgo": "5 hrs ago",
-    "title": "The History of Video Games #46",
-    "content": "Here's a quick tutorial on how to get started with this. It's easier than you think!",
+    "timeAgo": "2 months ago",
+    "title": "The power of 'Yet'",
+    "content": "I don't understand recursion... YET. That simple word from Dweck's 'Mindset' keeps me going when algorithms get tough.",
     "tags": [
       {
-        "label": "#Trending",
+        "label": "#Learning",
         "type": "topic"
       },
       {
-        "label": "Hobbies",
-        "type": "category"
-      },
-      {
-        "label": "#Help",
-        "type": "topic"
-      },
-      {
-        "label": "#Trending",
+        "label": "#Growth",
         "type": "topic"
       }
     ],
-    "stars": 789,
-    "community_id": "gaming-hub",
-    "related_books": [],
-    "created_at": "2025-10-11T05:10:45.607Z",
-    "updated_at": "2025-10-11T05:10:45.607Z"
+    "stars": 680,
+    "community_id": "wellness-warriors",
+    "related_books": [
+      9
+    ],
+    "created_at": "2023-09-26T15:00:00Z",
+    "updated_at": "2023-09-26T15:00:00Z"
   },
   {
     "id": 47,
     "author": {
-      "name": "Harvey Specter",
-      "avatar": "https://i.pravatar.cc/150?u=harvey",
-      "tagline": "Closer"
+      "name": "Orang Kmplang",
+      "avatar": "https://i.pravatar.cc/150?u=kmplang",
+      "tagline": "Casual Reader"
     },
-    "timeAgo": "5 hrs ago",
-    "title": "The Psychology of Color in Design #47",
-    "content": "Just finished this book and it blew my mind. Highly recommend it to everyone here.",
+    "timeAgo": "2 months ago",
+    "title": "Gaming Community Toxicity",
+    "content": "We need better community management in esports. Maybe applying some 'HCI' social computing principles could help reduce toxicity in chat?",
     "tags": [
       {
-        "label": "Food",
-        "type": "category"
-      },
-      {
-        "label": "#Review",
+        "label": "#Community",
         "type": "topic"
       },
       {
-        "label": "Travel",
-        "type": "category"
+        "label": "#Esports",
+        "type": "topic"
       }
     ],
-    "stars": 446,
+    "stars": 420,
     "community_id": "gaming-hub",
     "related_books": [
-      10
+      8
     ],
-    "created_at": "2023-10-02T04:16:57.240Z",
-    "updated_at": "2023-10-02T04:16:57.240Z"
+    "created_at": "2023-09-25T16:00:00Z",
+    "updated_at": "2023-09-25T16:00:00Z"
   },
   {
     "id": 48,
     "author": {
-      "name": "Donna Paulsen",
-      "avatar": "https://i.pravatar.cc/150?u=donna",
-      "tagline": "I know everything"
+      "name": "John Doe",
+      "avatar": "https://i.pravatar.cc/150?u=john",
+      "tagline": "AI Enthusiast"
     },
-    "timeAgo": "22 hrs ago",
-    "title": "My Journey to Becoming a Senior Dev #48",
-    "content": "Here's a quick tutorial on how to get started with this. It's easier than you think!",
+    "timeAgo": "2 months ago",
+    "title": "Backpropagation explained",
+    "content": "The chapter on backprop in 'Deep Learning' is the best technical explanation I've found. It's just chain rule, but applied at scale.",
     "tags": [
       {
-        "label": "#Review",
+        "label": "#Math",
         "type": "topic"
       },
       {
-        "label": "#Trending",
+        "label": "#DeepLearning",
         "type": "topic"
-      },
-      {
-        "label": "Hobbies",
-        "type": "category"
-      },
-      {
-        "label": "Lifestyle",
-        "type": "category"
       }
     ],
-    "stars": 652,
-    "community_id": "food-lovers",
-    "related_books": [],
-    "created_at": "2024-04-13T19:08:27.946Z",
-    "updated_at": "2024-04-13T19:08:27.946Z"
+    "stars": 180,
+    "community_id": "creative-atelier",
+    "related_books": [
+      6
+    ],
+    "created_at": "2023-09-24T17:00:00Z",
+    "updated_at": "2023-09-24T17:00:00Z"
   },
   {
     "id": 49,
     "author": {
-      "name": "Harvey Specter",
-      "avatar": "https://i.pravatar.cc/150?u=harvey",
-      "tagline": "Closer"
+      "name": "Sarah Chen",
+      "avatar": "https://i.pravatar.cc/150?u=sarah",
+      "tagline": "Product Designer"
     },
-    "timeAgo": "17 hrs ago",
-    "title": "The History of Video Games #49",
-    "content": "I'm struggling with this concept. Can anyone explain it in simple terms?",
+    "timeAgo": "2 months ago",
+    "title": "JavaScript weirdness",
+    "content": "Type coercion in JS is a nightmare. 'The Good Parts' suggests using === always. It's a simple rule that saved me so many bugs.",
     "tags": [
       {
-        "label": "#Trending",
+        "label": "#JS",
         "type": "topic"
       },
       {
-        "label": "#Help",
+        "label": "#Tips",
         "type": "topic"
       }
     ],
-    "stars": 12,
-    "community_id": "tech-talk",
+    "stars": 299,
+    "community_id": "creative-atelier",
     "related_books": [
-      6,
-      3
+      12
     ],
-    "created_at": "2024-09-29T19:47:44.412Z",
-    "updated_at": "2024-09-29T19:47:44.412Z"
+    "created_at": "2023-09-23T18:00:00Z",
+    "updated_at": "2023-09-23T18:00:00Z"
   },
   {
     "id": 50,
     "author": {
-      "name": "Jane Smith",
-      "avatar": "https://i.pravatar.cc/150?u=jane",
-      "tagline": "Bookworm"
+      "name": "Louis Litt",
+      "avatar": "https://i.pravatar.cc/150?u=louis",
+      "tagline": "History Buff"
     },
-    "timeAgo": "5 hrs ago",
-    "title": "How to Cook the Perfect Steak #50",
-    "content": "I've been thinking a lot about the future of this industry. With all the new tech coming out, it's hard to keep up. What are your predictions?",
+    "timeAgo": "3 months ago",
+    "title": "Reading Code",
+    "content": "We spend more time reading code than writing it. That's the main takeaway from 'Clean Code'. Write for humans, not for the compiler.",
     "tags": [
       {
-        "label": "#Review",
+        "label": "#Philosophy",
         "type": "topic"
       },
       {
-        "label": "#Discussion",
-        "type": "topic"
-      },
-      {
-        "label": "#Discussion",
+        "label": "#Coding",
         "type": "topic"
       }
     ],
-    "stars": 998,
-    "community_id": "literacy-circle",
+    "stars": 500,
+    "community_id": "creative-atelier",
     "related_books": [
-      9,
-      4
+      1
     ],
-    "created_at": "2025-10-27T02:40:34.414Z",
-    "updated_at": "2025-10-27T02:40:34.414Z"
+    "created_at": "2023-09-22T19:00:00Z",
+    "updated_at": "2023-09-22T19:00:00Z"
   }
 ]
