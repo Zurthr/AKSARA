@@ -272,6 +272,171 @@ module.exports = (req, res, next) => {
       return originalStatus.call(this, code);
     };
 
+    // Smart search and relevance scoring for books
+    if (req.path.includes('/books') && req.method === 'GET') {
+      const originalJson = res.json;
+      res.json = function(data) {
+        if (Array.isArray(data)) {
+          data = enhanceBookSearchResults(data, req.query);
+        }
+        return originalJson.call(this, data);
+      };
+    }
+
     next();
   }, delay);
 };
+
+// Helper function for smart search and relevance scoring
+function enhanceBookSearchResults(books, query) {
+  let enhancedBooks = [...books];
+
+  // Apply enhanced search if query parameters are present
+  if (query.search || query.smart_search || query.recommend_for_user_id) {
+    enhancedBooks = applySmartSearch(enhancedBooks, query);
+  }
+
+  // Apply partial matching for tags
+  if (query['tags.name_like']) {
+    const searchTerm = query['tags.name_like'].toLowerCase();
+    enhancedBooks = enhancedBooks.filter(book =>
+      book.tags && book.tags.some(tag =>
+        tag.name.toLowerCase().includes(searchTerm)
+      )
+    );
+  }
+
+  // Apply description search
+  if (query['description_like']) {
+    const searchTerm = query['description_like'].toLowerCase();
+    enhancedBooks = enhancedBooks.filter(book =>
+      book.description && book.description.toLowerCase().includes(searchTerm)
+    );
+  }
+
+  // Apply author search
+  if (query['author_like']) {
+    const searchTerm = query['author_like'].toLowerCase();
+    enhancedBooks = enhancedBooks.filter(book =>
+      book.author && book.author.toLowerCase().includes(searchTerm)
+    );
+  }
+
+  // Apply user preferences filtering
+  if (query.user_preferences) {
+    enhancedBooks = applyUserPreferences(enhancedBooks, query.user_preferences);
+  }
+
+  // Apply recommendations based on mock user ID
+  if (query.recommend_for_user_id) {
+    enhancedBooks = generateRecommendations(enhancedBooks, query.recommend_for_user_id);
+  }
+
+  // Apply relevance scoring if sorting by relevance
+  if (query._sort === 'relevance' && (query.q || query.smart_search)) {
+    enhancedBooks = applyRelevanceScoring(enhancedBooks, query.q || query.smart_search);
+  }
+
+  return enhancedBooks;
+}
+
+// Smart search function that combines multiple fields
+function applySmartSearch(books, query) {
+  const searchTerm = query.search || query.smart_search || query.q;
+  if (!searchTerm) return books;
+
+  const searchLower = searchTerm.toLowerCase();
+  return books.map(book => {
+    let relevanceScore = 0;
+
+    // Title match (highest weight)
+    if (book.title && book.title.toLowerCase().includes(searchLower)) {
+      relevanceScore += 10;
+      if (book.title.toLowerCase() === searchLower) relevanceScore += 20; // Exact match bonus
+    }
+
+    // Author match (high weight)
+    if (book.author && book.author.toLowerCase().includes(searchLower)) {
+      relevanceScore += 8;
+    }
+
+    // Description match (medium weight)
+    if (book.description) {
+      const descMatches = (book.description.toLowerCase().match(new RegExp(searchLower, 'g')) || []).length;
+      relevanceScore += Math.min(descMatches * 2, 6); // Cap description matches
+    }
+
+    // Tag match (medium weight)
+    if (book.tags) {
+      book.tags.forEach(tag => {
+        if (tag.name && tag.name.toLowerCase().includes(searchLower)) {
+          relevanceScore += 5;
+        }
+      });
+    }
+
+    return { ...book, _relevanceScore: relevanceScore };
+  }).filter(book => book._relevanceScore > 0);
+}
+
+// User preferences filtering
+function applyUserPreferences(books, preferences) {
+  const prefTags = preferences.split(',').map(p => p.trim().toLowerCase());
+
+  return books.map(book => {
+    let preferenceScore = 0;
+
+    if (book.tags) {
+      book.tags.forEach(tag => {
+        if (prefTags.includes(tag.name.toLowerCase())) {
+          preferenceScore += tag.type === 'primary' ? 10 : 5;
+        }
+      });
+    }
+
+    return { ...book, _preferenceScore: preferenceScore };
+  }).filter(book => book._preferenceScore > 0);
+}
+
+// Generate recommendations based on mock user ID
+function generateRecommendations(books, userId) {
+  // Mock user profiles based on ID
+  const userProfiles = {
+    '123': { interests: ['Web Development', 'JavaScript', 'Frontend'], level: 'intermediate' },
+    '456': { interests: ['Backend Development', 'PHP', 'Database'], level: 'beginner' },
+    '789': { interests: ['Clean Code', 'Software Engineering', 'Best Practices'], level: 'advanced' },
+    '101': { interests: ['Web Design', 'HTML', 'CSS'], level: 'beginner' },
+    '202': { interests: ['Vue.js', 'Frontend Frameworks'], level: 'intermediate' }
+  };
+
+  const userProfile = userProfiles[userId] || { interests: ['Programming'], level: 'intermediate' };
+
+  return books.map(book => {
+    let recommendationScore = 0;
+
+    if (book.tags) {
+      book.tags.forEach(tag => {
+        if (userProfile.interests.includes(tag.name)) {
+          recommendationScore += tag.type === 'primary' ? 15 : 8;
+        }
+      });
+    }
+
+    // Boost rating-based recommendations for advanced users
+    if (userProfile.level === 'advanced' && book.rating >= 4.5) {
+      recommendationScore += 10;
+    }
+
+    // Boost beginner-friendly books for beginners
+    if (userProfile.level === 'beginner' && book.rating >= 4.0) {
+      recommendationScore += 8;
+    }
+
+    return { ...book, _recommendationScore: recommendationScore };
+  }).filter(book => book._recommendationScore > 0);
+}
+
+// Apply relevance scoring sorting
+function applyRelevanceScoring(books, searchTerm) {
+  return books.sort((a, b) => (b._relevanceScore || 0) - (a._relevanceScore || 0));
+}

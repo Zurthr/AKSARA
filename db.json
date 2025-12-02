@@ -11,11 +11,26 @@
       "title": "LF Best Books for Aspiring Web Developers",
       "content": "Hey everyone! I've been diving deeper into web development lately, and I realized there's a ton of great books out there that can really help you level up beyond just YouTube tutorials. Thought I'd share a few and see what you all recommend too!",
       "tags": [
-        { "label": "A Level", "type": "category" },
-        { "label": "Web Dev", "type": "topic" },
-        { "label": "#NewDev", "type": "topic" },
-        { "label": "#WebDev", "type": "topic" },
-        { "label": "#Stacking", "type": "topic" }
+        {
+          "label": "A Level",
+          "type": "category"
+        },
+        {
+          "label": "Web Dev",
+          "type": "topic"
+        },
+        {
+          "label": "#NewDev",
+          "type": "topic"
+        },
+        {
+          "label": "#WebDev",
+          "type": "topic"
+        },
+        {
+          "label": "#Stacking",
+          "type": "topic"
+        }
       ],
       "stars": 80,
       "community_id": "literacy-circle",
@@ -33,11 +48,26 @@
       "title": "Is FNAF 2 going to debut in Minecraft alongside Herobrine",
       "content": "Okay, so I've been seeing some weird stuff in the latest Minecraft teasers and community rumors — people are saying there might be a crossover event bringing FNAF 2 elements into Minecraft?? Like animatronics, the pizzeria setting, and even a Herobrine tie-in?! Not sure if it's a mod collab, an ARG, or just wild fan theory fuel, but if Mojang actually drops a spooky update mixing Herobrine lore with FNAF 2 jumpscares, that would be insane. Anyone else heard about this or seen the leaks? What do you think — hype or hoax? 👻",
       "tags": [
-        { "label": "Hobbies", "type": "category" },
-        { "label": "FNAF", "type": "topic" },
-        { "label": "#FNAF", "type": "topic" },
-        { "label": "#Booo", "type": "topic" },
-        { "label": "#Horror", "type": "topic" }
+        {
+          "label": "Hobbies",
+          "type": "category"
+        },
+        {
+          "label": "FNAF",
+          "type": "topic"
+        },
+        {
+          "label": "#FNAF",
+          "type": "topic"
+        },
+        {
+          "label": "#Booo",
+          "type": "topic"
+        },
+        {
+          "label": "#Horror",
+          "type": "topic"
+        }
       ],
       "stars": 21,
       "community_id": "gaming-hub",
@@ -55,10 +85,22 @@
       "title": "Tips for Street Photography Beginners",
       "content": "Just wanted to share some tips I've learned from my street photography journey over the past year. The most important thing is to be patient and observe your surroundings. Don't be afraid to ask people for permission, and always carry your camera! What are your go-to spots for street photography?",
       "tags": [
-        { "label": "Photography", "type": "category" },
-        { "label": "Tips", "type": "topic" },
-        { "label": "#StreetPhoto", "type": "topic" },
-        { "label": "#Beginner", "type": "topic" }
+        {
+          "label": "Photography",
+          "type": "category"
+        },
+        {
+          "label": "Tips",
+          "type": "topic"
+        },
+        {
+          "label": "#StreetPhoto",
+          "type": "topic"
+        },
+        {
+          "label": "#Beginner",
+          "type": "topic"
+        }
       ],
       "stars": 45,
       "community_id": "photography-club",
@@ -72,7 +114,11 @@
       "name": "JUMP FEST 2025 - BRED THROUGH",
       "icon": "spark",
       "accent": "#E6F2FF",
-      "tags": ["#HarryPotter", "#WIBU", "#AnimeX"],
+      "tags": [
+        "#HarryPotter",
+        "#WIBU",
+        "#AnimeX"
+      ],
       "description": "Festival fandom terbesar tahun ini. Dapatkan bocoran rilis anime, sesi temu kreator, dan event eksklusif lainnya.",
       "members": "21k",
       "postsToday": 42,
@@ -86,7 +132,12 @@
       "name": "Literacy Circle",
       "icon": "heart",
       "accent": "#FFE5EC",
-      "tags": ["Harry Potter", "LoTR", "Book Talk", "Reading"],
+      "tags": [
+        "Harry Potter",
+        "LoTR",
+        "Book Talk",
+        "Reading"
+      ],
       "description": "Komunitas pecinta buku untuk diskusi sastra, review, dan menemukan penulis baru.",
       "members": "324",
       "postsToday": 18,
@@ -100,7 +151,11 @@
       "name": "Wellness Warriors",
       "icon": "spark",
       "accent": "#E6F2FF",
-      "tags": ["Mindful", "Balance", "Habits"],
+      "tags": [
+        "Mindful",
+        "Balance",
+        "Habits"
+      ],
       "description": "Berbagi rutinitas sehat, dukung perjalanan mindfulness, dan saling menguatkan.",
       "members": "512",
       "postsToday": 24,
@@ -114,7 +169,11 @@
       "name": "Photography Club",
       "icon": "camera",
       "accent": "#F0F9F5",
-      "tags": ["Photo Walk", "Tips", "Critique"],
+      "tags": [
+        "Photo Walk",
+        "Tips",
+        "Critique"
+      ],
       "description": "Belajar teknik fotografi, ikut photo walk, dan diskusi kritik konstruktif setiap minggu.",
       "members": "287",
       "postsToday": 12,
@@ -128,7 +187,11 @@
       "name": "Gaming Hub Indonesia",
       "icon": "chat",
       "accent": "#FFF8E1",
-      "tags": ["Esports", "Co-op", "Livestream"],
+      "tags": [
+        "Esports",
+        "Co-op",
+        "Livestream"
+      ],
       "description": "Tempat berkumpulnya gamer untuk mabar, update turnamen, dan berbagi tips build meta.",
       "members": "1.2k",
       "postsToday": 33,
@@ -142,7 +205,11 @@
       "name": "Creative Atelier",
       "icon": "heart",
       "accent": "#FEEAE6",
-      "tags": ["Illustration", "UI/UX", "Workshop"],
+      "tags": [
+        "Illustration",
+        "UI/UX",
+        "Workshop"
+      ],
       "description": "Komunitas kreator visual. Ada feedback session, challenge mingguan, dan kelas desain gratis.",
       "members": "648",
       "postsToday": 21,
@@ -227,17 +294,38 @@
       "year_edition": "2023 2nd Edition",
       "total_bookmarked": 3420,
       "tags": [
-        { "name": "Software Engineering", "type": "primary" },
-        { "name": "Programming", "type": "secondary" },
-        { "name": "Best Practices", "type": "secondary" },
-        { "name": "Code Quality", "type": "secondary" }
+        {
+          "name": "Software Engineering",
+          "type": "primary"
+        },
+        {
+          "name": "Programming",
+          "type": "secondary"
+        },
+        {
+          "name": "Best Practices",
+          "type": "secondary"
+        },
+        {
+          "name": "Code Quality",
+          "type": "secondary"
+        }
       ],
       "copy_type": "Physical",
       "licensing_type": "Pay-to-own",
       "sources": [
-        { "name": "IEEE Xplore", "url": "https://ieeexplore.ieee.org/document/6196583" },
-        { "name": "Springer", "url": "https://link.springer.com/book/10.1007/978-0-13-597444-5" },
-        { "name": "ACM Digital Library", "url": "https://dl.acm.org/doi/10.5555/1413532" }
+        {
+          "name": "IEEE Xplore",
+          "url": "https://ieeexplore.ieee.org/document/6196583"
+        },
+        {
+          "name": "Springer",
+          "url": "https://link.springer.com/book/10.1007/978-0-13-597444-5"
+        },
+        {
+          "name": "ACM Digital Library",
+          "url": "https://dl.acm.org/doi/10.5555/1413532"
+        }
       ],
       "twitter_embeds": [
         {
@@ -263,7 +351,10 @@
           "type": "preview"
         }
       ],
-      "related_posts": [1, 8],
+      "related_posts": [
+        1,
+        8
+      ],
       "community_id": "literacy-circle",
       "created_at": "2023-10-01T12:00:00Z",
       "updated_at": "2023-10-01T12:00:00Z"
@@ -278,16 +369,34 @@
       "year_edition": "2012 75th Anniversary Edition",
       "total_bookmarked": 8934,
       "tags": [
-        { "name": "Fantasy", "type": "primary" },
-        { "name": "Adventure", "type": "secondary" },
-        { "name": "Classic Literature", "type": "secondary" },
-        { "name": "Epic", "type": "secondary" }
+        {
+          "name": "Fantasy",
+          "type": "primary"
+        },
+        {
+          "name": "Adventure",
+          "type": "secondary"
+        },
+        {
+          "name": "Classic Literature",
+          "type": "secondary"
+        },
+        {
+          "name": "Epic",
+          "type": "secondary"
+        }
       ],
       "copy_type": "Physical",
       "licensing_type": "Pay-to-own",
       "sources": [
-        { "name": "Project Gutenberg", "url": "https://www.gutenberg.org/ebooks/2701" },
-        { "name": "Internet Archive", "url": "https://archive.org/details/thehobbit00tolk_0" }
+        {
+          "name": "Project Gutenberg",
+          "url": "https://www.gutenberg.org/ebooks/2701"
+        },
+        {
+          "name": "Internet Archive",
+          "url": "https://archive.org/details/thehobbit00tolk_0"
+        }
       ],
       "twitter_embeds": [
         {
@@ -308,7 +417,10 @@
           "type": "audiobook"
         }
       ],
-      "related_posts": [2, 12],
+      "related_posts": [
+        2,
+        12
+      ],
       "community_id": "literacy-circle",
       "created_at": "2023-10-01T12:00:00Z",
       "updated_at": "2023-10-01T12:00:00Z"
@@ -323,16 +435,34 @@
       "year_edition": "2023 Paperback Edition",
       "total_bookmarked": 15678,
       "tags": [
-        { "name": "Self-Help", "type": "primary" },
-        { "name": "Personal Development", "type": "secondary" },
-        { "name": "Productivity", "type": "secondary" },
-        { "name": "Psychology", "type": "secondary" }
+        {
+          "name": "Self-Help",
+          "type": "primary"
+        },
+        {
+          "name": "Personal Development",
+          "type": "secondary"
+        },
+        {
+          "name": "Productivity",
+          "type": "secondary"
+        },
+        {
+          "name": "Psychology",
+          "type": "secondary"
+        }
       ],
       "copy_type": "Online",
       "licensing_type": "Rent",
       "sources": [
-        { "name": "Psychology Today", "url": "https://www.psychologytoday.com/us/blog/habits" },
-        { "name": "Harvard Business Review", "url": "https://hbr.org/2018/10/atomic-habits" }
+        {
+          "name": "Psychology Today",
+          "url": "https://www.psychologytoday.com/us/blog/habits"
+        },
+        {
+          "name": "Harvard Business Review",
+          "url": "https://hbr.org/2018/10/atomic-habits"
+        }
       ],
       "twitter_embeds": [
         {
@@ -363,7 +493,10 @@
           "type": "read"
         }
       ],
-      "related_posts": [5, 9],
+      "related_posts": [
+        5,
+        9
+      ],
       "community_id": "wellness-warriors",
       "created_at": "2023-10-01T12:00:00Z",
       "updated_at": "2023-10-01T12:00:00Z"
@@ -378,16 +511,34 @@
       "year_edition": "2019 25th Anniversary Edition",
       "total_bookmarked": 5678,
       "tags": [
-        { "name": "Software Design", "type": "primary" },
-        { "name": "Object-Oriented Programming", "type": "secondary" },
-        { "name": "Architecture", "type": "secondary" },
-        { "name": "Design Patterns", "type": "secondary" }
+        {
+          "name": "Software Design",
+          "type": "primary"
+        },
+        {
+          "name": "Object-Oriented Programming",
+          "type": "secondary"
+        },
+        {
+          "name": "Architecture",
+          "type": "secondary"
+        },
+        {
+          "name": "Design Patterns",
+          "type": "secondary"
+        }
       ],
       "copy_type": "Physical",
       "licensing_type": "Pay-to-own",
       "sources": [
-        { "name": "IEEE Xplore", "url": "https://ieeexplore.ieee.org/document/5353680" },
-        { "name": "ACM Digital Library", "url": "https://dl.acm.org/doi/book/10.5555/197730" }
+        {
+          "name": "IEEE Xplore",
+          "url": "https://ieeexplore.ieee.org/document/5353680"
+        },
+        {
+          "name": "ACM Digital Library",
+          "url": "https://dl.acm.org/doi/book/10.5555/197730"
+        }
       ],
       "twitter_embeds": [
         {
@@ -403,7 +554,10 @@
           "type": "purchase"
         }
       ],
-      "related_posts": [7, 11],
+      "related_posts": [
+        7,
+        11
+      ],
       "community_id": "creative-atelier",
       "created_at": "2023-10-01T12:00:00Z",
       "updated_at": "2023-10-01T12:00:00Z"
@@ -418,16 +572,34 @@
       "year_edition": "2023 20th Anniversary Edition",
       "total_bookmarked": 8912,
       "tags": [
-        { "name": "Programming", "type": "primary" },
-        { "name": "Career Development", "type": "secondary" },
-        { "name": "Software Development", "type": "secondary" },
-        { "name": "Best Practices", "type": "secondary" }
+        {
+          "name": "Programming",
+          "type": "primary"
+        },
+        {
+          "name": "Career Development",
+          "type": "secondary"
+        },
+        {
+          "name": "Software Development",
+          "type": "secondary"
+        },
+        {
+          "name": "Best Practices",
+          "type": "secondary"
+        }
       ],
       "copy_type": "Online",
       "licensing_type": "Pay-to-own",
       "sources": [
-        { "name": "ACM Digital Library", "url": "https://dl.acm.org/doi/10.5555/333458" },
-        { "name": "O'Reilly", "url": "https://www.oreilly.com/library/view/the-pragmatic-programmer/9780135957059/" }
+        {
+          "name": "ACM Digital Library",
+          "url": "https://dl.acm.org/doi/10.5555/333458"
+        },
+        {
+          "name": "O'Reilly",
+          "url": "https://www.oreilly.com/library/view/the-pragmatic-programmer/9780135957059/"
+        }
       ],
       "twitter_embeds": [
         {
@@ -443,7 +615,10 @@
           "type": "purchase"
         }
       ],
-      "related_posts": [1, 6],
+      "related_posts": [
+        1,
+        6
+      ],
       "community_id": "literacy-circle",
       "created_at": "2023-10-01T12:00:00Z",
       "updated_at": "2023-10-01T12:00:00Z"
@@ -458,16 +633,34 @@
       "year_edition": "2016 First Edition",
       "total_bookmarked": 12450,
       "tags": [
-        { "name": "Machine Learning", "type": "primary" },
-        { "name": "Artificial Intelligence", "type": "secondary" },
-        { "name": "Neural Networks", "type": "secondary" },
-        { "name": "Computer Science", "type": "secondary" }
+        {
+          "name": "Machine Learning",
+          "type": "primary"
+        },
+        {
+          "name": "Artificial Intelligence",
+          "type": "secondary"
+        },
+        {
+          "name": "Neural Networks",
+          "type": "secondary"
+        },
+        {
+          "name": "Computer Science",
+          "type": "secondary"
+        }
       ],
       "copy_type": "Onsite Exclusive",
       "licensing_type": "Free",
       "sources": [
-        { "name": "arXiv", "url": "https://arxiv.org/abs/1609.04947" },
-        { "name": "MIT Press", "url": "https://mitpress.mit.edu/books/deep-learning" }
+        {
+          "name": "arXiv",
+          "url": "https://arxiv.org/abs/1609.04947"
+        },
+        {
+          "name": "MIT Press",
+          "url": "https://mitpress.mit.edu/books/deep-learning"
+        }
       ],
       "twitter_embeds": [
         {
@@ -493,7 +686,10 @@
           "type": "download"
         }
       ],
-      "related_posts": [3, 10],
+      "related_posts": [
+        3,
+        10
+      ],
       "community_id": "literacy-circle",
       "created_at": "2023-10-01T12:00:00Z",
       "updated_at": "2023-10-01T12:00:00Z"
@@ -508,16 +704,34 @@
       "year_edition": "2011 First Edition",
       "total_bookmarked": 9876,
       "tags": [
-        { "name": "Business", "type": "primary" },
-        { "name": "Entrepreneurship", "type": "secondary" },
-        { "name": "Innovation", "type": "secondary" },
-        { "name": "Startup", "type": "secondary" }
+        {
+          "name": "Business",
+          "type": "primary"
+        },
+        {
+          "name": "Entrepreneurship",
+          "type": "secondary"
+        },
+        {
+          "name": "Innovation",
+          "type": "secondary"
+        },
+        {
+          "name": "Startup",
+          "type": "secondary"
+        }
       ],
       "copy_type": "Online",
       "licensing_type": "Pay-to-own",
       "sources": [
-        { "name": "Harvard Business Review", "url": "https://hbr.org/2011/05/the-lean-startup" },
-        { "name": "Forbes", "url": "https://www.forbes.com/sites/steveblank/2013/04/03/the-lean-startup-movement/" }
+        {
+          "name": "Harvard Business Review",
+          "url": "https://hbr.org/2011/05/the-lean-startup"
+        },
+        {
+          "name": "Forbes",
+          "url": "https://www.forbes.com/sites/steveblank/2013/04/03/the-lean-startup-movement/"
+        }
       ],
       "twitter_embeds": [
         {
@@ -533,7 +747,9 @@
           "type": "purchase"
         }
       ],
-      "related_posts": [13],
+      "related_posts": [
+        13
+      ],
       "community_id": "creative-atelier",
       "created_at": "2023-10-01T12:00:00Z",
       "updated_at": "2023-10-01T12:00:00Z"
@@ -548,16 +764,34 @@
       "year_edition": "2017 4th Edition",
       "total_bookmarked": 3456,
       "tags": [
-        { "name": "User Experience", "type": "primary" },
-        { "name": "HCI", "type": "secondary" },
-        { "name": "Interface Design", "type": "secondary" },
-        { "name": "Usability", "type": "secondary" }
+        {
+          "name": "User Experience",
+          "type": "primary"
+        },
+        {
+          "name": "HCI",
+          "type": "secondary"
+        },
+        {
+          "name": "Interface Design",
+          "type": "secondary"
+        },
+        {
+          "name": "Usability",
+          "type": "secondary"
+        }
       ],
       "copy_type": "Physical",
       "licensing_type": "Pay-to-own",
       "sources": [
-        { "name": "ACM Digital Library", "url": "https://dl.acm.org/doi/book/10.5555/307809" },
-        { "name": "IEEE Xplore", "url": "https://ieeexplore.ieee.org/document/7473862" }
+        {
+          "name": "ACM Digital Library",
+          "url": "https://dl.acm.org/doi/book/10.5555/307809"
+        },
+        {
+          "name": "IEEE Xplore",
+          "url": "https://ieeexplore.ieee.org/document/7473862"
+        }
       ],
       "twitter_embeds": [
         {
@@ -573,7 +807,9 @@
           "type": "purchase"
         }
       ],
-      "related_posts": [14],
+      "related_posts": [
+        14
+      ],
       "community_id": "creative-atelier",
       "created_at": "2023-10-01T12:00:00Z",
       "updated_at": "2023-10-01T12:00:00Z"
@@ -588,16 +824,34 @@
       "year_edition": "2016 Updated Edition",
       "total_bookmarked": 7890,
       "tags": [
-        { "name": "Psychology", "type": "primary" },
-        { "name": "Personal Growth", "type": "secondary" },
-        { "name": "Motivation", "type": "secondary" },
-        { "name": "Education", "type": "secondary" }
+        {
+          "name": "Psychology",
+          "type": "primary"
+        },
+        {
+          "name": "Personal Growth",
+          "type": "secondary"
+        },
+        {
+          "name": "Motivation",
+          "type": "secondary"
+        },
+        {
+          "name": "Education",
+          "type": "secondary"
+        }
       ],
       "copy_type": "Online",
       "licensing_type": "Rent",
       "sources": [
-        { "name": "Psychology Today", "url": "https://www.psychologytoday.com/us/blog/mindset" },
-        { "name": "Harvard Graduate School", "url": "https://www.gse.harvard.edu/news/uk/16/01/mindset" }
+        {
+          "name": "Psychology Today",
+          "url": "https://www.psychologytoday.com/us/blog/mindset"
+        },
+        {
+          "name": "Harvard Graduate School",
+          "url": "https://www.gse.harvard.edu/news/uk/16/01/mindset"
+        }
       ],
       "twitter_embeds": [
         {
@@ -613,7 +867,10 @@
           "type": "purchase"
         }
       ],
-      "related_posts": [5, 15],
+      "related_posts": [
+        5,
+        15
+      ],
       "community_id": "wellness-warriors",
       "created_at": "2023-10-01T12:00:00Z",
       "updated_at": "2023-10-01T12:00:00Z"
@@ -628,16 +885,34 @@
       "year_edition": "2011 3rd Edition",
       "total_bookmarked": 4321,
       "tags": [
-        { "name": "Computer Science", "type": "primary" },
-        { "name": "Algorithms", "type": "secondary" },
-        { "name": "Programming Theory", "type": "secondary" },
-        { "name": "Mathematical Foundations", "type": "secondary" }
+        {
+          "name": "Computer Science",
+          "type": "primary"
+        },
+        {
+          "name": "Algorithms",
+          "type": "secondary"
+        },
+        {
+          "name": "Programming Theory",
+          "type": "secondary"
+        },
+        {
+          "name": "Mathematical Foundations",
+          "type": "secondary"
+        }
       ],
       "copy_type": "Physical",
       "licensing_type": "Pay-to-own",
       "sources": [
-        { "name": "ACM Digital Library", "url": "https://dl.acm.org/doi/book/10.5555/578145" },
-        { "name": "Stanford University", "url": "https://cs.stanford.edu/~knuth/taocp.html" }
+        {
+          "name": "ACM Digital Library",
+          "url": "https://dl.acm.org/doi/book/10.5555/578145"
+        },
+        {
+          "name": "Stanford University",
+          "url": "https://cs.stanford.edu/~knuth/taocp.html"
+        }
       ],
       "twitter_embeds": [
         {
@@ -653,8 +928,336 @@
           "type": "purchase"
         }
       ],
-      "related_posts": [16],
+      "related_posts": [
+        16
+      ],
       "community_id": "literacy-circle",
+      "created_at": "2023-10-01T12:00:00Z",
+      "updated_at": "2023-10-01T12:00:00Z"
+    },
+    {
+      "id": 11,
+      "title": "PHP and MySQL Web Development",
+      "author": "Luke Welling, Laura Thomson",
+      "cover": "https://images-na.ssl-images-amazon.com/images/I/51TJA-BOgEL._SX331_BO1,204,203,200_.jpg",
+      "rating": 4.2,
+      "description": "Learn PHP and MySQL programming - the practical guide to developing dynamic web applications using PHP and MySQL database. This comprehensive book covers everything from basic PHP syntax to advanced database interactions, form processing, security, and modern best practices for building robust web applications.",
+      "year_edition": "2018 5th Edition",
+      "total_bookmarked": 1542,
+      "tags": [
+        {
+          "name": "Web Development",
+          "type": "primary"
+        },
+        {
+          "name": "PHP",
+          "type": "primary"
+        },
+        {
+          "name": "MySQL",
+          "type": "secondary"
+        },
+        {
+          "name": "Backend Development",
+          "type": "secondary"
+        },
+        {
+          "name": "Database",
+          "type": "secondary"
+        }
+      ],
+      "copy_type": "Physical",
+      "licensing_type": "Pay-to-own",
+      "sources": [
+        {
+          "name": "Developer PHP Community",
+          "url": "https://www.php.net/manual/en/",
+          "description": "Official PHP documentation with examples"
+        }
+      ],
+      "twitter_embeds": [
+        {
+          "id": "1823456789",
+          "text": "Just finished PHP and MySQL Web Development - excellent resource for anyone starting with backend development! The database design chapters are gold. #PHP #WebDev",
+          "author": "DevMaster",
+          "author_handle": "@devmaster",
+          "likes": 456,
+          "retweets": 123,
+          "created_at": "2023-11-10T16:30:00Z"
+        }
+      ],
+      "access_links": [
+        {
+          "platform": "Amazon",
+          "url": "https://www.amazon.com/PHP-MySQL-Web-Development/dp/0134492663",
+          "type": "purchase"
+        },
+        {
+          "platform": "Pearson",
+          "url": "https://www.pearson.com/en-us/subject-catalog/p/php-and-mysql-web-development/P200000003256/9780134492660",
+          "type": "read"
+        }
+      ],
+      "created_at": "2023-10-01T12:00:00Z",
+      "updated_at": "2023-10-01T12:00:00Z"
+    },
+    {
+      "id": 12,
+      "title": "JavaScript: The Good Parts",
+      "author": "Douglas Crockford",
+      "cover": "https://images-na.ssl-images-amazon.com/images/I/51OL85-f0TL._SX331_BO1,204,203,200_.jpg",
+      "rating": 4.0,
+      "description": "Most programming languages contain good and bad parts, but JavaScript has more than its share of the bad, having been developed and released in a hurry before it could be refined. This book scrapes away these bad features to reveal a subset of JavaScript that is more reliable, readable, and maintainable.",
+      "year_edition": "2008",
+      "total_bookmarked": 2876,
+      "tags": [
+        {
+          "name": "Web Development",
+          "type": "primary"
+        },
+        {
+          "name": "JavaScript",
+          "type": "primary"
+        },
+        {
+          "name": "Frontend Development",
+          "type": "secondary"
+        },
+        {
+          "name": "Programming Languages",
+          "type": "secondary"
+        }
+      ],
+      "copy_type": "Physical",
+      "licensing_type": "Pay-to-own",
+      "sources": [
+        {
+          "name": "Mozilla Developer Network",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+          "description": "Comprehensive JavaScript guide and reference"
+        }
+      ],
+      "twitter_embeds": [
+        {
+          "id": "1728390123",
+          "text": "JavaScript: The Good Parts completely changed how I write JS. Every frontend developer should read this at least twice! #JavaScript #WebDev",
+          "author": "FrontendGuru",
+          "author_handle": "@frontendguru",
+          "likes": 892,
+          "retweets": 456,
+          "created_at": "2023-10-05T14:15:00Z"
+        }
+      ],
+      "access_links": [
+        {
+          "platform": "Amazon",
+          "url": "https://www.amazon.com/JavaScript-Good-Parts/dp/0596517742",
+          "type": "purchase"
+        },
+        {
+          "platform": "OReilly",
+          "url": "https://www.oreilly.com/library/view/javascript-the-good/9780596517748/",
+          "type": "read"
+        }
+      ],
+      "created_at": "2023-10-01T12:00:00Z",
+      "updated_at": "2023-10-01T12:00:00Z"
+    },
+    {
+      "id": 13,
+      "title": "Modern PHP: New Features and Good Practices",
+      "author": "Josh Lockhart",
+      "cover": "https://images-na.ssl-images-amazon.com/images/I/51ZIlx%2BByTL._SX331_BO1,204,203,200_.jpg",
+      "rating": 4.3,
+      "description": "PHP has transformed from a simple scripting language into a powerful, modern programming language capable of handling complex web applications. This book teaches you modern PHP features and best practices, covering namespaces, traits, generators, closures, and the latest PHP standards.",
+      "year_edition": "2015",
+      "total_bookmarked": 1234,
+      "tags": [
+        {
+          "name": "Web Development",
+          "type": "primary"
+        },
+        {
+          "name": "PHP",
+          "type": "primary"
+        },
+        {
+          "name": "Modern PHP",
+          "type": "secondary"
+        },
+        {
+          "name": "Best Practices",
+          "type": "secondary"
+        },
+        {
+          "name": "Backend Development",
+          "type": "secondary"
+        }
+      ],
+      "copy_type": "Online",
+      "licensing_type": "Free",
+      "sources": [
+        {
+          "name": "PHP The Right Way",
+          "url": "https://phptherightway.com/",
+          "description": "Modern PHP best practices and standards"
+        }
+      ],
+      "twitter_embeds": [
+        {
+          "id": "1923456788",
+          "text": "Modern PHP by Josh Lockhart is a game-changer for PHP developers. Shows how far PHP has come as a serious programming language! #PHP #ModernPHP",
+          "author": "PHPSavant",
+          "author_handle": "@phpsavant",
+          "likes": 567,
+          "retweets": 234,
+          "created_at": "2023-11-15T10:45:00Z"
+        }
+      ],
+      "access_links": [
+        {
+          "platform": "Amazon",
+          "url": "https://www.amazon.com/Modern-PHP-Features-Practices/dp/1491905018",
+          "type": "purchase"
+        },
+        {
+          "platform": "GitHub",
+          "url": "https://github.com/Pact-Foundation/modern-php-guide",
+          "type": "free"
+        }
+      ],
+      "created_at": "2023-10-01T12:00:00Z",
+      "updated_at": "2023-10-01T12:00:00Z"
+    },
+    {
+      "id": 14,
+      "title": "HTML and CSS: Design and Build Websites",
+      "author": "Jon Duckett",
+      "cover": "https://images-na.ssl-images-amazon.com/images/I/51SLxsDWURL._SX331_BO1,204,203,200_.jpg",
+      "rating": 4.4,
+      "description": "A full-color introduction to the fundamentals of HTML and CSS for creating beautiful, standards-compliant websites. Every page is packed with visually engaging examples, practical techniques, and clear explanations that make learning HTML and CSS intuitive and enjoyable.",
+      "year_edition": "2014",
+      "total_bookmarked": 3456,
+      "tags": [
+        {
+          "name": "Web Development",
+          "type": "primary"
+        },
+        {
+          "name": "HTML",
+          "type": "primary"
+        },
+        {
+          "name": "CSS",
+          "type": "primary"
+        },
+        {
+          "name": "Frontend Development",
+          "type": "secondary"
+        },
+        {
+          "name": "Web Design",
+          "type": "secondary"
+        }
+      ],
+      "copy_type": "Physical",
+      "licensing_type": "Pay-to-own",
+      "sources": [
+        {
+          "name": "W3Schools",
+          "url": "https://www.w3schools.com/html/",
+          "description": "Interactive HTML and CSS tutorials with examples"
+        }
+      ],
+      "twitter_embeds": [
+        {
+          "id": "1823456790",
+          "text": "HTML and CSS by Jon Duckett is the most beautifully designed programming book I have ever seen. Perfect for beginners! #HTML #CSS #WebDesign",
+          "author": "DesignWizard",
+          "author_handle": "@designwizard",
+          "likes": 789,
+          "retweets": 345,
+          "created_at": "2023-10-20T13:20:00Z"
+        }
+      ],
+      "access_links": [
+        {
+          "platform": "Amazon",
+          "url": "https://www.amazon.com/HTML-CSS-Design-Build-Websites/dp/1118008189",
+          "type": "purchase"
+        },
+        {
+          "platform": "Wiley",
+          "url": "https://www.wiley.com/en-us/HTML+and+CSS%3A+Design+and+Build+Websites",
+          "type": "read"
+        }
+      ],
+      "created_at": "2023-10-01T12:00:00Z",
+      "updated_at": "2023-10-01T12:00:00Z"
+    },
+    {
+      "id": 15,
+      "title": "Vue.js: Up and Running",
+      "author": "Callum Macrae",
+      "cover": "https://images-na.ssl-images-amazon.com/images/I/51W7H3N73IL._SX331_BO1,204,203,200_.jpg",
+      "rating": 4.1,
+      "description": "Get up and running with Vue.js quickly and build production-ready applications with this comprehensive guide. Learn Vue fundamentals, component architecture, state management, routing, and modern development practices for building interactive web applications.",
+      "year_edition": "2020",
+      "total_bookmarked": 1987,
+      "tags": [
+        {
+          "name": "Web Development",
+          "type": "primary"
+        },
+        {
+          "name": "JavaScript",
+          "type": "primary"
+        },
+        {
+          "name": "Vue.js",
+          "type": "primary"
+        },
+        {
+          "name": "Frontend Frameworks",
+          "type": "secondary"
+        },
+        {
+          "name": "Single Page Applications",
+          "type": "secondary"
+        }
+      ],
+      "copy_type": "Online",
+      "licensing_type": "Rent",
+      "sources": [
+        {
+          "name": "Vue.js Official Guide",
+          "url": "https://vuejs.org/guide/",
+          "description": "Official Vue.js documentation with interactive examples"
+        }
+      ],
+      "twitter_embeds": [
+        {
+          "id": "1923456789",
+          "text": "Vue.js: Up and Running is perfect for developers who want to quickly master Vue 3 and Composition API. The practical examples are invaluable! #VueJS #JavaScript",
+          "author": "VueExpert",
+          "author_handle": "@vueexpert",
+          "likes": 645,
+          "retweets": 287,
+          "created_at": "2023-11-25T16:50:00Z"
+        }
+      ],
+      "access_links": [
+        {
+          "platform": "Amazon",
+          "url": "https://www.amazon.com/Vue-js-Running-Callum-Macrae/dp/1491995667",
+          "type": "purchase"
+        },
+        {
+          "platform": "OReilly",
+          "url": "https://www.oreilly.com/library/view/vue-js-up/9781491995665/",
+          "type": "read"
+        }
+      ],
       "created_at": "2023-10-01T12:00:00Z",
       "updated_at": "2023-10-01T12:00:00Z"
     }

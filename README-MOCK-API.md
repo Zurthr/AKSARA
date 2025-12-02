@@ -56,18 +56,39 @@ The API will be available at `http://localhost:3002`
 - `DELETE /api/events/:id` - Delete event (requires authentication)
 
 ### Books (Literature/Reads)
-- `GET /api/books` - Get all books with comprehensive metadata
+- `GET /api/books` - Get all books with comprehensive metadata (supports filtering with query params)
 - `GET /api/books/:id` - Get specific book by ID
-- `GET /api/books/trending` - Get trending books (sorted by total_bookmarked)
-- `GET /api/books/tags/:tag` - Get books by tag name
-- `GET /api/books/copy-type/:copyType` - Filter books by copy type (Physical, Online, Onsite Exclusive)
-- `GET /api/books/licensing/:licensingType` - Filter books by licensing type (Pay-to-own, Rent, Free)
-- `GET /api/books/rating/:rating` - Get books with rating >= specified value
-- `GET /api/books/year/:year` - Get books from specific year or year range
 - `GET /api/books/:id/reviews` - Get all reviews for a specific book
 - `POST /api/books` - Add new book (requires authentication)
 - `PUT /api/books/:id` - Update book information (requires authentication)
 - `DELETE /api/books/:id` - Delete book (requires authentication)
+
+### Books Query Parameters
+Use these parameters with `/api/books` for filtering and sorting:
+- `?_sort=field&_order=asc|desc` - Sort books (fields: rating, total_bookmarked, title, author, year_edition, relevance)
+- `?_limit=number` - Limit number of results
+- `?_page=number` - Pagination
+- `?q=search_term` - Basic full-text search in title and author
+- `?search=search_term` - Enhanced smart search across multiple fields with relevance scoring
+- `?tags.name=tagName` - Filter by exact tag name
+- `?tags.name_like=partialTag` - Filter by partial tag match (e.g., tags.name_like=Web matches "Web Development")
+- `?description_like=term` - Search within book descriptions
+- `?author_like=term` - Search within author names
+- `?copy_type=Physical|Online|Onsite Exclusive` - Filter by copy type
+- `?licensing_type=Pay-to-own|Rent|Free` - Filter by licensing type
+- `?rating_gte=number` - Filter by minimum rating (1-5)
+- `?year_edition_like=year` - Filter by year
+- `?user_preferences=tag1,tag2` - Filter by user preferences (comma-separated tags)
+- `?recommend_for_user_id=id` - Get personalized recommendations for mock user (123, 456, 789, 101, 202)
+- **Combinable**: `GET /api/books?_sort=rating&_order=desc&copy_type=Free&rating_gte=4`
+
+### Smart Search & Relevance Scoring
+The enhanced search provides intelligent results with relevance scoring:
+- **Title matches**: Highest weight (10 points, +20 bonus for exact match)
+- **Author matches**: High weight (8 points)
+- **Tag matches**: Medium weight (5 points per tag)
+- **Description matches**: Medium weight (2 points per occurrence, max 6)
+- **Results sorted by relevance** when using `_sort=relevance`
 
 ### Reviews
 - `GET /api/reviews` - Get all book reviews
@@ -97,19 +118,37 @@ GET /api/posts?community_id=literacy-circle
 # Filter events by status
 GET /api/events?status=upcoming
 
-# Filter books by copy type
+# Books - Single filters
 GET /api/books?copy_type=Physical
-
-# Filter books by licensing type
 GET /api/books?licensing_type=Free
-
-# Filter books by rating
 GET /api/books?rating_gte=4
-
-# Filter books by tag
 GET /api/books?tags.name=Software%20Engineering
 
-# Multiple filters
+# Books - Combined filters
+GET /api/books?_sort=rating&_order=desc&copy_type=Free&rating_gte=4
+
+# Books - Trending books (sorted by bookmarks, limited to 10)
+GET /api/books?_sort=total_bookmarked&_order=desc&_limit=10
+
+# Books - Search by title or author
+GET /api/books?q=clean%20code
+
+# Books - Advanced filtering
+GET /api/books?tags.name=Programming&licensing_type=Free&rating_gte=4&_limit=5
+
+# Books - Smart search with relevance scoring
+GET /api/books?search=php&_sort=relevance
+
+# Books - Partial tag matching
+GET /api/books?tags.name_like=Web&rating_gte=4
+
+# Books - Personalized recommendations
+GET /api/books?recommend_for_user_id=123
+
+# Books - User preferences filtering
+GET /api/books?user_preferences=Web%20Development,JavaScript
+
+# Multiple filters for other resources
 GET /api/posts?community_id=gaming-hub&stars_gte=50
 ```
 
@@ -207,12 +246,22 @@ curl http://localhost:3002/api/books
 
 ### Get Books by Tag
 ```bash
-curl http://localhost:3002/api/books/tags/Software%20Engineering
+curl "http://localhost:3002/api/books?tags.name=Software%20Engineering"
 ```
 
 ### Get Trending Books
 ```bash
-curl http://localhost:3002/api/books/trending
+curl "http://localhost:3002/api/books?_sort=total_bookmarked&_order=desc&_limit=10"
+```
+
+### Advanced Filtering Example
+```bash
+curl "http://localhost:3002/api/books?copy_type=Free&rating_gte=4&_sort=rating&_order=desc"
+```
+
+### Search Books
+```bash
+curl "http://localhost:3002/api/books?q=clean%20code"
 ```
 
 ### Get All Posts
@@ -675,20 +724,50 @@ const communityEvents = await $fetch(`/api/events/community/${communityId}`)
 // Get all books
 const books = await $fetch('/api/books')
 
-// Get trending books
-const trendingBooks = await $fetch('/api/books/trending')
+// Get trending books (sorted by bookmarks, limited to 10)
+const trendingBooks = await $fetch('/api/books?_sort=total_bookmarked&_order=desc&_limit=10')
 
-// Get books by tag
-const programmingBooks = await $fetch('/api/books/tags/Programming')
+// === LITERATURE PAGE SPECIFIC EXAMPLES ===
 
-// Get books by copy type
-const physicalBooks = await $fetch('/api/books/copy-type/Physical')
+// Top Web Development Books (High-rated, Web Development tag)
+const topWebDevBooks = await $fetch('/api/books?tags.name=Web Development&rating_gte=4&_sort=rating&_order=desc&_limit=5')
 
-// Get books by licensing type
-const freeBooks = await $fetch('/api/books/licensing/Free')
+// Most Bookmarked Web Development Books
+const mostBookmarkedWebDev = await $fetch('/api/books?tags.name_like=Web&_sort=total_bookmarked&_order=desc&_limit=10')
 
-// Get books with high ratings
-const highlyRatedBooks = await $fetch('/api/books/rating/4')
+// PHP Recommendations (Smart search across title, author, description, tags)
+const phpRecommendations = await $fetch('/api/books?search=php&_sort=relevance&_limit=8')
+
+// Personalized Recommendations for User (JavaScript + Frontend interests)
+const personalizedRecs = await $fetch('/api/books?recommend_for_user_id=123')
+
+// User Preferences Filtering (Web Development + JavaScript)
+const userPreferenceBooks = await $fetch('/api/books?user_preferences=Web Development,JavaScript&_limit=6')
+
+// === COMBINED FILTERING EXAMPLES ===
+
+// Free, highly-rated programming books
+const freeProgrammingBooks = await $fetch('/api/books?tags.name=Programming&licensing_type=Free&rating_gte=4')
+
+// Beginner-friendly web development books
+const beginnerWebDev = await $fetch('/api/books?tags.name_like=Web&rating_gte=4&_limit=5')
+
+// Advanced backend development books
+const advancedBackend = await $fetch('/api/books?description_like=advanced&tags.name=Backend&_sort=rating&_order=desc')
+
+// JavaScript books (partial tag matching)
+const jsBooks = await $fetch('/api/books?tags.name_like=JavaScript&_sort=rating&_order=desc')
+
+// === SEARCH EXAMPLES ===
+
+// Smart search for "Clean Code"
+const cleanCodeSearch = await $fetch('/api/books?search=clean code&_sort=relevance')
+
+// Search in descriptions only
+const practicalBooks = await $fetch('/api/books?description_like=practical&rating_gte=4')
+
+// Search by author
+const robertMartinBooks = await $fetch('/api/books?author_like=Robert Martin')
 
 // Get reviews for a specific book
 const bookReviews = await $fetch(`/api/books/${bookId}/reviews`)
