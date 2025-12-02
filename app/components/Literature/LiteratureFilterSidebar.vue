@@ -64,21 +64,28 @@
 
     <div class="filter-group">
       <label class="filter-label">Related Tags</label>
-      <select 
-        class="filter-select"
-        multiple
-        :value="filters.tags"
-        @change="handleTagChange($event)"
-      >
-        <option value="">Select Tags</option>
-        <option 
-          v-for="tag in tagOptions" 
-          :key="tag"
-          :value="tag"
-        >
-          {{ tag }}
-        </option>
-      </select>
+      <div class="tag-input-container">
+        <input
+          type="text"
+          v-model="tagInput"
+          @keydown.enter.prevent="addTag"
+          @keydown.escape="tagInput = ''"
+          class="tag-input"
+          placeholder="Type a tag and press Enter"
+          autocomplete="off"
+        />
+        <div class="tag-suggestions" v-if="tagSuggestions.length > 0 && tagInput">
+          <button
+            v-for="suggestion in tagSuggestions"
+            :key="suggestion"
+            type="button"
+            class="tag-suggestion"
+            @click="addTagFromSuggestion(suggestion)"
+          >
+            {{ suggestion }}
+          </button>
+        </div>
+      </div>
       <div class="selected-tags" v-if="filters.tags.length > 0">
         <span 
           v-for="tag in filters.tags" 
@@ -198,14 +205,45 @@ const handleLicensingTypeChange = (value: string, checked: boolean) => {
   updateQueryParams();
 };
 
-const handleTagChange = (event: Event) => {
-  const select = event.target as HTMLSelectElement;
-  const selectedTags = Array.from(select.selectedOptions)
-    .map(option => option.value)
-    .filter(value => value !== '');
-  
-  filters.value.tags = selectedTags;
-  updateQueryParams();
+const tagInput = ref('');
+
+const tagSuggestions = computed(() => {
+  if (!tagInput.value.trim()) return [];
+  const input = tagInput.value.toLowerCase().trim();
+  const currentTagsLower = filters.value.tags.map(t => t.toLowerCase());
+  return tagOptions.filter(tag => 
+    tag.toLowerCase().includes(input) && 
+    !currentTagsLower.includes(tag.toLowerCase())
+  ).slice(0, 5);
+});
+
+const normalizeTag = (tag: string): string => {
+  return tag.trim();
+};
+
+const addTag = () => {
+  const tag = normalizeTag(tagInput.value);
+  if (tag) {
+    const tagLower = tag.toLowerCase();
+    const alreadyExists = filters.value.tags.some(t => t.toLowerCase() === tagLower);
+    if (!alreadyExists) {
+      filters.value.tags = [...filters.value.tags, tag];
+      tagInput.value = '';
+      updateQueryParams();
+    } else {
+      tagInput.value = '';
+    }
+  }
+};
+
+const addTagFromSuggestion = (tag: string) => {
+  const tagLower = tag.toLowerCase();
+  const alreadyExists = filters.value.tags.some(t => t.toLowerCase() === tagLower);
+  if (!alreadyExists) {
+    filters.value.tags = [...filters.value.tags, tag];
+    tagInput.value = '';
+    updateQueryParams();
+  }
 };
 
 const removeTag = (tag: string) => {
@@ -426,6 +464,67 @@ watch(() => route.query, (newQuery) => {
 
 .filter-select[multiple] {
   min-height: 100px;
+}
+
+.tag-input-container {
+  position: relative;
+  width: 100%;
+}
+
+.tag-input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 14px;
+  color: var(--color-black);
+  background: #ffffff;
+  transition: border-color 0.2s;
+}
+
+.tag-input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+.tag-suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: 4px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.tag-suggestion {
+  display: block;
+  width: 100%;
+  padding: 8px 12px;
+  text-align: left;
+  background: none;
+  border: none;
+  font-size: 14px;
+  color: var(--color-black);
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.tag-suggestion:hover {
+  background-color: #f1f5f9;
+}
+
+.tag-suggestion:first-child {
+  border-radius: 8px 8px 0 0;
+}
+
+.tag-suggestion:last-child {
+  border-radius: 0 0 8px 8px;
 }
 
 .selected-tags {

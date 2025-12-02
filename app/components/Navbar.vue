@@ -56,8 +56,8 @@ const handleSearch = () => {
       if (route.query.sources) query.sources = route.query.sources as string;
       if (route.query.tags) {
         query.tags = Array.isArray(route.query.tags) 
-          ? route.query.tags
-          : [route.query.tags as string];
+          ? route.query.tags as string[]
+          : route.query.tags as string ? [route.query.tags as string] : [];
       }
     }
     

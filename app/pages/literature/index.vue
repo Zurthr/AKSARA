@@ -227,15 +227,34 @@ const filteredBooks = computed(() => {
     );
   }
 
-  // Filter by tags
+  // Filter by tags - books must have at least one matching tag
   if (filters.value.tags.length > 0) {
+    const filterTagsLower = filters.value.tags.map(t => t.toLowerCase());
+    
     books = books.filter(book => 
-      filters.value.tags.some(tag => 
+      filterTagsLower.some(filterTag => 
         book.tags.some(bookTag => 
-          bookTag.toLowerCase().includes(tag.toLowerCase())
+          bookTag.toLowerCase().includes(filterTag) || filterTag.includes(bookTag.toLowerCase())
         )
       )
     );
+    
+    // Sort by relevance - books with more matching tags appear higher
+    books = books.sort((a, b) => {
+      const aMatches = filterTagsLower.filter(filterTag => 
+        a.tags.some(bookTag => 
+          bookTag.toLowerCase().includes(filterTag) || filterTag.includes(bookTag.toLowerCase())
+        )
+      ).length;
+      
+      const bMatches = filterTagsLower.filter(filterTag => 
+        b.tags.some(bookTag => 
+          bookTag.toLowerCase().includes(filterTag) || filterTag.includes(bookTag.toLowerCase())
+        )
+      ).length;
+      
+      return bMatches - aMatches; // Higher matches first
+    });
   }
 
   return books;
