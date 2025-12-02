@@ -90,51 +90,57 @@
 </template>
 
 <script setup lang="ts">
-// Dummy data for books
-const books = [
-  {
-    id: 1,
-    image: "https://img.freepik.com/free-vector/abstract-elegant-winter-book-cover_23-2148798745.jpg?semt=ais_hybrid&w=740&q=80",
-    tag: "Web Development",
-    rating: 4.2
-  },
-  {
-    id: 2,
-    image: "https://via.placeholder.com/200x300/16a34a/ffffff?text=The+Understory",
-    tag: "Cooking",
-    rating: 4.8
-  },
-  {
-    id: 3,
-    image: "https://via.placeholder.com/200x300/fbbf24/000000?text=James+and+the+Giant+Peach",
-    tag: "Web Development",
-    rating: 3.5
-  },
-  {
-    id: 4,
-    image: "https://via.placeholder.com/200x300/1e3a8a/ffffff?text=Beyond+the+Ocean+Door",
-    tag: "Web Development",
-    rating: 4.0
-  },
-  {
-    id: 5,
-    image: "https://via.placeholder.com/200x300/ef4444/ffffff?text=Clean+Code",
-    tag: "Programming",
-    rating: 4.9
-  },
-  {
-    id: 6,
-    image: "https://via.placeholder.com/200x300/8b5cf6/ffffff?text=Design+Patterns",
-    tag: "Software Engineering",
-    rating: 4.3
-  }
-];
+// Use the real books data from the mock backend JSON
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore - JSON module typing is handled by the bundler
+import rawBooksData from '../../../mock-backend/data/books.json';
+
+interface RawBookTag {
+  name: string;
+  type?: string;
+}
+
+interface RawBook {
+  id: number;
+  cover: string;
+  rating?: number;
+  tags?: RawBookTag[];
+}
+
+interface ReadBookCard {
+  id: number;
+  image: string;
+  tag: string;
+  rating: number;
+}
+
+const rawBooks = rawBooksData as RawBook[];
+
+// Build "Reads you may enjoy" from the highest-rated books
+const books = computed<ReadBookCard[]>(() => {
+  const mapped = (rawBooks || []).map((book) => {
+    const tags = book.tags || [];
+    const primary = tags.find((tag) => tag.type === 'primary') || tags[0];
+
+    return {
+      id: book.id,
+      image: book.cover,
+      tag: primary?.name || 'General',
+      rating: book.rating || 0
+    };
+  });
+
+  return mapped
+    .filter((book) => book.rating > 0)
+    .sort((a, b) => b.rating - a.rating)
+    .slice(0, 12);
+});
 
 const currentIndex = ref(0);
 const visibleBooks = 4; // Number of books visible at once
 
 const nextSlide = () => {
-  const maxIndex = Math.max(0, books.length - visibleBooks);
+  const maxIndex = Math.max(0, books.value.length - visibleBooks);
   currentIndex.value = Math.min(currentIndex.value + 1, maxIndex);
 };
 
