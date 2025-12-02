@@ -67,11 +67,25 @@
         <div class="community-insights" aria-label="Community highlights">
           <section class="insights-card">
             <header>
-              <h3>Communities</h3>
-              <p>Discover and join communities that match your interests</p>
+              <h3>Filter Communities</h3>
+              <p>Filter communities by topics and interests</p>
+              <div class="filter-stats" v-if="activeFilters.length > 0">
+                <span class="active-filters">{{ activeFilters.length }} filter{{ activeFilters.length > 1 ? 's' : '' }} active</span>
+                <button type="button" class="clear-filters" @click="clearAllFilters">Clear all</button>
+              </div>
             </header>
-            <div class="hashtag-list">
-              <span v-for="hashtag in hashtags" :key="hashtag" class="hashtag">{{ hashtag }}</span>
+            <div class="filter-list">
+              <button 
+                v-for="hashtag in hashtags" 
+                :key="hashtag" 
+                :class="['filter-tag', { 'active': activeFilters.includes(hashtag) }]"
+                @click="toggleFilter(hashtag)"
+                type="button"
+              >
+                <span class="tag-icon">{{ getTagIcon(hashtag) }}</span>
+                <span class="tag-text">{{ hashtag }}</span>
+                <span v-if="activeFilters.includes(hashtag)" ></span>
+              </button>
             </div>
           </section>
 
@@ -92,6 +106,11 @@
 </template>
 
 <script setup lang="ts">
+import { ref, computed } from 'vue';
+
+// Filter state management
+const activeFilters = ref<string[]>([]);
+
 const iconPaths: Record<string, string> = {
   heart: 'M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5A4.5 4.5 0 0 1 6.5 4 4.49 4.49 0 0 1 12 6.09 4.49 4.49 0 0 1 17.5 4 4.5 4.5 0 0 1 22 8.5c0 3.78-3.4 6.86-8.55 11.54z',
   spark: 'M12 2l2.09 6.26L20 8.27l-5 3.64L16.18 18 12 14.77 7.82 18 9 11.91l-5-3.64 5.91-.01L12 2z',
@@ -99,7 +118,8 @@ const iconPaths: Record<string, string> = {
   chat: 'M4 4h16a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H8l-4 4V5a1 1 0 0 1 1-1z'
 };
 
-const communities = [
+// All communities data
+const allCommunities = [
   {
     id: 'jump-fest-2025',
     name: 'JUMP FEST 2025 - BRED THROUGH',
@@ -116,7 +136,7 @@ const communities = [
     name: 'Literacy Circle',
     icon: 'heart',
     accent: '#FFE5EC',
-    tags: ['Harry Potter', 'LoTR', 'Book Talk', 'Reading'],
+    tags: ['#HarryPotter', 'LoTR', 'Book Talk', 'Reading'],
     description:
       'Komunitas pecinta buku untuk diskusi sastra, review, dan menemukan penulis baru.',
     members: '324',
@@ -168,7 +188,44 @@ const communities = [
   }
 ];
 
-const hashtags = ['#HarryPotter', '#WIBU', '#ANIME', '#GAME', '#DEMONS', '#ANIMEX'];
+// Filtered communities based on active filters
+const communities = computed(() => {
+  if (activeFilters.value.length === 0) {
+    return allCommunities;
+  }
+  
+  return allCommunities.filter(community => {
+    // Check if community has any of the active filter tags
+    return activeFilters.value.some(filter => 
+      community.tags.some(tag => tag.toLowerCase().includes(filter.toLowerCase())) ||
+      community.name.toLowerCase().includes(filter.toLowerCase()) ||
+      community.description.toLowerCase().includes(filter.toLowerCase())
+    );
+  });
+});
+
+// Toggle filter function
+const toggleFilter = (tag: string) => {
+  const index = activeFilters.value.indexOf(tag);
+  if (index > -1) {
+    activeFilters.value.splice(index, 1);
+  } else {
+    activeFilters.value.push(tag);
+  }
+};
+
+// Clear all filters
+const clearAllFilters = () => {
+  activeFilters.value = [];
+};
+
+// Get icon for different tag types (disabled for cleaner look)
+const getTagIcon = (tag: string): string => {
+  // Return empty string to remove all icons
+  return '';
+};
+
+const hashtags = ['#HarryPotter', '#WIBU', '#ANIME', '#GAME', '#DEMONS', '#ANIMEX', 'Mindful'];
 
 const tweet = {
   initials: 'BS',
@@ -213,6 +270,119 @@ const relatedCommunities = [
 .insights-card header p {
   color: #475569;
   font-size: 14px;
+}
+
+.filter-stats {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.active-filters {
+  font-size: 12px;
+  color: #6366f1;
+  font-weight: 600;
+}
+
+.clear-filters {
+  font-size: 12px;
+  color: #ef4444;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+}
+
+.clear-filters:hover {
+  background: #fef2f2;
+}
+
+.filter-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.filter-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  background-color: #2C3542;
+  border: 1.5px solid #3B5379;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.filter-tag::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.filter-tag:hover::before {
+  left: 100%;
+}
+
+.filter-tag:hover {
+  background-color: #3B5379;
+  border-color: #475569;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 83, 121, 0.25);
+}
+
+.filter-tag.active {
+  background-color: #3B5379;
+  border-color: #475569;
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 83, 121, 0.4);
+}
+
+.filter-tag.active:hover {
+  background-color: #475569;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(59, 83, 121, 0.5);
+}
+
+.tag-icon {
+  font-size: 14px;
+  line-height: 1;
+}
+
+.tag-text {
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+.tag-check {
+  font-size: 12px;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 2px;
 }
 
 .hashtag-list {
@@ -514,6 +684,7 @@ const relatedCommunities = [
   line-height: 1.6;
   display: -webkit-box;
   -webkit-line-clamp: 3;
+  line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
   min-height: 68px;
