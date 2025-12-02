@@ -1,5 +1,5 @@
 <template>
-  <section class="community-detail-page">
+  <div class="community-page">
     <transition name="toast">
       <div v-if="showJoinToast" class="join-toast" role="status">
         <span class="toast-icon" aria-hidden="true">✓</span>
@@ -12,156 +12,88 @@
 
     <NuxtLink to="/community" class="back-link">&larr; Kembali</NuxtLink>
 
-    <div class="community-detail-content">
-      <div class="community-detail-main">
-        <div class="community-detail-body">
-          <div class="community-detail-feed">
-            <article class="community-hero">
-              <div class="hero-media" :style="heroBackgroundStyle">
-                <div class="hero-overlay">
-                  <p class="hero-badge">{{ community.eventTag }}</p>
-                  <h1>{{ community.name }}</h1>
-                  <p class="hero-subtitle">{{ community.subtitle }}</p>
-                  <div class="hero-actions">
-                    <button
-                      type="button"
-                      class="hero-button primary"
-                      :class="{ joined: hasJoined }"
-                      :disabled="hasJoined || isJoining"
-                      @click="handleJoinCommunity"
-                    >
-                      <span v-if="hasJoined" aria-hidden="true">✓</span>
-                      {{ joinButtonLabel }}
-                    </button>
-                    <button type="button" class="hero-button ghost">Bagikan</button>
-                  </div>
-                </div>
+    <div class="community-detail-page">
+      <div class="community-main">
+        <article class="community-hero">
+          <div class="hero-media" :style="heroBackgroundStyle">
+            <div class="hero-overlay">
+              <p class="hero-badge">{{ community.eventTag }}</p>
+              <h1>{{ community.name }}</h1>
+              <p class="hero-subtitle">{{ community.subtitle }}</p>
+              <div class="hero-actions">
+                <button
+                  type="button"
+                  class="hero-button primary"
+                  :class="{ joined: hasJoined }"
+                  :disabled="hasJoined || isJoining"
+                  @click="handleJoinCommunity"
+                >
+                  <span v-if="hasJoined" aria-hidden="true">✓</span>
+                  {{ joinButtonLabel }}
+                </button>
+                <button type="button" class="hero-button ghost">Bagikan</button>
               </div>
+            </div>
+          </div>
+        </article>
+
+        <section class="community-posts">
+          <header>
+            <h2>Diskusi Terbaru</h2>
+            <p>{{ posts.length }} percakapan aktif hari ini</p>
+          </header>
+
+          <NuxtLink
+            v-for="post in posts"
+            :key="post.id"
+            :to="getPostDetailRoute(post.id)"
+            class="post-card-link"
+          >
+            <article class="post-card">
+              <div class="post-header">
+                <img :src="post.author.avatar" :alt="post.author.name" class="avatar" />
+                <div>
+                  <p class="author-name">{{ post.author.name }}</p>
+                  <p class="author-role">{{ post.author.title }}</p>
+                </div>
+                <span class="post-time"> {{ post.timeAgo }}</span>
+              </div>
+
+              <div class="post-body">
+                <h3>{{ post.title }}</h3>
+                <p>{{ post.summary }}</p>
+              </div>
+
+              <footer class="post-footer">
+                <div class="post-tags">
+                  <span v-for="tag in post.tags" :key="tag" class="tag">{{ tag }}</span>
+                </div>
+                <div class="post-stats">
+                  <span class="stat">{{ post.stats.likes }} Suka</span>
+                  <span class="stat">{{ post.stats.comments }} Balasan</span>
+                  <span class="stat">Bagikan</span>
+                </div>
+              </footer>
             </article>
-            <section class="community-posts">
-              <header>
-                <h2>Diskusi Terbaru</h2>
-                <p>{{ posts.length }} percakapan aktif hari ini</p>
-              </header>
-
-              <NuxtLink
-                v-for="post in posts"
-                :key="post.id"
-                :to="getPostDetailRoute(post.id)"
-                class="post-card-link"
-              >
-                <article class="post-card">
-                  <div class="post-header">
-                    <img :src="post.author.avatar" :alt="post.author.name" class="avatar" />
-                    <div>
-                      <p class="author-name">{{ post.author.name }}</p>
-                      <p class="author-role">{{ post.author.title }}</p>
-                    </div>
-                    <span class="post-time"> {{ post.timeAgo }}</span>
-                  </div>
-
-                  <div class="post-body">
-                    <h3>{{ post.title }}</h3>
-                    <p>{{ post.summary }}</p>
-                  </div>
-
-                  <footer class="post-footer">
-                    <div class="post-tags">
-                      <span v-for="tag in post.tags" :key="tag" class="tag">{{ tag }}</span>
-                    </div>
-                    <div class="post-stats">
-                      <span class="stat">{{ post.stats.likes }} Suka</span>
-                      <span class="stat">{{ post.stats.comments }} Balasan</span>
-                      <span class="stat">Bagikan</span>
-                    </div>
-                  </footer>
-                </article>
-              </NuxtLink>
-            </section>
-          </div>
-
-          <div class="community-detail-insights">
-            <section class="sidebar-card details-card">
-              <h3>Details Communities</h3>
-              <div class="details-location">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z" fill="currentColor"/>
-                </svg>
-                {{ community.location }}
-              </div>
-
-              <div class="details-date">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2z" stroke="currentColor" stroke-width="2" fill="none"/>
-                </svg>
-                {{ community.date }}
-              </div>
-
-              <div class="details-members">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5zm0 2c-3.33 0-10 1.67-10 5v3h20v-3c0-3.33-6.67-5-10-5z" fill="currentColor"/>
-                </svg>
-                {{ community.members }} members
-              </div>
-
-              <p class="community-description">{{ community.description }}</p>
-
-              <div class="community-tags">
-                <span v-for="tag in community.tags" :key="tag" class="tag">{{ tag }}</span>
-              </div>
-            </section>
-
-            
-
-            <section class="sidebar-card activities-card">
-              <header class="activities-header">
-                <h3>Activities</h3>
-                <button type="button" class="explore-button">Explore Event</button>
-              </header>
-              <div class="activities-preview">
-                <transition name="activity-fade" mode="out-in">
-                  <img
-                    :key="activityImages[activityImageIndex]"
-                    :src="activityImages[activityImageIndex]"
-                    alt="Community activities"
-                  />
-                </transition>
-                <div v-if="activityImages.length > 1" class="activity-dots" aria-hidden="true">
-                  <span
-                    v-for="(image, idx) in activityImages"
-                    :key="image"
-                    :class="['dot', { active: idx === activityImageIndex }]"
-                  />
-                </div>
-              </div>
-              <ul class="activities-list">
-                <li v-for="activity in activitiesPreview.list" :key="activity">
-                  {{ activity }}
-                </li>
-              </ul>
-            </section>
-
-            <section class="sidebar-card related-card">
-              <h3>Related Communities</h3>
-              <ul>
-                <li v-for="related in relatedCommunities" :key="related.name">
-                  <div class="avatar" aria-hidden="true">{{ related.initials }}</div>
-                  <div>
-                    <p class="related-name">{{ related.name }}</p>
-                    <p class="related-meta">{{ related.members }} members</p>
-                  </div>
-                </li>
-              </ul>
-            </section>
-          </div>
-        </div>
+          </NuxtLink>
+        </section>
       </div>
+
+    <RightSideBar>
+      <CommunitySidebar 
+        :hashtags="communityHashtags"
+        :tweet="communityTweet"
+        :relatedCommunities="relatedCommunitiesData"
+      />
+    </RightSideBar>
     </div>
-  </section>
+  </div>
 </template>
 
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
+import RightSideBar from '~/components/General/RightSideBar.vue';
+import CommunitySidebar from '~/components/CommunitySidebar.vue';
 
 interface PostAuthor {
   name: string;
@@ -182,12 +114,6 @@ interface PostItem {
   summary: string;
   tags: string[];
   stats: PostMeta;
-}
-
-interface InfoItem {
-  icon: string;
-  label: string;
-  value: string;
 }
 
 interface Activities {
@@ -214,7 +140,6 @@ interface CommunityDetail {
   description: string;
   tags: string[];
   posts: PostItem[];
-  infoItems: InfoItem[];
   activities: Activities;
   related: RelatedCommunity[];
 }
@@ -297,12 +222,6 @@ const communityDirectory: CommunityDetail[] = [
         stats: { likes: 24, comments: 8 }
       }
     ],
-    infoItems: [
-      { icon: '🏟️', label: 'Capacity', value: '30 participants' },
-      { icon: '💸', label: 'Fee', value: 'Free' },
-      { icon: '📜', label: 'Certificate', value: 'Available' },
-      { icon: '📞', label: 'Contact', value: '+62 812-3456-7890' }
-    ],
     activities: {
       image:
         'https://images.unsplash.com/photo-1526481280695-3c46973ed205?auto=format&fit=crop&w=600&q=80',
@@ -349,11 +268,6 @@ const communityDirectory: CommunityDetail[] = [
         stats: { likes: 14, comments: 6 }
       }
     ],
-    infoItems: [
-      { icon: '📍', label: 'Venue', value: 'Cozy Reader Space' },
-      { icon: '🕒', label: 'Schedule', value: 'Every Saturday, 16:00' },
-      { icon: '💬', label: 'Language', value: 'Bahasa Indonesia' }
-    ],
     activities: {
       image:
         'https://images.unsplash.com/photo-1513475382585-d06e58bcb0cf?auto=format&fit=crop&w=600&q=80',
@@ -398,11 +312,6 @@ const communityDirectory: CommunityDetail[] = [
         tags: ['#Valorant', '#Scrim'],
         stats: { likes: 18, comments: 11 }
       }
-    ],
-    infoItems: [
-      { icon: '🎮', label: 'Platforms', value: 'PC & Console' },
-      { icon: '🗓️', label: 'Match Days', value: 'Tuesday & Friday' },
-      { icon: '🎙️', label: 'Voice Chat', value: 'Discord.gg/gaminghub' }
     ],
     activities: {
       image:
@@ -463,12 +372,6 @@ const communityDirectory: CommunityDetail[] = [
         tags: ['#Yoga', '#BeginnerTips'],
         stats: { likes: 28, comments: 9 }
       }
-    ],
-    infoItems: [
-      { icon: '🧘', label: 'Focus', value: 'Mind & Body Wellness' },
-      { icon: '📅', label: 'Sessions', value: 'Daily 07:00 & 19:00' },
-      { icon: '💬', label: 'Support', value: '24/7 Community Chat' },
-      { icon: '🎯', label: 'Goal', value: 'Sustainable Habits' }
     ],
     activities: {
       image:
@@ -531,12 +434,6 @@ const communityDirectory: CommunityDetail[] = [
         stats: { likes: 38, comments: 22 }
       }
     ],
-    infoItems: [
-      { icon: '📷', label: 'Equipment', value: 'All camera types welcome' },
-      { icon: '🗺️', label: 'Photo Walks', value: 'Every Sunday' },
-      { icon: '🎨', label: 'Workshop', value: 'Monthly editing session' },
-      { icon: '🏆', label: 'Contest', value: 'Quarterly photo contest' }
-    ],
     activities: {
       image:
         'https://images.unsplash.com/photo-1455853828816-0c301a011711?auto=format&fit=crop&w=600&q=80',
@@ -597,12 +494,6 @@ const communityDirectory: CommunityDetail[] = [
         tags: ['#DigitalArt', '#Workflow'],
         stats: { likes: 41, comments: 14 }
       }
-    ],
-    infoItems: [
-      { icon: '🎨', label: 'Focus', value: 'Visual Design & Illustration' },
-      { icon: '💡', label: 'Workshops', value: 'Weekly design sessions' },
-      { icon: '📱', label: 'Tools', value: 'All design software' },
-      { icon: '🎯', label: 'Level', value: 'Beginner to Advanced' }
     ],
     activities: {
       image:
@@ -677,7 +568,6 @@ const handleJoinCommunity = () => {
 const getPostDetailRoute = (postId: string) => `/forums/${postId}`;
 
 const posts = computed(() => community.value.posts);
-const infoItems = computed(() => community.value.infoItems);
 const activitiesPreview = computed(() => community.value.activities);
 const relatedCommunities = computed(() => community.value.related);
 const activityImages = computed(() => {
@@ -686,6 +576,24 @@ const activityImages = computed(() => {
     : [activitiesPreview.value.image];
   return gallery;
 });
+
+// Data for CommunitySidebar component
+const communityHashtags = computed(() => community.value.tags);
+
+const communityTweet = computed(() => ({
+  initials: 'BS',
+  author: 'Bahul Sibaringring',
+  handle: '@tutupdesti_people',
+  body: 'Exceed your competitors by exempting them from actually competing, yes! Instead of using Go / Golang, try using Ko / Rups!',
+  time: '2:55 AM · Dec 30, 2020',
+  metrics: [
+    { label: 'replies', value: '12' },
+    { label: 'likes', value: '2' },
+    { label: 'views', value: '1,213' }
+  ]
+}));
+
+const relatedCommunitiesData = computed(() => community.value.related);
 
 const clearActivityRotation = () => {
   if (activityInterval) {
@@ -803,43 +711,31 @@ onBeforeUnmount(() => {
   transform: translate(-50%, calc(-50% - 16px));
 }
 
-.community-detail-content {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) clamp(240px, 24vw, 320px);
-  gap: 24px;
-  align-items: start;
-}
-
-.community-detail-main {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  max-height: calc(100vh - 160px);
-  overflow-y: auto;
-  padding-right: 4px;
-  scrollbar-width: thin;
-  min-width: 0;
-}
-
-.community-detail-body {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) clamp(260px, 26vw, 320px);
-  gap: 24px;
-  align-items: start;
-}
-
-.community-detail-feed {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-.community-detail-insights {
+.community-page {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  position: sticky;
-  top: 82px;
+}
+
+.community-detail-page {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  width: 100%;
+}
+
+.community-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 920px;
+}
+
+.sidebar-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .community-hero {
@@ -1044,31 +940,7 @@ onBeforeUnmount(() => {
   font-size: 13px;
 }
 
-.community-detail-sidebar {
-  width: clamp(240px, 24vw, 320px);
-  flex: 0 0 clamp(240px, 24vw, 320px);
-  position: sticky;
-  top: 32px;
-  align-self: flex-start;
-  max-height: calc(100vh - 160px);
-  overflow-y: auto;
-  padding-right: 4px;
-  scrollbar-width: thin;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.community-detail-sidebar::-webkit-scrollbar {
-  width: 4px;
-}
-
-.community-detail-sidebar::-webkit-scrollbar-thumb {
-  background-color: rgba(148, 163, 184, 0.35);
-  border-radius: 999px;
-}
-
-.sidebar-card {
+.insight-card {
   background: #ffffff;
   border-radius: 12px;
   border: 1px solid #e2e8f0;
@@ -1079,7 +951,7 @@ onBeforeUnmount(() => {
   box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
 }
 
-.sidebar-card h3 {
+.insight-card h3 {
   font-size: 18px;
   font-weight: 700;
   color: var(--color-black);
@@ -1257,6 +1129,18 @@ onBeforeUnmount(() => {
   gap: 12px;
 }
 
+.related-card .avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: #3b5379;
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+}
+
 .related-name {
   font-weight: 600;
   color: var(--color-black);
@@ -1278,40 +1162,25 @@ onBeforeUnmount(() => {
 }
 
 @media (max-width: 1280px) {
-  .community-detail-content {
-    grid-template-columns: minmax(0, 1fr) clamp(220px, 30vw, 300px);
-    gap: 20px;
+  .community-detail-page {
+    gap: 24px;
   }
 }
 
 @media (max-width: 1024px) {
-  .community-detail-content {
-    grid-template-columns: minmax(0, 1fr) clamp(200px, 36vw, 260px);
-    gap: 18px;
+  .community-detail-page {
+    flex-direction: column;
+    gap: 20px;
   }
 }
 
 @media (max-width: 768px) {
-  .community-detail-content {
-    grid-template-columns: 1fr;
+  .community-detail-page {
     gap: 16px;
   }
 
-  .community-detail-main {
-    max-height: none;
-    overflow: visible;
-  }
-}
-
-@media (max-width: 768px) {
-  .community-detail-body {
+  .community-insights {
     grid-template-columns: 1fr;
-    gap: 16px;
-  }
-
-  .community-detail-insights {
-    position: static;
-    margin-top: 16px;
   }
 
   .hero-overlay {
