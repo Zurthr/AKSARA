@@ -12,15 +12,7 @@
         </li>
       </ul>
     </section>
-
-    <section class="sidebar-card tags-card">
-      <h3>Tags</h3>
-      <div class="tags-container">
-        <span v-for="tag in tags" :key="tag.name" :class="tag.class" class="tag">
-          {{ tag.name }}
-        </span>
-      </div>
-    </section>
+    
 
     <section class="sidebar-card related-card">
       <h3>Related Events</h3>
@@ -73,24 +65,11 @@ defineProps<{
   width: clamp(240px, 24vw, 320px);
   flex: 0 0 clamp(240px, 24vw, 320px);
   position: sticky;
-  top: 32px;
+  top: 82px;
   align-self: flex-start;
-  max-height: calc(100vh - 160px);
-  overflow-y: auto;
-  padding-right: 4px;
-  scrollbar-width: thin;
   display: flex;
   flex-direction: column;
   gap: 16px;
-}
-
-.events-detail-sidebar::-webkit-scrollbar {
-  width: 4px;
-}
-
-.events-detail-sidebar::-webkit-scrollbar-thumb {
-  background-color: rgba(148, 163, 184, 0.35);
-  border-radius: 999px;
 }
 
 .sidebar-card {
@@ -163,13 +142,21 @@ defineProps<{
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
+  background: rgba(59, 83, 121, 0.12);
+  color: #3b5379;
+  border: 1px solid rgba(59, 83, 121, 0.22);
 }
 
-.tag-blue { background: #dbeafe; color: #1d4ed8; }
-.tag-dark { background: #1e293b; color: #ffffff; }
-.tag-purple { background: #ede9fe; color: #7c3aed; }
-.tag-orange { background: #fed7aa; color: #ea580c; }
-.tag-red { background: #fecaca; color: #dc2626; }
+.tag-blue,
+.tag-dark,
+.tag-purple,
+.tag-orange,
+.tag-red,
+.tag-default {
+  background: rgba(59, 83, 121, 0.12);
+  color: #3b5379;
+  border: 1px solid rgba(59, 83, 121, 0.22);
+}
 
 .tag:hover {
   transform: translateY(-1px);
