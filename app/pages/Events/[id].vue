@@ -1,8 +1,8 @@
 <template>
-  <section class="event-detail-page">
+  <div class="event-page">
     <NuxtLink to="/events" class="back-link">&larr; Back to Events</NuxtLink>
 
-    <div class="event-detail-content">
+    <div class="event-detail-page">
       <div class="event-detail-main">
         <div class="event-detail-feed">
           <article class="hero-media-section">
@@ -162,21 +162,6 @@
               </section>
             </div>
           </section>
-
-          <div class="event-actions">
-            <button class="register-btn">
-              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="currentColor"/>
-              </svg>
-              Daftar Event
-            </button>
-            <button class="share-btn">
-              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92S19.61 16.08 18 16.08z" fill="currentColor"/>
-              </svg>
-              Bagikan
-            </button>
-          </div>
         </div>
       </div>
 
@@ -188,10 +173,14 @@
         />
       </RightSideBar>
     </div>
-  </section>
+  </div>
 </template>
 
 <script setup lang="ts">
+import { computed, ref, watch } from 'vue';
+import { useRoute } from '#imports';
+import RightSideBar from '~/components/General/RightSideBar.vue';
+
 interface EventData {
   id: string;
   title: string;
@@ -205,76 +194,140 @@ interface EventData {
   locationType: string;
   datetime: string;
   address: string;
+  shortAddress?: string;
   capacity: string;
   price: string;
   certificate: string;
   contact: string;
   tags: string[];
-  informasiTambahan: Array<{
-    icon: string;
-    label: string;
-    value: string;
-  }>;
 }
 
-interface RelatedEvent {
+interface SidebarInfoItem {
+  icon: string;
+  label: string;
+  value: string;
+}
+
+interface SidebarTag {
+  name: string;
+  class: string;
+}
+
+interface RelatedEventCard {
   title: string;
   type: string;
   date: string;
   color: string;
 }
 
-interface PopularTag {
-  name: string;
-  class: string;
-}
-
-const route = useRoute();
-
-// Sample event data based on route ID
-const eventData: Record<string, EventData> = {
+const eventDetails: Record<string, EventData> = {
   'creative-writing-workshop': {
     id: 'creative-writing-workshop',
     title: 'Creative Writing Workshop',
     subtitle: 'Workshop Creative Writing: Menulis Cerita yang Menginspirasi',
     hostedBy: 'Komunitas Literasi Bandung',
-    description: 'Bergabunglah dengan workshop creative writing yang akan mengasah kemampuan menulis Anda! Dalam sesi ini, Anda akan mempelajari teknik-teknik dasar penulisan kreatif, mulai dari pengembangan karakter, plot, hingga gaya penulisan yang menarik.',
-    objectives: 'Workshop ini cocok untuk pemula yang ingin memulai perjalanan menulis maupun penulis yang ingin meningkatkan keterampilan mereka. Kami akan memberikan panduan praktis dan latihan langsung yang bisa diterapkan segera.',
-    benefits: 'Dapatkan kesempatan untuk berbagi karya dengan sesama peserta dan mendapat feedback konstruktif dari mentor berpengalaman di bidang literasi.',
-    image: 'https://images.unsplash.com/photo-1544723795-3fb6469f5b39?auto=format&fit=crop&w=200&q=80',
+    description: 'Bergabunglah dengan workshop creative writing yang akan mengasah kemampuan menulis Anda! Dalam sesi ini, Anda akan mempelajari teknik dasar penulisan kreatif mulai dari pengembangan karakter, alur, hingga gaya penulisan yang menarik.',
+    objectives: 'Peserta akan mendapatkan panduan praktis dan latihan yang dapat langsung diterapkan untuk memperkuat kepercayaan diri menulis.',
+    benefits: 'Dapatkan kesempatan berbagi karya dan menerima umpan balik konstruktif dari mentor literasi berpengalaman.',
+    image: 'https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=800&q=80',
     category: 'Workshop',
-    locationType: 'Online',
-    datetime: '20 November 2024, 13:00 - 16:00 WIB',
-    address: 'Perpustakaan Kota Bandung Jl. Seram No. 2, Citarum, Bandung Wetan Kota Bandung, Jawa Barat 40115',
-    capacity: '30 peserta',
+    locationType: 'Online (Zoom Meeting)',
+    datetime: 'Rabu, 20 November 2025 • 19:00 - 21:00 WIB',
+    address: 'Link Zoom akan dikirim setelah registrasi melalui email resmi peserta.',
+    shortAddress: 'Zoom Meeting (Link via email)',
+    capacity: '100 peserta',
     price: 'Gratis',
-    certificate: 'Available',
-    contact: '+62 812-3456-7890',
-    tags: ['#Workshop', '#Literasi', '#CreativeWriting', '#Menulis', '#Inspirasi'],
-    informasiTambahan: [
-      { icon: '👥', label: 'Kapasitas', value: '30 peserta' },
-      { icon: '💰', label: 'Gratis', value: 'Gratis' },
-      { icon: '📜', label: 'Sertifikat dan materi workshop', value: 'Available' },
-      { icon: '📞', label: 'Contact', value: '+62 812-3456-7890' }
-    ]
+    certificate: 'E-sertifikat tersedia',
+    contact: 'literasi@aksara.id',
+    tags: ['#Workshop', '#Literasi', '#CreativeWriting', '#Menulis', '#Inspirasi']
+  },
+  'book-knowledge-sharing': {
+    id: 'book-knowledge-sharing',
+    title: 'Book Events',
+    subtitle: 'Many Book Many Knowledge',
+    hostedBy: 'Komunitas Buku Nusantara',
+    description: 'Sesi berbagi pengetahuan dari para pembaca setia untuk mengulas buku-buku terbaru, diskusi tematik, dan membangun jejaring antar pecinta literasi.',
+    objectives: 'Menghadirkan ruang berdiskusi seputar buku dan memperkaya perspektif membaca melalui sesi tanya jawab.',
+    benefits: 'Bangun koneksi dengan komunitas literasi dan dapatkan referensi bacaan baru yang dikurasi langsung oleh para kurator buku.',
+    image: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=800&q=80',
+    category: 'Reading',
+    locationType: 'Offline (Tahura Bandung)',
+    datetime: 'Sabtu, 14 Desember 2025 • 15:00 - 18:00 WIB',
+    address: 'Taman Hutan Raya Ir. H. Djuanda, Jl. Ir. H. Juanda No. 99, Bandung',
+    shortAddress: 'Tahura, Bandung',
+    capacity: '150 peserta',
+    price: 'Rp 25.000',
+    certificate: 'Tanpa sertifikat',
+    contact: 'buku@aksara.id',
+    tags: ['#Book', '#Knowledge', '#Reading']
+  },
+  'book-festival-2025': {
+    id: 'book-festival-2025',
+    title: 'Book Festivals 2025',
+    subtitle: 'Book Festival 2025',
+    hostedBy: 'Dispusipda Jawa Barat',
+    description: 'Festival literasi tahunan yang mempertemukan penulis, penerbit, dan pembaca melalui diskusi panel, launching buku, serta pertunjukan seni.',
+    objectives: 'Menginspirasi pengunjung untuk mengeksplorasi ragam genre buku dan mendukung ekosistem literasi lokal.',
+    benefits: 'Nikmati diskon buku khusus festival dan akses eksklusif ke sesi meet and greet dengan penulis.',
+    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80',
+    category: 'Festival',
+    locationType: 'Offline (Dispusipda Jawa Barat)',
+    datetime: 'Sabtu, 22 November 2025 • 09:00 - 17:00 WIB',
+    address: 'Dispusipda Jawa Barat, Jl. Kawaluyaan Indah II No.4, Bandung',
+    shortAddress: 'Dispusipda Jabar, Bandung',
+    capacity: '500 pengunjung',
+    price: 'Gratis',
+    certificate: 'Merchandise eksklusif',
+    contact: 'festival@aksara.id',
+    tags: ['#Festival', '#Book', '#Literature']
+  },
+  'litverse-2025': {
+    id: 'litverse-2025',
+    title: 'LitVerse 2025',
+    subtitle: 'LitVerse 2025: Festival Literasi dan Imajinasi',
+    hostedBy: 'Aksara Collective',
+    description: 'Perayaan literasi dan kreativitas dengan sesi tematik, kelas master, dan instalasi interaktif untuk mengeksplorasi dunia imajinasi.',
+    objectives: 'Menyajikan pengalaman hybrid yang mempertemukan pembaca dengan kreator konten literasi lintas medium.',
+    benefits: 'Akses ke rekaman sesi premium dan jaringan komunitas kreatif nasional.',
+    image: 'https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=800&q=80',
+    category: 'Festival',
+    locationType: 'Hybrid (Bandung Convention Center + Livestream)',
+    datetime: 'Minggu, 29 Desember 2025 • 10:00 - 21:00 WIB',
+    address: 'Bandung Convention Center, Jl. Soekarno Hatta No. 354, Bandung',
+    shortAddress: 'Bandung Convention Center',
+    capacity: '1,200 peserta onsite & online',
+    price: 'Mulai Rp 99.000',
+    certificate: 'E-sertifikat & rekaman sesi',
+    contact: 'litverse@aksara.id',
+    tags: ['#LitVerse', '#Festival', '#Imajinasi']
   }
 };
 
-const event = computed((): EventData => {
-  const targetId = String(route.params.id);
-  return eventData[targetId] ?? eventData['creative-writing-workshop']!;
+const route = useRoute();
+const showFullAddress = ref(false);
+const heroImage = ref('');
+const fallbackHeroImage = 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80';
+const fallbackEvent = eventDetails['creative-writing-workshop'];
+
+const event = computed<EventData>(() => {
+  const id = String(route.params.id ?? '');
+  return (eventDetails[id] ?? fallbackEvent) as EventData;
 });
 
-const handleImageError = (e: Event) => {
-  const target = e.target as HTMLImageElement;
-  const container = target.parentElement;
-  
-  if (container) {
-    // Create a fallback gradient background
-    container.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
-    target.style.display = 'none';
+watch(
+  () => event.value.image,
+  (value) => {
+    heroImage.value = value || fallbackHeroImage;
+  },
+  { immediate: true }
+);
+
+const displayedAddress = computed(() => {
+  if (showFullAddress.value) {
+    return event.value.address;
   }
-};
+  return event.value.shortAddress ?? event.value.address;
+});
 
 const toggleAddress = () => {
   showFullAddress.value = !showFullAddress.value;
@@ -292,51 +345,39 @@ const popularEventTags = computed<SidebarTag[]>(() =>
   event.value.tags.map((tag) => ({ name: tag, class: 'tag-default' }))
 );
 
-const relatedEvents: RelatedEvent[] = [
-  {
-    title: 'Workshop Creative',
-    type: 'Online',
-    date: '20 November 2024',
-    color: 'green'
-  },
-  {
-    title: 'Workshop Creative', 
-    type: 'Onsite',
-    date: '20 November 2024',
-    color: 'green'
-  },
-  {
-    title: 'Reading Together',
-    type: 'Online', 
-    date: '20 November 2024',
-    color: 'green'
-  },
-  {
-    title: 'Workshop Writing',
-    type: 'Online',
-    date: '25 November 2024', 
-    color: 'green'
-  }
+const relatedEventsSource: RelatedEventCard[] = [
+  { title: 'Creative Writing Workshop', type: 'Online', date: '20 Nov 2025', color: 'green' },
+  { title: 'Book Events', type: 'Offline', date: '14 Des 2025', color: 'green' },
+  { title: 'Book Festivals 2025', type: 'Offline', date: '22 Nov 2025', color: 'green' },
+  { title: 'LitVerse 2025', type: 'Hybrid', date: '29 Des 2025', color: 'green' }
 ];
+
+const relatedEvents = computed<RelatedEventCard[]>(() =>
+  relatedEventsSource.filter((item) => item.title !== event.value.title).slice(0, 3)
+);
+
+const handleImageError = () => {
+  heroImage.value = fallbackHeroImage;
+};
 
 const getTagClass = (tag: string): string => {
   const tagClasses: Record<string, string> = {
     '#Workshop': 'tag-workshop',
-    '#Literasi': 'tag-literasi', 
+    '#Literasi': 'tag-literasi',
     '#CreativeWriting': 'tag-creative',
     '#Menulis': 'tag-menulis',
     '#Inspirasi': 'tag-inspirasi'
   };
+
   return tagClasses[tag] || 'tag-default';
 };
 </script>
 
 <style scoped>
-.event-detail-page {
+.event-page {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  width: 100%;
 }
 
 .back-link {
@@ -345,11 +386,11 @@ const getTagClass = (tag: string): string => {
   text-decoration: none;
 }
 
-.event-detail-content {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) clamp(240px, 24vw, 320px);
-  gap: 24px;
-  align-items: start;
+.event-detail-page {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  width: 100%;
 }
 
 .event-detail-main {
@@ -357,38 +398,32 @@ const getTagClass = (tag: string): string => {
   display: flex;
   flex-direction: column;
   gap: 24px;
-  max-height: calc(100vh - 160px);
-  overflow-y: auto;
-  padding-right: 4px;
-  scrollbar-width: thin;
-  min-width: 0;
+  max-width: 920px;
 }
 
-.event-detail-main::-webkit-scrollbar {
-  width: 4px;
-}
 
-.event-detail-main::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.event-detail-main::-webkit-scrollbar-thumb {
-  background-color: rgba(148, 163, 184, 0.35);
-  border-radius: 999px;
+.event-detail-feed {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
 .hero-media-section {
-  margin-bottom: 32px;
+  background: #ffffff;
+  border-radius: 24px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+  overflow: hidden;
 }
 
 .hero-media-container {
   position: relative;
   width: 100%;
-  height: 350px;
-  border-radius: 20px;
+  min-height: clamp(200px, 32vh, 260px);
+  aspect-ratio: 16 / 7;
+  border-radius: 0;
   overflow: hidden;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  box-shadow: 0 20px 60px rgba(15, 23, 42, 0.15);
 }
 
 .hero-media-image {
@@ -410,8 +445,58 @@ const getTagClass = (tag: string): string => {
 
 .hero-media-content {
   text-align: center;
-  color: white;
+  color: #ffffff;
   max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.hero-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border-radius: 14px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.hero-button svg {
+  width: 18px;
+  height: 18px;
+}
+
+.hero-button.primary {
+  background: #fbbf24;
+  color: var(--color-black);
+  box-shadow: 0 12px 24px rgba(250, 191, 36, 0.35);
+}
+
+.hero-button.primary:hover {
+  background: #f59e0b;
+  transform: translateY(-2px);
+}
+
+.hero-button.ghost {
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: #ffffff;
+}
+
+.hero-button.ghost:hover {
+  background: rgba(255, 255, 255, 0.28);
+  transform: translateY(-2px);
 }
 
 .hero-category-badge {
@@ -444,37 +529,6 @@ const getTagClass = (tag: string): string => {
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-.event-image-container {
-  width: 100%;
-  height: 250px;
-  border-radius: 16px;
-  overflow: hidden;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  margin-bottom: 24px;
-  box-shadow: 0 8px 32px rgba(15, 23, 42, 0.1);
-  border: 1px solid #e2e8f0;
-}
-
-.event-main-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.3s ease;
-}
-
-.event-main-image:hover {
-  transform: scale(1.02);
-}
-
-.event-hero {
-  background: #ffffff;
-  border-radius: 24px;
-  overflow: hidden;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
-}
-
 .event-info {
   background: #ffffff;
   border-radius: 24px;
@@ -485,6 +539,7 @@ const getTagClass = (tag: string): string => {
   flex-direction: column;
   gap: 24px;
 }
+
 
 .event-header h2 {
   font-size: 24px;
@@ -518,6 +573,7 @@ const getTagClass = (tag: string): string => {
   color: #3b82f6;
   font-weight: 600;
 }
+
 
 .event-description h3,
 .event-details-section h3,
@@ -562,9 +618,20 @@ const getTagClass = (tag: string): string => {
   flex-shrink: 0;
 }
 
-.detail-icon.category { background: #dbeafe; color: #1d4ed8; }
-.detail-icon.location { background: #dcfce7; color: #16a34a; }
-.detail-icon.time { background: #fef3c7; color: #d97706; }
+.detail-icon.category {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.detail-icon.location {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.detail-icon.time {
+  background: #fef3c7;
+  color: #d97706;
+}
 
 .detail-icon svg {
   width: 20px;
@@ -1213,47 +1280,42 @@ const getTagClass = (tag: string): string => {
 }
 
 @media (max-width: 768px) {
-  .event-detail-content {
-    grid-template-columns: 1fr;
+  .event-detail-page {
+    flex-direction: column;
     gap: 16px;
   }
 
-  .event-detail-main {
-    max-height: none;
-    overflow: visible;
-    padding-right: 0;
-  }
-
   .hero-media-container {
-    height: 280px;
+    min-height: 220px;
     border-radius: 16px;
   }
-  
+
   .hero-media-title {
     font-size: 32px;
   }
-  
+
   .hero-media-subtitle {
     font-size: 16px;
   }
-  
+
   .hero-media-overlay {
     padding: 24px;
   }
-  
-  .hero-overlay h1 {
-    font-size: 24px;
+
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
   }
-  
+
+  .hero-button {
+    width: 100%;
+    justify-content: center;
+  }
+
   .event-info {
     padding: 20px;
   }
 
-  .events-detail-sidebar,
-  .event-detail-content > *:last-child {
-    width: 100%;
-  }
-  
   .details-grid {
     grid-template-columns: 1fr;
   }

@@ -1,14 +1,13 @@
 <template>
   <section class="community-page">
-   
+    <div class="community-header" role="search">
+      
+    </div>
 
-    <div class="community-content">
-      <div class="community-main" tabindex="0">
-        <header class="community-title">
-          <h1>Community</h1>
-          <p>Discover, join, and grow with communities that match your interests.</p>
-        </header>
+    <div class="community-main" tabindex="0">
+      
 
+      <div class="community-body">
         <div class="community-grid">
           <NuxtLink
             v-for="community in communities"
@@ -99,6 +98,9 @@
           </section>
         </div>
       </div>
+      
+
+      <button type="button" class="load-more">Load More Communities</button>
     </div>
   </section>
 </template>
@@ -512,16 +514,18 @@ const relatedCommunities = [
 }
 
 .community-page {
+  padding-left:32px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 32px;
   width: 100%;
   padding-bottom: 40px;
 }
 
 .community-header {
   display: flex;
-  gap: 16px;
+  flex-wrap: wrap;
+  gap: 12px;
   align-items: center;
 }
 
@@ -572,35 +576,26 @@ const relatedCommunities = [
   transform: translateY(-2px);
 }
 
-
-.community-content {
-  display: flex;
-  gap: 24px;
-  align-items: stretch;
-}
-
 .community-main {
-  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 24px;
-  max-height: calc(100vh - 160px);
-  overflow-y: auto;
-  padding-right: 4px;
-  scrollbar-width: thin;
+  width: 100%;
 }
 
-.community-main::-webkit-scrollbar {
-  width: 4px;
+.community-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 32px;
+  align-items: start;
 }
 
-.community-main::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.community-main::-webkit-scrollbar-thumb {
-  background-color: rgba(148, 163, 184, 0.35);
-  border-radius: 999px;
+.community-insights {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  position: sticky;
+  top: 70px;
 }
 
 .community-title h1 {
@@ -618,6 +613,7 @@ const relatedCommunities = [
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 20px;
+  align-items: stretch;
 }
 
 .community-card {
@@ -632,6 +628,7 @@ const relatedCommunities = [
   text-decoration: none;
   color: inherit;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  height: 100%;
 }
 
 .community-card:hover {
@@ -676,8 +673,8 @@ const relatedCommunities = [
 .tag {
   padding: 4px 10px;
   border-radius: 999px;
-  background-color: #f1f5f9;
-  color: #475569;
+  background-color: #3B5379;
+  color: #ffffff;
   font-size: 12px;
   font-weight: 600;
 }
@@ -722,6 +719,7 @@ const relatedCommunities = [
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  margin-top: auto;
 }
 
 .join-button:hover {
@@ -745,33 +743,14 @@ const relatedCommunities = [
   background-color: var(--color-black);
   color: #ffffff;
 }
-
-
-.community-sidebar-container {
-  width: 320px;
-  position: sticky;
-  top: 32px;
-  align-self: flex-start;
-  max-height: calc(100vh - 160px);
-  overflow: hidden;
-}
-
 @media (max-width: 1280px) {
-  .community-content {
-    flex-direction: column;
+  .community-body {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
   }
 
-  .community-sidebar-container {
-    width: 100%;
+  .community-insights {
     position: static;
-    max-height: none;
-    overflow: visible;
-  }
-
-  .community-main {
-    max-height: none;
-    overflow: visible;
-    padding-right: 0;
   }
 }
 

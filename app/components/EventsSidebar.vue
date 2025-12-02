@@ -63,15 +63,7 @@ const getIconSymbol = (icon: string): string => {
 
 <style scoped>
 .events-detail-sidebar {
-  width: clamp(240px, 24vw, 320px);
-  flex: 0 0 clamp(240px, 24vw, 320px);
-  position: sticky;
-  top: 32px;
-  align-self: flex-start;
-  max-height: calc(100vh - 160px);
-  overflow-y: auto;
-  padding-right: 4px;
-  scrollbar-width: thin;
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 20px;

@@ -71,6 +71,48 @@ import BookGrid from '~/components/Literature/BookGrid.vue';
 import LiteratureFilterSidebar from '~/components/Literature/LiteratureFilterSidebar.vue';
 import TrendingSidebar from '~/components/TrendingSidebar.vue';
 
+// Use the real books data from the mock backend JSON
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore - JSON module typing is handled by the bundler
+import rawBooksData from '../../../mock-backend/data/books.json';
+
+interface RawBookTag {
+  name: string;
+  type?: string;
+}
+
+interface RawBookSource {
+  name: string;
+  url: string;
+}
+
+interface RawCopyTypeSource {
+  name: string;
+  url: string;
+  type?: string;
+  shipping_available?: boolean;
+}
+
+interface RawCopyType {
+  description: string;
+  sources?: RawCopyTypeSource[];
+}
+
+interface RawBook {
+  id: number;
+  title: string;
+  author?: string;
+  cover: string;
+  rating?: number;
+  description?: string;
+  year_edition?: string;
+  total_bookmarked?: number;
+  tags?: RawBookTag[];
+  copy_types?: Record<string, RawCopyType>;
+  licensing_type?: string;
+  sources?: RawBookSource[];
+}
+
 interface Book {
   id: number;
   title: string;
@@ -79,87 +121,61 @@ interface Book {
   tags: string[];
   rating?: number;
   bookmarks?: number;
-  copyType?: ('onsite' | 'physical' | 'online')[];
-  licensingType?: ('pay-to-own' | 'rent' | 'free')[];
+  copyType?: string[];
+  licensingType?: string[];
   sources?: string[];
 }
 
 const route = useRoute();
 
-// Sample book data - in production, this would come from an API
-const allBooks: Book[] = [
-  {
-    id: 1,
-    title: 'DIFFERENT WINTER',
-    author: 'Mia Jackson',
-    image: 'https://img.freepik.com/free-vector/abstract-elegant-winter-book-cover_23-2148798745.jpg?semt=ais_hybrid&w=740&q=80',
-    tags: ['Web Development'],
-    rating: 4.2,
-    bookmarks: 120,
-    copyType: ['online', 'onsite'],
-    licensingType: ['free', 'rent'],
-    sources: ['IEEE', 'Google Books']
-  },
-  {
-    id: 2,
-    title: 'THE UNDERSTORY',
-    author: 'Saner Sangsuk',
-    image: 'https://via.placeholder.com/200x300/16a34a/ffffff?text=The+Understory',
-    tags: ['Web Development', 'PHP'],
-    rating: 4.8,
-    bookmarks: 95,
-    copyType: ['online'],
-    licensingType: ['rent'],
-    sources: ['IEEE']
-  },
-  {
-    id: 3,
-    title: 'JAMES and the Giant Peach',
-    author: 'Roald Dahl',
-    image: 'https://via.placeholder.com/200x300/fbbf24/000000?text=James+and+the+Giant+Peach',
-    tags: ['Web Development'],
-    rating: 3.5,
-    bookmarks: 80,
-    copyType: ['physical', 'onsite'],
-    licensingType: ['pay-to-own'],
-    sources: ['ACM', 'Springer']
-  },
-  {
-    id: 4,
-    title: 'BEYOND THE OCEAN DOOR',
-    image: 'https://via.placeholder.com/200x300/1e3a8a/ffffff?text=Beyond+the+Ocean+Door',
-    tags: ['Web Development'],
-    rating: 4.0,
-    bookmarks: 150,
-    copyType: ['online', 'physical'],
-    licensingType: ['free'],
-    sources: ['IEEE', 'Project Gutenberg']
-  },
-  {
-    id: 5,
-    title: 'Clean Code',
-    author: 'Robert C. Martin',
-    image: 'https://via.placeholder.com/200x300/ef4444/ffffff?text=Clean+Code',
-    tags: ['Programming', 'Software Engineering'],
-    rating: 4.9,
-    bookmarks: 200,
-    copyType: ['physical'],
-    licensingType: ['pay-to-own', 'rent'],
-    sources: ['Springer', 'Wiley']
-  },
-  {
-    id: 6,
-    title: 'Design Patterns',
-    author: 'Gang of Four',
-    image: 'https://via.placeholder.com/200x300/8b5cf6/ffffff?text=Design+Patterns',
-    tags: ['Software Engineering', 'Programming'],
-    rating: 4.3,
-    bookmarks: 180,
-    copyType: ['online', 'onsite'],
-    licensingType: ['rent', 'pay-to-own'],
-    sources: ['Elsevier', 'ACM']
+const normalizeKey = (value: string | undefined | null) => {
+  return (value || '')
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, '-');
+};
+
+const rawBooks = rawBooksData as RawBook[];
+
+// Map backend books.json structure into the simpler Book shape used by the UI
+const allBooks: Book[] = (rawBooks || []).map((book) => {
+  const tags = (book.tags || []).map((tag) => tag.name);
+
+  const copyType = book.copy_types
+    ? Object.keys(book.copy_types).map((key) => normalizeKey(key)).filter(Boolean)
+    : [];
+
+  const licensingType = book.licensing_type
+    ? [normalizeKey(book.licensing_type)]
+    : [];
+
+  const sourceNames: string[] = [];
+
+  if (book.sources) {
+    sourceNames.push(...book.sources.map((source) => source.name));
   }
-];
+
+  if (book.copy_types) {
+    Object.values(book.copy_types).forEach((copyTypeEntry) => {
+      if (copyTypeEntry.sources) {
+        sourceNames.push(...copyTypeEntry.sources.map((source) => source.name));
+      }
+    });
+  }
+
+  return {
+    id: book.id,
+    title: book.title,
+    author: book.author,
+    image: book.cover,
+    tags,
+    rating: book.rating,
+    bookmarks: book.total_bookmarked,
+    copyType,
+    licensingType,
+    sources: Array.from(new Set(sourceNames))
+  };
+});
 
 const searchQuery = computed(() => route.query.q as string || route.query.search as string || '');
 
@@ -260,10 +276,8 @@ const filteredBooks = computed(() => {
   return books;
 });
 
-// Top books for user (sorted by rating, personalized based on user preferences)
+// Top books for user (sorted by rating)
 const topBooks = computed(() => {
-  // In production, this would be personalized based on user's reading history, preferences, etc.
-  // For now, showing top-rated books
   return allBooks
     .sort((a, b) => (b.rating || 0) - (a.rating || 0))
     .slice(0, 8);

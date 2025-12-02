@@ -1,0 +1,111 @@
+[
+  {
+    "id": "jump-fest-2025",
+    "name": "JUMP FEST 2025 - BRED THROUGH",
+    "icon": "spark",
+    "accent": "#E6F2FF",
+    "tags": [
+      "#HarryPotter",
+      "#WIBU",
+      "#AnimeX"
+    ],
+    "description": "Festival fandom terbesar tahun ini. Dapatkan bocoran rilis anime, sesi temu kreator, dan event eksklusif lainnya.",
+    "members": "21k",
+    "postsToday": 42,
+    "memberCount": 21000,
+    "isJoined": false,
+    "created_at": "2023-09-01T12:00:00Z",
+    "updated_at": "2023-10-01T12:00:00Z"
+  },
+  {
+    "id": "literacy-circle",
+    "name": "Literacy Circle",
+    "icon": "heart",
+    "accent": "#FFE5EC",
+    "tags": [
+      "Harry Potter",
+      "LoTR",
+      "Book Talk",
+      "Reading"
+    ],
+    "description": "Komunitas pecinta buku untuk diskusi sastra, review, dan menemukan penulis baru.",
+    "members": "324",
+    "postsToday": 18,
+    "memberCount": 324,
+    "isJoined": true,
+    "created_at": "2023-08-15T12:00:00Z",
+    "updated_at": "2023-10-01T12:00:00Z"
+  },
+  {
+    "id": "wellness-warriors",
+    "name": "Wellness Warriors",
+    "icon": "spark",
+    "accent": "#E6F2FF",
+    "tags": [
+      "Mindful",
+      "Balance",
+      "Habits"
+    ],
+    "description": "Berbagi rutinitas sehat, dukung perjalanan mindfulness, dan saling menguatkan.",
+    "members": "512",
+    "postsToday": 24,
+    "memberCount": 512,
+    "isJoined": false,
+    "created_at": "2023-09-20T12:00:00Z",
+    "updated_at": "2023-10-01T12:00:00Z"
+  },
+  {
+    "id": "photography-club",
+    "name": "Photography Club",
+    "icon": "camera",
+    "accent": "#F0F9F5",
+    "tags": [
+      "Photo Walk",
+      "Tips",
+      "Critique"
+    ],
+    "description": "Belajar teknik fotografi, ikut photo walk, dan diskusi kritik konstruktif setiap minggu.",
+    "members": "287",
+    "postsToday": 12,
+    "memberCount": 287,
+    "isJoined": true,
+    "created_at": "2023-07-10T12:00:00Z",
+    "updated_at": "2023-10-01T12:00:00Z"
+  },
+  {
+    "id": "gaming-hub",
+    "name": "Gaming Hub Indonesia",
+    "icon": "chat",
+    "accent": "#FFF8E1",
+    "tags": [
+      "Esports",
+      "Co-op",
+      "Livestream"
+    ],
+    "description": "Tempat berkumpulnya gamer untuk mabar, update turnamen, dan berbagi tips build meta.",
+    "members": "1.2k",
+    "postsToday": 33,
+    "memberCount": 1200,
+    "isJoined": false,
+    "created_at": "2023-06-05T12:00:00Z",
+    "updated_at": "2023-10-01T12:00:00Z"
+  },
+  {
+    "id": "creative-atelier",
+    "name": "Creative Atelier",
+    "icon": "heart",
+    "accent": "#FEEAE6",
+    "tags": [
+      "Illustration",
+      "UI/UX",
+      "Workshop"
+    ],
+    "description": "Komunitas kreator visual. Ada feedback session, challenge mingguan, dan kelas desain gratis.",
+    "members": "648",
+    "postsToday": 21,
+    "memberCount": 648,
+    "isJoined": true,
+    "created_at": "2023-08-01T12:00:00Z",
+    "updated_at": "2023-10-01T12:00:00Z"
+  }
+]

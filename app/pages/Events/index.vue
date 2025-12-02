@@ -1,12 +1,9 @@
 <template>
   <section class="events-page">
-    <div class="events-content">
-      <div class="events-main">
-        <header class="events-header">
-          <h1>Events</h1>
-          <p>Bergabunglah dalam acara tentang pendidikan, perpustakaan, dan komunitas. Mulai diskusi baru atau ikuti yang sudah ada.</p>
-        </header>
+    <div class="events-main">
+     
 
+      <div class="events-body">
         <div class="events-grid">
           <NuxtLink
             v-for="event in events"
@@ -20,12 +17,12 @@
                 <h3>{{ event.title }}</h3>
               </div>
             </div>
-            
+
             <div class="event-content">
               <div class="event-meta">
                 <h4>{{ event.subtitle }}</h4>
                 <p class="event-description">{{ event.description }}</p>
-                
+
                 <div class="event-details">
                   <div class="event-location">
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -33,7 +30,7 @@
                     </svg>
                     {{ event.location }}
                   </div>
-                  
+
                   <div class="event-date">
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z" fill="currentColor"/>
@@ -42,34 +39,34 @@
                   </div>
                 </div>
               </div>
-              
+
               <button class="event-detail-btn">Event Detail</button>
             </div>
           </NuxtLink>
         </div>
-        
-        <div class="load-more">
-          <button class="load-more-btn">Load More Events</button>
+
+        <div class="events-insights" aria-label="Event highlights">
+          <section class="sidebar-card">
+            <h3>Most Popular Tags</h3>
+            <div class="tags-grid">
+              <span v-for="tag in popularTags" :key="tag.name" class="tag" :class="tag.class">{{ tag.name }}</span>
+            </div>
+          </section>
+
+          <section class="sidebar-card">
+            <NuxtLink to="/events/create" class="initiate-btn">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" fill="currentColor"/>
+              </svg>
+              Initiate a Event
+            </NuxtLink>
+          </section>
         </div>
       </div>
-      
-      <aside class="events-sidebar">
-        <section class="sidebar-card">
-          <h3>Most Popular Tags</h3>
-          <div class="tags-grid">
-            <span v-for="tag in popularTags" :key="tag.name" class="tag" :class="tag.class">{{ tag.name }}</span>
-          </div>
-        </section>
-        
-        <section class="sidebar-card">
-          <NuxtLink to="/events/create" class="initiate-btn">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" fill="currentColor"/>
-            </svg>
-            Initiate a Event
-          </NuxtLink>
-        </section>
-      </aside>
+
+      <div class="load-more">
+        <button class="load-more-btn">Load More Events</button>
+      </div>
     </div>
   </section>
 </template>
@@ -80,15 +77,15 @@ import eventsData from '~/data/events.json';
 const events = eventsData;
 
 const popularTags = [
-  { name: 'Harry Potter', class: 'tag-primary' },
+  { name: 'Harry Potter', class: 'tag-secondary' },
   { name: 'College', class: 'tag-secondary' },
-  { name: '#Book', class: 'tag-dark' },
-  { name: 'Literasi', class: 'tag-info' },
-  { name: 'LMS', class: 'tag-warning' },
-  { name: '#Sejarah', class: 'tag-success' },
-  { name: 'Website', class: 'tag-danger' },
-  { name: 'Course', class: 'tag-light' },
-  { name: '#API', class: 'tag-purple' }
+  { name: '#Book', class: 'tag-primary' },
+  { name: 'Literasi', class: 'tag-secondary' },
+  { name: 'LMS', class: 'tag-secondary' },
+  { name: '#Sejarah', class: 'tag-primary' },
+  { name: 'Website', class: 'tag-secondary' },
+  { name: 'Course', class: 'tag-secondary' },
+  { name: '#API', class: 'tag-primary' }
 ];
 </script>
 
@@ -100,17 +97,17 @@ const popularTags = [
   width: 100%;
 }
 
-.events-content {
-  display: flex;
-  gap: 24px;
-  align-items: flex-start;
-}
-
 .events-main {
-  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 24px;
+}
+
+.events-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(240px, 28vw, 300px);
+  gap: 24px;
+  align-items: start;
 }
 
 .events-header h1 {
@@ -142,6 +139,7 @@ const popularTags = [
   transition: all 0.3s ease;
   text-decoration: none;
   color: inherit;
+  min-height: 240px;
 }
 
 .event-card:hover {
@@ -152,7 +150,8 @@ const popularTags = [
 .event-image {
   position: relative;
   width: 300px;
-  min-height: 200px;
+  aspect-ratio: 4 / 3;
+  flex-shrink: 0;
 }
 
 .event-image img {
@@ -265,13 +264,12 @@ const popularTags = [
   transform: translateY(-2px);
 }
 
-.events-sidebar {
-  width: 300px;
+.events-insights {
   display: flex;
   flex-direction: column;
   gap: 16px;
   position: sticky;
-  top: 24px;
+  top: 84px;
 }
 
 .sidebar-card {
@@ -304,15 +302,9 @@ const popularTags = [
   transition: all 0.2s ease;
 }
 
-.tag-primary { background: #dbeafe; color: #1d4ed8; }
-.tag-secondary { background: #f1f5f9; color: #475569; }
-.tag-dark { background: #1e293b; color: #ffffff; }
-.tag-info { background: #ecfeff; color: #0891b2; }
-.tag-warning { background: #fef3c7; color: #d97706; }
-.tag-success { background: #dcfce7; color: #16a34a; }
-.tag-danger { background: #fecaca; color: #dc2626; }
-.tag-light { background: #f8fafc; color: #64748b; }
-.tag-purple { background: #ede9fe; color: #7c3aed; }
+.tag-primary { background: #3B5379; color: #ffffff; }
+.tag-secondary { background: #2C3542; color: #ffffff; }
+
 
 .tag:hover {
   transform: translateY(-1px);
@@ -346,24 +338,29 @@ const popularTags = [
 }
 
 @media (max-width: 1024px) {
-  .events-content {
-    flex-direction: column;
-  }
-  
-  .events-sidebar {
-    width: 100%;
-    position: static;
+  .events-body {
+    grid-template-columns: minmax(0, 1fr) clamp(260px, 40vw, 320px);
+    gap: 20px;
   }
 }
 
 @media (max-width: 768px) {
+  .events-body {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .events-insights {
+    position: static;
+  }
+
   .event-card {
     flex-direction: column;
   }
   
   .event-image {
     width: 100%;
-    min-height: 180px;
+    aspect-ratio: 16 / 9;
   }
   
   .events-header h1 {
