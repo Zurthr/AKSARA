@@ -4,7 +4,12 @@
       <h3 class="section-title">Related Topics</h3>
       
       <!-- Related Community -->
-      <div v-if="relatedCommunity" class="related-topic-card">
+      <!-- Related Community -->
+      <NuxtLink 
+        v-if="relatedCommunity" 
+        :to="`/Community/${relatedCommunity.id}`"
+        class="related-topic-card clickable-card"
+      >
         <div class="topic-icon">
           <!-- Placeholder icon if no specific icon logic -->
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
@@ -14,7 +19,7 @@
           <span class="tag">{{ relatedCommunity.members }} members</span>
           <button class="btn-subscribe">Join</button>
         </div>
-      </div>
+      </NuxtLink>
 
       <!-- Related Books -->
       <div v-for="book in relatedBooks" :key="book.title" class="related-topic-card">
@@ -95,6 +100,7 @@
 <script setup lang="ts">
 defineProps<{
   relatedCommunity?: {
+    id: string;
     name: string;
     icon: string;
     members: string;
@@ -134,6 +140,14 @@ defineProps<{
   border-radius: 12px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.05);
   margin-bottom: 12px;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.clickable-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
 }
 
 .topic-icon {
