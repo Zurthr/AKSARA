@@ -95,6 +95,17 @@
         </span>
       </div>
     </div>
+
+    <div class="filter-actions">
+      <button 
+        type="button"
+        class="clear-filters-btn"
+        @click="clearAllFilters"
+        :disabled="!hasActiveFilters"
+      >
+        Clear Filters
+      </button>
+    </div>
   </div>
 </template>
 
@@ -174,31 +185,72 @@ const removeTag = (tag: string) => {
   updateQueryParams();
 };
 
-const updateQueryParams = () => {
-  const query: Record<string, string | string[]> = { ...route.query };
+const hasActiveFilters = computed(() => {
+  return filters.value.copyType || 
+         filters.value.licensingType || 
+         filters.value.sources || 
+         filters.value.tags.length > 0;
+});
+
+const clearAllFilters = () => {
+  filters.value = {
+    copyType: '',
+    licensingType: '',
+    sources: '',
+    tags: []
+  };
   
+  const query: Record<string, string | string[]> = {};
+  
+  // Copy only non-filter query params (like search query 'q')
+  Object.keys(route.query).forEach(key => {
+    if (key !== 'copyType' && key !== 'licensingType' && key !== 'sources' && key !== 'tags') {
+      const value = route.query[key];
+      if (value !== null && value !== undefined) {
+        if (Array.isArray(value)) {
+          query[key] = value.filter(v => v !== null) as string[];
+        } else {
+          query[key] = value as string;
+        }
+      }
+    }
+  });
+  
+  router.push({ query });
+};
+
+const updateQueryParams = () => {
+  const query: Record<string, string | string[]> = {};
+  
+  // Copy existing non-filter query params (like search query 'q')
+  Object.keys(route.query).forEach(key => {
+    if (key !== 'copyType' && key !== 'licensingType' && key !== 'sources' && key !== 'tags') {
+      const value = route.query[key];
+      if (value !== null && value !== undefined) {
+        if (Array.isArray(value)) {
+          query[key] = value.filter(v => v !== null) as string[];
+        } else {
+          query[key] = value as string;
+        }
+      }
+    }
+  });
+  
+  // Add filter params if they have values
   if (filters.value.copyType) {
     query.copyType = filters.value.copyType;
-  } else {
-    delete query.copyType;
   }
   
   if (filters.value.licensingType) {
     query.licensingType = filters.value.licensingType;
-  } else {
-    delete query.licensingType;
   }
   
   if (filters.value.sources) {
     query.sources = filters.value.sources;
-  } else {
-    delete query.sources;
   }
   
   if (filters.value.tags.length > 0) {
     query.tags = filters.value.tags;
-  } else {
-    delete query.tags;
   }
   
   router.push({ query });
@@ -331,6 +383,35 @@ watch(() => route.query, (newQuery) => {
 
 .tag-remove:hover {
   background-color: rgba(255, 255, 255, 0.2);
+}
+
+.filter-actions {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.clear-filters-btn {
+  width: 100%;
+  padding: 12px 20px;
+  background-color: #f1f5f9;
+  color: #475569;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.clear-filters-btn:hover:not(:disabled) {
+  background-color: #e2e8f0;
+  color: var(--color-black);
+}
+
+.clear-filters-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 </style>
 

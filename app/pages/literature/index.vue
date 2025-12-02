@@ -1,6 +1,5 @@
 <template>
   <div class="literature-page">
-    <div class="literature-content">
       <div class="literature-main">
         <header class="literature-header" v-if="searchQuery">
           <h1>Search Results for "{{ searchQuery }}"</h1>
@@ -50,7 +49,7 @@
 
         <!-- All Books Section - Always visible at the bottom -->
         <div class="all-books-section">
-          <BookSection
+          <BookGrid
             title="A Library of Books to See"
             :books="allBooks"
             see-more-link="/literature"
@@ -61,18 +60,16 @@
       <RightSideBar>
         <LiteratureFilterSidebar />
         <TrendingSidebar />
-        <TwitterFeed />
       </RightSideBar>
-    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import RightSideBar from '~/components/General/RightSideBar.vue';
 import BookSection from '~/components/Literature/BookSection.vue';
+import BookGrid from '~/components/Literature/BookGrid.vue';
 import LiteratureFilterSidebar from '~/components/Literature/LiteratureFilterSidebar.vue';
 import TrendingSidebar from '~/components/TrendingSidebar.vue';
-import TwitterFeed from '~/components/Literature/TwitterFeed.vue';
 
 interface Book {
   id: number;
@@ -273,10 +270,9 @@ const suggestedBooks = computed(() => {
 <style scoped>
 .literature-page {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 24px;
   width: 100%;
-  padding: 20px;
 }
 
 .literature-content {
