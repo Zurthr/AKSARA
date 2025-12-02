@@ -1,0 +1,78 @@
+[
+    {
+        "id": 1,
+        "post_id": 1,
+        "author": {
+            "name": "SastraLover",
+            "avatar": "https://i.pravatar.cc/150?u=sastra",
+            "isPro": false
+        },
+        "timeAgo": "1 hour ago",
+        "text": "This is such an important discussion! I think digital platforms have actually helped discover new voices that wouldn't have been published otherwise.",
+        "likes": 15,
+        "replies": [
+            {
+                "id": 11,
+                "author": {
+                    "name": "BookWorm99",
+                    "avatar": "https://i.pravatar.cc/150?u=bookworm"
+                },
+                "timeAgo": "45 min ago",
+                "text": "Totally agree! Access is key.",
+                "likes": 5
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "post_id": 1,
+        "author": {
+            "name": "CritiqueMaster",
+            "avatar": "https://i.pravatar.cc/150?u=critique",
+            "isPro": true
+        },
+        "timeAgo": "30 min ago",
+        "text": "While access is great, I do worry about the lack of editorial oversight in some digital spaces. Quantity over quality seems to be the trend.",
+        "likes": 8,
+        "replies": []
+    },
+    {
+        "id": 3,
+        "post_id": 2,
+        "author": {
+            "name": "MinecraftFan",
+            "avatar": "https://i.pravatar.cc/150?u=minecraft",
+            "isPro": false
+        },
+        "timeAgo": "2 hours ago",
+        "text": "I heard about this too! Honestly, I think it's just a mod. Mojang usually doesn't do crossovers like this.",
+        "likes": 12,
+        "replies": []
+    },
+    {
+        "id": 4,
+        "post_id": 2,
+        "author": {
+            "name": "FNAF_Lover",
+            "avatar": "https://i.pravatar.cc/150?u=fnaf",
+            "isPro": true
+        },
+        "timeAgo": "1 hour ago",
+        "text": "Don't lose hope! Scott Cawthon is full of surprises. Maybe it's a secret DLC?",
+        "likes": 20,
+        "replies": []
+    },
+    {
+        "id": 5,
+        "post_id": 3,
+        "author": {
+            "name": "LensMaster",
+            "avatar": "https://i.pravatar.cc/150?u=lens",
+            "isPro": false
+        },
+        "timeAgo": "4 hours ago",
+        "text": "Great tips! I would add that lighting is everything. Golden hour is your best friend.",
+        "likes": 30,
+        "replies": []
+    }
+]
