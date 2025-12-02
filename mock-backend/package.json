@@ -1,0 +1,29 @@
+{
+  "name": "aksara-mock-backend",
+  "version": "1.0.0",
+  "description": "Mock API backend for AKSARA community platform",
+  "main": "db.json",
+  "scripts": {
+    "start": "json-server --watch db.json --port 3002",
+    "dev": "json-server --watch db.json --port 3002",
+    "prod": "json-server --host 0.0.0.0 --port 3002 db.json",
+    "simple": "json-server --watch db.json --port 3002",
+    "enhanced": "node server.cjs",
+    "install-deps": "npm install"
+  },
+  "dependencies": {
+    "json-server": "^1.0.0-beta.3",
+    "lodash": "^4.17.21"
+  },
+  "keywords": [
+    "mock-api",
+    "json-server",
+    "community-platform",
+    "literature"
+  ],
+  "author": "AKSARA Team",
+  "license": "ISC",
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

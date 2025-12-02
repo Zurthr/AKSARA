@@ -8,16 +8,16 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "mock:server": "node server.cjs",
-    "mock:simple": "json-server --watch db.json --port 3002",
-    "mock:prod": "json-server --host 0.0.0.0 --port 3002 db.json"
+    "mock:api": "cd mock-backend && npm start",
+    "mock:dev": "cd mock-backend && npm run dev",
+    "mock:prod": "cd mock-backend && npm run prod",
+    "mock:enhanced": "cd mock-backend && npm run enhanced"
   },
   "dependencies": {
     "@tailwindcss/cli": "^4.1.17",
     "nuxt": "^4.2.1",
     "vue": "^3.5.25",
-    "vue-router": "^4.6.3",
-    "json-server": "^1.0.0-beta.3"
+    "vue-router": "^4.6.3"
   },
   "devDependencies": {
     "@types/node": "^24.10.1",

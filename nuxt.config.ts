@@ -1,14 +1,14 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-//lakuin ini 
+//lakuin ini
 // npm install -D @types/node
-import { fileURLToPath } from 'node:url'
+import { fileURLToPath } from "node:url";
 
 export default defineNuxtConfig({
-  compatibilityDate: '2025-07-15',
+  compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
-  css: ['~/assets/global.css'],
+  css: ["~/assets/global.css"],
   alias: {
-    'images': fileURLToPath(new URL('./assets/images', import.meta.url)),
-    'style': fileURLToPath(new URL('./assets/style', import.meta.url)),
+    images: fileURLToPath(new URL("./assets/images", import.meta.url)),
+    style: fileURLToPath(new URL("./assets/style", import.meta.url)),
   },
-})
+});
