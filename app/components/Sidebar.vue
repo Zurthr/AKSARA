@@ -5,23 +5,26 @@
     </div>
 
     <nav class="nav">
-      <ul class="nav-list">
-        <li v-for="item in navItems" :key="item.label">
-          <NuxtLink
-            :to="item.href"
-            class="nav-item"
-            :class="{ active: isActive(item.href) }"
-          >
-            <img
-              class="nav-icon"
-              :src="item.icon"
-              alt=""
-              aria-hidden="true"
+      <div v-for="group in navGroups" :key="group.label" class="nav-group">
+        <div class="nav-group-label">{{ group.label }}</div>
+        <ul class="nav-list">
+          <li v-for="item in group.items" :key="item.label">
+            <NuxtLink
+              :to="item.href"
+              class="nav-item"
+              :class="{ active: isActive(item.href) }"
             >
-            <span>{{ item.label }}</span>
-          </NuxtLink>
-        </li>
-      </ul>
+              <img
+                class="nav-icon"
+                :src="item.icon"
+                alt=""
+                aria-hidden="true"
+              >
+              <span>{{ item.label }}</span>
+            </NuxtLink>
+          </li>
+        </ul>
+      </div>
     </nav>
   </aside>
 </template>
@@ -37,41 +40,56 @@ import Embeds from '~/assets/icons/Embed.svg';
 import Bookmarks from '~/assets/icons/Bookmarks.svg';
 
 
-const navItems = [
+const navGroups = [
   {
-    label: 'Home',
-    href: '/',
-    icon: HomeIcon
+    label: 'Main',
+    items: [
+      {
+        label: 'Home',
+        href: '/',
+        icon: HomeIcon
+      },
+      {
+        label: 'Literature',
+        href: '/literature',
+        icon: BookOpenIcon
+      }
+    ]
   },
   {
-    label: 'Literature',
-    href: '/literature',
-    icon: BookOpenIcon
+    label: 'Communities',
+    items: [
+      {
+        label: 'Community',
+        href: '/community',
+        icon: Community
+      },
+      {
+        label: 'Forums',
+        href: '/forums',
+        icon: Forum
+      },
+      {
+        label: 'Events',
+        href: '/events',
+        icon: Events
+      }
+    ]
   },
   {
-    label: 'Community',
-    href: '/community',
-    icon: Community
-  },
-  {
-    label: 'Forums',
-    href: '/forums',
-    icon: Forum
-  },
-  {
-    label: 'Events',
-    href: '/events',
-    icon: Events
-  },
-  {
-    label: 'Embeds',
-    href: '/embeds',
-    icon: Embeds
-  },
-  {
-    label: 'My Bookmarks',
-    href: '/bookmarks',
-    icon: Bookmarks
+    label: 'My Content',
+    items: [
+      {
+        label: 'Embeds',
+        href: '/embeds',
+        icon: Embeds
+      },
+      {
+        label: 'My Bookmarks',
+        href: '/bookmarks',
+        icon: Bookmarks
+      }
+    ]
   }
 ];
 
@@ -104,6 +122,26 @@ const isActive = (href: string) => {
 
 .nav {
   flex: 1;
+}
+
+.nav-group {
+  margin-bottom: 24px;
+}
+
+.nav-group:last-child {
+  margin-bottom: 0;
+}
+
+.nav-group-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #64748b;
+  padding: 0 12px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 8px;
 }
 
 .nav-list {
