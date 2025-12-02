@@ -35,84 +35,86 @@
           <p class="embed-description">{{ embed.description }}</p>
         </div>
 
-        <div class="stats-row">
-          <div class="stat-item">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-              <circle cx="12" cy="12" r="3"></circle>
-            </svg>
-            <span class="stat-value">{{ formatNumber(embed.views) }}</span>
-            <span class="stat-label">views</span>
+        <div class="stats-and-actions">
+          <div class="stats-row">
+            <div class="stat-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+              <span class="stat-value">{{ formatNumber(embed.views) }}</span>
+              <span class="stat-label">views</span>
+            </div>
+            <div class="stat-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+                <polyline points="10 17 15 12 10 7"></polyline>
+                <line x1="15" y1="12" x2="3" y2="12"></line>
+              </svg>
+              <span class="stat-value">{{ formatNumber(embed.clicks) }}</span>
+              <span class="stat-label">clicks</span>
+            </div>
+            <div class="stat-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="16" y1="2" x2="16" y2="6"></line>
+                <line x1="8" y1="2" x2="8" y2="6"></line>
+                <line x1="3" y1="10" x2="21" y2="10"></line>
+              </svg>
+              <span class="stat-value">{{ formatDate(embed.createdAt) }}</span>
+              <span class="stat-label">created</span>
+            </div>
           </div>
-          <div class="stat-item">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
-              <polyline points="10 17 15 12 10 7"></polyline>
-              <line x1="15" y1="12" x2="3" y2="12"></line>
-            </svg>
-            <span class="stat-value">{{ formatNumber(embed.clicks) }}</span>
-            <span class="stat-label">clicks</span>
+
+          <div class="action-buttons">
+            <button
+              class="btn-action btn-primary"
+              @click="$emit('get-link', embed)"
+              title="Copy embed link"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+              </svg>
+              <span>Get Link</span>
+            </button>
+
+            <button
+              class="btn-action btn-duplicate"
+              @click="$emit('duplicate', embed)"
+              title="Duplicate embed"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              <span>Duplicate</span>
+            </button>
+
+            <button
+              class="btn-action btn-edit"
+              @click="$emit('edit', embed)"
+              title="Edit embed"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+              </svg>
+              <span>Edit</span>
+            </button>
+
+            <button
+              class="btn-action btn-delete"
+              @click="$emit('delete', embed)"
+              title="Delete embed"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="3 6 5 6 21 6"></polyline>
+                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+              </svg>
+              <span>Delete</span>
+            </button>
           </div>
-          <div class="stat-item">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-              <line x1="16" y1="2" x2="16" y2="6"></line>
-              <line x1="8" y1="2" x2="8" y2="6"></line>
-              <line x1="3" y1="10" x2="21" y2="10"></line>
-            </svg>
-            <span class="stat-value">{{ formatDate(embed.createdAt) }}</span>
-            <span class="stat-label">created</span>
-          </div>
-        </div>
-
-        <div class="action-buttons">
-          <button
-            class="btn-action btn-primary"
-            @click="$emit('get-link', embed)"
-            title="Copy embed link"
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
-              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
-            </svg>
-            <span>Get Link</span>
-          </button>
-
-          <button
-            class="btn-action btn-duplicate"
-            @click="$emit('duplicate', embed)"
-            title="Duplicate embed"
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-            </svg>
-            <span>Duplicate</span>
-          </button>
-
-          <button
-            class="btn-action btn-edit"
-            @click="$emit('edit', embed)"
-            title="Edit embed"
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-            </svg>
-            <span>Edit</span>
-          </button>
-
-          <button
-            class="btn-action btn-delete"
-            @click="$emit('delete', embed)"
-            title="Delete embed"
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <polyline points="3 6 5 6 21 6"></polyline>
-              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-            </svg>
-            <span>Delete</span>
-          </button>
         </div>
       </div>
     </div>
@@ -170,7 +172,7 @@ const handleImageError = (event: Event) => {
 .embed-card {
   background: white;
   border-radius: 16px;
-  padding: 24px;
+  padding: 16px;
   margin-bottom: 16px;
   border: 1px solid #e2e8f0;
   transition: transform 0.2s, box-shadow 0.2s;
@@ -184,7 +186,7 @@ const handleImageError = (event: Event) => {
 
 .card-main {
   display: flex;
-  gap: 20px;
+  gap: 16px;
   align-items: flex-start;
 }
 
@@ -230,13 +232,22 @@ const handleImageError = (event: Event) => {
   font-weight: 600;
 }
 
+.stats-and-actions {
+  border-top: 1px solid #f1f5f9;
+  padding-top: 12px;
+}
+
+.stats-row {
+  display: flex;
+  gap: 16px;
+  padding: 8px 0;
+}
+
 .action-buttons {
   display: flex;
   gap: 8px;
   align-items: center;
-  margin-top: 16px;
-  padding-top: 16px;
-  border-top: 1px solid #f1f5f9;
+  margin-top: 8px;
 }
 
 .embed-info {
@@ -249,7 +260,7 @@ const handleImageError = (event: Event) => {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 16px;
+  gap: 12px;
 }
 
 .title-row {
@@ -322,13 +333,6 @@ const handleImageError = (event: Event) => {
 }
 
 
-.stats-row {
-  display: flex;
-  gap: 16px;
-  padding: 12px 0;
-  border-top: 1px solid #f1f5f9;
-  border-bottom: 1px solid #f1f5f9;
-}
 
 .stat-item {
   display: flex;
@@ -406,7 +410,7 @@ const handleImageError = (event: Event) => {
 @media (max-width: 768px) {
   .card-main {
     flex-direction: column;
-    gap: 16px;
+    gap: 12px;
   }
 
   .card-left {
