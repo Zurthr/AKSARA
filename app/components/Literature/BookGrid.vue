@@ -25,72 +25,16 @@
         :key="book.id"
         class="book-card"
       >
-        <NuxtLink :to="`/literature/${book.id}`" class="book-link">
-          <div class="book-cover">
-            <img :src="book.image" :alt="book.title || `Book ${book.id}`" />
-          </div>
-          <div class="book-info">
-            <h4 class="book-title">{{ book.title }}</h4>
-            <p class="book-author" v-if="book.author">by {{ book.author }}</p>
-            <div class="book-tags">
-              <span 
-                v-for="tag in book.tags" 
-                :key="tag" 
-                class="book-tag"
-              >
-                {{ tag }}
-              </span>
-            </div>
-            <div class="book-rating" v-if="book.rating">
-              <span class="rating-number">{{ book.rating.toFixed(1) }}</span>
-              <div class="stars-container">
-                <div
-                  v-for="starIndex in 5"
-                  :key="starIndex"
-                  class="star-wrapper"
-                >
-                  <img 
-                    v-if="starIndex > book.rating"
-                    src="~/assets/icons/StarDark.svg" 
-                    alt="star" 
-                    class="star star-empty" 
-                  />
-                  <template v-else>
-                    <img 
-                      src="~/assets/icons/StarDark.svg" 
-                      alt="star" 
-                      class="star star-background" 
-                    />
-                    <img 
-                      src="~/assets/icons/Star.svg" 
-                      alt="star" 
-                      class="star star-filled" 
-                      :style="{ 
-                        clipPath: starIndex < book.rating
-                          ? 'inset(0 0% 0 0)' 
-                          : `inset(0 ${100 - ((book.rating - (starIndex - 1)) * 100)}% 0 0)` 
-                      }"
-                    />
-                  </template>
-                </div>
-              </div>
-            </div>
-          </div>
-        </NuxtLink>
+        <BookCard :book="book" />
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-interface Book {
-  id: number;
-  title: string;
-  author?: string;
-  image: string;
-  tags: string[];
-  rating?: number;
-}
+import BookCard, { type BookCardBook } from '~/components/Literature/BookCard.vue';
+
+interface Book extends BookCardBook {}
 
 const props = defineProps<{
   title: string;

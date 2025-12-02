@@ -697,4 +697,3 @@ watch(() => route.query, (newQuery) => {
   cursor: not-allowed;
 }
 </style>
-
