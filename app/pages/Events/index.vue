@@ -6,7 +6,7 @@
       <div class="events-body">
         <div class="events-grid">
           <NuxtLink
-            v-for="event in events"
+            v-for="event in filteredEvents"
             :key="event.id"
             :to="`/events/${event.id}`"
             class="event-card"
@@ -35,7 +35,11 @@
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z" fill="currentColor"/>
                     </svg>
-                    {{ event.date }}
+                    <div class="date-block">
+                      <div class="date-info">
+                        <div class="date-full">{{ formatEventDate(event.date).full }}</div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -46,6 +50,43 @@
         </div>
 
         <div class="events-insights" aria-label="Event highlights">
+          <section class="sidebar-card filter-card">
+            <h3>Filter Events</h3>
+            <div class="filter-form">
+              <div class="filter-row">
+                <label class="filter-label">Start date</label>
+                <div class="input-with-icon">
+                  <input ref="startInput" class="filter-input" type="date" v-model="startDate" />
+                  <button type="button" class="input-icon" @click="openStartPicker" aria-label="Open start date picker">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 10h5v5H7z" fill="currentColor" opacity="0.2"/><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z" fill="currentColor"/></svg>
+                  </button>
+                </div>
+              </div>
+
+              <div class="filter-row">
+                <label class="filter-label">End date</label>
+                <div class="input-with-icon">
+                  <input ref="endInput" class="filter-input" type="date" v-model="endDate" />
+                  <button type="button" class="input-icon" @click="openEndPicker" aria-label="Open end date picker">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 10h5v5H7z" fill="currentColor" opacity="0.2"/><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z" fill="currentColor"/></svg>
+                  </button>
+                </div>
+              </div>
+
+              <div class="filter-row">
+                <label class="filter-label">Type</label>
+                <div class="chip-group">
+                  <button type="button" :class="['chip', { 'chip-active': onlineChecked }]" @click="onlineChecked = !onlineChecked">Online</button>
+                  <button type="button" :class="['chip', { 'chip-active': offlineChecked }]" @click="offlineChecked = !offlineChecked">Offline</button>
+                </div>
+              </div>
+
+              <div class="filter-row filter-actions">
+                <button class="clear-btn" @click.prevent="clearFilters">Clear Filters</button>
+              </div>
+            </div>
+          </section>
+
           <section class="sidebar-card">
             <h3>Most Popular Tags</h3>
             <div class="tags-grid">
@@ -72,9 +113,136 @@
 </template>
 
 <script setup lang="ts">
+import { ref, computed } from 'vue';
 import eventsData from '~/data/events.json';
 
-const events = eventsData;
+const originalEvents = eventsData;
+
+const startDate = ref<string | null>(null);
+const endDate = ref<string | null>(null);
+// chip-style selection: can select one, both, or none.
+// Default: both unchecked (no visual active). When neither is checked we treat as "show all".
+const onlineChecked = ref<boolean>(false);
+const offlineChecked = ref<boolean>(false);
+
+// refs to the native date inputs so we can trigger the picker from the icon
+const startInput = ref<HTMLInputElement | null>(null);
+const endInput = ref<HTMLInputElement | null>(null);
+
+const openPicker = (elRef: typeof startInput) => {
+  const el = elRef.value as (HTMLInputElement & { showPicker?: () => void }) | null;
+  if (!el) return;
+  // modern browsers expose showPicker()
+  try {
+    if (typeof el.showPicker === 'function') {
+      el.showPicker();
+      return;
+    }
+  } catch (e) {
+    // ignore and fallback
+  }
+  // fallback: focus + click
+  el.focus();
+  try { el.click(); } catch (e) { /* ignore */ }
+};
+
+const openStartPicker = () => openPicker(startInput);
+const openEndPicker = () => openPicker(endInput);
+
+const parseEventDate = (dateStr?: string | null): Date | null => {
+  if (!dateStr) return null;
+  // Try ISO first
+  const iso = new Date(dateStr as string);
+  if (!isNaN(iso.getTime())) return iso;
+
+  // Try Indonesian month names like "29 Desember, 2025"
+  const months: Record<string, number> = {
+    januari: 0,
+    februari: 1,
+    maret: 2,
+    april: 3,
+    mei: 4,
+    juni: 5,
+    juli: 6,
+    agustus: 7,
+    september: 8,
+    oktober: 9,
+    november: 10,
+    desember: 11
+  };
+
+  const m = (dateStr as string).match(/(\d{1,2})\s+([A-Za-z]+),?\s*(\d{4})/);
+  if (!m) return null;
+  const day = parseInt(m[1] || '', 10);
+  const monthName = (m[2] || '').toLowerCase();
+  const year = parseInt(m[3] || '', 10);
+  const month = months[monthName];
+  if (month === undefined) return null;
+  return new Date(year, month, day);
+};
+
+const formatEventDate = (dateStr?: string | null) => {
+  const d = parseEventDate(dateStr || undefined);
+  const monthsShort = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
+  const monthsFull = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+  if (!d) {
+    return { day: '--', monthShort: '---', year: '', full: (dateStr as string) || '' };
+  }
+  const day = String(d.getDate()).padStart(2, '0');
+  const monthIdx = d.getMonth();
+  const monthShort = monthsShort[monthIdx] || '';
+  const monthFull = monthsFull[monthIdx] || '';
+  const year = String(d.getFullYear());
+  const full = `${day} ${monthFull} ${year}`;
+  return { day, monthShort, monthFull, year, full };
+};
+
+const isEventOnline = (event: any) => {
+  const loc = (event.location || '').toString().toLowerCase();
+  return loc.includes('zoom') || loc.includes('online');
+};
+
+const filteredEvents = computed(() => {
+  return originalEvents.filter((ev: any) => {
+    // Type filter using chips: if both checked -> show all. If neither checked -> show all.
+    if (!(onlineChecked.value && offlineChecked.value)) {
+      // one of them might be false
+      if (onlineChecked.value && !offlineChecked.value) {
+        if (!isEventOnline(ev)) return false;
+      } else if (!onlineChecked.value && offlineChecked.value) {
+        if (isEventOnline(ev)) return false;
+      } else {
+        // neither checked -> treat as all (show everything)
+      }
+    }
+
+    // Date filters
+    if (startDate.value || endDate.value) {
+      const evDate = parseEventDate(ev.date);
+      if (!evDate) return false;
+
+      if (startDate.value) {
+        const s = new Date(startDate.value);
+        if (evDate < s) return false;
+      }
+      if (endDate.value) {
+        const e = new Date(endDate.value);
+        e.setHours(23, 59, 59, 999);
+        if (evDate > e) return false;
+      }
+    }
+
+    return true;
+  });
+});
+
+const clearFilters = () => {
+  startDate.value = null;
+  endDate.value = null;
+  // reset chips back to default (both unselected). If neither selected we show all events.
+  onlineChecked.value = false;
+  offlineChecked.value = false;
+};
 
 const popularTags = [
   { name: 'Harry Potter', class: 'tag-secondary' },
@@ -218,6 +386,184 @@ const popularTags = [
   gap: 6px;
   font-size: 14px;
   color: #64748b;
+}
+
+.date-block {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.date-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg,#3B5379,#2C3542);
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 8px;
+  min-width: 56px;
+}
+
+.date-day {
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.date-month {
+  font-size: 11px;
+  opacity: 0.95;
+}
+
+.date-info .date-full {
+  font-size: 14px;
+  color: #475569;
+}
+
+/* Filter card styles */
+.filter-card {
+  padding: 18px;
+}
+
+.filter-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.filter-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.filter-label {
+  font-weight: 700;
+  color: #111827;
+  font-size: 14px;
+}
+
+.input-with-icon {
+  position: relative;
+}
+
+.filter-input {
+  width: 100%;
+  padding: 10px 40px 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  font-size: 14px;
+  color: #0f172a;
+  height: 40px;
+}
+
+/* Tidy date input: remove native picker icon space and hide webkit indicator */
+input[type="date"] {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
+.input-icon {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 28px;
+  height: 28px;
+  opacity: 0.95;
+  color: #3B5379; /* project primary */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.input-icon svg { width: 18px; height: 18px; }
+
+.filter-radio-group {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.radio-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  color: #334155;
+}
+
+.radio-label input[type="radio"] {
+  width: 16px;
+  height: 16px;
+}
+
+.filter-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.clear-btn {
+  background: transparent;
+  border: 1px solid #e2e8f0;
+  color: #3B5379; /* primary color */
+  padding: 10px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.apply-btn {
+  background: linear-gradient(90deg,#3B5379,#2C3542);
+  color: #fff;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.apply-btn:hover {
+  filter: brightness(0.95);
+}
+
+/* chips for online/offline */
+.chip-group {
+  display: flex;
+  gap: 8px;
+}
+
+.chip {
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  cursor: pointer;
+  font-weight: 700;
+  color: #334155;
+  transition: all 0.15s ease;
+}
+
+.chip-active {
+  /* use tag primary -> tag secondary gradient for active chips */
+  background: linear-gradient(90deg,#3B5379,#2C3542);
+  color: #ffffff;
+  border-color: transparent;
+  box-shadow: 0 8px 20px rgba(44,53,66,0.12);
+  transform: translateY(-1px);
 }
 
 .event-location svg,
