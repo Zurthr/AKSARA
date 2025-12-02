@@ -75,16 +75,31 @@ npm run enhanced
 
 ```
 mock-backend/
-├── package.json          # Backend dependencies and scripts
-├── db.json              # Main database with sample data
-├── server.cjs           # Enhanced server with middleware
+├── data/                # 🔥 **Modular data files**
+│   ├── posts.json      # Community posts and discussions
+│   ├── communities.json# Community groups and information
+│   ├── events.json     # Community events and meetups
+│   ├── books.json      # Literature and reading materials
+│   ├── reviews.json    # Book reviews and ratings
+│   └── trending.json   # Trending content across platform
+├── load-data.cjs       # 🔄 Combines modular data into db.json
+├── db.json             # 📊 Generated combined data (don't edit manually)
+├── server.cjs          # Enhanced server with middleware
 ├── middleware.js        # Custom middleware for advanced features
 ├── routes.json          # Custom route configurations
-├── json-server.json     # JSON Server configuration
+├── package.json        # Dependencies and scripts
 └── README.md           # This documentation
 ```
 
 ## 🎯 Features
+
+### 🔥 New: Modular Data Structure
+✅ **Better Organization** - Each entity has its own file
+✅ **Easier Maintenance** - Edit books without affecting posts
+✅ **Better Collaboration** - Different developers can work on different files
+✅ **Cleaner Git History** - Changes are more focused and easier to review
+✅ **Scalable** - Easy to add new entity types
+✅ **Backup Friendly** - Individual files can be backed up separately
 
 ### Enhanced Books System
 - **15 Sample Books** with comprehensive metadata
@@ -210,8 +225,24 @@ Books include Twitter embeds for:
 ## 🚦 Development
 
 ### Adding New Data
-1. Edit `db.json` to add new books, posts, or communities
-2. Changes are automatically reflected (file watching enabled)
+1. **NEW WAY**: Edit the appropriate JSON file in `data/` directory
+   - Edit `data/books.json` for books
+   - Edit `data/posts.json` for posts
+   - Edit `data/communities.json` for communities
+   - etc.
+2. Run `npm run build` or restart with `npm run dev`
+3. Changes are automatically reflected
+
+### Adding New Entity Types
+1. Create a new JSON file in `data/` (e.g., `data/users.json`)
+2. Update `load-data.cjs` to include the new data:
+   ```javascript
+   const users = require('./data/users.json');
+   const db = {
+     posts, communities, events, books, reviews, trending,
+     users  // Add new entity
+   };
+   ```
 
 ### Custom Endpoints
 1. Modify `routes.json` for new route definitions
@@ -265,6 +296,21 @@ The current data structure supports:
 2. Update `middleware.js` for business logic changes
 3. Test thoroughly with the frontend application
 4. Maintain backward compatibility
+
+## 🔄 Migration from Old Structure
+
+**What Changed?**
+- ❌ Old: Single massive `db.json` file with all data
+- ✅ New: Modular JSON files in `data/` directory
+
+**How it Works:**
+1. Edit modular files in `data/` directory
+2. Run `npm run build` to generate `db.json`
+3. JSON Server uses the generated `db.json`
+
+**Important**:
+- ❌ **Don't edit** the generated `db.json` manually
+- ✅ **Always edit** the files in `data/` directory
 
 ## 📝 License
 

@@ -286,7 +286,7 @@
   "books": [
     {
       "id": 1,
-      "title": "Clean Code: A Handbook of Agile Software Craftsmanship",
+      "title": "lean Code: A Handbook of Agile Software Craftsmanship",
       "author": "Robert C. Martin",
       "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1436202607l/3735293.jpg",
       "rating": 4.5,
@@ -1006,7 +1006,7 @@
       "title": "JavaScript: The Good Parts",
       "author": "Douglas Crockford",
       "cover": "https://images-na.ssl-images-amazon.com/images/I/51OL85-f0TL._SX331_BO1,204,203,200_.jpg",
-      "rating": 4.0,
+      "rating": 4,
       "description": "Most programming languages contain good and bad parts, but JavaScript has more than its share of the bad, having been developed and released in a hurry before it could be refined. This book scrapes away these bad features to reveal a subset of JavaScript that is more reliable, readable, and maintainable.",
       "year_edition": "2008",
       "total_bookmarked": 2876,
