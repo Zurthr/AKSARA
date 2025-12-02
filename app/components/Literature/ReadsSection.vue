@@ -26,10 +26,11 @@
 
       <div class="carousel-container">
         <div class="carousel-track" :style="{ transform: `translateX(-${currentIndex * 180}px)` }">
-          <div
+          <NuxtLink
             v-for="book in books"
             :key="book.id"
-            class="book-card"
+            :to="`/literature/${book.id}`"
+            class="book-card book-link"
           >
             <div class="book-cover">
               <img :src="book.image" :alt="`Book ${book.id}`" />
@@ -71,7 +72,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </NuxtLink>
         </div>
       </div>
 
@@ -220,6 +221,17 @@ const previousSlide = () => {
   flex-direction: column;
   gap: 8px;
   align-items: center;
+}
+
+.book-link {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.book-link:hover {
+  transform: translateY(-2px);
 }
 
 .book-cover {

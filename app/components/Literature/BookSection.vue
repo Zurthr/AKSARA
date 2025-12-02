@@ -186,7 +186,7 @@ const refresh = () => {
 
 .carousel-nav {
   position: absolute;
-  top: 40%;
+  top: 30%;
   transform: translateY(-50%);
   width: 40px;
   height: 40px;
