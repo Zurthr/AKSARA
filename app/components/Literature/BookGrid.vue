@@ -2,9 +2,23 @@
   <div class="book-grid-section">
     <div class="section-header">
       <div class="section-title">
-        {{ title }}
+        <template v-if="sectionType === 'search'">
+          <span v-if="titlePrefix">Our</span>
+          <span class="title-highlight">{{ titlePrefix || 'Results' }}</span>
+          <span>for '</span>
+          <span v-if="highlightedQuery" class="tag-highlight">{{ highlightedQuery }}</span>
+          <span v-if="titleSuffix">{{ titleSuffix }}</span>
+        </template>
+        <template v-else-if="sectionType === 'top'">
+          <span v-if="titlePrefix && title.includes('Our')">Our </span>
+          <span class="title-highlight">{{ titlePrefix }}</span>
+          <span v-if="titleSuffix" style="margin-left:-6px;">, {{ titleSuffix }}</span>
+        </template>
+        <template v-else>
+          {{ title }}
+        </template>
       </div>
-      <div class="section-actions">
+      <!-- <div class="section-actions">
         <NuxtLink :to="seeMoreLink" class="see-more-link">
           <span>See more</span>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -16,7 +30,7 @@
             <path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z" fill="currentColor"/>
           </svg>
         </button>
-      </div>
+      </div> -->
     </div>
 
     <div class="books-grid">
@@ -40,6 +54,10 @@ const props = defineProps<{
   title: string;
   books: Book[];
   seeMoreLink?: string;
+  sectionType?: 'top' | 'search' | 'default';
+  titlePrefix?: string;
+  titleSuffix?: string;
+  highlightedQuery?: string;
 }>();
 
 const refresh = () => {
@@ -70,6 +88,49 @@ const refresh = () => {
   font-weight: 400;
   color: #111827;
   margin: 0;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.title-highlight {
+  margin-left: -6px;
+  margin-right: -6px;
+  background-color: var(--color-highlight);
+  text-decoration: underline;
+  color: #000;
+  font-family: Inter;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+  text-decoration-skip-ink: auto;
+  text-decoration-thickness: auto;
+  text-underline-offset: auto;
+  text-underline-position: from-font;
+  margin-right: -4px;
+}
+
+.tag-highlight {
+  margin-left: -6px;
+  margin-right: -6px;
+  background-color: var(--color-secondary);
+  color: var(--color-white);
+  font-weight: 600;
+  font-family: Inter;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-decoration-style: solid;
+  text-decoration-skip-ink: auto;
+  text-decoration-thickness: auto;
+  text-underline-offset: auto;
+  text-underline-position: from-font;
 }
 
 .section-actions {

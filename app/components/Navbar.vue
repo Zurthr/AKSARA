@@ -23,9 +23,8 @@
         </div>
     </div>
     <div class="action-icons">
-      <!-- TODO: swap placeholders with bell/profile icons -->
-      <button type="button" class="icon-button">!</button>
-      <button type="button" class="icon-button">!</button>
+      <button type="button" class="icon-button"><img src="~/assets/icons/Notifications.svg" alt="Bell" style="width: 20px; height: 20px;"></button>
+      <button type="button" class="icon-button"><img src="~/assets/icons/Person.svg" alt="Profile" style="width: 20px; height: 20px;"></button>
     </div>
   </header>
 </template>

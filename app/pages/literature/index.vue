@@ -4,9 +4,12 @@
 
         <div v-if="!searchQuery && !hasActiveFilters" class="literature-sections">
           <BookSection
-            title="Top Books For you"
+            title="Top Books for you"
             :books="topBooks"
             see-more-link="/literature?sort=top"
+            section-type="top"
+            title-prefix="Top Books"
+            title-suffix="for you"
           />
           
           <BookSection
@@ -14,12 +17,25 @@
             :title="`Looking for ${suggestedTag}?`"
             :books="suggestedBooks"
             :see-more-link="`/literature?tag=${suggestedTag}`"
+            section-type="recommendation"
+            :highlighted-tag="suggestedTag"
           />
         </div>
 
         <div v-else-if="searchQuery || hasActiveFilters" class="search-results">
           <BookGrid
-            :title="searchQuery ? `Results for '${searchQuery}'` : 'Filtered Results'"
+            v-if="searchQuery"
+            :title="`Our results for '${searchQuery}'`"
+            :books="filteredBooks"
+            see-more-link="/literature"
+            section-type="search"
+            title-prefix="results"
+            :highlighted-query="searchQuery"
+            title-suffix="'"
+          />
+          <BookGrid
+            v-else
+            title="Filtered Results"
             :books="filteredBooks"
             see-more-link="/literature"
           />
@@ -31,6 +47,9 @@
             title="Top Books For you"
             :books="topBooks"
             see-more-link="/literature?sort=top"
+            section-type="top"
+            title-prefix="Top Books"
+            title-suffix="For you"
           />
           
           <BookSection
@@ -38,15 +57,20 @@
             :title="`Looking for ${suggestedTag}?`"
             :books="suggestedBooks"
             :see-more-link="`/literature?tag=${suggestedTag}`"
+            section-type="recommendation"
+            :highlighted-tag="suggestedTag"
           />
         </div>
 
         <!-- All Books Section - Always visible at the bottom -->
         <div class="all-books-section">
           <BookGrid
-            title="A Library of Books to See"
+            title="Our Library, just for you."
             :books="allBooks"
             see-more-link="/literature"
+            section-type="top"
+            title-prefix="Library"
+            title-suffix="just for you."
           />
         </div>
       </div>
@@ -277,16 +301,30 @@ const topBooks = computed(() => {
     .slice(0, 8);
 });
 
-// Get user's most searched tag from search history
-// In production, this would come from user's search history/analytics
-const getUserSearchHistory = (): string[] => {
-  // Simulated search history - in production, fetch from localStorage/API
-  // This would track user's frequent searches
-  const searchHistory = ['PHP', 'Vue', 'JavaScript', 'Python', 'React'];
-  return searchHistory;
-};
+// Tags to cycle through for suggested books
+const suggestedTagsCycle = ['PHP', 'Web Development', 'Programming', 'Fantasy', 'Non-Fiction', 'Dystopia'];
 
-// Suggested tag based on user's search history
+// Current tag index - cycles on every page refresh
+const currentTagIndex = ref(0);
+
+// Initialize tag index on mount - cycles through tags on each refresh
+onMounted(() => {
+  if (process.client) {
+    // Use sessionStorage to track and cycle through tags on each refresh
+    const storedIndex = sessionStorage.getItem('suggestedTagIndex');
+    let index = storedIndex ? parseInt(storedIndex, 10) : 0;
+    
+    // Increment index and cycle back to 0 when reaching the end
+    index = (index + 1) % suggestedTagsCycle.length;
+    
+    // Store the new index for next refresh
+    sessionStorage.setItem('suggestedTagIndex', index.toString());
+    
+    currentTagIndex.value = index;
+  }
+});
+
+// Suggested tag - cycles through predefined tags on each refresh
 const suggestedTag = computed(() => {
   if (filters.value.tags.length > 0) {
     return filters.value.tags[0];
@@ -294,9 +332,8 @@ const suggestedTag = computed(() => {
   if (searchQuery.value) {
     return searchQuery.value;
   }
-  // Get most frequent tag from user's search history
-  const searchHistory = getUserSearchHistory();
-  return searchHistory[0] || 'PHP'; // Default to first item in history or fallback
+  // Cycle through the predefined tags on each page refresh
+  return suggestedTagsCycle[currentTagIndex.value];
 });
 
 // Suggested books based on tag
