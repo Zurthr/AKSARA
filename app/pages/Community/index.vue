@@ -344,6 +344,7 @@ const relatedCommunities = [
 }
 
 .community-page {
+  padding-left:32px;
   display: flex;
   flex-direction: column;
   gap: 32px;
