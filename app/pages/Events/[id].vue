@@ -1,8 +1,8 @@
 <template>
-  <section class="event-detail-page">
+  <div class="event-page">
     <NuxtLink to="/events" class="back-link">&larr; Back to Events</NuxtLink>
 
-    <div class="event-detail-content">
+    <div class="event-detail-page">
       <div class="event-detail-main">
         <div class="event-detail-feed">
           <article class="hero-media-section">
@@ -137,18 +137,21 @@
         </div>
       </div>
 
-      <EventsSidebar
-        :informasiTambahan="sidebarInfo"
-        :tags="popularEventTags"
-        :relatedEvents="relatedEvents"
-      />
+      <RightSideBar>
+        <EventsSidebar
+          :informasiTambahan="sidebarInfo"
+          :tags="popularEventTags"
+          :relatedEvents="relatedEvents"
+        />
+      </RightSideBar>
     </div>
-  </section>
+  </div>
 </template>
 
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue';
 import { useRoute } from '#imports';
+import RightSideBar from '~/components/General/RightSideBar.vue';
 
 interface EventData {
   id: string;
@@ -345,11 +348,10 @@ const getTagClass = (tag: string): string => {
 </script>
 
 <style scoped>
-.event-detail-page {
+.event-page {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  width: 100%;
 }
 
 .back-link {
@@ -358,11 +360,11 @@ const getTagClass = (tag: string): string => {
   text-decoration: none;
 }
 
-.event-detail-content {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) clamp(240px, 24vw, 320px);
-  gap: 24px;
-  align-items: start;
+.event-detail-page {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  width: 100%;
 }
 
 .event-detail-main {
@@ -370,22 +372,9 @@ const getTagClass = (tag: string): string => {
   display: flex;
   flex-direction: column;
   gap: 24px;
-
-  max-height: calc(100vh - 160px);
-  overflow-y: auto;
-  padding-right: 4px;
-  scrollbar-width: thin;
-  min-width: 0;
+  max-width: 920px;
 }
 
-.event-detail-main::-webkit-scrollbar {
-  width: 4px;
-}
-
-.event-detail-main::-webkit-scrollbar-track {
-  background: transparent;
-
-}
 
 .event-detail-feed {
   display: flex;
@@ -652,6 +641,7 @@ const getTagClass = (tag: string): string => {
   background: #fbbf24;
   color: var(--color-black);
   flex: 1;
+}
 
 .detail-address-toggle:hover .detail-address-hint {
   text-decoration: underline;
@@ -692,30 +682,10 @@ const getTagClass = (tag: string): string => {
   border: 1px solid rgba(59, 83, 121, 0.22);
 }
 
-@media (max-width: 1280px) {
-  .event-detail-content {
-    grid-template-columns: minmax(0, 1fr) clamp(220px, 30vw, 300px);
-    gap: 20px;
-  }
-}
-
-@media (max-width: 1024px) {
-  .event-detail-content {
-    grid-template-columns: minmax(0, 1fr) clamp(200px, 36vw, 260px);
-    gap: 18px;
-  }
-}
-
 @media (max-width: 768px) {
-  .event-detail-content {
-    grid-template-columns: 1fr;
+  .event-detail-page {
+    flex-direction: column;
     gap: 16px;
-  }
-
-  .event-detail-main {
-    max-height: none;
-    overflow: visible;
-    padding-right: 0;
   }
 
   .hero-media-container {
@@ -749,11 +719,6 @@ const getTagClass = (tag: string): string => {
     padding: 20px;
   }
 
-  .events-detail-sidebar,
-  .event-detail-content > *:last-child {
-    width: 100%;
-  }
-  
   .details-grid {
     grid-template-columns: 1fr;
   }

@@ -1,10 +1,7 @@
 <template>
   <section class="events-page">
     <div class="events-main">
-      <header class="events-header">
-        <h1>Events</h1>
-        <p>Bergabunglah dalam acara tentang pendidikan, perpustakaan, dan komunitas. Mulai diskusi baru atau ikuti yang sudah ada.</p>
-      </header>
+     
 
       <div class="events-body">
         <div class="events-grid">
