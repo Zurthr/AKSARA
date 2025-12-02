@@ -11,21 +11,39 @@
           <div class="book-info-section">
             <h1 class="book-title-main">{{ book.title }}</h1>
             <p class="book-author-main" v-if="book.author">by {{ book.author }}</p>
-            <div class="book-rating-section">
+            <div class="book-rating-section" v-if="book.rating">
+              <span class="rating-number">{{ book.rating.toFixed(1) }}</span>
               <div class="stars-container">
-                <div class="star-wrapper" v-for="i in 5" :key="i">
-                  <svg
-                    class="star"
-                    :class="{ 'star-filled': i <= Math.round(book.rating || 0) }"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                  >
-                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                  </svg>
+                <div
+                  v-for="starIndex in 5"
+                  :key="starIndex"
+                  class="star-wrapper"
+                >
+                  <img
+                    v-if="starIndex > Math.ceil(book.rating)"
+                    src="~/assets/icons/StarDark.svg"
+                    alt="star"
+                    class="star star-empty"
+                  />
+                  <template v-else>
+                    <img
+                      src="~/assets/icons/StarDark.svg"
+                      alt="star"
+                      class="star star-background"
+                    />
+                    <img
+                      src="~/assets/icons/Star.svg"
+                      alt="star"
+                      class="star star-filled"
+                      :style="{
+                        clipPath: starIndex <= Math.floor(book.rating)
+                          ? 'inset(0 0% 0 0)'
+                          : starIndex - 1 < book.rating
+                          ? `inset(0 ${100 - ((book.rating - (starIndex - 1)) * 100)}% 0 0)`
+                          : 'inset(0 100% 0 0)'
+                      }"
+                    />
+                  </template>
                 </div>
               </div>
             </div>
@@ -94,7 +112,7 @@
       </main>
 
       <!-- Sidebar -->
-      <aside class="book-sidebar">
+      <RightSideBar>
         <div class="sidebar-content">
           <h2 class="sidebar-title">Book Details</h2>
           
@@ -154,7 +172,11 @@
                 v-for="option in purchaseOptions"
                 :key="option.label"
                 class="purchase-button"
-                :class="option.primary ? 'primary' : ''"
+                :class="{ 
+                  'primary': option.primary, 
+                  'disabled': option.disabled 
+                }"
+                :disabled="option.disabled"
                 @click="handlePurchaseClick(option)"
               >
                 {{ option.label }}
@@ -162,7 +184,7 @@
             </div>
           </div>
         </div>
-      </aside>
+      </RightSideBar>
     </div>
     <div v-else class="book-not-found">
       <p>Book not found</p>
@@ -171,14 +193,11 @@
 </template>
 
 <script setup lang="ts">
+import RightSideBar from '~/components/General/RightSideBar.vue';
 import ForumCard from '~/components/Forum/ForumCard.vue';
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore - JSON module typing is handled by the bundler
-import rawBooksData from '../../../mock-backend/data/books.json';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore - JSON module typing is handled by the bundler
-import rawPostsData from '../../../mock-backend/data/posts.json';
+const route = useRoute();
+const bookId = route.params.id;
 
 interface RawBookTag {
   name: string;
@@ -233,7 +252,6 @@ interface Post {
   stars: number;
 }
 
-const route = useRoute();
 const activeTab = ref<'posts' | 'reviews' | 'sourcing'>('posts');
 
 const tabs = [
@@ -242,82 +260,105 @@ const tabs = [
   { id: 'sourcing' as const, label: 'Sourcing Options' },
 ];
 
-const rawBooks = rawBooksData as unknown as RawBook[];
-const rawPosts = rawPostsData as unknown as Post[];
+// Fetch book data from API
+const { data: book, error: bookError } = await useFetch<RawBook>(`http://localhost:3002/books/${bookId}`);
 
-const bookId = computed(() => {
-  const id = route.params.id;
-  return typeof id === 'string' ? parseInt(id, 10) : id;
-});
+if (bookError.value) {
+  console.error('Error fetching book:', bookError.value);
+}
 
-const book = computed(() => {
-  return rawBooks.find((b) => b.id === bookId.value);
-});
-
-const relatedPosts = computed(() => {
-  if (!book.value || !book.value.related_posts) return [];
-  return rawPosts.filter((post) => book.value!.related_posts!.includes(post.id));
-});
+// Fetch related posts
+const relatedPosts = ref<Post[]>([]);
+if (book.value?.related_posts?.length) {
+  const query = book.value.related_posts.map(id => `id=${id}`).join('&');
+  const { data, error } = await useFetch<Post[]>(`http://localhost:3002/posts?${query}`);
+  if (error.value) {
+    console.error('Error fetching related posts:', error.value);
+  }
+  relatedPosts.value = data.value ?? [];
+}
 
 
 const purchaseOptions = computed(() => {
   const options = [];
   
-  // Find Kindle option from copy_types
-  if (book.value?.copy_types) {
-    for (const [copyType, details] of Object.entries(book.value.copy_types)) {
-      if (details.sources) {
-        for (const source of details.sources) {
-          if (source.name.toLowerCase().includes('kindle')) {
-            options.push({
-              label: 'Buy at Kindle',
-              url: source.url,
-              primary: false,
-            });
-            break;
-          }
-        }
-      }
-    }
+  if (!book?.value?.copy_types) {
+    // If no copy_types, return default options
+    options.push(
+      { label: 'No Preview Available', url: null, primary: false, disabled: true },
+      { label: 'Buy on Amazon', url: null, primary: false, disabled: false },
+      { label: 'Other Options', url: null, primary: false, disabled: false }
+    );
+    return options;
   }
   
-  // Find IEEE option from sources
-  if (book.value?.sources) {
-    for (const source of book.value.sources) {
-      if (source.name.toLowerCase().includes('ieee')) {
-        options.push({
-          label: 'Read Book on IEEE',
-          url: source.url,
-          primary: true,
-        });
-        break;
-      }
-    }
+  // 1. Find Preview option (highlighted/primary)
+  let previewSource = null;
+  const digitalCopy = book.value.copy_types.Digital;
+  if (digitalCopy?.sources) {
+    previewSource = digitalCopy.sources.find(source => source.type === 'preview');
   }
   
-  // Add "Other Options" if we have any sources
-  if (book.value?.sources && book.value.sources.length > 0) {
+  if (previewSource) {
     options.push({
-      label: 'Other Options',
+      label: `Read Book on ${previewSource.name}`,
+      url: previewSource.url,
+      primary: true,
+      disabled: false,
+    });
+  } else {
+    options.push({
+      label: 'No Preview Available',
       url: null,
       primary: false,
+      disabled: true,
     });
   }
   
-  // Default options if none found
-  if (options.length === 0) {
-    options.push(
-      { label: 'Buy at Kindle', url: null, primary: false },
-      { label: 'Other Options', url: null, primary: false },
-      { label: 'Read Book on IEEE', url: null, primary: true }
-    );
+  // 2. Find Purchase option
+  // First, check for Digital copy with type "purchase"
+  let purchaseSource = null;
+  if (digitalCopy?.sources) {
+    purchaseSource = digitalCopy.sources.find(source => source.type === 'purchase');
   }
+  
+  // If no Digital purchase, check Physical copy with type "online_retailer"
+  if (!purchaseSource) {
+    const physicalCopy = book.value.copy_types.Physical;
+    if (physicalCopy?.sources) {
+      purchaseSource = physicalCopy.sources.find(source => source.type === 'online_retailer');
+    }
+  }
+  
+  if (purchaseSource) {
+    options.push({
+      label: `Buy on ${purchaseSource.name}`,
+      url: purchaseSource.url,
+      primary: false,
+      disabled: false,
+    });
+  } else {
+    options.push({
+      label: 'Buy on Amazon',
+      url: null,
+      primary: false,
+      disabled: false,
+    });
+  }
+  
+  // 3. Add "Other Options"
+  options.push({
+    label: 'Other Options',
+    url: null,
+    primary: false,
+    disabled: false,
+  });
   
   return options;
 });
 
-const handlePurchaseClick = (option: { label: string; url: string | null; primary: boolean }) => {
-  if (option.url) {
+const handlePurchaseClick = (option: { label: string; url: string | null; primary: boolean; disabled: boolean }) => {
+  if (option.url && !option.disabled) {
     window.open(option.url, '_blank', 'noopener,noreferrer');
   }
 };
@@ -326,21 +367,23 @@ const handlePurchaseClick = (option: { label: string; url: string | null; primar
 <style scoped>
 .book-detail-page {
   width: 100%;
-  padding: 24px;
+  margin: 8px 0 0 32px;
   background-color: #f8fafc;
   min-height: 100vh;
 }
 
 .book-detail-container {
   display: flex;
-  max-width: 1400px;
+  width:100%;
   margin: 0 auto;
-  gap: 32px;
+  gap: 24px;
 }
 
 .book-main {
   flex: 1;
-  min-width: 0;
+  margin-top: 20px;
+  min-width: 640px;
+  max-width: 920px;
 }
 
 .book-header {
@@ -388,28 +431,51 @@ const handlePurchaseClick = (option: { label: string; url: string | null; primar
 
 .book-rating-section {
   display: flex;
-  align-items: center;
+  width: fit-content;
   gap: 8px;
+  align-items: center;
+}
+
+.rating-number {
+  margin-top: 2px;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-black);
+  line-height: 1;
 }
 
 .stars-container {
   display: flex;
   gap: 4px;
-}
-
-.star-wrapper {
-  display: flex;
   align-items: center;
 }
 
-.star {
-  color: #e2e8f0;
+.star-wrapper {
+  position: relative;
+  display: inline-block;
   width: 24px;
   height: 24px;
 }
 
-.star.star-filled {
-  color: #fbbf24;
+.star {
+  width: 24px;
+  height: 24px;
+  display: block;
+  object-fit: contain;
+}
+
+.star-empty {
+  opacity: 0.6;
+}
+
+.star-background {
+  opacity: 0.6;
+}
+
+.star-filled {
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .book-description {
@@ -503,7 +569,7 @@ const handlePurchaseClick = (option: { label: string; url: string | null; primar
 }
 
 .book-sidebar {
-  width: 360px;
+  width: 320px;
   flex-shrink: 0;
 }
 
@@ -648,13 +714,26 @@ const handlePurchaseClick = (option: { label: string; url: string | null; primar
   border-color: #3b5379;
 }
 
+.purchase-button.disabled {
+  background: #f1f5f9;
+  color: #94a3b8;
+  border-color: #e2e8f0;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.purchase-button.disabled:hover {
+  background: #f1f5f9;
+  border-color: #e2e8f0;
+}
+
 .book-not-found {
   padding: 48px;
   text-align: center;
   color: #64748b;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1040px) {
   .book-detail-container {
     flex-direction: column;
   }

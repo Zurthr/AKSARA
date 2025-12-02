@@ -2,8 +2,7 @@
   <header class="navbar">
     <div class="search-center">
         <div class="search-wrapper">
-          <!-- TODO: replace with actual search icon component -->
-          <span class="icon-placeholder">!</span>
+          <img src="~/assets/icons/Search.svg" alt="Search" style="width: 20px; height: 20px;">
           <input
             type="search"
             class="search-input"
@@ -18,14 +17,14 @@
             @click="clearSearch"
             aria-label="Clear search"
           >
-            ×
+          <img src="~/assets/icons/Close.svg" alt="Close" style="width: 20px; height: 20px;">
+
           </button>
         </div>
     </div>
     <div class="action-icons">
-      <!-- TODO: swap placeholders with bell/profile icons -->
-      <button type="button" class="icon-button">!</button>
-      <button type="button" class="icon-button">!</button>
+      <button type="button" class="icon-button"><img src="~/assets/icons/Notifications.svg" alt="Bell" style="width: 20px; height: 20px;"></button>
+      <button type="button" class="icon-button"><img src="~/assets/icons/Person.svg" alt="Profile" style="width: 20px; height: 20px;"></button>
     </div>
   </header>
 </template>
@@ -183,6 +182,15 @@ const clearSearch = () => {
 
 .search-input::placeholder {
   color: #94a3b8;
+}
+
+/* Hide browser's default search clear button */
+.search-input::-webkit-search-cancel-button {
+  display: none;
+}
+
+.search-input::-ms-clear {
+  display: none;
 }
 
 .action-icons {

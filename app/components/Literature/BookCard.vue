@@ -165,6 +165,7 @@ const displayAuthor = computed(() => {
   font-weight: 500;
   width: fit-content;
   text-align: center;
+  height: 26px;
 }
 
 .book-tag-more {
@@ -177,7 +178,7 @@ const displayAuthor = computed(() => {
   font-weight: 500;
   width: fit-content;
   text-align: center;
-  border: 1px solid rgba(59, 83, 121, 0.2);
+  height: 26px;
 }
 
 .book-rating {

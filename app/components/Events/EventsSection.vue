@@ -92,9 +92,9 @@
 </template>
 
 <script setup lang="ts">
-import eventsData from '~/data/events.json';
+import eventsData from '~/../mock-backend/data/events.json';
 
-const events = eventsData;
+const events = eventsData.slice(0, 7);
 const currentIndex = ref(0);
 let autoPlayInterval: ReturnType<typeof setInterval> | null = null;
 
