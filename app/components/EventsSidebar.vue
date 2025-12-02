@@ -62,11 +62,7 @@ defineProps<{
 
 <style scoped>
 .events-detail-sidebar {
-  width: clamp(240px, 24vw, 320px);
-  flex: 0 0 clamp(240px, 24vw, 320px);
-  position: sticky;
-  top: 82px;
-  align-self: flex-start;
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -237,11 +233,6 @@ defineProps<{
 @media (max-width: 768px) {
   .events-detail-sidebar {
     width: 100%;
-    position: static;
-    max-height: none;
-    overflow: visible;
-    padding-right: 0;
-    flex: 1 1 auto;
   }
 }
 </style>
