@@ -62,7 +62,8 @@ defineProps<{
 
 <style scoped>
 .events-detail-sidebar {
-  width: 320px;
+  width: clamp(240px, 24vw, 320px);
+  flex: 0 0 clamp(240px, 24vw, 320px);
   position: sticky;
   top: 82px;
   align-self: flex-start;
@@ -85,7 +86,7 @@ defineProps<{
 .sidebar-card h3 {
   font-size: 18px;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--color-black);
 }
 
 .info-list {
@@ -118,7 +119,7 @@ defineProps<{
 
 .info-label {
   font-weight: 600;
-  color: #0f172a;
+  color: var(--color-black);
   font-size: 14px;
   margin-bottom: 4px;
 }
@@ -195,7 +196,7 @@ defineProps<{
 
 .event-title {
   font-weight: 600;
-  color: #0f172a;
+  color: var(--color-black);
   font-size: 14px;
   margin-bottom: 4px;
 }
@@ -218,7 +219,7 @@ defineProps<{
 .more-events-btn {
   width: 100%;
   background: #fbbf24;
-  color: #0f172a;
+  color: var(--color-black);
   padding: 10px 16px;
   border: none;
   border-radius: 12px;
@@ -233,13 +234,14 @@ defineProps<{
   transform: translateY(-2px);
 }
 
-@media (max-width: 1280px) {
+@media (max-width: 768px) {
   .events-detail-sidebar {
     width: 100%;
     position: static;
     max-height: none;
     overflow: visible;
     padding-right: 0;
+    flex: 1 1 auto;
   }
 }
 </style>

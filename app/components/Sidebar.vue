@@ -28,38 +28,51 @@
 
 <script setup lang="ts">
 const route = useRoute();
+import HomeIcon from '~/assets/icons/Home.svg';
+import BookOpenIcon from '~/assets/icons/BookOpen.svg';
+import Community from '~/assets/icons/Community.svg';
+import Forum from '~/assets/icons/Forum.svg';
+import Events from '~/assets/icons/Event.svg';
+import Embeds from '~/assets/icons/Embed.svg';
+import Bookmarks from '~/assets/icons/Bookmarks.svg';
+
 
 const navItems = [
   {
     label: 'Home',
     href: '/',
-    icon: 'M12 3 4 9v10h5v-5h6v5h5V9z'
+    icon: HomeIcon
   },
   {
     label: 'Literature',
     href: '/literature',
-    icon: 'M6 5h9a3 3 0 0 1 3 3v11l-3-2-3 2-3-2-3 2V8a3 3 0 0 1 3-3z'
+    icon: BookOpenIcon
   },
   {
     label: 'Community',
     href: '/community',
-    icon: 'M5 13a3 3 0 1 1 3-3 3 3 0 0 1-3 3zm14-3a3 3 0 1 0-3 3 3 3 0 0 0 3-3zm-9 8a5 5 0 0 0-5-5H4a4 4 0 0 0-4 4v3h10zm3 0h10v-3a4 4 0 0 0-4-4h-1a5 5 0 0 0-5 5z'
+    icon: Community
   },
   {
     label: 'Forums',
     href: '/forums',
-    icon: 'M4 4h16v10H7l-3 3z'
+    icon: Forum
   },
   {
     label: 'Events',
     href: '/events',
-    icon: 'M7 3v2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2V3h-2v2H9V3zm0 8h4v4H7z'
+    icon: Events
   },
   {
     label: 'Embeds',
     href: '/embeds',
-    icon: 'M5 5h14v14H5zm2 2v10h10V7z'
+    icon: Embeds
   },
+  {
+    label: 'My Bookmarks',
+    href: '/bookmarks',
+    icon: Bookmarks
+  }
 ];
 
 const isActive = (href: string) => {
@@ -110,7 +123,7 @@ const isActive = (href: string) => {
   border-radius: 8px;
   color: var(--color-black);
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 400;
   transition: background-color 0.2s, color 0.2s;
 }
 
@@ -128,7 +141,6 @@ const isActive = (href: string) => {
   display: inline-flex;
   width: 18px;
   height: 18px;
-  color: #4a4a4a;
 }
 
 .nav-icon svg {

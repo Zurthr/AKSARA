@@ -1,0 +1,64 @@
+[
+  {
+    "id": 1,
+    "title": "Photo Walk Jakarta",
+    "community_id": "photography-club",
+    "community_name": "Photography Club",
+    "date": "2023-10-15T08:00:00Z",
+    "location": "Kota Tua, Jakarta",
+    "description": "Join us for a morning photo walk through the historic streets of Kota Tua. We'll explore colonial architecture, street photography techniques, and end with a gallery review session at a local café.",
+    "attendees": [
+      {
+        "id": 1,
+        "name": "Sarah Chen",
+        "avatar": "https://i.pravatar.cc/150?u=sarah"
+      },
+      {
+        "id": 2,
+        "name": "Mike Johnson",
+        "avatar": "https://i.pravatar.cc/150?u=mike"
+      }
+    ],
+    "attendeeCount": 12,
+    "maxAttendees": 20,
+    "status": "upcoming",
+    "created_at": "2023-10-01T12:00:00Z",
+    "updated_at": "2023-10-01T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "title": "Book Club: Harry Potter Marathon",
+    "community_id": "literacy-circle",
+    "community_name": "Literacy Circle",
+    "date": "2023-10-20T14:00:00Z",
+    "location": "Periplus Bookstore, Jakarta",
+    "description": "A full day marathon discussing all seven Harry Potter books. Bring your favorite theories and cosplay as your favorite character!",
+    "attendees": [
+      {
+        "id": 1,
+        "name": "Orang Kmplang",
+        "avatar": "https://i.pravatar.cc/150?u=kmplang"
+      }
+    ],
+    "attendeeCount": 8,
+    "maxAttendees": 15,
+    "status": "upcoming",
+    "created_at": "2023-10-01T10:00:00Z",
+    "updated_at": "2023-10-01T10:00:00Z"
+  },
+  {
+    "id": 3,
+    "title": "Wellness Workshop: Mindfulness Basics",
+    "community_id": "wellness-warriors",
+    "community_name": "Wellness Warriors",
+    "date": "2023-09-28T09:00:00Z",
+    "location": "Online - Zoom",
+    "description": "Learn the basics of mindfulness meditation and daily practices for mental wellness. Perfect for beginners!",
+    "attendees": [],
+    "attendeeCount": 25,
+    "maxAttendees": 100,
+    "status": "completed",
+    "created_at": "2023-09-20T12:00:00Z",
+    "updated_at": "2023-09-28T17:00:00Z"
+  }
+]

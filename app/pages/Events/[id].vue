@@ -370,7 +370,21 @@ const getTagClass = (tag: string): string => {
   display: flex;
   flex-direction: column;
   gap: 24px;
+
+  max-height: calc(100vh - 160px);
+  overflow-y: auto;
+  padding-right: 4px;
+  scrollbar-width: thin;
   min-width: 0;
+}
+
+.event-detail-main::-webkit-scrollbar {
+  width: 4px;
+}
+
+.event-detail-main::-webkit-scrollbar-track {
+  background: transparent;
+
 }
 
 .event-detail-feed {
@@ -511,6 +525,41 @@ const getTagClass = (tag: string): string => {
   gap: 24px;
 }
 
+
+.event-header h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-black);
+  margin-bottom: 8px;
+}
+
+.event-title {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--color-black);
+  margin-bottom: 12px;
+  line-height: 1.2;
+}
+
+.event-subtitle {
+  font-size: 20px;
+  font-weight: 600;
+  color: #475569;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.hosted-by {
+  color: #64748b;
+  font-size: 14px;
+}
+
+.host-link {
+  color: #3b82f6;
+  font-weight: 600;
+}
+
+
 .event-description h3,
 .event-details-section h3,
 .event-tags h3 {
@@ -598,13 +647,11 @@ const getTagClass = (tag: string): string => {
   gap: 8px;
 }
 
-.detail-address-hint {
-  font-size: 12px;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  color: rgba(59, 83, 121, 0.75);
-}
+
+.register-btn {
+  background: #fbbf24;
+  color: var(--color-black);
+  flex: 1;
 
 .detail-address-toggle:hover .detail-address-hint {
   text-decoration: underline;
@@ -665,6 +712,12 @@ const getTagClass = (tag: string): string => {
     gap: 16px;
   }
 
+  .event-detail-main {
+    max-height: none;
+    overflow: visible;
+    padding-right: 0;
+  }
+
   .hero-media-container {
     min-height: 220px;
     border-radius: 16px;
@@ -700,7 +753,7 @@ const getTagClass = (tag: string): string => {
   .event-detail-content > *:last-child {
     width: 100%;
   }
-
+  
   .details-grid {
     grid-template-columns: 1fr;
   }

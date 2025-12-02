@@ -1,0 +1,953 @@
+[
+  {
+    "id": 1,
+    "title": "lean Code: A Handbook of Agile Software Craftsmanship",
+    "author": "Robert C. Martin",
+    "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1436202607l/3735293.jpg",
+    "rating": 4.5,
+    "description": "Even bad code can function. But if code isn't clean, it can bring a development organization to its knees. Every year, countless hours and significant resources are lost because of poorly written code. But it doesn't have to be that way.",
+    "year_edition": "2023 2nd Edition",
+    "total_bookmarked": 3420,
+    "tags": [
+      {
+        "name": "Software Engineering",
+        "type": "primary"
+      },
+      {
+        "name": "Programming",
+        "type": "secondary"
+      },
+      {
+        "name": "Best Practices",
+        "type": "secondary"
+      },
+      {
+        "name": "Code Quality",
+        "type": "secondary"
+      }
+    ],
+    "copy_type": "Physical",
+    "licensing_type": "Pay-to-own",
+    "sources": [
+      {
+        "name": "IEEE Xplore",
+        "url": "https://ieeexplore.ieee.org/document/6196583"
+      },
+      {
+        "name": "Springer",
+        "url": "https://link.springer.com/book/10.1007/978-0-13-597444-5"
+      },
+      {
+        "name": "ACM Digital Library",
+        "url": "https://dl.acm.org/doi/10.5555/1413532"
+      }
+    ],
+    "twitter_embeds": [
+      {
+        "embed_url": "https://twitter.com/unclebobmartin/status/123456789",
+        "keyword": "Clean Code",
+        "generated_at": "2023-10-01T12:00:00Z"
+      },
+      {
+        "embed_url": "https://twitter.com/martinfowler/status/987654321",
+        "keyword": "Software Engineering",
+        "generated_at": "2023-10-01T12:00:00Z"
+      }
+    ],
+    "access_links": [
+      {
+        "platform": "Amazon Kindle",
+        "url": "https://amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350884",
+        "type": "purchase"
+      },
+      {
+        "platform": "Google Books",
+        "url": "https://books.google.com/books?id=CpA5DwAAQBAJ",
+        "type": "preview"
+      }
+    ],
+    "related_posts": [1, 8],
+    "community_id": "literacy-circle",
+    "created_at": "2023-10-01T12:00:00Z",
+    "updated_at": "2023-10-01T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "title": "The Hobbit",
+    "author": "J.R.R. Tolkien",
+    "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1546071216l/5907.jpg",
+    "rating": 4.3,
+    "description": "Bilbo Baggins is a hobbit who enjoys a comfortable, unambitious life, rarely traveling any farther than his pantry or cellar. But his contentment is disturbed when the wizard Gandalf and a company of dwarves arrive on his doorstep one day.",
+    "year_edition": "2012 75th Anniversary Edition",
+    "total_bookmarked": 8934,
+    "tags": [
+      {
+        "name": "Fantasy",
+        "type": "primary"
+      },
+      {
+        "name": "Adventure",
+        "type": "secondary"
+      },
+      {
+        "name": "Classic Literature",
+        "type": "secondary"
+      },
+      {
+        "name": "Epic",
+        "type": "secondary"
+      }
+    ],
+    "copy_type": "Physical",
+    "licensing_type": "Pay-to-own",
+    "sources": [
+      {
+        "name": "Project Gutenberg",
+        "url": "https://www.gutenberg.org/ebooks/2701"
+      },
+      {
+        "name": "Internet Archive",
+        "url": "https://archive.org/details/thehobbit00tolk_0"
+      }
+    ],
+    "twitter_embeds": [
+      {
+        "embed_url": "https://twitter.com/Tolkien/status/1122334455",
+        "keyword": "The Hobbit",
+        "generated_at": "2023-10-01T12:00:00Z"
+      }
+    ],
+    "access_links": [
+      {
+        "platform": "Amazon Kindle",
+        "url": "https://amazon.com/Hobbit-J-R-R-Tolkien/dp/054792822X",
+        "type": "purchase"
+      },
+      {
+        "platform": "Audible",
+        "url": "https://audible.com/pd/The-Hobbit-Audiobook/B002V1HSP2",
+        "type": "audiobook"
+      }
+    ],
+    "related_posts": [2, 12],
+    "community_id": "literacy-circle",
+    "created_at": "2023-10-01T12:00:00Z",
+    "updated_at": "2023-10-01T12:00:00Z"
+  },
+  {
+    "id": 3,
+    "title": "Atomic Habits: An Easy & Proven Way to Build Good Habits & Break Bad Ones",
+    "author": "James Clear",
+    "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1535115320l/40121378.jpg",
+    "rating": 4.7,
+    "description": "No matter your goals, Atomic Habits offers a proven framework for improving--every day. James Clear, one of the world's leading experts on habit formation, reveals practical strategies that will teach you exactly how to form good habits, break bad ones, and master the tiny behaviors that lead to remarkable results.",
+    "year_edition": "2023 Paperback Edition",
+    "total_bookmarked": 15678,
+    "tags": [
+      {
+        "name": "Self-Help",
+        "type": "primary"
+      },
+      {
+        "name": "Personal Development",
+        "type": "secondary"
+      },
+      {
+        "name": "Productivity",
+        "type": "secondary"
+      },
+      {
+        "name": "Psychology",
+        "type": "secondary"
+      }
+    ],
+    "copy_type": "Online",
+    "licensing_type": "Rent",
+    "sources": [
+      {
+        "name": "Psychology Today",
+        "url": "https://www.psychologytoday.com/us/blog/habits"
+      },
+      {
+        "name": "Harvard Business Review",
+        "url": "https://hbr.org/2018/10/atomic-habits"
+      }
+    ],
+    "twitter_embeds": [
+      {
+        "embed_url": "https://twitter.com/JamesClear/status/9988776655",
+        "keyword": "Atomic Habits",
+        "generated_at": "2023-10-01T12:00:00Z"
+      },
+      {
+        "embed_url": "https://twitter.com/JamesClear/status/8877665544",
+        "keyword": "Habits",
+        "generated_at": "2023-10-01T12:00:00Z"
+      }
+    ],
+    "access_links": [
+      {
+        "platform": "Amazon Kindle",
+        "url": "https://amazon.com/Atomic-Habits-Proven-Build-Break/dp/0735211299",
+        "type": "purchase"
+      },
+      {
+        "platform": "Apple Books",
+        "url": "https://books.apple.com/us/book/atomic-habits/id1442369036",
+        "type": "purchase"
+      },
+      {
+        "platform": "Scribd",
+        "url": "https://www.scribd.com/book/403734241/Atomic-Habits",
+        "type": "read"
+      }
+    ],
+    "related_posts": [5, 9],
+    "community_id": "wellness-warriors",
+    "created_at": "2023-10-01T12:00:00Z",
+    "updated_at": "2023-10-01T12:00:00Z"
+  },
+  {
+    "id": 4,
+    "title": "Design Patterns: Elements of Reusable Object-Oriented Software",
+    "author": "Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides",
+    "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1435589748l/850099.jpg",
+    "rating": 4.2,
+    "description": "Capturing a wealth of experience about the design of object-oriented software, four top-notch designers present a catalog of simple and succinct solutions to commonly occurring design problems.",
+    "year_edition": "2019 25th Anniversary Edition",
+    "total_bookmarked": 5678,
+    "tags": [
+      {
+        "name": "Software Design",
+        "type": "primary"
+      },
+      {
+        "name": "Object-Oriented Programming",
+        "type": "secondary"
+      },
+      {
+        "name": "Architecture",
+        "type": "secondary"
+      },
+      {
+        "name": "Design Patterns",
+        "type": "secondary"
+      }
+    ],
+    "copy_type": "Physical",
+    "licensing_type": "Pay-to-own",
+    "sources": [
+      {
+        "name": "IEEE Xplore",
+        "url": "https://ieeexplore.ieee.org/document/5353680"
+      },
+      {
+        "name": "ACM Digital Library",
+        "url": "https://dl.acm.org/doi/book/10.5555/197730"
+      }
+    ],
+    "twitter_embeds": [
+      {
+        "embed_url": "https://twitter.com/martinfowler/status/7766554433",
+        "keyword": "Design Patterns",
+        "generated_at": "2023-10-01T12:00:00Z"
+      }
+    ],
+    "access_links": [
+      {
+        "platform": "Amazon Kindle",
+        "url": "https://amazon.com/Design-Patterns-Elements-Reusable-Object-Oriented/dp/0201633612",
+        "type": "purchase"
+      }
+    ],
+    "related_posts": [7, 11],
+    "community_id": "creative-atelier",
+    "created_at": "2023-10-01T12:00:00Z",
+    "updated_at": "2023-10-01T12:00:00Z"
+  },
+  {
+    "id": 5,
+    "title": "The Pragmatic Programmer: Your Journey to Mastery",
+    "author": "David Thomas, Andrew Hunt",
+    "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/4070553672l/4099",
+    "rating": 4.4,
+    "description": "Written as a series of self-contained sections and filled with classic and fresh anecdotes, thoughtful examples, and interesting analogies, The Pragmatic Programmer illustrates the best approaches and major pitfalls of many different aspects of software development.",
+    "year_edition": "2023 20th Anniversary Edition",
+    "total_bookmarked": 8912,
+    "tags": [
+      {
+        "name": "Programming",
+        "type": "primary"
+      },
+      {
+        "name": "Career Development",
+        "type": "secondary"
+      },
+      {
+        "name": "Software Development",
+        "type": "secondary"
+      },
+      {
+        "name": "Best Practices",
+        "type": "secondary"
+      }
+    ],
+    "copy_type": "Online",
+    "licensing_type": "Pay-to-own",
+    "sources": [
+      {
+        "name": "ACM Digital Library",
+        "url": "https://dl.acm.org/doi/10.5555/333458"
+      },
+      {
+        "name": "O'Reilly",
+        "url": "https://www.oreilly.com/library/view/the-pragmatic-programmer/9780135957059/"
+      }
+    ],
+    "twitter_embeds": [
+      {
+        "embed_url": "https://twitter.com/pragdave/status/6655443322",
+        "keyword": "Pragmatic Programmer",
+        "generated_at": "2023-10-01T12:00:00Z"
+      }
+    ],
+    "access_links": [
+      {
+        "platform": "Amazon Kindle",
+        "url": "https://amazon.com/Pragmatic-Programmer-journey-mastery-20th/dp/0135957059",
+        "type": "purchase"
+      }
+    ],
+    "related_posts": [1, 6],
+    "community_id": "literacy-circle",
+    "created_at": "2023-10-01T12:00:00Z",
+    "updated_at": "2023-10-01T12:00:00Z"
+  },
+  {
+    "id": 6,
+    "title": "Deep Learning",
+    "author": "Ian Goodfellow, Yoshua Bengio, Aaron Courville",
+    "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1857111902l/24775616.jpg",
+    "rating": 4.6,
+    "description": "The text offers mathematical and conceptual background, covering relevant concepts in linear algebra, probability theory and information theory, numerical computation, and machine learning. It describes deep learning techniques used by practitioners in industry.",
+    "year_edition": "2016 First Edition",
+    "total_bookmarked": 12450,
+    "tags": [
+      {
+        "name": "Machine Learning",
+        "type": "primary"
+      },
+      {
+        "name": "Artificial Intelligence",
+        "type": "secondary"
+      },
+      {
+        "name": "Neural Networks",
+        "type": "secondary"
+      },
+      {
+        "name": "Computer Science",
+        "type": "secondary"
+      }
+    ],
+    "copy_type": "Onsite Exclusive",
+    "licensing_type": "Free",
+    "sources": [
+      {
+        "name": "arXiv",
+        "url": "https://arxiv.org/abs/1609.04947"
+      },
+      {
+        "name": "MIT Press",
+        "url": "https://mitpress.mit.edu/books/deep-learning"
+      }
+    ],
+    "twitter_embeds": [
+      {
+        "embed_url": "https://twitter.com/ylecun/status/5544332211",
+        "keyword": "Deep Learning",
+        "generated_at": "2023-10-01T12:00:00Z"
+      },
+      {
+        "embed_url": "https://twitter.com/goodfellow_ian/status/4433221100",
+        "keyword": "Neural Networks",
+        "generated_at": "2023-10-01T12:00:00Z"
+      }
+    ],
+    "access_links": [
+      {
+        "platform": "MIT Press",
+        "url": "https://mitpress.mit.edu/books/deep-learning",
+        "type": "read"
+      },
+      {
+        "platform": "PDF Download",
+        "url": "https://www.deeplearningbook.org/",
+        "type": "download"
+      }
+    ],
+    "related_posts": [3, 10],
+    "community_id": "literacy-circle",
+    "created_at": "2023-10-01T12:00:00Z",
+    "updated_at": "2023-10-01T12:00:00Z"
+  },
+  {
+    "id": 7,
+    "title": "The Lean Startup: How Today's Entrepreneurs Use Continuous Innovation",
+    "author": "Eric Ries",
+    "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1388266938l/10127019.jpg",
+    "rating": 3.9,
+    "description": "Most startups fail. But many of those failures are preventable. The Lean Startup is a new approach being adopted across the globe, changing the way companies are built and new products are launched.",
+    "year_edition": "2011 First Edition",
+    "total_bookmarked": 9876,
+    "tags": [
+      {
+        "name": "Business",
+        "type": "primary"
+      },
+      {
+        "name": "Entrepreneurship",
+        "type": "secondary"
+      },
+      {
+        "name": "Innovation",
+        "type": "secondary"
+      },
+      {
+        "name": "Startup",
+        "type": "secondary"
+      }
+    ],
+    "copy_type": "Online",
+    "licensing_type": "Pay-to-own",
+    "sources": [
+      {
+        "name": "Harvard Business Review",
+        "url": "https://hbr.org/2011/05/the-lean-startup"
+      },
+      {
+        "name": "Forbes",
+        "url": "https://www.forbes.com/sites/steveblank/2013/04/03/the-lean-startup-movement/"
+      }
+    ],
+    "twitter_embeds": [
+      {
+        "embed_url": "https://twitter.com/ericries/status/3322110099",
+        "keyword": "Lean Startup",
+        "generated_at": "2023-10-01T12:00:00Z"
+      }
+    ],
+    "access_links": [
+      {
+        "platform": "Amazon Kindle",
+        "url": "https://amazon.com/Lean-Startup-Entrepreneurs-Continuous-Innovation/dp/0307887898",
+        "type": "purchase"
+      }
+    ],
+    "related_posts": [13],
+    "community_id": "creative-atelier",
+    "created_at": "2023-10-01T12:00:00Z",
+    "updated_at": "2023-10-01T12:00:00Z"
+  },
+  {
+    "id": 8,
+    "title": "Human-Computer Interaction",
+    "author": "Alan Dix, Janet Finlay, Gregory D. Abowd, Russell Beale",
+    "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1348365968l/4010806.jpg",
+    "rating": 3.7,
+    "description": "Much has changed since the first edition of Human-Computer Interaction was published. Ubiquitous computing and rich sensor-filled environments are finding their way out of the laboratory, not just into movies but also into our workplaces and homes.",
+    "year_edition": "2017 4th Edition",
+    "total_bookmarked": 3456,
+    "tags": [
+      {
+        "name": "User Experience",
+        "type": "primary"
+      },
+      {
+        "name": "HCI",
+        "type": "secondary"
+      },
+      {
+        "name": "Interface Design",
+        "type": "secondary"
+      },
+      {
+        "name": "Usability",
+        "type": "secondary"
+      }
+    ],
+    "copy_type": "Physical",
+    "licensing_type": "Pay-to-own",
+    "sources": [
+      {
+        "name": "ACM Digital Library",
+        "url": "https://dl.acm.org/doi/book/10.5555/307809"
+      },
+      {
+        "name": "IEEE Xplore",
+        "url": "https://ieeexplore.ieee.org/document/7473862"
+      }
+    ],
+    "twitter_embeds": [
+      {
+        "embed_url": "https://twitter.com/alancix/status/2211009988",
+        "keyword": "Human Computer Interaction",
+        "generated_at": "2023-10-01T12:00:00Z"
+      }
+    ],
+    "access_links": [
+      {
+        "platform": "Amazon Kindle",
+        "url": "https://amazon.com/Human-Computer-Interaction-Alan-Dix/dp/0134460989",
+        "type": "purchase"
+      }
+    ],
+    "related_posts": [14],
+    "community_id": "creative-atelier",
+    "created_at": "2023-10-01T12:00:00Z",
+    "updated_at": "2023-10-01T12:00:00Z"
+  },
+  {
+    "id": 9,
+    "title": "Mindset: The New Psychology of Success",
+    "author": "Carol S. Dweck",
+    "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1473448322l/40745899.jpg",
+    "rating": 4.1,
+    "description": "After decades of research, world-renowned Stanford University psychologist Carol S. Dweck, Ph.D., discovered a simple but groundbreaking idea: the power of mindset. In this brilliant book, she shows how success in school, work, sports, the arts, and almost every area of human endeavor can be dramatically influenced by how we think about our talents and abilities.",
+    "year_edition": "2016 Updated Edition",
+    "total_bookmarked": 7890,
+    "tags": [
+      {
+        "name": "Psychology",
+        "type": "primary"
+      },
+      {
+        "name": "Personal Growth",
+        "type": "secondary"
+      },
+      {
+        "name": "Motivation",
+        "type": "secondary"
+      },
+      {
+        "name": "Education",
+        "type": "secondary"
+      }
+    ],
+    "copy_type": "Online",
+    "licensing_type": "Rent",
+    "sources": [
+      {
+        "name": "Psychology Today",
+        "url": "https://www.psychologytoday.com/us/blog/mindset"
+      },
+      {
+        "name": "Harvard Graduate School",
+        "url": "https://www.gse.harvard.edu/news/uk/16/01/mindset"
+      }
+    ],
+    "twitter_embeds": [
+      {
+        "embed_url": "https://twitter.com/CarolDweck/status/1099887766",
+        "keyword": "Growth Mindset",
+        "generated_at": "2023-10-01T12:00:00Z"
+      }
+    ],
+    "access_links": [
+      {
+        "platform": "Amazon Kindle",
+        "url": "https://amazon.com/Mindset-Psychology-Carol-S-Dweck/dp/0345472322",
+        "type": "purchase"
+      }
+    ],
+    "related_posts": [5, 15],
+    "community_id": "wellness-warriors",
+    "created_at": "2023-10-01T12:00:00Z",
+    "updated_at": "2023-10-01T12:00:00Z"
+  },
+  {
+    "id": 10,
+    "title": "The Art of Computer Programming",
+    "author": "Donald E. Knuth",
+    "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1401490415l/527659.jpg",
+    "rating": 4.6,
+    "description": "This multivolume work on the analysis of algorithms has long been recognized as the definitive description of classical computer science. The three complete volumes published to date already comprise a unique and invaluable resource in programming theory and practice.",
+    "year_edition": "2011 3rd Edition",
+    "total_bookmarked": 4321,
+    "tags": [
+      {
+        "name": "Computer Science",
+        "type": "primary"
+      },
+      {
+        "name": "Algorithms",
+        "type": "secondary"
+      },
+      {
+        "name": "Programming Theory",
+        "type": "secondary"
+      },
+      {
+        "name": "Mathematical Foundations",
+        "type": "secondary"
+      }
+    ],
+    "copy_type": "Physical",
+    "licensing_type": "Pay-to-own",
+    "sources": [
+      {
+        "name": "ACM Digital Library",
+        "url": "https://dl.acm.org/doi/book/10.5555/578145"
+      },
+      {
+        "name": "Stanford University",
+        "url": "https://cs.stanford.edu/~knuth/taocp.html"
+      }
+    ],
+    "twitter_embeds": [
+      {
+        "embed_url": "https://twitter.com/DonaldKnuth/status/887665543",
+        "keyword": "Computer Programming",
+        "generated_at": "2023-10-01T12:00:00Z"
+      }
+    ],
+    "access_links": [
+      {
+        "platform": "Amazon Kindle",
+        "url": "https://amazon.com/Art-Computer-Programming-Volume/dp/0201896842",
+        "type": "purchase"
+      }
+    ],
+    "related_posts": [16],
+    "community_id": "literacy-circle",
+    "created_at": "2023-10-01T12:00:00Z",
+    "updated_at": "2023-10-01T12:00:00Z"
+  },
+  {
+    "id": 11,
+    "title": "PHP and MySQL Web Development",
+    "author": "Luke Welling, Laura Thomson",
+    "cover": "https://images-na.ssl-images-amazon.com/images/I/51TJA-BOgEL._SX331_BO1,204,203,200_.jpg",
+    "rating": 4.2,
+    "description": "Learn PHP and MySQL programming - the practical guide to developing dynamic web applications using PHP and MySQL database. This comprehensive book covers everything from basic PHP syntax to advanced database interactions, form processing, security, and modern best practices for building robust web applications.",
+    "year_edition": "2018 5th Edition",
+    "total_bookmarked": 1542,
+    "tags": [
+      {
+        "name": "Web Development",
+        "type": "primary"
+      },
+      {
+        "name": "PHP",
+        "type": "primary"
+      },
+      {
+        "name": "MySQL",
+        "type": "secondary"
+      },
+      {
+        "name": "Backend Development",
+        "type": "secondary"
+      },
+      {
+        "name": "Database",
+        "type": "secondary"
+      }
+    ],
+    "copy_type": "Physical",
+    "licensing_type": "Pay-to-own",
+    "sources": [
+      {
+        "name": "Developer PHP Community",
+        "url": "https://www.php.net/manual/en/",
+        "description": "Official PHP documentation with examples"
+      }
+    ],
+    "twitter_embeds": [
+      {
+        "id": "1823456789",
+        "text": "Just finished PHP and MySQL Web Development - excellent resource for anyone starting with backend development! The database design chapters are gold. #PHP #WebDev",
+        "author": "DevMaster",
+        "author_handle": "@devmaster",
+        "likes": 456,
+        "retweets": 123,
+        "created_at": "2023-11-10T16:30:00Z"
+      }
+    ],
+    "access_links": [
+      {
+        "platform": "Amazon",
+        "url": "https://www.amazon.com/PHP-MySQL-Web-Development/dp/0134492663",
+        "type": "purchase"
+      },
+      {
+        "platform": "Pearson",
+        "url": "https://www.pearson.com/en-us/subject-catalog/p/php-and-mysql-web-development/P200000003256/9780134492660",
+        "type": "read"
+      }
+    ],
+    "created_at": "2023-10-01T12:00:00Z",
+    "updated_at": "2023-10-01T12:00:00Z"
+  },
+  {
+    "id": 12,
+    "title": "JavaScript: The Good Parts",
+    "author": "Douglas Crockford",
+    "cover": "https://images-na.ssl-images-amazon.com/images/I/51OL85-f0TL._SX331_BO1,204,203,200_.jpg",
+    "rating": 4.0,
+    "description": "Most programming languages contain good and bad parts, but JavaScript has more than its share of the bad, having been developed and released in a hurry before it could be refined. This book scrapes away these bad features to reveal a subset of JavaScript that is more reliable, readable, and maintainable.",
+    "year_edition": "2008",
+    "total_bookmarked": 2876,
+    "tags": [
+      {
+        "name": "Web Development",
+        "type": "primary"
+      },
+      {
+        "name": "JavaScript",
+        "type": "primary"
+      },
+      {
+        "name": "Frontend Development",
+        "type": "secondary"
+      },
+      {
+        "name": "Programming Languages",
+        "type": "secondary"
+      }
+    ],
+    "copy_type": "Physical",
+    "licensing_type": "Pay-to-own",
+    "sources": [
+      {
+        "name": "Mozilla Developer Network",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+        "description": "Comprehensive JavaScript guide and reference"
+      }
+    ],
+    "twitter_embeds": [
+      {
+        "id": "1728390123",
+        "text": "JavaScript: The Good Parts completely changed how I write JS. Every frontend developer should read this at least twice! #JavaScript #WebDev",
+        "author": "FrontendGuru",
+        "author_handle": "@frontendguru",
+        "likes": 892,
+        "retweets": 456,
+        "created_at": "2023-10-05T14:15:00Z"
+      }
+    ],
+    "access_links": [
+      {
+        "platform": "Amazon",
+        "url": "https://www.amazon.com/JavaScript-Good-Parts/dp/0596517742",
+        "type": "purchase"
+      },
+      {
+        "platform": "OReilly",
+        "url": "https://www.oreilly.com/library/view/javascript-the-good/9780596517748/",
+        "type": "read"
+      }
+    ],
+    "created_at": "2023-10-01T12:00:00Z",
+    "updated_at": "2023-10-01T12:00:00Z"
+  },
+  {
+    "id": 13,
+    "title": "Modern PHP: New Features and Good Practices",
+    "author": "Josh Lockhart",
+    "cover": "https://images-na.ssl-images-amazon.com/images/I/51ZIlx%2BByTL._SX331_BO1,204,203,200_.jpg",
+    "rating": 4.3,
+    "description": "PHP has transformed from a simple scripting language into a powerful, modern programming language capable of handling complex web applications. This book teaches you modern PHP features and best practices, covering namespaces, traits, generators, closures, and the latest PHP standards.",
+    "year_edition": "2015",
+    "total_bookmarked": 1234,
+    "tags": [
+      {
+        "name": "Web Development",
+        "type": "primary"
+      },
+      {
+        "name": "PHP",
+        "type": "primary"
+      },
+      {
+        "name": "Modern PHP",
+        "type": "secondary"
+      },
+      {
+        "name": "Best Practices",
+        "type": "secondary"
+      },
+      {
+        "name": "Backend Development",
+        "type": "secondary"
+      }
+    ],
+    "copy_type": "Online",
+    "licensing_type": "Free",
+    "sources": [
+      {
+        "name": "PHP The Right Way",
+        "url": "https://phptherightway.com/",
+        "description": "Modern PHP best practices and standards"
+      }
+    ],
+    "twitter_embeds": [
+      {
+        "id": "1923456788",
+        "text": "Modern PHP by Josh Lockhart is a game-changer for PHP developers. Shows how far PHP has come as a serious programming language! #PHP #ModernPHP",
+        "author": "PHPSavant",
+        "author_handle": "@phpsavant",
+        "likes": 567,
+        "retweets": 234,
+        "created_at": "2023-11-15T10:45:00Z"
+      }
+    ],
+    "access_links": [
+      {
+        "platform": "Amazon",
+        "url": "https://www.amazon.com/Modern-PHP-Features-Practices/dp/1491905018",
+        "type": "purchase"
+      },
+      {
+        "platform": "GitHub",
+        "url": "https://github.com/Pact-Foundation/modern-php-guide",
+        "type": "free"
+      }
+    ],
+    "created_at": "2023-10-01T12:00:00Z",
+    "updated_at": "2023-10-01T12:00:00Z"
+  },
+  {
+    "id": 14,
+    "title": "HTML and CSS: Design and Build Websites",
+    "author": "Jon Duckett",
+    "cover": "https://images-na.ssl-images-amazon.com/images/I/51SLxsDWURL._SX331_BO1,204,203,200_.jpg",
+    "rating": 4.4,
+    "description": "A full-color introduction to the fundamentals of HTML and CSS for creating beautiful, standards-compliant websites. Every page is packed with visually engaging examples, practical techniques, and clear explanations that make learning HTML and CSS intuitive and enjoyable.",
+    "year_edition": "2014",
+    "total_bookmarked": 3456,
+    "tags": [
+      {
+        "name": "Web Development",
+        "type": "primary"
+      },
+      {
+        "name": "HTML",
+        "type": "primary"
+      },
+      {
+        "name": "CSS",
+        "type": "primary"
+      },
+      {
+        "name": "Frontend Development",
+        "type": "secondary"
+      },
+      {
+        "name": "Web Design",
+        "type": "secondary"
+      }
+    ],
+    "copy_type": "Physical",
+    "licensing_type": "Pay-to-own",
+    "sources": [
+      {
+        "name": "W3Schools",
+        "url": "https://www.w3schools.com/html/",
+        "description": "Interactive HTML and CSS tutorials with examples"
+      }
+    ],
+    "twitter_embeds": [
+      {
+        "id": "1823456790",
+        "text": "HTML and CSS by Jon Duckett is the most beautifully designed programming book I have ever seen. Perfect for beginners! #HTML #CSS #WebDesign",
+        "author": "DesignWizard",
+        "author_handle": "@designwizard",
+        "likes": 789,
+        "retweets": 345,
+        "created_at": "2023-10-20T13:20:00Z"
+      }
+    ],
+    "access_links": [
+      {
+        "platform": "Amazon",
+        "url": "https://www.amazon.com/HTML-CSS-Design-Build-Websites/dp/1118008189",
+        "type": "purchase"
+      },
+      {
+        "platform": "Wiley",
+        "url": "https://www.wiley.com/en-us/HTML+and+CSS%3A+Design+and+Build+Websites",
+        "type": "read"
+      }
+    ],
+    "created_at": "2023-10-01T12:00:00Z",
+    "updated_at": "2023-10-01T12:00:00Z"
+  },
+  {
+    "id": 15,
+    "title": "Vue.js: Up and Running",
+    "author": "Callum Macrae",
+    "cover": "https://images-na.ssl-images-amazon.com/images/I/51W7H3N73IL._SX331_BO1,204,203,200_.jpg",
+    "rating": 4.1,
+    "description": "Get up and running with Vue.js quickly and build production-ready applications with this comprehensive guide. Learn Vue fundamentals, component architecture, state management, routing, and modern development practices for building interactive web applications.",
+    "year_edition": "2020",
+    "total_bookmarked": 1987,
+    "tags": [
+      {
+        "name": "Web Development",
+        "type": "primary"
+      },
+      {
+        "name": "JavaScript",
+        "type": "primary"
+      },
+      {
+        "name": "Vue.js",
+        "type": "primary"
+      },
+      {
+        "name": "Frontend Frameworks",
+        "type": "secondary"
+      },
+      {
+        "name": "Single Page Applications",
+        "type": "secondary"
+      }
+    ],
+    "copy_type": "Online",
+    "licensing_type": "Rent",
+    "sources": [
+      {
+        "name": "Vue.js Official Guide",
+        "url": "https://vuejs.org/guide/",
+        "description": "Official Vue.js documentation with interactive examples"
+      }
+    ],
+    "twitter_embeds": [
+      {
+        "id": "1923456789",
+        "text": "Vue.js: Up and Running is perfect for developers who want to quickly master Vue 3 and Composition API. The practical examples are invaluable! #VueJS #JavaScript",
+        "author": "VueExpert",
+        "author_handle": "@vueexpert",
+        "likes": 645,
+        "retweets": 287,
+        "created_at": "2023-11-25T16:50:00Z"
+      }
+    ],
+    "access_links": [
+      {
+        "platform": "Amazon",
+        "url": "https://www.amazon.com/Vue-js-Running-Callum-Macrae/dp/1491995667",
+        "type": "purchase"
+      },
+      {
+        "platform": "OReilly",
+        "url": "https://www.oreilly.com/library/view/vue-js-up/9781491995665/",
+        "type": "read"
+      }
+    ],
+    "created_at": "2023-10-01T12:00:00Z",
+    "updated_at": "2023-10-01T12:00:00Z"
+  }
+]
+

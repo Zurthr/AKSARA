@@ -175,7 +175,7 @@ const comments = [
 .comments-header h3 {
   font-size: 18px;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--color-black);
 }
 
 .sort-options button {
@@ -189,7 +189,7 @@ const comments = [
 }
 
 .sort-options button.active {
-  color: #0f172a;
+  color: var(--color-black);
   font-weight: 700;
 }
 
@@ -229,7 +229,7 @@ const comments = [
 
 .btn-post {
   background: #FFDA49;
-  color: #0f172a;
+  color: var(--color-black);
   border: none;
   padding: 6px 16px;
   border-radius: 8px;
@@ -264,7 +264,7 @@ const comments = [
 .comment-author {
   font-weight: 600;
   font-size: 14px;
-  color: #0f172a;
+  color: var(--color-black);
 }
 
 .pro-badge {
@@ -307,7 +307,7 @@ const comments = [
 }
 
 .action-btn:hover {
-  color: #0f172a;
+  color: var(--color-black);
 }
 
 .replies-list {
