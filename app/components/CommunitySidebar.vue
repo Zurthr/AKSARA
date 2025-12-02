@@ -1,5 +1,5 @@
 <template>
-  <aside class="community-sidebar">
+  <aside class="community-sidebar" :class="layout === 'inline' ? 'layout-inline' : ''">
     <section class="sidebar-card">
       <header>
         <h3>Communities</h3>
@@ -70,11 +70,14 @@ interface RelatedCommunity {
   members: string;
 }
 
-defineProps<{
+const props = defineProps<{
   hashtags: string[];
   tweet: Tweet;
   relatedCommunities: RelatedCommunity[];
+  layout?: 'default' | 'inline';
 }>();
+
+const { layout = 'default' } = props;
 </script>
 
 <style scoped>
@@ -91,6 +94,17 @@ defineProps<{
 
 .community-sidebar:hover {
   scrollbar-color: #94a3b8 transparent;
+}
+
+.community-sidebar.layout-inline {
+  max-height: none;
+  overflow: visible;
+  padding-right: 0;
+  height: auto;
+}
+
+.community-sidebar.layout-inline:hover {
+  scrollbar-color: auto;
 }
 
 .community-sidebar::-webkit-scrollbar {
