@@ -4034,5 +4034,534 @@
       "posts_count": 203,
       "engagement": "4.5k"
     }
+  ],
+  "external_posts": [
+    {
+      "id": 1,
+      "post_id": 1,
+      "platform": "twitter",
+      "user": {
+        "name": "James Clear",
+        "handle": "@JamesClear",
+        "avatar": "https://i.pravatar.cc/150?u=james"
+      },
+      "content": "You do not rise to the level of your goals. You fall to the level of your systems. Focus on the 2-minute version of your habit first.",
+      "date": "8:00 AM Oct 30, 2023",
+      "stats": {
+        "replies": 450,
+        "retweets": 12000,
+        "likes": 56000
+      }
+    },
+    {
+      "id": 2,
+      "post_id": 2,
+      "platform": "twitter",
+      "user": {
+        "name": "Uncle Bob Martin",
+        "handle": "@unclebobmartin",
+        "avatar": "https://i.pravatar.cc/150?u=bob"
+      },
+      "content": "The only way to go fast, is to go well. Messy code slows you down. Always.",
+      "date": "10:15 AM Oct 29, 2023",
+      "subreddit": {
+        "name": "r/ProgrammerHumor",
+        "members": "3M members",
+        "avatar": "https://i.pravatar.cc/150?u=ph"
+      },
+      "title": "When you git blame the legacy code and it turns out it was you 3 years ago.",
+      "image": "https://images.unsplash.com/photo-1580894894513-541e068a3e2b?auto=format&fit=crop&w=500&q=60",
+      "stats": {
+        "comments": "1.2k"
+      }
+    },
+    {
+      "id": 21,
+      "post_id": 21,
+      "platform": "twitter",
+      "user": {
+        "name": "Evan You",
+        "handle": "@youyuxi",
+        "avatar": "https://i.pravatar.cc/150?u=evan"
+      },
+      "content": "The Composition API isn't just a new syntax; it's a way to organize logic by feature, not by options.",
+      "date": "9:00 AM Oct 20, 2023",
+      "stats": {
+        "replies": 150,
+        "retweets": 800,
+        "likes": 4000
+      }
+    },
+    {
+      "id": 22,
+      "post_id": 22,
+      "platform": "reddit",
+      "subreddit": {
+        "name": "r/fantasywriters",
+        "members": "500k members",
+        "avatar": "https://i.pravatar.cc/150?u=write"
+      },
+      "title": "How Tolkien created depth: It's not just the map, it's the linguistic history behind the names.",
+      "image": "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=500&q=60",
+      "stats": {
+        "comments": "230"
+      }
+    },
+    {
+      "id": 23,
+      "post_id": 23,
+      "platform": "twitter",
+      "user": {
+        "name": "SQL Tips",
+        "handle": "@sqltips",
+        "avatar": "https://i.pravatar.cc/150?u=sql"
+      },
+      "content": "If you are storing comma-separated values in a single column, you are hurting your database's feelings. Normalize your data.",
+      "date": "1:00 PM Oct 18, 2023",
+      "stats": {
+        "replies": 120,
+        "retweets": 500,
+        "likes": 1800
+      }
+    },
+    {
+      "id": 24,
+      "post_id": 24,
+      "platform": "twitter",
+      "user": {
+        "name": "A11y Project",
+        "handle": "@A11YProject",
+        "avatar": "https://i.pravatar.cc/150?u=a11y"
+      },
+      "content": "Semantic HTML isn't 'extra'. It is the baseline. <h1> is for headings, not just big text.",
+      "date": "10:00 AM Oct 17, 2023",
+      "stats": {
+        "replies": 45,
+        "retweets": 300,
+        "likes": 1200
+      }
+    },
+    {
+      "id": 25,
+      "post_id": 25,
+      "platform": "reddit",
+      "subreddit": {
+        "name": "r/startups",
+        "members": "1.1M members",
+        "avatar": "https://i.pravatar.cc/150?u=start"
+      },
+      "title": "We spent 6 months building a feature nobody wanted. Learn from our mistake: Pivot early.",
+      "image": null,
+      "stats": {
+        "comments": "450"
+      }
+    },
+    {
+      "id": 26,
+      "post_id": 26,
+      "platform": "twitter",
+      "user": {
+        "name": "Dev Burnout",
+        "handle": "@dev_struggles",
+        "avatar": "https://i.pravatar.cc/150?u=dev"
+      },
+      "content": "Friendly reminder: You are a human being, not a code generator. Take a break. Touch grass.",
+      "date": "5:00 PM Oct 15, 2023",
+      "stats": {
+        "replies": 200,
+        "retweets": 1500,
+        "likes": 6000
+      }
+    },
+    {
+      "id": 27,
+      "post_id": 27,
+      "platform": "twitter",
+      "user": {
+        "name": "Twitch Streamer",
+        "handle": "@GamerLife",
+        "avatar": "https://i.pravatar.cc/150?u=gamer"
+      },
+      "content": "Balance is key. Grinding rank is fun, but sleeping 8 hours is the real meta.",
+      "date": "11:00 PM Oct 14, 2023",
+      "stats": {
+        "replies": 150,
+        "retweets": 400,
+        "likes": 3000
+      }
+    },
+    {
+      "id": 28,
+      "post_id": 28,
+      "platform": "youtube",
+      "user": {
+        "name": "3Blue1Brown",
+        "handle": "@3blue1brown",
+        "avatar": "https://i.pravatar.cc/150?u=3b1b"
+      },
+      "content": "Neural Networks: The core math is simpler than you think (Chain Rule & Derivatives)",
+      "image": "https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=500&q=60",
+      "stats": {
+        "views": "4.2M"
+      }
+    },
+    {
+      "id": 29,
+      "post_id": 29,
+      "platform": "twitter",
+      "user": {
+        "name": "Figma Tips",
+        "handle": "@figmadesign",
+        "avatar": "https://i.pravatar.cc/150?u=figma"
+      },
+      "content": "DRY (Don't Repeat Yourself) applies to design too. If you are copying and pasting the same button 50 times, make it a Component.",
+      "date": "2:00 PM Oct 12, 2023",
+      "stats": {
+        "replies": 60,
+        "retweets": 500,
+        "likes": 2500
+      }
+    },
+    {
+      "id": 30,
+      "post_id": 30,
+      "platform": "twitter",
+      "user": {
+        "name": "Computer History",
+        "handle": "@ComputerHistory",
+        "avatar": "https://i.pravatar.cc/150?u=history"
+      },
+      "content": "On this day in 1968, Donald Knuth released the first volume of 'The Art of Computer Programming'. A monumental achievement.",
+      "date": "8:00 AM Oct 11, 2023",
+      "stats": {
+        "replies": 100,
+        "retweets": 800,
+        "likes": 3500
+      }
+    },
+    {
+      "id": 31,
+      "post_id": 31,
+      "platform": "reddit",
+      "subreddit": {
+        "name": "r/webdev",
+        "members": "1.5M members",
+        "avatar": "https://i.pravatar.cc/150?u=web"
+      },
+      "title": "I finally understand CSS Grid and I feel like a god. Goodbye Bootstrap!",
+      "image": "https://images.unsplash.com/photo-1507721999472-8ed4421c4af2?auto=format&fit=crop&w=500&q=60",
+      "stats": {
+        "comments": "670"
+      }
+    },
+    {
+      "id": 32,
+      "post_id": 32,
+      "platform": "twitter",
+      "user": {
+        "name": "Cozy Fantasy Art",
+        "handle": "@cozyfantasy",
+        "avatar": "https://i.pravatar.cc/150?u=art"
+      },
+      "content": "Sometimes you just want to sit in a hobbit hole, drink tea, and eat seed cake. No dragons, please.",
+      "date": "4:00 PM Oct 09, 2023",
+      "stats": {
+        "replies": 120,
+        "retweets": 2000,
+        "likes": 12000
+      }
+    },
+    {
+      "id": 33,
+      "post_id": 33,
+      "platform": "twitter",
+      "user": {
+        "name": "Code Wisdom",
+        "handle": "@CodeWisdom",
+        "avatar": "https://i.pravatar.cc/150?u=wisdom"
+      },
+      "content": "The Factory Pattern: Because sometimes you don't know what object you need until runtime.",
+      "date": "10:00 AM Oct 08, 2023",
+      "stats": {
+        "replies": 45,
+        "retweets": 300,
+        "likes": 1500
+      }
+    },
+    {
+      "id": 34,
+      "post_id": 34,
+      "platform": "youtube",
+      "user": {
+        "name": "NNgroup",
+        "handle": "@nngroup",
+        "avatar": "https://i.pravatar.cc/150?u=nng"
+      },
+      "content": "10 Usability Heuristics for User Interface Design: Error Prevention and Recovery",
+      "image": "https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&w=500&q=60",
+      "stats": {
+        "views": "200k"
+      }
+    },
+    {
+      "id": 35,
+      "post_id": 35,
+      "platform": "twitter",
+      "user": {
+        "name": "Paul Graham",
+        "handle": "@paulg",
+        "avatar": "https://i.pravatar.cc/150?u=paul"
+      },
+      "content": "Vanity metrics make you feel good. Actionable metrics make you make decisions. Know the difference.",
+      "date": "9:00 AM Oct 06, 2023",
+      "stats": {
+        "replies": 120,
+        "retweets": 1500,
+        "likes": 6000
+      }
+    },
+    {
+      "id": 36,
+      "post_id": 36,
+      "platform": "reddit",
+      "subreddit": {
+        "name": "r/GetDisciplined",
+        "members": "1.3M members",
+        "avatar": "https://i.pravatar.cc/150?u=discipline"
+      },
+      "title": "It's not about motivation, it's about systems. My 30-day progress using the Atomic Habits framework.",
+      "image": "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=500&q=60",
+      "stats": {
+        "comments": "560"
+      }
+    },
+    {
+      "id": 37,
+      "post_id": 37,
+      "platform": "twitter",
+      "user": {
+        "name": "Tech Crunch",
+        "handle": "@TechCrunch",
+        "avatar": "https://i.pravatar.cc/150?u=tc"
+      },
+      "content": "Study reveals significant racial bias in facial recognition algorithms used by law enforcement.",
+      "date": "1:00 PM Oct 04, 2023",
+      "stats": {
+        "replies": 800,
+        "retweets": 4000,
+        "likes": 10000
+      }
+    },
+    {
+      "id": 38,
+      "post_id": 38,
+      "platform": "twitter",
+      "user": {
+        "name": "Indie Hacker",
+        "handle": "@indiehacker",
+        "avatar": "https://i.pravatar.cc/150?u=indie"
+      },
+      "content": "Unpopular opinion: I made $50k last year building boring CRUD apps with PHP and jQuery. You don't always need the latest stack.",
+      "date": "11:00 AM Oct 03, 2023",
+      "stats": {
+        "replies": 300,
+        "retweets": 1000,
+        "likes": 5000
+      }
+    },
+    {
+      "id": 39,
+      "post_id": 39,
+      "platform": "youtube",
+      "user": {
+        "name": "Vox",
+        "handle": "@Vox",
+        "avatar": "https://i.pravatar.cc/150?u=vox"
+      },
+      "content": "It's not you. Bad doors are everywhere. (The Norman Door explained)",
+      "image": "https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?auto=format&fit=crop&w=500&q=60",
+      "stats": {
+        "views": "5.6M"
+      }
+    },
+    {
+      "id": 40,
+      "post_id": 40,
+      "platform": "reddit",
+      "subreddit": {
+        "name": "r/ProjectManagement",
+        "members": "100k members",
+        "avatar": "https://i.pravatar.cc/150?u=pm"
+      },
+      "title": "Brooks' Law in action: Management added 3 devs to our late project, and now we are even later.",
+      "image": null,
+      "stats": {
+        "comments": "150"
+      }
+    },
+    {
+      "id": 41,
+      "post_id": 41,
+      "platform": "twitter",
+      "user": {
+        "name": "Vue.js News",
+        "handle": "@VueNews",
+        "avatar": "https://i.pravatar.cc/150?u=vuenews"
+      },
+      "content": "Goodbye Vuex, Hello Pinia! Here is a cheat sheet for migrating your state management.",
+      "date": "10:00 AM Sep 30, 2023",
+      "stats": {
+        "replies": 60,
+        "retweets": 500,
+        "likes": 2000
+      }
+    },
+    {
+      "id": 42,
+      "post_id": 42,
+      "platform": "twitter",
+      "user": {
+        "name": "LOTR Facts",
+        "handle": "@LOTRfacts",
+        "avatar": "https://i.pravatar.cc/150?u=gandalf"
+      },
+      "content": "The 'Riddles in the Dark' chapter was significantly rewritten by Tolkien after LOTR was published to align the Ring's behavior.",
+      "date": "3:00 PM Sep 29, 2023",
+      "stats": {
+        "replies": 80,
+        "retweets": 1200,
+        "likes": 6000
+      }
+    },
+    {
+      "id": 43,
+      "post_id": 43,
+      "platform": "reddit",
+      "subreddit": {
+        "name": "r/badcode",
+        "members": "200k members",
+        "avatar": "https://i.pravatar.cc/150?u=bad"
+      },
+      "title": "Found this gem in production today. Comments explaining the obvious.",
+      "image": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=500&q=60",
+      "stats": {
+        "comments": "450"
+      }
+    },
+    {
+      "id": 44,
+      "post_id": 44,
+      "platform": "twitter",
+      "user": {
+        "name": "Color Palette",
+        "handle": "@colors",
+        "avatar": "https://i.pravatar.cc/150?u=color"
+      },
+      "content": "Blue instills trust. Red creates urgency. Green implies growth. Know your color psychology before opening Figma.",
+      "date": "1:00 PM Sep 27, 2023",
+      "stats": {
+        "replies": 50,
+        "retweets": 800,
+        "likes": 3200
+      }
+    },
+    {
+      "id": 45,
+      "post_id": 45,
+      "platform": "twitter",
+      "user": {
+        "name": "SaaS Metrics",
+        "handle": "@saasmetrics",
+        "avatar": "https://i.pravatar.cc/150?u=saas"
+      },
+      "content": "Acquisition is vanity. Retention is sanity. If they don't stick around, you don't have a business.",
+      "date": "9:00 AM Sep 26, 2023",
+      "stats": {
+        "replies": 90,
+        "retweets": 600,
+        "likes": 2500
+      }
+    },
+    {
+      "id": 46,
+      "post_id": 46,
+      "platform": "youtube",
+      "user": {
+        "name": "TED",
+        "handle": "@TEDTalks",
+        "avatar": "https://i.pravatar.cc/150?u=ted"
+      },
+      "content": "The power of believing that you can improve | Carol Dweck",
+      "image": "https://images.unsplash.com/photo-1475721027760-74c99ec8d40d?auto=format&fit=crop&w=500&q=60",
+      "stats": {
+        "views": "14M"
+      }
+    },
+    {
+      "id": 47,
+      "post_id": 47,
+      "platform": "reddit",
+      "subreddit": {
+        "name": "r/LeagueOfLegends",
+        "members": "6M members",
+        "avatar": "https://i.pravatar.cc/150?u=lol"
+      },
+      "title": "Pro player discusses the mental toll of toxicity in solo queue and suggests system changes.",
+      "image": null,
+      "stats": {
+        "comments": "3.5k"
+      }
+    },
+    {
+      "id": 48,
+      "post_id": 48,
+      "platform": "twitter",
+      "user": {
+        "name": "Math Visuals",
+        "handle": "@mathvis",
+        "avatar": "https://i.pravatar.cc/150?u=math"
+      },
+      "content": "Backpropagation is just the Chain Rule applied over and over again. Here is a GIF that makes it click.",
+      "date": "2:00 PM Sep 23, 2023",
+      "stats": {
+        "replies": 100,
+        "retweets": 2500,
+        "likes": 9000
+      }
+    },
+    {
+      "id": 49,
+      "post_id": 49,
+      "platform": "twitter",
+      "user": {
+        "name": "JS Daily",
+        "handle": "@JavaScriptDaily",
+        "avatar": "https://i.pravatar.cc/150?u=js"
+      },
+      "content": "Why does [] + [] = '' but {} + [] = 0? JavaScript type coercion explained.",
+      "date": "11:00 AM Sep 22, 2023",
+      "stats": {
+        "replies": 200,
+        "retweets": 1200,
+        "likes": 5000
+      }
+    },
+    {
+      "id": 50,
+      "post_id": 50,
+      "platform": "twitter",
+      "user": {
+        "name": "Martin Fowler",
+        "handle": "@martinfowler",
+        "avatar": "https://i.pravatar.cc/150?u=martin"
+      },
+      "content": "Any fool can write code that a computer can understand. Good programmers write code that humans can understand.",
+      "date": "8:00 AM Sep 21, 2023",
+      "stats": {
+        "replies": 150,
+        "retweets": 5000,
+        "likes": 18000
+      }
+    }
   ]
 }

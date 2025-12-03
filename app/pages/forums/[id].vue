@@ -84,6 +84,7 @@
       <ForumRightSidebar 
         :related-community="relatedCommunity"
         :related-books="relatedBooks"
+        :external-posts="externalPosts"
       />
     </div>
   </div>
@@ -166,6 +167,35 @@ interface Book {
   cover: string;
   rating: number;
 }
+
+interface ExternalPost {
+  id: number;
+  platform: string;
+  user?: {
+    name: string;
+    handle: string;
+    avatar: string;
+  };
+  subreddit?: {
+    name: string;
+    members: string;
+    avatar: string;
+  };
+  content?: string;
+  title?: string;
+  image?: string;
+  date?: string;
+  stats: {
+    replies?: number;
+    retweets?: number;
+    likes?: number;
+    comments?: string | number;
+    views?: string;
+  };
+}
+
+// Fetch external posts
+const { data: externalPosts } = await useFetch<ExternalPost[]>(`http://localhost:3002/external-posts?post_id=${postId}`);
 </script>
 
 
