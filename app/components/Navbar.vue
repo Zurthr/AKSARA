@@ -40,7 +40,23 @@
           @close="closeNotificationModal"
         />
       </div>
-      <button type="button" class="icon-button"><img src="~/assets/icons/Person.svg" alt="Profile" style="width: 20px; height: 20px;"></button>
+      <div class="profile-wrapper">
+        <button
+          type="button"
+          class="icon-button"
+          @click="toggleProfileDropdown"
+          :class="{ 'active': showProfileDropdown }"
+          aria-label="Profile"
+        >
+          <img src="~/assets/icons/Person.svg" alt="Profile" style="width: 20px; height: 20px;">
+        </button>
+
+        <!-- Profile Dropdown -->
+        <ProfileDropdown
+          v-if="showProfileDropdown"
+          @close="closeProfileDropdown"
+        />
+      </div>
     </div>
   </header>
 </template>
@@ -53,6 +69,9 @@ const searchQuery = ref<string>((route.query.q as string) || (route.query.search
 
 // Notification modal state
 const showNotificationModal = ref(false);
+
+// Profile dropdown state
+const showProfileDropdown = ref(false);
 
 // Update search query from URL when route changes
 watch(() => route.query, (newQuery) => {
@@ -136,25 +155,47 @@ const clearSearch = () => {
 // Notification modal functions
 const toggleNotificationModal = () => {
   showNotificationModal.value = !showNotificationModal.value;
+  // Close profile dropdown when opening notifications
+  if (showNotificationModal.value) {
+    showProfileDropdown.value = false;
+  }
 };
 
 const closeNotificationModal = () => {
   showNotificationModal.value = false;
 };
 
-// Close dropdown when clicking outside
+// Profile dropdown functions
+const toggleProfileDropdown = () => {
+  showProfileDropdown.value = !showProfileDropdown.value;
+  // Close notification dropdown when opening profile
+  if (showProfileDropdown.value) {
+    showNotificationModal.value = false;
+  }
+};
+
+const closeProfileDropdown = () => {
+  showProfileDropdown.value = false;
+};
+
+// Close dropdowns when clicking outside
 const handleClickOutside = (event: Event) => {
   const target = event.target as HTMLElement;
   const notificationWrapper = target.closest('.notification-wrapper');
+  const profileWrapper = target.closest('.profile-wrapper');
 
   if (!notificationWrapper && showNotificationModal.value) {
     closeNotificationModal();
   }
+
+  if (!profileWrapper && showProfileDropdown.value) {
+    closeProfileDropdown();
+  }
 };
 
 // Add and remove click outside listener
-watch(showNotificationModal, (newValue) => {
-  if (newValue) {
+watch([showNotificationModal, showProfileDropdown], ([notificationOpen, profileOpen]) => {
+  if (notificationOpen || profileOpen) {
     nextTick(() => {
       document.addEventListener('click', handleClickOutside);
     });
@@ -254,6 +295,12 @@ onUnmounted(() => {
 }
 
 .notification-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.profile-wrapper {
   position: relative;
   display: flex;
   align-items: center;
