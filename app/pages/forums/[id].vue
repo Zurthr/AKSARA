@@ -84,6 +84,7 @@
       <ForumRightSidebar 
         :related-community="relatedCommunity"
         :related-books="relatedBooks"
+        :social-mentions="post?.social_mentions"
       />
     </div>
   </div>
@@ -109,6 +110,26 @@ interface Post {
   related_books?: number[];
   created_at: string;
   updated_at: string;
+  social_mentions?: Array<{
+    platform: 'twitter' | 'reddit';
+    author_name?: string;
+    author_handle?: string;
+    author_avatar?: string;
+    content?: string;
+    date?: string;
+    stats?: {
+      replies: number | string;
+      retweets: number | string;
+      likes: number | string;
+    };
+    subreddit?: string;
+    subreddit_members?: string;
+    subreddit_icon?: string;
+    title?: string;
+    image?: string;
+    comment_count?: string;
+    url?: string;
+  }>;
 }
 
 const { data: post, error } = await useFetch<Post>(`http://localhost:3002/posts/${postId}`);
