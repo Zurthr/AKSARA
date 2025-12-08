@@ -1,0 +1,6 @@
+<svg width="80" height="60" viewBox="0 0 80 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="80" height="60" rx="8" fill="#F3F4F6"/>
+  <rect x='15' y='20' width='50' height='8' rx='4' fill='#E5E7EB'/>
+  <rect x='15' y='20' width='32' height='8' rx='4' fill='#FFDA49'/>
+  <text x='40' y='45' text-anchor='middle' font-size='8' fill='#6B7280' font-family='sans-serif'>Progress: 64%</text>
+</svg>

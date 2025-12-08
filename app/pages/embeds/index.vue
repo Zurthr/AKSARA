@@ -66,6 +66,18 @@ definePageMeta({
   description: "Manage and track your embedded content",
 });
 
+// Helper function to get thumbnail URL based on category
+const getThumbnailUrl = (category: string): string => {
+  const categoryMap: Record<string, string> = {
+    'Literature': '/images/embeds/literature-placeholder.svg',
+    'Events': '/images/embeds/events-placeholder.svg',
+    'Community': '/images/embeds/community-placeholder.svg',
+    'Learning': '/images/embeds/learning-placeholder.svg',
+    'Technology': '/images/embeds/technology-placeholder.svg',
+  };
+  return categoryMap[category] || '/images/embeds/default-placeholder.svg';
+};
+
 // Mock data - replace with actual API call
 const embeds = ref<Embed[]>([
   {
@@ -77,7 +89,7 @@ const embeds = ref<Embed[]>([
     createdAt: "2024-01-15T10:30:00Z",
     views: 3420,
     clicks: 287,
-    thumbnailUrl: "data:image/svg+xml,%3Csvg width='80' height='60' viewBox='0 0 80 60' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='80' height='60' rx='8' fill='%23F3F4F6'/%3E%3Crect x='10' y='8' width='15' height='20' rx='2' fill='%233B5379'/%3E%3Crect x='28' y='8' width='15' height='20' rx='2' fill='%23FFDA49'/%3E%3Crect x='46' y='8' width='15' height='20' rx='2' fill='%233B5379'/%3E%3Ctext x='40' y='42' text-anchor='middle' font-size='8' fill='%236B7280' font-family='sans-serif'Best Books 2024%3C/text%3E%3C/svg%3E",
+    thumbnailUrl: getThumbnailUrl("Literature"),
     embedUrl: "https://aksara.io/embed/featured-books",
   },
   {
@@ -89,7 +101,7 @@ const embeds = ref<Embed[]>([
     createdAt: "2024-01-10T14:20:00Z",
     views: 2156,
     clicks: 423,
-    thumbnailUrl: "data:image/svg+xml,%3Csvg width='80' height='60' viewBox='0 0 80 60' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='80' height='60' rx='8' fill='%23F3F4F6'/%3E%3Crect x='10' y='15' width='60' height='30' rx='4' fill='%233B5379'/%3E%3Ccircle cx='20' cy='30' r='8' fill='%23FFDA49'/%3E%3Ctext x='20' y='33' text-anchor='middle' font-size='8' fill='%231A1A1A' font-weight='bold' font-family='sans-serif'%3C/text%3E%3Cpath d='M30 28 L50 28 M30 32 L40 32' stroke='white' stroke-width='2'/%3E%3C/svg%3E",
+    thumbnailUrl: getThumbnailUrl("Events"),
     embedUrl: "https://aksara.io/embed/events-countdown",
   },
   {
@@ -101,7 +113,7 @@ const embeds = ref<Embed[]>([
     createdAt: "2024-01-08T16:45:00Z",
     views: 1876,
     clicks: 156,
-    thumbnailUrl: "data:image/svg+xml,%3Csvg width='80' height='60' viewBox='0 0 80 60' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='80' height='60' rx='8' fill='%23F3F4F6'/%3E%3Crect x='10' y='12' width='60' height='36' rx='4' fill='%233B5379'/%3E%3Ccircle cx='18' cy='22' r='3' fill='%23FFDA49'/%3E%3Ccircle cx='18' cy='30' r='3' fill='%23FFDA49'/%3E%3Ccircle cx='18' cy='38' r='3' fill='%23FFDA49'/%3E%3Crect x='26' y='19' width='20' height='2' fill='white'/%3E%3Crect x='26' y='27' width='15' height='2' fill='white'/%3E%3Crect x='26' y='35' width='18' height='2' fill='white'/%3E%3Ctext x='40' y='55' text-anchor='middle' font-size='8' fill='%236B7280' font-family='sans-serif'Community Forum%3C/text%3E%3C/svg%3E",
+    thumbnailUrl: getThumbnailUrl("Community"),
     embedUrl: "https://aksara.io/embed/discussion-thread",
   },
   {
@@ -113,7 +125,7 @@ const embeds = ref<Embed[]>([
     createdAt: "2024-01-05T09:15:00Z",
     views: 983,
     clicks: 78,
-    thumbnailUrl: "data:image/svg+xml,%3Csvg width='80' height='60' viewBox='0 0 80 60' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='80' height='60' rx='8' fill='%23F3F4F6'/%3E%3Crect x='15' y='10' width='50' height='40' rx='4' fill='%233B5379'/%3E%3Ccircle cx='25' cy='30' r='6' fill='%23FFDA49'/%3E%3Cpath d='M32 30 L50 30 M32 25 L45 25 M32 35 L48 35' stroke='white' stroke-width='2'/%3E%3Ctext x='40' y='55' text-anchor='middle' font-size='8' fill='%236B7280' font-family='sans-serif'Recommend AI%3C/text%3E%3C/svg%3E",
+    thumbnailUrl: getThumbnailUrl("Learning"),
     embedUrl: "https://aksara.io/embed/book-recommendations",
   },
   {
@@ -125,7 +137,7 @@ const embeds = ref<Embed[]>([
     createdAt: "2024-01-03T11:30:00Z",
     views: 245,
     clicks: 18,
-    thumbnailUrl: "data:image/svg+xml,%3Csvg width='80' height='60' viewBox='0 0 80 60' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='80' height='60' rx='8' fill='%23F3F4F6'/%3E%3Crect x='15' y='20' width='50' height='8' rx='4' fill='%23E5E7EB'/%3E%3Crect x='15' y='20' width='32' height='8' rx='4' fill='%23FFDA49'/%3E%3Ctext x='40' y='45' text-anchor='middle' font-size='8' fill='%236B7280' font-family='sans-serif'Progress: 64%25%3C/text%3E%3C/svg%3E",
+    thumbnailUrl: getThumbnailUrl("Learning"),
     embedUrl: "https://aksara.io/embed/reading-progress",
   },
   {
@@ -137,7 +149,7 @@ const embeds = ref<Embed[]>([
     createdAt: "2024-01-01T13:20:00Z",
     views: 4123,
     clicks: 567,
-    thumbnailUrl: "data:image/svg+xml,%3Csvg width='80' height='60' viewBox='0 0 80 60' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='80' height='60' rx='8' fill='%23F3F4F6'/%3E%3Crect x='10' y='10' width='18' height='24' rx='2' fill='%233B5379'/%3E%3Crect x='31' y='10' width='18' height='24' rx='2' fill='%23FFDA49'/%3E%3Crect x='52' y='10' width='18' height='24' rx='2' fill='%233B5379'/%3E%3Ctext x='40' y='48' text-anchor='middle' font-size='7' fill='%236B7280' font-family='sans-serif'Clean Code%3C/text%3E%3Ctext x='40' y='55' text-anchor='middle' font-size='7' fill='%236B7280' font-family='sans-serif'Top Dev Books%3C/text%3E%3C/svg%3E",
+    thumbnailUrl: getThumbnailUrl("Technology"),
     embedUrl: "https://aksara.io/embed/dev-books",
   },
   {
@@ -149,7 +161,7 @@ const embeds = ref<Embed[]>([
     createdAt: "2023-12-28T09:45:00Z",
     views: 2789,
     clicks: 342,
-    thumbnailUrl: "data:image/svg+xml,%3Csvg width='80' height='60' viewBox='0 0 80 60' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='80' height='60' rx='8' fill='%23F3F4F6'/%3E%3Cpath d='M20 15 L30 25 L25 40 L15 40 L10 25 Z' fill='%233B5379'/%3E%3Cpath d='M50 15 L60 25 L55 40 L45 40 L40 25 Z' fill='%23FFDA49'/%3E%3Ctext x='40' y='52' text-anchor='middle' font-size='8' fill='%236B7280' font-family='sans-serif'Fantasy Books%3C/text%3E%3C/svg%3E",
+    thumbnailUrl: getThumbnailUrl("Literature"),
     embedUrl: "https://aksara.io/embed/fantasy-books",
   },
   {
@@ -161,7 +173,7 @@ const embeds = ref<Embed[]>([
     createdAt: "2023-12-25T14:20:00Z",
     views: 1523,
     clicks: 89,
-    thumbnailUrl: "data:image/svg+xml,%3Csvg width='80' height='60' viewBox='0 0 80 60' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='80' height='60' rx='8' fill='%23F3F4F6'/%3E%3Ccircle cx='20' cy='20' r='6' fill='%233B5379'/%3E%3Ccircle cx='40' cy='20' r='6' fill='%23FFDA49'/%3E%3Ccircle cx='60' cy='20' r='6' fill='%233B5379'/%3E%3Crect x='12' y='30' width='16' height='8' rx='2' fill='%23E5E7EB'/%3E%3Crect x='32' y='30' width='16' height='8' rx='2' fill='%23E5E7EB'/%3E%3Crect x='52' y='30' width='16' height='8' rx='2' fill='%23E5E7EB'/%3E%3Ctext x='40' y='50' text-anchor='middle' font-size='8' fill='%236B7280' font-family='sans-serif'Members%3C/text%3E%3C/svg%3E",
+    thumbnailUrl: getThumbnailUrl("Community"),
     embedUrl: "https://aksara.io/embed/member-directory",
   },
   {
@@ -173,7 +185,7 @@ const embeds = ref<Embed[]>([
     createdAt: "2023-12-20T11:15:00Z",
     views: 3456,
     clicks: 278,
-    thumbnailUrl: "data:image/svg+xml,%3Csvg width='80' height='60' viewBox='0 0 80 60' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='80' height='60' rx='8' fill='%23F3F4F6'/%3E%3Crect x='10' y='15' width='60' height='4' rx='2' fill='%23E5E7EB'/%3E%3Crect x='10' y='25' width='50' height='4' rx='2' fill='%23FFDA49'/%3E%3Crect x='10' y='35' width='40' height='4' rx='2' fill='%233B5379'/%3E%3Ctext x='40' y='52' text-anchor='middle' font-size='8' fill='%236B7280' font-family='sans-serif'JavaScript Path%3C/text%3E%3C/svg%3E",
+    thumbnailUrl: getThumbnailUrl("Learning"),
     embedUrl: "https://aksara.io/embed/js-learning-path",
   },
   {
@@ -185,7 +197,7 @@ const embeds = ref<Embed[]>([
     createdAt: "2023-12-18T16:30:00Z",
     views: 567,
     clicks: 45,
-    thumbnailUrl: "data:image/svg+xml,%3Csvg width='80' height='60' viewBox='0 0 80 60' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='80' height='60' rx='8' fill='%23F3F4F6'/%3E%3Crect x='15' y='10' width='50' height='35' rx='4' fill='%233B5379'/%3E%3Crect x='22' y='18' width='36' height='4' rx='2' fill='%23FFDA49'/%3E%3Crect x='22' y='26' width='30' height='3' rx='1' fill='white'/%3E%3Crect x='22' y='32' width='25' height='3' rx='1' fill='white'/%3E%3Ctext x='40' y='54' text-anchor='middle' font-size='8' fill='%236B7280' font-family='sans-serif'Book Club%3C/text%3E%3C/svg%3E",
+    thumbnailUrl: getThumbnailUrl("Events"),
     embedUrl: "https://aksara.io/embed/book-club-calendar",
   },
   {
@@ -197,7 +209,7 @@ const embeds = ref<Embed[]>([
     createdAt: "2023-12-15T10:00:00Z",
     views: 2234,
     clicks: 198,
-    thumbnailUrl: "data:image/svg+xml,%3Csvg width='80' height='60' viewBox='0 0 80 60' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='80' height='60' rx='8' fill='%23F3F4F6'/%3E%3Ccircle cx='25' cy='25' r='8' fill='%233B5379'/%3E%3Crect x='38' y='15' width='32' height='20' rx='4' fill='%23FFDA49'/%3E%3Ctext x='40' y='50' text-anchor='middle' font-size='8' fill='%236B7280' font-family='sans-serif'Author Spotlight%3C/text%3E%3C/svg%3E",
+    thumbnailUrl: getThumbnailUrl("Literature"),
     embedUrl: "https://aksara.io/embed/author-spotlight",
   },
   {
@@ -209,7 +221,7 @@ const embeds = ref<Embed[]>([
     createdAt: "2023-12-12T13:45:00Z",
     views: 4890,
     clicks: 612,
-    thumbnailUrl: "data:image/svg+xml,%3Csvg width='80' height='60' viewBox='0 0 80 60' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='80' height='60' rx='8' fill='%23F3F4F6'/%3E%3Cpath d='M30 20 L50 20 L45 30 L35 30 Z' fill='%233B5379'/%3E%3Cpath d='M25 35 L55 35 L50 40 L30 40 Z' fill='%23FFDA49'/%3E%3Ctext x='40' y='52' text-anchor='middle' font-size='8' fill='%236B7280' font-family='sans-serif'Vue.js Tutorials%3C/text%3E%3C/svg%3E",
+    thumbnailUrl: getThumbnailUrl("Technology"),
     embedUrl: "https://aksara.io/embed/vue-tutorials",
   },
   {
@@ -221,7 +233,7 @@ const embeds = ref<Embed[]>([
     createdAt: "2023-12-10T09:20:00Z",
     views: 1876,
     clicks: 234,
-    thumbnailUrl: "data:image/svg+xml,%3Csvg width='80' height='60' viewBox='0 0 80 60' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='80' height='60' rx='8' fill='%23F3F4F6'/%3E%3Ccircle cx='40' cy='30' r='12' fill='none' stroke='%233B5379' stroke-width='4'/%3E%3Cpath d='M40 30 L40 20 M40 30 L48 36' stroke='%23FFDA49' stroke-width='2'/%3E%3Ctext x='40' y='52' text-anchor='middle' font-size='8' fill='%236B7280' font-family='sans-serif'Reading Challenge%3C/text%3E%3C/svg%3E",
+    thumbnailUrl: getThumbnailUrl("Learning"),
     embedUrl: "https://aksara.io/embed/reading-challenge",
   },
 ]);

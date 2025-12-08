@@ -23,8 +23,40 @@
         </div>
     </div>
     <div class="action-icons">
-      <button type="button" class="icon-button"><img src="~/assets/icons/Notifications.svg" alt="Bell" style="width: 20px; height: 20px;"></button>
-      <button type="button" class="icon-button"><img src="~/assets/icons/Person.svg" alt="Profile" style="width: 20px; height: 20px;"></button>
+      <div class="notification-wrapper">
+        <button
+          type="button"
+          class="icon-button"
+          @click="toggleNotificationModal"
+          :class="{ 'active': showNotificationModal }"
+          aria-label="Notifications"
+        >
+          <img src="~/assets/icons/Notifications.svg" alt="Bell" style="width: 20px; height: 20px;">
+        </button>
+
+        <!-- Notification Dropdown -->
+        <NotificationModal
+          v-if="showNotificationModal"
+          @close="closeNotificationModal"
+        />
+      </div>
+      <div class="profile-wrapper">
+        <button
+          type="button"
+          class="icon-button"
+          @click="toggleProfileDropdown"
+          :class="{ 'active': showProfileDropdown }"
+          aria-label="Profile"
+        >
+          <img src="~/assets/icons/Person.svg" alt="Profile" style="width: 20px; height: 20px;">
+        </button>
+
+        <!-- Profile Dropdown -->
+        <ProfileDropdown
+          v-if="showProfileDropdown"
+          @close="closeProfileDropdown"
+        />
+      </div>
     </div>
   </header>
 </template>
@@ -34,6 +66,12 @@ const route = useRoute();
 const router = useRouter();
 
 const searchQuery = ref<string>((route.query.q as string) || (route.query.search as string) || '');
+
+// Notification modal state
+const showNotificationModal = ref(false);
+
+// Profile dropdown state
+const showProfileDropdown = ref(false);
 
 // Update search query from URL when route changes
 watch(() => route.query, (newQuery) => {
@@ -48,27 +86,27 @@ const handleSearch = () => {
     const query: Record<string, string | string[]> = {
       q: searchQuery.value.trim()
     };
-    
+
     // Preserve filter params if already on literature page
     if (route.path === '/literature') {
       if (route.query.copyType) {
-        query.copyType = Array.isArray(route.query.copyType) 
+        query.copyType = Array.isArray(route.query.copyType)
           ? route.query.copyType as string[]
           : [route.query.copyType as string];
       }
       if (route.query.licensingType) {
-        query.licensingType = Array.isArray(route.query.licensingType) 
+        query.licensingType = Array.isArray(route.query.licensingType)
           ? route.query.licensingType as string[]
           : [route.query.licensingType as string];
       }
       if (route.query.sources) query.sources = route.query.sources as string;
       if (route.query.tags) {
-        query.tags = Array.isArray(route.query.tags) 
+        query.tags = Array.isArray(route.query.tags)
           ? route.query.tags as string[]
           : route.query.tags as string ? [route.query.tags as string] : [];
       }
     }
-    
+
     router.push({
       path: '/literature',
       query
@@ -113,6 +151,63 @@ const clearSearch = () => {
     });
   }
 };
+
+// Notification modal functions
+const toggleNotificationModal = () => {
+  showNotificationModal.value = !showNotificationModal.value;
+  // Close profile dropdown when opening notifications
+  if (showNotificationModal.value) {
+    showProfileDropdown.value = false;
+  }
+};
+
+const closeNotificationModal = () => {
+  showNotificationModal.value = false;
+};
+
+// Profile dropdown functions
+const toggleProfileDropdown = () => {
+  showProfileDropdown.value = !showProfileDropdown.value;
+  // Close notification dropdown when opening profile
+  if (showProfileDropdown.value) {
+    showNotificationModal.value = false;
+  }
+};
+
+const closeProfileDropdown = () => {
+  showProfileDropdown.value = false;
+};
+
+// Close dropdowns when clicking outside
+const handleClickOutside = (event: Event) => {
+  const target = event.target as HTMLElement;
+  const notificationWrapper = target.closest('.notification-wrapper');
+  const profileWrapper = target.closest('.profile-wrapper');
+
+  if (!notificationWrapper && showNotificationModal.value) {
+    closeNotificationModal();
+  }
+
+  if (!profileWrapper && showProfileDropdown.value) {
+    closeProfileDropdown();
+  }
+};
+
+// Add and remove click outside listener
+watch([showNotificationModal, showProfileDropdown], ([notificationOpen, profileOpen]) => {
+  if (notificationOpen || profileOpen) {
+    nextTick(() => {
+      document.addEventListener('click', handleClickOutside);
+    });
+  } else {
+    document.removeEventListener('click', handleClickOutside);
+  }
+});
+
+// Clean up on unmount
+onUnmounted(() => {
+  document.removeEventListener('click', handleClickOutside);
+});
 </script>
 
 <style scoped>
@@ -199,6 +294,18 @@ const clearSearch = () => {
   gap: 12px;
 }
 
+.notification-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.profile-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
 .icon-button {
   width: 40px;
   height: 40px;
@@ -211,6 +318,18 @@ const clearSearch = () => {
   justify-content: center;
   cursor: pointer;
   font-size: 16px;
+  transition: all 0.2s ease;
+}
+
+.icon-button:hover {
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
+  transform: translateY(-1px);
+}
+
+.icon-button.active {
+  background-color: var(--color-light-blue);
+  box-shadow: 0 4px 12px rgba(59, 83, 121, 0.2);
+  border: 1px solid var(--color-primary);
 }
 
 
