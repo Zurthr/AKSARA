@@ -4,7 +4,20 @@
      
 
       <div class="events-body">
-        <div class="events-grid">
+        <!-- Loading state -->
+        <div v-if="loading" class="loading-state">
+          <div class="loading-spinner"></div>
+          <p>Loading events...</p>
+        </div>
+
+        <!-- Error state -->
+        <div v-else-if="error" class="error-state">
+          <p class="error-message">{{ error }}</p>
+          <button @click="fetchEvents" class="retry-btn">Try Again</button>
+        </div>
+
+        <!-- Events grid -->
+        <div v-else class="events-grid">
           <NuxtLink
             v-for="event in filteredEvents"
             :key="event.id"
@@ -12,13 +25,12 @@
             class="event-card"
           >
             <div class="event-image">
-              <img :src="event.image" :alt="event.title" />
-
+              <img :src="getEventImageSrc(event)" :alt="event.title" @error="handleCardImageError" />
             </div>
 
             <div class="event-content">
               <div class="event-meta">
-                <h4>{{ event.subtitle }}</h4>
+                <h4>{{ event.title }}</h4>
                 <p class="event-description">{{ event.description }}</p>
 
                 <div class="event-details">
@@ -111,10 +123,66 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
-import eventsData from '~/../mock-backend/data/events.json';
+import { ref, computed, onMounted } from 'vue'
+import { useRuntimeConfig } from '#imports'
+import { useEvents } from '~/composables/useEvents'
+import type { Event as EventItem } from '~/composables/useEvents'
 
-const originalEvents = eventsData;
+const runtimeConfig = useRuntimeConfig()
+const resolveAssetBaseUrl = () => {
+  const configured = runtimeConfig.public?.assetBaseUrl as string | undefined
+  if (configured) return configured
+  const apiBase = runtimeConfig.public?.apiBaseUrl as string | undefined
+  if (!apiBase) return ''
+  try {
+    const url = new URL(apiBase)
+    return url.origin
+  } catch {
+    return apiBase.replace(/\/api\/?$/, '')
+  }
+}
+const assetBaseUrl = resolveAssetBaseUrl()
+const listFallbackImage = 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=900&q=80'
+
+// Use Laravel API
+const { getAllEvents, loading, error } = useEvents()
+const originalEvents = ref<EventItem[]>([])
+
+const resolveAbsoluteUrl = (raw?: string | null) => {
+  if (!raw) return null
+  const trimmed = raw.trim()
+  if (!trimmed) return null
+  if (/^https?:\/\//i.test(trimmed)) return trimmed
+  if (!assetBaseUrl) return trimmed
+  const normalizedBase = assetBaseUrl.replace(/\/$/, '')
+  const normalizedPath = trimmed.startsWith('/') ? trimmed : `/${trimmed}`
+  return `${normalizedBase}${normalizedPath}`
+}
+
+const getEventImageSrc = (event: EventItem) => {
+  const record = event as unknown as Record<string, string | undefined>
+  const candidate = event.image_url || record.image || record.cover_image || record.banner_url || null
+  return resolveAbsoluteUrl(candidate) || listFallbackImage
+}
+
+const handleCardImageError = (domEvent: Event) => {
+  const image = domEvent.target as HTMLImageElement | null
+  if (image) {
+    image.src = listFallbackImage
+  }
+}
+
+// Fetch events on mount
+onMounted(async () => {
+  await fetchEvents();
+});
+
+const fetchEvents = async () => {
+  const response = await getAllEvents();
+  if (response && response.data) {
+    originalEvents.value = response.data;
+  }
+};
 
 const startDate = ref<string | null>(null);
 const endDate = ref<string | null>(null);
@@ -211,7 +279,7 @@ const isEventOnline = (event: any) => {
 };
 
 const filteredEvents = computed(() => {
-  return originalEvents.filter((ev: any) => {
+  return originalEvents.value.filter((ev: EventItem) => {
     // Type filter using chips: if both checked -> show all. If neither checked -> show all.
     if (!(onlineChecked.value && offlineChecked.value)) {
       // one of them might be false
@@ -720,5 +788,51 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   .events-header h1 {
     font-size: 24px;
   }
+}
+
+/* Loading and Error States */
+.loading-state, .error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px;
+  text-align: center;
+  min-height: 300px;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3b82f6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 16px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.error-message {
+  color: #dc2626;
+  margin-bottom: 16px;
+  font-size: 16px;
+}
+
+.retry-btn {
+  background: #3b82f6;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.retry-btn:hover {
+  background: #2563eb;
 }
 </style>

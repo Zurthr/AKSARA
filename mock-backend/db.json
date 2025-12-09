@@ -848,7 +848,7 @@
             }
           ]
         },
-        "Institutional": {
+        "Academic": {
           "description": "Available through academic/professional institutions",
           "sources": [
             {
@@ -913,7 +913,7 @@
         }
       ],
       "copy_types": {
-        "Online": {
+        "Digital": {
           "description": "Free online edition with full access",
           "sources": [
             {
