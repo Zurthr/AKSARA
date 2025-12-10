@@ -210,7 +210,9 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
 import { navigateTo } from '#imports'
-import { useEvents, type EventCreateData } from '~/composables/useEvents'
+
+import { useLocalEvents } from '~/composables/useLocalEvents'
+// import { useEvents, type EventCreateData } from '~/composables/useEvents'
 
 interface CreateEventForm {
   title: string
@@ -247,15 +249,10 @@ const formData = ref<CreateEventForm>({
 const selectedTags = ref<string[]>([])
 const currentTag = ref('')
 
-const { createEvent, loading, error } = useEvents()
-const isSubmitting = computed(() => loading.value)
-const submissionError = ref<string | null>(null)
 
-watch(error, (value) => {
-  if (value) {
-    submissionError.value = value
-  }
-})
+const { addLocalEvent } = useLocalEvents()
+const isSubmitting = ref(false)
+const submissionError = ref<string | null>(null)
 
 watch(
   () => formData.value.isFree,
@@ -324,18 +321,26 @@ const handleSubmit = async (event: Event) => {
     return
   }
   submissionError.value = null
+  isSubmitting.value = true
 
   if (!formData.value.location.trim()) {
     submissionError.value = 'Lokasi acara wajib diisi.'
+    isSubmitting.value = false
     return
   }
 
   if (!formData.value.organizer.trim()) {
     submissionError.value = 'Nama penyelenggara wajib diisi.'
+    isSubmitting.value = false
     return
   }
 
-  const payload: EventCreateData = {
+  // Generate unique id (timestamp + random)
+  const id = `local-${Date.now()}-${Math.floor(Math.random() * 10000)}`
+
+  // Map form data to event object
+  const newEvent = {
+    id,
     title: formData.value.title.trim(),
     description: formData.value.description.trim(),
     date: formData.value.date,
@@ -343,44 +348,25 @@ const handleSubmit = async (event: Event) => {
     location: formData.value.location.trim(),
     organizer: formData.value.organizer.trim(),
     is_free: formData.value.isFree,
+    price: formData.value.isFree ? 0 : Number(formData.value.price) || 0,
+    capacity: formData.value.capacity ? Number(formData.value.capacity) : undefined,
+    category: formData.value.category,
+    community: formData.value.community,
+    image_url: formData.value.imageUrl?.trim() || '',
+    tags: selectedTags.value,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+    // Add any other fields as needed
   }
 
-  if (formData.value.category) {
-    payload.category = formData.value.category
+  try {
+    addLocalEvent(newEvent)
+    await navigateTo('/events')
+  } catch (e) {
+    submissionError.value = 'Gagal menyimpan event lokal.'
+  } finally {
+    isSubmitting.value = false
   }
-
-  if (formData.value.imageUrl) {
-    payload.image_url = formData.value.imageUrl.trim()
-  }
-
-  if (!formData.value.isFree) {
-    const priceValue = Number(formData.value.price)
-    if (Number.isNaN(priceValue) || priceValue < 0) {
-      submissionError.value = 'Harga tiket tidak valid.'
-      return
-    }
-    payload.price = priceValue
-  } else {
-    payload.price = 0
-  }
-
-  if (formData.value.capacity) {
-    const capacityValue = Number(formData.value.capacity)
-    if (Number.isNaN(capacityValue) || capacityValue < 0) {
-      submissionError.value = 'Kapasitas harus berupa angka positif.'
-      return
-    }
-    payload.capacity = capacityValue
-  }
-
-  const created = await createEvent(payload)
-
-  if (created?.id) {
-    await navigateTo(`/events/${created.id}`)
-    return
-  }
-
-  submissionError.value = error.value ?? 'Gagal membuat event. Silakan coba lagi.'
 }
 
 const cancel = () => {

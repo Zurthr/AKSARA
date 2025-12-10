@@ -15,6 +15,44 @@
           <div v-else-if="error" class="error-state">
             <p class="error-message">{{ error }}</p>
             <button @click="fetchEvents" class="retry-btn">Try Again</button>
+            <!-- Fallback: show local/file events if backend fails -->
+            <div v-if="filteredEvents.length" class="events-grid" style="margin-top:32px;">
+              <NuxtLink
+                v-for="event in filteredEvents"
+                :key="event.id"
+                :to="`/events/${event.id}`"
+                class="event-card"
+              >
+                <div class="event-image">
+                  <img :src="getEventImageSrc(event)" :alt="event.title" @error="handleCardImageError" />
+                </div>
+                <div class="event-content">
+                  <div class="event-meta">
+                    <h4>{{ event.title }}</h4>
+                    <p class="event-description">{{ event.description }}</p>
+                    <div class="event-details">
+                      <div class="event-location">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z" fill="currentColor"/>
+                        </svg>
+                        {{ event.location }}
+                      </div>
+                      <div class="event-date">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z" fill="currentColor"/>
+                        </svg>
+                        <div class="date-block">
+                          <div class="date-info">
+                            <div class="date-full">{{ formatEventDate(event.date).full }}</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <button class="event-detail-btn">Event Detail</button>
+                </div>
+              </NuxtLink>
+            </div>
           </div>
 
           <!-- Events grid -->
@@ -28,12 +66,10 @@
               <div class="event-image">
                 <img :src="getEventImageSrc(event)" :alt="event.title" @error="handleCardImageError" />
               </div>
-
               <div class="event-content">
                 <div class="event-meta">
                   <h4>{{ event.title }}</h4>
                   <p class="event-description">{{ event.description }}</p>
-
                   <div class="event-details">
                     <div class="event-location">
                       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -41,7 +77,6 @@
                       </svg>
                       {{ event.location }}
                     </div>
-
                     <div class="event-date">
                       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z" fill="currentColor"/>
@@ -54,7 +89,6 @@
                     </div>
                   </div>
                 </div>
-
                 <button class="event-detail-btn">Event Detail</button>
               </div>
             </NuxtLink>
@@ -127,8 +161,12 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import { useRuntimeConfig } from '#imports'
+
+
 import { useEvents } from '~/composables/useEvents'
 import type { Event as EventItem } from '~/composables/useEvents'
+import { useLocalEvents } from '~/composables/useLocalEvents'
+import eventsLocal from '~/data/events-local.json'
 
 const runtimeConfig = useRuntimeConfig()
 const resolveAssetBaseUrl = () => {
@@ -148,7 +186,45 @@ const listFallbackImage = 'https://images.unsplash.com/photo-1498050108023-c5249
 
 // Use Laravel API
 const { getAllEvents, loading, error } = useEvents()
+
 const originalEvents = ref<EventItem[]>([])
+const { localEvents, addLocalEvent } = useLocalEvents()
+const mergedEvents = computed<EventItem[]>(() => {
+  // If backend fetch failed, show file + localStorage events only
+  if (error.value) {
+    const fileMapped = (eventsLocal as any[]).map(ev => ({
+      ...ev,
+      organizer: ev.community_name || ev.organizer || '-',
+      is_free: typeof ev.is_free === 'boolean' ? ev.is_free : (ev.price ? ev.price === 'Gratis' : true),
+      image_url: ev.image_url || ev.image || ''
+    }))
+    const localMapped = (localEvents.value as any[]).map(ev => ({
+      ...ev,
+      organizer: ev.community_name || ev.organizer || '-',
+      is_free: typeof ev.is_free === 'boolean' ? ev.is_free : (ev.price ? ev.price === 'Gratis' : true)
+    }))
+    // Remove duplicates by id (local > file)
+    const all = [...localMapped, ...fileMapped]
+    const seen = new Set()
+    const unique = []
+    for (const ev of all) {
+      const id = String(ev.id)
+      if (!seen.has(id)) {
+        seen.add(id)
+        unique.push(ev)
+      }
+    }
+    return unique as EventItem[]
+  }
+  // If backend works, show backend + localStorage events only
+  const apiIds = new Set(originalEvents.value.map(ev => String(ev.id)))
+  const localMapped = (localEvents.value as any[]).map(ev => ({
+    ...ev,
+    organizer: ev.community_name || ev.organizer || '-',
+    is_free: typeof ev.is_free === 'boolean' ? ev.is_free : (ev.price ? ev.price === 'Gratis' : true)
+  })).filter(ev => !apiIds.has(String(ev.id)))
+  return [...originalEvents.value, ...localMapped] as EventItem[]
+})
 
 const resolveAbsoluteUrl = (raw?: string | null) => {
   if (!raw) return null
@@ -281,7 +357,7 @@ const isEventOnline = (event: any) => {
 };
 
 const filteredEvents = computed(() => {
-  return originalEvents.value.filter((ev: EventItem) => {
+  return mergedEvents.value.filter((ev: EventItem) => {
     // Type filter using chips: if both checked -> show all. If neither checked -> show all.
     if (!(onlineChecked.value && offlineChecked.value)) {
       // one of them might be false
