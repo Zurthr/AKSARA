@@ -214,9 +214,8 @@ import ForumCard from '~/components/Forum/ForumCard.vue';
 
 // Literature API integration
 import { useLiterature } from '~/composables/useLiterature'
-import type { Book } from '~/composables/useLiterature'
 import { LOCAL_BOOKS_STORAGE_KEY } from '~/composables/useLocalBooks'
-import mockBooks from 'mockData/books.json'
+import mockBooks from '../../../mock-backend/data/books.json'
 import { findBookById, mergeBookCollections, normalizeBookCollection, readLocalBooksSnapshot } from '~/utils/books-normalizer'
 
 type RawBookRecord = Record<string, unknown>

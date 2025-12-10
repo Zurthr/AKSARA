@@ -1,4 +1,6 @@
-import type { Book as BookItem } from '~/composables/useLiterature'
+import type { LiteratureBook } from '~/composables/useLiterature'
+
+type BookItem = LiteratureBook
 
 // Helpers to normalize and merge literature/book data from multiple sources.
 

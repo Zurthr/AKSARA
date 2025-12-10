@@ -71,9 +71,9 @@ import TrendingSidebar from '~/components/TrendingSidebar.vue';
 
 // Literature API integration
 import { useLiterature } from '~/composables/useLiterature'
-import type { Book as BookItem } from '~/composables/useLiterature'
+import type { LiteratureBook } from '~/composables/useLiterature'
 import { useLocalBooks } from '~/composables/useLocalBooks'
-import mockBooks from 'mockData/books.json'
+import mockBooks from '../../../mock-backend/data/books.json'
 import { mergeBookCollections, normalizeBookCollection } from '~/utils/books-normalizer'
 
 type RawBookRecord = Record<string, unknown>
@@ -81,16 +81,16 @@ type RawBookRecord = Record<string, unknown>
 // Use Laravel API
 const { getAllBooks, loading, error } = useLiterature()
 
-const originalBooks = ref<BookItem[]>([])
+const originalBooks = ref<LiteratureBook[]>([])
 const staticBooks = normalizeBookCollection(mockBooks as RawBookRecord[])
 const { localBooks } = useLocalBooks()
 
-const normalizedLocalBooks = computed<BookItem[]>(() => {
+const normalizedLocalBooks = computed<LiteratureBook[]>(() => {
   const raw = Array.isArray(localBooks.value) ? localBooks.value : []
   return normalizeBookCollection(raw as RawBookRecord[])
 })
 
-const mergedBooksData = computed<BookItem[]>(() => {
+const mergedBooksData = computed<LiteratureBook[]>(() => {
   const remote = Array.isArray(originalBooks.value) ? originalBooks.value : []
   const local = Array.isArray(normalizedLocalBooks.value) ? normalizedLocalBooks.value : []
   const static_books = Array.isArray(staticBooks) ? staticBooks : []

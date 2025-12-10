@@ -1,8 +1,7 @@
-import { ref, readonly } from 'vue'
-import { useApi } from './useApi'
+﻿import { ref, readonly } from "vue"
+import { useApi } from "./useApi"
 
-// TypeScript interfaces for Literature/Books API
-export interface Book {
+export interface LiteratureBook {
   id: number | string
   title: string
   author?: string
@@ -13,7 +12,7 @@ export interface Book {
   year_edition?: string | number
   total_bookmarked?: number
   tags?: Array<{ name: string; type?: string }> | string[]
-  copy_types?: Record<string, any>
+  copy_types?: Record<string, unknown>
   licensing_type?: string
   sources?: Array<{ name: string; url: string }>
   access_links?: Array<{ platform: string; url: string; type: string }>
@@ -22,7 +21,7 @@ export interface Book {
   [key: string]: unknown
 }
 
-export interface BookCreateData {
+export interface LiteratureBookCreateData {
   title: string
   author?: string
   description?: string
@@ -30,18 +29,18 @@ export interface BookCreateData {
   rating?: number
   year_edition?: string | number
   tags?: Array<{ name: string; type?: string }> | string[]
-  copy_types?: Record<string, any>
+  copy_types?: Record<string, unknown>
   licensing_type?: string
   sources?: Array<{ name: string; url: string }>
 }
 
-export interface BookUpdateData extends Partial<BookCreateData> {}
+export interface LiteratureBookUpdateData extends Partial<LiteratureBookCreateData> {}
 
-export interface BooksResponse {
+export interface LiteratureBooksResponse {
   status?: boolean
   message?: string
   data: {
-    data: Book[]
+    data: LiteratureBook[]
     current_page?: number
     last_page?: number
     per_page?: number
@@ -64,127 +63,126 @@ export interface BooksResponse {
   }
 }
 
-// Literature/Books API composable
 export const useLiterature = () => {
   const api = useApi()
   const loading = ref(false)
   const error = ref<string | null>(null)
-  
+
   const setLoading = (value: boolean) => {
     loading.value = value
   }
-  
+
   const setError = (err: string | null) => {
     error.value = err
   }
-  
-  const getAllBooks = async (page: number = 1, perPage: number = 20): Promise<BooksResponse | null> => {
+
+  const getAllBooks = async (page: number = 1, perPage: number = 20): Promise<LiteratureBooksResponse | null> => {
     setLoading(true)
     setError(null)
-    
+
     try {
-      const response = await api.get<BooksResponse>(`/literatures?page=${page}&per_page=${perPage}`)
+      const response = await api.get<LiteratureBooksResponse>(`/literatures?page=${page}&per_page=${perPage}`)
       return response
     } catch (err) {
-      const errorMsg = err instanceof Error ? err.message : 'Failed to fetch books'
+      const errorMsg = err instanceof Error ? err.message : "Failed to fetch books"
       setError(errorMsg)
       return null
     } finally {
       setLoading(false)
     }
   }
-  
-  const getBookById = async (id: number | string): Promise<Book | null> => {
+
+  const getBookById = async (id: number | string): Promise<LiteratureBook | null> => {
     setLoading(true)
     setError(null)
-    
+
     try {
       const encodedId = encodeURIComponent(String(id))
-      const response = await api.get<{ data: Book }>(`/literatures/${encodedId}`)
+      const response = await api.get<{ data: LiteratureBook }>(`/literatures/${encodedId}`)
       return response.data
     } catch (err) {
-      const errorMsg = err instanceof Error ? err.message : 'Failed to fetch book'
+      const errorMsg = err instanceof Error ? err.message : "Failed to fetch book"
       setError(errorMsg)
       return null
     } finally {
       setLoading(false)
     }
   }
-  
-  const searchBooks = async (query: string, filters?: Record<string, any>): Promise<BooksResponse | null> => {
+
+  const searchBooks = async (query: string, filters?: Record<string, unknown>): Promise<LiteratureBooksResponse | null> => {
     setLoading(true)
     setError(null)
-    
+
     try {
       const params = new URLSearchParams({ q: query })
       if (filters) {
         Object.entries(filters).forEach(([key, value]) => {
-          if (value !== null && value !== undefined && value !== '') {
+          if (value !== null && value !== undefined && value !== "") {
             params.append(key, String(value))
           }
         })
       }
-      const response = await api.get<BooksResponse>(`/books/search?${params.toString()}`)
+      const response = await api.get<LiteratureBooksResponse>(`/books/search?${params.toString()}`)
       return response
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to search books')
+      setError(err instanceof Error ? err.message : "Failed to search books")
       return null
     } finally {
       setLoading(false)
     }
   }
-  
-  const createBook = async (bookData: BookCreateData): Promise<Book | null> => {
+
+  const createBook = async (bookData: LiteratureBookCreateData): Promise<LiteratureBook | null> => {
     setLoading(true)
     setError(null)
-    
+
     try {
-      const response = await api.post<{ data: Book }>('/books', bookData)
+      const response = await api.post<{ data: LiteratureBook }>("/books", bookData)
       return response.data
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to create book')
+      setError(err instanceof Error ? err.message : "Failed to create book")
       return null
     } finally {
       setLoading(false)
     }
   }
-  
-  const updateBook = async (id: number | string, bookData: BookUpdateData): Promise<Book | null> => {
+
+  const updateBook = async (id: number | string, bookData: LiteratureBookUpdateData): Promise<LiteratureBook | null> => {
     setLoading(true)
     setError(null)
-    
+
     try {
       const encodedId = encodeURIComponent(String(id))
-      const response = await api.put<{ data: Book }>(`/books/${encodedId}`, bookData)
+      const response = await api.put<{ data: LiteratureBook }>(`/books/${encodedId}`, bookData)
       return response.data
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to update book')
+      setError(err instanceof Error ? err.message : "Failed to update book")
       return null
     } finally {
       setLoading(false)
     }
   }
-  
+
   const deleteBook = async (id: number | string): Promise<boolean> => {
     setLoading(true)
     setError(null)
-    
+
     try {
       const encodedId = encodeURIComponent(String(id))
       await api.delete(`/books/${encodedId}`)
       return true
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to delete book')
+      setError(err instanceof Error ? err.message : "Failed to delete book")
       return false
     } finally {
       setLoading(false)
     }
   }
-  
+
   const clearError = () => {
     setError(null)
   }
-  
+
   return {
     loading: readonly(loading),
     error: readonly(error),
