@@ -14,6 +14,7 @@
             :key="community.id"
             :to="`/community/${community.id}`"
             class="community-card"
+            @click="handleCommunityClick(community)"
           >
             <div class="community-card-header">
               <div
@@ -60,7 +61,7 @@
               </span>
             </div>
 
-            <button type="button" class="join-button" @click.stop>Join Community</button>
+            <button type="button" class="join-button" @click.stop="handleCommunityClick(community)">Join Community</button>
           </NuxtLink>
         </div>
 
@@ -107,6 +108,19 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue';
+import { useClickTracking } from '~/composables/useClickTracking';
+
+const { trackCommunityClick } = useClickTracking();
+
+// Handle community card click
+const handleCommunityClick = (community: { id: string; name: string; tags: string[]; members: string }) => {
+  trackCommunityClick({
+    id: community.id,
+    name: community.name,
+    tags: community.tags,
+    members: parseInt(community.members.replace(/[^0-9]/g, ''), 10) || 0
+  });
+};
 
 // Filter state management
 const activeFilters = ref<string[]>([]);

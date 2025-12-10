@@ -7396,6 +7396,142 @@
         "rating": 4.8
       },
       "id": 20
+    },
+    {
+      "event_type": "post_click",
+      "item_id": 1,
+      "item_title": "Applying 'Atomic Habits' to Learning to Code",
+      "item_tags": [
+        "#Productivity",
+        "#Coding"
+      ],
+      "user_id": "anon_1765351005302_w54spq4kc",
+      "timestamp": "2025-12-10T08:07:39.133Z",
+      "source_page": "/forums",
+      "metadata": {
+        "author": "Sarah Chen",
+        "stars": 342
+      },
+      "id": 21
+    },
+    {
+      "event_type": "community_click",
+      "item_id": "wellness-warriors",
+      "item_title": "Wellness Warriors",
+      "user_id": "anon_1765351005302_w54spq4kc",
+      "timestamp": "2025-12-10T08:07:42.917Z",
+      "source_page": "/forums/1",
+      "metadata": {
+        "members": 512
+      },
+      "id": 22
+    },
+    {
+      "event_type": "community_click",
+      "item_id": "jump-fest-2025",
+      "item_title": "JUMP FEST 2025 - BRED THROUGH",
+      "item_tags": [
+        "#HarryPotter",
+        "#WIBU",
+        "#AnimeX"
+      ],
+      "user_id": "anon_1765351005302_w54spq4kc",
+      "timestamp": "2025-12-10T08:08:19.236Z",
+      "source_page": "/community",
+      "metadata": {
+        "members": 21
+      },
+      "id": 23
+    },
+    {
+      "event_type": "event_click",
+      "item_id": 1,
+      "item_title": "Photo Walk Jakarta",
+      "user_id": "anon_1765351005302_w54spq4kc",
+      "timestamp": "2025-12-10T08:08:26.059Z",
+      "source_page": "/events",
+      "metadata": {
+        "date": "2023-10-15T08:00:00Z",
+        "community_id": "photography-club"
+      },
+      "id": 24
+    },
+    {
+      "event_type": "community_click",
+      "item_id": "photography-club",
+      "item_title": "Photography Club",
+      "item_tags": [
+        "Photo Walk",
+        "Tips",
+        "Critique"
+      ],
+      "user_id": "anon_1765351005302_w54spq4kc",
+      "timestamp": "2025-12-10T08:08:51.696Z",
+      "source_page": "/community",
+      "metadata": {
+        "members": 287
+      },
+      "id": 25
+    },
+    {
+      "event_type": "community_click",
+      "item_id": "photography-club",
+      "item_title": "Photography Club",
+      "item_tags": [
+        "Photo Walk",
+        "Tips",
+        "Critique"
+      ],
+      "user_id": "anon_1765351005302_w54spq4kc",
+      "timestamp": "2025-12-10T08:08:58.098Z",
+      "source_page": "/community",
+      "metadata": {
+        "members": 287
+      },
+      "id": 26
+    },
+    {
+      "event_type": "event_click",
+      "item_id": 1,
+      "item_title": "Photo Walk Jakarta",
+      "user_id": "anon_1765351005302_w54spq4kc",
+      "timestamp": "2025-12-10T08:09:15.505Z",
+      "source_page": "/events",
+      "metadata": {
+        "date": "2023-10-15T08:00:00Z",
+        "community_id": "photography-club"
+      },
+      "id": 27
+    },
+    {
+      "event_type": "event_click",
+      "item_id": 2,
+      "item_title": "Book Club: Harry Potter Marathon",
+      "user_id": "anon_1765351005302_w54spq4kc",
+      "timestamp": "2025-12-10T08:09:25.730Z",
+      "source_page": "/events",
+      "metadata": {
+        "date": "2023-10-20T14:00:00Z",
+        "community_id": "literacy-circle"
+      },
+      "id": 28
+    },
+    {
+      "event_type": "community_click",
+      "item_id": "jump-fest-2025",
+      "item_title": "JUMP FEST 2025 - BRED THROUGH",
+      "item_tags": [
+        "#HarryPotter",
+        "#WIBU",
+        "#AnimeX"
+      ],
+      "user_id": "anon_1765351005302_w54spq4kc",
+      "timestamp": "2025-12-10T08:13:46.973Z",
+      "source_page": "/community",
+      "metadata": {
+        "members": 21
+      },
+      "id": 29
     }
   ]
 }

@@ -8,6 +8,7 @@
         v-if="relatedCommunity" 
         :to="`/Community/${relatedCommunity.id}`"
         class="related-topic-card clickable-card"
+        @click="handleCommunityClick"
       >
         <div class="topic-icon">
           <!-- Placeholder icon if no specific icon logic -->
@@ -99,6 +100,10 @@
 </template>
 
 <script setup lang="ts">
+import { useClickTracking } from '~/composables/useClickTracking';
+
+const { trackCommunityClick } = useClickTracking();
+
 interface SocialMention {
   platform: 'twitter' | 'reddit';
   // Shared
@@ -123,7 +128,7 @@ interface SocialMention {
   url?: string;
 }
 
-defineProps<{
+const props = defineProps<{
   relatedCommunity?: {
     id: string;
     name: string;
@@ -138,6 +143,16 @@ defineProps<{
   }> | null;
   socialMentions?: SocialMention[] | null;
 }>();
+
+const handleCommunityClick = () => {
+  if (props.relatedCommunity) {
+    trackCommunityClick({
+      id: props.relatedCommunity.id,
+      name: props.relatedCommunity.name,
+      members: parseInt(props.relatedCommunity.members.replace(/[^0-9]/g, ''), 10) || 0
+    });
+  }
+};
 </script>
 
 <style scoped>
