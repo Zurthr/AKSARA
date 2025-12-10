@@ -1,7 +1,12 @@
 <template>
   <NuxtLink :to="`/literature/${book.id}`" class="book-link">
     <div class="book-cover">
-      <img :src="book.image" :alt="book.title || `Book ${book.id}`" />
+      <img 
+        :src="imageUrl" 
+        :alt="book.title || `Book ${book.id}`" 
+        @error="handleImageError"
+        @load="handleImageLoad"
+      />
     </div>
     <div class="book-info">
       <h4 class="book-title">{{ displayTitle }}</h4>
@@ -65,6 +70,20 @@ export interface BookCardBook {
 const props = defineProps<{
   book: BookCardBook;
 }>();
+
+const imageUrl = ref(props.book.image);
+const imageError = ref(false);
+
+const handleImageError = () => {
+  if (!imageError.value) {
+    imageError.value = true;
+    imageUrl.value = '/images/book-cover-placeholder.svg';
+  }
+};
+
+const handleImageLoad = () => {
+  imageError.value = false;
+};
 
 const displayTag = computed(() => {
   const firstTag = props.book.tags?.[0] || '';

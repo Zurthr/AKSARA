@@ -39,27 +39,7 @@
             :books="filteredBooks"
             see-more-link="/literature"
           />
-          <p v-if="filteredBooks.length === 0" style="color: #64748b; font-size: 16px; line-height: 1.6; align-self: center; justify-self: center; margin-bottom:32px;">No results found. Try adjusting your filters or search query.</p>
-        </div>
-
-        <div v-else class="literature-sections">
-          <BookSection
-            title="Top Books For you"
-            :books="topBooks"
-            see-more-link="/literature?sort=top"
-            section-type="top"
-            title-prefix="Top Books"
-            title-suffix="For you"
-          />
-          
-          <BookSection
-            v-if="suggestedTag"
-            :title="`Looking for ${suggestedTag}?`"
-            :books="suggestedBooks"
-            :see-more-link="`/literature?tag=${suggestedTag}`"
-            section-type="recommendation"
-            :highlighted-tag="suggestedTag"
-          />
+          <p v-if="filteredBooks.length === 0" class="no-results-text">No results found. Try adjusting your filters or search query.</p>
         </div>
 
         <!-- All Books Section - Always visible at the bottom -->
@@ -83,132 +63,159 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, watch } from 'vue';
 import RightSideBar from '~/components/General/RightSideBar.vue';
 import BookSection from '~/components/Literature/BookSection.vue';
 import BookGrid from '~/components/Literature/BookGrid.vue';
 import LiteratureFilterSidebar from '~/components/Literature/LiteratureFilterSidebar.vue';
 import TrendingSidebar from '~/components/TrendingSidebar.vue';
-import { useBooks, type Book as ApiBook, type CopyType } from '~/composables/useBooks';
 
-// UI Interface for books (maintaining existing structure)
-interface Book {
-  id: number;
-  title: string;
-  author?: string;
-  image: string;
-  tags: string[];
-  rating?: number;
-  bookmarks?: number;
-  copyType?: string[];
-  licensingType?: string[];
-  sources?: string[];
+// Literature API integration
+import { useLiterature } from '~/composables/useLiterature'
+import type { Book as BookItem } from '~/composables/useLiterature'
+import { useLocalBooks } from '~/composables/useLocalBooks'
+import mockBooks from 'mockData/books.json'
+import { mergeBookCollections, normalizeBookCollection } from '~/utils/books-normalizer'
+
+type RawBookRecord = Record<string, unknown>
+
+// Use Laravel API
+const { getAllBooks, loading, error } = useLiterature()
+
+const originalBooks = ref<BookItem[]>([])
+const staticBooks = normalizeBookCollection(mockBooks as RawBookRecord[])
+const { localBooks } = useLocalBooks()
+
+const normalizedLocalBooks = computed<BookItem[]>(() => {
+  const raw = Array.isArray(localBooks.value) ? localBooks.value : []
+  return normalizeBookCollection(raw as RawBookRecord[])
+})
+
+const mergedBooksData = computed<BookItem[]>(() => {
+  const remote = Array.isArray(originalBooks.value) ? originalBooks.value : []
+  const local = Array.isArray(normalizedLocalBooks.value) ? normalizedLocalBooks.value : []
+  const static_books = Array.isArray(staticBooks) ? staticBooks : []
+  
+  // Ensure stable merge order and prevent duplicates
+  const merged = mergeBookCollections([static_books, local, remote])
+  
+  // Always ensure we have books available
+  const result = merged.length > 0 ? merged : static_books
+  
+  // Stable sort to prevent flickering
+  return result.sort((a, b) => {
+    const idA = typeof a.id === 'string' ? parseInt(a.id) || 0 : (a.id as number)
+    const idB = typeof b.id === 'string' ? parseInt(b.id) || 0 : (b.id as number)
+    return idA - idB
+  })
+})
+
+const route = useRoute()
+
+const fetchBooks = async () => {
+  try {
+    const response = await getAllBooks()
+    
+    // Handle nested Laravel response structure: response.data.data
+    if (response && response.data && response.data.data) {
+      const laravelBooksWithUniqueIds = response.data.data.map((book, index) => ({
+        ...book,
+        id: book.id || `laravel-${index + 1}`,
+        source: 'laravel'
+      }))
+      
+      originalBooks.value = laravelBooksWithUniqueIds
+    } else {
+      originalBooks.value = []
+    }
+  } catch (apiError) {
+    console.warn('Literature API not available, using local data only')
+    originalBooks.value = []
+  }
 }
 
-const route = useRoute();
-const { getAllBooks, error: booksError } = useBooks();
+// Ensure books are fetched when component is mounted and on route change
+onMounted(async () => {
+  await fetchBooks()
+})
 
-// Reactive data
-const allBooks = ref<Book[]>([]);
+// Refetch when route changes
+watch(() => route.fullPath, async () => {
+  await fetchBooks()
+}, { immediate: false })
+
+// Convert normalized books to UI format for compatibility
+const allBooks = computed(() => {
+  return mergedBooksData.value.map((book): Book => {
+    const tags = Array.isArray(book.tags) 
+      ? book.tags.map(tag => typeof tag === 'string' ? tag : tag.name)
+      : []
+    
+    const copyType = book.copy_types
+      ? Object.keys(book.copy_types).map(key => normalizeKey(key)).filter(Boolean)
+      : []
+    
+    const licensingType = book.licensing_type
+      ? [normalizeKey(book.licensing_type)]
+      : []
+    
+    const sources = Array.isArray(book.sources)
+      ? book.sources.map(s => typeof s === 'string' ? s : s.name)
+      : []
+    
+    // Handle image URL with fallback and better filtering
+    let imageUrl = book.cover || book.image_url || '/images/book-placeholder.svg'
+    
+    // Filter out problematic image URLs that cause 403/404 errors
+    const problematicDomains = [
+      'goodreads.com',
+      'amazon.com', 
+      'ssl-images',
+      'media-amazon',
+      'images-na.ssl-images-amazon'
+    ]
+    
+    const hasProblematicUrl = problematicDomains.some(domain => 
+      imageUrl.includes(domain)
+    )
+    
+    if (hasProblematicUrl || !imageUrl.startsWith('http')) {
+      imageUrl = '/images/book-placeholder.svg'
+    }
+    
+    return {
+      id: typeof book.id === 'string' ? parseInt(book.id) || 0 : (book.id as number),
+      title: book.title,
+      author: book.author,
+      image: imageUrl,
+      tags,
+      rating: book.rating,
+      bookmarks: book.total_bookmarked,
+      copyType,
+      licensingType,
+      sources
+    }
+  })
+})
+
+interface Book {
+  id: number
+  title: string
+  author?: string
+  image: string
+  tags: string[]
+  rating?: number
+  bookmarks?: number
+  copyType?: string[]
+  licensingType?: string[]
+  sources?: string[]
+}
 
 const normalizeKey = (value: string | undefined | null) => {
   return (value || '')
     .trim()
     .toLowerCase()
-    .replace(/\s+/g, '-');
-};
-
-// Transform API book data to UI format
-const transformApiBookToUIBook = (apiBook: ApiBook): Book => {
-  const tags = (apiBook.tags || []).map((tag) => tag.name);
-
-  const copyType = apiBook.copy_types
-    ? Object.keys(apiBook.copy_types).map((key) => normalizeKey(key)).filter(Boolean)
-    : [];
-
-  const licensingType = apiBook.licensing_type
-    ? [normalizeKey(apiBook.licensing_type)]
-    : [];
-
-  const sourceNames: string[] = [];
-
-  if (apiBook.sources) {
-    sourceNames.push(...apiBook.sources.map((source) => source.name));
-  }
-
-  const copyTypes = apiBook.copy_types as Record<string, CopyType> | undefined;
-  if (copyTypes) {
-    Object.values(copyTypes).forEach((copyTypeEntry) => {
-      const sources = copyTypeEntry.sources || [];
-      sources.forEach((source) => {
-        sourceNames.push(source.name);
-      });
-    });
-  }
-
-  return {
-    id: apiBook.id,
-    title: apiBook.title,
-    author: apiBook.author,
-    image: apiBook.cover,
-    tags,
-    rating: apiBook.rating,
-    bookmarks: apiBook.total_bookmarked,
-    copyType,
-    licensingType,
-    sources: Array.from(new Set(sourceNames))
-  };
-};
-
-const extractBooksFromResponse = (response: unknown): ApiBook[] => {
-  if (!response) {
-    return [];
-  }
-
-  if (Array.isArray(response)) {
-    return response as ApiBook[];
-  }
-
-  if (typeof response === 'object') {
-    const payload = response as Record<string, unknown>;
-
-    if (Array.isArray(payload.data)) {
-      return payload.data as ApiBook[];
-    }
-
-    const nestedData = payload.data as Record<string, unknown> | undefined;
-    if (nestedData && Array.isArray(nestedData.data)) {
-      return nestedData.data as ApiBook[];
-    }
-
-    if (Array.isArray(payload.books)) {
-      return payload.books as ApiBook[];
-    }
-  }
-
-  return [];
-};
-
-const loadBooksFromApi = async () => {
-  const response = await getAllBooks(1, 100);
-  const apiBooks = extractBooksFromResponse(response);
-
-  if (apiBooks.length === 0) {
-    console.warn('[Literature] Books API returned no data. Raw response:', response);
-    allBooks.value = [];
-    return;
-  }
-
-  allBooks.value = apiBooks.map(transformApiBookToUIBook);
-};
-
-watch(booksError, (message) => {
-  if (message) {
-    console.error('[Literature] Failed to load books:', message);
-  }
-});
-
-const searchQuery = computed(() => route.query.q as string || route.query.search as string || '');
+    .replace(/\s+/g, '-')
+}
 
 const filters = computed(() => ({
   copyType: Array.isArray(route.query.copyType) 
@@ -229,6 +236,8 @@ const filters = computed(() => ({
       : []
 }));
 
+const searchQuery = computed(() => route.query.q as string || route.query.search as string || '');
+
 const hasActiveFilters = computed(() => {
   return filters.value.copyType.length > 0 || 
          filters.value.licensingType.length > 0 || 
@@ -240,64 +249,67 @@ const hasActiveFilters = computed(() => {
 const filteredBooks = computed(() => {
   let books = [...allBooks.value];
 
+  // Filter by search query
   if (searchQuery.value) {
     const query = searchQuery.value.toLowerCase();
-    books = books.filter((book) =>
+    books = books.filter(book => 
       book.title.toLowerCase().includes(query) ||
       book.author?.toLowerCase().includes(query) ||
-      book.tags.some((tag) => tag.toLowerCase().includes(query))
+      book.tags.some(tag => tag.toLowerCase().includes(query))
     );
   }
 
+  // Filter by copy type - check if any of the book's copy types match any filter
   if (filters.value.copyType.length > 0) {
-    books = books.filter((book) =>
-      book.copyType &&
-      book.copyType.some((bookCopyType) => filters.value.copyType.includes(bookCopyType))
+    books = books.filter(book => 
+      book.copyType && 
+      book.copyType.some(bookCopyType => filters.value.copyType.includes(bookCopyType))
     );
   }
 
+  // Filter by licensing type - check if any of the book's licensing types match any filter
   if (filters.value.licensingType.length > 0) {
-    books = books.filter((book) =>
-      book.licensingType &&
-      book.licensingType.some((bookLicensingType) => filters.value.licensingType.includes(bookLicensingType))
+    books = books.filter(book => 
+      book.licensingType && 
+      book.licensingType.some(bookLicensingType => filters.value.licensingType.includes(bookLicensingType))
     );
   }
 
+  // Filter by sources - check if any of the book's sources match the filter
   if (filters.value.sources) {
-    const sourceQuery = filters.value.sources.toLowerCase();
-    books = books.filter((book) =>
-      book.sources &&
-      book.sources.some((source) => source.toLowerCase().includes(sourceQuery))
+    books = books.filter(book => 
+      book.sources && 
+      book.sources.includes(filters.value.sources)
     );
   }
 
+  // Filter by tags - books must have at least one matching tag
   if (filters.value.tags.length > 0) {
-    const filterTagsLower = filters.value.tags.map((tag) => tag.toLowerCase());
-
-    books = books.filter((book) =>
-      book.tags &&
-      filterTagsLower.some((filterTag) =>
-        book.tags.some((bookTag) =>
+    const filterTagsLower = filters.value.tags.map(t => t.toLowerCase());
+    
+    books = books.filter(book => 
+      filterTagsLower.some(filterTag => 
+        book.tags.some(bookTag => 
           bookTag.toLowerCase().includes(filterTag) || filterTag.includes(bookTag.toLowerCase())
         )
       )
     );
-
-    // Sort to prioritize books with the most matching tags
-    books.sort((a, b) => {
-      const aMatches = filterTagsLower.filter((filterTag) =>
-        a.tags.some((bookTag) =>
+    
+    // Sort by relevance - books with more matching tags appear higher
+    books = books.sort((a, b) => {
+      const aMatches = filterTagsLower.filter(filterTag => 
+        a.tags.some(bookTag => 
           bookTag.toLowerCase().includes(filterTag) || filterTag.includes(bookTag.toLowerCase())
         )
       ).length;
-
-      const bMatches = filterTagsLower.filter((filterTag) =>
-        b.tags.some((bookTag) =>
+      
+      const bMatches = filterTagsLower.filter(filterTag => 
+        b.tags.some(bookTag => 
           bookTag.toLowerCase().includes(filterTag) || filterTag.includes(bookTag.toLowerCase())
         )
       ).length;
-
-      return bMatches - aMatches;
+      
+      return bMatches - aMatches; // Higher matches first
     });
   }
 
@@ -306,8 +318,7 @@ const filteredBooks = computed(() => {
 
 // Top books for user (sorted by rating)
 const topBooks = computed(() => {
-  const books = [...allBooks.value];
-  return books
+  return allBooks.value
     .sort((a, b) => (b.rating || 0) - (a.rating || 0))
     .slice(0, 8);
 });
@@ -318,10 +329,8 @@ const suggestedTagsCycle = ['PHP', 'Web Development', 'Programming', 'Fantasy', 
 // Current tag index - cycles on every page refresh
 const currentTagIndex = ref(0);
 
-// Initialize tag index and load data on mount
-onMounted(async () => {
-  await loadBooksFromApi();
-  
+// Initialize tag index on mount - cycles through tags on each refresh
+onMounted(() => {
   if (process.client) {
     // Use sessionStorage to track and cycle through tags on each refresh
     const storedIndex = sessionStorage.getItem('suggestedTagIndex');
@@ -352,12 +361,9 @@ const suggestedTag = computed(() => {
 // Suggested books based on tag
 const suggestedBooks = computed(() => {
   const tag = suggestedTag.value;
-  if (!tag) {
-    return [];
-  }
-
+  if (!tag) return [];
   return allBooks.value
-    .filter((book) => book.tags.some((bookTag) =>
+    .filter(book => book.tags.some(bookTag => 
       bookTag.toLowerCase().includes(tag.toLowerCase())
     ))
     .slice(0, 8);
@@ -414,6 +420,17 @@ const suggestedBooks = computed(() => {
   width:920px;
   flex-direction: column;
   gap: 20px;
+}
+
+.no-results-text {
+  color: #64748b;
+  font-size: 16px;
+  line-height: 1.6;
+  text-align: center;
+  margin: 32px 0;
+  padding: 24px;
+  background: #f8fafc;
+  border-radius: 8px;
 }
 
 @media (max-width: 1024px) {
