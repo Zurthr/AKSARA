@@ -62,15 +62,19 @@
           />
         </div>
 
-        <!-- All Books Section - Always visible at the bottom -->
+        <!-- All Books Section - Always visible at the bottom with lazy loading -->
         <div class="all-books-section">
           <BookGrid
             title="Our Library, just for you."
-            :books="allBooks"
+            :books="lazyBooks"
             see-more-link="/literature"
             section-type="top"
             title-prefix="Library"
             title-suffix="just for you."
+            :lazy-load="true"
+            :is-loading="isLoadingBooks"
+            :has-more="hasMoreBooks"
+            @load-more="loadMoreBooks"
           />
         </div>
       </div>
@@ -88,8 +92,17 @@ import BookSection from '~/components/Literature/BookSection.vue';
 import BookGrid from '~/components/Literature/BookGrid.vue';
 import LiteratureFilterSidebar from '~/components/Literature/LiteratureFilterSidebar.vue';
 import TrendingSidebar from '~/components/TrendingSidebar.vue';
+import { useLazyBooks } from '~/composables/useLazyBooks';
 
-// Use the real books data from the mock backend JSON
+// Lazy load books from API for the "All Books" section
+const { 
+  books: lazyBooks, 
+  isLoading: isLoadingBooks, 
+  hasMore: hasMoreBooks, 
+  loadMore: loadMoreBooks 
+} = useLazyBooks(12);
+
+// Use the real books data from the mock backend JSON for static sections (topBooks, suggestedBooks)
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore - JSON module typing is handled by the bundler
 import rawBooksData from '../../../mock-backend/data/books.json';
