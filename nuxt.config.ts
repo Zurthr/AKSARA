@@ -10,6 +10,7 @@ export default defineNuxtConfig({
   alias: {
     images: fileURLToPath(new URL("./assets/images", import.meta.url)),
     style: fileURLToPath(new URL("./assets/style", import.meta.url)),
+    mockData: fileURLToPath(new URL("./mock-backend/data", import.meta.url)),
   },
   runtimeConfig: {
     public: {

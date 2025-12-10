@@ -166,9 +166,12 @@ import { useRuntimeConfig } from '#imports'
 import { useEvents } from '~/composables/useEvents'
 import type { Event as EventItem } from '~/composables/useEvents'
 import { useLocalEvents } from '~/composables/useLocalEvents'
-import eventsLocal from '~/data/events-local.json'
+import mockEvents from 'mockData/events.json'
+import { mergeEventCollections, normalizeEventCollection } from '~/utils/events-normalizer'
 
 const runtimeConfig = useRuntimeConfig()
+
+type RawEventRecord = Record<string, unknown>
 const resolveAssetBaseUrl = () => {
   const configured = runtimeConfig.public?.assetBaseUrl as string | undefined
   if (configured) return configured
@@ -188,42 +191,23 @@ const listFallbackImage = 'https://images.unsplash.com/photo-1498050108023-c5249
 const { getAllEvents, loading, error } = useEvents()
 
 const originalEvents = ref<EventItem[]>([])
-const { localEvents, addLocalEvent } = useLocalEvents()
+const staticEvents = normalizeEventCollection(mockEvents as RawEventRecord[])
+const { localEvents } = useLocalEvents()
+
+const normalizedLocalEvents = computed<EventItem[]>(() => {
+  const raw = Array.isArray(localEvents.value) ? localEvents.value : []
+  return normalizeEventCollection(raw as RawEventRecord[])
+})
+
 const mergedEvents = computed<EventItem[]>(() => {
-  // If backend fetch failed, show file + localStorage events only
-  if (error.value) {
-    const fileMapped = (eventsLocal as any[]).map(ev => ({
-      ...ev,
-      organizer: ev.community_name || ev.organizer || '-',
-      is_free: typeof ev.is_free === 'boolean' ? ev.is_free : (ev.price ? ev.price === 'Gratis' : true),
-      image_url: ev.image_url || ev.image || ''
-    }))
-    const localMapped = (localEvents.value as any[]).map(ev => ({
-      ...ev,
-      organizer: ev.community_name || ev.organizer || '-',
-      is_free: typeof ev.is_free === 'boolean' ? ev.is_free : (ev.price ? ev.price === 'Gratis' : true)
-    }))
-    // Remove duplicates by id (local > file)
-    const all = [...localMapped, ...fileMapped]
-    const seen = new Set()
-    const unique = []
-    for (const ev of all) {
-      const id = String(ev.id)
-      if (!seen.has(id)) {
-        seen.add(id)
-        unique.push(ev)
-      }
-    }
-    return unique as EventItem[]
-  }
-  // If backend works, show backend + localStorage events only
-  const apiIds = new Set(originalEvents.value.map(ev => String(ev.id)))
-  const localMapped = (localEvents.value as any[]).map(ev => ({
-    ...ev,
-    organizer: ev.community_name || ev.organizer || '-',
-    is_free: typeof ev.is_free === 'boolean' ? ev.is_free : (ev.price ? ev.price === 'Gratis' : true)
-  })).filter(ev => !apiIds.has(String(ev.id)))
-  return [...originalEvents.value, ...localMapped] as EventItem[]
+  const remote = Array.isArray(originalEvents.value) ? originalEvents.value : []
+  console.log('🔍 Merging events:')
+  console.log('📡 Remote (Laravel):', remote.length, 'events')
+  console.log('📄 Static (JSON):', staticEvents.length, 'events')
+  console.log('💾 Local Storage:', normalizedLocalEvents.value.length, 'events')
+  const merged = mergeEventCollections([remote, staticEvents, normalizedLocalEvents.value])
+  console.log('✅ Final merged:', merged.length, 'events')
+  return merged
 })
 
 const resolveAbsoluteUrl = (raw?: string | null) => {

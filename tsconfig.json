@@ -6,8 +6,10 @@
       "~": ["./app"],
       "~/*": ["./app/*"],
       "@": ["./app"],
-      "@/*": ["./app/*"]
-    }
+      "@/*": ["./app/*"],
+      "mockData/*": ["./mock-backend/data/*"]
+    },
+    "resolveJsonModule": true
   },
   "files": [],
   "references": [

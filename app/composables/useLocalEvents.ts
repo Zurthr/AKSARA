@@ -1,14 +1,14 @@
 // Composable untuk event manual berbasis localStorage
 import { ref } from 'vue'
 
-const LOCAL_KEY = 'aksara_local_events_v1'
+export const LOCAL_EVENTS_STORAGE_KEY = 'aksara_local_events_v1'
 
 export function useLocalEvents() {
   const localEvents = ref(readLocalEvents())
 
   function readLocalEvents() {
     try {
-      const raw = localStorage.getItem(LOCAL_KEY)
+      const raw = localStorage.getItem(LOCAL_EVENTS_STORAGE_KEY)
       if (!raw) return []
       return JSON.parse(raw)
     } catch {
@@ -17,7 +17,7 @@ export function useLocalEvents() {
   }
 
   function saveLocalEvents(events: any[]) {
-    localStorage.setItem(LOCAL_KEY, JSON.stringify(events))
+    localStorage.setItem(LOCAL_EVENTS_STORAGE_KEY, JSON.stringify(events))
     localEvents.value = events
   }
 

@@ -175,6 +175,9 @@ import { computed, ref, watch, onBeforeUnmount } from 'vue'
 import { useRoute, useRuntimeConfig } from '#imports'
 import { useEvents } from '~/composables/useEvents'
 import type { Event } from '~/composables/useEvents'
+import mockEvents from 'mockData/events.json'
+import { LOCAL_EVENTS_STORAGE_KEY } from '~/composables/useLocalEvents'
+import { findEventById, mergeEventCollections, normalizeEventCollection, readLocalEventsSnapshot } from '~/utils/events-normalizer'
 
 interface SidebarInfoItem {
   icon: string
@@ -188,19 +191,23 @@ interface SidebarTag {
 }
 
 interface RelatedEventCard {
-  id: number | null
+  id: string | number | null
   title: string
   type: string
   date: string
   image: string
 }
 
+type RawEventRecord = Record<string, unknown>
+
 const route = useRoute()
 const runtimeConfig = useRuntimeConfig()
 const eventApi = useEvents()
 const relatedApi = useEvents()
-const { getEventById, loading, error } = eventApi
+const { getEventById, loading, error, clearError } = eventApi
 const { getAllEvents } = relatedApi
+
+const staticEvents = normalizeEventCollection(mockEvents as RawEventRecord[])
 
 const event = ref<Event | null>(null)
 const notFound = ref(false)
@@ -304,25 +311,33 @@ const fetchEvent = async (rawId: string | string[] | undefined) => {
     return
   }
 
-  const numericId = Number(idParam)
-  if (Number.isNaN(numericId)) {
-    event.value = null
-    notFound.value = true
-    relatedRaw.value = []
+  const idKey = String(idParam)
+  clearError()
+  const remote = await getEventById(idParam)
+  if (remote) {
+    event.value = remote
+    clearError()
+    await loadRelatedEvents(remote)
     return
   }
 
-  const result = await getEventById(numericId)
-  if (result) {
-    event.value = result
-    await loadRelatedEvents(result)
-  } else if (!error.value) {
+  const localSnapshot = readLocalEventsSnapshot(LOCAL_EVENTS_STORAGE_KEY)
+  const fallback = findEventById(idKey, [staticEvents, localSnapshot])
+  if (fallback) {
+    event.value = fallback
+    clearError()
+    await loadRelatedEvents(fallback, localSnapshot)
+    return
+  }
+
+  event.value = null
+  relatedRaw.value = []
+  if (!error.value) {
     notFound.value = true
-    relatedRaw.value = []
   }
 }
 
-const loadRelatedEvents = async (current: Event | null) => {
+const loadRelatedEvents = async (current: Event | null, localSnapshot?: Event[]) => {
   if (!current) {
     relatedRaw.value = []
     return
@@ -330,15 +345,14 @@ const loadRelatedEvents = async (current: Event | null) => {
 
   isRelatedLoading.value = true
   relatedIndex.value = 0
+  const localEvents = Array.isArray(localSnapshot) ? localSnapshot : readLocalEventsSnapshot(LOCAL_EVENTS_STORAGE_KEY)
+
   try {
-    const response = await getAllEvents(1, 20)
-    if (response?.data) {
-      relatedRaw.value = response.data
-    } else {
-      relatedRaw.value = []
-    }
+    const response = await getAllEvents(1, 40)
+    const remote = response?.data ?? []
+    relatedRaw.value = mergeEventCollections([remote, staticEvents, localEvents])
   } catch {
-    relatedRaw.value = []
+    relatedRaw.value = mergeEventCollections([staticEvents, localEvents])
   } finally {
     isRelatedLoading.value = false
   }

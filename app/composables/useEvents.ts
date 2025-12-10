@@ -3,7 +3,7 @@ import { useApi } from './useApi'
 
 // TypeScript interfaces for Events API
 export interface Event {
-  id: number
+  id: number | string
   title: string
   description: string
   date: string
@@ -19,6 +19,15 @@ export interface Event {
   status: 'upcoming' | 'ongoing' | 'completed' | 'cancelled'
   created_at: string
   updated_at: string
+  tags?: string[]
+  attendees?: Array<{ id?: number | string; name?: string; avatar?: string }>
+  attendeeCount?: number
+  maxAttendees?: number
+  community_id?: string
+  community_name?: string
+  subtitle?: string
+  registration_url?: string
+  [key: string]: unknown
 }
 
 export interface EventCreateData {
@@ -74,12 +83,13 @@ export const useEvents = () => {
     }
   }
   
-  const getEventById = async (id: number): Promise<Event | null> => {
+  const getEventById = async (id: number | string): Promise<Event | null> => {
     setLoading(true)
     setError(null)
     
     try {
-      const response = await api.get<{ data: Event }>(`/events/${id}`)
+      const encodedId = encodeURIComponent(String(id))
+      const response = await api.get<{ data: Event }>(`/events/${encodedId}`)
       return response.data
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to fetch event')
@@ -104,12 +114,13 @@ export const useEvents = () => {
     }
   }
   
-  const updateEvent = async (id: number, eventData: EventUpdateData): Promise<Event | null> => {
+  const updateEvent = async (id: number | string, eventData: EventUpdateData): Promise<Event | null> => {
     setLoading(true)
     setError(null)
     
     try {
-      const response = await api.post<{ data: Event }>(`/events/${id}`, eventData)
+      const encodedId = encodeURIComponent(String(id))
+      const response = await api.post<{ data: Event }>(`/events/${encodedId}`, eventData)
       return response.data
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to update event')
@@ -119,12 +130,13 @@ export const useEvents = () => {
     }
   }
   
-  const deleteEvent = async (id: number): Promise<boolean> => {
+  const deleteEvent = async (id: number | string): Promise<boolean> => {
     setLoading(true)
     setError(null)
     
     try {
-      await api.delete(`/events/${id}`)
+      const encodedId = encodeURIComponent(String(id))
+      await api.delete(`/events/${encodedId}`)
       return true
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to delete event')
@@ -134,6 +146,10 @@ export const useEvents = () => {
     }
   }
   
+  const clearError = () => {
+    setError(null)
+  }
+  
   return {
     loading: readonly(loading),
     error: readonly(error),
@@ -141,6 +157,7 @@ export const useEvents = () => {
     getEventById,
     createEvent,
     updateEvent,
-    deleteEvent
+    deleteEvent,
+    clearError
   }
 }
