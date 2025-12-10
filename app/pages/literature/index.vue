@@ -83,54 +83,15 @@
 </template>
 
 <script setup lang="ts">
+import { ref, computed, onMounted, watch } from 'vue';
 import RightSideBar from '~/components/General/RightSideBar.vue';
 import BookSection from '~/components/Literature/BookSection.vue';
 import BookGrid from '~/components/Literature/BookGrid.vue';
 import LiteratureFilterSidebar from '~/components/Literature/LiteratureFilterSidebar.vue';
 import TrendingSidebar from '~/components/TrendingSidebar.vue';
+import { useBooks, type Book as ApiBook, type CopyType } from '~/composables/useBooks';
 
-// Use the real books data from the mock backend JSON
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore - JSON module typing is handled by the bundler
-import rawBooksData from '../../../mock-backend/data/books.json';
-
-interface RawBookTag {
-  name: string;
-  type?: string;
-}
-
-interface RawBookSource {
-  name: string;
-  url: string;
-}
-
-interface RawCopyTypeSource {
-  name: string;
-  url: string;
-  type?: string;
-  shipping_available?: boolean;
-}
-
-interface RawCopyType {
-  description: string;
-  sources?: RawCopyTypeSource[];
-}
-
-interface RawBook {
-  id: number;
-  title: string;
-  author?: string;
-  cover: string;
-  rating?: number;
-  description?: string;
-  year_edition?: string;
-  total_bookmarked?: number;
-  tags?: RawBookTag[];
-  copy_types?: Record<string, RawCopyType>;
-  licensing_type?: string;
-  sources?: RawBookSource[];
-}
-
+// UI Interface for books (maintaining existing structure)
 interface Book {
   id: number;
   title: string;
@@ -145,6 +106,10 @@ interface Book {
 }
 
 const route = useRoute();
+const { getAllBooks, error: booksError } = useBooks();
+
+// Reactive data
+const allBooks = ref<Book[]>([]);
 
 const normalizeKey = (value: string | undefined | null) => {
   return (value || '')
@@ -153,46 +118,94 @@ const normalizeKey = (value: string | undefined | null) => {
     .replace(/\s+/g, '-');
 };
 
-const rawBooks = rawBooksData as unknown as RawBook[];
+// Transform API book data to UI format
+const transformApiBookToUIBook = (apiBook: ApiBook): Book => {
+  const tags = (apiBook.tags || []).map((tag) => tag.name);
 
-// Map backend books.json structure into the simpler Book shape used by the UI
-const allBooks: Book[] = (rawBooks || []).map((book) => {
-  const tags = (book.tags || []).map((tag) => tag.name);
-
-  const copyType = book.copy_types
-    ? Object.keys(book.copy_types).map((key) => normalizeKey(key)).filter(Boolean)
+  const copyType = apiBook.copy_types
+    ? Object.keys(apiBook.copy_types).map((key) => normalizeKey(key)).filter(Boolean)
     : [];
 
-  const licensingType = book.licensing_type
-    ? [normalizeKey(book.licensing_type)]
+  const licensingType = apiBook.licensing_type
+    ? [normalizeKey(apiBook.licensing_type)]
     : [];
 
   const sourceNames: string[] = [];
 
-  if (book.sources) {
-    sourceNames.push(...book.sources.map((source) => source.name));
+  if (apiBook.sources) {
+    sourceNames.push(...apiBook.sources.map((source) => source.name));
   }
 
-  if (book.copy_types) {
-    Object.values(book.copy_types).forEach((copyTypeEntry) => {
-      if (copyTypeEntry.sources) {
-        sourceNames.push(...copyTypeEntry.sources.map((source) => source.name));
-      }
+  const copyTypes = apiBook.copy_types as Record<string, CopyType> | undefined;
+  if (copyTypes) {
+    Object.values(copyTypes).forEach((copyTypeEntry) => {
+      const sources = copyTypeEntry.sources || [];
+      sources.forEach((source) => {
+        sourceNames.push(source.name);
+      });
     });
   }
 
   return {
-    id: book.id,
-    title: book.title,
-    author: book.author,
-    image: book.cover,
+    id: apiBook.id,
+    title: apiBook.title,
+    author: apiBook.author,
+    image: apiBook.cover,
     tags,
-    rating: book.rating,
-    bookmarks: book.total_bookmarked,
+    rating: apiBook.rating,
+    bookmarks: apiBook.total_bookmarked,
     copyType,
     licensingType,
     sources: Array.from(new Set(sourceNames))
   };
+};
+
+const extractBooksFromResponse = (response: unknown): ApiBook[] => {
+  if (!response) {
+    return [];
+  }
+
+  if (Array.isArray(response)) {
+    return response as ApiBook[];
+  }
+
+  if (typeof response === 'object') {
+    const payload = response as Record<string, unknown>;
+
+    if (Array.isArray(payload.data)) {
+      return payload.data as ApiBook[];
+    }
+
+    const nestedData = payload.data as Record<string, unknown> | undefined;
+    if (nestedData && Array.isArray(nestedData.data)) {
+      return nestedData.data as ApiBook[];
+    }
+
+    if (Array.isArray(payload.books)) {
+      return payload.books as ApiBook[];
+    }
+  }
+
+  return [];
+};
+
+const loadBooksFromApi = async () => {
+  const response = await getAllBooks(1, 100);
+  const apiBooks = extractBooksFromResponse(response);
+
+  if (apiBooks.length === 0) {
+    console.warn('[Literature] Books API returned no data. Raw response:', response);
+    allBooks.value = [];
+    return;
+  }
+
+  allBooks.value = apiBooks.map(transformApiBookToUIBook);
+};
+
+watch(booksError, (message) => {
+  if (message) {
+    console.error('[Literature] Failed to load books:', message);
+  }
 });
 
 const searchQuery = computed(() => route.query.q as string || route.query.search as string || '');
@@ -225,69 +238,66 @@ const hasActiveFilters = computed(() => {
 
 // Filter books based on search query and filters
 const filteredBooks = computed(() => {
-  let books = [...allBooks];
+  let books = [...allBooks.value];
 
-  // Filter by search query
   if (searchQuery.value) {
     const query = searchQuery.value.toLowerCase();
-    books = books.filter(book => 
+    books = books.filter((book) =>
       book.title.toLowerCase().includes(query) ||
       book.author?.toLowerCase().includes(query) ||
-      book.tags.some(tag => tag.toLowerCase().includes(query))
+      book.tags.some((tag) => tag.toLowerCase().includes(query))
     );
   }
 
-  // Filter by copy type - check if any of the book's copy types match any filter
   if (filters.value.copyType.length > 0) {
-    books = books.filter(book => 
-      book.copyType && 
-      book.copyType.some(bookCopyType => filters.value.copyType.includes(bookCopyType))
+    books = books.filter((book) =>
+      book.copyType &&
+      book.copyType.some((bookCopyType) => filters.value.copyType.includes(bookCopyType))
     );
   }
 
-  // Filter by licensing type - check if any of the book's licensing types match any filter
   if (filters.value.licensingType.length > 0) {
-    books = books.filter(book => 
-      book.licensingType && 
-      book.licensingType.some(bookLicensingType => filters.value.licensingType.includes(bookLicensingType))
+    books = books.filter((book) =>
+      book.licensingType &&
+      book.licensingType.some((bookLicensingType) => filters.value.licensingType.includes(bookLicensingType))
     );
   }
 
-  // Filter by sources - check if any of the book's sources match the filter
   if (filters.value.sources) {
-    books = books.filter(book => 
-      book.sources && 
-      book.sources.includes(filters.value.sources)
+    const sourceQuery = filters.value.sources.toLowerCase();
+    books = books.filter((book) =>
+      book.sources &&
+      book.sources.some((source) => source.toLowerCase().includes(sourceQuery))
     );
   }
 
-  // Filter by tags - books must have at least one matching tag
   if (filters.value.tags.length > 0) {
-    const filterTagsLower = filters.value.tags.map(t => t.toLowerCase());
-    
-    books = books.filter(book => 
-      filterTagsLower.some(filterTag => 
-        book.tags.some(bookTag => 
+    const filterTagsLower = filters.value.tags.map((tag) => tag.toLowerCase());
+
+    books = books.filter((book) =>
+      book.tags &&
+      filterTagsLower.some((filterTag) =>
+        book.tags.some((bookTag) =>
           bookTag.toLowerCase().includes(filterTag) || filterTag.includes(bookTag.toLowerCase())
         )
       )
     );
-    
-    // Sort by relevance - books with more matching tags appear higher
-    books = books.sort((a, b) => {
-      const aMatches = filterTagsLower.filter(filterTag => 
-        a.tags.some(bookTag => 
+
+    // Sort to prioritize books with the most matching tags
+    books.sort((a, b) => {
+      const aMatches = filterTagsLower.filter((filterTag) =>
+        a.tags.some((bookTag) =>
           bookTag.toLowerCase().includes(filterTag) || filterTag.includes(bookTag.toLowerCase())
         )
       ).length;
-      
-      const bMatches = filterTagsLower.filter(filterTag => 
-        b.tags.some(bookTag => 
+
+      const bMatches = filterTagsLower.filter((filterTag) =>
+        b.tags.some((bookTag) =>
           bookTag.toLowerCase().includes(filterTag) || filterTag.includes(bookTag.toLowerCase())
         )
       ).length;
-      
-      return bMatches - aMatches; // Higher matches first
+
+      return bMatches - aMatches;
     });
   }
 
@@ -296,7 +306,8 @@ const filteredBooks = computed(() => {
 
 // Top books for user (sorted by rating)
 const topBooks = computed(() => {
-  return allBooks
+  const books = [...allBooks.value];
+  return books
     .sort((a, b) => (b.rating || 0) - (a.rating || 0))
     .slice(0, 8);
 });
@@ -307,8 +318,10 @@ const suggestedTagsCycle = ['PHP', 'Web Development', 'Programming', 'Fantasy', 
 // Current tag index - cycles on every page refresh
 const currentTagIndex = ref(0);
 
-// Initialize tag index on mount - cycles through tags on each refresh
-onMounted(() => {
+// Initialize tag index and load data on mount
+onMounted(async () => {
+  await loadBooksFromApi();
+  
   if (process.client) {
     // Use sessionStorage to track and cycle through tags on each refresh
     const storedIndex = sessionStorage.getItem('suggestedTagIndex');
@@ -339,9 +352,12 @@ const suggestedTag = computed(() => {
 // Suggested books based on tag
 const suggestedBooks = computed(() => {
   const tag = suggestedTag.value;
-  if (!tag) return [];
-  return allBooks
-    .filter(book => book.tags.some(bookTag => 
+  if (!tag) {
+    return [];
+  }
+
+  return allBooks.value
+    .filter((book) => book.tags.some((bookTag) =>
       bookTag.toLowerCase().includes(tag.toLowerCase())
     ))
     .slice(0, 8);
