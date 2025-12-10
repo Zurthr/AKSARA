@@ -163,24 +163,14 @@ const allBooks = computed(() => {
       : []
     
     // Handle image URL with fallback and better filtering
-    let imageUrl = book.cover || book.image_url || '/images/book-placeholder.svg'
+    let imageUrl = book.cover || book.image_url
     
-    // Filter out problematic image URLs that cause 403/404 errors
-    const problematicDomains = [
-      'goodreads.com',
-      'amazon.com', 
-      'ssl-images',
-      'media-amazon',
-      'images-na.ssl-images-amazon'
-    ]
-    
-    const hasProblematicUrl = problematicDomains.some(domain => 
-      imageUrl.includes(domain)
-    )
-    
-    if (hasProblematicUrl || !imageUrl.startsWith('http')) {
-      imageUrl = '/images/book-placeholder.svg'
+    // Only use placeholder for clearly invalid URLs
+    if (!imageUrl || imageUrl === 'null' || imageUrl === 'undefined' || imageUrl.trim() === '') {
+      imageUrl = '/images/book-cover-placeholder.svg'
     }
+    
+    // Let the BookCard component handle image loading errors gracefully
     
     return {
       id: typeof book.id === 'string' ? parseInt(book.id) || 0 : (book.id as number),
@@ -433,9 +423,10 @@ const suggestedBooks = computed(() => {
   border-radius: 8px;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 768px) {
   .literature-content {
-    flex-direction: column;
+   flex-direction: column;
+    padding: 16px;
   }
   
   .literature-main {
