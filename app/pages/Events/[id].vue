@@ -28,11 +28,26 @@
                 <div class="hero-media-content">
                   <span v-if="eventData.category" class="hero-category-badge">{{ eventData.category }}</span>
                   <h1 class="hero-media-title">{{ eventData.title }}</h1>
-                  <p v-if="eventData.description" class="hero-media-subtitle">{{ truncate(eventData.description) }}</p>
-                  <div class="hero-actions">
-                    <span v-if="displayDate" class="hero-chip">{{ displayDate }}</span>
-                    <span v-if="eventData.location" class="hero-chip">{{ eventData.location }}</span>
+                  
+                  <div class="hero-cta">
+                    <button
+                      type="button"
+                      class="hero-button primary"
+                      :disabled="!registrationLink"
+                      @click="handleRegisterClick"
+                    >
+                      <span class="hero-button-icon">★</span>
+                      {{ registrationButtonLabel }}
+                    </button>
+                    <button type="button" class="hero-button secondary" @click="shareEvent">
+                      <svg class="hero-button-share" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 0 6h.17A3 3 0 0 0 18 8Zm0 2a4.98 4.98 0 0 0-3.9 1.9l-5.3-2.65a3 3 0 1 0-.8 1.6l5.34 2.67A4.97 4.97 0 0 0 13 16a5 5 0 1 0 5-5Z" fill="currentColor" />
+                      </svg>
+                      {{ shareButtonLabel }}
+                    </button>
                   </div>
+                
+                  <p v-if="shareMessage" class="hero-share-feedback">{{ shareMessage }}</p>
                 </div>
               </div>
             </div>
@@ -40,28 +55,23 @@
 
           <section class="event-info">
             <header class="event-header">
-              <h2 class="event-title">{{ eventData.title }}</h2>
-              <p v-if="eventData.organizer" class="hosted-by">
-                Diselenggarakan oleh <span class="host-link">{{ eventData.organizer }}</span>
-              </p>
-              <p v-if="displayStatus" class="event-subtitle">Status: {{ displayStatus }}</p>
+              
+              <span v-if="displayStatus" class="status-pill">{{ displayStatus }}</span>
             </header>
 
             <section v-if="eventData.description" class="event-description">
-              <h3>Deskripsi</h3>
+              <h3>Deskripsi Event</h3>
               <p>{{ eventData.description }}</p>
             </section>
 
             <section v-if="detailBlocks.length" class="event-details-section">
               <h3>Detail Event</h3>
-              <div class="details-grid">
+              <dl class="details-grid">
                 <div v-for="detail in detailBlocks" :key="detail.label" class="detail-item">
-                  <div class="detail-content">
-                    <p class="detail-label">{{ detail.label }}</p>
-                    <p class="detail-value">{{ detail.value }}</p>
-                  </div>
+                  <dt class="detail-label">{{ detail.label }}</dt>
+                  <dd class="detail-value">{{ detail.value }}</dd>
                 </div>
-              </div>
+              </dl>
             </section>
 
             <section v-if="tagList.length" class="event-tags">
@@ -71,16 +81,97 @@
               </div>
             </section>
           </section>
+
+          <section v-if="isRelatedLoading" class="related-events-card related-loading">
+            <div class="card-header">
+              <h3>Related Events</h3>
+              <div class="loading-pulse"></div>
+            </div>
+            <p class="related-placeholder">Memuat rekomendasi event...</p>
+          </section>
+
+          <section v-else-if="carouselItems.length" class="related-events-card carousel-card">
+            <div class="card-header">
+              <h3>Related Events</h3>
+              <span class="events-count">{{ carouselItems.length }} Events</span>
+            </div>
+
+            <div class="carousel-wrapper related-carousel">
+              <button
+                v-if="showCarouselNav"
+                class="carousel-nav carousel-nav-left"
+                type="button"
+                :disabled="relatedIndex === 0"
+                @click="previousRelated"
+                aria-label="Event sebelumnya"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </button>
+
+              <div class="carousel-container">
+                <div class="carousel-track" :style="{ transform: carouselTranslate }">
+                  <div v-for="item in carouselItems" :key="item.title" class="related-card">
+                    <NuxtLink v-if="item.id" :to="`/events/${item.id}`" class="related-card-inner related-link">
+                      <div class="related-thumb">
+                        <img class="related-thumb-img" :src="item.image" :alt="item.title" />
+                      </div>
+                      <div class="related-body">
+                        <h4 class="related-title">{{ item.title }}</h4>
+                        <div class="related-meta">
+                          <span class="related-type">{{ item.type }}</span>
+                          <span class="related-date">{{ item.date }}</span>
+                        </div>
+                      </div>
+                    </NuxtLink>
+                    <div v-else class="related-card-inner">
+                      <div class="related-thumb">
+                        <img class="related-thumb-img" :src="item.image" :alt="item.title" />
+                      </div>
+                      <div class="related-body">
+                        <h4 class="related-title">{{ item.title }}</h4>
+                        <div class="related-meta">
+                          <span class="related-type">{{ item.type }}</span>
+                          <span class="related-date">{{ item.date }}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <button
+                v-if="showCarouselNav"
+                class="carousel-nav carousel-nav-right"
+                type="button"
+                :disabled="relatedIndex >= maxRelatedIndex"
+                @click="nextRelated"
+                aria-label="Event berikutnya"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </button>
+            </div>
+          </section>
+
+          <section v-else class="related-events-card empty">
+            <div class="card-header">
+              <h3>Related Events</h3>
+            </div>
+            <p class="related-placeholder">Belum ada rekomendasi event lainnya.</p>
+          </section>
         </div>
       </div>
 
-      <EventsSidebar :informasiTambahan="sidebarInfo" :tags="sidebarTags" :relatedEvents="relatedEvents" />
+      <EventsSidebar :informasiTambahan="sidebarInfo" :tags="sidebarTags" :relatedEvents="[]" />
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue'
+import { computed, ref, watch, onBeforeUnmount } from 'vue'
 import { useRoute, useRuntimeConfig } from '#imports'
 import { useEvents } from '~/composables/useEvents'
 import type { Event } from '~/composables/useEvents'
@@ -97,20 +188,31 @@ interface SidebarTag {
 }
 
 interface RelatedEventCard {
+  id: number | null
   title: string
   type: string
   date: string
-  color: string
+  image: string
 }
 
 const route = useRoute()
 const runtimeConfig = useRuntimeConfig()
-const { getEventById, loading, error } = useEvents()
+const eventApi = useEvents()
+const relatedApi = useEvents()
+const { getEventById, loading, error } = eventApi
+const { getAllEvents } = relatedApi
 
 const event = ref<Event | null>(null)
 const notFound = ref(false)
 const heroImage = ref('')
 const fallbackHeroImage = 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80'
+const shareMessage = ref('')
+let shareMessageTimer: ReturnType<typeof setTimeout> | null = null
+const relatedRaw = ref<Event[]>([])
+const relatedIndex = ref(0)
+const isRelatedLoading = ref(false)
+const CARD_WIDTH = 320
+const CARD_GAP = 12
 const resolveAssetBaseUrl = () => {
   const configured = runtimeConfig.public?.assetBaseUrl as string | undefined
   if (configured) return configured
@@ -143,12 +245,62 @@ const getHeroImageSrc = (item: Event | null) => {
   return resolveAbsoluteUrl(candidate)
 }
 
+const getCardImageSrc = (item: Event | null) => getHeroImageSrc(item) || fallbackHeroImage
+
+const formatRelatedDate = (dateStr?: string | null) => {
+  if (!dateStr) return 'TBA'
+  try {
+    const date = new Date(dateStr)
+    if (Number.isNaN(date.getTime())) return dateStr
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des']
+    const day = String(date.getDate()).padStart(2, '0')
+    const month = months[date.getMonth()] || ''
+    const year = date.getFullYear()
+    return `${day} ${month} ${year}`
+  } catch {
+    return dateStr
+  }
+}
+
+const registrationLink = computed(() => {
+  const value = event.value as (Event & Record<string, string | undefined>) | null
+  if (!value) return null
+  return (
+    value.registration_url ||
+    value.registrationLink ||
+    value.link ||
+    value.cta_url ||
+    value.ctaLink ||
+    null
+  )
+})
+
+const registrationButtonLabel = computed(() => {
+  if (!event.value) return 'Daftar Event'
+  return event.value.is_free ? 'Daftar Event (Gratis)' : 'Daftar Event'
+})
+
+const shareButtonLabel = computed(() => {
+  if (typeof navigator !== 'undefined' && typeof navigator.share === 'function') {
+    return 'Bagikan'
+  }
+  return 'Salin Tautan'
+})
+
+const clearShareTimer = () => {
+  if (shareMessageTimer) {
+    clearTimeout(shareMessageTimer)
+    shareMessageTimer = null
+  }
+}
+
 const fetchEvent = async (rawId: string | string[] | undefined) => {
   notFound.value = false
   const idParam = Array.isArray(rawId) ? rawId[0] : rawId
   if (!idParam) {
     event.value = null
     notFound.value = true
+    relatedRaw.value = []
     return
   }
 
@@ -156,14 +308,39 @@ const fetchEvent = async (rawId: string | string[] | undefined) => {
   if (Number.isNaN(numericId)) {
     event.value = null
     notFound.value = true
+    relatedRaw.value = []
     return
   }
 
   const result = await getEventById(numericId)
   if (result) {
     event.value = result
+    await loadRelatedEvents(result)
   } else if (!error.value) {
     notFound.value = true
+    relatedRaw.value = []
+  }
+}
+
+const loadRelatedEvents = async (current: Event | null) => {
+  if (!current) {
+    relatedRaw.value = []
+    return
+  }
+
+  isRelatedLoading.value = true
+  relatedIndex.value = 0
+  try {
+    const response = await getAllEvents(1, 20)
+    if (response?.data) {
+      relatedRaw.value = response.data
+    } else {
+      relatedRaw.value = []
+    }
+  } catch {
+    relatedRaw.value = []
+  } finally {
+    isRelatedLoading.value = false
   }
 }
 
@@ -182,6 +359,53 @@ watch(
   },
   { immediate: true }
 )
+
+const setShareMessage = (message: string) => {
+  shareMessage.value = message
+  clearShareTimer()
+  shareMessageTimer = setTimeout(() => {
+    shareMessage.value = ''
+    shareMessageTimer = null
+  }, 2400)
+}
+
+const handleRegisterClick = () => {
+  if (!registrationLink.value) return
+  if (typeof window === 'undefined') return
+  window.open(registrationLink.value, '_blank', 'noopener')
+}
+
+const shareEvent = async () => {
+  if (typeof window === 'undefined') return
+  const shareUrl = window.location.href
+  const title = event.value?.title ?? 'Event AKSARA'
+
+  try {
+    if (typeof navigator !== 'undefined' && typeof navigator.share === 'function') {
+      await navigator.share({ title, url: shareUrl })
+      return
+    }
+  } catch {
+    // Fallback to clipboard if share fails.
+  }
+
+  if (typeof navigator !== 'undefined' && navigator.clipboard) {
+    try {
+      await navigator.clipboard.writeText(shareUrl)
+      setShareMessage('Tautan event berhasil disalin')
+      return
+    } catch {
+      setShareMessage('Tidak dapat menyalin tautan')
+      return
+    }
+  }
+
+  setShareMessage('Silakan salin tautan secara manual')
+}
+
+onBeforeUnmount(() => {
+  clearShareTimer()
+})
 
 const isLoading = computed(() => loading.value)
 const loadError = computed(() => error.value)
@@ -261,7 +485,7 @@ const detailBlocks = computed(() => {
     { label: 'Status', value: displayStatus.value },
     { label: 'Harga', value: displayPrice.value },
     { label: 'Kapasitas', value: displayCapacity.value },
-    { label: 'Terakhir Diperbarui', value: value.updated_at ? new Date(value.updated_at).toLocaleString('id-ID') : null },
+    
   ]
 
   return details.filter((item) => item.value) as { label: string; value: string }[]
@@ -296,7 +520,53 @@ const tagList = computed(() => {
 })
 
 const sidebarTags = computed(() => tagList.value.map((name) => ({ name, class: 'tag-default' })) as SidebarTag[])
-const relatedEvents = computed(() => [] as RelatedEventCard[])
+
+const relatedEventsList = computed(() => {
+  const current = event.value
+  if (!current) return [] as Event[]
+
+  const others = relatedRaw.value.filter((item) => item.id !== current.id)
+  const sameCategory = current.category ? others.filter((item) => item.category === current.category) : others
+  const remaining = current.category ? others.filter((item) => item.category !== current.category) : []
+  const merged = [...sameCategory, ...remaining]
+  return merged.slice(0, 9)
+})
+
+const carouselItems = computed((): RelatedEventCard[] => {
+  return relatedEventsList.value.map((item, index) => ({
+    id: item.id ?? null,
+    title: item.title,
+    type: item.category || 'Event',
+    date: formatRelatedDate(item.date),
+    image: getCardImageSrc(item),
+  }))
+})
+
+const visibleCount = computed(() => Math.min(3, carouselItems.value.length))
+const maxRelatedIndex = computed(() => Math.max(0, carouselItems.value.length - visibleCount.value))
+const carouselTranslate = computed(() => `translateX(-${relatedIndex.value * (CARD_WIDTH + CARD_GAP)}px)`)
+const showCarouselNav = computed(() => carouselItems.value.length > visibleCount.value)
+
+const nextRelated = () => {
+  if (relatedIndex.value < maxRelatedIndex.value) {
+    relatedIndex.value += 1
+  }
+}
+
+const previousRelated = () => {
+  if (relatedIndex.value > 0) {
+    relatedIndex.value -= 1
+  }
+}
+
+watch([
+  () => carouselItems.value.length,
+  () => visibleCount.value,
+], () => {
+  if (relatedIndex.value > maxRelatedIndex.value) {
+    relatedIndex.value = maxRelatedIndex.value
+  }
+})
 
 const handleImageError = () => {
   heroImage.value = fallbackHeroImage
@@ -324,13 +594,19 @@ const retryFetch = () => {
   color: #3b5379;
   font-weight: 600;
   text-decoration: none;
+  margin-left: 31px;
 }
 
 .event-detail-content {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) clamp(240px, 24vw, 320px);
-  gap: 24px;
-  align-items: start;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  width: 100%;
+  align-items: flex-start;
+}
+
+.event-detail-content > *:last-child {
+  flex-shrink: 0;
 }
 
 .event-detail-main {
@@ -338,25 +614,15 @@ const retryFetch = () => {
   display: flex;
   flex-direction: column;
   gap: 24px;
-  max-height: calc(100vh - 160px);
-  overflow-y: auto;
-  padding-right: 4px;
-  scrollbar-width: thin;
   min-width: 0;
-}
-
-.event-detail-main::-webkit-scrollbar {
-  width: 4px;
-}
-
-.event-detail-main::-webkit-scrollbar-track {
-  background: transparent;
+  max-width: 920px;
 }
 
 .event-detail-feed {
   display: flex;
   flex-direction: column;
   gap: 24px;
+  margin-left: 31px;
 }
 
 .state-card {
@@ -460,7 +726,7 @@ const retryFetch = () => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
+  gap: 18px;
 }
 
 .hero-category-badge {
@@ -487,104 +753,172 @@ const retryFetch = () => {
   opacity: 0.95;
 }
 
-.hero-actions {
+.hero-cta {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
   justify-content: center;
 }
 
-.hero-chip {
+.hero-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 24px;
+  border-radius: 999px;
+  border: none;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hero-button.primary {
+  background: #ffda49;
+  color: #1f2937;
+  box-shadow: 0 12px 24px rgba(249, 115, 22, 0.35);
+}
+
+.hero-button.secondary {
+  background: rgba(255, 255, 255, 0.18);
+  color: #f8fafc;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.hero-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+
+.hero-button-icon {
+  font-size: 16px;
+}
+
+.hero-button-share {
+  display: block;
+}
+
+.hero-meta {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.hero-meta-item {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 10px 16px;
+  padding: 8px 14px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.28);
   font-weight: 600;
 }
 
-.event-info {
-  background: #ffffff;
-  border-radius: 24px;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
-  padding: 32px;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
+.hero-share-feedback {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #facc15;
 }
 
-.event-header h2 {
-  font-size: 24px;
-  font-weight: 700;
-  color: var(--color-black);
-  margin-bottom: 8px;
+
+.event-info {
+  background: #ffffff;
+  border-radius: 28px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 22px 44px rgba(15, 23, 42, 0.08);
+  padding: 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.event-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
 }
 
 .event-title {
-  font-size: clamp(24px, 4vw, 32px);
+  font-size: clamp(28px, 4vw, 38px);
   font-weight: 800;
-  color: var(--color-black);
-  margin: 0 0 8px;
-}
-
-.event-subtitle {
-  font-size: 16px;
-  color: #475569;
-  margin: 0;
+  color: #0f172a;
+  margin: 0 0 10px;
 }
 
 .hosted-by {
   color: #64748b;
-  font-size: 14px;
+  font-size: 15px;
   margin: 0;
 }
 
 .host-link {
-  color: #3b82f6;
+  color: #2563eb;
+  font-weight: 700;
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 18px;
+  border-radius: 999px;
+  background: rgba(59, 130, 246, 0.1);
+  color: #1d4ed8;
   font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 12px;
 }
 
 .event-description h3,
 .event-details-section h3,
 .event-tags h3 {
-  font-size: 18px;
+  font-size: 19px;
   font-weight: 700;
-  color: var(--color-black);
-  margin-bottom: 12px;
+  color: #0f172a;
+  margin: 0 0 16px;
 }
 
 .event-description p {
   color: #475569;
-  line-height: 1.6;
+  line-height: 1.7;
+  margin: 0;
+  font-size: 16px;
 }
 
 .details-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 18px;
 }
 
 .detail-item {
-  padding: 16px;
   background: #f8fafc;
-  border-radius: 12px;
+  border-radius: 18px;
   border: 1px solid #e2e8f0;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .detail-label {
+  font-size: 12px;
   font-weight: 600;
-  color: #374151;
-  font-size: 13px;
-  margin-bottom: 4px;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
+  color: #64748b;
+  margin: 0;
 }
 
 .detail-value {
-  color: #1f2937;
-  font-size: 15px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #0f172a;
+  margin: 0;
 }
 
 .tags-container {
@@ -611,29 +945,224 @@ const retryFetch = () => {
   border: 1px solid rgba(59, 83, 121, 0.22);
 }
 
+.related-events-card {
+  background: #ffffff;
+  border-radius: 24px;
+  border: 1px solid #e2e8f0;
+  padding: 28px;
+  box-shadow: 0 18px 36px rgba(15, 23, 42, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.related-events-card .card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.related-events-card .card-header h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+}
+
+.events-count {
+  font-size: 12px;
+  font-weight: 600;
+  color: #475569;
+  background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+  padding: 6px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(71, 85, 105, 0.12);
+}
+
+.related-placeholder {
+  margin: 0;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.related-loading .loading-pulse {
+  width: 64px;
+  height: 10px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(148, 163, 184, 0.35), rgba(148, 163, 184, 0.15), rgba(148, 163, 184, 0.35));
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.carousel-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.carousel-container {
+  overflow: hidden;
+  width: 100%;
+}
+
+.carousel-track {
+  display: flex;
+  gap: 12px;
+  transition: transform 0.35s ease;
+  padding: 8px 4px;
+  will-change: transform;
+}
+
+.related-card {
+  flex-shrink: 0;
+  width: 320px;
+}
+
+.related-card-inner {
+  background: #f8fafc;
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  padding: 16px;
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.related-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.related-link:hover .related-card-inner,
+.related-card-inner:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.12);
+}
+
+.related-thumb {
+  width: 104px;
+  height: 104px;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #e2e8f0;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.related-thumb-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.related-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.related-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.related-meta {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.related-type {
+  background: #e2e8f0;
+  color: #334155;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.related-date {
+  font-size: 12px;
+}
+
+.carousel-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  border: 1px solid #cbd5f5;
+  background: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #1d4ed8;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 8px 16px rgba(15, 23, 42, 0.12);
+}
+
+.carousel-nav:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.carousel-nav-left {
+  left: -18px;
+}
+
+.carousel-nav-right {
+  right: -18px;
+}
+
+.carousel-nav:hover:not(:disabled) {
+  transform: translateY(-50%) translateY(-2px);
+}
+
 @media (max-width: 1280px) {
   .event-detail-content {
-    grid-template-columns: minmax(0, 1fr) clamp(220px, 30vw, 300px);
     gap: 20px;
   }
 }
 
 @media (max-width: 1024px) {
   .event-detail-content {
-    grid-template-columns: minmax(0, 1fr) clamp(200px, 36vw, 260px);
     gap: 18px;
   }
 }
 
 @media (max-width: 768px) {
   .event-detail-content {
-    grid-template-columns: 1fr;
+    flex-direction: column;
     gap: 16px;
   }
 
   .event-detail-main {
-    max-height: none;
-    overflow: visible;
     padding-right: 0;
   }
 
@@ -654,18 +1183,39 @@ const retryFetch = () => {
     font-size: 16px;
   }
 
-  .hero-actions {
+  .event-info {
+    padding: 24px;
+  }
+
+  .event-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hero-cta {
     flex-direction: column;
     width: 100%;
   }
 
-  .hero-chip {
+  .hero-button {
     width: 100%;
     justify-content: center;
   }
 
-  .event-info {
-    padding: 20px;
+  .related-events-card {
+    padding: 22px;
+  }
+
+  .related-card {
+    width: 260px;
+  }
+
+  .carousel-nav-left {
+    left: -6px;
+  }
+
+  .carousel-nav-right {
+    right: -6px;
   }
 }
 </style>

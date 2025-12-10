@@ -4,105 +4,107 @@
      
 
       <div class="events-body">
-        <!-- Loading state -->
-        <div v-if="loading" class="loading-state">
-          <div class="loading-spinner"></div>
-          <p>Loading events...</p>
-        </div>
+        <div class="events-content">
+          <!-- Loading state -->
+          <div v-if="loading" class="loading-state">
+            <div class="loading-spinner"></div>
+            <p>Loading events...</p>
+          </div>
 
-        <!-- Error state -->
-        <div v-else-if="error" class="error-state">
-          <p class="error-message">{{ error }}</p>
-          <button @click="fetchEvents" class="retry-btn">Try Again</button>
-        </div>
+          <!-- Error state -->
+          <div v-else-if="error" class="error-state">
+            <p class="error-message">{{ error }}</p>
+            <button @click="fetchEvents" class="retry-btn">Try Again</button>
+          </div>
 
-        <!-- Events grid -->
-        <div v-else class="events-grid">
-          <NuxtLink
-            v-for="event in filteredEvents"
-            :key="event.id"
-            :to="`/events/${event.id}`"
-            class="event-card"
-          >
-            <div class="event-image">
-              <img :src="getEventImageSrc(event)" :alt="event.title" @error="handleCardImageError" />
-            </div>
+          <!-- Events grid -->
+          <div v-else class="events-grid">
+            <NuxtLink
+              v-for="event in filteredEvents"
+              :key="event.id"
+              :to="`/events/${event.id}`"
+              class="event-card"
+            >
+              <div class="event-image">
+                <img :src="getEventImageSrc(event)" :alt="event.title" @error="handleCardImageError" />
+              </div>
 
-            <div class="event-content">
-              <div class="event-meta">
-                <h4>{{ event.title }}</h4>
-                <p class="event-description">{{ event.description }}</p>
+              <div class="event-content">
+                <div class="event-meta">
+                  <h4>{{ event.title }}</h4>
+                  <p class="event-description">{{ event.description }}</p>
 
-                <div class="event-details">
-                  <div class="event-location">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z" fill="currentColor"/>
-                    </svg>
-                    {{ event.location }}
-                  </div>
+                  <div class="event-details">
+                    <div class="event-location">
+                      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z" fill="currentColor"/>
+                      </svg>
+                      {{ event.location }}
+                    </div>
 
-                  <div class="event-date">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z" fill="currentColor"/>
-                    </svg>
-                    <div class="date-block">
-                      <div class="date-info">
-                        <div class="date-full">{{ formatEventDate(event.date).full }}</div>
+                    <div class="event-date">
+                      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z" fill="currentColor"/>
+                      </svg>
+                      <div class="date-block">
+                        <div class="date-info">
+                          <div class="date-full">{{ formatEventDate(event.date).full }}</div>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              <button class="event-detail-btn">Event Detail</button>
-            </div>
-          </NuxtLink>
+                <button class="event-detail-btn">Event Detail</button>
+              </div>
+            </NuxtLink>
+          </div>
         </div>
 
         <div class="events-insights" aria-label="Event highlights">
           <section class="sidebar-card filter-card">
-            <h3>Filter Events</h3>
-            <div class="filter-form">
-              <div class="filter-row">
-                <label class="filter-label">Start date</label>
-                <div class="input-with-icon">
-                  <input ref="startInput" class="filter-input" type="date" v-model="startDate" />
-                  <button type="button" class="input-icon" @click="openStartPicker" aria-label="Open start date picker">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 10h5v5H7z" fill="currentColor" opacity="0.2"/><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z" fill="currentColor"/></svg>
-                  </button>
+              <h3>Filter Events</h3>
+              <div class="filter-form">
+                <div class="filter-row">
+                  <label class="filter-label">Start date</label>
+                  <div class="input-with-icon">
+                    <input ref="startInput" class="filter-input" type="date" v-model="startDate" />
+                    <button type="button" class="input-icon" @click="openStartPicker" aria-label="Open start date picker">
+                      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 10h5v5H7z" fill="currentColor" opacity="0.2"/><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z" fill="currentColor"/></svg>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="filter-row">
+                  <label class="filter-label">End date</label>
+                  <div class="input-with-icon">
+                    <input ref="endInput" class="filter-input" type="date" v-model="endDate" />
+                    <button type="button" class="input-icon" @click="openEndPicker" aria-label="Open end date picker">
+                      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 10h5v5H7z" fill="currentColor" opacity="0.2"/><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2zm0 16H5V8h14v11zM7 10h5v5H7z" fill="currentColor"/></svg>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="filter-row">
+                  <label class="filter-label">Type</label>
+                  <div class="chip-group">
+                    <button type="button" :class="['chip', { 'chip-active': onlineChecked }]" @click="onlineChecked = !onlineChecked">Online</button>
+                    <button type="button" :class="['chip', { 'chip-active': offlineChecked }]" @click="offlineChecked = !offlineChecked">Offline</button>
+                  </div>
+                </div>
+
+                <div class="filter-row filter-actions">
+                  <button class="clear-btn" @click.prevent="clearFilters">Clear Filters</button>
                 </div>
               </div>
+            </section>
 
-              <div class="filter-row">
-                <label class="filter-label">End date</label>
-                <div class="input-with-icon">
-                  <input ref="endInput" class="filter-input" type="date" v-model="endDate" />
-                  <button type="button" class="input-icon" @click="openEndPicker" aria-label="Open end date picker">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 10h5v5H7z" fill="currentColor" opacity="0.2"/><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z" fill="currentColor"/></svg>
-                  </button>
-                </div>
+            <section class="sidebar-card">
+              <h3>Most Popular Tags</h3>
+              <div class="tags-grid">
+                <span v-for="tag in popularTags" :key="tag.name" class="tag" :class="tag.class">{{ tag.name }}</span>
               </div>
-
-              <div class="filter-row">
-                <label class="filter-label">Type</label>
-                <div class="chip-group">
-                  <button type="button" :class="['chip', { 'chip-active': onlineChecked }]" @click="onlineChecked = !onlineChecked">Online</button>
-                  <button type="button" :class="['chip', { 'chip-active': offlineChecked }]" @click="offlineChecked = !offlineChecked">Offline</button>
-                </div>
-              </div>
-
-              <div class="filter-row filter-actions">
-                <button class="clear-btn" @click.prevent="clearFilters">Clear Filters</button>
-              </div>
-            </div>
-          </section>
-
-          <section class="sidebar-card">
-            <h3>Most Popular Tags</h3>
-            <div class="tags-grid">
-              <span v-for="tag in popularTags" :key="tag.name" class="tag" :class="tag.class">{{ tag.name }}</span>
-            </div>
-          </section>
+            </section>
 
           <section class="sidebar-card">
             <NuxtLink to="/events/create" class="initiate-btn">
@@ -348,10 +350,19 @@ const popularTags = [
 }
 
 .events-body {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) clamp(240px, 28vw, 300px);
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.events-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
   gap: 24px;
-  align-items: start;
+  min-width: 0;
+  max-width: 920px;
 }
 
 .events-header h1 {
@@ -371,6 +382,7 @@ const popularTags = [
   display: flex;
   flex-direction: column;
   gap: 20px;
+  margin-left: 31px;
 }
 
 .event-card {
@@ -687,11 +699,14 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .events-insights {
+  position: sticky;
+  top: 80px;
+  margin-top: 20px;
+  width: 320px;
+  padding-left: 24px;
   display: flex;
   flex-direction: column;
   gap: 16px;
-  position: sticky;
-  top: 84px;
 }
 
 .sidebar-card {
@@ -761,19 +776,25 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 @media (max-width: 1024px) {
   .events-body {
-    grid-template-columns: minmax(0, 1fr) clamp(260px, 40vw, 320px);
-    gap: 20px;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .events-content {
+    max-width: 100%;
+  }
+
+  .events-insights {
+    position: static;
+    width: 100%;
+    padding-left: 0;
+    margin-top: 0;
   }
 }
 
 @media (max-width: 768px) {
   .events-body {
-    grid-template-columns: 1fr;
     gap: 16px;
-  }
-
-  .events-insights {
-    position: static;
   }
 
   .event-card {
