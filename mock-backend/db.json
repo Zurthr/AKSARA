@@ -7061,5 +7061,177 @@
       "posts_count": 203,
       "engagement": "4.5k"
     }
+  ],
+  "click_events": [
+    {
+      "event_type": "book_click",
+      "item_id": 37,
+      "item_title": "Catching Fire",
+      "item_tags": [
+        "General"
+      ],
+      "user_id": "anon_1765351005302_w54spq4kc",
+      "timestamp": "2025-12-10T07:18:51.866Z",
+      "source_page": "/literature",
+      "metadata": {
+        "author": "Suzanne Collins",
+        "rating": 4.8
+      },
+      "id": 1
+    },
+    {
+      "event_type": "page_view",
+      "item_id": 37,
+      "item_title": "book: Catching Fire",
+      "item_tags": [
+        "General"
+      ],
+      "user_id": "anon_1765351005302_w54spq4kc",
+      "timestamp": "2025-12-10T07:18:52.657Z",
+      "source_page": "/literature/37",
+      "metadata": {
+        "page_type": "book"
+      },
+      "id": 2
+    },
+    {
+      "event_type": "page_view",
+      "item_id": 3,
+      "item_title": "book: Atomic Habits: An Easy & Proven Way to Build Good Habits & Break Bad Ones",
+      "item_tags": [
+        "Self-Help",
+        "Personal Development",
+        "Productivity",
+        "Psychology"
+      ],
+      "user_id": "anon_1765351005302_w54spq4kc",
+      "timestamp": "2025-12-10T07:33:34.831Z",
+      "source_page": "/literature/3",
+      "metadata": {
+        "page_type": "book"
+      },
+      "id": 3
+    },
+    {
+      "event_type": "book_click",
+      "item_id": 43,
+      "item_title": "The Martian",
+      "item_tags": [
+        "Science Fiction",
+        "Speculative"
+      ],
+      "user_id": "anon_1765351005302_w54spq4kc",
+      "timestamp": "2025-12-10T07:33:38.728Z",
+      "source_page": "/literature",
+      "metadata": {
+        "author": "Andy Weir",
+        "rating": 4.7
+      },
+      "id": 4
+    },
+    {
+      "event_type": "page_view",
+      "item_id": 43,
+      "item_title": "book: The Martian",
+      "item_tags": [
+        "Science Fiction",
+        "Speculative"
+      ],
+      "user_id": "anon_1765351005302_w54spq4kc",
+      "timestamp": "2025-12-10T07:33:39.365Z",
+      "source_page": "/literature/43",
+      "metadata": {
+        "page_type": "book"
+      },
+      "id": 5
+    },
+    {
+      "event_type": "book_click",
+      "item_id": 10,
+      "item_title": "The Art of Computer Programming",
+      "item_tags": [
+        "Computer Science",
+        "Algorithms",
+        "Programming Theory",
+        "Mathematical Foundations"
+      ],
+      "user_id": "anon_1765351005302_w54spq4kc",
+      "timestamp": "2025-12-10T07:33:43.294Z",
+      "source_page": "/literature",
+      "metadata": {
+        "author": "Donald E. Knuth",
+        "rating": 4.6
+      },
+      "id": 6
+    },
+    {
+      "event_type": "page_view",
+      "item_id": 10,
+      "item_title": "book: The Art of Computer Programming",
+      "item_tags": [
+        "Computer Science",
+        "Algorithms",
+        "Programming Theory",
+        "Mathematical Foundations"
+      ],
+      "user_id": "anon_1765351005302_w54spq4kc",
+      "timestamp": "2025-12-10T07:33:44.736Z",
+      "source_page": "/literature/10",
+      "metadata": {
+        "page_type": "book"
+      },
+      "id": 7
+    },
+    {
+      "event_type": "post_click",
+      "item_id": 16,
+      "item_title": "Mindset in Negotiation",
+      "item_tags": [
+        "#Business",
+        "#Psychology"
+      ],
+      "user_id": "anon_1765351005302_w54spq4kc",
+      "timestamp": "2025-12-10T07:33:47.765Z",
+      "source_page": "/literature/10",
+      "metadata": {
+        "author": "Harvey Specter",
+        "stars": 610
+      },
+      "id": 8
+    },
+    {
+      "event_type": "post_click",
+      "item_id": 9,
+      "item_title": "Design Patterns for Game Dev",
+      "item_tags": [
+        "#GameDev",
+        "#Architecture"
+      ],
+      "user_id": "anon_1765351005302_w54spq4kc",
+      "timestamp": "2025-12-10T07:33:55.594Z",
+      "source_page": "/forums",
+      "metadata": {
+        "author": "Orang Kmplang",
+        "stars": 230
+      },
+      "id": 9
+    },
+    {
+      "event_type": "post_click",
+      "item_id": 1,
+      "item_title": "Applying 'Atomic Habits' to Learning to Code",
+      "item_tags": [
+        "#Productivity",
+        "#Coding"
+      ],
+      "user_id": "anon_1765351005302_w54spq4kc",
+      "timestamp": "2025-12-10T07:34:01.444Z",
+      "source_page": "/forums",
+      "metadata": {
+        "author": "Sarah Chen",
+        "stars": 342
+      },
+      "id": 10
+    }
   ]
 }

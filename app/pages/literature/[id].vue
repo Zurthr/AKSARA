@@ -195,6 +195,9 @@
 <script setup lang="ts">
 import RightSideBar from '~/components/General/RightSideBar.vue';
 import ForumCard from '~/components/Forum/ForumCard.vue';
+import { useClickTracking } from '~/composables/useClickTracking';
+
+const { trackPageView } = useClickTracking();
 
 const route = useRoute();
 const bookId = route.params.id;
@@ -266,6 +269,18 @@ const { data: book, error: bookError } = await useFetch<RawBook>(`http://localho
 if (bookError.value) {
   console.error('Error fetching book:', bookError.value);
 }
+
+// Track page view when book is loaded
+onMounted(() => {
+  if (book.value) {
+    trackPageView({
+      type: 'book',
+      id: book.value.id,
+      title: book.value.title,
+      tags: book.value.tags?.map(t => t.name)
+    });
+  }
+});
 
 // Fetch related posts
 const relatedPosts = ref<Post[]>([]);

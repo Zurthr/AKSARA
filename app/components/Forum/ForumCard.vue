@@ -48,6 +48,8 @@
 </template>
 
 <script setup lang="ts">
+import { useClickTracking } from '~/composables/useClickTracking';
+
 const props = defineProps<{
   post: {
     id: string | number;
@@ -66,8 +68,18 @@ const props = defineProps<{
 }>();
 
 const router = useRouter();
+const { trackPostClick } = useClickTracking();
 
 const navigateToDetail = () => {
+  // Track the click event
+  trackPostClick({
+    id: props.post.id,
+    title: props.post.title,
+    tags: props.post.tags,
+    author: props.post.author,
+    stars: props.post.stars
+  });
+  
   router.push(`/forums/${props.post.id}`);
 };
 </script>
