@@ -138,6 +138,7 @@ if (error.value) {
   console.error('Error fetching post:', error.value);
 }
 
+
 // Fetch related community
 const relatedCommunity = ref<Community | null>(null);
 if (post.value?.community_id) {

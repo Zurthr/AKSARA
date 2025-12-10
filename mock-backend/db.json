@@ -7232,6 +7232,170 @@
         "stars": 342
       },
       "id": 10
+    },
+    {
+      "event_type": "page_view",
+      "item_id": 1,
+      "item_title": "post: Applying 'Atomic Habits' to Learning to Code",
+      "item_tags": [
+        "#Productivity",
+        "#Coding"
+      ],
+      "user_id": "anon_1765351005302_w54spq4kc",
+      "timestamp": "2025-12-10T07:37:24.346Z",
+      "source_page": "/forums/1",
+      "metadata": {
+        "page_type": "post"
+      },
+      "id": 11
+    },
+    {
+      "event_type": "post_click",
+      "item_id": 2,
+      "item_title": "Is 'Clean Code' still relevant in 2024?",
+      "item_tags": [
+        "#Discussion",
+        "#SoftwareEngineering"
+      ],
+      "user_id": "anon_1765351005302_w54spq4kc",
+      "timestamp": "2025-12-10T07:41:16.285Z",
+      "source_page": "/",
+      "metadata": {
+        "author": "Mike Ross",
+        "stars": 128
+      },
+      "id": 12
+    },
+    {
+      "event_type": "page_view",
+      "item_id": 2,
+      "item_title": "post: Is 'Clean Code' still relevant in 2024?",
+      "item_tags": [
+        "#Discussion",
+        "#SoftwareEngineering"
+      ],
+      "user_id": "anon_1765351005302_w54spq4kc",
+      "timestamp": "2025-12-10T07:41:18.607Z",
+      "source_page": "/forums/2",
+      "metadata": {
+        "page_type": "post"
+      },
+      "id": 13
+    },
+    {
+      "event_type": "post_click",
+      "item_id": 8,
+      "item_title": "The math behind Deep Learning",
+      "item_tags": [
+        "#AI",
+        "#Math"
+      ],
+      "user_id": "anon_1765351005302_w54spq4kc",
+      "timestamp": "2025-12-10T07:41:54.103Z",
+      "source_page": "/forums",
+      "metadata": {
+        "author": "John Doe",
+        "stars": 112
+      },
+      "id": 14
+    },
+    {
+      "event_type": "page_view",
+      "item_id": 8,
+      "item_title": "post: The math behind Deep Learning",
+      "item_tags": [
+        "#AI",
+        "#Math"
+      ],
+      "user_id": "anon_1765351005302_w54spq4kc",
+      "timestamp": "2025-12-10T07:41:56.481Z",
+      "source_page": "/forums/8",
+      "metadata": {
+        "page_type": "post"
+      },
+      "id": 15
+    },
+    {
+      "event_type": "book_click",
+      "item_id": 37,
+      "item_title": "Catching Fire",
+      "item_tags": [
+        "General"
+      ],
+      "user_id": "anon_1765351005302_w54spq4kc",
+      "timestamp": "2025-12-10T07:43:09.116Z",
+      "source_page": "/literature",
+      "metadata": {
+        "author": "Suzanne Collins",
+        "rating": 4.8
+      },
+      "id": 16
+    },
+    {
+      "event_type": "page_view",
+      "item_id": 37,
+      "item_title": "book: Catching Fire",
+      "item_tags": [
+        "General"
+      ],
+      "user_id": "anon_1765351005302_w54spq4kc",
+      "timestamp": "2025-12-10T07:43:09.678Z",
+      "source_page": "/literature/37",
+      "metadata": {
+        "page_type": "book"
+      },
+      "id": 17
+    },
+    {
+      "event_type": "post_click",
+      "item_id": 1,
+      "item_title": "Applying 'Atomic Habits' to Learning to Code",
+      "item_tags": [
+        "#Productivity",
+        "#Coding"
+      ],
+      "user_id": "anon_1765351005302_w54spq4kc",
+      "timestamp": "2025-12-10T07:57:19.392Z",
+      "source_page": "/forums",
+      "metadata": {
+        "author": "Sarah Chen",
+        "stars": 342
+      },
+      "id": 18
+    },
+    {
+      "event_type": "post_click",
+      "item_id": 6,
+      "item_title": "MVP vs Polished Product",
+      "item_tags": [
+        "#Business",
+        "#Startup"
+      ],
+      "user_id": "anon_1765351005302_w54spq4kc",
+      "timestamp": "2025-12-10T07:57:32.396Z",
+      "source_page": "/forums",
+      "metadata": {
+        "author": "Harvey Specter",
+        "stars": 445
+      },
+      "id": 19
+    },
+    {
+      "event_type": "book_click",
+      "item_id": 36,
+      "item_title": "The Hunger Games",
+      "item_tags": [
+        "Dystopia",
+        "Fiction"
+      ],
+      "user_id": "anon_1765351005302_w54spq4kc",
+      "timestamp": "2025-12-10T07:57:41.633Z",
+      "source_page": "/literature",
+      "metadata": {
+        "author": "Suzanne Collins",
+        "rating": 4.8
+      },
+      "id": 20
     }
   ]
 }

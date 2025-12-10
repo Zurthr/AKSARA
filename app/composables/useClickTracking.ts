@@ -4,13 +4,13 @@
  * 
  * Features:
  * - Anonymous session ID (stored in localStorage)
- * - Batching (sends multiple events together to reduce API calls)
- * - Supports: book_click, post_click, community_click, event_click, page_view
+ * - Immediate sending using sendBeacon (works during navigation)
+ * - Supports: book_click, post_click, community_click, event_click
  */
 
 export interface ClickEvent {
     id?: number
-    event_type: 'book_click' | 'post_click' | 'community_click' | 'event_click' | 'page_view'
+    event_type: 'book_click' | 'post_click' | 'community_click' | 'event_click'
     item_id: number | string
     item_title: string
     item_tags?: string[]
@@ -23,13 +23,8 @@ export interface ClickEvent {
 // Session ID key in localStorage
 const SESSION_ID_KEY = 'aksara_session_id'
 
-// Batch configuration
-const BATCH_SIZE = 5 // Send after 5 events
-const BATCH_TIMEOUT = 30000 // Or after 30 seconds
-
-// Event queue for batching
-let eventQueue: ClickEvent[] = []
-let batchTimeout: ReturnType<typeof setTimeout> | null = null
+// API endpoint
+const API_ENDPOINT = 'http://localhost:3002/click_events'
 
 /**
  * Generate or retrieve anonymous session ID
@@ -61,54 +56,32 @@ function getCurrentPage(): string {
 }
 
 /**
- * Send events batch to API
+ * Send event immediately using sendBeacon (works during navigation) or fetch as fallback
  */
-async function flushEventQueue(): Promise<void> {
-    if (eventQueue.length === 0) return
+function sendEvent(event: ClickEvent): void {
+    if (typeof window === 'undefined') return
 
-    const eventsToSend = [...eventQueue]
-    eventQueue = []
+    const payload = JSON.stringify(event)
 
-    if (batchTimeout) {
-        clearTimeout(batchTimeout)
-        batchTimeout = null
-    }
-
-    try {
-        // Send events one by one (json-server doesn't support batch POST natively)
-        // In production, you'd send as array to a batch endpoint
-        for (const event of eventsToSend) {
-            await $fetch('http://localhost:3002/click_events', {
-                method: 'POST',
-                body: event
-            })
+    // Try sendBeacon first (works even during page navigation)
+    if (navigator.sendBeacon) {
+        const blob = new Blob([payload], { type: 'application/json' })
+        const sent = navigator.sendBeacon(API_ENDPOINT, blob)
+        if (sent) {
+            console.log(`[ClickTracking] Sent via beacon: ${event.event_type}`, event.item_title)
+            return
         }
-        console.log(`[ClickTracking] Sent ${eventsToSend.length} events`)
-    } catch (error) {
-        console.error('[ClickTracking] Failed to send events:', error)
-        // Put events back in queue on failure
-        eventQueue = [...eventsToSend, ...eventQueue]
-    }
-}
-
-/**
- * Add event to queue and schedule batch send
- */
-function queueEvent(event: ClickEvent): void {
-    eventQueue.push(event)
-
-    // Send immediately if batch size reached
-    if (eventQueue.length >= BATCH_SIZE) {
-        flushEventQueue()
-        return
     }
 
-    // Otherwise, set timeout to send later
-    if (!batchTimeout) {
-        batchTimeout = setTimeout(() => {
-            flushEventQueue()
-        }, BATCH_TIMEOUT)
-    }
+    // Fallback to fetch (fire and forget)
+    fetch(API_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: payload,
+        keepalive: true // Helps with navigation
+    })
+        .then(() => console.log(`[ClickTracking] Sent via fetch: ${event.event_type}`, event.item_title))
+        .catch(err => console.error('[ClickTracking] Failed:', err))
 }
 
 /**
@@ -151,7 +124,7 @@ export function useClickTracking() {
             book.tags,
             { author: book.author, rating: book.rating }
         )
-        queueEvent(event)
+        sendEvent(event)
     }
 
     /**
@@ -172,7 +145,7 @@ export function useClickTracking() {
             tags,
             { author: post.author?.name, stars: post.stars }
         )
-        queueEvent(event)
+        sendEvent(event)
     }
 
     /**
@@ -191,7 +164,7 @@ export function useClickTracking() {
             community.tags,
             { members: community.members }
         )
-        queueEvent(event)
+        sendEvent(event)
     }
 
     /**
@@ -211,46 +184,13 @@ export function useClickTracking() {
             eventItem.tags,
             { date: eventItem.date, community_id: eventItem.community_id }
         )
-        queueEvent(event)
-    }
-
-    /**
-     * Track page view (for detail pages opened directly)
-     */
-    const trackPageView = (page: {
-        type: 'book' | 'post' | 'community' | 'event'
-        id: number | string
-        title: string
-        tags?: string[]
-    }) => {
-        const event = createEvent(
-            'page_view',
-            page.id,
-            `${page.type}: ${page.title}`,
-            page.tags,
-            { page_type: page.type }
-        )
-        queueEvent(event)
-    }
-
-    /**
-     * Force flush all queued events (call on page unload or route change)
-     */
-    const flush = () => {
-        flushEventQueue()
-    }
-
-    // Flush on page unload
-    if (typeof window !== 'undefined') {
-        window.addEventListener('beforeunload', flush)
+        sendEvent(event)
     }
 
     return {
         trackBookClick,
         trackPostClick,
         trackCommunityClick,
-        trackEventClick,
-        trackPageView,
-        flush
+        trackEventClick
     }
 }
