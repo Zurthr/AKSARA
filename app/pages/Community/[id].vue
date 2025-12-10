@@ -40,42 +40,23 @@
         <section class="community-posts">
           <header>
             <h2>Diskusi Terbaru</h2>
-            <p>{{ posts.length }} percakapan aktif hari ini</p>
+            <p>{{ forumPosts.length }} percakapan aktif hari ini</p>
           </header>
 
-          <NuxtLink
-            v-for="post in posts"
-            :key="post.id"
-            :to="getPostDetailRoute(post.id)"
-            class="post-card-link"
-          >
-            <article class="post-card">
-              <div class="post-header">
-                <img :src="post.author.avatar" :alt="post.author.name" class="avatar" />
-                <div>
-                  <p class="author-name">{{ post.author.name }}</p>
-                  <p class="author-role">{{ post.author.title }}</p>
-                </div>
-                <span class="post-time"> {{ post.timeAgo }}</span>
-              </div>
+          <div v-if="forumPosts.length > 0" class="forum-posts-list">
+            <ForumCard
+              v-for="post in forumPosts"
+              :key="post.id"
+              :post="post"
+            />
+          </div>
 
-              <div class="post-body">
-                <h3>{{ post.title }}</h3>
-                <p>{{ post.summary }}</p>
-              </div>
-
-              <footer class="post-footer">
-                <div class="post-tags">
-                  <span v-for="tag in post.tags" :key="tag" class="tag">{{ tag }}</span>
-                </div>
-                <div class="post-stats">
-                  <span class="stat">{{ post.stats.likes }} Suka</span>
-                  <span class="stat">{{ post.stats.comments }} Balasan</span>
-                  <span class="stat">Bagikan</span>
-                </div>
-              </footer>
-            </article>
-          </NuxtLink>
+          <div v-else class="no-posts">
+            <p>Belum ada diskusi di komunitas ini.</p>
+            <NuxtLink to="/forums/create" class="start-discussion-btn">
+              Mulai Diskusi
+            </NuxtLink>
+          </div>
         </section>
       </div>
 
@@ -94,6 +75,26 @@
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import RightSideBar from '~/components/General/RightSideBar.vue';
 import CommunitySidebar from '~/components/CommunitySidebar.vue';
+import ForumCard from '~/components/Forum/ForumCard.vue';
+import postsData from '../../../mock-backend/data/posts.json';
+
+interface ForumPost {
+  id: number;
+  author: {
+    name: string;
+    avatar: string;
+    tagline: string;
+    badge?: string;
+  };
+  timeAgo: string;
+  title: string;
+  content: string;
+  tags: Array<{ label: string; type: 'category' | 'topic' }>;
+  stars: number;
+  community_id: string;
+  created_at: string;
+  updated_at: string;
+}
 
 interface PostAuthor {
   name: string;
@@ -567,6 +568,12 @@ const handleJoinCommunity = () => {
 
 const getPostDetailRoute = (postId: string) => `/forums/${postId}`;
 
+// Filter forum posts berdasarkan community_id
+const forumPosts = computed(() => {
+  const communityId = community.value.id;
+  return (postsData as ForumPost[]).filter(post => post.community_id === communityId);
+});
+
 const posts = computed(() => community.value.posts);
 const activitiesPreview = computed(() => community.value.activities);
 const relatedCommunities = computed(() => community.value.related);
@@ -698,6 +705,7 @@ onBeforeUnmount(() => {
   color: #3b5379;
   font-weight: 600;
   text-decoration: none;
+  padding-left: 32px;
 }
 
 .toast-enter-active,
@@ -730,6 +738,7 @@ onBeforeUnmount(() => {
   flex-direction: column;
   gap: 24px;
   max-width: 920px;
+  padding-left: 32px;
 }
 
 .sidebar-stack {
@@ -856,6 +865,49 @@ onBeforeUnmount(() => {
 
 .community-posts header p {
   color: #64748b;
+}
+
+.forum-posts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.no-posts {
+  text-align: center;
+  padding: 48px 24px;
+  background: #ffffff;
+  border-radius: 20px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.05);
+}
+
+.no-posts p {
+  color: #64748b;
+  font-size: 16px;
+  margin-bottom: 24px;
+}
+
+.start-discussion-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 24px;
+  background: #3b5379;
+  color: white;
+  text-decoration: none;
+  border-radius: 12px;
+  font-weight: 600;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.start-discussion-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(59, 83, 121, 0.25);
+}
+
+/* Override ForumCard margin untuk halaman community */
+.forum-posts-list .forum-card {
+  margin-left: 0;
 }
 
 .post-card {

@@ -3,6 +3,7 @@ const communities = require('./data/communities.json');
 const events = require('./data/events.json');
 const books = require('./data/books.json');
 const reviews = require('./data/reviews.json');
+const comments = require('./data/comments.json');
 const trending = require('./data/trending.json');
 
 module.exports = () => ({
@@ -11,5 +12,6 @@ module.exports = () => ({
   events,
   books,
   reviews,
+  comments,
   trending
 });

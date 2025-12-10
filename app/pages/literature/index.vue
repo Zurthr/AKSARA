@@ -1,19 +1,15 @@
 <template>
   <div class="literature-page">
       <div class="literature-main">
-        <header class="literature-header" v-if="searchQuery">
-          <h1>Search Results for "{{ searchQuery }}"</h1>
-          <p v-if="filteredBooks.length > 0">
-            Found {{ filteredBooks.length }} result{{ filteredBooks.length !== 1 ? 's' : '' }}
-          </p>
-          <p v-else>No results found. Try adjusting your filters or search query.</p>
-        </header>
 
         <div v-if="!searchQuery && !hasActiveFilters" class="literature-sections">
           <BookSection
-            title="Top Books For you"
+            title="Top Books for you"
             :books="topBooks"
             see-more-link="/literature?sort=top"
+            section-type="top"
+            title-prefix="Top Books"
+            title-suffix="for you"
           />
           
           <BookSection
@@ -21,15 +17,29 @@
             :title="`Looking for ${suggestedTag}?`"
             :books="suggestedBooks"
             :see-more-link="`/literature?tag=${suggestedTag}`"
+            section-type="recommendation"
+            :highlighted-tag="suggestedTag"
           />
         </div>
 
         <div v-else-if="searchQuery || hasActiveFilters" class="search-results">
           <BookGrid
-            :title="searchQuery ? `Results for '${searchQuery}'` : 'Filtered Results'"
+            v-if="searchQuery"
+            :title="`Our results for '${searchQuery}'`"
+            :books="filteredBooks"
+            see-more-link="/literature"
+            section-type="search"
+            title-prefix="results"
+            :highlighted-query="searchQuery"
+            title-suffix="'"
+          />
+          <BookGrid
+            v-else
+            title="Filtered Results"
             :books="filteredBooks"
             see-more-link="/literature"
           />
+          <p v-if="filteredBooks.length === 0" style="color: #64748b; font-size: 16px; line-height: 1.6; align-self: center; justify-self: center; margin-bottom:32px;">No results found. Try adjusting your filters or search query.</p>
         </div>
 
         <div v-else class="literature-sections">
@@ -37,6 +47,9 @@
             title="Top Books For you"
             :books="topBooks"
             see-more-link="/literature?sort=top"
+            section-type="top"
+            title-prefix="Top Books"
+            title-suffix="For you"
           />
           
           <BookSection
@@ -44,15 +57,20 @@
             :title="`Looking for ${suggestedTag}?`"
             :books="suggestedBooks"
             :see-more-link="`/literature?tag=${suggestedTag}`"
+            section-type="recommendation"
+            :highlighted-tag="suggestedTag"
           />
         </div>
 
         <!-- All Books Section - Always visible at the bottom -->
         <div class="all-books-section">
           <BookGrid
-            title="A Library of Books to See"
+            title="Our Library, just for you."
             :books="allBooks"
             see-more-link="/literature"
+            section-type="top"
+            title-prefix="Library"
+            title-suffix="just for you."
           />
         </div>
       </div>
@@ -71,6 +89,48 @@ import BookGrid from '~/components/Literature/BookGrid.vue';
 import LiteratureFilterSidebar from '~/components/Literature/LiteratureFilterSidebar.vue';
 import TrendingSidebar from '~/components/TrendingSidebar.vue';
 
+// Use the real books data from the mock backend JSON
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore - JSON module typing is handled by the bundler
+import rawBooksData from '../../../mock-backend/data/books.json';
+
+interface RawBookTag {
+  name: string;
+  type?: string;
+}
+
+interface RawBookSource {
+  name: string;
+  url: string;
+}
+
+interface RawCopyTypeSource {
+  name: string;
+  url: string;
+  type?: string;
+  shipping_available?: boolean;
+}
+
+interface RawCopyType {
+  description: string;
+  sources?: RawCopyTypeSource[];
+}
+
+interface RawBook {
+  id: number;
+  title: string;
+  author?: string;
+  cover: string;
+  rating?: number;
+  description?: string;
+  year_edition?: string;
+  total_bookmarked?: number;
+  tags?: RawBookTag[];
+  copy_types?: Record<string, RawCopyType>;
+  licensing_type?: string;
+  sources?: RawBookSource[];
+}
+
 interface Book {
   id: number;
   title: string;
@@ -79,87 +139,61 @@ interface Book {
   tags: string[];
   rating?: number;
   bookmarks?: number;
-  copyType?: ('onsite' | 'physical' | 'online')[];
-  licensingType?: ('pay-to-own' | 'rent' | 'free')[];
+  copyType?: string[];
+  licensingType?: string[];
   sources?: string[];
 }
 
 const route = useRoute();
 
-// Sample book data - in production, this would come from an API
-const allBooks: Book[] = [
-  {
-    id: 1,
-    title: 'DIFFERENT WINTER',
-    author: 'Mia Jackson',
-    image: 'https://img.freepik.com/free-vector/abstract-elegant-winter-book-cover_23-2148798745.jpg?semt=ais_hybrid&w=740&q=80',
-    tags: ['Web Development'],
-    rating: 4.2,
-    bookmarks: 120,
-    copyType: ['online', 'onsite'],
-    licensingType: ['free', 'rent'],
-    sources: ['IEEE', 'Google Books']
-  },
-  {
-    id: 2,
-    title: 'THE UNDERSTORY',
-    author: 'Saner Sangsuk',
-    image: 'https://via.placeholder.com/200x300/16a34a/ffffff?text=The+Understory',
-    tags: ['Web Development', 'PHP'],
-    rating: 4.8,
-    bookmarks: 95,
-    copyType: ['online'],
-    licensingType: ['rent'],
-    sources: ['IEEE']
-  },
-  {
-    id: 3,
-    title: 'JAMES and the Giant Peach',
-    author: 'Roald Dahl',
-    image: 'https://via.placeholder.com/200x300/fbbf24/000000?text=James+and+the+Giant+Peach',
-    tags: ['Web Development'],
-    rating: 3.5,
-    bookmarks: 80,
-    copyType: ['physical', 'onsite'],
-    licensingType: ['pay-to-own'],
-    sources: ['ACM', 'Springer']
-  },
-  {
-    id: 4,
-    title: 'BEYOND THE OCEAN DOOR',
-    image: 'https://via.placeholder.com/200x300/1e3a8a/ffffff?text=Beyond+the+Ocean+Door',
-    tags: ['Web Development'],
-    rating: 4.0,
-    bookmarks: 150,
-    copyType: ['online', 'physical'],
-    licensingType: ['free'],
-    sources: ['IEEE', 'Project Gutenberg']
-  },
-  {
-    id: 5,
-    title: 'Clean Code',
-    author: 'Robert C. Martin',
-    image: 'https://via.placeholder.com/200x300/ef4444/ffffff?text=Clean+Code',
-    tags: ['Programming', 'Software Engineering'],
-    rating: 4.9,
-    bookmarks: 200,
-    copyType: ['physical'],
-    licensingType: ['pay-to-own', 'rent'],
-    sources: ['Springer', 'Wiley']
-  },
-  {
-    id: 6,
-    title: 'Design Patterns',
-    author: 'Gang of Four',
-    image: 'https://via.placeholder.com/200x300/8b5cf6/ffffff?text=Design+Patterns',
-    tags: ['Software Engineering', 'Programming'],
-    rating: 4.3,
-    bookmarks: 180,
-    copyType: ['online', 'onsite'],
-    licensingType: ['rent', 'pay-to-own'],
-    sources: ['Elsevier', 'ACM']
+const normalizeKey = (value: string | undefined | null) => {
+  return (value || '')
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, '-');
+};
+
+const rawBooks = rawBooksData as unknown as RawBook[];
+
+// Map backend books.json structure into the simpler Book shape used by the UI
+const allBooks: Book[] = (rawBooks || []).map((book) => {
+  const tags = (book.tags || []).map((tag) => tag.name);
+
+  const copyType = book.copy_types
+    ? Object.keys(book.copy_types).map((key) => normalizeKey(key)).filter(Boolean)
+    : [];
+
+  const licensingType = book.licensing_type
+    ? [normalizeKey(book.licensing_type)]
+    : [];
+
+  const sourceNames: string[] = [];
+
+  if (book.sources) {
+    sourceNames.push(...book.sources.map((source) => source.name));
   }
-];
+
+  if (book.copy_types) {
+    Object.values(book.copy_types).forEach((copyTypeEntry) => {
+      if (copyTypeEntry.sources) {
+        sourceNames.push(...copyTypeEntry.sources.map((source) => source.name));
+      }
+    });
+  }
+
+  return {
+    id: book.id,
+    title: book.title,
+    author: book.author,
+    image: book.cover,
+    tags,
+    rating: book.rating,
+    bookmarks: book.total_bookmarked,
+    copyType,
+    licensingType,
+    sources: Array.from(new Set(sourceNames))
+  };
+});
 
 const searchQuery = computed(() => route.query.q as string || route.query.search as string || '');
 
@@ -260,25 +294,37 @@ const filteredBooks = computed(() => {
   return books;
 });
 
-// Top books for user (sorted by rating, personalized based on user preferences)
+// Top books for user (sorted by rating)
 const topBooks = computed(() => {
-  // In production, this would be personalized based on user's reading history, preferences, etc.
-  // For now, showing top-rated books
   return allBooks
     .sort((a, b) => (b.rating || 0) - (a.rating || 0))
     .slice(0, 8);
 });
 
-// Get user's most searched tag from search history
-// In production, this would come from user's search history/analytics
-const getUserSearchHistory = (): string[] => {
-  // Simulated search history - in production, fetch from localStorage/API
-  // This would track user's frequent searches
-  const searchHistory = ['PHP', 'Vue', 'JavaScript', 'Python', 'React'];
-  return searchHistory;
-};
+// Tags to cycle through for suggested books
+const suggestedTagsCycle = ['PHP', 'Web Development', 'Programming', 'Fantasy', 'Non-Fiction', 'Dystopia'];
 
-// Suggested tag based on user's search history
+// Current tag index - cycles on every page refresh
+const currentTagIndex = ref(0);
+
+// Initialize tag index on mount - cycles through tags on each refresh
+onMounted(() => {
+  if (process.client) {
+    // Use sessionStorage to track and cycle through tags on each refresh
+    const storedIndex = sessionStorage.getItem('suggestedTagIndex');
+    let index = storedIndex ? parseInt(storedIndex, 10) : 0;
+    
+    // Increment index and cycle back to 0 when reaching the end
+    index = (index + 1) % suggestedTagsCycle.length;
+    
+    // Store the new index for next refresh
+    sessionStorage.setItem('suggestedTagIndex', index.toString());
+    
+    currentTagIndex.value = index;
+  }
+});
+
+// Suggested tag - cycles through predefined tags on each refresh
 const suggestedTag = computed(() => {
   if (filters.value.tags.length > 0) {
     return filters.value.tags[0];
@@ -286,9 +332,8 @@ const suggestedTag = computed(() => {
   if (searchQuery.value) {
     return searchQuery.value;
   }
-  // Get most frequent tag from user's search history
-  const searchHistory = getUserSearchHistory();
-  return searchHistory[0] || 'PHP'; // Default to first item in history or fallback
+  // Cycle through the predefined tags on each page refresh
+  return suggestedTagsCycle[currentTagIndex.value];
 });
 
 // Suggested books based on tag
@@ -350,6 +395,7 @@ const suggestedBooks = computed(() => {
 
 .search-results {
   display: flex;
+  width:920px;
   flex-direction: column;
   gap: 20px;
 }

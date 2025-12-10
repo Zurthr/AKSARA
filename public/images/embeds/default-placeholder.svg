@@ -1,0 +1,7 @@
+<svg width="80" height="60" viewBox="0 0 80 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="80" height="60" rx="8" fill="#F3F4F6"/>
+  <rect x="15" y="15" width="50" height="30" rx="4" fill="#3B5379"/>
+  <circle cx="25" cy="30" r="6" fill="#FFDA49"/>
+  <path d="M32 30 L50 30 M32 25 L45 25 M32 35 L48 35" stroke="white" stroke-width="2"/>
+  <text x="40" y="55" text-anchor="middle" font-size="8" fill="#6B7280" font-family="sans-serif">AKSARA Embed</text>
+</svg>

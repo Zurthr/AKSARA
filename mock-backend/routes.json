@@ -1,6 +1,7 @@
 {
   "/api/posts": "/posts",
   "/api/posts/:id": "/posts/:id",
+  "/api/posts/:id/comments": "/comments?post_id=:id",
   "/api/communities": "/communities",
   "/api/communities/:id": "/communities/:id",
   "/api/communities/:id/join": "/communities/:id",
@@ -23,5 +24,9 @@
   "/api/search/posts": "/posts",
   "/api/search/communities": "/communities",
   "/api/search/events": "/events",
-  "/api/search/books": "/books"
+  "/api/search/books": "/books",
+  "/posts/:id/comments": "/comments?post_id=:id",
+  "/communities/:id/posts": "/posts?community_id=:id",
+  "/books/:id/reviews": "/reviews?book_id=:id",
+  "/events/community/:communityId": "/events?community_id=:communityId"
 }

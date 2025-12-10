@@ -122,6 +122,40 @@
 const route = useRoute();
 const router = useRouter();
 
+// Use the real books data from the mock backend JSON to drive filter options
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore - JSON module typing is handled by the bundler
+import rawBooksData from '../../../mock-backend/data/books.json';
+
+interface RawBookTag {
+  name: string;
+  type?: string;
+}
+
+interface RawBookSource {
+  name: string;
+  url: string;
+}
+
+interface RawCopyTypeSource {
+  name: string;
+  url: string;
+  type?: string;
+}
+
+interface RawCopyType {
+  description: string;
+  sources?: RawCopyTypeSource[];
+}
+
+interface RawBook {
+  id: number;
+  tags?: RawBookTag[];
+  copy_types?: Record<string, RawCopyType>;
+  licensing_type?: string;
+  sources?: RawBookSource[];
+}
+
 interface Filters {
   copyType: string[];
   licensingType: string[];
@@ -129,39 +163,92 @@ interface Filters {
   tags: string[];
 }
 
-const copyTypeOptions = [
-  { label: 'Onsite Exclusive', value: 'onsite' },
-  { label: 'Physical', value: 'physical' },
-  { label: 'Online', value: 'online' }
-];
+const normalizeKey = (value: string | undefined | null) => {
+  return (value || '')
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, '-');
+};
 
-const licensingTypeOptions = [
-  { label: 'Pay-to-own', value: 'pay-to-own' },
-  { label: 'Rent', value: 'rent' },
-  { label: 'Free', value: 'free' }
-];
+const toTitleCaseFromKey = (value: string) => {
+  return value
+    .split('-')
+    .filter(Boolean)
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(' ');
+};
 
-const sourceOptions = [
-  'IEEE',
-  'ACM',
-  'Springer',
-  'Elsevier',
-  'Wiley',
-  'Google Books',
-  'Project Gutenberg'
-];
+const rawBooks = rawBooksData as unknown as RawBook[];
 
-const tagOptions = [
-  'PHP',
-  'Vue',
-  'JavaScript',
-  'Python',
-  'React',
-  'Node.js',
-  'Web Development',
-  'Programming',
-  'Software Engineering'
-];
+const unique = <T>(items: T[]) => Array.from(new Set(items));
+
+const copyTypeOptions = computed(() => {
+  const keys: string[] = [];
+
+  rawBooks.forEach((book) => {
+    if (book.copy_types) {
+      keys.push(...Object.keys(book.copy_types));
+    }
+  });
+
+  const normalized = unique(
+    keys.map((key) => normalizeKey(key)).filter(Boolean)
+  );
+
+  return normalized.map((value) => ({
+    value,
+    label: toTitleCaseFromKey(value)
+  }));
+});
+
+const licensingTypeOptions = computed(() => {
+  const rawValues: string[] = [];
+
+  rawBooks.forEach((book) => {
+    if (book.licensing_type) {
+      rawValues.push(book.licensing_type);
+    }
+  });
+
+  const uniqueRaw = unique(rawValues);
+
+  return uniqueRaw.map((raw) => ({
+    value: normalizeKey(raw),
+    label: raw
+  }));
+});
+
+const sourceOptions = computed(() => {
+  const names: string[] = [];
+
+  rawBooks.forEach((book) => {
+    if (book.sources) {
+      names.push(...book.sources.map((source) => source.name));
+    }
+
+    if (book.copy_types) {
+      Object.values(book.copy_types).forEach((copyTypeEntry) => {
+        if (copyTypeEntry.sources) {
+          names.push(...copyTypeEntry.sources.map((source) => source.name));
+        }
+      });
+    }
+  });
+
+  return unique(names).sort();
+});
+
+const tagOptions = computed(() => {
+  const names: string[] = [];
+
+  rawBooks.forEach((book) => {
+    if (book.tags) {
+      names.push(...book.tags.map((tag) => tag.name));
+    }
+  });
+
+  return unique(names).sort();
+});
 
 const filters = ref<Filters>({
   copyType: Array.isArray(route.query.copyType) 
@@ -211,7 +298,7 @@ const tagSuggestions = computed(() => {
   if (!tagInput.value.trim()) return [];
   const input = tagInput.value.toLowerCase().trim();
   const currentTagsLower = filters.value.tags.map(t => t.toLowerCase());
-  return tagOptions.filter(tag => 
+  return tagOptions.value.filter((tag: any) => 
     tag.toLowerCase().includes(input) && 
     !currentTagsLower.includes(tag.toLowerCase())
   ).slice(0, 5);
@@ -268,9 +355,16 @@ const clearAllFilters = () => {
   
   const query: Record<string, string | string[]> = {};
   
-  // Copy only non-filter query params (like search query 'q')
+  // Copy only non-filter, non-search query params
   Object.keys(route.query).forEach(key => {
-    if (key !== 'copyType' && key !== 'licensingType' && key !== 'sources' && key !== 'tags') {
+    if (
+      key !== 'copyType' &&
+      key !== 'licensingType' &&
+      key !== 'sources' &&
+      key !== 'tags' &&
+      key !== 'q' &&
+      key !== 'search'
+    ) {
       const value = route.query[key];
       if (value !== null && value !== undefined) {
         if (Array.isArray(value)) {
@@ -288,9 +382,16 @@ const clearAllFilters = () => {
 const updateQueryParams = () => {
   const query: Record<string, string | string[]> = {};
   
-  // Copy existing non-filter query params (like search query 'q')
+  // Copy existing non-filter, non-search query params
   Object.keys(route.query).forEach(key => {
-    if (key !== 'copyType' && key !== 'licensingType' && key !== 'sources' && key !== 'tags') {
+    if (
+      key !== 'copyType' &&
+      key !== 'licensingType' &&
+      key !== 'sources' &&
+      key !== 'tags' &&
+      key !== 'q' &&
+      key !== 'search'
+    ) {
       const value = route.query[key];
       if (value !== null && value !== undefined) {
         if (Array.isArray(value)) {
@@ -596,4 +697,3 @@ watch(() => route.query, (newQuery) => {
   cursor: not-allowed;
 }
 </style>
-

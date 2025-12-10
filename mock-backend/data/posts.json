@@ -2,98 +2,302 @@
   {
     "id": 1,
     "author": {
-      "name": "Orang Kmplang",
-      "avatar": "https://i.pravatar.cc/150?u=kmplang",
-      "tagline": "A stupid one"
+      "name": "Sarah Chen",
+      "avatar": "https://i.pravatar.cc/150?u=sarah",
+      "tagline": "Product Designer"
     },
-    "timeAgo": "an hr ago",
-    "title": "LF Best Books for Aspiring Web Developers",
-    "content": "Hey everyone! I've been diving deeper into web development lately, and I realized there's a ton of great books out there that can really help you level up beyond just YouTube tutorials. Thought I'd share a few and see what you all recommend too!",
+    "timeAgo": "2 hours ago",
+    "title": "Applying 'Atomic Habits' to Learning to Code",
+    "content": "I've been struggling to stay consistent with my Vue.js learning. I started applying the '2-minute rule' from James Clear's book. Instead of saying 'I will code for 2 hours', I just say 'I will open VS Code'. It's surprisingly effective.",
     "tags": [
       {
-        "label": "A Level",
-        "type": "category"
-      },
-      {
-        "label": "Web Dev",
+        "label": "#Productivity",
         "type": "topic"
       },
       {
-        "label": "#NewDev",
+        "label": "#Coding",
+        "type": "topic"
+      }
+    ],
+    "stars": 342,
+    "community_id": "wellness-warriors",
+    "related_books": [
+      3,
+      15
+    ],
+    "created_at": "2023-11-01T08:00:00Z",
+    "updated_at": "2023-11-01T08:00:00Z"
+  },
+  {
+    "id": 2,
+    "author": {
+      "name": "Mike Ross",
+      "avatar": "https://i.pravatar.cc/150?u=mike",
+      "tagline": "Backend Dev"
+    },
+    "timeAgo": "4 hours ago",
+    "title": "Is 'Clean Code' still relevant in 2024?",
+    "content": "Uncle Bob's examples are in Java, and some people say the advice is outdated. However, I feel the core principles of meaningful naming and small functions are timeless. Thoughts?",
+    "tags": [
+      {
+        "label": "#Discussion",
+        "type": "topic"
+      },
+      {
+        "label": "#SoftwareEngineering",
+        "type": "topic"
+      }
+    ],
+    "stars": 128,
+    "community_id": "creative-atelier",
+    "related_books": [
+      1,
+      5
+    ],
+    "created_at": "2023-11-01T10:00:00Z",
+    "updated_at": "2023-11-01T10:00:00Z"
+  },
+  {
+    "id": 3,
+    "author": {
+      "name": "Jane Smith",
+      "avatar": "https://i.pravatar.cc/150?u=jane",
+      "tagline": "Fantasy Reader"
+    },
+    "timeAgo": "5 hours ago",
+    "title": "The cozy beginning of The Hobbit",
+    "content": "Re-reading The Hobbit this weekend. I forgot how whimsical the opening chapter is compared to the epic scale of LOTR. Bilbo fretting over his doilies while Gandalf plots an adventure is peak comedy.",
+    "tags": [
+      {
+        "label": "#Tolkien",
+        "type": "topic"
+      },
+      {
+        "label": "#Fantasy",
+        "type": "topic"
+      }
+    ],
+    "stars": 560,
+    "community_id": "literacy-circle",
+    "related_books": [
+      2
+    ],
+    "created_at": "2023-11-01T11:00:00Z",
+    "updated_at": "2023-11-01T11:00:00Z"
+  },
+  {
+    "id": 4,
+    "author": {
+      "name": "Alfan Gunadar",
+      "avatar": "https://i.pravatar.cc/150?u=alfan",
+      "tagline": "Frontend Ninja"
+    },
+    "timeAgo": "6 hours ago",
+    "title": "Why you should master Vanilla JS before Frameworks",
+    "content": "Reading 'JavaScript: The Good Parts' reminded me why understanding closures and prototypes is crucial, even if you use React or Vue every day. Don't skip the basics, guys.",
+    "tags": [
+      {
+        "label": "#JavaScript",
+        "type": "topic"
+      },
+      {
+        "label": "#Advice",
+        "type": "topic"
+      }
+    ],
+    "stars": 210,
+    "community_id": "creative-atelier",
+    "related_books": [
+      12,
+      15
+    ],
+    "created_at": "2023-11-01T12:00:00Z",
+    "updated_at": "2023-11-01T12:00:00Z"
+  },
+  {
+    "id": 5,
+    "author": {
+      "name": "Donna Paulsen",
+      "avatar": "https://i.pravatar.cc/150?u=donna",
+      "tagline": "UX Researcher"
+    },
+    "timeAgo": "8 hours ago",
+    "title": "HCI principles in modern Game UI",
+    "content": "I've been analyzing the inventory systems in RPGs. The principles from the 'Human-Computer Interaction' book regarding cognitive load are totally applicable here. Minimalist UI isn't just aesthetic; it's functional.",
+    "tags": [
+      {
+        "label": "#UXDesign",
+        "type": "topic"
+      },
+      {
+        "label": "#Gaming",
+        "type": "topic"
+      }
+    ],
+    "stars": 89,
+    "community_id": "gaming-hub",
+    "related_books": [
+      8,
+      14
+    ],
+    "created_at": "2023-11-01T14:00:00Z",
+    "updated_at": "2023-11-01T14:00:00Z"
+  },
+  {
+    "id": 6,
+    "author": {
+      "name": "Harvey Specter",
+      "avatar": "https://i.pravatar.cc/150?u=harvey",
+      "tagline": "Startup Founder"
+    },
+    "timeAgo": "10 hours ago",
+    "title": "MVP vs Polished Product",
+    "content": "The Lean Startup methodology saved my latest project. We were about to spend 6 months building a feature nobody wanted. 'Build-Measure-Learn' is the only way to go.",
+    "tags": [
+      {
+        "label": "#Business",
+        "type": "topic"
+      },
+      {
+        "label": "#Startup",
+        "type": "topic"
+      }
+    ],
+    "stars": 445,
+    "community_id": "creative-atelier",
+    "related_books": [
+      7
+    ],
+    "created_at": "2023-11-01T15:00:00Z",
+    "updated_at": "2023-11-01T15:00:00Z"
+  },
+  {
+    "id": 7,
+    "author": {
+      "name": "Rachel Zane",
+      "avatar": "https://i.pravatar.cc/150?u=rachel",
+      "tagline": "Student"
+    },
+    "timeAgo": "12 hours ago",
+    "title": "Growth Mindset changed how I study",
+    "content": "I used to think I was just 'bad at math'. After reading Carol Dweck's book, I realized I just hadn't found the right method yet. It's a subtle shift but it changes everything.",
+    "tags": [
+      {
+        "label": "#Psychology",
+        "type": "topic"
+      },
+      {
+        "label": "#Studying",
+        "type": "topic"
+      }
+    ],
+    "stars": 670,
+    "community_id": "wellness-warriors",
+    "related_books": [
+      9
+    ],
+    "created_at": "2023-11-01T16:00:00Z",
+    "updated_at": "2023-11-01T16:00:00Z"
+  },
+  {
+    "id": 8,
+    "author": {
+      "name": "John Doe",
+      "avatar": "https://i.pravatar.cc/150?u=john",
+      "tagline": "AI Enthusiast"
+    },
+    "timeAgo": "14 hours ago",
+    "title": "The math behind Deep Learning",
+    "content": "Finally diving into the 'Deep Learning' book by Goodfellow. The linear algebra chapter is dense but necessary. Anyone else working through this text?",
+    "tags": [
+      {
+        "label": "#AI",
+        "type": "topic"
+      },
+      {
+        "label": "#Math",
+        "type": "topic"
+      }
+    ],
+    "stars": 112,
+    "community_id": "creative-atelier",
+    "related_books": [
+      6,
+      10
+    ],
+    "created_at": "2023-11-01T17:00:00Z",
+    "updated_at": "2023-11-01T17:00:00Z"
+  },
+  {
+    "id": 9,
+    "author": {
+      "name": "Orang Kmplang",
+      "avatar": "https://i.pravatar.cc/150?u=kmplang",
+      "tagline": "Casual Reader"
+    },
+    "timeAgo": "1 day ago",
+    "title": "Design Patterns for Game Dev",
+    "content": "Observer pattern and Singleton are everywhere in Unity development. The Gang of Four book is dry, but the concepts are fundamental if you want scalable game architecture.",
+    "tags": [
+      {
+        "label": "#GameDev",
+        "type": "topic"
+      },
+      {
+        "label": "#Architecture",
+        "type": "topic"
+      }
+    ],
+    "stars": 230,
+    "community_id": "gaming-hub",
+    "related_books": [
+      4
+    ],
+    "created_at": "2023-11-01T18:00:00Z",
+    "updated_at": "2023-11-01T18:00:00Z"
+  },
+  {
+    "id": 10,
+    "author": {
+      "name": "Louis Litt",
+      "avatar": "https://i.pravatar.cc/150?u=louis",
+      "tagline": "History Buff"
+    },
+    "timeAgo": "1 day ago",
+    "title": "PHP isn't dead, seriously.",
+    "content": "With Modern PHP practices and Laravel, the ecosystem is thriving. Stop hating on it if you haven't used it since 2010. 'Modern PHP' by Josh Lockhart is a great refresher.",
+    "tags": [
+      {
+        "label": "#PHP",
         "type": "topic"
       },
       {
         "label": "#WebDev",
         "type": "topic"
-      },
-      {
-        "label": "#Stacking",
-        "type": "topic"
       }
     ],
-    "stars": 80,
-    "community_id": "literacy-circle",
-    "created_at": "2023-10-01T12:00:00Z",
-    "updated_at": "2023-10-01T12:00:00Z"
-  },
-  {
-    "id": 2,
-    "author": {
-      "name": "Alfan Gunadar",
-      "avatar": "https://i.pravatar.cc/150?u=alfan",
-      "tagline": "Something Vanity!"
-    },
-    "timeAgo": "3 hrs ago",
-    "title": "Is FNAF 2 going to debut in Minecraft alongside Herobrine",
-    "content": "Okay, so I've been seeing some weird stuff in the latest Minecraft teasers and community rumors — people are saying there might be a crossover event bringing FNAF 2 elements into Minecraft?? Like animatronics, the pizzeria setting, and even a Herobrine tie-in?! Not sure if it's a mod collab, an ARG, or just wild fan theory fuel, but if Mojang actually drops a spooky update mixing Herobrine lore with FNAF 2 jumpscares, that would be insane. Anyone else heard about this or seen the leaks? What do you think — hype or hoax? 👻",
-    "tags": [
-      {
-        "label": "Hobbies",
-        "type": "category"
-      },
-      {
-        "label": "FNAF",
-        "type": "topic"
-      },
-      {
-        "label": "#FNAF",
-        "type": "topic"
-      },
-      {
-        "label": "#Booo",
-        "type": "topic"
-      },
-      {
-        "label": "#Horror",
-        "type": "topic"
-      }
+    "stars": 190,
+    "community_id": "creative-atelier",
+    "related_books": [
+      13,
+      11
     ],
-    "stars": 21,
-    "community_id": "gaming-hub",
-    "created_at": "2023-10-01T11:00:00Z",
-    "updated_at": "2023-10-01T11:00:00Z"
+    "created_at": "2023-11-01T19:00:00Z",
+    "updated_at": "2023-11-01T19:00:00Z"
   },
   {
-    "id": 3,
+    "id": 11,
     "author": {
       "name": "Sarah Chen",
       "avatar": "https://i.pravatar.cc/150?u=sarah",
-      "tagline": "Photography enthusiast"
+      "tagline": "Product Designer"
     },
-    "timeAgo": "5 hrs ago",
-    "title": "Tips for Street Photography Beginners",
-    "content": "Just wanted to share some tips I've learned from my street photography journey over the past year. The most important thing is to be patient and observe your surroundings. Don't be afraid to ask people for permission, and always carry your camera! What are your go-to spots for street photography?",
+    "timeAgo": "1 day ago",
+    "title": "HTML semantics matter!",
+    "content": "Just finished Jon Duckett's HTML & CSS book. The visual explanation of the box model is the best I've seen. Beginners, please stop using divs for everything.",
     "tags": [
       {
-        "label": "Photography",
-        "type": "category"
-      },
-      {
-        "label": "Tips",
-        "type": "topic"
-      },
-      {
-        "label": "#StreetPhoto",
+        "label": "#WebDesign",
         "type": "topic"
       },
       {
@@ -101,9 +305,1108 @@
         "type": "topic"
       }
     ],
-    "stars": 45,
+    "stars": 300,
+    "community_id": "creative-atelier",
+    "related_books": [
+      14
+    ],
+    "created_at": "2023-10-30T09:00:00Z",
+    "updated_at": "2023-10-30T09:00:00Z"
+  },
+  {
+    "id": 12,
+    "author": {
+      "name": "Mike Ross",
+      "avatar": "https://i.pravatar.cc/150?u=mike",
+      "tagline": "Backend Dev"
+    },
+    "timeAgo": "2 days ago",
+    "title": "Algorithms are hard.",
+    "content": "Donald Knuth's 'Art of Computer Programming' is intimidating. I treat it more like an encyclopedia than a reading book. Has anyone actually read it cover to cover?",
+    "tags": [
+      {
+        "label": "#CS",
+        "type": "topic"
+      },
+      {
+        "label": "#Hardcore",
+        "type": "topic"
+      }
+    ],
+    "stars": 540,
+    "community_id": "creative-atelier",
+    "related_books": [
+      10
+    ],
+    "created_at": "2023-10-29T10:00:00Z",
+    "updated_at": "2023-10-29T10:00:00Z"
+  },
+  {
+    "id": 13,
+    "author": {
+      "name": "Jane Smith",
+      "avatar": "https://i.pravatar.cc/150?u=jane",
+      "tagline": "Fantasy Reader"
+    },
+    "timeAgo": "2 days ago",
+    "title": "Habit Stacking for Readers",
+    "content": "Using Atomic Habits techniques: After I pour my morning coffee (current habit), I will read one page of a book (new habit). It's helping me get through my TBR pile.",
+    "tags": [
+      {
+        "label": "#ReadingTips",
+        "type": "topic"
+      },
+      {
+        "label": "#Habits",
+        "type": "topic"
+      }
+    ],
+    "stars": 412,
+    "community_id": "literacy-circle",
+    "related_books": [
+      3
+    ],
+    "created_at": "2023-10-28T11:00:00Z",
+    "updated_at": "2023-10-28T11:00:00Z"
+  },
+  {
+    "id": 14,
+    "author": {
+      "name": "Alfan Gunadar",
+      "avatar": "https://i.pravatar.cc/150?u=alfan",
+      "tagline": "Frontend Ninja"
+    },
+    "timeAgo": "3 days ago",
+    "title": "The Pragmatic Programmer is a career guide",
+    "content": "The advice about 'Stone Soup and Boiled Frogs' explains so much about corporate software development. It's not just code; it's about responsibility.",
+    "tags": [
+      {
+        "label": "#Career",
+        "type": "topic"
+      },
+      {
+        "label": "#DevLife",
+        "type": "topic"
+      }
+    ],
+    "stars": 288,
+    "community_id": "creative-atelier",
+    "related_books": [
+      5
+    ],
+    "created_at": "2023-10-27T12:00:00Z",
+    "updated_at": "2023-10-27T12:00:00Z"
+  },
+  {
+    "id": 15,
+    "author": {
+      "name": "Donna Paulsen",
+      "avatar": "https://i.pravatar.cc/150?u=donna",
+      "tagline": "UX Researcher"
+    },
+    "timeAgo": "3 days ago",
+    "title": "Mental Models in Design",
+    "content": "Reading 'Design Patterns' made me realize we have similar patterns in UI. Users expect certain behaviors (like hamburger menus on mobile). Breaking these patterns causes friction.",
+    "tags": [
+      {
+        "label": "#Design",
+        "type": "topic"
+      },
+      {
+        "label": "#UI",
+        "type": "topic"
+      }
+    ],
+    "stars": 156,
+    "community_id": "creative-atelier",
+    "related_books": [
+      4,
+      8
+    ],
+    "created_at": "2023-10-26T13:00:00Z",
+    "updated_at": "2023-10-26T13:00:00Z"
+  },
+  {
+    "id": 16,
+    "author": {
+      "name": "Harvey Specter",
+      "avatar": "https://i.pravatar.cc/150?u=harvey",
+      "tagline": "Startup Founder"
+    },
+    "timeAgo": "3 days ago",
+    "title": "Mindset in Negotiation",
+    "content": "Fixed mindset says 'I am a bad negotiator'. Growth mindset says 'I can learn negotiation'. Dweck's research applies heavily to business strategy.",
+    "tags": [
+      {
+        "label": "#Business",
+        "type": "topic"
+      },
+      {
+        "label": "#Psychology",
+        "type": "topic"
+      }
+    ],
+    "stars": 610,
+    "community_id": "wellness-warriors",
+    "related_books": [
+      9
+    ],
+    "created_at": "2023-10-25T14:00:00Z",
+    "updated_at": "2023-10-25T14:00:00Z"
+  },
+  {
+    "id": 17,
+    "author": {
+      "name": "Orang Kmplang",
+      "avatar": "https://i.pravatar.cc/150?u=kmplang",
+      "tagline": "Casual Reader"
+    },
+    "timeAgo": "4 days ago",
+    "title": "Jump Fest 2025 Hype!",
+    "content": "Anyone else excited for the new shonen announcements? I'm hoping for some good fantasy adaptations, something with world-building like The Hobbit but anime style.",
+    "tags": [
+      {
+        "label": "#Anime",
+        "type": "topic"
+      },
+      {
+        "label": "#Events",
+        "type": "topic"
+      }
+    ],
+    "stars": 890,
+    "community_id": "jump-fest-2025",
+    "related_books": [
+      2
+    ],
+    "created_at": "2023-10-24T15:00:00Z",
+    "updated_at": "2023-10-24T15:00:00Z"
+  },
+  {
+    "id": 18,
+    "author": {
+      "name": "Sarah Chen",
+      "avatar": "https://i.pravatar.cc/150?u=sarah",
+      "tagline": "Product Designer"
+    },
+    "timeAgo": "4 days ago",
+    "title": "Photography and Composition",
+    "content": "Just like in 'HTML & CSS', structure is everything. I'm trying to apply the rule of thirds from my design books to my weekend photography shots.",
+    "tags": [
+      {
+        "label": "#Photography",
+        "type": "topic"
+      },
+      {
+        "label": "#Composition",
+        "type": "topic"
+      }
+    ],
+    "stars": 120,
     "community_id": "photography-club",
-    "created_at": "2023-10-01T09:00:00Z",
-    "updated_at": "2023-10-01T09:00:00Z"
+    "related_books": [
+      14
+    ],
+    "created_at": "2023-10-23T16:00:00Z",
+    "updated_at": "2023-10-23T16:00:00Z"
+  },
+  {
+    "id": 19,
+    "author": {
+      "name": "John Doe",
+      "avatar": "https://i.pravatar.cc/150?u=john",
+      "tagline": "AI Enthusiast"
+    },
+    "timeAgo": "5 days ago",
+    "title": "AI generated code vs Clean Code",
+    "content": "Copilot is great, but it often violates 'Clean Code' principles. It repeats logic and creates massive functions. We still need to refactor AI output.",
+    "tags": [
+      {
+        "label": "#AI",
+        "type": "topic"
+      },
+      {
+        "label": "#Refactoring",
+        "type": "topic"
+      }
+    ],
+    "stars": 333,
+    "community_id": "creative-atelier",
+    "related_books": [
+      1,
+      6
+    ],
+    "created_at": "2023-10-22T17:00:00Z",
+    "updated_at": "2023-10-22T17:00:00Z"
+  },
+  {
+    "id": 20,
+    "author": {
+      "name": "Louis Litt",
+      "avatar": "https://i.pravatar.cc/150?u=louis",
+      "tagline": "History Buff"
+    },
+    "timeAgo": "5 days ago",
+    "title": "Legacy Code Nightmares",
+    "content": "I inherited a project with zero comments and variables named 'x', 'y', 'temp'. 'Working Effectively with Legacy Code' is my bible right now, alongside 'Clean Code'.",
+    "tags": [
+      {
+        "label": "#DevStruggles",
+        "type": "topic"
+      },
+      {
+        "label": "#Legacy",
+        "type": "topic"
+      }
+    ],
+    "stars": 245,
+    "community_id": "creative-atelier",
+    "related_books": [
+      1
+    ],
+    "created_at": "2023-10-21T18:00:00Z",
+    "updated_at": "2023-10-21T18:00:00Z"
+  },
+  {
+    "id": 21,
+    "author": {
+      "name": "Alfan Gunadar",
+      "avatar": "https://i.pravatar.cc/150?u=alfan",
+      "tagline": "Frontend Ninja"
+    },
+    "timeAgo": "5 days ago",
+    "title": "Vue 3 Composition API",
+    "content": "The new syntax in Vue 3 is so much cleaner. Reading 'Vue.js: Up and Running' helped bridge the gap from Options API for me.",
+    "tags": [
+      {
+        "label": "#VueJS",
+        "type": "topic"
+      },
+      {
+        "label": "#Frontend",
+        "type": "topic"
+      }
+    ],
+    "stars": 167,
+    "community_id": "creative-atelier",
+    "related_books": [
+      15
+    ],
+    "created_at": "2023-10-21T10:00:00Z",
+    "updated_at": "2023-10-21T10:00:00Z"
+  },
+  {
+    "id": 22,
+    "author": {
+      "name": "Jane Smith",
+      "avatar": "https://i.pravatar.cc/150?u=jane",
+      "tagline": "Fantasy Reader"
+    },
+    "timeAgo": "6 days ago",
+    "title": "World Building 101",
+    "content": "Tolkien didn't just write a story; he created languages, maps, and histories. That's the standard for high fantasy. Any recommendations for books with similar depth?",
+    "tags": [
+      {
+        "label": "#Writing",
+        "type": "topic"
+      },
+      {
+        "label": "#Fantasy",
+        "type": "topic"
+      }
+    ],
+    "stars": 490,
+    "community_id": "literacy-circle",
+    "related_books": [
+      2
+    ],
+    "created_at": "2023-10-20T11:00:00Z",
+    "updated_at": "2023-10-20T11:00:00Z"
+  },
+  {
+    "id": 23,
+    "author": {
+      "name": "Mike Ross",
+      "avatar": "https://i.pravatar.cc/150?u=mike",
+      "tagline": "Backend Dev"
+    },
+    "timeAgo": "1 week ago",
+    "title": "Database normalization",
+    "content": "Reviewing 'PHP and MySQL Web Development'. The chapter on database normalization is a great refresher. Many devs skip this and regret it later.",
+    "tags": [
+      {
+        "label": "#Database",
+        "type": "topic"
+      },
+      {
+        "label": "#SQL",
+        "type": "topic"
+      }
+    ],
+    "stars": 88,
+    "community_id": "creative-atelier",
+    "related_books": [
+      11
+    ],
+    "created_at": "2023-10-19T12:00:00Z",
+    "updated_at": "2023-10-19T12:00:00Z"
+  },
+  {
+    "id": 24,
+    "author": {
+      "name": "Donna Paulsen",
+      "avatar": "https://i.pravatar.cc/150?u=donna",
+      "tagline": "UX Researcher"
+    },
+    "timeAgo": "1 week ago",
+    "title": "Accessibility in Web Design",
+    "content": "Semantic HTML is the first step to accessibility. Screen readers rely on header tags and aria-labels. Duckett's book touches on this, but we need to go deeper.",
+    "tags": [
+      {
+        "label": "#a11y",
+        "type": "topic"
+      },
+      {
+        "label": "#HTML",
+        "type": "topic"
+      }
+    ],
+    "stars": 312,
+    "community_id": "creative-atelier",
+    "related_books": [
+      14
+    ],
+    "created_at": "2023-10-18T13:00:00Z",
+    "updated_at": "2023-10-18T13:00:00Z"
+  },
+  {
+    "id": 25,
+    "author": {
+      "name": "Harvey Specter",
+      "avatar": "https://i.pravatar.cc/150?u=harvey",
+      "tagline": "Startup Founder"
+    },
+    "timeAgo": "1 week ago",
+    "title": "Pivoting your idea",
+    "content": "We realized our initial hypothesis was wrong. Following 'The Lean Startup', we pivoted instead of persevering on a dead end. Hard decision, but necessary.",
+    "tags": [
+      {
+        "label": "#Entrepreneurship",
+        "type": "topic"
+      },
+      {
+        "label": "#Strategy",
+        "type": "topic"
+      }
+    ],
+    "stars": 505,
+    "community_id": "creative-atelier",
+    "related_books": [
+      7
+    ],
+    "created_at": "2023-10-17T14:00:00Z",
+    "updated_at": "2023-10-17T14:00:00Z"
+  },
+  {
+    "id": 26,
+    "author": {
+      "name": "Rachel Zane",
+      "avatar": "https://i.pravatar.cc/150?u=rachel",
+      "tagline": "Student"
+    },
+    "timeAgo": "1 week ago",
+    "title": "Dealing with burnout",
+    "content": "Programming is mentally exhausting. I'm using techniques from 'Mindset' to view this burnout as a signal to rest, not a sign of incompetence.",
+    "tags": [
+      {
+        "label": "#MentalHealth",
+        "type": "topic"
+      },
+      {
+        "label": "#Dev",
+        "type": "topic"
+      }
+    ],
+    "stars": 780,
+    "community_id": "wellness-warriors",
+    "related_books": [
+      9
+    ],
+    "created_at": "2023-10-16T15:00:00Z",
+    "updated_at": "2023-10-16T15:00:00Z"
+  },
+  {
+    "id": 27,
+    "author": {
+      "name": "Orang Kmplang",
+      "avatar": "https://i.pravatar.cc/150?u=kmplang",
+      "tagline": "Casual Reader"
+    },
+    "timeAgo": "2 weeks ago",
+    "title": "Gaming marathons vs Habits",
+    "content": "I love gaming, but it eats my time. Trying to use 'Atomic Habits' to limit sessions to 2 hours. Identity shift: 'I am a gamer who also sleeps'.",
+    "tags": [
+      {
+        "label": "#Gaming",
+        "type": "topic"
+      },
+      {
+        "label": "#LifeBalance",
+        "type": "topic"
+      }
+    ],
+    "stars": 340,
+    "community_id": "gaming-hub",
+    "related_books": [
+      3
+    ],
+    "created_at": "2023-10-15T16:00:00Z",
+    "updated_at": "2023-10-15T16:00:00Z"
+  },
+  {
+    "id": 28,
+    "author": {
+      "name": "John Doe",
+      "avatar": "https://i.pravatar.cc/150?u=john",
+      "tagline": "AI Enthusiast"
+    },
+    "timeAgo": "2 weeks ago",
+    "title": "Neural Networks for Dummies",
+    "content": "Even if you are a web dev, understanding basic Neural Networks is becoming essential. The introductory chapters of 'Deep Learning' are approachable.",
+    "tags": [
+      {
+        "label": "#FutureTech",
+        "type": "topic"
+      },
+      {
+        "label": "#Learning",
+        "type": "topic"
+      }
+    ],
+    "stars": 215,
+    "community_id": "creative-atelier",
+    "related_books": [
+      6
+    ],
+    "created_at": "2023-10-14T17:00:00Z",
+    "updated_at": "2023-10-14T17:00:00Z"
+  },
+  {
+    "id": 29,
+    "author": {
+      "name": "Sarah Chen",
+      "avatar": "https://i.pravatar.cc/150?u=sarah",
+      "tagline": "Product Designer"
+    },
+    "timeAgo": "2 weeks ago",
+    "title": "DRY Principle in Design",
+    "content": "Don't Repeat Yourself isn't just for code. In UI design, using components (like in 'Pragmatic Programmer') saves so much time when clients ask for changes.",
+    "tags": [
+      {
+        "label": "#DesignSystems",
+        "type": "topic"
+      },
+      {
+        "label": "#Workflow",
+        "type": "topic"
+      }
+    ],
+    "stars": 145,
+    "community_id": "creative-atelier",
+    "related_books": [
+      5,
+      4
+    ],
+    "created_at": "2023-10-13T18:00:00Z",
+    "updated_at": "2023-10-13T18:00:00Z"
+  },
+  {
+    "id": 30,
+    "author": {
+      "name": "Louis Litt",
+      "avatar": "https://i.pravatar.cc/150?u=louis",
+      "tagline": "History Buff"
+    },
+    "timeAgo": "2 weeks ago",
+    "title": "History of Computing",
+    "content": "Reading Knuth's work gives you such an appreciation for the pioneers. Sorting algorithms we take for granted took years to perfect.",
+    "tags": [
+      {
+        "label": "#History",
+        "type": "topic"
+      },
+      {
+        "label": "#Algorithms",
+        "type": "topic"
+      }
+    ],
+    "stars": 99,
+    "community_id": "literacy-circle",
+    "related_books": [
+      10
+    ],
+    "created_at": "2023-10-12T19:00:00Z",
+    "updated_at": "2023-10-12T19:00:00Z"
+  },
+  {
+    "id": 31,
+    "author": {
+      "name": "Alfan Gunadar",
+      "avatar": "https://i.pravatar.cc/150?u=alfan",
+      "tagline": "Frontend Ninja"
+    },
+    "timeAgo": "3 weeks ago",
+    "title": "CSS Grid is magic",
+    "content": "Remember float clearing? Dark times. Modern CSS is so powerful. If you are still using Bootstrap for everything, read a modern CSS book.",
+    "tags": [
+      {
+        "label": "#CSS",
+        "type": "topic"
+      },
+      {
+        "label": "#Web",
+        "type": "topic"
+      }
+    ],
+    "stars": 367,
+    "community_id": "creative-atelier",
+    "related_books": [
+      14
+    ],
+    "created_at": "2023-10-11T10:00:00Z",
+    "updated_at": "2023-10-11T10:00:00Z"
+  },
+  {
+    "id": 32,
+    "author": {
+      "name": "Jane Smith",
+      "avatar": "https://i.pravatar.cc/150?u=jane",
+      "tagline": "Fantasy Reader"
+    },
+    "timeAgo": "3 weeks ago",
+    "title": "Comfort characters",
+    "content": "Bilbo Baggins is the ultimate comfort character. He doesn't want to be a hero, he just wants his tea. Relatable.",
+    "tags": [
+      {
+        "label": "#Characters",
+        "type": "topic"
+      },
+      {
+        "label": "#Books",
+        "type": "topic"
+      }
+    ],
+    "stars": 520,
+    "community_id": "literacy-circle",
+    "related_books": [
+      2
+    ],
+    "created_at": "2023-10-10T11:00:00Z",
+    "updated_at": "2023-10-10T11:00:00Z"
+  },
+  {
+    "id": 33,
+    "author": {
+      "name": "Mike Ross",
+      "avatar": "https://i.pravatar.cc/150?u=mike",
+      "tagline": "Backend Dev"
+    },
+    "timeAgo": "3 weeks ago",
+    "title": "Factory Pattern use cases",
+    "content": "I used to think Design Patterns were academic fluff. Then I had to build a notification system supporting Email, SMS, and Push. Factory Pattern to the rescue.",
+    "tags": [
+      {
+        "label": "#Code",
+        "type": "topic"
+      },
+      {
+        "label": "#DesignPatterns",
+        "type": "topic"
+      }
+    ],
+    "stars": 255,
+    "community_id": "creative-atelier",
+    "related_books": [
+      4
+    ],
+    "created_at": "2023-10-09T12:00:00Z",
+    "updated_at": "2023-10-09T12:00:00Z"
+  },
+  {
+    "id": 34,
+    "author": {
+      "name": "Donna Paulsen",
+      "avatar": "https://i.pravatar.cc/150?u=donna",
+      "tagline": "UX Researcher"
+    },
+    "timeAgo": "3 weeks ago",
+    "title": "Forms are hard.",
+    "content": "Designing good forms is an art. 'Human-Computer Interaction' has a whole section on error recovery. Don't just show 'Invalid Error', tell users HOW to fix it.",
+    "tags": [
+      {
+        "label": "#UX",
+        "type": "topic"
+      },
+      {
+        "label": "#Forms",
+        "type": "topic"
+      }
+    ],
+    "stars": 340,
+    "community_id": "creative-atelier",
+    "related_books": [
+      8
+    ],
+    "created_at": "2023-10-08T13:00:00Z",
+    "updated_at": "2023-10-08T13:00:00Z"
+  },
+  {
+    "id": 35,
+    "author": {
+      "name": "Harvey Specter",
+      "avatar": "https://i.pravatar.cc/150?u=harvey",
+      "tagline": "Startup Founder"
+    },
+    "timeAgo": "1 month ago",
+    "title": "Validating assumptions",
+    "content": "The hardest part of 'The Lean Startup' is admitting you might be wrong. We utilize A/B testing for everything now.",
+    "tags": [
+      {
+        "label": "#DataDriven",
+        "type": "topic"
+      },
+      {
+        "label": "#Growth",
+        "type": "topic"
+      }
+    ],
+    "stars": 460,
+    "community_id": "creative-atelier",
+    "related_books": [
+      7
+    ],
+    "created_at": "2023-10-07T14:00:00Z",
+    "updated_at": "2023-10-07T14:00:00Z"
+  },
+  {
+    "id": 36,
+    "author": {
+      "name": "Rachel Zane",
+      "avatar": "https://i.pravatar.cc/150?u=rachel",
+      "tagline": "Student"
+    },
+    "timeAgo": "1 month ago",
+    "title": "Consistency > Intensity",
+    "content": "Atomic Habits key takeaway: You don't rise to the level of your goals, you fall to the level of your systems. I'm building a system for my finals.",
+    "tags": [
+      {
+        "label": "#StudyHacks",
+        "type": "topic"
+      },
+      {
+        "label": "#Motivation",
+        "type": "topic"
+      }
+    ],
+    "stars": 710,
+    "community_id": "wellness-warriors",
+    "related_books": [
+      3
+    ],
+    "created_at": "2023-10-06T15:00:00Z",
+    "updated_at": "2023-10-06T15:00:00Z"
+  },
+  {
+    "id": 37,
+    "author": {
+      "name": "John Doe",
+      "avatar": "https://i.pravatar.cc/150?u=john",
+      "tagline": "AI Enthusiast"
+    },
+    "timeAgo": "1 month ago",
+    "title": "Ethics in AI",
+    "content": "Deep Learning is powerful, but we need to talk about bias in datasets. Goodfellow touches on this, but it needs more discussion in our community.",
+    "tags": [
+      {
+        "label": "#Ethics",
+        "type": "topic"
+      },
+      {
+        "label": "#AI",
+        "type": "topic"
+      }
+    ],
+    "stars": 198,
+    "community_id": "creative-atelier",
+    "related_books": [
+      6
+    ],
+    "created_at": "2023-10-05T16:00:00Z",
+    "updated_at": "2023-10-05T16:00:00Z"
+  },
+  {
+    "id": 38,
+    "author": {
+      "name": "Orang Kmplang",
+      "avatar": "https://i.pravatar.cc/150?u=kmplang",
+      "tagline": "Casual Reader"
+    },
+    "timeAgo": "1 month ago",
+    "title": "JS vs PHP for freelancing",
+    "content": "Hot take: PHP (Laravel) is still faster for whipping up a quick freelance project than a full JS stack. 'Modern PHP' proves it's robust enough.",
+    "tags": [
+      {
+        "label": "#Freelance",
+        "type": "topic"
+      },
+      {
+        "label": "#TechStack",
+        "type": "topic"
+      }
+    ],
+    "stars": 275,
+    "community_id": "creative-atelier",
+    "related_books": [
+      13,
+      12
+    ],
+    "created_at": "2023-10-04T17:00:00Z",
+    "updated_at": "2023-10-04T17:00:00Z"
+  },
+  {
+    "id": 39,
+    "author": {
+      "name": "Sarah Chen",
+      "avatar": "https://i.pravatar.cc/150?u=sarah",
+      "tagline": "Product Designer"
+    },
+    "timeAgo": "1 month ago",
+    "title": "Affordances in real life",
+    "content": "After reading about HCI, I can't stop seeing bad design everywhere. Doors you pull but look like push doors (Norman Doors). Design matters!",
+    "tags": [
+      {
+        "label": "#RealLife",
+        "type": "topic"
+      },
+      {
+        "label": "#Design",
+        "type": "topic"
+      }
+    ],
+    "stars": 380,
+    "community_id": "creative-atelier",
+    "related_books": [
+      8
+    ],
+    "created_at": "2023-10-03T18:00:00Z",
+    "updated_at": "2023-10-03T18:00:00Z"
+  },
+  {
+    "id": 40,
+    "author": {
+      "name": "Louis Litt",
+      "avatar": "https://i.pravatar.cc/150?u=louis",
+      "tagline": "History Buff"
+    },
+    "timeAgo": "1 month ago",
+    "title": "The mythical man-month",
+    "content": "Not on the list, but 'The Pragmatic Programmer' references it. Adding manpower to a late software project makes it later. Classic.",
+    "tags": [
+      {
+        "label": "#Management",
+        "type": "topic"
+      },
+      {
+        "label": "#Classics",
+        "type": "topic"
+      }
+    ],
+    "stars": 220,
+    "community_id": "creative-atelier",
+    "related_books": [
+      5
+    ],
+    "created_at": "2023-10-02T19:00:00Z",
+    "updated_at": "2023-10-02T19:00:00Z"
+  },
+  {
+    "id": 41,
+    "author": {
+      "name": "Alfan Gunadar",
+      "avatar": "https://i.pravatar.cc/150?u=alfan",
+      "tagline": "Frontend Ninja"
+    },
+    "timeAgo": "1 month ago",
+    "title": "State Management in 2024",
+    "content": "Vue's Pinia is so much simpler than Vuex. The 'Vue.js: Up and Running' concepts about state flow still apply, but the boilerplate is gone.",
+    "tags": [
+      {
+        "label": "#Vue",
+        "type": "topic"
+      },
+      {
+        "label": "#State",
+        "type": "topic"
+      }
+    ],
+    "stars": 155,
+    "community_id": "creative-atelier",
+    "related_books": [
+      15
+    ],
+    "created_at": "2023-10-01T10:00:00Z",
+    "updated_at": "2023-10-01T10:00:00Z"
+  },
+  {
+    "id": 42,
+    "author": {
+      "name": "Jane Smith",
+      "avatar": "https://i.pravatar.cc/150?u=jane",
+      "tagline": "Fantasy Reader"
+    },
+    "timeAgo": "1 month ago",
+    "title": "Riddles in the Dark",
+    "content": "The chapter with Gollum in The Hobbit is a masterclass in tension. It's a children's book but that scene is genuinely creepy.",
+    "tags": [
+      {
+        "label": "#Storytelling",
+        "type": "topic"
+      },
+      {
+        "label": "#Suspense",
+        "type": "topic"
+      }
+    ],
+    "stars": 600,
+    "community_id": "literacy-circle",
+    "related_books": [
+      2
+    ],
+    "created_at": "2023-09-30T11:00:00Z",
+    "updated_at": "2023-09-30T11:00:00Z"
+  },
+  {
+    "id": 43,
+    "author": {
+      "name": "Mike Ross",
+      "avatar": "https://i.pravatar.cc/150?u=mike",
+      "tagline": "Backend Dev"
+    },
+    "timeAgo": "2 months ago",
+    "title": "Bad comments vs Clean Code",
+    "content": "Don't write comments that repeat the code. 'i++ // increment i'. Clean Code taught me that code should express itself. Comments are for 'Why', not 'What'.",
+    "tags": [
+      {
+        "label": "#BestPractices",
+        "type": "topic"
+      },
+      {
+        "label": "#Coding",
+        "type": "topic"
+      }
+    ],
+    "stars": 410,
+    "community_id": "creative-atelier",
+    "related_books": [
+      1
+    ],
+    "created_at": "2023-09-29T12:00:00Z",
+    "updated_at": "2023-09-29T12:00:00Z"
+  },
+  {
+    "id": 44,
+    "author": {
+      "name": "Donna Paulsen",
+      "avatar": "https://i.pravatar.cc/150?u=donna",
+      "tagline": "UX Researcher"
+    },
+    "timeAgo": "2 months ago",
+    "title": "Color Psychology",
+    "content": "Discussing color theory in web design. It's not just CSS hex codes; it's about emotion. HTML & CSS covers syntax, but we need to study art too.",
+    "tags": [
+      {
+        "label": "#Color",
+        "type": "topic"
+      },
+      {
+        "label": "#Art",
+        "type": "topic"
+      }
+    ],
+    "stars": 290,
+    "community_id": "creative-atelier",
+    "related_books": [
+      14
+    ],
+    "created_at": "2023-09-28T13:00:00Z",
+    "updated_at": "2023-09-28T13:00:00Z"
+  },
+  {
+    "id": 45,
+    "author": {
+      "name": "Harvey Specter",
+      "avatar": "https://i.pravatar.cc/150?u=harvey",
+      "tagline": "Startup Founder"
+    },
+    "timeAgo": "2 months ago",
+    "title": "Vanity Metrics",
+    "content": "Page views don't pay the bills. 'The Lean Startup' warns against vanity metrics. We focus on conversion and retention now.",
+    "tags": [
+      {
+        "label": "#Metrics",
+        "type": "topic"
+      },
+      {
+        "label": "#Business",
+        "type": "topic"
+      }
+    ],
+    "stars": 550,
+    "community_id": "creative-atelier",
+    "related_books": [
+      7
+    ],
+    "created_at": "2023-09-27T14:00:00Z",
+    "updated_at": "2023-09-27T14:00:00Z"
+  },
+  {
+    "id": 46,
+    "author": {
+      "name": "Rachel Zane",
+      "avatar": "https://i.pravatar.cc/150?u=rachel",
+      "tagline": "Student"
+    },
+    "timeAgo": "2 months ago",
+    "title": "The power of 'Yet'",
+    "content": "I don't understand recursion... YET. That simple word from Dweck's 'Mindset' keeps me going when algorithms get tough.",
+    "tags": [
+      {
+        "label": "#Learning",
+        "type": "topic"
+      },
+      {
+        "label": "#Growth",
+        "type": "topic"
+      }
+    ],
+    "stars": 680,
+    "community_id": "wellness-warriors",
+    "related_books": [
+      9
+    ],
+    "created_at": "2023-09-26T15:00:00Z",
+    "updated_at": "2023-09-26T15:00:00Z"
+  },
+  {
+    "id": 47,
+    "author": {
+      "name": "Orang Kmplang",
+      "avatar": "https://i.pravatar.cc/150?u=kmplang",
+      "tagline": "Casual Reader"
+    },
+    "timeAgo": "2 months ago",
+    "title": "Gaming Community Toxicity",
+    "content": "We need better community management in esports. Maybe applying some 'HCI' social computing principles could help reduce toxicity in chat?",
+    "tags": [
+      {
+        "label": "#Community",
+        "type": "topic"
+      },
+      {
+        "label": "#Esports",
+        "type": "topic"
+      }
+    ],
+    "stars": 420,
+    "community_id": "gaming-hub",
+    "related_books": [
+      8
+    ],
+    "created_at": "2023-09-25T16:00:00Z",
+    "updated_at": "2023-09-25T16:00:00Z"
+  },
+  {
+    "id": 48,
+    "author": {
+      "name": "John Doe",
+      "avatar": "https://i.pravatar.cc/150?u=john",
+      "tagline": "AI Enthusiast"
+    },
+    "timeAgo": "2 months ago",
+    "title": "Backpropagation explained",
+    "content": "The chapter on backprop in 'Deep Learning' is the best technical explanation I've found. It's just chain rule, but applied at scale.",
+    "tags": [
+      {
+        "label": "#Math",
+        "type": "topic"
+      },
+      {
+        "label": "#DeepLearning",
+        "type": "topic"
+      }
+    ],
+    "stars": 180,
+    "community_id": "creative-atelier",
+    "related_books": [
+      6
+    ],
+    "created_at": "2023-09-24T17:00:00Z",
+    "updated_at": "2023-09-24T17:00:00Z"
+  },
+  {
+    "id": 49,
+    "author": {
+      "name": "Sarah Chen",
+      "avatar": "https://i.pravatar.cc/150?u=sarah",
+      "tagline": "Product Designer"
+    },
+    "timeAgo": "2 months ago",
+    "title": "JavaScript weirdness",
+    "content": "Type coercion in JS is a nightmare. 'The Good Parts' suggests using === always. It's a simple rule that saved me so many bugs.",
+    "tags": [
+      {
+        "label": "#JS",
+        "type": "topic"
+      },
+      {
+        "label": "#Tips",
+        "type": "topic"
+      }
+    ],
+    "stars": 299,
+    "community_id": "creative-atelier",
+    "related_books": [
+      12
+    ],
+    "created_at": "2023-09-23T18:00:00Z",
+    "updated_at": "2023-09-23T18:00:00Z"
+  },
+  {
+    "id": 50,
+    "author": {
+      "name": "Louis Litt",
+      "avatar": "https://i.pravatar.cc/150?u=louis",
+      "tagline": "History Buff"
+    },
+    "timeAgo": "3 months ago",
+    "title": "Reading Code",
+    "content": "We spend more time reading code than writing it. That's the main takeaway from 'Clean Code'. Write for humans, not for the compiler.",
+    "tags": [
+      {
+        "label": "#Philosophy",
+        "type": "topic"
+      },
+      {
+        "label": "#Coding",
+        "type": "topic"
+      }
+    ],
+    "stars": 500,
+    "community_id": "creative-atelier",
+    "related_books": [
+      1
+    ],
+    "created_at": "2023-09-22T19:00:00Z",
+    "updated_at": "2023-09-22T19:00:00Z"
   }
 ]
