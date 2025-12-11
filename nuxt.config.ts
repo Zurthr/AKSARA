@@ -11,4 +11,14 @@ export default defineNuxtConfig({
     'images': fileURLToPath(new URL('./assets/images', import.meta.url)),
     'style': fileURLToPath(new URL('./assets/style', import.meta.url)),
   },
+  nitro: {
+    experimental: {
+      wasm: true
+    },
+    routeRules: {
+      '/api/**': {
+        proxy: 'https://aksara-api.fruz.xyz/api/**'
+      }
+    }
+  }
 })

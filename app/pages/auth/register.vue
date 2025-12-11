@@ -6,6 +6,10 @@
     </div>
 
     <form @submit.prevent="handleRegister" class="auth-form">
+      <div v-if="displayError" class="error-message">
+        {{ displayError }}
+      </div>
+      
       <div class="form-group">
         <label for="name" class="label">Full Name</label>
         <input 
@@ -54,7 +58,9 @@
         >
       </div>
 
-      <button type="submit" class="btn-primary">Sign Up</button>
+      <button type="submit" class="btn-primary" :disabled="loading">
+        {{ loading ? 'Creating Account...' : 'Create Account' }}
+      </button>
     </form>
 
     <div class="divider">
@@ -78,6 +84,9 @@ definePageMeta({
   layout: 'auth'
 });
 
+const auth = useAuth()
+const router = useRouter()
+
 const form = ref({
   name: '',
   email: '',
@@ -85,10 +94,63 @@ const form = ref({
   confirmPassword: ''
 });
 
-const handleRegister = () => {
-  console.log('Register attempt:', form.value);
-  // TODO: Implement actual register logic
-};
+const localError = ref('')
+const loading = computed(() => auth.isLoading.value)
+const displayError = computed(() => localError.value || auth.error.value || '')
+const hasCompletedInterests = computed(() => {
+  const scores = auth.user.value?.interestScores
+  return !!scores && Object.keys(scores).length > 0
+})
+
+const handleRegister = async () => {
+  localError.value = ''
+  
+  // Validation
+  if (form.value.password !== form.value.confirmPassword) {
+    localError.value = 'Passwords do not match'
+    return
+  }
+  
+  if (form.value.password.length < 8) {
+    localError.value = 'Password must be at least 8 characters'
+    return
+  }
+  
+  const nameParts = form.value.name.trim().split(/\s+/)
+
+  if (nameParts.length < 2) {
+    localError.value = 'Please enter your full name (first and last name)'
+    return
+  }
+
+  const firstName = nameParts[0]!
+  const lastName = nameParts.slice(1).join(' ')
+  
+  const success = await auth.register({
+    email: form.value.email,
+    password: form.value.password,
+    // Remove password_confirmation - backend doesn't expect it
+    firstName,
+    lastName
+  })
+  
+  if (success) {
+    await router.push('/auth/interests')
+  } else {
+    localError.value = auth.error.value || 'Registration failed. Please try again.'
+  }
+}
+
+// Redirect if already authenticated
+watchEffect(() => {
+  if (!auth.isAuthenticated.value) return
+
+  if (hasCompletedInterests.value) {
+    router.replace('/')
+  } else {
+    router.replace('/auth/interests')
+  }
+});
 </script>
 
 <style scoped>
@@ -161,6 +223,20 @@ const handleRegister = () => {
 
 .btn-primary:active {
   transform: scale(0.98);
+}
+
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.error-message {
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #dc2626;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 14px;
 }
 
 .divider {

@@ -6,6 +6,14 @@
     </div>
 
     <form @submit.prevent="handleReset" class="auth-form">
+      <div v-if="error" class="error-message">
+        {{ error }}
+      </div>
+      
+      <div v-if="success" class="success-message">
+        {{ success }}
+      </div>
+      
       <div class="form-group">
         <label for="email" class="label">Email Address</label>
         <input 
@@ -15,10 +23,13 @@
           class="input" 
           placeholder="Enter your email"
           required
+          :disabled="loading"
         >
       </div>
 
-      <button type="submit" class="btn-primary">Send Reset Link</button>
+      <button type="submit" class="btn-primary" :disabled="loading || !email">
+        {{ loading ? 'Sending...' : 'Send Reset Link' }}
+      </button>
     </form>
 
     <p class="footer-text">
@@ -38,10 +49,30 @@ definePageMeta({
 });
 
 const email = ref('');
+const loading = ref(false);
+const error = ref('');
+const success = ref('');
 
-const handleReset = () => {
-  console.log('Reset password for:', email.value);
-  // TODO: Implement actual reset logic
+const handleReset = async () => {
+  error.value = '';
+  success.value = '';
+  loading.value = true;
+  
+  try {
+    const response = await $fetch('/api/auth/forgot-password', {
+      method: 'POST',
+      body: {
+        email: email.value
+      }
+    });
+    
+    success.value = 'Password reset link has been sent to your email address.';
+    email.value = ''; // Clear form
+  } catch (err: any) {
+    error.value = err?.data?.message || err?.message || 'Failed to send reset email. Please try again.';
+  } finally {
+    loading.value = false;
+  }
 };
 </script>
 
@@ -115,6 +146,29 @@ const handleReset = () => {
 
 .btn-primary:active {
   transform: scale(0.98);
+}
+
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.error-message {
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #dc2626;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.success-message {
+  background-color: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  color: #16a34a;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 14px;
 }
 
 .footer-text {

@@ -14,10 +14,23 @@
     <div class="action-icons">
       <!-- TODO: swap placeholders with bell/profile icons -->
       <button type="button" class="icon-button">!</button>
-      <button type="button" class="icon-button">!</button>
+      
+      <!-- Authentication actions -->
+      <div v-if="!isAuthenticated" class="auth-buttons">
+        <NuxtLink to="/auth/login" class="login-btn">Login</NuxtLink>
+        <NuxtLink to="/auth/register" class="register-btn">Register</NuxtLink>
+      </div>
+      
+      <div v-else class="user-menu">
+        <ProfileDropdown />
+      </div>
     </div>
   </header>
 </template>
+
+<script setup lang="ts">
+const { isAuthenticated } = useAuth()
+</script>
 
 <style scoped>
 .navbar {
@@ -92,6 +105,45 @@
   font-size: 16px;
 }
 
+.auth-buttons {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.login-btn {
+  padding: 8px 16px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  text-decoration: none;
+  color: #374151;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.login-btn:hover {
+  background-color: #f9fafb;
+  border-color: #d1d5db;
+}
+
+.register-btn {
+  padding: 8px 16px;
+  background-color: #4f46e5;
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.register-btn:hover {
+  background-color: #4338ca;
+}
+
+.user-menu {
+  display: flex;
+  align-items: center;
+}
 
 @media screen and (max-width: 1040px) {
   .search-center {

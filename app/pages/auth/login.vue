@@ -6,6 +6,10 @@
     </div>
 
     <form @submit.prevent="handleLogin" class="auth-form">
+      <div v-if="displayError" class="error-message">
+        {{ displayError }}
+      </div>
+      
       <div class="form-group">
         <label for="email" class="label">Email Address</label>
         <input 
@@ -38,7 +42,9 @@
         <NuxtLink to="/auth/forgot-password" class="forgot-link">Forgot Password?</NuxtLink>
       </div>
 
-      <button type="submit" class="btn-primary">Sign In</button>
+      <button type="submit" class="btn-primary" :disabled="loading">
+        {{ loading ? 'Signing in...' : 'Sign In' }}
+      </button>
     </form>
 
     <div class="divider">
@@ -62,16 +68,74 @@ definePageMeta({
   layout: 'auth'
 });
 
+const auth = useAuth()
+const router = useRouter()
+
 const form = ref({
   email: '',
   password: '',
   rememberMe: false
 });
 
-const handleLogin = () => {
-  console.log('Login attempt:', form.value);
-  // TODO: Implement actual login logic
-};
+const localError = ref('')
+const loading = computed(() => auth.isLoading.value)
+
+function mapAuthErrorMessage(message: string): string {
+  const normalized = message.toLowerCase()
+
+  if (normalized.includes('credential') || normalized.includes('password') || normalized.includes('unauthorized')) {
+    return 'Email atau kata sandi yang Anda masukkan salah. Silakan periksa kembali.'
+  }
+
+  if (normalized.includes('email') && (normalized.includes('not') || normalized.includes('exist') || normalized.includes('found'))) {
+    return 'Kami tidak menemukan akun dengan email tersebut. Silakan daftar terlebih dahulu.'
+  }
+
+  if (normalized.includes('inactive') || normalized.includes('verify') || normalized.includes('unverified')) {
+    return 'Akun Anda belum aktif. Periksa email Anda untuk menyelesaikan verifikasi.'
+  }
+
+  if (normalized.includes('throttle') || normalized.includes('too many') || normalized.includes('attempt')) {
+    return 'Terlalu banyak percobaan login. Coba lagi dalam beberapa menit.'
+  }
+
+  if (normalized.includes('network') || normalized.includes('status 5') || normalized.includes('server')) {
+    return 'Terjadi masalah pada server. Silakan coba lagi nanti.'
+  }
+
+  return message
+}
+
+const displayError = computed(() => {
+  const message = localError.value || auth.error.value || ''
+  return message ? mapAuthErrorMessage(message) : ''
+})
+
+const handleLogin = async () => {
+  localError.value = ''
+  auth.clearError()
+
+  const success = await auth.login({
+    email: form.value.email,
+    password: form.value.password
+  })
+
+  if (success) {
+    const redirectTo = router.currentRoute.value.query.redirect as string || '/dashboard'
+    await router.push(redirectTo)
+    return
+  }
+
+  const fallbackMessage = auth.error.value || 'Login gagal. Silakan coba lagi.'
+  localError.value = fallbackMessage
+}
+
+// Redirect if already authenticated
+watchEffect(() => {
+  if (auth.isAuthenticated.value) {
+    router.push('/')
+  }
+})
 </script>
 
 <style scoped>
@@ -165,6 +229,20 @@ const handleLogin = () => {
 
 .btn-primary:active {
   transform: scale(0.98);
+}
+
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.error-message {
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #dc2626;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 14px;
 }
 
 .divider {
