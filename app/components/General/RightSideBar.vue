@@ -1,23 +1,20 @@
 <template>
-  <div class="right-sidebar-wrapper">
-    <div class="right-sidebar">
-      <slot />
+    <div style="width: 348px;">
+    <div class="Right-sidebar">
+        <slot />
     </div>
-  </div>
+</div>
 </template>
 
 <style scoped>
-.right-sidebar-wrapper {
-  width: 348px;
-  align-self: flex-start; /* ensure sticky calculates from the scroll container */
-}
-
-.right-sidebar {
-  position: sticky;
+.Right-sidebar{
+    position: sticky;
   top: 80px;
   margin-top: 20px;
-  width: 100%;
-  padding-left: 0;
-  margin-left: 24px;
+  width: 320px;
+  padding-left: 0px;
+  margin-left:24px;
+  /* margin-bottom: 400px; */
 }
+
 </style>
