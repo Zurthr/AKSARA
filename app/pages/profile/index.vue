@@ -142,17 +142,7 @@
           <div class="about-me">
             <h3 class="card-title">About Me</h3>
             <p class="about-tagline">'He's the girl in the bubble, his big shiny bubble'</p>
-            <div class="about-actions">
-              <button class="btn-follow">Follow</button>
-              <button class="btn-chat">Chat</button>
-              <button class="btn-menu-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <line x1="3" y1="6" x2="21" y2="6"></line>
-                  <line x1="3" y1="12" x2="21" y2="12"></line>
-                  <line x1="3" y1="18" x2="21" y2="18"></line>
-                </svg>
-              </button>
-            </div>
+
           </div>
         </div>
 
@@ -338,7 +328,7 @@ const posts = ref([
   background: white;
   border-radius: 16px;
   overflow: hidden;
-  margin-bottom: 24px;
+  margin: 24px 0px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
@@ -348,12 +338,15 @@ const posts = ref([
   height: 300px;
   overflow: show;
   background: linear-gradient(135deg, #FFA500 0%, #FF8C00 100%);
+  border-radius: 16px;
+
 }
 
 .banner-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 16px;
 }
 
 .profile-avatar-overlay {
@@ -373,7 +366,7 @@ const posts = ref([
 }
 
 .profile-info-section {
-  padding: 80px 24px 24px;
+  padding: 80px 24px 0;
 }
 
 .profile-name-section {

@@ -367,7 +367,7 @@ const handlePurchaseClick = (option: { label: string; url: string | null; primar
 <style scoped>
 .book-detail-page {
   width: 100%;
-  margin: 8px 0 0 32px;
+  margin: 0 0 0 32px;
   background-color: #f8fafc;
   min-height: 100vh;
 }
@@ -659,7 +659,7 @@ const handlePurchaseClick = (option: { label: string; url: string | null; primar
 .licensing-list,
 .copy-types-list {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 8px;
 }
 
