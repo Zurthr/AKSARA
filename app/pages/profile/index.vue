@@ -2,28 +2,30 @@
   <div class="profile-page">
     <!-- Profile Header Section -->
     <div class="profile-header">
-      <div class="profile-banner">
-        <img src="https://via.placeholder.com/1200x300/FFA500/FFFFFF?text=Banner" alt="Profile Banner" class="banner-image">
-        <div class="profile-avatar-overlay">
-          <img src="https://via.placeholder.com/120/4CAF50/FFFFFF?text=Avatar" alt="Profile Avatar" class="profile-avatar">
-        </div>
-      </div>
-      
-      <div class="profile-info-section">
-        <div class="profile-name-section">
-          <h1 class="profile-name">Zurthr .zur</h1>
-          <p class="profile-tagline">'He's the girl in the bubble, his big shiny bubble'</p>
+      <div class="profile-header-inner">
+        <div class="profile-banner">
+          <img src="https://styles.redditmedia.com/t5_2ybklx/styles/profileBanner_mkh1leb397f51.jpg?width=1280&height=384&frame=1&auto=webp&crop=1280:384,smart&s=3df61bc81c762e701bcede592b5b82e6a4a2944e" alt="Profile Banner" class="banner-image">
+          <div class="profile-avatar-overlay">
+            <img src="https://styles.redditmedia.com/t5_2ybklx/styles/profileIcon_ryoe6ydu77f51.png?s=8cd049bb382287c2ce1bf5e0862a6fb1d6d49310" alt="Profile Avatar" class="profile-avatar">
+          </div>
         </div>
         
-        <div class="profile-tabs">
-          <button 
-            v-for="tab in tabs" 
-            :key="tab.id"
-            :class="['tab-button', { active: activeTab === tab.id }]"
-            @click="activeTab = tab.id"
-          >
-            {{ tab.label }}
-          </button>
+        <div class="profile-info-section">
+          <div class="profile-name-section">
+            <h1 class="profile-name">Zurthr .zur</h1>
+            <p class="profile-tagline">'He's the girl in the bubble, his big shiny bubble'</p>
+          </div>
+          
+          <div class="profile-tabs">
+            <button 
+              v-for="tab in tabs" 
+              :key="tab.id"
+              :class="['tab-button', { active: activeTab === tab.id }]"
+              @click="activeTab = tab.id"
+            >
+              {{ tab.label }}
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -202,13 +204,20 @@ const posts = ref([
 <style scoped>
 .profile-page {
   width: 100%;
-  background-color: #f8fafc;
   min-height: 100vh;
+  background-color: #f8fafc;
+  padding: 0 24px 24px;
 }
 
 .profile-header {
   background: white;
-  margin-bottom: 24px;
+  margin: 0 auto 24px;
+  width: 100%;
+}
+
+.profile-header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .profile-banner {
@@ -242,7 +251,7 @@ const posts = ref([
 }
 
 .profile-info-section {
-  padding: 80px 24px 24px 24px;
+  padding: 80px 24px 24px;
   max-width: 1200px;
   margin: 0 auto;
 }
@@ -303,10 +312,11 @@ const posts = ref([
 
 .profile-content {
   display: flex;
+  gap: 24px;
   max-width: 1200px;
   margin: 0 auto;
-  gap: 24px;
-  padding: 0 24px 24px 24px;
+  padding: 0 0 24px;
+  width: 100%;
 }
 
 .feed-section {
