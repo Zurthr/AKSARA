@@ -7151,6 +7151,42 @@
         "rating": 4.8
       },
       "id": 5
+    },
+    {
+      "event_type": "book_click",
+      "item_id": 37,
+      "item_title": "Catching Fire",
+      "item_tags": [
+        "General"
+      ],
+      "user_id": "anon_1765639418926_ays8es5mw",
+      "timestamp": "2025-12-13T16:14:45.723Z",
+      "source_page": "/literature",
+      "metadata": {
+        "author": "Suzanne Collins",
+        "rating": 4.8
+      },
+      "id": 6
+    },
+    {
+      "event_type": "book_click",
+      "item_id": 14,
+      "item_title": "HTML and CSS: Design and Build Websites",
+      "item_tags": [
+        "Web Development",
+        "HTML",
+        "CSS",
+        "Frontend Development",
+        "Web Design"
+      ],
+      "user_id": "anon_1765639418926_ays8es5mw",
+      "timestamp": "2025-12-13T16:20:05.034Z",
+      "source_page": "/literature",
+      "metadata": {
+        "author": "Jon Duckett",
+        "rating": 4.4
+      },
+      "id": 7
     }
   ]
 }

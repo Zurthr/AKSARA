@@ -26,18 +26,15 @@
         </div>
         
         <div class="source-info">
-          <div class="source-label">
-            <!-- Book icon for Digital/Public Preview -->
+          <div class="source-label" :class="getLabelClass(source.copyType, source.type)">
             <svg v-if="isDigitalType(source.copyType)" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="label-icon">
               <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
               <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
             </svg>
-            <!-- Graduation cap for Academic -->
             <svg v-else-if="isAcademicType(source.copyType)" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="label-icon">
               <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
               <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
             </svg>
-            <!-- Dollar sign for Physical/Paid -->
             <svg v-else width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="label-icon">
               <line x1="12" y1="1" x2="12" y2="23"></line>
               <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
@@ -46,9 +43,6 @@
           </div>
           <div class="source-name">
             {{ source.name }}
-            <span v-if="getOnPremiseTag(source.type)" class="onpremise-tag">
-              {{ getOnPremiseTag(source.type) }}
-            </span>
           </div>
         </div>
         
@@ -88,6 +82,33 @@ interface FlattenedSource extends CopyTypeSource {
   copyType: string;
 }
 
+const getSourcePriority = (copyType: string, sourceType?: string): number => {
+  const type = copyType.toLowerCase();
+  
+  // 1. Readables/Previews (Digital with free/free_download/preview)
+  if (type === 'digital' && (sourceType === 'free' || sourceType === 'free_download' || sourceType === 'preview')) {
+    return 1;
+  }
+  
+  // 2. Academic Copies
+  if (type === 'academic') {
+    return 2;
+  }
+  
+  // 3. Digital Copies (other digital types)
+  if (type === 'digital') {
+    return 3;
+  }
+  
+  // 4. Physical Copies
+  if (type === 'physical') {
+    return 4;
+  }
+  
+  // Default for unknown types
+  return 99;
+};
+
 const flattenedSources = computed<FlattenedSource[]>(() => {
   if (!props.copyTypes) return [];
   
@@ -104,7 +125,12 @@ const flattenedSources = computed<FlattenedSource[]>(() => {
     }
   });
   
-  return sources;
+  // Sort by priority: Readables/Previews, Academic, Digital, Physical
+  return sources.sort((a, b) => {
+    const priorityA = getSourcePriority(a.copyType, a.type);
+    const priorityB = getSourcePriority(b.copyType, b.type);
+    return priorityA - priorityB;
+  });
 });
 
 const getSourceLogo = (sourceName: string): string | undefined => {
@@ -156,6 +182,14 @@ const getCopyTypeLabel = (copyType: string, sourceType?: string): string => {
     return 'Academic Copy';
   }
   if (type === 'physical') {
+    // On-Premise Sale for bookstore_chain and academic_bookstore
+    if (sourceType === 'bookstore_chain' || sourceType === 'academic_bookstore') {
+      return 'On-Premise Sale';
+    }
+    // On-Premise Copy for university_library
+    if (sourceType === 'university_library') {
+      return 'On-Premise Copy';
+    }
     return 'Physical Copy';
   }
   
@@ -170,21 +204,18 @@ const isAcademicType = (copyType: string): boolean => {
   return copyType.toLowerCase() === 'academic';
 };
 
-const getOnPremiseTag = (sourceType?: string): string | null => {
-  if (!sourceType) return null;
+const getLabelClass = (copyType: string, sourceType?: string): string => {
+  const type = copyType.toLowerCase();
   
-  // On-premise Purchase (for onsite sales)
-  if (sourceType === 'bookstore_chain' || sourceType === 'academic_bookstore') {
-    return 'On-premise Purchase';
+  // Public Preview (Digital with free/free_download/preview) gets light blue
+  if (type === 'digital' && (sourceType === 'free' || sourceType === 'free_download' || sourceType === 'preview')) {
+    return 'label-preview';
   }
   
-  // On-premise Copy (for free readable physical copies)
-  if (sourceType === 'university_library') {
-    return 'On-premise Copy';
-  }
-  
-  return null;
+  // All other types get black
+  return 'label-default';
 };
+
 </script>
 
 <style scoped>
@@ -271,14 +302,28 @@ const getOnPremiseTag = (sourceType?: string): string | null => {
   align-items: center;
   gap: 6px;
   font-size: 12px;
-  color: #3b82f6;
   font-weight: 600;
+}
+
+.label-preview {
+  color: #3b82f6;
+}
+
+.label-preview .label-icon {
+  color: #3b82f6;
+}
+
+.label-default {
+  color: var(--color-black);
+}
+
+.label-default .label-icon {
+  color: var(--color-black);
 }
 
 .label-icon {
   width: 16px;
   height: 16px;
-  color: #3b82f6;
   flex-shrink: 0;
   display: inline-block;
 }
@@ -292,18 +337,6 @@ const getOnPremiseTag = (sourceType?: string): string | null => {
   font-weight: 700;
   color: var(--color-black);
   line-height: 1.3;
-}
-
-.onpremise-tag {
-  display: inline-block;
-  margin-left: 8px;
-  padding: 4px 8px;
-  border-radius: 6px;
-  background-color: #f0f9ff;
-  color: #0369a1;
-  font-size: 11px;
-  font-weight: 600;
-  line-height: 1;
 }
 
 .source-arrow {
