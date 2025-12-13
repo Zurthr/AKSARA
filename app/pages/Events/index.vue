@@ -164,8 +164,11 @@ import { useRuntimeConfig } from '#imports'
 
 
 import { useEvents } from '~/composables/useEvents'
+import { useClickTracking } from '~/composables/useClickTracking'
 import type { Event as EventItem } from '~/composables/useEvents'
 import { useLocalEvents } from '~/composables/useLocalEvents'
+
+const { trackEventClick } = useClickTracking()
 import mockEvents from 'mockData/events.json'
 import { mergeEventCollections, normalizeEventCollection } from '~/utils/events-normalizer'
 
@@ -247,7 +250,7 @@ const fetchEvents = async () => {
 };
 
 // Handle event card click
-const handleEventClick = (event: typeof originalEvents[0]) => {
+const handleEventClick = (event: EventItem) => {
   trackEventClick({
     id: event.id,
     title: event.title,

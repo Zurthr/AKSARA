@@ -74,6 +74,8 @@ import LiteratureFilterSidebar from '~/components/Literature/LiteratureFilterSid
 import TrendingSidebar from '~/components/TrendingSidebar.vue';
 import { useLazyBooks } from '~/composables/useLazyBooks';
 
+const { books: lazyBooks, isLoading: isLoadingBooks, hasMore: hasMoreBooks, loadMore: loadMoreBooks } = useLazyBooks()
+
 // Literature API integration
 import { useLiterature } from '~/composables/useLiterature'
 import type { LiteratureBook } from '~/composables/useLiterature'
