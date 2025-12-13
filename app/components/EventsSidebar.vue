@@ -1,19 +1,32 @@
 <template>
   <aside class="events-detail-sidebar">
-    <!-- Additional Information Card -->
-    <section class="sidebar-card info-card">
+    <section v-if="informasiTambahan.length" class="sidebar-card info-card">
       <div class="card-header">
         <h3>Informasi Event</h3>
       </div>
       <ul class="info-list">
         <li v-for="item in informasiTambahan" :key="`info-${item.label}`" class="info-item">
           <div class="info-icon">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" v-html="getIconSymbol(item.icon)">
-            </svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" v-html="getIconSymbol(item.icon)"></svg>
           </div>
           <div class="info-content">
             <p class="info-label">{{ item.label }}</p>
             <p class="info-value">{{ item.value }}</p>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <section v-if="relatedEvents.length" class="sidebar-card related-card">
+      <div class="card-header">
+        <h3>Event Terkait</h3>
+      </div>
+      <ul class="related-list">
+        <li v-for="event in relatedEvents" :key="event.title" class="related-item">
+          <div class="related-indicator" :style="{ background: event.color }"></div>
+          <div class="related-content">
+            <p class="related-title">{{ event.title }}</p>
+            <p class="related-meta">{{ event.type }} • {{ event.date }}</p>
           </div>
         </li>
       </ul>
@@ -63,7 +76,11 @@ const getIconSymbol = (icon: string): string => {
 
 <style scoped>
 .events-detail-sidebar {
-  width: 100%;
+  position: sticky;
+  top: 80px;
+  margin-top: 20px;
+  width: 320px;
+  padding-left: 24px;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -71,106 +88,53 @@ const getIconSymbol = (icon: string): string => {
 
 .sidebar-card {
   background: #ffffff;
-  border-radius: 12px;
-  border: 1px solid #e5e7eb;
-  padding: 0;
+  border-radius: 20px;
+  border: 1px solid #e2e8f0;
+  padding: 20px;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
-  will-change: transform; /* Optimize for animations */
-  contain: layout style; /* CSS containment for better performance */
+  gap: 16px;
+  box-shadow: 0 18px 36px rgba(15, 23, 42, 0.08);
 }
 
 .card-header {
-  padding: 16px 16px 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 12px;
 }
 
 .card-header h3 {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   font-size: 18px;
   font-weight: 700;
-  color: #1a1a1a;
+  color: #0f172a;
   margin: 0;
-  letter-spacing: -0.025em;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  background: linear-gradient(135deg, #1a1a1a 0%, #374151 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.info-icon-accent {
-  width: 28px;
-  height: 28px;
-  border-radius: 8px;
-  background: #f9fafb;
-  color: #6b7280;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid #e5e7eb;
-}
-
-.events-count {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  font-size: 11px;
-  color: #475569;
-  background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
-  padding: 4px 10px;
-  border-radius: 10px;
-  font-weight: 600;
-  letter-spacing: 0.3px;
-  border: 1px solid rgba(71, 85, 105, 0.1);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 .info-list {
   list-style: none;
-  padding: 0 16px 16px;
   margin: 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 14px;
 }
 
 .info-item {
   display: flex;
-  align-items: flex-start;
-  gap: 8px;
-  padding: 6px 0;
-  border-bottom: 1px solid #f3f4f6;
-}
-
-.info-item:last-child {
-  border-bottom: none;
+  align-items: center;
+  gap: 12px;
 }
 
 .info-icon {
-  width: 20px;
-  height: 20px;
-  border-radius: 4px;
-  background: #f9fafb;
-  display: inline-flex;
+  width: 40px;
+  height: 40px;
+  border-radius: 14px;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  display: flex;
   align-items: center;
   justify-content: center;
-  color: #6b7280;
-  flex-shrink: 0;
-}
-
-.info-icon {
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: #4b5563;
+  color: #334155;
   flex-shrink: 0;
 }
 
@@ -180,48 +144,94 @@ const getIconSymbol = (icon: string): string => {
 }
 
 .info-label {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 12px;
   font-weight: 600;
-  color: #6366f1;
-  font-size: 11px;
-  margin: 0 0 4px 0;
+  color: #64748b;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  opacity: 0.9;
-  transition: all 0.2s ease;
+  letter-spacing: 0.08em;
+  margin: 0 0 4px;
 }
 
 .info-value {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  font-size: 15px;
-  color: #1e293b;
-  margin: 0;
-  line-height: 1.5;
+  font-size: 16px;
   font-weight: 600;
-  letter-spacing: -0.01em;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  color: #0f172a;
+  margin: 0;
+}
+
+.tags-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.sidebar-tag {
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  background: rgba(59, 83, 121, 0.12);
+  color: #1d3557;
+  border: 1px solid rgba(59, 83, 121, 0.2);
+}
+
+.sidebar-tag.tag-default {
+  background: #1d4ed8;
+  border-color: transparent;
+  color: #ffffff;
+}
+
+.related-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.related-item {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.related-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.related-content {
+  flex: 1;
+}
+
+.related-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #0f172a;
+  margin: 0 0 4px;
+}
+
+.related-meta {
+  font-size: 12px;
+  color: #64748b;
+  margin: 0;
+}
+
+@media (max-width: 1024px) {
+  .events-detail-sidebar {
+    position: static;
+    width: 100%;
+    padding-left: 0;
+    margin-top: 0;
+  }
 }
 
 @media (max-width: 768px) {
-  .events-detail-sidebar {
-    width: 100%;
-    gap: 12px;
-  }
-  
-  .card-header {
-    padding: 12px 12px 0;
-  }
-  
-  .info-list {
-    padding: 0 12px 12px;
-  }
-  
-  .related-events {
-    padding: 0 12px;
-  }
-  
-  .card-footer {
-    padding: 0 12px 12px;
+  .sidebar-card {
+    padding: 18px;
   }
 }
 </style>
