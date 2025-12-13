@@ -190,27 +190,46 @@ const resolveAssetBaseUrl = () => {
 const assetBaseUrl = resolveAssetBaseUrl()
 const listFallbackImage = 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=900&q=80'
 
-// Use Laravel API
-const { getAllEvents, loading, error } = useEvents()
+// Use Laravel API via Lazy Load
+import { useLazyEvents } from '~/composables/useLazyEvents'
 
-const originalEvents = ref<EventItem[]>([])
-const staticEvents = normalizeEventCollection(mockEvents as RawEventRecord[])
+const { events: remoteEvents, loadMore, hasMore: hasMoreEvents, isLoading: isLoadingEvents } = useLazyEvents(6) // 12? user choice
+
+// Sentinel for infinite scroll
+const sentinelRef = ref<HTMLElement | null>(null)
+let observer: IntersectionObserver | null = null
+
+onMounted(() => {
+  // Setup Intersection Observer
+  if (typeof window !== 'undefined') {
+    observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && hasMoreEvents.value && !isLoadingEvents.value) {
+           loadMore()
+        }
+      })
+    }, { rootMargin: '100px' })
+    
+    if (sentinelRef.value) observer.observe(sentinelRef.value)
+  }
+})
+
+watch(sentinelRef, (newRef, oldRef) => {
+  if (oldRef && observer) observer.unobserve(oldRef)
+  if (newRef && observer) observer.observe(newRef)
+})
+
+onUnmounted(() => {
+  if (observer) observer.disconnect()
+})
+
+// const originalEvents = ref<EventItem[]>([]) -> replaced by remoteEvents from composable
+// const staticEvents = normalizeEventCollection(mockEvents as RawEventRecord[]) // REMOVED to prevent loading all mock data at once
 const { localEvents } = useLocalEvents()
 
 const normalizedLocalEvents = computed<EventItem[]>(() => {
   const raw = Array.isArray(localEvents.value) ? localEvents.value : []
   return normalizeEventCollection(raw as RawEventRecord[])
-})
-
-const mergedEvents = computed<EventItem[]>(() => {
-  const remote = Array.isArray(originalEvents.value) ? originalEvents.value : []
-  console.log('🔍 Merging events:')
-  console.log('📡 Remote (Laravel):', remote.length, 'events')
-  console.log('📄 Static (JSON):', staticEvents.length, 'events')
-  console.log('💾 Local Storage:', normalizedLocalEvents.value.length, 'events')
-  const merged = mergeEventCollections([remote, staticEvents, normalizedLocalEvents.value])
-  console.log('✅ Final merged:', merged.length, 'events')
-  return merged
 })
 
 const resolveAbsoluteUrl = (raw?: string | null) => {
@@ -237,17 +256,26 @@ const handleCardImageError = (domEvent: Event) => {
   }
 }
 
-// Fetch events on mount
-onMounted(async () => {
-  await fetchEvents();
-});
+// Map lazy load state to template variables
+const loading = isLoadingEvents
+const error = ref<string | null>(null) // Composable returns generic Error, template expects string maybe? Or just use as is. 
+// Composable error is Ref<Error | null>. Template {{ error }} implies it prints it. Error object prints message usually.
+// Let's create a computed for error message string if needed, or just alias it.
+// Actually locally we can just use the ref from useLazyEvents if checking v-if="error".
+// But we need to make sure `fetchEvents` is available for the "Try Again" button.
 
 const fetchEvents = async () => {
-  const response = await getAllEvents();
-  if (response && response.data) {
-    originalEvents.value = response.data;
-  }
-};
+    // Wrapper for retry
+    loadMore()
+}
+
+const mergedEvents = computed<EventItem[]>(() => {
+  const remote = Array.isArray(remoteEvents.value) ? remoteEvents.value : []
+  console.log('🔍 Merging events:')
+  console.log('📡 Remote (Lazy):', remote.length, 'events')
+  const merged = mergeEventCollections([remote, normalizedLocalEvents.value])
+  return merged
+})
 
 // Handle event card click
 const handleEventClick = (event: EventItem) => {
