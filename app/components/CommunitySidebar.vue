@@ -1,5 +1,23 @@
 <template>
   <aside class="community-sidebar" :class="layout === 'inline' ? 'layout-inline' : ''">
+    <section v-if="communityDetails" class="sidebar-card community-details-card">
+      <header>
+        <div class="community-header">
+          <div class="community-avatar">{{ communityDetails.initials }}</div>
+          <div>
+            <h3>{{ communityDetails.name }}</h3>
+            <p class="community-meta">{{ communityDetails.members }} members • {{ communityDetails.posts }} posts</p>
+          </div>
+        </div>
+      </header>
+      <div class="community-description">
+        <p>{{ communityDetails.description }}</p>
+      </div>
+      <div v-if="communityDetails.tags" class="community-tags">
+        <span v-for="tag in communityDetails.tags" :key="tag" class="community-tag">{{ tag }}</span>
+      </div>
+    </section>
+    
     <section class="sidebar-card">
       <header>
         <h3>Communities</h3>
@@ -50,10 +68,20 @@ interface RelatedCommunity {
   members: string;
 }
 
+interface CommunityDetails {
+  initials: string;
+  name: string;
+  description: string;
+  members: string;
+  posts: string;
+  tags?: string[];
+}
+
 const props = defineProps<{
   hashtags: string[];
   tweet: Tweet;
   relatedCommunities: RelatedCommunity[];
+  communityDetails?: CommunityDetails;
   layout?: 'default' | 'inline';
 }>();
 
@@ -73,7 +101,7 @@ const { layout = 'default' } = props;
 }
 
 .community-sidebar:hover {
-  scrollbar-color: #94a3b8 transparent;
+  scrollbar-color: #ffffff transparent;
 }
 
 .community-sidebar.layout-inline {
@@ -98,6 +126,56 @@ const { layout = 'default' } = props;
 .community-sidebar::-webkit-scrollbar-thumb {
   background-color: rgba(148, 163, 184, 0.5);
   border-radius: 999px;
+}
+
+.community-details-card {
+  border: 1px solid #FFDA49;
+  background: linear-gradient(135deg, #fffbeb 0%, #ffffff 100%);
+}
+
+.community-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.community-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #FFDA49 0%, #fbbf24 100%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: var(--color-black);
+  font-size: 18px;
+}
+
+.community-meta {
+  font-size: 13px;
+  color: #64748b;
+  margin-top: 2px;
+}
+
+.community-description {
+  line-height: 1.6;
+  color: #475569;
+}
+
+.community-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.community-tag {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background-color: #FFDA49;
+  color: var(--color-black);
+  font-size: 12px;
+  font-weight: 600;
 }
 
 .sidebar-card {

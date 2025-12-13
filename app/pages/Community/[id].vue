@@ -10,7 +10,7 @@
       </div>
     </transition>
 
-    <NuxtLink to="/community" class="back-link">&larr; Kembali</NuxtLink>
+    <NuxtLink to="/community" class="back-link">&larr; Back</NuxtLink>
 
     <div class="community-detail-page">
       <div class="community-main">
@@ -31,7 +31,7 @@
                   <span v-if="hasJoined" aria-hidden="true">✓</span>
                   {{ joinButtonLabel }}
                 </button>
-                <button type="button" class="hero-button ghost">Bagikan</button>
+                <button type="button" class="hero-button ghost">Share</button>
               </div>
             </div>
           </div>
@@ -39,8 +39,8 @@
 
         <section class="community-posts">
           <header>
-            <h2>Diskusi Terbaru</h2>
-            <p>{{ forumPosts.length }} percakapan aktif hari ini</p>
+            <h2>latest discussion</h2>
+            <p>{{ forumPosts.length }} Active conversation today</p>
           </header>
 
           <div v-if="forumPosts.length > 0" class="forum-posts-list">
@@ -65,6 +65,7 @@
         :hashtags="communityHashtags"
         :tweet="communityTweet"
         :relatedCommunities="relatedCommunitiesData"
+        :communityDetails="communityDetails"
       />
     </RightSideBar>
     </div>
@@ -535,12 +536,12 @@ let activityInterval: ReturnType<typeof setInterval> | null = null;
 
 const joinButtonLabel = computed(() => {
   if (hasJoined.value) {
-    return 'Sudah Bergabung';
+    return 'Already Joined';
   }
   if (isJoining.value) {
-    return 'Menghubungkan...';
+    return 'Connect...';
   }
-  return '+ Gabung Komunitas';
+  return '+ Join the Community';
 });
 
 const handleJoinCommunity = () => {
@@ -586,6 +587,15 @@ const activityImages = computed(() => {
 
 // Data for CommunitySidebar component
 const communityHashtags = computed(() => community.value.tags);
+
+const communityDetails = computed(() => ({
+  initials: community.value.name.split(' ').map(word => word[0]).join('').substring(0, 2).toUpperCase(),
+  name: community.value.name,
+  description: community.value.description,
+  members: community.value.members,
+  posts: community.value.posts?.length.toString() || '0',
+  tags: community.value.tags
+}));
 
 const communityTweet = computed(() => ({
   initials: 'BS',

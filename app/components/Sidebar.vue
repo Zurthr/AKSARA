@@ -38,7 +38,7 @@ import Forum from '~/assets/icons/Forum.svg';
 import Events from '~/assets/icons/Event.svg';
 import Embeds from '~/assets/icons/Embed.svg';
 import Bookmarks from '~/assets/icons/Bookmarks.svg';
-
+import User from '~/assets/icons/Person.svg';
 
 const navGroups = [
   {
@@ -48,6 +48,11 @@ const navGroups = [
         label: 'Home',
         href: '/',
         icon: HomeIcon
+      },
+      {
+        label: 'Forums',
+        href: '/forums',
+        icon: Forum
       },
       {
         label: 'Literature',
@@ -65,11 +70,6 @@ const navGroups = [
         icon: Community
       },
       {
-        label: 'Forums',
-        href: '/forums',
-        icon: Forum
-      },
-      {
         label: 'Events',
         href: '/events',
         icon: Events
@@ -85,9 +85,14 @@ const navGroups = [
         icon: Embeds
       },
       {
-        label: 'My Bookmarks',
+        label: 'Bookmarks',
         href: '/bookmarks',
         icon: Bookmarks
+      },
+      {
+        label: 'Profile',
+        href: '/profile',
+        icon: User
       }
     ]
   }
