@@ -28,5 +28,10 @@
   "/posts/:id/comments": "/comments?post_id=:id",
   "/communities/:id/posts": "/posts?community_id=:id",
   "/books/:id/reviews": "/reviews?book_id=:id",
-  "/events/community/:communityId": "/events?community_id=:communityId"
+  "/events/community/:communityId": "/events?community_id=:communityId",
+  "/api/click-events": "/click_events",
+  "/api/click-events/:id": "/click_events/:id",
+  "/api/click-events/user/:userId": "/click_events?user_id=:userId",
+  "/api/click-events/type/:eventType": "/click_events?event_type=:eventType",
+  "/api/click-events/batch": "/click_events"
 }

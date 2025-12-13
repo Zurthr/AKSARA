@@ -246,6 +246,16 @@ const fetchEvents = async () => {
   }
 };
 
+// Handle event card click
+const handleEventClick = (event: typeof originalEvents[0]) => {
+  trackEventClick({
+    id: event.id,
+    title: event.title,
+    date: event.date,
+    community_id: event.community_id
+  });
+};
+
 const startDate = ref<string | null>(null);
 const endDate = ref<string | null>(null);
 // chip-style selection: can select one, both, or none.

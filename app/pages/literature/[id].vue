@@ -732,7 +732,7 @@ const handleImageError = (event: Event) => {
 .licensing-list,
 .copy-types-list {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 8px;
 }
 
