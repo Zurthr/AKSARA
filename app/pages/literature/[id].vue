@@ -1,12 +1,29 @@
 <template>
   <div class="book-detail-page">
-    <div v-if="book" class="book-detail-container">
-      <!-- Main Content -->
-      <main class="book-main">
+    <!-- Loading state -->
+    <div v-if="loading" class="loading-state">
+      <div class="loading-spinner"></div>
+      <p>Loading book...</p>
+    </div>
+    
+    <!-- Error state -->
+    <div v-else-if="bookError" class="error-state">
+      <h3>Failed to load book</h3>
+      <p>{{ bookError }}</p>
+      <button @click="fetchBook" class="retry-btn">Try Again</button>
+    </div>
+    
+    <!-- Book content -->
+    <main v-else-if="book" class="book-main">
         <!-- Book Header Section -->
         <div class="book-header">
           <div class="book-cover-section">
-            <img :src="book.cover" :alt="book.title" class="book-cover-image" />
+            <img 
+              :src="book.cover" 
+              :alt="book.title" 
+              class="book-cover-image" 
+              @error="handleImageError"
+            />
           </div>
           <div class="book-info-section">
             <h1 class="book-title-main">{{ book.title }}</h1>
@@ -109,84 +126,83 @@
             </div>
           </div>
         </div>
-      </main>
+    </main>
 
-      <!-- Sidebar -->
-      <RightSideBar>
-        <div class="sidebar-content">
-          <h2 class="sidebar-title">Book Details</h2>
+    <RightSideBar v-if="book">
+      <div class="sidebar-content">
+        <h2 class="sidebar-title">Book Details</h2>
           
-          <div class="sidebar-section">
-            <h3 class="sidebar-book-title">{{ book.title }}</h3>
-            <div class="bookmark-count">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"/>
-              </svg>
-              <span>{{ book.total_bookmarked || 0 }}</span>
-            </div>
-            <p class="sidebar-author" v-if="book.author">by {{ book.author }}</p>
-            <p class="sidebar-edition" v-if="book.year_edition">{{ book.year_edition }}</p>
+        <div class="sidebar-section">
+          <h3 class="sidebar-book-title">{{ book.title }}</h3>
+          <div class="bookmark-count">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"/>
+            </svg>
+            <span>{{ book.total_bookmarked || 0 }}</span>
           </div>
+          <p class="sidebar-author" v-if="book.author">by {{ book.author }}</p>
+          <p class="sidebar-edition" v-if="book.year_edition">{{ book.year_edition }}</p>
+        </div>
 
-          <!-- Tags -->
-          <div class="sidebar-section" v-if="book.tags && book.tags.length > 0">
-            <h4 class="sidebar-section-title">Related Tags</h4>
-            <div class="tags-list">
-              <span
-                v-for="tag in book.tags"
-                :key="tag.name"
-                class="tag-item"
-              >
-                {{ tag.name }}
-              </span>
-            </div>
-          </div>
-
-          <!-- Book Licensing -->
-          <div class="sidebar-section" v-if="book.licensing_type">
-            <h4 class="sidebar-section-title">Book Licensing</h4>
-            <div class="licensing-list">
-              <span class="licensing-item">{{ book.licensing_type }}</span>
-            </div>
-          </div>
-
-          <!-- Copy Availability -->
-          <div class="sidebar-section" v-if="book.copy_types">
-            <h4 class="sidebar-section-title">Copy Availability</h4>
-            <div class="copy-types-list">
-              <span
-                v-for="(copyType, key) in book.copy_types"
-                :key="key"
-                class="copy-type-item"
-              >
-                {{ key }}
-              </span>
-            </div>
-          </div>
-
-          <!-- Purchase Options -->
-          <div class="sidebar-section purchase-section">
-            <h4 class="sidebar-section-title">Get your hands on this book</h4>
-            <div class="purchase-options">
-              <button
-                v-for="option in purchaseOptions"
-                :key="option.label"
-                class="purchase-button"
-                :class="{ 
-                  'primary': option.primary, 
-                  'disabled': option.disabled 
-                }"
-                :disabled="option.disabled"
-                @click="handlePurchaseClick(option)"
-              >
-                {{ option.label }}
-              </button>
-            </div>
+        <!-- Tags -->
+        <div class="sidebar-section" v-if="book.tags && book.tags.length > 0">
+          <h4 class="sidebar-section-title">Related Tags</h4>
+          <div class="tags-list">
+            <span
+              v-for="tag in book.tags"
+              :key="tag.name"
+              class="tag-item"
+            >
+              {{ tag.name }}
+            </span>
           </div>
         </div>
-      </RightSideBar>
-    </div>
-    <div v-else class="book-not-found">
+
+        <!-- Book Licensing -->
+        <div class="sidebar-section" v-if="book.licensing_type">
+          <h4 class="sidebar-section-title">Book Licensing</h4>
+          <div class="licensing-list">
+            <span class="licensing-item">{{ book.licensing_type }}</span>
+          </div>
+        </div>
+
+        <!-- Copy Availability -->
+        <div class="sidebar-section" v-if="book.copy_types">
+          <h4 class="sidebar-section-title">Copy Availability</h4>
+          <div class="copy-types-list">
+            <span
+              v-for="(copyType, key) in book.copy_types"
+              :key="key"
+              class="copy-type-item"
+            >
+              {{ key }}
+            </span>
+          </div>
+        </div>
+
+        <!-- Purchase Options -->
+        <div class="sidebar-section purchase-section">
+          <h4 class="sidebar-section-title">Get your hands on this book</h4>
+          <div class="purchase-options">
+            <button
+              v-for="option in purchaseOptions"
+              :key="option.label"
+              class="purchase-button"
+              :class="{ 
+                'primary': option.primary, 
+                'disabled': option.disabled 
+              }"
+              :disabled="option.disabled"
+              @click="handlePurchaseClick(option)"
+            >
+              {{ option.label }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </RightSideBar>
+    
+    <div v-else-if="!loading && !bookError" class="book-not-found">
       <p>Book not found</p>
     </div>
   </div>
@@ -195,6 +211,14 @@
 <script setup lang="ts">
 import RightSideBar from '~/components/General/RightSideBar.vue';
 import ForumCard from '~/components/Forum/ForumCard.vue';
+
+// Literature API integration
+import { useLiterature } from '~/composables/useLiterature'
+import { LOCAL_BOOKS_STORAGE_KEY } from '~/composables/useLocalBooks'
+import mockBooks from '../../../mock-backend/data/books.json'
+import { findBookById, mergeBookCollections, normalizeBookCollection, readLocalBooksSnapshot } from '~/utils/books-normalizer'
+
+type RawBookRecord = Record<string, unknown>
 
 const route = useRoute();
 const bookId = route.params.id;
@@ -260,24 +284,79 @@ const tabs = [
   { id: 'sourcing' as const, label: 'Sourcing Options' },
 ];
 
-// Fetch book data from API
-const { data: book, error: bookError } = await useFetch<RawBook>(`http://localhost:3002/books/${bookId}`);
+// Fetch book data from Laravel API with fallback
+const { getBookById, loading, error, clearError } = useLiterature()
+const staticBooks = normalizeBookCollection(mockBooks as RawBookRecord[])
 
-
-if (bookError.value) {
-  console.error('Error fetching book:', bookError.value);
-}
+const book = ref<RawBook | null>(null);
+const bookError = ref<string | null>(null);
 
 // Fetch related posts
 const relatedPosts = ref<Post[]>([]);
-if (book.value?.related_posts?.length) {
-  const query = book.value.related_posts.map(id => `id=${id}`).join('&');
-  const { data, error } = await useFetch<Post[]>(`http://localhost:3002/posts?${query}`);
-  if (error.value) {
-    console.error('Error fetching related posts:', error.value);
+
+const fetchRelatedPosts = async () => {
+  if (!book.value?.related_posts?.length) {
+    relatedPosts.value = [];
+    return;
   }
-  relatedPosts.value = data.value ?? [];
-}
+
+  try {
+    const query = book.value.related_posts.map(id => `id=${id}`).join('&');
+    const data = await $fetch<Post[]>(`http://localhost:3002/posts?${query}`);
+    relatedPosts.value = data || [];
+  } catch (err) {
+    console.error('Error fetching related posts:', err);
+    relatedPosts.value = [];
+  }
+};
+
+// Fetch book with fallback mechanism
+const fetchBook = async () => {
+  bookError.value = null;
+  
+  try {
+    // Check if ID exists in our available data first
+    const localSnapshot = readLocalBooksSnapshot(LOCAL_BOOKS_STORAGE_KEY);
+    const allAvailableBooks = mergeBookCollections([staticBooks, localSnapshot]);
+    const bookExists = allAvailableBooks.find(book => String(book.id) === String(bookId));
+    
+    // Only try Laravel API if book might exist there or we haven't found it locally
+    if (!bookExists || (bookExists && (bookExists as any).source === 'laravel')) {
+      clearError();
+      const remote = await getBookById(bookId as string);
+      if (remote) {
+        book.value = remote as RawBook;
+        await fetchRelatedPosts();
+        return;
+      }
+    }
+    
+    // Fallback to static + local storage
+    const fallback = findBookById(bookId as string, [staticBooks, localSnapshot]);
+    if (fallback) {
+      book.value = fallback as RawBook;
+      clearError();
+      await fetchRelatedPosts();
+      return;
+    }
+    
+    // If no fallback found
+    book.value = null;
+    bookError.value = 'Book not found';
+  } catch (err) {
+    bookError.value = err instanceof Error ? err.message : 'Failed to load book';
+    console.error('Error fetching book:', err);
+  }
+};
+
+// Fetch on mount and route change
+onMounted(() => {
+  fetchBook();
+});
+
+watch(() => route.params.id, () => {
+  fetchBook();
+});
 
 
 const purchaseOptions = computed(() => {
@@ -363,28 +442,28 @@ const handlePurchaseClick = (option: { label: string; url: string | null; primar
     window.open(option.url, '_blank', 'noopener,noreferrer');
   }
 };
+
+const handleImageError = (event: Event) => {
+  const img = event.target as HTMLImageElement;
+  img.src = '/images/book-cover-placeholder.svg';
+};
 </script>
 
 <style scoped>
 .book-detail-page {
   width: 100%;
-  margin: 0 0 0 32px;
+  padding: 24px;
   background-color: #f8fafc;
-  min-height: 100vh;
-}
-
-.book-detail-container {
+  min-height: 100%;
   display: flex;
-  width:100%;
+  max-width: 1200px;
   margin: 0 auto;
   gap: 24px;
 }
 
 .book-main {
   flex: 1;
-  margin-top: 20px;
-  min-width: 640px;
-  max-width: 920px;
+  min-width: 0;
 }
 
 .book-header {
@@ -569,18 +648,11 @@ const handlePurchaseClick = (option: { label: string; url: string | null; primar
   text-decoration: underline;
 }
 
-.book-sidebar {
-  width: 320px;
-  flex-shrink: 0;
-}
-
 .sidebar-content {
   background: white;
   border-radius: 16px;
   padding: 24px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  position: sticky;
-  top: 24px;
 }
 
 .sidebar-title {
@@ -732,19 +804,20 @@ const handlePurchaseClick = (option: { label: string; url: string | null; primar
   padding: 48px;
   text-align: center;
   color: #64748b;
+  width: 100%;
 }
 
-@media (max-width: 1040px) {
-  .book-detail-container {
+.loading-state,
+.error-state {
+  width: 100%;
+  padding: 48px;
+  text-align: center;
+}
+
+@media (max-width: 1080px) {
+  .book-detail-page {
     flex-direction: column;
-  }
-
-  .book-sidebar {
-    width: 100%;
-  }
-
-  .sidebar-content {
-    position: static;
+    padding: 16px;
   }
 
   .book-header {

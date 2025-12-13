@@ -1,133 +1,117 @@
 <template>
-  <div class="event-page">
+  <section class="event-detail-page">
     <NuxtLink to="/events" class="back-link">&larr; Back to Events</NuxtLink>
 
-    <div class="event-detail-page">
+    <div class="event-detail-content">
       <div class="event-detail-main">
-        <div class="event-detail-feed">
+        <div v-if="isLoading" class="state-card loading">
+          <div class="loading-spinner"></div>
+          <p>Memuat detail event...</p>
+        </div>
+
+        <div v-else-if="loadError" class="state-card error">
+          <h3>Gagal memuat data</h3>
+          <p>{{ loadError }}</p>
+          <button class="retry-btn" @click="retryFetch">Coba lagi</button>
+        </div>
+
+        <div v-else-if="notFound" class="state-card empty">
+          <h3>Event tidak ditemukan</h3>
+          <p>Periksa kembali tautan atau pilih event lain dari daftar.</p>
+        </div>
+
+        <div v-else-if="eventData" class="event-detail-feed">
           <article class="hero-media-section">
             <div class="hero-media-container">
-              <img
-                :src="heroImage"
-                :alt="event.title"
-                class="hero-media-image"
-                @error="handleImageError"
-              />
+              <img :src="heroImage" :alt="eventData.title" class="hero-media-image" @error="handleImageError" />
               <div class="hero-media-overlay">
                 <div class="hero-media-content">
-                  <span class="hero-category-badge">{{ event.category }}</span>
-                  <h1 class="hero-media-title">{{ event.title }}</h1>
-                  <p class="hero-media-subtitle">{{ event.subtitle }}</p>
-                  <div class="hero-actions">
-                    <button type="button" class="hero-button primary">
-                      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="currentColor" />
-                      </svg>
-                      Daftar Event
+                  <span v-if="eventData.category" class="hero-category-badge">{{ eventData.category }}</span>
+                  <h1 class="hero-media-title">{{ eventData.title }}</h1>
+                  
+                  <div class="hero-cta">
+                    <button
+                      type="button"
+                      class="hero-button primary"
+                      :disabled="!registrationLink"
+                      @click="handleRegisterClick"
+                    >
+                      <span class="hero-button-icon">★</span>
+                      {{ registrationButtonLabel }}
                     </button>
-                    <button type="button" class="hero-button ghost">
-                      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z" fill="currentColor" />
+                    <button type="button" class="hero-button secondary" @click="shareEvent">
+                      <svg class="hero-button-share" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 0 6h.17A3 3 0 0 0 18 8Zm0 2a4.98 4.98 0 0 0-3.9 1.9l-5.3-2.65a3 3 0 1 0-.8 1.6l5.34 2.67A4.97 4.97 0 0 0 13 16a5 5 0 1 0 5-5Z" fill="currentColor" />
                       </svg>
-                      Bagikan
+                      {{ shareButtonLabel }}
                     </button>
                   </div>
+                
+                  <p v-if="shareMessage" class="hero-share-feedback">{{ shareMessage }}</p>
                 </div>
               </div>
             </div>
           </article>
 
           <section class="event-info">
-            <div class="event-header">
-              <p class="hosted-by">
-                Hosted by: <span class="host-link">{{ event.hostedBy }}</span>
-              </p>
-            </div>
+            <header class="event-header">
+              
+              <span v-if="displayStatus" class="status-pill">{{ displayStatus }}</span>
+            </header>
 
-            <section class="event-description">
+            <section v-if="eventData.description" class="event-description">
               <h3>Deskripsi Event</h3>
-              <p>{{ event.description }}</p>
-              <div v-if="event.objectives" class="event-objectives">
-                <p>{{ event.objectives }}</p>
-              </div>
-              <div v-if="event.benefits" class="event-benefits">
-                <p>{{ event.benefits }}</p>
-              </div>
-              <!-- Tags Section -->
-                <div class="event-tags-section">
-                  <h4>Tags</h4>
-                  <div class="tags-container">
-                    <span
-                      v-for="tag in event.tags"
-                      :key="tag"
-                      :class="['tag', getTagClass(tag)]"
-                    >
-                      {{ tag }}
-                    </span>
-                  </div>
-                </div>
+              <p>{{ eventData.description }}</p>
             </section>
 
-            <!-- Detail Event and Related Events Grid -->
-            <div class="details-and-related-grid">
-              <!-- Detail Event Section -->
-              <section class="event-details-section">
-                <div class="details-grid"> 
-
-                  <!-- Date/time -->
-                    <div class="detail-item">
-                      <div class="detail-icon time">
-                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z" fill="currentColor" />
-                        </svg>
-                      </div>
-                      <div>
-                        <p class="detail-label">Tanggal & Waktu</p>
-                        <p class="detail-value">{{ event.datetime }}</p>
-                      </div>
-                    </div>
-
-                  <!-- Location (online/offline) -->
-                    <div class="detail-item">
-                      <div class="detail-icon location">
-                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z" fill="currentColor" />
-                        </svg>
-                      </div>
-                      <div>
-                        <p class="detail-label">Lokasi</p>
-                        <div class="detail-value">
-                          <template v-if="isOnlineEvent">
-                            <div class="location-title">{{ event.shortAddress || 'Online (Zoom Meeting)' }}</div>
-                            <div class="location-link">
-                              <a :href="extractLink(event.address) || '#'" target="_blank" rel="noopener">{{ extractLink(event.address) ? extractLink(event.address) : event.address }}</a>
-                            </div>
-                          </template>
-                          <template v-else>
-                            <div class="location-title">{{ event.shortAddress || event.address }}</div>
-                          </template>
-                        </div>
-                      </div>
-                    </div>
+            <section v-if="detailBlocks.length" class="event-details-section">
+              <h3>Detail Event</h3>
+              <dl class="details-grid">
+                <div v-for="detail in detailBlocks" :key="detail.label" class="detail-item">
+                  <dt class="detail-label">{{ detail.label }}</dt>
+                  <dd class="detail-value">{{ detail.value }}</dd>
                 </div>
-              </section>
-            </div>
+              </dl>
+            </section>
+
+            <section v-if="tagList.length" class="event-tags">
+              <h3>Tag</h3>
+              <div class="tags-container">
+                <span v-for="tag in tagList" :key="tag" class="tag tag-default">{{ tag }}</span>
+              </div>
+            </section>
           </section>
 
-          <!-- Related events carousel (moved below details) -->
-          <section class="related-events-card carousel-card">
+          <section v-if="isRelatedLoading" class="related-events-card related-loading">
+            <div class="card-header">
+              <h3>Related Events</h3>
+              <div class="loading-pulse"></div>
+            </div>
+            <p class="related-placeholder">Memuat rekomendasi event...</p>
+          </section>
+
+          <section v-else-if="carouselItems.length" class="related-events-card carousel-card">
             <div class="card-header">
               <h3>Related Events</h3>
               <span class="events-count">{{ carouselItems.length }} Events</span>
             </div>
 
             <div class="carousel-wrapper related-carousel">
-              <button v-if="carouselItems.length > visibleCount" class="carousel-nav carousel-nav-left" @click="previousRelated" :disabled="relatedIndex===0" aria-label="Previous">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <button
+                v-if="showCarouselNav"
+                class="carousel-nav carousel-nav-left"
+                type="button"
+                :disabled="relatedIndex === 0"
+                @click="previousRelated"
+                aria-label="Event sebelumnya"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
               </button>
 
               <div class="carousel-container">
-                <div class="carousel-track" :style="{ transform: `translateX(-${relatedIndex * (cardWidth + gap)}px)` }">
+                <div class="carousel-track" :style="{ transform: carouselTranslate }">
                   <div v-for="item in carouselItems" :key="item.title" class="related-card">
                     <NuxtLink v-if="item.id" :to="`/events/${item.id}`" class="related-card-inner related-link">
                       <div class="related-thumb">
@@ -157,304 +141,486 @@
                 </div>
               </div>
 
-              <button v-if="carouselItems.length > visibleCount" class="carousel-nav carousel-nav-right" @click="nextRelated" :disabled="relatedIndex >= maxRelatedIndex" aria-label="Next">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <button
+                v-if="showCarouselNav"
+                class="carousel-nav carousel-nav-right"
+                type="button"
+                :disabled="relatedIndex >= maxRelatedIndex"
+                @click="nextRelated"
+                aria-label="Event berikutnya"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
               </button>
             </div>
+          </section>
 
-            
+          <section v-else class="related-events-card empty">
+            <div class="card-header">
+              <h3>Related Events</h3>
+            </div>
+            <p class="related-placeholder">Belum ada rekomendasi event lainnya.</p>
           </section>
         </div>
       </div>
 
-      <RightSideBar>
-        <EventsSidebar
-          :informasiTambahan="sidebarInfo"
-          :tags="popularEventTags"
-          :relatedEvents="[]"
-        />
-      </RightSideBar>
+      <EventsSidebar :informasiTambahan="sidebarInfo" :tags="sidebarTags" :relatedEvents="[]" />
     </div>
-  </div>
+  </section>
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue';
-import { useRoute } from '#imports';
-import RightSideBar from '~/components/General/RightSideBar.vue';
-import eventsDataRaw from '~/../mock-backend/data/events.json';
-
-interface EventData {
-  id: string;
-  title: string;
-  subtitle: string;
-  hostedBy: string;
-  description: string;
-  objectives?: string;
-  benefits?: string;
-  image: string;
-  category: string;
-  locationType: string;
-  datetime: string;
-  address: string;
-  shortAddress?: string;
-  capacity: string;
-  price: string;
-  certificate: string;
-  contact: string;
-  tags: string[];
-}
+import { computed, ref, watch, onBeforeUnmount } from 'vue'
+import { useRoute, useRuntimeConfig } from '#imports'
+import { useEvents } from '~/composables/useEvents'
+import type { Event } from '~/composables/useEvents'
+import mockEvents from 'mockData/events.json'
+import { LOCAL_EVENTS_STORAGE_KEY } from '~/composables/useLocalEvents'
+import { findEventById, mergeEventCollections, normalizeEventCollection, readLocalEventsSnapshot } from '~/utils/events-normalizer'
 
 interface SidebarInfoItem {
-  icon: string;
-  label: string;
-  value: string;
+  icon: string
+  label: string
+  value: string
 }
 
 interface SidebarTag {
-  name: string;
-  class: string;
+  name: string
+  class: string
 }
 
 interface RelatedEventCard {
-  title: string;
-  type: string;
-  date: string;
-  color: string;
-  image?: string;
-  id?: string;
+  id: string | number | null
+  title: string
+  type: string
+  date: string
+  image: string
 }
 
-// Transform mock-backend events to EventData format
-const eventDetails = computed<Record<string, EventData>>(() => {
-  const result: Record<string, EventData> = {};
-  
-  eventsDataRaw.forEach((event: any) => {
-    const eventId = String(event.id);
-    const dateStr = event.date || '';
-    const isOnline = (event.location || '').toLowerCase().includes('online');
-    
-    result[eventId] = {
-      id: eventId,
-      title: event.title,
-      subtitle: event.subtitle || '',
-      hostedBy: event.community_name || 'Community',
-      description: event.description || '',
-      image: event.image || fallbackHeroImage,
-      category: event.category || 'Event',
-      locationType: event.location || 'TBA',
-      datetime: formatFullDateTime(dateStr),
-      address: event.location || 'TBA',
-      shortAddress: event.location || 'TBA',
-      capacity: `${event.maxAttendees || 0} peserta`,
-      price: 'TBA',
-      certificate: 'TBA',
-      contact: event.community_id || '',
-      tags: event.tags || []
-    };
-  });
-  
-  return result;
-});
+type RawEventRecord = Record<string, unknown>
 
-// Helper function to format date from ISO format with WIB timezone (+7)
-const formatFullDateTime = (dateStr: string): string => {
-  if (!dateStr) return 'TBA';
-  
+const route = useRoute()
+const runtimeConfig = useRuntimeConfig()
+const eventApi = useEvents()
+const relatedApi = useEvents()
+const { getEventById, loading, error, clearError } = eventApi
+const { getAllEvents } = relatedApi
+
+const staticEvents = normalizeEventCollection(mockEvents as RawEventRecord[])
+
+const event = ref<Event | null>(null)
+const notFound = ref(false)
+const heroImage = ref('')
+const fallbackHeroImage = 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80'
+const shareMessage = ref('')
+let shareMessageTimer: ReturnType<typeof setTimeout> | null = null
+const relatedRaw = ref<Event[]>([])
+const relatedIndex = ref(0)
+const isRelatedLoading = ref(false)
+const CARD_WIDTH = 320
+const CARD_GAP = 12
+const resolveAssetBaseUrl = () => {
+  const configured = runtimeConfig.public?.assetBaseUrl as string | undefined
+  if (configured) return configured
+  const apiBase = runtimeConfig.public?.apiBaseUrl as string | undefined
+  if (!apiBase) return ''
   try {
-    const date = new Date(dateStr);
-    if (isNaN(date.getTime())) return dateStr;
-    
-    const monthsFull = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
-    const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
-    
-    // Convert UTC to WIB (UTC+7) by adding 7 hours
-    const wibDate = new Date(date.getTime() + 7 * 60 * 60 * 1000);
-    
-    const dayName = days[wibDate.getUTCDay()];
-    const dayNum = String(wibDate.getUTCDate()).padStart(2, '0');
-    const monthName = monthsFull[wibDate.getUTCMonth()];
-    const year = wibDate.getUTCFullYear();
-    const hours = String(wibDate.getUTCHours()).padStart(2, '0');
-    const minutes = String(wibDate.getUTCMinutes()).padStart(2, '0');
-    
-    return `${dayName}, ${dayNum} ${monthName} ${year} • ${hours}:${minutes} WIB`;
-  } catch (e) {
-    return dateStr;
+    const url = new URL(apiBase)
+    return url.origin
+  } catch {
+    return apiBase.replace(/\/api\/?$/, '')
   }
-};
+}
+const assetBaseUrl = resolveAssetBaseUrl()
 
-const route = useRoute();
-const showFullAddress = ref(false);
-const heroImage = ref('');
-const fallbackHeroImage = 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80';
+const resolveAbsoluteUrl = (raw?: string | null) => {
+  if (!raw) return null
+  const trimmed = raw.trim()
+  if (!trimmed) return null
+  if (/^https?:\/\//i.test(trimmed)) return trimmed
+  if (!assetBaseUrl) return trimmed
+  const normalizedBase = assetBaseUrl.replace(/\/$/, '')
+  const normalizedPath = trimmed.startsWith('/') ? trimmed : `/${trimmed}`
+  return `${normalizedBase}${normalizedPath}`
+}
 
-const event = computed<EventData>(() => {
-  const id = String(route.params.id ?? '');
-  const fallback: EventData = {
-    id: 'not-found',
-    title: 'Event not found',
-    subtitle: '',
-    hostedBy: '',
-    description: '',
-    image: fallbackHeroImage,
-    category: '',
-    locationType: '',
-    datetime: '',
-    address: '',
-    shortAddress: '',
-    capacity: '',
-    price: '',
-    certificate: '',
-    contact: '',
-    tags: []
-  };
-  return (eventDetails.value[id] ?? fallback) as EventData;
-});
+const getHeroImageSrc = (item: Event | null) => {
+  if (!item) return null
+  const record = item as unknown as Record<string, string | undefined>
+  const candidate = item.image_url || record.image || record.cover_image || record.banner_url || null
+  return resolveAbsoluteUrl(candidate)
+}
+
+const getCardImageSrc = (item: Event | null) => getHeroImageSrc(item) || fallbackHeroImage
+
+const formatRelatedDate = (dateStr?: string | null) => {
+  if (!dateStr) return 'TBA'
+  try {
+    const date = new Date(dateStr)
+    if (Number.isNaN(date.getTime())) return dateStr
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des']
+    const day = String(date.getDate()).padStart(2, '0')
+    const month = months[date.getMonth()] || ''
+    const year = date.getFullYear()
+    return `${day} ${month} ${year}`
+  } catch {
+    return dateStr
+  }
+}
+
+const registrationLink = computed(() => {
+  const value = event.value as (Event & Record<string, string | undefined>) | null
+  if (!value) return null
+  return (
+    value.registration_url ||
+    value.registrationLink ||
+    value.link ||
+    value.cta_url ||
+    value.ctaLink ||
+    null
+  )
+})
+
+const registrationButtonLabel = computed(() => {
+  if (!event.value) return 'Daftar Event'
+  return event.value.is_free ? 'Daftar Event (Gratis)' : 'Daftar Event'
+})
+
+const shareButtonLabel = computed(() => {
+  if (typeof navigator !== 'undefined' && typeof navigator.share === 'function') {
+    return 'Bagikan'
+  }
+  return 'Salin Tautan'
+})
+
+const clearShareTimer = () => {
+  if (shareMessageTimer) {
+    clearTimeout(shareMessageTimer)
+    shareMessageTimer = null
+  }
+}
+
+const fetchEvent = async (rawId: string | string[] | undefined) => {
+  notFound.value = false
+  const idParam = Array.isArray(rawId) ? rawId[0] : rawId
+  if (!idParam) {
+    event.value = null
+    notFound.value = true
+    relatedRaw.value = []
+    return
+  }
+
+  const idKey = String(idParam)
+  clearError()
+  const remote = await getEventById(idParam)
+  if (remote) {
+    event.value = remote
+    clearError()
+    await loadRelatedEvents(remote)
+    return
+  }
+
+  const localSnapshot = readLocalEventsSnapshot(LOCAL_EVENTS_STORAGE_KEY)
+  const fallback = findEventById(idKey, [staticEvents, localSnapshot])
+  if (fallback) {
+    event.value = fallback
+    clearError()
+    await loadRelatedEvents(fallback, localSnapshot)
+    return
+  }
+
+  event.value = null
+  relatedRaw.value = []
+  if (!error.value) {
+    notFound.value = true
+  }
+}
+
+const loadRelatedEvents = async (current: Event | null, localSnapshot?: Event[]) => {
+  if (!current) {
+    relatedRaw.value = []
+    return
+  }
+
+  isRelatedLoading.value = true
+  relatedIndex.value = 0
+  const localEvents = Array.isArray(localSnapshot) ? localSnapshot : readLocalEventsSnapshot(LOCAL_EVENTS_STORAGE_KEY)
+
+  try {
+    const response = await getAllEvents(1, 40)
+    const remote = response?.data ?? []
+    relatedRaw.value = mergeEventCollections([remote, staticEvents, localEvents])
+  } catch {
+    relatedRaw.value = mergeEventCollections([staticEvents, localEvents])
+  } finally {
+    isRelatedLoading.value = false
+  }
+}
 
 watch(
-  () => event.value.image,
-  (value) => {
-    heroImage.value = value || fallbackHeroImage;
+  () => route.params.id,
+  (newId) => {
+    void fetchEvent(newId)
   },
   { immediate: true }
-);
+)
 
-const displayedAddress = computed(() => {
-  if (showFullAddress.value) {
-    return event.value.address;
-  }
-  return event.value.shortAddress ?? event.value.address;
-});
+watch(
+  () => event.value,
+  (value) => {
+    heroImage.value = getHeroImageSrc(value) || fallbackHeroImage
+  },
+  { immediate: true }
+)
 
-const toggleAddress = () => {
-  showFullAddress.value = !showFullAddress.value;
-};
+const setShareMessage = (message: string) => {
+  shareMessage.value = message
+  clearShareTimer()
+  shareMessageTimer = setTimeout(() => {
+    shareMessage.value = ''
+    shareMessageTimer = null
+  }, 2400)
+}
 
-const sidebarInfo = computed<SidebarInfoItem[]>(() => [
-  { icon: 'CAT', label: 'Kategori', value: event.value.category },
-  { icon: 'LOC', label: 'Tipe Lokasi', value: event.value.locationType },
-  { icon: 'TIME', label: 'Tanggal & Waktu', value: event.value.datetime },
-  { icon: 'CAP', label: 'Kapasitas', value: event.value.capacity },
-  { icon: 'CP', label: 'Narahubung', value: event.value.contact }
-]);
+const handleRegisterClick = () => {
+  if (!registrationLink.value) return
+  if (typeof window === 'undefined') return
+  window.open(registrationLink.value, '_blank', 'noopener')
+}
 
-const popularEventTags = computed<SidebarTag[]>(() =>
-  event.value.tags.map((tag) => ({ name: tag, class: 'tag-default' }))
-);
+const shareEvent = async () => {
+  if (typeof window === 'undefined') return
+  const shareUrl = window.location.href
+  const title = event.value?.title ?? 'Event AKSARA'
 
-const relatedEventsSource = computed<RelatedEventCard[]>(() => {
-  return eventsDataRaw
-    .filter((e: any) => String(e.id) !== String(route.params.id))
-    .map((e: any) => ({
-      title: e.title,
-      type: e.location || 'Event',
-      date: formatEventDateShort(e.date),
-      color: 'green',
-      image: e.image,
-      id: String(e.id)
-    }));
-});
-
-const formatEventDateShort = (dateStr: string): string => {
-  if (!dateStr) return 'TBA';
   try {
-    const date = new Date(dateStr);
-    if (isNaN(date.getTime())) return dateStr;
-    
-    const monthsShort = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
-    
-    // Convert UTC to WIB (UTC+7)
-    const wibDate = new Date(date.getTime() + 7 * 60 * 60 * 1000);
-    const dayNum = wibDate.getUTCDate();
-    const monthName = monthsShort[wibDate.getUTCMonth()];
-    const year = wibDate.getUTCFullYear();
-    
-    return `${dayNum} ${monthName} ${year}`;
-  } catch (e) {
-    return dateStr;
+    if (typeof navigator !== 'undefined' && typeof navigator.share === 'function') {
+      await navigator.share({ title, url: shareUrl })
+      return
+    }
+  } catch {
+    // Fallback to clipboard if share fails.
   }
-};
 
-// Map related source to include image URLs and ids from eventDetails when possible
-const relatedEvents = computed<RelatedEventCard[]>(() =>
-  relatedEventsSource.value
-    .filter((item) => item.title !== event.value.title)
-    .slice(0, 3)
-);
+  if (typeof navigator !== 'undefined' && navigator.clipboard) {
+    try {
+      await navigator.clipboard.writeText(shareUrl)
+      setShareMessage('Tautan event berhasil disalin')
+      return
+    } catch {
+      setShareMessage('Tidak dapat menyalin tautan')
+      return
+    }
+  }
 
-// Carousel for related events (all available related items with images and ids)
-const carouselItems = computed<RelatedEventCard[]>(() =>
-  relatedEventsSource.value
-    .filter((item) => item.title !== event.value.title)
-);
+  setShareMessage('Silakan salin tautan secara manual')
+}
 
-const relatedIndex = ref(0);
-const cardWidth = 300; // px
-const gap = 8; // px
-// visibleCount adapts to how many items exist (max 3)
-const visibleCount = computed(() => Math.min(3, carouselItems.value.length));
-const maxRelatedIndex = computed(() => Math.max(0, carouselItems.value.length - visibleCount.value));
+onBeforeUnmount(() => {
+  clearShareTimer()
+})
+
+const isLoading = computed(() => loading.value)
+const loadError = computed(() => error.value)
+const eventData = computed(() => event.value)
+
+const formatCurrency = (value?: number | null) => {
+  if (value === null || value === undefined) return null
+  try {
+    return new Intl.NumberFormat('id-ID', {
+      style: 'currency',
+      currency: 'IDR',
+      maximumFractionDigits: 0,
+    }).format(value)
+  } catch {
+    return `Rp ${value}`
+  }
+}
+
+const formatStatus = (status?: Event['status']) => {
+  if (!status) return null
+  if (status === 'upcoming') return 'Akan Datang'
+  if (status === 'ongoing') return 'Sedang Berlangsung'
+  if (status === 'completed') return 'Selesai'
+  if (status === 'cancelled') return 'Dibatalkan'
+  return status
+}
+
+const displayDate = computed(() => {
+  const value = eventData.value
+  if (!value?.date) return null
+
+  const date = new Date(value.date)
+  if (!Number.isNaN(date.getTime())) {
+    const datePart = date.toLocaleDateString('id-ID', {
+      day: '2-digit',
+      month: 'long',
+      year: 'numeric',
+    })
+
+    const timePart = value.time
+      ? value.time
+      : value.date.includes('T')
+        ? date.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' })
+        : null
+
+    return timePart ? `${datePart} • ${timePart} WIB` : datePart
+  }
+
+  return value.date
+})
+
+const displayPrice = computed(() => {
+  const value = eventData.value
+  if (!value) return null
+  if (value.is_free) return 'Gratis'
+  if (value.price !== undefined && value.price !== null) return formatCurrency(value.price)
+  return null
+})
+
+const displayCapacity = computed(() => {
+  const value = eventData.value
+  if (!value) return null
+  if (value.capacity) return `${value.capacity} peserta`
+  if (value.registered_count) return `${value.registered_count} peserta terdaftar`
+  return null
+})
+
+const displayStatus = computed(() => formatStatus(eventData.value?.status))
+
+const detailBlocks = computed(() => {
+  const value = eventData.value
+  if (!value) return [] as { label: string; value: string }[]
+
+  const details: { label: string; value: string | null }[] = [
+    { label: 'Tanggal & Waktu', value: displayDate.value },
+    { label: 'Lokasi', value: value.location || null },
+    { label: 'Status', value: displayStatus.value },
+    { label: 'Harga', value: displayPrice.value },
+    { label: 'Kapasitas', value: displayCapacity.value },
+    
+  ]
+
+  return details.filter((item) => item.value) as { label: string; value: string }[]
+})
+
+const sidebarInfo = computed((): SidebarInfoItem[] => {
+  const value = eventData.value
+  if (!value) return []
+
+  const info: SidebarInfoItem[] = []
+  if (value.category) info.push({ icon: 'CAT', label: 'Kategori', value: value.category })
+  if (displayDate.value) info.push({ icon: 'TIME', label: 'Tanggal & Waktu', value: displayDate.value })
+  if (value.location) info.push({ icon: 'LOC', label: 'Lokasi', value: value.location })
+  if (displayCapacity.value) info.push({ icon: 'CAP', label: 'Kapasitas', value: displayCapacity.value })
+  if (displayPrice.value) info.push({ icon: 'CAP', label: 'Harga', value: displayPrice.value })
+  if (value.organizer) info.push({ icon: 'CP', label: 'Penyelenggara', value: value.organizer })
+  if (displayStatus.value) info.push({ icon: 'CAT', label: 'Status', value: displayStatus.value })
+  return info
+})
+
+const normalizeTag = (raw: string) => `#${raw.replace(/\s+/g, '')}`
+
+const tagList = computed(() => {
+  const value = eventData.value
+  if (!value) return [] as string[]
+
+  const tags = new Set<string>()
+  if (value.category) tags.add(normalizeTag(value.category))
+  if (value.status) tags.add(normalizeTag(formatStatus(value.status) || value.status))
+  if (value.is_free) tags.add('#Gratis')
+  return Array.from(tags)
+})
+
+const sidebarTags = computed(() => tagList.value.map((name) => ({ name, class: 'tag-default' })) as SidebarTag[])
+
+const relatedEventsList = computed(() => {
+  const current = event.value
+  if (!current) return [] as Event[]
+
+  const others = relatedRaw.value.filter((item) => item.id !== current.id)
+  const sameCategory = current.category ? others.filter((item) => item.category === current.category) : others
+  const remaining = current.category ? others.filter((item) => item.category !== current.category) : []
+  const merged = [...sameCategory, ...remaining]
+  return merged.slice(0, 9)
+})
+
+const carouselItems = computed((): RelatedEventCard[] => {
+  return relatedEventsList.value.map((item, index) => ({
+    id: item.id ?? null,
+    title: item.title,
+    type: item.category || 'Event',
+    date: formatRelatedDate(item.date),
+    image: getCardImageSrc(item),
+  }))
+})
+
+const visibleCount = computed(() => Math.min(3, carouselItems.value.length))
+const maxRelatedIndex = computed(() => Math.max(0, carouselItems.value.length - visibleCount.value))
+const carouselTranslate = computed(() => `translateX(-${relatedIndex.value * (CARD_WIDTH + CARD_GAP)}px)`)
+const showCarouselNav = computed(() => carouselItems.value.length > visibleCount.value)
 
 const nextRelated = () => {
   if (relatedIndex.value < maxRelatedIndex.value) {
-    relatedIndex.value = Math.min(relatedIndex.value + 1, maxRelatedIndex.value);
+    relatedIndex.value += 1
   }
-};
+}
 
 const previousRelated = () => {
   if (relatedIndex.value > 0) {
-    relatedIndex.value = Math.max(0, relatedIndex.value - 1);
+    relatedIndex.value -= 1
   }
-};
+}
 
-// Helpers for location display
-const isOnlineEvent = computed(() => {
-  const loc = (event.value.locationType || '').toString().toLowerCase();
-  return loc.includes('online') || loc.includes('zoom');
-});
-
-const extractLink = (text: string) => {
-  if (!text) return '';
-  const m = text.match(/https?:\/\/[\S]+/i);
-  return m ? m[0] : '';
-};
+watch([
+  () => carouselItems.value.length,
+  () => visibleCount.value,
+], () => {
+  if (relatedIndex.value > maxRelatedIndex.value) {
+    relatedIndex.value = maxRelatedIndex.value
+  }
+})
 
 const handleImageError = () => {
-  heroImage.value = fallbackHeroImage;
-};
+  heroImage.value = fallbackHeroImage
+}
 
-const getTagClass = (tag: string): string => {
-  const tagClasses: Record<string, string> = {
-    '#Workshop': 'tag-workshop',
-    '#Literasi': 'tag-literasi',
-    '#CreativeWriting': 'tag-creative',
-    '#Menulis': 'tag-menulis',
-    '#Inspirasi': 'tag-inspirasi'
-  };
+const truncate = (value: string, length = 180) => {
+  if (value.length <= length) return value
+  return `${value.slice(0, length).trim()}…`
+}
 
-  return tagClasses[tag] || 'tag-default';
-};
+const retryFetch = () => {
+  void fetchEvent(route.params.id)
+}
 </script>
 
 <style scoped>
-.event-page {
+.event-detail-page {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  width: 100%;
 }
 
 .back-link {
   color: #3b5379;
   font-weight: 600;
   text-decoration: none;
+  margin-left: 31px;
 }
 
-.event-detail-page {
+.event-detail-content {
   display: flex;
   flex-direction: row;
   gap: 8px;
   width: 100%;
+  align-items: flex-start;
+}
+
+.event-detail-content > *:last-child {
+  flex-shrink: 0;
 }
 
 .event-detail-main {
@@ -462,14 +628,75 @@ const getTagClass = (tag: string): string => {
   display: flex;
   flex-direction: column;
   gap: 24px;
+  min-width: 0;
   max-width: 920px;
 }
-
 
 .event-detail-feed {
   display: flex;
   flex-direction: column;
   gap: 24px;
+  margin-left: 31px;
+}
+
+.state-card {
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+}
+
+.state-card h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.state-card p {
+  margin: 0;
+  color: #475569;
+}
+
+.state-card.error {
+  border-color: #fecaca;
+  background: #fef2f2;
+}
+
+.state-card.empty {
+  background: #f8fafc;
+}
+
+.loading-spinner {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 4px solid #e2e8f0;
+  border-top-color: #3b5379;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.retry-btn {
+  padding: 10px 18px;
+  border-radius: 10px;
+  border: none;
+  background: #3b5379;
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 .hero-media-section {
@@ -483,9 +710,8 @@ const getTagClass = (tag: string): string => {
 .hero-media-container {
   position: relative;
   width: 100%;
-  min-height: clamp(200px, 32vh, 260px);
+  min-height: clamp(220px, 32vh, 320px);
   aspect-ratio: 16 / 7;
-  border-radius: 0;
   overflow: hidden;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
@@ -500,7 +726,7 @@ const getTagClass = (tag: string): string => {
 .hero-media-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6));
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.7));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -510,14 +736,38 @@ const getTagClass = (tag: string): string => {
 .hero-media-content {
   text-align: center;
   color: #ffffff;
-  max-width: 800px;
+  max-width: 720px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
+  gap: 18px;
 }
 
-.hero-actions {
+.hero-category-badge {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+  padding: 8px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.hero-media-title {
+  font-size: clamp(28px, 5vw, 48px);
+  font-weight: 800;
+  margin: 0;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.hero-media-subtitle {
+  font-size: 18px;
+  line-height: 1.5;
+  opacity: 0.95;
+}
+
+.hero-cta {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
@@ -527,225 +777,162 @@ const getTagClass = (tag: string): string => {
 .hero-button {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 12px 20px;
-  border-radius: 14px;
+  gap: 10px;
+  padding: 12px 24px;
+  border-radius: 999px;
   border: none;
-  font-weight: 600;
+  font-weight: 700;
+  font-size: 15px;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
-}
-
-.hero-button svg {
-  width: 18px;
-  height: 18px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .hero-button.primary {
-  background: #fbbf24;
-  color: var(--color-black);
-  box-shadow: 0 12px 24px rgba(250, 191, 36, 0.35);
+  background: #ffda49;
+  color: #1f2937;
+  box-shadow: 0 12px 24px rgba(249, 115, 22, 0.35);
 }
 
-.hero-button.primary:hover {
-  background: #f59e0b;
-  transform: translateY(-2px);
-}
-
-.hero-button.ghost {
+.hero-button.secondary {
   background: rgba(255, 255, 255, 0.18);
+  color: #f8fafc;
   border: 1px solid rgba(255, 255, 255, 0.35);
-  color: #ffffff;
 }
 
-.hero-button.ghost:hover {
-  background: rgba(255, 255, 255, 0.28);
+.hero-button:hover:not(:disabled) {
   transform: translateY(-2px);
 }
 
-.hero-category-badge {
-  display: inline-block;
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 25px;
-  padding: 8px 20px;
+.hero-button-icon {
+  font-size: 16px;
+}
+
+.hero-button-share {
+  display: block;
+}
+
+.hero-meta {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.hero-meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  font-weight: 600;
+}
+
+.hero-share-feedback {
+  margin: 0;
   font-size: 14px;
   font-weight: 600;
-  margin-bottom: 20px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  color: #facc15;
 }
 
-.hero-media-title {
-  font-size: 48px;
-  font-weight: 800;
-  margin-bottom: 16px;
-  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-  line-height: 1.1;
-}
-
-.hero-media-subtitle {
-  font-size: 20px;
-  font-weight: 400;
-  opacity: 0.95;
-  line-height: 1.5;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-}
 
 .event-info {
   background: #ffffff;
-  border-radius: 24px;
+  border-radius: 28px;
   border: 1px solid #e2e8f0;
-  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
-  padding: 32px;
+  box-shadow: 0 22px 44px rgba(15, 23, 42, 0.08);
+  padding: 36px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 32px;
 }
 
-
-.event-header h2 {
-  font-size: 24px;
-  font-weight: 700;
-  color: var(--color-black);
-  margin-bottom: 8px;
+.event-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
 }
 
 .event-title {
-  font-size: 32px;
+  font-size: clamp(28px, 4vw, 38px);
   font-weight: 800;
-  color: var(--color-black);
-  margin-bottom: 12px;
-  line-height: 1.2;
-}
-
-.event-subtitle {
-  font-size: 20px;
-  font-weight: 600;
-  color: #475569;
-  margin-bottom: 8px;
-  line-height: 1.4;
+  color: #0f172a;
+  margin: 0 0 10px;
 }
 
 .hosted-by {
   color: #64748b;
-  font-size: 14px;
+  font-size: 15px;
+  margin: 0;
 }
 
 .host-link {
-  color: #3b82f6;
-  font-weight: 600;
+  color: #2563eb;
+  font-weight: 700;
 }
 
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 18px;
+  border-radius: 999px;
+  background: rgba(59, 130, 246, 0.1);
+  color: #1d4ed8;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 12px;
+}
 
 .event-description h3,
 .event-details-section h3,
 .event-tags h3 {
-  font-size: 18px;
+  font-size: 19px;
   font-weight: 700;
-  color: var(--color-black);
-  margin-bottom: 12px;
+  color: #0f172a;
+  margin: 0 0 16px;
 }
 
-.event-description p,
-.event-objectives p,
-.event-benefits p {
+.event-description p {
   color: #475569;
-  line-height: 1.6;
-  margin-bottom: 16px;
+  line-height: 1.7;
+  margin: 0;
+  font-size: 16px;
 }
 
 .details-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 18px;
 }
 
 .detail-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 10px 12px;
   background: #f8fafc;
-  border-radius: 12px;
+  border-radius: 18px;
   border: 1px solid #e2e8f0;
-  flex: 1;
-  min-width: 0;
-}
-
-.detail-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 12px;
+  padding: 18px;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.detail-icon.category {
-  background: #dbeafe;
-  color: #1d4ed8;
-}
-
-.detail-icon.location {
-  background: #dcfce7;
-  color: #16a34a;
-}
-
-.detail-icon.time {
-  background: #fef3c7;
-  color: #d97706;
-}
-
-.detail-icon svg {
-  width: 20px;
-  height: 20px;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .detail-label {
-  font-weight: 600;
-  color: #374151;
   font-size: 12px;
-  margin-bottom: 3px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  color: #64748b;
+  margin: 0;
 }
 
 .detail-value {
-  color: #6b7280;
-  font-size: 13px;
-  line-height: 1.4;
-}
-
-.detail-address-toggle {
-  border: none;
-  background: none;
-  padding: 0;
-  color: #3b5379;
+  font-size: 16px;
   font-weight: 600;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-
-
-.register-btn {
-  background: #fbbf24;
-  color: var(--color-black);
-  flex: 1;
-}
-
-.detail-address-toggle:hover .detail-address-hint {
-  text-decoration: underline;
-}
-
-.detail-address-full {
-  margin-top: 8px;
-  color: #475569;
-  line-height: 1.5;
+  color: #0f172a;
+  margin: 0;
 }
 
 .tags-container {
@@ -1027,241 +1214,123 @@ const getTagClass = (tag: string): string => {
   border: 1px solid rgba(59, 83, 121, 0.22);
 }
 
-.tag-workshop,
-.tag-literasi,
-.tag-creative,
-.tag-menulis,
-.tag-inspirasi,
 .tag-default {
-  background: #3B5379;
-  color: #FFFFFF;
+  background: #3b5379;
+  color: #ffffff;
   border: 1px solid rgba(59, 83, 121, 0.22);
 }
 
-/* Details and Related Events Grid Layout */
-.details-and-related-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  margin-top: 16px;
-  align-items: start;
-}
-
-.event-details-section {
+.related-events-card {
   background: #ffffff;
-  border-radius: 16px;
+  border-radius: 24px;
   border: 1px solid #e2e8f0;
-  padding: 20px;
-  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.04);
+  padding: 28px;
+  box-shadow: 0 18px 36px rgba(15, 23, 42, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.event-details-section h3 {
-  font-size: 18px;
-  font-weight: 700;
-  color: #1e293b;
-  margin-bottom: 16px;
-}
-
-.details-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+.related-events-card .card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   gap: 12px;
-  margin-bottom: 16px;
 }
 
-.event-tags-section {
-  border-top: 1px solid #f1f5f9;
-  padding-top: 12px;
-}
-
-.event-tags-section h4 {
-  font-size: 14px;
-  font-weight: 600;
-  color: #1e293b;
-  margin-bottom: 10px;
-}
-
-.related-events-section {
-  background: #ffffff;
-  border-radius: 20px;
-  border: 1px solid #e2e8f0;
-  padding: 24px;
-  margin-top: 24px;
-  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.05);
-}
-
-.related-events-section h3 {
+.related-events-card .card-header h3 {
   font-size: 20px;
   font-weight: 700;
-  color: #1e293b;
-  margin-bottom: 20px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  color: #0f172a;
+  margin: 0;
 }
 
-.related-events-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 16px;
-  margin-bottom: 20px;
-}
-
-.related-event-card {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  padding: 16px;
-  background: #f8fafc;
-  border-radius: 12px;
-  border: 1px solid #e2e8f0;
-  transition: all 0.2s ease;
-}
-
-.related-event-card:hover {
-  background: #f1f5f9;
-  border-color: #cbd5e1;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.1);
-}
-
-.event-indicator {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  margin-top: 6px;
-  flex-shrink: 0;
-  position: relative;
-}
-
-.indicator-green {
-  background: #10b981;
-}
-
-.event-details {
-  flex: 1;
-  min-width: 0;
-}
-
-.related-event-card .event-title {
-  font-size: 16px;
-  font-weight: 600;
-  color: #1e293b;
-  margin: 0 0 8px 0;
-  line-height: 1.4;
-}
-
-.related-event-card .event-meta {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-}
-
-.related-event-card .event-type {
-  font-size: 11px;
-  font-weight: 600;
-  padding: 4px 8px;
-  border-radius: 6px;
-  background: #e2e8f0;
-  color: #475569;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.related-event-card .event-date {
-  color: #64748b;
+.events-count {
   font-size: 12px;
-  font-weight: 500;
-}
-
-.more-events-section {
-  border-top: 1px solid #e2e8f0;
-  padding-top: 16px;
-  text-align: center;
-}
-
-.more-events-btn {
-  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-  color: #ffffff;
-  padding: 12px 24px;
-  border: none;
-  border-radius: 10px;
   font-weight: 600;
+  color: #475569;
+  background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+  padding: 6px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(71, 85, 105, 0.12);
+}
+
+.related-placeholder {
+  margin: 0;
+  color: #64748b;
   font-size: 14px;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(30, 41, 59, 0.2);
 }
 
-.more-events-btn:hover {
-  background: linear-gradient(135deg, #334155 0%, #475569 100%);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(30, 41, 59, 0.3);
+.related-loading .loading-pulse {
+  width: 64px;
+  height: 10px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(148, 163, 184, 0.35), rgba(148, 163, 184, 0.15), rgba(148, 163, 184, 0.35));
+  animation: pulse 1.2s ease-in-out infinite;
 }
 
-/* Related Events Card Styles */
-.related-events-card {
-  /* remove white background and outer chrome so the related area blends with page */
-  background: transparent;
-  border-radius: 0;
-  border: none;
-  padding: 0;
-  box-shadow: none;
-  overflow: visible;
-  height: auto;
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 1;
+  }
 }
 
-/* Related events carousel styles */
-.carousel-card .carousel-wrapper {
+.carousel-wrapper {
   position: relative;
-  padding: 12px 16px;
+  display: flex;
+  align-items: center;
 }
 
-.related-carousel .carousel-container {
+.carousel-container {
   overflow: hidden;
   width: 100%;
 }
 
-.related-carousel .carousel-track {
+.carousel-track {
   display: flex;
-  gap: 8px;
-  transition: transform 0.36s ease;
-  padding: 12px 16px 20px;
+  gap: 12px;
+  transition: transform 0.35s ease;
+  padding: 8px 4px;
   will-change: transform;
 }
 
 .related-card {
   flex-shrink: 0;
-  width: 320px; 
-  display: flex;
-  align-items: stretch;
+  width: 320px;
 }
 
 .related-card-inner {
   background: #f8fafc;
-  border-radius: 12px;
+  border-radius: 16px;
   border: 1px solid #e2e8f0;
-  padding: 12px;
+  padding: 16px;
   display: flex;
-  gap: 12px;
+  gap: 14px;
   align-items: center;
-  height: 100%;
-  box-sizing: border-box;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.related-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.related-link:hover .related-card-inner,
+.related-card-inner:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.12);
 }
 
 .related-thumb {
-  width: 112px;   
-  height: 112px; 
-  border-radius: 10px;
-  flex-shrink: 0;
-  display: block;
+  width: 104px;
+  height: 104px;
+  border-radius: 14px;
   overflow: hidden;
-  background: #eaeef3;
-  box-shadow: 0 6px 14px rgba(15,23,42,0.04);
+  background: #e2e8f0;
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1270,24 +1339,8 @@ const getTagClass = (tag: string): string => {
 .related-thumb-img {
   width: 100%;
   height: 100%;
-  object-fit: cover;       
-  object-position: 50% 50%;
+  object-fit: cover;
   display: block;
-}
-
-/* make the whole card a clickable link when wrapped by NuxtLink */
-.related-link {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  width: 100%;
-  color: inherit;
-  text-decoration: none;
-}
-
-.related-link:hover {
-  transform: translateY(-4px);
-  transition: transform 0.18s ease;
 }
 
 .related-body {
@@ -1295,182 +1348,106 @@ const getTagClass = (tag: string): string => {
   min-width: 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  gap: 6px;
 }
 
 .related-title {
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 700;
-  margin: 0 0 6px 0;
-  color: #1e293b;
-  line-height: 1.2;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.related-meta { display:flex; gap:8px; align-items:center; color:#64748b; font-size:12px }
-
-.carousel-nav { position: absolute; top: 50%; transform: translateY(-50%); z-index: 10; }
-.carousel-nav-left { left: 8px; }
-.carousel-nav-right { right: 8px; }
-
-
-.related-events-card .card-header {
-  padding: 24px 24px 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 20px;
-}
-
-.related-events-card .card-header h3 {
-  font-size: 20px;
-  font-weight: 700;
-  color: #1e293b;
+  color: #0f172a;
   margin: 0;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-}
-
-.related-events-card .events-count {
-  font-size: 11px;
-  color: #475569;
-  background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
-  padding: 6px 12px;
-  border-radius: 12px;
-  font-weight: 600;
-  letter-spacing: 0.3px;
-  border: 1px solid rgba(71, 85, 105, 0.1);
-}
-
-.related-events-list {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding: 0 24px;
-  margin-bottom: 16px;
-}
-
-.related-event-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px;
-  background: #f8fafc;
-  border-radius: 12px;
-  border: 1px solid #e2e8f0;
-  transition: all 0.2s ease;
-}
-
-.related-event-item:hover {
-  background: #f1f5f9;
-  border-color: #cbd5e1;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
-}
-
-.event-indicator {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-.indicator-green { background: #10b981; }
-.indicator-blue { background: #3b82f6; }
-.indicator-purple { background: #8b5cf6; }
-.indicator-orange { background: #f59e0b; }
-
-.event-info {
-  flex: 1;
-  min-width: 0;
-}
-
-.related-event-item .event-title {
-  font-size: 14px;
-  font-weight: 600;
-  color: #1e293b;
-  margin: 0 0 4px 0;
   line-height: 1.3;
 }
 
-.related-event-item .event-meta {
+.related-meta {
   display: flex;
-  gap: 8px;
+  gap: 10px;
+  flex-wrap: wrap;
   align-items: center;
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 600;
 }
 
-.related-event-item .event-type {
-  font-size: 9px;
-  font-weight: 600;
-  padding: 2px 6px;
-  border-radius: 4px;
+.related-type {
   background: #e2e8f0;
-  color: #475569;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.related-event-item .event-date {
-  color: #64748b;
+  color: #334155;
+  padding: 4px 10px;
+  border-radius: 999px;
   font-size: 11px;
-  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
-.event-action-btn {
-  background: none;
-  border: none;
-  color: #64748b;
-  cursor: pointer;
-  padding: 4px;
-  border-radius: 4px;
-  transition: all 0.2s ease;
+.related-date {
+  font-size: 12px;
 }
 
-.event-action-btn:hover {
-  color: #1e293b;
-  background: #f1f5f9;
-}
-
-.related-events-card .card-footer {
-  padding: 16px 24px 24px;
-  border-top: 1px solid #f1f5f9;
-  text-align: center;
-}
-
-.view-all-events-btn {
-  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-  color: #ffffff;
-  padding: 10px 16px;
-  border: none;
-  border-radius: 8px;
-  font-weight: 600;
-  font-size: 13px;
-  cursor: pointer;
+.carousel-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  border: 1px solid #cbd5f5;
+  background: #ffffff;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(30, 41, 59, 0.2);
+  color: #1d4ed8;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 8px 16px rgba(15, 23, 42, 0.12);
 }
 
-.view-all-events-btn:hover {
-  background: linear-gradient(135deg, #334155 0%, #475569 100%);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(30, 41, 59, 0.3);
+.carousel-nav:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.carousel-nav-left {
+  left: -18px;
+}
+
+.carousel-nav-right {
+  right: -18px;
+}
+
+.carousel-nav:hover:not(:disabled) {
+  transform: translateY(-50%) translateY(-2px);
+}
+
+@media (max-width: 1280px) {
+  .event-detail-content {
+    gap: 20px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .event-detail-content {
+    gap: 18px;
+  }
 }
 
 @media (max-width: 768px) {
-  .event-detail-page {
+  .event-detail-content {
     flex-direction: column;
     gap: 16px;
+  }
+
+  .event-detail-main {
+    padding-right: 0;
   }
 
   .hero-media-container {
     min-height: 220px;
     border-radius: 16px;
+  }
+
+  .hero-media-overlay {
+    padding: 24px;
   }
 
   .hero-media-title {
@@ -1481,11 +1458,16 @@ const getTagClass = (tag: string): string => {
     font-size: 16px;
   }
 
-  .hero-media-overlay {
+  .event-info {
     padding: 24px;
   }
 
-  .hero-actions {
+  .event-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hero-cta {
     flex-direction: column;
     width: 100%;
   }
@@ -1495,72 +1477,20 @@ const getTagClass = (tag: string): string => {
     justify-content: center;
   }
 
-  .event-info {
-    padding: 20px;
-  }
-
-  .details-grid {
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .details-and-related-grid {
-    grid-template-columns: 1fr;
-    gap: 12px;
-    margin-top: 12px;
-  }
-
-  .event-details-section,
   .related-events-card {
-    padding: 16px;
+    padding: 22px;
   }
 
-  .related-events-card .card-header {
-    padding: 16px 16px 0;
-    margin-bottom: 12px;
+  .related-card {
+    width: 260px;
   }
 
-  .related-events-list {
-    padding: 0 16px;
-    gap: 4px;
+  .carousel-nav-left {
+    left: -6px;
   }
 
-  .related-events-card .card-footer {
-    padding: 8px 16px 12px;
-  }
-
-  .view-all-events-btn {
-    font-size: 10px;
-    padding: 6px 10px;
+  .carousel-nav-right {
+    right: -6px;
   }
 }
-
-/* Override to ensure details grid shows two columns on desktop and stacks on mobile */
-.event-info .event-details-section .details-grid {
-  /* static two-column layout: center the pair and give each card a fixed width */
-  display: flex !important;
-  gap: 16px !important;
-  align-items: stretch !important;
-  justify-content: center !important;
-  flex-wrap: nowrap !important;
-  padding: 12px 8px;
-}
-
-.event-info .event-details-section .detail-item {
-  flex: 0 0 380px !important;
-  width: 380px !important;
-  max-width: 380px !important;
-}
-
-/* Truncate long detail text (single line) to keep cards compact */
-.event-info .event-details-section .detail-value,
-.event-info .event-details-section .detail-value a {
-  display: block;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-/* Make sure carousel nav sits above content and is visible on all sizes */
-.related-carousel .carousel-nav { z-index: 20 !important; }
 </style>
