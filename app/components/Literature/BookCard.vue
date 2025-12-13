@@ -1,5 +1,5 @@
 <template>
-  <NuxtLink :to="`/literature/${book.id}`" class="book-link">
+  <NuxtLink :to="`/literature/${book.id}`" class="book-link" @click="handleClick">
     <div class="book-cover">
       <img 
         :src="imageUrl" 
@@ -60,6 +60,8 @@
 </template>
 
 <script setup lang="ts">
+import { useClickTracking } from '~/composables/useClickTracking';
+
 export interface BookCardBook {
   id: number;
   title: string;

@@ -79,8 +79,8 @@ module.exports = (req, res, next) => {
         }
       }
 
-      // Event validation
-      if (req.path.includes('/events') || req.path.includes('events')) {
+      // Event validation (exclude click_events from this validation)
+      if ((req.path.includes('/events') || req.path.includes('events')) && !req.path.includes('click_events')) {
         if (!body.title || typeof body.title !== 'string' || body.title.trim().length === 0) {
           return res.status(400).json({
             success: false,
@@ -222,7 +222,7 @@ module.exports = (req, res, next) => {
         // Validate source if provided
         if (body.source) {
           const validSources = ['Amazon Review', 'Goodreads', 'O\'Reilly Review', 'ACM Digital Library',
-                              'Harvard Business Review', 'Psychology Today', 'IEEE Xplore', 'Stanford CS Review'];
+            'Harvard Business Review', 'Psychology Today', 'IEEE Xplore', 'Stanford CS Review'];
           if (!validSources.includes(body.source)) {
             return res.status(400).json({
               success: false,
@@ -236,7 +236,7 @@ module.exports = (req, res, next) => {
     // Add pagination metadata for GET requests
     if (req.method === 'GET' && req.path.includes('/')) {
       const originalJson = res.json;
-      res.json = function(data) {
+      res.json = function (data) {
         if (Array.isArray(data)) {
           const page = parseInt(req.query._page) || 1;
           const limit = parseInt(req.query._limit) || 10;
@@ -254,7 +254,7 @@ module.exports = (req, res, next) => {
 
     // Custom error responses for common scenarios
     const originalStatus = res.status;
-    res.status = function(code) {
+    res.status = function (code) {
       if (code === 404) {
         return originalStatus.call(this, 404).json({
           success: false,
@@ -275,7 +275,7 @@ module.exports = (req, res, next) => {
     // Smart search and relevance scoring for books
     if (req.path.includes('/books') && req.method === 'GET') {
       const originalJson = res.json;
-      res.json = function(data) {
+      res.json = function (data) {
         if (Array.isArray(data)) {
           data = enhanceBookSearchResults(data, req.query);
         }

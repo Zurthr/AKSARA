@@ -46,7 +46,7 @@
                 </div>
               </div>
             </div>
-              <NuxtLink :to="`/events/${event.id}`" class="explore-btn">
+              <NuxtLink :to="`/events/${event.id}`" class="explore-btn" @click="trackEvent(event)">
                 Explore Event
               </NuxtLink>
             </div>
@@ -93,10 +93,24 @@
 
 <script setup lang="ts">
 import eventsData from '~/../mock-backend/data/events.json';
+import { useClickTracking } from '~/composables/useClickTracking';
 
 const events = eventsData.slice(0, 7);
 const currentIndex = ref(0);
 let autoPlayInterval: ReturnType<typeof setInterval> | null = null;
+
+const { trackEventClick } = useClickTracking();
+
+// Track event click
+const trackEvent = (event: typeof events[0]) => {
+  trackEventClick({
+    id: event.id,
+    title: event.title,
+    date: event.date,
+    community_id: event.community_id
+  });
+};
+
 
 const nextSlide = () => {
   currentIndex.value = (currentIndex.value + 1) % events.length;

@@ -42,15 +42,19 @@
           <p v-if="filteredBooks.length === 0" class="no-results-text">No results found. Try adjusting your filters or search query.</p>
         </div>
 
-        <!-- All Books Section - Always visible at the bottom -->
+        <!-- All Books Section - Always visible at the bottom with lazy loading -->
         <div class="all-books-section">
           <BookGrid
             title="Our Library, just for you."
-            :books="allBooks"
+            :books="lazyBooks"
             see-more-link="/literature"
             section-type="top"
             title-prefix="Library"
             title-suffix="just for you."
+            :lazy-load="true"
+            :is-loading="isLoadingBooks"
+            :has-more="hasMoreBooks"
+            @load-more="loadMoreBooks"
           />
         </div>
       </div>
@@ -68,6 +72,7 @@ import BookSection from '~/components/Literature/BookSection.vue';
 import BookGrid from '~/components/Literature/BookGrid.vue';
 import LiteratureFilterSidebar from '~/components/Literature/LiteratureFilterSidebar.vue';
 import TrendingSidebar from '~/components/TrendingSidebar.vue';
+import { useLazyBooks } from '~/composables/useLazyBooks';
 
 // Literature API integration
 import { useLiterature } from '~/composables/useLiterature'
