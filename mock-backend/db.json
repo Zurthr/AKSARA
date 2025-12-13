@@ -7062,5 +7062,23 @@
       "engagement": "4.5k"
     }
   ],
-  "click_events": []
+  "click_events": [
+    {
+      "event_type": "post_click",
+      "item_id": 1,
+      "item_title": "Applying 'Atomic Habits' to Learning to Code",
+      "item_tags": [
+        "#Productivity",
+        "#Coding"
+      ],
+      "user_id": "anon_1765638376183_di2bn113d",
+      "timestamp": "2025-12-13T15:06:16.183Z",
+      "source_page": "/forums",
+      "metadata": {
+        "author": "Sarah Chen",
+        "stars": 342
+      },
+      "id": 1
+    }
+  ]
 }
