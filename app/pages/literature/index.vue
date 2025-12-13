@@ -365,7 +365,8 @@ const suggestedBooks = computed(() => {
   display: flex;
   flex-direction: row;
   gap: 8px;
-  width: 100%;
+  max-width: 100%;
+  flex:1;
 }
 
 .literature-content {

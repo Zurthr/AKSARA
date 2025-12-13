@@ -9,7 +9,9 @@
       />
     </div>
     <div class="book-info">
-      <h4 class="book-title">{{ displayTitle }}</h4>
+      <h4 class="book-title" :class="titleWidthClass">
+        {{ displayTitle }}
+      </h4>
       <p class="book-author" v-if="book.author">by {{ displayAuthor }}</p>
       <div class="book-tags" v-if="book.tags && book.tags.length > 0">
         <span class="book-tag">
@@ -101,6 +103,13 @@ const displayTitle = computed(() => {
   return title;
 });
 
+const titleWidthClass = computed(() => {
+  const titleLength = (props.book.title || '').trim().length;
+  if (titleLength > 0 && titleLength < 16) return 'book-title--narrow-12';
+  if (titleLength < 24) return 'book-title--narrow-18';
+  return '';
+});
+
 const displayAuthor = computed(() => {
   const author = props.book.author || '';
   if (!author) return '';
@@ -158,6 +167,17 @@ const displayAuthor = computed(() => {
   color: var(--color-black);
   margin: 0;
   line-height: 1.3;
+  word-break: break-word;
+}
+
+.book-title--narrow-12 {
+  max-width: 50%;
+  letter-spacing: 0.03em;
+}
+
+.book-title--narrow-18 {
+  max-width: 60%;
+  letter-spacing: 0.01em;
 }
 
 .book-author {
