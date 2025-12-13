@@ -10,13 +10,11 @@
           :post="post" 
         />
         
-        <!-- Lazy Load Section with Infinite Scroll -->
         <div class="lazy-load-section">
           <div v-if="isLoading" class="loading-indicator">
             <div class="spinner"></div>
             <span>Loading more posts...</span>
           </div>
-          <!-- Invisible sentinel element that triggers auto-load when scrolled into view -->
           <div 
             v-else-if="hasMore" 
             ref="sentinelRef"
@@ -40,8 +38,6 @@ import { useLazyPosts } from '~/composables/useLazyPosts';
 
 // Use lazy loading for posts with infinite scroll
 const { posts, isLoading, hasMore, loadMore } = useLazyPosts(10);
-
-// Intersection Observer for infinite scroll
 const sentinelRef = ref<HTMLElement | null>(null);
 let observer: IntersectionObserver | null = null;
 
@@ -57,14 +53,14 @@ onMounted(() => {
       },
       {
         root: null,
-        rootMargin: '100px', // Load when 100px before reaching the sentinel
+        rootMargin: '100px', 
         threshold: 0
       }
     );
   }
 });
 
-// Watch for sentinel ref changes to observe/unobserve
+
 watch(sentinelRef, (newRef, oldRef) => {
   if (oldRef && observer) {
     observer.unobserve(oldRef);

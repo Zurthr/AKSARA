@@ -27,19 +27,10 @@
         
         <div class="source-info">
           <div class="source-label" :class="getLabelClass(source.copyType, source.type)">
-            <svg v-if="isDigitalType(source.copyType)" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="label-icon">
-              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-            </svg>
-            <svg v-else-if="isAcademicType(source.copyType)" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="label-icon">
-              <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
-              <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
-            </svg>
-            <svg v-else width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="label-icon">
-              <line x1="12" y1="1" x2="12" y2="23"></line>
-              <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-            </svg>
             <span class="label-text">{{ getCopyTypeLabel(source.copyType, source.type) }}</span>
+            <img v-if="isDigitalFreeType(source.copyType, source.type)" src="~/assets/icons/SourceBook.svg" class="label-icon">
+            <img v-else-if="isAcademicType(source.copyType)" src="~/assets/icons/SourceAcademic.svg" class="label-icon">
+            <img v-else src="~/assets/icons/SourcePaid.svg" class="label-icon">
           </div>
           <div class="source-name">
             {{ source.name }}
@@ -200,6 +191,11 @@ const isDigitalType = (copyType: string): boolean => {
   return copyType.toLowerCase() === 'digital';
 };
 
+const isDigitalFreeType = (copyType: string, sourceType?: string): boolean => {
+  const type = copyType.toLowerCase();
+  return type === 'digital' && (sourceType === 'free' || sourceType === 'free_download' || sourceType === 'preview');
+};
+
 const isAcademicType = (copyType: string): boolean => {
   return copyType.toLowerCase() === 'academic';
 };
@@ -326,6 +322,12 @@ const getLabelClass = (copyType: string, sourceType?: string): string => {
   height: 16px;
   flex-shrink: 0;
   display: inline-block;
+}
+
+.label-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .label-text {

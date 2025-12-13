@@ -7234,6 +7234,126 @@
         "stars": 120
       },
       "id": 10
+    },
+    {
+      "event_type": "post_click",
+      "item_id": 1,
+      "item_title": "Applying 'Atomic Habits' to Learning to Code",
+      "item_tags": [
+        "#Productivity",
+        "#Coding"
+      ],
+      "user_id": "anon_1765639418926_ays8es5mw",
+      "timestamp": "2025-12-13T17:08:22.189Z",
+      "source_page": "/forums",
+      "metadata": {
+        "author": "Sarah Chen",
+        "stars": 342
+      },
+      "id": 11
+    },
+    {
+      "event_type": "post_click",
+      "item_id": 1,
+      "item_title": "Applying 'Atomic Habits' to Learning to Code",
+      "item_tags": [
+        "#Productivity",
+        "#Coding"
+      ],
+      "user_id": "anon_1765639418926_ays8es5mw",
+      "timestamp": "2025-12-13T17:08:23.769Z",
+      "source_page": "/forums/1",
+      "metadata": {
+        "author": "Sarah Chen",
+        "stars": 342
+      },
+      "id": 12
+    },
+    {
+      "event_type": "post_click",
+      "item_id": 1,
+      "item_title": "Applying 'Atomic Habits' to Learning to Code",
+      "item_tags": [
+        "#Productivity",
+        "#Coding"
+      ],
+      "user_id": "anon_1765639418926_ays8es5mw",
+      "timestamp": "2025-12-13T17:08:37.919Z",
+      "source_page": "/forums",
+      "metadata": {
+        "author": "Sarah Chen",
+        "stars": 342
+      },
+      "id": 13
+    },
+    {
+      "event_type": "post_click",
+      "item_id": 1,
+      "item_title": "Applying 'Atomic Habits' to Learning to Code",
+      "item_tags": [
+        "#Productivity",
+        "#Coding"
+      ],
+      "user_id": "anon_1765639418926_ays8es5mw",
+      "timestamp": "2025-12-13T17:08:38.481Z",
+      "source_page": "/forums/1",
+      "metadata": {
+        "author": "Sarah Chen",
+        "stars": 342
+      },
+      "id": 14
+    },
+    {
+      "event_type": "post_click",
+      "item_id": 1,
+      "item_title": "Applying 'Atomic Habits' to Learning to Code",
+      "item_tags": [
+        "#Productivity",
+        "#Coding"
+      ],
+      "user_id": "anon_1765639418926_ays8es5mw",
+      "timestamp": "2025-12-13T17:08:40.414Z",
+      "source_page": "/forums/1",
+      "metadata": {
+        "author": "Sarah Chen",
+        "stars": 342
+      },
+      "id": 15
+    },
+    {
+      "event_type": "book_click",
+      "item_id": 37,
+      "item_title": "Catching Fire",
+      "item_tags": [
+        "General"
+      ],
+      "user_id": "anon_1765639418926_ays8es5mw",
+      "timestamp": "2025-12-13T17:15:44.682Z",
+      "source_page": "/literature",
+      "metadata": {
+        "author": "Suzanne Collins",
+        "rating": 4.8
+      },
+      "id": 16
+    },
+    {
+      "event_type": "book_click",
+      "item_id": 3,
+      "item_title": "Atomic Habits: An Easy & Proven Way to Build Good Habits & Break Bad Ones",
+      "item_tags": [
+        "Self-Help",
+        "Personal Development",
+        "Productivity",
+        "Psychology"
+      ],
+      "user_id": "anon_1765639418926_ays8es5mw",
+      "timestamp": "2025-12-13T17:20:20.774Z",
+      "source_page": "/literature",
+      "metadata": {
+        "author": "James Clear",
+        "rating": 4.7
+      },
+      "id": 17
     }
   ]
 }
