@@ -476,7 +476,6 @@ const getTagClass = (tag: string): string => {
   background: #ffffff;
   border-radius: 24px;
   border: 1px solid #e2e8f0;
-  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
   overflow: hidden;
 }
 
@@ -597,7 +596,6 @@ const getTagClass = (tag: string): string => {
   background: #ffffff;
   border-radius: 24px;
   border: 1px solid #e2e8f0;
-  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
   padding: 32px;
   display: flex;
   flex-direction: column;

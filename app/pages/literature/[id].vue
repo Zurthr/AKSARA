@@ -84,7 +84,7 @@
 
           <!-- Reviews Tab -->
           <div v-if="activeTab === 'reviews'" class="reviews-tab">
-            <p>Reviews section coming soon...</p>
+            <WorkInProgress/>
           </div>
 
           <!-- Sourcing Options Tab -->
@@ -278,10 +278,15 @@ const purchaseOptions = computed(() => {
   }
   
   // 1. Find Preview option (highlighted/primary)
+  // Check for preview, free, or free_download types
   let previewSource = null;
   const digitalCopy = book.value.copy_types.Digital;
   if (digitalCopy?.sources) {
-    previewSource = digitalCopy.sources.find(source => source.type === 'preview');
+    previewSource = digitalCopy.sources.find(source => 
+      source.type === 'preview' || 
+      source.type === 'free' || 
+      source.type === 'free_download'
+    );
   }
   
   if (previewSource) {

@@ -7187,6 +7187,53 @@
         "rating": 4.4
       },
       "id": 7
+    },
+    {
+      "event_type": "event_click",
+      "item_id": 1,
+      "item_title": "Photo Walk Jakarta",
+      "user_id": "anon_1765639418926_ays8es5mw",
+      "timestamp": "2025-12-13T17:00:59.231Z",
+      "source_page": "/",
+      "metadata": {
+        "date": "2023-10-15T08:00:00Z",
+        "community_id": "photography-club"
+      },
+      "id": 8
+    },
+    {
+      "event_type": "post_click",
+      "item_id": 18,
+      "item_title": "Photography and Composition",
+      "item_tags": [
+        "#Photography",
+        "#Composition"
+      ],
+      "user_id": "anon_1765639418926_ays8es5mw",
+      "timestamp": "2025-12-13T17:05:50.650Z",
+      "source_page": "/",
+      "metadata": {
+        "author": "Sarah Chen",
+        "stars": 120
+      },
+      "id": 9
+    },
+    {
+      "event_type": "post_click",
+      "item_id": 18,
+      "item_title": "Photography and Composition",
+      "item_tags": [
+        "#Photography",
+        "#Composition"
+      ],
+      "user_id": "anon_1765639418926_ays8es5mw",
+      "timestamp": "2025-12-13T17:05:52.506Z",
+      "source_page": "/forums/18",
+      "metadata": {
+        "author": "Sarah Chen",
+        "stars": 120
+      },
+      "id": 10
     }
   ]
 }
