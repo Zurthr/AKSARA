@@ -42,6 +42,21 @@
         <BookCard :book="book" />
       </div>
     </div>
+
+    <!-- Lazy Load Section with Infinite Scroll -->
+    <div v-if="lazyLoad" class="lazy-load-section">
+      <div v-if="isLoading" class="loading-indicator">
+        <div class="spinner"></div>
+        <span>Loading more books...</span>
+      </div>
+      <!-- Invisible sentinel element that triggers auto-load when scrolled into view -->
+      <div 
+        v-else-if="hasMore" 
+        ref="sentinelRef"
+        class="scroll-sentinel"
+      ></div>
+      <p v-else class="no-more-items">You've reached the end of the library</p>
+    </div>
   </div>
 </template>
 
@@ -58,7 +73,54 @@ const props = defineProps<{
   titlePrefix?: string;
   titleSuffix?: string;
   highlightedQuery?: string;
+  // Lazy loading props
+  lazyLoad?: boolean;
+  isLoading?: boolean;
+  hasMore?: boolean;
 }>();
+
+const emit = defineEmits<{
+  (e: 'loadMore'): void;
+}>();
+
+// Intersection Observer for infinite scroll
+const sentinelRef = ref<HTMLElement | null>(null);
+let observer: IntersectionObserver | null = null;
+
+onMounted(() => {
+  if (props.lazyLoad && typeof window !== 'undefined') {
+    observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && props.hasMore && !props.isLoading) {
+            emit('loadMore');
+          }
+        });
+      },
+      {
+        root: null,
+        rootMargin: '100px', // Load when 100px before reaching the sentinel
+        threshold: 0
+      }
+    );
+  }
+});
+
+// Watch for sentinel ref changes to observe/unobserve
+watch(sentinelRef, (newRef, oldRef) => {
+  if (oldRef && observer) {
+    observer.unobserve(oldRef);
+  }
+  if (newRef && observer) {
+    observer.observe(newRef);
+  }
+});
+
+onUnmounted(() => {
+  if (observer) {
+    observer.disconnect();
+  }
+});
 
 const refresh = () => {
   // Emit refresh event or reload data
@@ -327,6 +389,51 @@ const refresh = () => {
   .book-card {
     flex: 0 0 100%;
   }
+}
+
+/* Lazy Load Styles */
+.lazy-load-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px 0;
+  width: 100%;
+}
+
+.loading-indicator {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.spinner {
+  width: 24px;
+  height: 24px;
+  border: 3px solid #e2e8f0;
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.scroll-sentinel {
+  width: 100%;
+  height: 1px;
+  visibility: hidden;
+}
+
+.no-more-items {
+  color: #94a3b8;
+  font-size: 14px;
+  font-style: italic;
+  margin: 0;
 }
 </style>
 

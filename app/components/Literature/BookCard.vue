@@ -1,5 +1,5 @@
 <template>
-  <NuxtLink :to="`/literature/${book.id}`" class="book-link">
+  <NuxtLink :to="`/literature/${book.id}`" class="book-link" @click="handleClick">
     <div class="book-cover">
       <img :src="book.image" :alt="book.title || `Book ${book.id}`" />
     </div>
@@ -55,6 +55,8 @@
 </template>
 
 <script setup lang="ts">
+import { useClickTracking } from '~/composables/useClickTracking';
+
 export interface BookCardBook {
   id: number;
   title: string;
@@ -67,6 +69,18 @@ export interface BookCardBook {
 const props = defineProps<{
   book: BookCardBook;
 }>();
+
+const { trackBookClick } = useClickTracking();
+
+const handleClick = () => {
+  trackBookClick({
+    id: props.book.id,
+    title: props.book.title,
+    tags: props.book.tags,
+    author: props.book.author,
+    rating: props.book.rating
+  });
+};
 
 const displayTag = computed(() => {
   const firstTag = props.book.tags?.[0] || '';

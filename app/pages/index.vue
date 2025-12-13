@@ -9,6 +9,21 @@
           :key="post.id" 
           :post="post" 
         />
+        
+        <!-- Lazy Load Section with Infinite Scroll -->
+        <div class="lazy-load-section">
+          <div v-if="isLoading" class="loading-indicator">
+            <div class="spinner"></div>
+            <span>Loading more posts...</span>
+          </div>
+          <!-- Invisible sentinel element that triggers auto-load when scrolled into view -->
+          <div 
+            v-else-if="hasMore" 
+            ref="sentinelRef"
+            class="scroll-sentinel"
+          ></div>
+          <p v-else class="no-more-items">You've seen all posts</p>
+        </div>
       </div>
       <RightSideBar>
         <TrendingSidebar />
@@ -21,29 +36,49 @@
 // Auto import not working gatau kenapa jirr
 import RightSideBar from '~/components/General/RightSideBar.vue';
 import ReadsSection from '~/components/Literature/ReadsSection.vue';
+import { useLazyPosts } from '~/composables/useLazyPosts';
 
-interface Post {
-  id: number;
-  author: {
-    name: string;
-    avatar: string;
-    tagline: string;
-  };
-  timeAgo: string;
-  title: string;
-  content: string;
-  tags: Array<{ label: string; type: 'category' | 'topic' }>;
-  stars: number;
-  community_id: string;
-  created_at: string;
-  updated_at: string;
-}
+// Use lazy loading for posts with infinite scroll
+const { posts, isLoading, hasMore, loadMore } = useLazyPosts(10);
 
-const { data: posts, error } = await useFetch<Post[]>('http://localhost:3002/posts');
+// Intersection Observer for infinite scroll
+const sentinelRef = ref<HTMLElement | null>(null);
+let observer: IntersectionObserver | null = null;
 
-if (error.value) {
-  console.error('Error fetching posts:', error.value);
-}
+onMounted(() => {
+  if (typeof window !== 'undefined') {
+    observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && hasMore.value && !isLoading.value) {
+            loadMore();
+          }
+        });
+      },
+      {
+        root: null,
+        rootMargin: '100px', // Load when 100px before reaching the sentinel
+        threshold: 0
+      }
+    );
+  }
+});
+
+// Watch for sentinel ref changes to observe/unobserve
+watch(sentinelRef, (newRef, oldRef) => {
+  if (oldRef && observer) {
+    observer.unobserve(oldRef);
+  }
+  if (newRef && observer) {
+    observer.observe(newRef);
+  }
+});
+
+onUnmounted(() => {
+  if (observer) {
+    observer.disconnect();
+  }
+});
 </script>
 
 <style scoped>
@@ -64,5 +99,51 @@ if (error.value) {
   flex-direction: column;
   gap: 20px;
 }
+
+/* Lazy Load Styles */
+.lazy-load-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 32px 0;
+  width: 100%;
+}
+
+.loading-indicator {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.spinner {
+  width: 24px;
+  height: 24px;
+  border: 3px solid #e2e8f0;
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.scroll-sentinel {
+  width: 100%;
+  height: 1px;
+  visibility: hidden;
+}
+
+.no-more-items {
+  color: #94a3b8;
+  font-size: 14px;
+  font-style: italic;
+  margin: 0;
+}
 </style>
+
 

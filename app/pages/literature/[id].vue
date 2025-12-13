@@ -263,6 +263,7 @@ const tabs = [
 // Fetch book data from API
 const { data: book, error: bookError } = await useFetch<RawBook>(`http://localhost:3002/books/${bookId}`);
 
+
 if (bookError.value) {
   console.error('Error fetching book:', bookError.value);
 }

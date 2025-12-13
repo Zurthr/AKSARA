@@ -10,6 +10,7 @@
             :key="event.id"
             :to="`/events/${event.id}`"
             class="event-card"
+            @click="handleEventClick(event)"
           >
             <div class="event-image">
               <img :src="event.image" :alt="event.title" />
@@ -113,8 +114,21 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import eventsData from '~/../mock-backend/data/events.json';
+import { useClickTracking } from '~/composables/useClickTracking';
+
+const { trackEventClick } = useClickTracking();
 
 const originalEvents = eventsData;
+
+// Handle event card click
+const handleEventClick = (event: typeof originalEvents[0]) => {
+  trackEventClick({
+    id: event.id,
+    title: event.title,
+    date: event.date,
+    community_id: event.community_id
+  });
+};
 
 const startDate = ref<string | null>(null);
 const endDate = ref<string | null>(null);
