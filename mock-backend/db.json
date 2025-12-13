@@ -7062,5 +7062,95 @@
       "engagement": "4.5k"
     }
   ],
-  "click_events": []
+  "click_events": [
+    {
+      "event_type": "post_click",
+      "item_id": 1,
+      "item_title": "LF Best Books for Aspiring Web Developers",
+      "item_tags": [
+        "Web Dev",
+        "#NewDev",
+        "#WebDev",
+        "#Stacking"
+      ],
+      "user_id": "anon_1765639418926_ays8es5mw",
+      "timestamp": "2025-12-13T15:23:38.926Z",
+      "source_page": "/profile",
+      "metadata": {
+        "author": "Orang Kmplang",
+        "stars": 80
+      },
+      "id": 1
+    },
+    {
+      "event_type": "post_click",
+      "item_id": 1,
+      "item_title": "LF Best Books for Aspiring Web Developers",
+      "item_tags": [
+        "Web Dev",
+        "#NewDev",
+        "#WebDev",
+        "#Stacking"
+      ],
+      "user_id": "anon_1765639418926_ays8es5mw",
+      "timestamp": "2025-12-13T15:23:40.163Z",
+      "source_page": "/forums/1",
+      "metadata": {
+        "author": "Orang Kmplang",
+        "stars": 80
+      },
+      "id": 2
+    },
+    {
+      "event_type": "post_click",
+      "item_id": 3,
+      "item_title": "The cozy beginning of The Hobbit",
+      "item_tags": [
+        "#Tolkien",
+        "#Fantasy"
+      ],
+      "user_id": "anon_1765639418926_ays8es5mw",
+      "timestamp": "2025-12-13T15:26:12.622Z",
+      "source_page": "/forums",
+      "metadata": {
+        "author": "Jane Smith",
+        "stars": 560
+      },
+      "id": 3
+    },
+    {
+      "event_type": "post_click",
+      "item_id": 3,
+      "item_title": "The cozy beginning of The Hobbit",
+      "item_tags": [
+        "#Tolkien",
+        "#Fantasy"
+      ],
+      "user_id": "anon_1765639418926_ays8es5mw",
+      "timestamp": "2025-12-13T15:26:14.797Z",
+      "source_page": "/forums/3",
+      "metadata": {
+        "author": "Jane Smith",
+        "stars": 560
+      },
+      "id": 4
+    },
+    {
+      "event_type": "book_click",
+      "item_id": 36,
+      "item_title": "The Hunger Games",
+      "item_tags": [
+        "Dystopia",
+        "Fiction"
+      ],
+      "user_id": "anon_1765639418926_ays8es5mw",
+      "timestamp": "2025-12-13T15:38:25.727Z",
+      "source_page": "/literature",
+      "metadata": {
+        "author": "Suzanne Collins",
+        "rating": 4.8
+      },
+      "id": 5
+    }
+  ]
 }
