@@ -72,7 +72,7 @@ import BookSection from '~/components/Literature/BookSection.vue';
 import BookGrid from '~/components/Literature/BookGrid.vue';
 import LiteratureFilterSidebar from '~/components/Literature/LiteratureFilterSidebar.vue';
 import TrendingSidebar from '~/components/TrendingSidebar.vue';
-import { useLazyBooks } from '~/composables/useLazyBooks';
+import { useLazyBooks } from '~/composables/useLiterature';
 
 // Literature API integration
 import { useLiterature } from '~/composables/useLiterature'
@@ -85,6 +85,14 @@ type RawBookRecord = Record<string, unknown>
 
 // Use Laravel API
 const { getAllBooks, loading, error } = useLiterature()
+
+// Use lazy loading for infinite scroll
+const { 
+  books: lazyBooks, 
+  isLoading: isLoadingBooks, 
+  hasMore: hasMoreBooks, 
+  loadMore: loadMoreBooks 
+} = useLazyBooks()
 
 const originalBooks = ref<LiteratureBook[]>([])
 const staticBooks = normalizeBookCollection(mockBooks as RawBookRecord[])

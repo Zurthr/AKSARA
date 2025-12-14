@@ -21,6 +21,20 @@ export interface LiteratureBook {
   [key: string]: unknown
 }
 
+// Normalized book interface for UI consumption (used by lazy loading)
+export interface NormalizedBook {
+  id: number
+  title: string
+  author?: string
+  image: string
+  tags: string[]
+  rating?: number
+  bookmarks?: number
+  copyType?: string[]
+  licensingType?: string[]
+  sources?: string[]
+}
+
 export interface LiteratureBookCreateData {
   title: string
   author?: string
@@ -34,7 +48,7 @@ export interface LiteratureBookCreateData {
   sources?: Array<{ name: string; url: string }>
 }
 
-export interface LiteratureBookUpdateData extends Partial<LiteratureBookCreateData> {}
+export interface LiteratureBookUpdateData extends Partial<LiteratureBookCreateData> { }
 
 export interface LiteratureBooksResponse {
   status?: boolean
@@ -63,6 +77,61 @@ export interface LiteratureBooksResponse {
   }
 }
 
+// Helper function to normalize keys (for copy types, licensing, etc)
+const normalizeKey = (value: string | undefined | null): string => {
+  return (value || '')
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, '-')
+}
+
+// Helper function to map raw book to normalized format for UI
+export const mapToNormalizedBook = (book: LiteratureBook): NormalizedBook => {
+  // Handle tags - can be string[] or Array<{name: string}>
+  const tags: string[] = (book.tags || []).map((tag) =>
+    typeof tag === 'string' ? tag : tag.name
+  )
+
+  // Handle copy_types
+  const copyType = book.copy_types
+    ? Object.keys(book.copy_types).map((key) => normalizeKey(key)).filter(Boolean)
+    : []
+
+  const licensingType = book.licensing_type
+    ? [normalizeKey(book.licensing_type)]
+    : []
+
+  const sourceNames: string[] = []
+
+  if (book.sources) {
+    sourceNames.push(...book.sources.map((source) => source.name))
+  }
+
+  // Handle copy_types sources with proper type checking
+  if (book.copy_types) {
+    Object.values(book.copy_types).forEach((copyTypeEntry) => {
+      const entry = copyTypeEntry as { sources?: Array<{ name: string }> }
+      if (entry.sources) {
+        sourceNames.push(...entry.sources.map((source) => source.name))
+      }
+    })
+  }
+
+  return {
+    id: typeof book.id === 'string' ? parseInt(book.id) || 0 : (book.id as number),
+    title: book.title,
+    author: book.author,
+    image: book.cover || book.image_url || '',
+    tags,
+    rating: book.rating,
+    bookmarks: book.total_bookmarked,
+    copyType,
+    licensingType,
+    sources: Array.from(new Set(sourceNames))
+  }
+}
+
+// Main composable for literature/books API operations
 export const useLiterature = () => {
   const api = useApi()
   const loading = ref(false)
@@ -195,3 +264,72 @@ export const useLiterature = () => {
     clearError
   }
 }
+
+/**
+ * Composable for lazy loading books with pagination
+ * Uses json-server pagination with _page and _limit params
+ * 
+ * @param pageSize - Number of books to load per page (default: 12)
+ */
+export function useLazyBooks(pageSize: number = 12) {
+  const books = ref<NormalizedBook[]>([])
+  const isLoading = ref(false)
+  const hasMore = ref(true)
+  const currentPage = ref(0)
+  const error = ref<Error | null>(null)
+
+  const loadMore = async () => {
+    if (isLoading.value || !hasMore.value) return
+
+    isLoading.value = true
+    error.value = null
+    currentPage.value++
+
+    try {
+      const response = await $fetch<LiteratureBook[]>(`http://localhost:3002/books`, {
+        params: {
+          _page: currentPage.value,
+          _limit: pageSize
+        }
+      })
+
+      if (response.length < pageSize) {
+        hasMore.value = false
+      }
+
+      if (response.length === 0) {
+        hasMore.value = false
+      } else {
+        const mappedBooks = response.map(mapToNormalizedBook)
+        books.value = [...books.value, ...mappedBooks]
+      }
+    } catch (e) {
+      error.value = e as Error
+      console.error('Error loading books:', e)
+    } finally {
+      isLoading.value = false
+    }
+  }
+
+  const reset = () => {
+    books.value = []
+    currentPage.value = 0
+    hasMore.value = true
+    error.value = null
+  }
+
+  // Load initial batch on mount
+  onMounted(() => {
+    loadMore()
+  })
+
+  return {
+    books,
+    isLoading,
+    hasMore,
+    error,
+    loadMore,
+    reset
+  }
+}
+

@@ -161,7 +161,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import { useRuntimeConfig } from '#imports'
-
+import { useClickTracking } from '~/composables/useClickTracking'
 
 import { useEvents } from '~/composables/useEvents'
 import type { Event as EventItem } from '~/composables/useEvents'
@@ -189,6 +189,9 @@ const listFallbackImage = 'https://images.unsplash.com/photo-1498050108023-c5249
 
 // Use Laravel API
 const { getAllEvents, loading, error } = useEvents()
+
+// Click tracking
+const { trackEventClick } = useClickTracking()
 
 const originalEvents = ref<EventItem[]>([])
 const staticEvents = normalizeEventCollection(mockEvents as RawEventRecord[])
@@ -247,10 +250,11 @@ const fetchEvents = async () => {
 };
 
 // Handle event card click
-const handleEventClick = (event: typeof originalEvents[0]) => {
+const handleEventClick = (event: EventItem) => {
   trackEventClick({
     id: event.id,
     title: event.title,
+    tags: event.tags,
     date: event.date,
     community_id: event.community_id
   });

@@ -78,6 +78,19 @@ const props = defineProps<{
 const imageUrl = ref(props.book.image);
 const imageError = ref(false);
 
+// Click tracking
+const { trackBookClick } = useClickTracking();
+
+const handleClick = () => {
+  trackBookClick({
+    id: props.book.id,
+    title: props.book.title,
+    tags: props.book.tags,
+    author: props.book.author,
+    rating: props.book.rating
+  });
+};
+
 const handleImageError = () => {
   if (!imageError.value) {
     imageError.value = true;
