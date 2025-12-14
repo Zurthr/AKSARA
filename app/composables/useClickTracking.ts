@@ -10,7 +10,7 @@
 
 export interface ClickEvent {
     id?: number
-    event_type: 'book_click' | 'post_click' | 'community_click' | 'event_click'
+    event_type: 'book_click' | 'post_click' | 'community_click' | 'event_click' | 'search_query' | 'community_join'
     item_id: number | string
     item_title: string
     item_tags?: string[]
@@ -187,10 +187,53 @@ export function useClickTracking() {
         sendEvent(event)
     }
 
+    /**
+     * Track search query
+     */
+    const trackSearch = (search: {
+        query: string
+        source_page?: string
+        filters?: Record<string, unknown>
+    }) => {
+        const event = createEvent(
+            'search_query',
+            search.query,
+            search.query,
+            undefined,
+            { filters: search.filters }
+        )
+        // Override source_page if provided
+        if (search.source_page) {
+            event.source_page = search.source_page
+        }
+        sendEvent(event)
+    }
+
+    /**
+     * Track community join
+     */
+    const trackCommunityJoin = (community: {
+        id: number | string
+        name: string
+        tags?: string[]
+        members?: string | number
+    }) => {
+        const event = createEvent(
+            'community_join',
+            community.id,
+            community.name,
+            community.tags,
+            { members: community.members }
+        )
+        sendEvent(event)
+    }
+
     return {
         trackBookClick,
         trackPostClick,
         trackCommunityClick,
-        trackEventClick
+        trackEventClick,
+        trackSearch,
+        trackCommunityJoin
     }
 }
