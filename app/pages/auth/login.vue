@@ -121,7 +121,7 @@ const handleLogin = async () => {
   })
 
   if (success) {
-    const redirectTo = router.currentRoute.value.query.redirect as string || '/dashboard'
+    const redirectTo = router.currentRoute.value.query.redirect as string || '/'
     await router.push(redirectTo)
     return
   }

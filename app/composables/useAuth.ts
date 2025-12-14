@@ -1,16 +1,26 @@
 import { computed } from 'vue'
 
-// Types based on API response structure
+// Types based on API response structur// Types
 export interface User {
   id: string
   email: string
-  firstName: string
-  lastName: string
+  role: 'USER' | 'ADMIN'
+  createdAt: string
+  // Profile is nested in API response
+  profile?: {
+    id: string
+    userId: string
+    displayName?: string
+    bio?: string
+    avatarUrl?: string | null
+    interestScores?: Record<string, number>
+  }
+  // Legacy fields for backward compatibility
+  firstName?: string
+  lastName?: string
   displayName?: string
   bio?: string
-  role: string
   interestScores?: Record<string, number>
-  createdAt?: string
   updatedAt?: string
 }
 
@@ -73,7 +83,7 @@ export interface ApiError {
 export const useAuth = () => {
   const config = useRuntimeConfig()
   const router = useRouter()
-  
+
   // Shared auth state across app instances
   const user = useState<User | null>('auth_user', () => null)
   const accessToken = useState<string | null>('auth_access_token', () => null)
@@ -83,7 +93,7 @@ export const useAuth = () => {
   const isInitialized = useState<boolean>('auth_is_initialized', () => false)
 
   // Base API URL - Use proxy in development to avoid CORS
-  const baseURL = process.dev 
+  const baseURL = process.dev
     ? '/api'  // Use proxy in development
     : (config.public.authApiUrl || 'https://aksara-api.fruz.xyz/api')
 
@@ -93,7 +103,7 @@ export const useAuth = () => {
   // Helper function for API calls
   const apiCall = async <T>(endpoint: string, options: RequestInit = {}): Promise<T> => {
     const url = `${baseURL}${endpoint}`
-    
+
     const defaultHeaders: Record<string, string> = {
       'Content-Type': 'application/json'
     }
@@ -155,7 +165,7 @@ export const useAuth = () => {
     user.value = authData.user
     accessToken.value = authData.tokens.accessToken
     refreshToken.value = authData.tokens.refreshToken
-    
+
     // Store in localStorage for persistence
     if (process.client) {
       localStorage.setItem('accessToken', authData.tokens.accessToken)
@@ -169,7 +179,7 @@ export const useAuth = () => {
     user.value = null
     accessToken.value = null
     refreshToken.value = null
-    
+
     if (process.client) {
       localStorage.removeItem('accessToken')
       localStorage.removeItem('refreshToken')
@@ -252,7 +262,7 @@ export const useAuth = () => {
 
       const response = await apiCall<ProfileResponse>('/auth/profile')
       user.value = response.data
-      
+
       // Update stored user data
       if (process.client) {
         localStorage.setItem('user', JSON.stringify(response.data))
@@ -279,7 +289,7 @@ export const useAuth = () => {
       })
 
       user.value = response.data
-      
+
       // Update stored user data
       if (process.client) {
         localStorage.setItem('user', JSON.stringify(response.data))
@@ -305,7 +315,7 @@ export const useAuth = () => {
       })
 
       accessToken.value = response.data.accessToken
-      
+
       if (process.client) {
         localStorage.setItem('accessToken', response.data.accessToken)
       }
@@ -323,7 +333,7 @@ export const useAuth = () => {
   const logout = async () => {
     try {
       isLoading.value = true
-      
+
       // Call logout endpoint if refresh token exists
       if (refreshToken.value) {
         await apiCall('/auth/logout', {
@@ -336,7 +346,7 @@ export const useAuth = () => {
     } finally {
       clearAuthData()
       isLoading.value = false
-      
+
       // Redirect to login page
       await router.push('/auth/login')
     }
@@ -351,7 +361,7 @@ export const useAuth = () => {
       const payload = JSON.parse(atob(accessToken.value.split('.')[1]))
       const expiry = payload.exp * 1000 // Convert to milliseconds
       const now = Date.now()
-      
+
       // If token expires in less than 5 minutes, refresh it
       if (expiry - now < 5 * 60 * 1000) {
         refreshAccessToken()

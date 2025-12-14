@@ -231,8 +231,8 @@ const saveInterests = async () => {
     })
 
     if (success) {
-      // Redirect to dashboard
-      await router.push('/dashboard')
+      // Redirect to homepage
+      await router.push('/')
     } else {
       error.value = 'Failed to save interests. Please try again.'
     }
@@ -244,8 +244,8 @@ const saveInterests = async () => {
 }
 
 const skipSelection = async () => {
-  // Go to dashboard without saving interests
-  await router.push('/dashboard')
+  // Go to homepage without saving interests
+  await router.push('/')
 }
 
 // Pre-select interests if user already has them
