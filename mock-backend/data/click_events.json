@@ -1,1 +1,36 @@
-[]
+[
+  {
+    "id": 1,
+    "event_type": "community_click",
+    "item_id": "jump-fest-2025",
+    "item_title": "JUMP FEST 2025 - BRED THROUGH",
+    "item_tags": [
+      "#HarryPotter",
+      "#WIBU",
+      "#AnimeX"
+    ],
+    "user_id": "anon_1765717418704_a3y2adatr",
+    "timestamp": "2025-12-14T13:28:14.700Z",
+    "source_page": "/community",
+    "metadata": {
+      "members": 21
+    }
+  },
+  {
+    "id": 2,
+    "event_type": "post_click",
+    "item_id": 1,
+    "item_title": "Applying 'Atomic Habits' to Learning to Code",
+    "item_tags": [
+      "#Productivity",
+      "#Coding"
+    ],
+    "user_id": "anon_1765717418704_a3y2adatr",
+    "timestamp": "2025-12-14T13:29:09.193Z",
+    "source_page": "/forums",
+    "metadata": {
+      "author": "Sarah Chen",
+      "stars": 342
+    }
+  }
+]

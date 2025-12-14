@@ -6,7 +6,7 @@
   "scripts": {
     "build": "node load-data.cjs",
     "start": "npm run build && json-server --watch db.json --routes routes.json --port 3002",
-    "dev": "npm run build && json-server --watch db.json --routes routes.json --port 3002",
+    "dev": "npm run build && node server.cjs",
     "prod": "npm run build && json-server --host 0.0.0.0 db.json --routes routes.json --port 3002",
     "simple": "json-server --watch db.json --routes routes.json --port 3002",
     "enhanced": "npm run build && node server.cjs",

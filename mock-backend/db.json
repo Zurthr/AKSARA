@@ -7064,111 +7064,38 @@
   ],
   "click_events": [
     {
-      "event_type": "post_click",
-      "item_id": 3,
-      "item_title": "The cozy beginning of The Hobbit",
-      "item_tags": [
-        "#Tolkien",
-        "#Fantasy"
-      ],
-      "user_id": "anon_1765640017713_lc0own0ia",
-      "timestamp": "2025-12-14T12:02:28.418Z",
-      "source_page": "/forums",
-      "metadata": {
-        "author": "Jane Smith",
-        "stars": 560
-      },
-      "id": 1
-    },
-    {
-      "event_type": "post_click",
-      "item_id": 4,
-      "item_title": "Why you should master Vanilla JS before Frameworks",
-      "item_tags": [
-        "#JavaScript",
-        "#Advice"
-      ],
-      "user_id": "anon_1765640017713_lc0own0ia",
-      "timestamp": "2025-12-14T12:02:44.016Z",
-      "source_page": "/forums",
-      "metadata": {
-        "author": "Alfan Gunadar",
-        "stars": 210
-      },
-      "id": 2
-    },
-    {
-      "event_type": "book_click",
-      "item_id": 14,
-      "item_title": "HTML and CSS: Design and Build Websites",
-      "item_tags": [
-        "Web Development",
-        "HTML",
-        "CSS",
-        "Frontend Development",
-        "Web Design"
-      ],
-      "user_id": "anon_1765640017713_lc0own0ia",
-      "timestamp": "2025-12-14T12:02:54.635Z",
-      "source_page": "/literature",
-      "metadata": {
-        "author": "Jon Duckett",
-        "rating": 4.4
-      },
-      "id": 3
-    },
-    {
-      "event_type": "book_click",
-      "item_id": 2,
-      "item_title": "The Hobbit",
-      "item_tags": [
-        "Fantasy",
-        "Adventure",
-        "Classic Literature",
-        "Epic"
-      ],
-      "user_id": "anon_1765640017713_lc0own0ia",
-      "timestamp": "2025-12-14T12:03:30.538Z",
-      "source_page": "/literature",
-      "metadata": {
-        "author": "J.R.R. Tolkien",
-        "rating": 4.3
-      },
-      "id": 4
-    },
-    {
+      "id": 1,
       "event_type": "community_click",
-      "item_id": "gaming-hub",
-      "item_title": "Gaming Hub Indonesia",
+      "item_id": "jump-fest-2025",
+      "item_title": "JUMP FEST 2025 - BRED THROUGH",
       "item_tags": [
-        "Esports",
-        "Co-op",
-        "Livestream"
+        "#HarryPotter",
+        "#WIBU",
+        "#AnimeX"
       ],
-      "user_id": "anon_1765640017713_lc0own0ia",
-      "timestamp": "2025-12-14T12:03:40.229Z",
+      "user_id": "anon_1765717418704_a3y2adatr",
+      "timestamp": "2025-12-14T13:28:14.700Z",
       "source_page": "/community",
       "metadata": {
-        "members": 12
-      },
-      "id": 5
+        "members": 21
+      }
     },
     {
-      "event_type": "community_click",
-      "item_id": "photography-club",
-      "item_title": "Photography Club",
+      "id": 2,
+      "event_type": "post_click",
+      "item_id": 1,
+      "item_title": "Applying 'Atomic Habits' to Learning to Code",
       "item_tags": [
-        "Photo Walk",
-        "Tips",
-        "Critique"
+        "#Productivity",
+        "#Coding"
       ],
-      "user_id": "anon_1765640017713_lc0own0ia",
-      "timestamp": "2025-12-14T12:03:49.689Z",
-      "source_page": "/community",
+      "user_id": "anon_1765717418704_a3y2adatr",
+      "timestamp": "2025-12-14T13:29:09.193Z",
+      "source_page": "/forums",
       "metadata": {
-        "members": 287
-      },
-      "id": 6
+        "author": "Sarah Chen",
+        "stars": 342
+      }
     }
   ]
 }
