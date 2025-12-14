@@ -107,18 +107,60 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import { useClickTracking } from '~/composables/useClickTracking';
 
 const { trackCommunityClick } = useClickTracking();
 
+// Interface for community data
+interface Community {
+  id: string
+  name: string
+  icon: string
+  accent: string
+  tags: string[]
+  description: string
+  members: string
+  postsToday: number | string
+  memberCount?: number
+  isJoined?: boolean
+}
+
+// State management
+const allCommunities = ref<Community[]>([]);
+const loading = ref(false);
+const error = ref<string | null>(null);
+
+// Fetch communities from mock-backend
+const fetchCommunities = async () => {
+  loading.value = true;
+  error.value = null;
+  
+  try {
+    const response = await $fetch<Community[]>('http://localhost:3002/communities');
+    allCommunities.value = response;
+    console.log('✅ Fetched communities from mock-backend:', response.length);
+  } catch (err) {
+    error.value = err instanceof Error ? err.message : 'Failed to fetch communities';
+    console.error('❌ Error fetching communities:', err);
+    allCommunities.value = []; // Fallback to empty array
+  } finally {
+    loading.value = false;
+  }
+};
+
+// Fetch on mount
+onMounted(() => {
+  fetchCommunities();
+});
+
 // Handle community card click
-const handleCommunityClick = (community: { id: string; name: string; tags: string[]; members: string }) => {
+const handleCommunityClick = (community: Community) => {
   trackCommunityClick({
     id: community.id,
     name: community.name,
     tags: community.tags,
-    members: parseInt(community.members.replace(/[^0-9]/g, ''), 10) || 0
+    members: parseInt(community.members.replace(/[^0-9]/g, ''), 10) || community.memberCount || 0
   });
 };
 
@@ -132,83 +174,13 @@ const iconPaths: Record<string, string> = {
   chat: 'M4 4h16a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H8l-4 4V5a1 1 0 0 1 1-1z'
 };
 
-// All communities data
-const allCommunities = [
-  {
-    id: 'jump-fest-2025',
-    name: 'JUMP FEST 2025 - BRED THROUGH',
-    icon: 'spark',
-    accent: '#E6F2FF',
-    tags: ['#HarryPotter', '#WIBU', '#AnimeX'],
-    description:
-      'Festival fandom terbesar tahun ini. Dapatkan bocoran rilis anime, sesi temu kreator, dan event eksklusif lainnya.',
-    members: '21k',
-    postsToday: '42'
-  },
-  {
-    id: 'literacy-circle',
-    name: 'Literacy Circle',
-    icon: 'heart',
-    accent: '#FFE5EC',
-    tags: ['#HarryPotter', 'LoTR', 'Book Talk', 'Reading'],
-    description:
-      'Komunitas pecinta buku untuk diskusi sastra, review, dan menemukan penulis baru.',
-    members: '324',
-    postsToday: '18'
-  },
-  {
-    id: 'wellness-warriors',
-    name: 'Wellness Warriors',
-    icon: 'spark',
-    accent: '#E6F2FF',
-    tags: ['Mindful', 'Balance', 'Habits'],
-    description:
-      'Berbagi rutinitas sehat, dukung perjalanan mindfulness, dan saling menguatkan.',
-    members: '512',
-    postsToday: '24'
-  },
-  {
-    id: 'photography-club',
-    name: 'Photography Club',
-    icon: 'camera',
-    accent: '#F0F9F5',
-    tags: ['Photo Walk', 'Tips', 'Critique'],
-    description:
-      'Belajar teknik fotografi, ikut photo walk, dan diskusi kritik konstruktif setiap minggu.',
-    members: '287',
-    postsToday: '12'
-  },
-  {
-    id: 'gaming-hub',
-    name: 'Gaming Hub Indonesia',
-    icon: 'chat',
-    accent: '#FFF8E1',
-    tags: ['Esports', 'Co-op', 'Livestream'],
-    description:
-      'Tempat berkumpulnya gamer untuk mabar, update turnamen, dan berbagi tips build meta.',
-    members: '1.2k',
-    postsToday: '33'
-  },
-  {
-    id: 'creative-atelier',
-    name: 'Creative Atelier',
-    icon: 'heart',
-    accent: '#FEEAE6',
-    tags: ['Illustration', 'UI/UX', 'Workshop'],
-    description:
-      'Komunitas kreator visual. Ada feedback session, challenge mingguan, dan kelas desain gratis.',
-    members: '648',
-    postsToday: '21'
-  }
-];
-
 // Filtered communities based on active filters
 const communities = computed(() => {
   if (activeFilters.value.length === 0) {
-    return allCommunities;
+    return allCommunities.value;
   }
   
-  return allCommunities.filter(community => {
+  return allCommunities.value.filter(community => {
     // Check if community has any of the active filter tags
     return activeFilters.value.some(filter => 
       community.tags.some(tag => tag.toLowerCase().includes(filter.toLowerCase())) ||

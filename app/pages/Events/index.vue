@@ -165,9 +165,6 @@ import { useClickTracking } from '~/composables/useClickTracking'
 
 import { useEvents } from '~/composables/useEvents'
 import type { Event as EventItem } from '~/composables/useEvents'
-import { useLocalEvents } from '~/composables/useLocalEvents'
-import mockEvents from 'mockData/events.json'
-import { mergeEventCollections, normalizeEventCollection } from '~/utils/events-normalizer'
 
 const runtimeConfig = useRuntimeConfig()
 
@@ -193,24 +190,34 @@ const { getAllEvents, loading, error } = useEvents()
 // Click tracking
 const { trackEventClick } = useClickTracking()
 
-const originalEvents = ref<EventItem[]>([])
-const staticEvents = normalizeEventCollection(mockEvents as RawEventRecord[])
-const { localEvents } = useLocalEvents()
+// Direct fetch from mock-backend
+const allEvents = ref<EventItem[]>([])
+const fetchingFromMockBackend = ref(false)
 
-const normalizedLocalEvents = computed<EventItem[]>(() => {
-  const raw = Array.isArray(localEvents.value) ? localEvents.value : []
-  return normalizeEventCollection(raw as RawEventRecord[])
-})
+// Fetch events from mock-backend API
+const fetchEventsFromMockBackend = async () => {
+  fetchingFromMockBackend.value = true
+  
+  try {
+    const response = await $fetch<EventItem[]>('http://localhost:3002/events')
+    allEvents.value = response
+    console.log('✅ Fetched events from mock-backend:', response.length)
+  } catch (err) {
+    console.error('❌ Error fetching from mock-backend:', err)
+    allEvents.value = []
+  } finally {
+    fetchingFromMockBackend.value = false
+  }
+}
 
+// Fetch events on mount
+onMounted(async () => {
+  await fetchEventsFromMockBackend();
+});
+
+// Merged events - now just uses mock-backend data
 const mergedEvents = computed<EventItem[]>(() => {
-  const remote = Array.isArray(originalEvents.value) ? originalEvents.value : []
-  console.log('🔍 Merging events:')
-  console.log('📡 Remote (Laravel):', remote.length, 'events')
-  console.log('📄 Static (JSON):', staticEvents.length, 'events')
-  console.log('💾 Local Storage:', normalizedLocalEvents.value.length, 'events')
-  const merged = mergeEventCollections([remote, staticEvents, normalizedLocalEvents.value])
-  console.log('✅ Final merged:', merged.length, 'events')
-  return merged
+  return allEvents.value
 })
 
 const resolveAbsoluteUrl = (raw?: string | null) => {
@@ -236,18 +243,6 @@ const handleCardImageError = (domEvent: Event) => {
     image.src = listFallbackImage
   }
 }
-
-// Fetch events on mount
-onMounted(async () => {
-  await fetchEvents();
-});
-
-const fetchEvents = async () => {
-  const response = await getAllEvents();
-  if (response && response.data) {
-    originalEvents.value = response.data;
-  }
-};
 
 // Handle event card click
 const handleEventClick = (event: EventItem) => {
