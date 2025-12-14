@@ -27,10 +27,10 @@
         
         <div class="source-info">
           <div class="source-label" :class="getLabelClass(source.copyType, source.type)">
-            <span class="label-text">{{ getCopyTypeLabel(source.copyType, source.type) }}</span>
             <img v-if="isDigitalFreeType(source.copyType, source.type)" src="~/assets/icons/SourceBook.svg" class="label-icon">
             <img v-else-if="isAcademicType(source.copyType)" src="~/assets/icons/SourceAcademic.svg" class="label-icon">
             <img v-else src="~/assets/icons/SourcePaid.svg" class="label-icon">
+            <span class="label-text">{{ getCopyTypeLabel(source.copyType, source.type) }}</span>
           </div>
           <div class="source-name">
             {{ source.name }}
@@ -296,7 +296,7 @@ const getLabelClass = (copyType: string, sourceType?: string): string => {
 .source-label {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
   font-size: 12px;
   font-weight: 600;
 }
