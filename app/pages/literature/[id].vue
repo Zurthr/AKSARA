@@ -101,29 +101,12 @@
 
           <!-- Reviews Tab -->
           <div v-if="activeTab === 'reviews'" class="reviews-tab">
-            <p>Reviews section coming soon...</p>
+            <WorkInProgress/>
           </div>
 
           <!-- Sourcing Options Tab -->
           <div v-if="activeTab === 'sourcing'" class="sourcing-tab">
-            <div class="sourcing-content">
-              <h3>Available Sources</h3>
-              <div v-if="book.sources && book.sources.length > 0" class="sources-list">
-                <a
-                  v-for="source in book.sources"
-                  :key="source.name"
-                  :href="source.url"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="source-link"
-                >
-                  {{ source.name }}
-                </a>
-              </div>
-              <div v-else>
-                <p>No sources available.</p>
-              </div>
-            </div>
+            <SourcingOptions :copy-types="book.copy_types" />
           </div>
         </div>
     </main>
@@ -211,6 +194,7 @@
 <script setup lang="ts">
 import RightSideBar from '~/components/General/RightSideBar.vue';
 import ForumCard from '~/components/Forum/ForumCard.vue';
+import SourcingOptions from '~/components/Literature/SourcingOptions.vue';
 
 // Literature API integration
 import { useLiterature } from '~/composables/useLiterature'
@@ -373,10 +357,15 @@ const purchaseOptions = computed(() => {
   }
   
   // 1. Find Preview option (highlighted/primary)
+  // Check for preview, free, or free_download types
   let previewSource = null;
   const digitalCopy = book.value.copy_types.Digital;
   if (digitalCopy?.sources) {
-    previewSource = digitalCopy.sources.find(source => source.type === 'preview');
+    previewSource = digitalCopy.sources.find(source => 
+      source.type === 'preview' || 
+      source.type === 'free' || 
+      source.type === 'free_download'
+    );
   }
   
   if (previewSource) {
@@ -617,11 +606,7 @@ const handleImageError = (event: Event) => {
 
 .reviews-tab,
 .sourcing-tab {
-  padding: 32px;
-  background: white;
-  border-radius: 16px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
+  border-radius: 16px;}
 
 .sourcing-content h3 {
   font-size: 20px;

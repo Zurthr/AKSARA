@@ -703,7 +703,6 @@ const retryFetch = () => {
   background: #ffffff;
   border-radius: 24px;
   border: 1px solid #e2e8f0;
-  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
   overflow: hidden;
 }
 
@@ -841,8 +840,8 @@ const retryFetch = () => {
   background: #ffffff;
   border-radius: 28px;
   border: 1px solid #e2e8f0;
-  box-shadow: 0 22px 44px rgba(15, 23, 42, 0.08);
-  padding: 36px;
+  padding: 32px;
+
   display: flex;
   flex-direction: column;
   gap: 32px;
