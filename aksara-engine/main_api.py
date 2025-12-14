@@ -18,7 +18,7 @@ brain = None
 class ClickEvent(BaseModel):
     event_type: str
     item_id: Union[int, str]
-    item_type: str # 'book', 'event', 'post', 'community'
+    item_type: Optional[str] = None # 'book', 'event', 'post', 'community'
     timestamp: Optional[str] = None
 
 class RecommendationRequest(BaseModel):
