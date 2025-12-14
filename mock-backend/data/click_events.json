@@ -221,5 +221,78 @@
     "metadata": {
       "filters": {}
     }
+  },
+  {
+    "id": 15,
+    "event_type": "community_click",
+    "item_id": "jump-fest-2025",
+    "item_title": "JUMP FEST 2025 - BRED THROUGH",
+    "item_tags": [
+      "#HarryPotter",
+      "#WIBU",
+      "#AnimeX"
+    ],
+    "user_id": "anon_1765717418704_a3y2adatr",
+    "timestamp": "2025-12-14T15:11:04.693Z",
+    "source_page": "/community",
+    "metadata": {
+      "members": 21
+    }
+  },
+  {
+    "id": 16,
+    "event_type": "community_join",
+    "item_id": "jump-fest-2025",
+    "item_title": "JUMP FEST 2025 - BRED THROUGH",
+    "item_tags": [
+      "#HarryPotter",
+      "#WIBU",
+      "#ANIME",
+      "#GAME",
+      "#DEMONS",
+      "#ANIMEX"
+    ],
+    "user_id": "anon_1765717418704_a3y2adatr",
+    "timestamp": "2025-12-14T15:11:12.714Z",
+    "source_page": "/community/jump-fest-2025",
+    "metadata": {
+      "members": "21k"
+    }
+  },
+  {
+    "id": 17,
+    "event_type": "community_click",
+    "item_id": "jump-fest-2025",
+    "item_title": "JUMP FEST 2025 - BRED THROUGH",
+    "item_tags": [
+      "#HarryPotter",
+      "#WIBU",
+      "#AnimeX"
+    ],
+    "user_id": "anon_1765717418704_a3y2adatr",
+    "timestamp": "2025-12-14T15:13:24.780Z",
+    "source_page": "/community",
+    "metadata": {
+      "members": 21
+    }
+  },
+  {
+    "id": 18,
+    "event_type": "post_click",
+    "item_id": 1,
+    "item_title": "LF Best Books for Aspiring Web Developers",
+    "item_tags": [
+      "Web Dev",
+      "#NewDev",
+      "#WebDev",
+      "#Stacking"
+    ],
+    "user_id": "anon_1765717418704_a3y2adatr",
+    "timestamp": "2025-12-14T15:24:54.188Z",
+    "source_page": "/profile",
+    "metadata": {
+      "author": "Orang Kmplang",
+      "stars": 80
+    }
   }
 ]

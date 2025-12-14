@@ -14,7 +14,16 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      apiBaseUrl: process.env.NUXT_PUBLIC_API_BASE_URL || 'http://127.0.0.1:8000/api'
+      apiBaseUrl: process.env.NUXT_PUBLIC_API_BASE_URL || 'http://127.0.0.1:8000/api',
+      authApiUrl: process.env.NUXT_PUBLIC_AUTH_API_URL || 'https://aksara-api.fruz.xyz/api'
+    }
+  },
+  // Configure proxy for auth API in development
+  nitro: {
+    routeRules: {
+      '/api/**': {
+        proxy: 'https://aksara-api.fruz.xyz/api/**'
+      }
     }
   }
 });

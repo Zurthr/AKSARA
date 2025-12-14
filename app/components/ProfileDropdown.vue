@@ -10,15 +10,15 @@
             </svg>
           </div>
           <div class="profile-details">
-            <h4 class="profile-name">John Doe</h4>
-            <p class="profile-email">john.doe@example.com</p>
+            <h4 class="profile-name">{{ user?.firstName }} {{ user?.lastName }}</h4>
+            <p class="profile-email">{{ user?.email }}</p>
           </div>
         </div>
       </div>
 
       <div class="profile-dropdown-body">
         <div class="profile-menu">
-          <a href="#" class="profile-menu-item">
+          <NuxtLink to="/profile" class="profile-menu-item" @click="emit('close')">
             <div class="menu-icon">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
@@ -26,21 +26,23 @@
               </svg>
             </div>
             <span>Profile</span>
-          </a>
+          </NuxtLink>
 
-          <a href="#" class="profile-menu-item">
+          <NuxtLink to="/dashboard" class="profile-menu-item" @click="emit('close')">
             <div class="menu-icon">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/>
-                <circle cx="12" cy="12" r="3"/>
+                <rect x="3" y="3" width="7" height="7"/>
+                <rect x="14" y="3" width="7" height="7"/>
+                <rect x="14" y="14" width="7" height="7"/>
+                <rect x="3" y="14" width="7" height="7"/>
               </svg>
             </div>
-            <span>Settings</span>
-          </a>
+            <span>Dashboard</span>
+          </NuxtLink>
 
           <div class="profile-divider"></div>
 
-          <a href="#" class="profile-menu-item">
+          <button type="button" class="profile-menu-item" @click="handleLogout">
             <div class="menu-icon">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
@@ -49,7 +51,7 @@
               </svg>
             </div>
             <span>Logout</span>
-          </a>
+          </button>
         </div>
       </div>
     </div>
@@ -57,9 +59,16 @@
 </template>
 
 <script setup lang="ts">
+const { user, logout } = useAuth()
+
 const emit = defineEmits<{
   close: [];
 }>();
+
+const handleLogout = async () => {
+  emit('close')
+  await logout()
+}
 </script>
 
 <style scoped>
