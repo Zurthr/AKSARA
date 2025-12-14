@@ -128,9 +128,14 @@ class TheBrain:
             
             # Infer item_type if missing (heuristic based on usage)
             if not item_type:
-                 # Try to infer or skip? Better to skip if ambiguous, or try all?
-                 # ideally frontend sends item_type. 
-                 pass
+                if 'book' in e_type:
+                    item_type = 'book'
+                elif 'post' in e_type:
+                    item_type = 'post'
+                elif 'community' in e_type:
+                    item_type = 'community'
+                elif 'event' in e_type:
+                    item_type = 'event'
 
             weight = weights.get(e_type, 1)
             
@@ -145,14 +150,22 @@ class TheBrain:
         if self.df is None or self.df.empty:
             return []
 
-        user_query = self.build_user_vector(click_events)
+        # Normalize events (infer item_type)
+        normalized_events = []
+        for e in click_events:
+            e_copy = e.copy()
+            e_type = e_copy.get('event_type', '')
+            if not e_copy.get('item_type'):
+                if 'book' in e_type: e_copy['item_type'] = 'book'
+                elif 'post' in e_type: e_copy['item_type'] = 'post'
+                elif 'community' in e_type: e_copy['item_type'] = 'community'
+                elif 'event' in e_type: e_copy['item_type'] = 'event'
+            normalized_events.append(e_copy)
+
+        user_query = self.build_user_vector(normalized_events)
         
         # If user has no history or valid tags found, return trending/random (or empty)
-        # For this task, we'll just handle the vectorization.
         if not user_query.strip():
-            # Fallback: return top random items if cold start? 
-            # Or just return empty list as strict interpretation.
-            # Let's return sample items to show something works.
             return self.df.head(top_n).to_dict('records')
 
         user_vec = self.vectorizer.transform([user_query])
@@ -166,10 +179,12 @@ class TheBrain:
         recommendations = []
         
         # Filter out items user already interacted with
-        interacted_ids = set((e.get('item_id'), e.get('item_type')) for e in click_events)
+        interacted_ids = set((e.get('item_id'), e.get('item_type')) for e in normalized_events)
         
         for idx in sim_indices:
             item = self.df.iloc[idx]
+            # Ensure type match involved in comparison logic if needed
+            # For now relying on python equality (1 == 1, 'id' == 'id')
             if (item['id'], item['type']) not in interacted_ids:
                 rec_item = item.to_dict()
                 rec_item['score'] = float(cosine_sim[idx])
