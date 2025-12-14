@@ -73,6 +73,9 @@ const showNotificationModal = ref(false);
 // Profile dropdown state
 const showProfileDropdown = ref(false);
 
+// Click tracking
+const { trackSearch } = useClickTracking();
+
 // Update search query from URL when route changes
 watch(() => route.query, (newQuery) => {
   searchQuery.value = (newQuery.q as string) || (newQuery.search as string) || '';
@@ -106,6 +109,18 @@ const handleSearch = () => {
           : route.query.tags as string ? [route.query.tags as string] : [];
       }
     }
+
+    // Track search query
+    trackSearch({
+      query: searchQuery.value.trim(),
+      source_page: route.path,
+      filters: {
+        copyType: query.copyType,
+        licensingType: query.licensingType,
+        tags: query.tags,
+        sources: query.sources
+      }
+    });
 
     router.push({
       path: '/literature',

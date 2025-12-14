@@ -4,94 +4,141 @@
      
 
       <div class="events-body">
-        <div class="events-grid">
-          <NuxtLink
-            v-for="event in filteredEvents"
-            :key="event.id"
-            :to="`/events/${event.id}`"
-            class="event-card"
-            @click="handleEventClick(event)"
-          >
-            <div class="event-image">
-              <img :src="event.image" :alt="event.title" />
+        <div class="events-content">
+          <!-- Loading state -->
+          <div v-if="loading" class="loading-state">
+            <div class="loading-spinner"></div>
+            <p>Loading events...</p>
+          </div>
 
-            </div>
-
-            <div class="event-content">
-              <div class="event-meta">
-                <h4>{{ event.subtitle }}</h4>
-                <p class="event-description">{{ event.description }}</p>
-
-                <div class="event-details">
-                  <div class="event-location">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z" fill="currentColor"/>
-                    </svg>
-                    {{ event.location }}
+          <!-- Error state -->
+          <div v-else-if="error" class="error-state">
+            <p class="error-message">{{ error }}</p>
+            <button @click="fetchEvents" class="retry-btn">Try Again</button>
+            <!-- Fallback: show local/file events if backend fails -->
+            <div v-if="filteredEvents.length" class="events-grid" style="margin-top:32px;">
+              <NuxtLink
+                v-for="event in filteredEvents"
+                :key="event.id"
+                :to="`/events/${event.id}`"
+                class="event-card"
+              >
+                <div class="event-image">
+                  <img :src="getEventImageSrc(event)" :alt="event.title" @error="handleCardImageError" />
+                </div>
+                <div class="event-content">
+                  <div class="event-meta">
+                    <h4>{{ event.title }}</h4>
+                    <p class="event-description">{{ event.description }}</p>
+                    <div class="event-details">
+                      <div class="event-location">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z" fill="currentColor"/>
+                        </svg>
+                        {{ event.location }}
+                      </div>
+                      <div class="event-date">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z" fill="currentColor"/>
+                        </svg>
+                        <div class="date-block">
+                          <div class="date-info">
+                            <div class="date-full">{{ formatEventDate(event.date).full }}</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
+                  <button class="event-detail-btn">Event Detail</button>
+                </div>
+              </NuxtLink>
+            </div>
+          </div>
 
-                  <div class="event-date">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z" fill="currentColor"/>
-                    </svg>
-                    <div class="date-block">
-                      <div class="date-info">
-                        <div class="date-full">{{ formatEventDate(event.date).full }}</div>
+          <!-- Events grid -->
+          <div v-else class="events-grid">
+            <NuxtLink
+              v-for="event in filteredEvents"
+              :key="event.id"
+              :to="`/events/${event.id}`"
+              class="event-card"
+            >
+              <div class="event-image">
+                <img :src="getEventImageSrc(event)" :alt="event.title" @error="handleCardImageError" />
+              </div>
+              <div class="event-content">
+                <div class="event-meta">
+                  <h4>{{ event.title }}</h4>
+                  <p class="event-description">{{ event.description }}</p>
+                  <div class="event-details">
+                    <div class="event-location">
+                      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z" fill="currentColor"/>
+                      </svg>
+                      {{ event.location }}
+                    </div>
+                    <div class="event-date">
+                      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z" fill="currentColor"/>
+                      </svg>
+                      <div class="date-block">
+                        <div class="date-info">
+                          <div class="date-full">{{ formatEventDate(event.date).full }}</div>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
+                <button class="event-detail-btn">Event Detail</button>
               </div>
-
-              <button class="event-detail-btn">Event Detail</button>
-            </div>
-          </NuxtLink>
+            </NuxtLink>
+          </div>
         </div>
 
         <div class="events-insights" aria-label="Event highlights">
           <section class="sidebar-card filter-card">
-            <h3>Filter Events</h3>
-            <div class="filter-form">
-              <div class="filter-row">
-                <label class="filter-label">Start date</label>
-                <div class="input-with-icon">
-                  <input ref="startInput" class="filter-input" type="date" v-model="startDate" />
-                  <button type="button" class="input-icon" @click="openStartPicker" aria-label="Open start date picker">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 10h5v5H7z" fill="currentColor" opacity="0.2"/><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z" fill="currentColor"/></svg>
-                  </button>
+              <h3>Filter Events</h3>
+              <div class="filter-form">
+                <div class="filter-row">
+                  <label class="filter-label">Start date</label>
+                  <div class="input-with-icon">
+                    <input ref="startInput" class="filter-input" type="date" v-model="startDate" />
+                    <button type="button" class="input-icon" @click="openStartPicker" aria-label="Open start date picker">
+                      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 10h5v5H7z" fill="currentColor" opacity="0.2"/><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z" fill="currentColor"/></svg>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="filter-row">
+                  <label class="filter-label">End date</label>
+                  <div class="input-with-icon">
+                    <input ref="endInput" class="filter-input" type="date" v-model="endDate" />
+                    <button type="button" class="input-icon" @click="openEndPicker" aria-label="Open end date picker">
+                      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 10h5v5H7z" fill="currentColor" opacity="0.2"/><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2zm0 16H5V8h14v11zM7 10h5v5H7z" fill="currentColor"/></svg>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="filter-row">
+                  <label class="filter-label">Type</label>
+                  <div class="chip-group">
+                    <button type="button" :class="['chip', { 'chip-active': onlineChecked }]" @click="onlineChecked = !onlineChecked">Online</button>
+                    <button type="button" :class="['chip', { 'chip-active': offlineChecked }]" @click="offlineChecked = !offlineChecked">Offline</button>
+                  </div>
+                </div>
+
+                <div class="filter-row filter-actions">
+                  <button class="clear-btn" @click.prevent="clearFilters">Clear Filters</button>
                 </div>
               </div>
+            </section>
 
-              <div class="filter-row">
-                <label class="filter-label">End date</label>
-                <div class="input-with-icon">
-                  <input ref="endInput" class="filter-input" type="date" v-model="endDate" />
-                  <button type="button" class="input-icon" @click="openEndPicker" aria-label="Open end date picker">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 10h5v5H7z" fill="currentColor" opacity="0.2"/><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z" fill="currentColor"/></svg>
-                  </button>
-                </div>
+            <section class="sidebar-card">
+              <h3>Most Popular Tags</h3>
+              <div class="tags-grid">
+                <span v-for="tag in popularTags" :key="tag.name" class="tag" :class="tag.class">{{ tag.name }}</span>
               </div>
-
-              <div class="filter-row">
-                <label class="filter-label">Type</label>
-                <div class="chip-group">
-                  <button type="button" :class="['chip', { 'chip-active': onlineChecked }]" @click="onlineChecked = !onlineChecked">Online</button>
-                  <button type="button" :class="['chip', { 'chip-active': offlineChecked }]" @click="offlineChecked = !offlineChecked">Offline</button>
-                </div>
-              </div>
-
-              <div class="filter-row filter-actions">
-                <button class="clear-btn" @click.prevent="clearFilters">Clear Filters</button>
-              </div>
-            </div>
-          </section>
-
-          <section class="sidebar-card">
-            <h3>Most Popular Tags</h3>
-            <div class="tags-grid">
-              <span v-for="tag in popularTags" :key="tag.name" class="tag" :class="tag.class">{{ tag.name }}</span>
-            </div>
-          </section>
+            </section>
 
           <section class="sidebar-card">
             <NuxtLink to="/events/create" class="initiate-btn">
@@ -112,19 +159,97 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
-import eventsData from '~/../mock-backend/data/events.json';
-import { useClickTracking } from '~/composables/useClickTracking';
+import { ref, computed, onMounted } from 'vue'
+import { useRuntimeConfig } from '#imports'
+import { useClickTracking } from '~/composables/useClickTracking'
 
-const { trackEventClick } = useClickTracking();
+import { useEvents } from '~/composables/useEvents'
+import type { Event as EventItem } from '~/composables/useEvents'
 
-const originalEvents = eventsData;
+const runtimeConfig = useRuntimeConfig()
+
+type RawEventRecord = Record<string, unknown>
+const resolveAssetBaseUrl = () => {
+  const configured = runtimeConfig.public?.assetBaseUrl as string | undefined
+  if (configured) return configured
+  const apiBase = runtimeConfig.public?.apiBaseUrl as string | undefined
+  if (!apiBase) return ''
+  try {
+    const url = new URL(apiBase)
+    return url.origin
+  } catch {
+    return apiBase.replace(/\/api\/?$/, '')
+  }
+}
+const assetBaseUrl = resolveAssetBaseUrl()
+const listFallbackImage = 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=900&q=80'
+
+// Use Laravel API
+const { getAllEvents, loading, error } = useEvents()
+
+// Click tracking
+const { trackEventClick } = useClickTracking()
+
+// Direct fetch from mock-backend
+const allEvents = ref<EventItem[]>([])
+const fetchingFromMockBackend = ref(false)
+
+// Fetch events from mock-backend API
+const fetchEventsFromMockBackend = async () => {
+  fetchingFromMockBackend.value = true
+  
+  try {
+    const response = await $fetch<EventItem[]>('http://localhost:3002/events')
+    allEvents.value = response
+    console.log('✅ Fetched events from mock-backend:', response.length)
+  } catch (err) {
+    console.error('❌ Error fetching from mock-backend:', err)
+    allEvents.value = []
+  } finally {
+    fetchingFromMockBackend.value = false
+  }
+}
+
+// Fetch events on mount
+onMounted(async () => {
+  await fetchEventsFromMockBackend();
+});
+
+// Merged events - now just uses mock-backend data
+const mergedEvents = computed<EventItem[]>(() => {
+  return allEvents.value
+})
+
+const resolveAbsoluteUrl = (raw?: string | null) => {
+  if (!raw) return null
+  const trimmed = raw.trim()
+  if (!trimmed) return null
+  if (/^https?:\/\//i.test(trimmed)) return trimmed
+  if (!assetBaseUrl) return trimmed
+  const normalizedBase = assetBaseUrl.replace(/\/$/, '')
+  const normalizedPath = trimmed.startsWith('/') ? trimmed : `/${trimmed}`
+  return `${normalizedBase}${normalizedPath}`
+}
+
+const getEventImageSrc = (event: EventItem) => {
+  const record = event as unknown as Record<string, string | undefined>
+  const candidate = event.image_url || record.image || record.cover_image || record.banner_url || null
+  return resolveAbsoluteUrl(candidate) || listFallbackImage
+}
+
+const handleCardImageError = (domEvent: Event) => {
+  const image = domEvent.target as HTMLImageElement | null
+  if (image) {
+    image.src = listFallbackImage
+  }
+}
 
 // Handle event card click
-const handleEventClick = (event: typeof originalEvents[0]) => {
+const handleEventClick = (event: EventItem) => {
   trackEventClick({
     id: event.id,
     title: event.title,
+    tags: event.tags,
     date: event.date,
     community_id: event.community_id
   });
@@ -225,7 +350,7 @@ const isEventOnline = (event: any) => {
 };
 
 const filteredEvents = computed(() => {
-  return originalEvents.filter((ev: any) => {
+  return mergedEvents.value.filter((ev: EventItem) => {
     // Type filter using chips: if both checked -> show all. If neither checked -> show all.
     if (!(onlineChecked.value && offlineChecked.value)) {
       // one of them might be false
@@ -294,10 +419,19 @@ const popularTags = [
 }
 
 .events-body {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) clamp(240px, 28vw, 300px);
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.events-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
   gap: 24px;
-  align-items: start;
+  min-width: 0;
+  max-width: 920px;
 }
 
 .events-header h1 {
@@ -317,6 +451,7 @@ const popularTags = [
   display: flex;
   flex-direction: column;
   gap: 20px;
+  margin-left: 31px;
 }
 
 .event-card {
@@ -633,11 +768,14 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .events-insights {
+  position: sticky;
+  top: 80px;
+  margin-top: 20px;
+  width: 320px;
+  padding-left: 24px;
   display: flex;
   flex-direction: column;
   gap: 16px;
-  position: sticky;
-  top: 84px;
 }
 
 .sidebar-card {
@@ -707,19 +845,25 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 @media (max-width: 1024px) {
   .events-body {
-    grid-template-columns: minmax(0, 1fr) clamp(260px, 40vw, 320px);
-    gap: 20px;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .events-content {
+    max-width: 100%;
+  }
+
+  .events-insights {
+    position: static;
+    width: 100%;
+    padding-left: 0;
+    margin-top: 0;
   }
 }
 
 @media (max-width: 768px) {
   .events-body {
-    grid-template-columns: 1fr;
     gap: 16px;
-  }
-
-  .events-insights {
-    position: static;
   }
 
   .event-card {
@@ -734,5 +878,51 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   .events-header h1 {
     font-size: 24px;
   }
+}
+
+/* Loading and Error States */
+.loading-state, .error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px;
+  text-align: center;
+  min-height: 300px;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3b82f6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 16px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.error-message {
+  color: #dc2626;
+  margin-bottom: 16px;
+  font-size: 16px;
+}
+
+.retry-btn {
+  background: #3b82f6;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.retry-btn:hover {
+  background: #2563eb;
 }
 </style>

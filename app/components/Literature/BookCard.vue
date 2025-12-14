@@ -1,7 +1,12 @@
 <template>
   <NuxtLink :to="`/literature/${book.id}`" class="book-link" @click="handleClick">
     <div class="book-cover">
-      <img :src="book.image" :alt="book.title || `Book ${book.id}`" />
+      <img 
+        :src="imageUrl" 
+        :alt="book.title || `Book ${book.id}`" 
+        @error="handleImageError"
+        @load="handleImageLoad"
+      />
     </div>
     <div class="book-info">
       <h4 class="book-title" :class="titleWidthClass">
@@ -70,6 +75,10 @@ const props = defineProps<{
   book: BookCardBook;
 }>();
 
+const imageUrl = ref(props.book.image);
+const imageError = ref(false);
+
+// Click tracking
 const { trackBookClick } = useClickTracking();
 
 const handleClick = () => {
@@ -80,6 +89,17 @@ const handleClick = () => {
     author: props.book.author,
     rating: props.book.rating
   });
+};
+
+const handleImageError = () => {
+  if (!imageError.value) {
+    imageError.value = true;
+    imageUrl.value = '/images/book-cover-placeholder.svg';
+  }
+};
+
+const handleImageLoad = () => {
+  imageError.value = false;
 };
 
 const displayTag = computed(() => {

@@ -7062,5 +7062,229 @@
       "engagement": "4.5k"
     }
   ],
-  "click_events": []
+  "click_events": [
+    {
+      "id": 1,
+      "event_type": "community_click",
+      "item_id": "jump-fest-2025",
+      "item_title": "JUMP FEST 2025 - BRED THROUGH",
+      "item_tags": [
+        "#HarryPotter",
+        "#WIBU",
+        "#AnimeX"
+      ],
+      "user_id": "anon_1765717418704_a3y2adatr",
+      "timestamp": "2025-12-14T13:28:14.700Z",
+      "source_page": "/community",
+      "metadata": {
+        "members": 21
+      }
+    },
+    {
+      "id": 2,
+      "event_type": "post_click",
+      "item_id": 1,
+      "item_title": "Applying 'Atomic Habits' to Learning to Code",
+      "item_tags": [
+        "#Productivity",
+        "#Coding"
+      ],
+      "user_id": "anon_1765717418704_a3y2adatr",
+      "timestamp": "2025-12-14T13:29:09.193Z",
+      "source_page": "/forums",
+      "metadata": {
+        "author": "Sarah Chen",
+        "stars": 342
+      }
+    },
+    {
+      "id": 3,
+      "event_type": "post_click",
+      "item_id": 1,
+      "item_title": "Applying 'Atomic Habits' to Learning to Code",
+      "item_tags": [
+        "#Productivity",
+        "#Coding"
+      ],
+      "user_id": "anon_1765717418704_a3y2adatr",
+      "timestamp": "2025-12-14T13:46:33.192Z",
+      "source_page": "/forums",
+      "metadata": {
+        "author": "Sarah Chen",
+        "stars": 342
+      }
+    },
+    {
+      "id": 4,
+      "event_type": "book_click",
+      "item_id": 36,
+      "item_title": "The Hunger Games",
+      "item_tags": [
+        "Dystopia",
+        "Fiction"
+      ],
+      "user_id": "anon_1765717418704_a3y2adatr",
+      "timestamp": "2025-12-14T13:46:38.644Z",
+      "source_page": "/literature",
+      "metadata": {
+        "author": "Suzanne Collins",
+        "rating": 4.8
+      }
+    },
+    {
+      "id": 5,
+      "event_type": "community_click",
+      "item_id": "jump-fest-2025",
+      "item_title": "JUMP FEST 2025 - BRED THROUGH",
+      "item_tags": [
+        "#HarryPotter",
+        "#WIBU",
+        "#AnimeX"
+      ],
+      "user_id": "anon_1765717418704_a3y2adatr",
+      "timestamp": "2025-12-14T13:47:16.147Z",
+      "source_page": "/community",
+      "metadata": {
+        "members": 21
+      }
+    },
+    {
+      "id": 6,
+      "event_type": "book_click",
+      "item_id": 37,
+      "item_title": "Catching Fire",
+      "item_tags": [
+        "General"
+      ],
+      "user_id": "anon_1765717418704_a3y2adatr",
+      "timestamp": "2025-12-14T13:54:10.792Z",
+      "source_page": "/literature",
+      "metadata": {
+        "author": "Suzanne Collins",
+        "rating": 4.8
+      }
+    },
+    {
+      "id": 7,
+      "event_type": "community_click",
+      "item_id": "jump-fest-2025",
+      "item_title": "JUMP FEST 2025 - BRED THROUGH",
+      "item_tags": [
+        "#HarryPotter",
+        "#WIBU",
+        "#AnimeX"
+      ],
+      "user_id": "anon_1765717418704_a3y2adatr",
+      "timestamp": "2025-12-14T13:54:46.880Z",
+      "source_page": "/community",
+      "metadata": {
+        "members": 21
+      }
+    },
+    {
+      "id": 8,
+      "event_type": "community_click",
+      "item_id": "literacy-circle",
+      "item_title": "Literacy Circle",
+      "item_tags": [
+        "Harry Potter",
+        "LoTR",
+        "Book Talk",
+        "Reading"
+      ],
+      "user_id": "anon_1765717418704_a3y2adatr",
+      "timestamp": "2025-12-14T13:55:26.360Z",
+      "source_page": "/community",
+      "metadata": {
+        "members": 324
+      }
+    },
+    {
+      "id": 9,
+      "event_type": "community_join",
+      "item_id": "literacy-circle",
+      "item_title": "Literacy Circle",
+      "item_tags": [
+        "#BookClub",
+        "#NovelTalk",
+        "#IndieAuthor"
+      ],
+      "user_id": "anon_1765717418704_a3y2adatr",
+      "timestamp": "2025-12-14T13:59:08.473Z",
+      "source_page": "/community/literacy-circle",
+      "metadata": {
+        "members": "324"
+      }
+    },
+    {
+      "id": 10,
+      "event_type": "community_click",
+      "item_id": "gaming-hub",
+      "item_title": "Gaming Hub Indonesia",
+      "item_tags": [
+        "Esports",
+        "Co-op",
+        "Livestream"
+      ],
+      "user_id": "anon_1765717418704_a3y2adatr",
+      "timestamp": "2025-12-14T13:59:30.186Z",
+      "source_page": "/community",
+      "metadata": {
+        "members": 12
+      }
+    },
+    {
+      "id": 11,
+      "event_type": "community_join",
+      "item_id": "gaming-hub",
+      "item_title": "Gaming Hub Indonesia",
+      "item_tags": [
+        "#Esports",
+        "#Coop",
+        "#Livestream"
+      ],
+      "user_id": "anon_1765717418704_a3y2adatr",
+      "timestamp": "2025-12-14T13:59:32.676Z",
+      "source_page": "/community/gaming-hub",
+      "metadata": {
+        "members": "1.2k"
+      }
+    },
+    {
+      "id": 12,
+      "event_type": "search_query",
+      "item_id": "php",
+      "item_title": "php",
+      "user_id": "anon_1765717418704_a3y2adatr",
+      "timestamp": "2025-12-14T13:59:45.644Z",
+      "source_page": "/literature",
+      "metadata": {
+        "filters": {}
+      }
+    },
+    {
+      "id": 13,
+      "event_type": "search_query",
+      "item_id": "atomic",
+      "item_title": "atomic",
+      "user_id": "anon_1765717418704_a3y2adatr",
+      "timestamp": "2025-12-14T13:59:56.635Z",
+      "source_page": "/literature",
+      "metadata": {
+        "filters": {}
+      }
+    },
+    {
+      "id": 14,
+      "event_type": "search_query",
+      "item_id": "habit",
+      "item_title": "habit",
+      "user_id": "anon_1765717418704_a3y2adatr",
+      "timestamp": "2025-12-14T14:00:04.802Z",
+      "source_page": "/literature",
+      "metadata": {
+        "filters": {}
+      }
+    }
+  ]
 }

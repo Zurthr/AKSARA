@@ -148,6 +148,9 @@ interface CommunityDetail {
 
 const route = useRoute();
 
+// Click tracking
+const { trackCommunityJoin } = useClickTracking();
+
 const communityDirectory: CommunityDetail[] = [
   {
     id: 'jump-fest-2025',
@@ -555,6 +558,14 @@ const handleJoinCommunity = () => {
     hasJoined.value = true;
     isJoining.value = false;
     showJoinToast.value = true;
+
+    // Track community join
+    trackCommunityJoin({
+      id: community.value.id,
+      name: community.value.name,
+      tags: community.value.tags,
+      members: community.value.members
+    });
 
     if (toastTimeout) {
       clearTimeout(toastTimeout);
