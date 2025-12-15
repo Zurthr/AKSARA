@@ -6,18 +6,18 @@
       <div class="event-detail-main">
         <div v-if="isLoading" class="state-card loading">
           <div class="loading-spinner"></div>
-          <p>Memuat detail event...</p>
+          <p>Loading event details...</p>
         </div>
 
         <div v-else-if="loadError" class="state-card error">
-          <h3>Gagal memuat data</h3>
+          <h3>Failed to load data</h3>
           <p>{{ loadError }}</p>
-          <button class="retry-btn" @click="retryFetch">Coba lagi</button>
+          <button class="retry-btn" @click="retryFetch">Try again</button>
         </div>
 
         <div v-else-if="notFound" class="state-card empty">
-          <h3>Event tidak ditemukan</h3>
-          <p>Periksa kembali tautan atau pilih event lain dari daftar.</p>
+          <h3>Event not found</h3>
+          <p>Please check the link or select another event from the list.</p>
         </div>
 
         <div v-else-if="eventData" class="event-detail-feed">
@@ -60,12 +60,12 @@
             </header>
 
             <section v-if="eventData.description" class="event-description">
-              <h3>Deskripsi Event</h3>
+              <h3>Event Description</h3>
               <p>{{ eventData.description }}</p>
             </section>
 
             <section v-if="detailBlocks.length" class="event-details-section">
-              <h3>Detail Event</h3>
+              <h3>Event Details</h3>
               <dl class="details-grid">
                 <div v-for="detail in detailBlocks" :key="detail.label" class="detail-item">
                   <dt class="detail-label">{{ detail.label }}</dt>
@@ -75,7 +75,7 @@
             </section>
 
             <section v-if="tagList.length" class="event-tags">
-              <h3>Tag</h3>
+              <h3>Tags</h3>
               <div class="tags-container">
                 <span v-for="tag in tagList" :key="tag" class="tag tag-default">{{ tag }}</span>
               </div>
@@ -87,7 +87,7 @@
               <h3>Related Events</h3>
               <div class="loading-pulse"></div>
             </div>
-            <p class="related-placeholder">Memuat rekomendasi event...</p>
+            <p class="related-placeholder">Loading recommended events...</p>
           </section>
 
           <section v-else-if="carouselItems.length" class="related-events-card carousel-card">
@@ -103,7 +103,7 @@
                 type="button"
                 :disabled="relatedIndex === 0"
                 @click="previousRelated"
-                aria-label="Event sebelumnya"
+                aria-label="Previous event"
               >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -147,7 +147,7 @@
                 type="button"
                 :disabled="relatedIndex >= maxRelatedIndex"
                 @click="nextRelated"
-                aria-label="Event berikutnya"
+                aria-label="Next event"
               >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -160,7 +160,7 @@
             <div class="card-header">
               <h3>Related Events</h3>
             </div>
-            <p class="related-placeholder">Belum ada rekomendasi event lainnya.</p>
+            <p class="related-placeholder">No other event recommendations yet.</p>
           </section>
         </div>
       </div>
@@ -283,15 +283,15 @@ const registrationLink = computed(() => {
 })
 
 const registrationButtonLabel = computed(() => {
-  if (!event.value) return 'Daftar Event'
-  return event.value.is_free ? 'Daftar Event (Gratis)' : 'Daftar Event'
+  if (!event.value) return 'Register Event'
+  return event.value.is_free ? 'Register Event (Free)' : 'Register Event'
 })
 
 const shareButtonLabel = computed(() => {
   if (typeof navigator !== 'undefined' && typeof navigator.share === 'function') {
-    return 'Bagikan'
+    return 'Share'
   }
-  return 'Salin Tautan'
+  return 'Copy Link'
 })
 
 const clearShareTimer = () => {
@@ -432,15 +432,15 @@ const shareEvent = async () => {
   if (typeof navigator !== 'undefined' && navigator.clipboard) {
     try {
       await navigator.clipboard.writeText(shareUrl)
-      setShareMessage('Tautan event berhasil disalin')
+      setShareMessage('Event link copied successfully')
       return
     } catch {
-      setShareMessage('Tidak dapat menyalin tautan')
+      setShareMessage('Failed to copy link')
       return
     }
   }
 
-  setShareMessage('Silakan salin tautan secara manual')
+  setShareMessage('Please copy the link manually')
 }
 
 onBeforeUnmount(() => {
@@ -466,10 +466,10 @@ const formatCurrency = (value?: number | null) => {
 
 const formatStatus = (status?: Event['status']) => {
   if (!status) return null
-  if (status === 'upcoming') return 'Akan Datang'
-  if (status === 'ongoing') return 'Sedang Berlangsung'
-  if (status === 'completed') return 'Selesai'
-  if (status === 'cancelled') return 'Dibatalkan'
+  if (status === 'upcoming') return 'Upcoming'
+  if (status === 'ongoing') return 'Ongoing'
+  if (status === 'completed') return 'Completed'
+  if (status === 'cancelled') return 'Cancelled'
   return status
 }
 
@@ -500,7 +500,7 @@ const displayDate = computed(() => {
 const displayPrice = computed(() => {
   const value = eventData.value
   if (!value) return null
-  if (value.is_free) return 'Gratis'
+  if (value.is_free) return 'Free'
   if (value.price !== undefined && value.price !== null) return formatCurrency(value.price)
   return null
 })
@@ -508,8 +508,8 @@ const displayPrice = computed(() => {
 const displayCapacity = computed(() => {
   const value = eventData.value
   if (!value) return null
-  if (value.capacity) return `${value.capacity} peserta`
-  if (value.registered_count) return `${value.registered_count} peserta terdaftar`
+  if (value.capacity) return `${value.capacity} participants`
+  if (value.registered_count) return `${value.registered_count} registered participants`
   return null
 })
 
@@ -520,11 +520,11 @@ const detailBlocks = computed(() => {
   if (!value) return [] as { label: string; value: string }[]
 
   const details: { label: string; value: string | null }[] = [
-    { label: 'Tanggal & Waktu', value: displayDate.value },
-    { label: 'Lokasi', value: value.location || null },
+    { label: 'Date & Time', value: displayDate.value },
+    { label: 'Location', value: value.location || null },
     { label: 'Status', value: displayStatus.value },
-    { label: 'Harga', value: displayPrice.value },
-    { label: 'Kapasitas', value: displayCapacity.value },
+    { label: 'Price', value: displayPrice.value },
+    { label: 'Capacity', value: displayCapacity.value },
     
   ]
 
@@ -536,12 +536,12 @@ const sidebarInfo = computed((): SidebarInfoItem[] => {
   if (!value) return []
 
   const info: SidebarInfoItem[] = []
-  if (value.category) info.push({ icon: 'CAT', label: 'Kategori', value: value.category })
-  if (displayDate.value) info.push({ icon: 'TIME', label: 'Tanggal & Waktu', value: displayDate.value })
-  if (value.location) info.push({ icon: 'LOC', label: 'Lokasi', value: value.location })
-  if (displayCapacity.value) info.push({ icon: 'CAP', label: 'Kapasitas', value: displayCapacity.value })
-  if (displayPrice.value) info.push({ icon: 'CAP', label: 'Harga', value: displayPrice.value })
-  if (value.organizer) info.push({ icon: 'CP', label: 'Penyelenggara', value: value.organizer })
+  if (value.category) info.push({ icon: 'CAT', label: 'Category', value: value.category })
+  if (displayDate.value) info.push({ icon: 'TIME', label: 'Date & Time', value: displayDate.value })
+  if (value.location) info.push({ icon: 'LOC', label: 'Location', value: value.location })
+  if (displayCapacity.value) info.push({ icon: 'CAP', label: 'Capacity', value: displayCapacity.value })
+  if (displayPrice.value) info.push({ icon: 'CAP', label: 'Price', value: displayPrice.value })
+  if (value.organizer) info.push({ icon: 'CP', label: 'Organizer', value: value.organizer })
   if (displayStatus.value) info.push({ icon: 'CAT', label: 'Status', value: displayStatus.value })
   return info
 })
@@ -555,7 +555,7 @@ const tagList = computed(() => {
   const tags = new Set<string>()
   if (value.category) tags.add(normalizeTag(value.category))
   if (value.status) tags.add(normalizeTag(formatStatus(value.status) || value.status))
-  if (value.is_free) tags.add('#Gratis')
+  if (value.is_free) tags.add('#Free')
   return Array.from(tags)
 })
 

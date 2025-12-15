@@ -71,10 +71,10 @@ export const normalizeEventRecord = (raw: Record<string, unknown>): EventItem =>
   const rawId = source.id ?? source.event_id ?? source.slug ?? source.uuid
   copy.id = typeof rawId === 'number' || typeof rawId === 'string' ? rawId : fallbackId
 
-  copy.title = ensureString(source.title ?? source.name ?? source.event_name, 'Event Tanpa Judul')
+  copy.title = ensureString(source.title ?? source.name ?? source.event_name, 'Untitled Event')
 
   const description = ensureString(source.description ?? source.subtitle ?? source.summary, '')
-  copy.description = description || 'Deskripsi belum tersedia.'
+  copy.description = description || 'Description not available.'
 
   const baseDate = ensureString(source.date ?? source.event_date ?? source.start_date ?? source.datetime, new Date().toISOString())
   copy.date = baseDate

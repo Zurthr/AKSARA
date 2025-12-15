@@ -50,7 +50,7 @@
                       </div>
                     </div>
                   </div>
-                  <button class="event-detail-btn">Event Detail</button>
+                  <button class="event-detail-btn">View Details</button>
                 </div>
               </NuxtLink>
             </div>
@@ -91,7 +91,7 @@
                     </div>
                   </div>
                 </div>
-                <button class="event-detail-btn">Event Detail</button>
+                <button class="event-detail-btn">View Details</button>
               </div>
             </NuxtLink>
           </div>
@@ -147,7 +147,7 @@
               <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" fill="currentColor"/>
               </svg>
-              Initiate a Event
+              Initiate an Event
             </NuxtLink>
           </section>
         </div>
@@ -462,18 +462,18 @@ const parseEventDate = (dateStr?: string | null): Date | null => {
 
   // Try Indonesian month names like "29 Desember, 2025"
   const months: Record<string, number> = {
-    januari: 0,
-    februari: 1,
-    maret: 2,
+    january: 0,
+    february: 1,
+    march: 2,
     april: 3,
-    mei: 4,
-    juni: 5,
-    juli: 6,
-    agustus: 7,
+    may: 4,
+    june: 5,
+    july: 6,
+    august: 7,
     september: 8,
-    oktober: 9,
+    october: 9,
     november: 10,
-    desember: 11
+    december: 11
   };
 
   const m = (dateStr as string).match(/(\d{1,2})\s+([A-Za-z]+),?\s*(\d{4})/);
@@ -488,8 +488,8 @@ const parseEventDate = (dateStr?: string | null): Date | null => {
 
 const formatEventDate = (dateStr?: string | null) => {
   const d = parseEventDate(dateStr || undefined);
-  const monthsShort = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
-  const monthsFull = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+  const monthsShort = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  const monthsFull = ['January','February','March','April','May','June','July','August','September','October','November','December'];
   if (!d || isNaN(d.getTime())) {
     return { day: '--', monthShort: '---', year: '', full: (dateStr as string) || '' };
   }

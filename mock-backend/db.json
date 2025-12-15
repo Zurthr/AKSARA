@@ -7127,6 +7127,36 @@
         "community_id": "photography-club"
       },
       "id": 5
+    },
+    {
+      "event_type": "event_click",
+      "item_id": 1,
+      "item_title": "Laravel Workshop: Building Modern Web Applications",
+      "user_id": "anon_1765640280316_dw5wdzb07",
+      "timestamp": "2025-12-15T18:20:50.543Z",
+      "source_page": "/events",
+      "metadata": {
+        "date": "2025-12-20T10:00:00.000000Z",
+        "community_id": "COM1001"
+      },
+      "id": 6
+    },
+    {
+      "event_type": "community_click",
+      "item_id": "jump-fest-2025",
+      "item_title": "JUMP FEST 2025 - BRED THROUGH",
+      "item_tags": [
+        "#HarryPotter",
+        "#WIBU",
+        "#AnimeX"
+      ],
+      "user_id": "anon_1765640280316_dw5wdzb07",
+      "timestamp": "2025-12-15T18:23:20.548Z",
+      "source_page": "/community",
+      "metadata": {
+        "members": 21
+      },
+      "id": 7
     }
   ]
 }
