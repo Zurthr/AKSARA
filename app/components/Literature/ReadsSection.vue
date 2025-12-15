@@ -91,56 +91,29 @@
 </template>
 
 <script setup lang="ts">
-// Use the real books data from the mock backend JSON
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore - JSON module typing is handled by the bundler
-import rawBooksData from '../../../mock-backend/data/books.json';
+import { useLazyBooks } from '~/composables/useLiterature';
 
-interface RawBookTag {
-  name: string;
-  type?: string;
-}
+const { books: lazyBooks, isLoading } = useLazyBooks(12);
 
-interface RawBook {
-  id: number;
-  cover: string;
-  rating?: number;
-  tags?: RawBookTag[];
-}
-
-interface ReadBookCard {
-  id: number;
-  image: string;
-  tag: string;
-  rating: number;
-}
-
-const rawBooks = rawBooksData as RawBook[];
-
-// Build "Reads you may enjoy" from the highest-rated books
-const books = computed<ReadBookCard[]>(() => {
-  const mapped = (rawBooks || []).map((book) => {
-    const tags = book.tags || [];
-    const primary = tags.find((tag) => tag.type === 'primary') || tags[0];
-
-    return {
-      id: book.id,
-      image: book.cover,
-      tag: primary?.name || 'General',
+// Map/Compute books to ensure they match the template expectations, if needed.
+// NormalizedBook has `tags: string[]`. Template expects `tag: string`.
+// Also filtering by rating > 0.
+const books = computed(() => {
+  return lazyBooks.value
+    .filter(book => (book.rating || 0) > 0)
+    .sort((a, b) => (b.rating || 0) - (a.rating || 0))
+    .map(book => ({
+      ...book,
+      tag: book.tags[0] || 'General',
       rating: book.rating || 0
-    };
-  });
-
-  return mapped
-    .filter((book) => book.rating > 0)
-    .sort((a, b) => b.rating - a.rating)
-    .slice(0, 12);
+    }));
 });
 
 const currentIndex = ref(0);
 const visibleBooks = 4; // Number of books visible at once
 
 const nextSlide = () => {
+  // Use books.value because it is a computed property wrapper around the ref
   const maxIndex = Math.max(0, books.value.length - visibleBooks);
   currentIndex.value = Math.min(currentIndex.value + 1, maxIndex);
 };

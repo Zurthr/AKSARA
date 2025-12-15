@@ -7392,6 +7392,57 @@
         "author": "John Doe",
         "stars": 112
       }
+    },
+    {
+      "id": 21,
+      "event_type": "post_click",
+      "item_id": 7,
+      "item_title": "Growth Mindset changed how I study",
+      "item_tags": [
+        "#Psychology",
+        "#Studying"
+      ],
+      "user_id": "anon_1765782306873_758j9zg3a",
+      "timestamp": "2025-12-15T07:05:06.873Z",
+      "source_page": "/",
+      "metadata": {
+        "author": "Rachel Zane",
+        "stars": 670
+      }
+    },
+    {
+      "id": 22,
+      "event_type": "post_click",
+      "item_id": 7,
+      "item_title": "Growth Mindset changed how I study",
+      "item_tags": [
+        "#Psychology",
+        "#Studying"
+      ],
+      "user_id": "anon_1765782306873_758j9zg3a",
+      "timestamp": "2025-12-15T07:05:07.334Z",
+      "source_page": "/forums/7",
+      "metadata": {
+        "author": "Rachel Zane",
+        "stars": 670
+      }
+    },
+    {
+      "id": 23,
+      "event_type": "post_click",
+      "item_id": 10,
+      "item_title": "PHP isn't dead, seriously.",
+      "item_tags": [
+        "#PHP",
+        "#WebDev"
+      ],
+      "user_id": "anon_1765782306873_758j9zg3a",
+      "timestamp": "2025-12-15T07:16:07.564Z",
+      "source_page": "/",
+      "metadata": {
+        "author": "Louis Litt",
+        "stars": 190
+      }
     }
   ]
 }
