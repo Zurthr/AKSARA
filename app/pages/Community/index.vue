@@ -101,57 +101,41 @@
       </div>
       
 
-      <button type="button" class="load-more">Load More Communities</button>
+      <button 
+        type="button" 
+        class="load-more" 
+        @click="handleLoadMore"
+        v-if="hasMore"
+        :disabled="loading"
+      >
+        {{ loading ? 'Loading...' : 'Load More Communities' }}
+      </button>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed, onMounted, watch } from 'vue';
 import { useClickTracking } from '~/composables/useClickTracking';
+import { useCommunities, type Community } from '~/composables/useCommunities';
 
 const { trackCommunityClick } = useClickTracking();
+const { 
+  communities: serverCommunities, 
+  loading, 
+  error, 
+  loadMoreCommunities, 
+  refetchCommunities,
+  hasMore 
+} = useCommunities(6); // Load 6 per page (grid is 2 columns, so 6 is good)
 
-// Interface for community data
-interface Community {
-  id: string
-  name: string
-  icon: string
-  accent: string
-  tags: string[]
-  description: string
-  members: string
-  postsToday: number | string
-  memberCount?: number
-  isJoined?: boolean
-}
-
-// State management
-const allCommunities = ref<Community[]>([]);
-const loading = ref(false);
-const error = ref<string | null>(null);
-
-// Fetch communities from mock-backend
-const fetchCommunities = async () => {
-  loading.value = true;
-  error.value = null;
-  
-  try {
-    const response = await $fetch<Community[]>('http://localhost:3002/communities');
-    allCommunities.value = response;
-    console.log('✅ Fetched communities from mock-backend:', response.length);
-  } catch (err) {
-    error.value = err instanceof Error ? err.message : 'Failed to fetch communities';
-    console.error('❌ Error fetching communities:', err);
-    allCommunities.value = []; // Fallback to empty array
-  } finally {
-    loading.value = false;
-  }
-};
+// Use the communities from the composable
+// We don't filter client-side anymore, server does it based on 'q'
+const communities = computed(() => serverCommunities.value);
 
 // Fetch on mount
 onMounted(() => {
-  fetchCommunities();
+  refetchCommunities();
 });
 
 // Handle community card click
@@ -174,21 +158,11 @@ const iconPaths: Record<string, string> = {
   chat: 'M4 4h16a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H8l-4 4V5a1 1 0 0 1 1-1z'
 };
 
-// Filtered communities based on active filters
-const communities = computed(() => {
-  if (activeFilters.value.length === 0) {
-    return allCommunities.value;
-  }
-  
-  return allCommunities.value.filter(community => {
-    // Check if community has any of the active filter tags
-    return activeFilters.value.some(filter => 
-      community.tags.some(tag => tag.toLowerCase().includes(filter.toLowerCase())) ||
-      community.name.toLowerCase().includes(filter.toLowerCase()) ||
-      community.description.toLowerCase().includes(filter.toLowerCase())
-    );
-  });
-});
+// Watch filters to trigger server fetch
+watch(activeFilters, (newFilters) => {
+  const query = newFilters.join(' ');
+  refetchCommunities(query);
+}, { deep: true });
 
 // Toggle filter function
 const toggleFilter = (tag: string) => {
@@ -203,6 +177,11 @@ const toggleFilter = (tag: string) => {
 // Clear all filters
 const clearAllFilters = () => {
   activeFilters.value = [];
+};
+
+const handleLoadMore = () => {
+  const query = activeFilters.value.join(' ');
+  loadMoreCommunities(query);
 };
 
 // Get icon for different tag types (disabled for cleaner look)

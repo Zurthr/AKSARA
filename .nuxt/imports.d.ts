@@ -33,7 +33,7 @@ export { defineLazyHydrationComponent } from '#app/composables/lazy-hydration';
 export { useApi } from '../app/composables/useApi';
 export { useAuth, User, AuthTokens, LoginCredentials, RegisterData, UpdateProfileData, AuthResponse, RefreshResponse, ProfileResponse, ApiError } from '../app/composables/useAuth';
 export { useClickTracking, ClickEvent } from '../app/composables/useClickTracking';
-export { useCommunities, Community, CommunityPost, CommunityCreateData, CommunityUpdateData, CommunitiesResponse } from '../app/composables/useCommunities';
+export { useCommunities, Community } from '../app/composables/useCommunities';
 export { useEvents, useLazyEvents, Event, EventCreateData, EventUpdateData, EventsResponse } from '../app/composables/useEvents';
 export { useLazyPosts, PostAuthor, PostTag, Post } from '../app/composables/useLazyPosts';
 export { mapToNormalizedBook, useLiterature, useLazyBooks, LiteratureBook, NormalizedBook, LiteratureBookCreateData, LiteratureBookUpdateData, LiteratureBooksResponse } from '../app/composables/useLiterature';

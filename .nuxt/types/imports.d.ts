@@ -212,7 +212,7 @@ declare global {
   export type { ClickEvent } from '../../app/composables/useClickTracking'
   import('../../app/composables/useClickTracking')
   // @ts-ignore
-  export type { Community, CommunityPost, CommunityCreateData, CommunityUpdateData, CommunitiesResponse } from '../../app/composables/useCommunities'
+  export type { Community } from '../../app/composables/useCommunities'
   import('../../app/composables/useCommunities')
   // @ts-ignore
   export type { Event, EventCreateData, EventUpdateData, EventsResponse } from '../../app/composables/useEvents'

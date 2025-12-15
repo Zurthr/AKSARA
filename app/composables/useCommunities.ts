@@ -1,154 +1,100 @@
-import { ref, readonly } from 'vue'
-import { useApi } from './useApi'
+import { ref, readonly, onMounted } from 'vue'
 
-// TypeScript interfaces for Communities API
+
+// Interface matching Community/index.vue expectation
 export interface Community {
-  id: number
+  id: string | number
   name: string
+  icon: string
+  accent: string
+  tags: string[]
   description: string
-  image_url?: string
-  cover_image_url?: string
-  member_count: number
-  post_count: number
-  category: string
-  is_private: boolean
-  created_by: number
-  created_at: string
-  updated_at: string
-  latest_posts?: CommunityPost[]
+  members: string
+  postsToday: number | string
+  memberCount?: number
+  isJoined?: boolean
 }
 
-export interface CommunityPost {
-  id: number
-  title: string
-  content: string
-  author: {
-    id: number
-    name: string
-    avatar_url?: string
-  }
-  community_id: number
-  replies_count: number
-  likes_count: number
-  created_at: string
-  updated_at: string
-}
-
-export interface CommunityCreateData {
-  name: string
-  description: string
-  image_url?: string
-  cover_image_url?: string
-  category: string
-  is_private: boolean
-}
-
-export interface CommunityUpdateData extends Partial<CommunityCreateData> {}
-
-export interface CommunitiesResponse {
-  data: Community[]
-  current_page: number
-  last_page: number
-  per_page: number
-  total: number
-}
-
-// Communities API composable
-export const useCommunities = () => {
-  const api = useApi()
+// Communities API composable with lazy loading
+export const useCommunities = (pageSize: number = 10) => {
+  const communities = ref<Community[]>([])
   const loading = ref(false)
   const error = ref<string | null>(null)
-  
+  const hasMore = ref(true)
+  const page = ref(0)
+
   const setLoading = (value: boolean) => {
     loading.value = value
   }
-  
+
   const setError = (err: string | null) => {
     error.value = err
   }
-  
-  const getAllCommunities = async (page: number = 1, perPage: number = 10): Promise<CommunitiesResponse | null> => {
+
+  const loadMoreCommunities = async (filterQuery: string = '') => {
+    if (loading.value || !hasMore.value) return
+
     setLoading(true)
     setError(null)
-    
+    page.value++ // Increment page before fetch
+
     try {
-      const response = await api.get<CommunitiesResponse>(`/communities?page=${page}&per_page=${perPage}`)
-      return response
+      // Build query parameters
+      const params: Record<string, any> = {
+        _page: page.value,
+        _limit: pageSize
+      }
+
+      // Add text search if provided (mock backend uses 'q' for full text search)
+      if (filterQuery) {
+        params.q = filterQuery
+      }
+
+      const response = await $fetch<Community[]>('http://localhost:3002/communities', {
+        params
+      })
+
+      if (response && Array.isArray(response)) {
+        if (response.length < pageSize) {
+          hasMore.value = false
+        }
+
+        if (response.length > 0) {
+          communities.value = [...communities.value, ...response]
+        } else {
+          // If we get 0 results on a page > 1, it means we reached the end
+          hasMore.value = false
+        }
+      } else {
+        // Unexpected response format
+        hasMore.value = false
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to fetch communities')
-      return null
+      page.value-- // Revert page increment on error
     } finally {
       setLoading(false)
     }
   }
-  
-  const getCommunityById = async (id: number): Promise<Community | null> => {
-    setLoading(true)
-    setError(null)
-    
-    try {
-      const response = await api.get<{ data: Community }>(`/communities/${id}`)
-      return response.data
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to fetch community')
-      return null
-    } finally {
-      setLoading(false)
-    }
+
+  const reset = () => {
+    communities.value = []
+    page.value = 0
+    hasMore.value = true
+    error.value = null
   }
-  
-  const createCommunity = async (communityData: CommunityCreateData): Promise<Community | null> => {
-    setLoading(true)
-    setError(null)
-    
-    try {
-      const response = await api.post<{ data: Community }>('/communities', communityData)
-      return response.data
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to create community')
-      return null
-    } finally {
-      setLoading(false)
-    }
+
+  const refetchCommunities = async (filterQuery: string = '') => {
+    reset()
+    await loadMoreCommunities(filterQuery)
   }
-  
-  const updateCommunity = async (id: number, communityData: CommunityUpdateData): Promise<Community | null> => {
-    setLoading(true)
-    setError(null)
-    
-    try {
-      const response = await api.post<{ data: Community }>(`/communities/${id}`, communityData)
-      return response.data
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to update community')
-      return null
-    } finally {
-      setLoading(false)
-    }
-  }
-  
-  const deleteCommunity = async (id: number): Promise<boolean> => {
-    setLoading(true)
-    setError(null)
-    
-    try {
-      await api.delete(`/communities/${id}`)
-      return true
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to delete community')
-      return false
-    } finally {
-      setLoading(false)
-    }
-  }
-  
+
   return {
+    communities,
     loading: readonly(loading),
     error: readonly(error),
-    getAllCommunities,
-    getCommunityById,
-    createCommunity,
-    updateCommunity,
-    deleteCommunity
+    hasMore: readonly(hasMore),
+    loadMoreCommunities,
+    refetchCommunities
   }
 }
