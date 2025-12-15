@@ -241,10 +241,8 @@ const { data: externalPosts } = await useFetch<ExternalPost[]>(`http://localhost
 }
 
 .comments-section {
-  background: white;
-  border-radius: 16px;
-  padding: 24px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  background: transparent;
+  padding: 24px 0;
 }
 
 .comments-header {
@@ -289,10 +287,11 @@ const { data: externalPosts } = await useFetch<ExternalPost[]>(`http://localhost
 
 .input-box {
   flex: 1;
-  background: #f8fafc;
+  background: #ffffff;
   border: 1px solid #e2e8f0;
   border-radius: 12px;
   padding: 12px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05); /* Add subtle shadow to input box itself since container is gone */
 }
 
 .input-box input {
@@ -322,8 +321,9 @@ const { data: externalPosts } = await useFetch<ExternalPost[]>(`http://localhost
 
 .comment-item {
   display: flex;
-  gap: 16px;
+  gap: 12px;
   margin-bottom: 24px;
+  position: relative; /* For thread line positioning if needed, but flex gap handles basic spacing */
 }
 
 .comment-avatar img {
@@ -390,15 +390,25 @@ const { data: externalPosts } = await useFetch<ExternalPost[]>(`http://localhost
 
 .action-btn:hover {
   color: var(--color-black);
+  background-color: rgba(0,0,0,0.03); /* Hover effect since no card bg */
+  border-radius: 4px;
+  padding: 2px 4px;
+  margin: -2px -4px; /* Offset padding to prevent layout shift */
 }
 
 .replies-list {
   margin-top: 16px;
-  border-left: 2px solid #e2e8f0;
-  padding-left: 16px;
+  border-left: 2px solid #e2e8f0; /* Thread line */
+  padding-left: 24px; /* Space for line */
+  margin-left: 4px; /* Align line with parent content */
 }
 
 .reply-item {
   margin-bottom: 16px;
+}
+
+/* Hover effect for the thread line to make it interactive/clear */
+.replies-list:hover {
+  border-left-color: #cbd5e1;
 }
 </style>
