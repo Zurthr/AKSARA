@@ -1,1 +1,1 @@
-export { default } from "file:///D:/belajar_coding/AKSARA/AKSARA/node_modules/@nuxt/vite-builder/dist/runtime/client.manifest.mjs"
+export { default } from "file:///Users/izzafiazizmannan/Documents/AKSARA/node_modules/@nuxt/vite-builder/dist/runtime/client.manifest.mjs"

@@ -23,8 +23,8 @@ def test_live_api():
         print("No click events found in db.json!")
         return
 
-    # Let's take the last 5 events to simulate the recent session
-    recent_events = click_events[-5:]
+    # Send FULL history
+    recent_events = click_events
     
     # Payload
     payload = {

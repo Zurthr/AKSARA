@@ -7062,5 +7062,150 @@
       "engagement": "4.5k"
     }
   ],
-  "click_events": []
+  "click_events": [
+    {
+      "event_type": "book_click",
+      "item_id": 43,
+      "item_title": "The Martian",
+      "item_tags": [
+        "Science Fiction",
+        "Speculative"
+      ],
+      "user_id": "anon_1765639552491_ni38vrlhj",
+      "timestamp": "2025-12-15T10:41:16.578Z",
+      "source_page": "/literature",
+      "metadata": {
+        "author": "Andy Weir",
+        "rating": 4.7
+      },
+      "id": 1
+    },
+    {
+      "event_type": "book_click",
+      "item_id": 10,
+      "item_title": "The Art of Computer Programming",
+      "item_tags": [
+        "Computer Science",
+        "Algorithms",
+        "Programming Theory",
+        "Mathematical Foundations"
+      ],
+      "user_id": "anon_1765639552491_ni38vrlhj",
+      "timestamp": "2025-12-15T10:44:17.909Z",
+      "source_page": "/literature",
+      "metadata": {
+        "author": "Donald E. Knuth",
+        "rating": 4.6
+      },
+      "id": 2
+    },
+    {
+      "event_type": "book_click",
+      "item_id": 5,
+      "item_title": "The Pragmatic Programmer: Your Journey to Mastery",
+      "item_tags": [
+        "Programming",
+        "Career Development",
+        "Software Development",
+        "Best Practices"
+      ],
+      "user_id": "anon_1765639552491_ni38vrlhj",
+      "timestamp": "2025-12-15T10:44:28.446Z",
+      "source_page": "/literature",
+      "metadata": {
+        "author": "David Thomas, Andrew Hunt",
+        "rating": 4.4
+      },
+      "id": 3
+    },
+    {
+      "event_type": "book_click",
+      "item_id": 1,
+      "item_title": "lean Code: A Handbook of Agile Software Craftsmanship",
+      "item_tags": [
+        "Software Engineering",
+        "Programming",
+        "Best Practices",
+        "Code Quality"
+      ],
+      "user_id": "anon_1765639552491_ni38vrlhj",
+      "timestamp": "2025-12-15T10:44:34.578Z",
+      "source_page": "/literature",
+      "metadata": {
+        "author": "Robert C. Martin",
+        "rating": 4.5
+      },
+      "id": 4
+    },
+    {
+      "event_type": "book_click",
+      "item_id": 2,
+      "item_title": "The Hobbit",
+      "item_tags": [
+        "Fantasy",
+        "Adventure",
+        "Classic Literature",
+        "Epic"
+      ],
+      "user_id": "anon_1765639552491_ni38vrlhj",
+      "timestamp": "2025-12-15T10:46:16.658Z",
+      "source_page": "/literature",
+      "metadata": {
+        "author": "J.R.R. Tolkien",
+        "rating": 4.3
+      },
+      "id": 5
+    },
+    {
+      "event_type": "book_click",
+      "item_id": 16,
+      "item_title": "Harry Potter and the Sorcerer's Stone",
+      "item_tags": [
+        "Fantasy",
+        "Fiction"
+      ],
+      "user_id": "anon_1765639552491_ni38vrlhj",
+      "timestamp": "2025-12-15T10:46:18.809Z",
+      "source_page": "/literature",
+      "metadata": {
+        "author": "J.K. Rowling",
+        "rating": 4.5
+      },
+      "id": 6
+    },
+    {
+      "event_type": "book_click",
+      "item_id": 17,
+      "item_title": "The Name of the Wind",
+      "item_tags": [
+        "Fantasy",
+        "Fiction"
+      ],
+      "user_id": "anon_1765639552491_ni38vrlhj",
+      "timestamp": "2025-12-15T10:46:20.608Z",
+      "source_page": "/literature",
+      "metadata": {
+        "author": "Patrick Rothfuss",
+        "rating": 4.6
+      },
+      "id": 7
+    },
+    {
+      "event_type": "book_click",
+      "item_id": 19,
+      "item_title": "Dune",
+      "item_tags": [
+        "Fantasy",
+        "Fiction"
+      ],
+      "user_id": "anon_1765639552491_ni38vrlhj",
+      "timestamp": "2025-12-15T10:46:22.445Z",
+      "source_page": "/literature",
+      "metadata": {
+        "author": "Frank Herbert",
+        "rating": 3.9
+      },
+      "id": 8
+    }
+  ]
 }
