@@ -40,6 +40,19 @@ export interface LiteratureBookUpdateData extends Partial<LiteratureBookCreateDa
 
 export type LiteratureBooksResponse = PaginatedCollection<LiteratureBook>
 
+export interface NormalizedBook {
+  id: number
+  title: string
+  author?: string
+  image: string
+  tags: string[]
+  rating?: number
+  bookmarks?: number
+  copyType?: string[]
+  licensingType?: string[]
+  sources?: string[]
+}
+
 // Helper function to normalize keys (for copy types, licensing, etc)
 const normalizeKey = (value: string | undefined | null): string => {
   return (value || '')

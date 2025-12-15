@@ -6,36 +6,37 @@
       <div class="events-body">
         <div class="events-content">
           <!-- Loading state -->
-          <div v-if="loading" class="loading-state">
+          <div v-if="isBusy" class="loading-state">
             <div class="loading-spinner"></div>
             <p>Loading events...</p>
           </div>
 
           <!-- Error state -->
-          <div v-else-if="error" class="error-state">
-            <p class="error-message">{{ error }}</p>
-            <button @click="fetchEvents" class="retry-btn">Try Again</button>
+          <div v-else-if="combinedError" class="error-state">
+            <p class="error-message">{{ combinedError }}</p>
+            <button @click="retryFetch" class="retry-btn">Try Again</button>
             <!-- Fallback: show local/file events if backend fails -->
             <div v-if="filteredEvents.length" class="events-grid" style="margin-top:32px;">
               <NuxtLink
-                v-for="event in filteredEvents"
-                :key="event.id"
-                :to="`/events/${event.id}`"
+                v-for="eventItem in filteredEvents"
+                :key="eventItem.id"
+                :to="`/events/${eventItem.id}`"
                 class="event-card"
+                @click="handleEventClick(eventItem)"
               >
                 <div class="event-image">
-                  <img :src="getEventImageSrc(event)" :alt="event.title" @error="handleCardImageError" />
+                  <img :src="getEventImageSrc(eventItem)" :alt="eventItem.title" @error="handleCardImageError" />
                 </div>
                 <div class="event-content">
                   <div class="event-meta">
-                    <h4>{{ event.title }}</h4>
-                    <p class="event-description">{{ event.description }}</p>
+                    <h4>{{ eventItem.title }}</h4>
+                    <p class="event-description">{{ eventItem.description }}</p>
                     <div class="event-details">
                       <div class="event-location">
                         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z" fill="currentColor"/>
                         </svg>
-                        {{ event.location }}
+                        {{ eventItem.location }}
                       </div>
                       <div class="event-date">
                         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -43,7 +44,7 @@
                         </svg>
                         <div class="date-block">
                           <div class="date-info">
-                            <div class="date-full">{{ formatEventDate(event.date).full }}</div>
+                            <div class="date-full">{{ formatEventDate(eventItem.date).full }}</div>
                           </div>
                         </div>
                       </div>
@@ -58,24 +59,25 @@
           <!-- Events grid -->
           <div v-else class="events-grid">
             <NuxtLink
-              v-for="event in filteredEvents"
-              :key="event.id"
-              :to="`/events/${event.id}`"
+              v-for="eventItem in filteredEvents"
+              :key="eventItem.id"
+              :to="`/events/${eventItem.id}`"
               class="event-card"
+              @click="handleEventClick(eventItem)"
             >
               <div class="event-image">
-                <img :src="getEventImageSrc(event)" :alt="event.title" @error="handleCardImageError" />
+                <img :src="getEventImageSrc(eventItem)" :alt="eventItem.title" @error="handleCardImageError" />
               </div>
               <div class="event-content">
                 <div class="event-meta">
-                  <h4>{{ event.title }}</h4>
-                  <p class="event-description">{{ event.description }}</p>
+                  <h4>{{ eventItem.title }}</h4>
+                  <p class="event-description">{{ eventItem.description }}</p>
                   <div class="event-details">
                     <div class="event-location">
                       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z" fill="currentColor"/>
                       </svg>
-                      {{ event.location }}
+                      {{ eventItem.location }}
                     </div>
                     <div class="event-date">
                       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -83,7 +85,7 @@
                       </svg>
                       <div class="date-block">
                         <div class="date-info">
-                          <div class="date-full">{{ formatEventDate(event.date).full }}</div>
+                          <div class="date-full">{{ formatEventDate(eventItem.date).full }}</div>
                         </div>
                       </div>
                     </div>
@@ -151,23 +153,30 @@
         </div>
       </div>
 
-      <div class="load-more">
-        <button class="load-more-btn">Load More Events</button>
+      <div class="load-more" ref="loadMoreTrigger">
+        <button
+          class="load-more-btn"
+          @click="handleManualLoadMore"
+          :disabled="isLoading || !hasMore"
+        >
+          <span v-if="hasMore">{{ isLoading ? 'Loading...' : 'Load More Events' }}</span>
+          <span v-else>No more events</span>
+        </button>
       </div>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
-import { useRuntimeConfig } from '#imports'
+import { ref, computed, onMounted, onBeforeUnmount, watch } from 'vue'
+import { useRuntimeConfig, useRoute } from '#imports'
 
-
-import { useEvents } from '~/composables/useEvents'
+import { useEvents, useLazyEvents } from '~/composables/useEvents'
 import type { Event as EventItem } from '~/composables/useEvents'
 import { useLocalEvents } from '~/composables/useLocalEvents'
 import mockEvents from 'mockData/events.json'
 import { mergeEventCollections, normalizeEventCollection } from '~/utils/events-normalizer'
+import { useClickTracking } from '~/composables/useClickTracking'
 
 const runtimeConfig = useRuntimeConfig()
 
@@ -189,23 +198,61 @@ const listFallbackImage = 'https://images.unsplash.com/photo-1498050108023-c5249
 
 // Use Laravel API
 const { getAllEvents, loading, error } = useEvents()
+const { trackEventClick } = useClickTracking()
+
+const {
+  events: lazyEvents,
+  isLoading,
+  hasMore,
+  loadMore,
+  search,
+  error: lazyError
+} = useLazyEvents(6)
+
+const isBusy = computed(() => loading.value || isLoading.value)
+const combinedError = computed(() => {
+  if (error.value) return error.value
+  return lazyError.value?.message ?? null
+})
 
 const originalEvents = ref<EventItem[]>([])
 const staticEvents = normalizeEventCollection(mockEvents as RawEventRecord[])
 const { localEvents } = useLocalEvents()
 
-// Retry fetch
-const retryFetch = () => {
-  reset()
-  loadMore()
+const normalizedLocalEvents = computed<EventItem[]>(() => {
+  const raw = Array.isArray(localEvents.value) ? localEvents.value : []
+  return normalizeEventCollection(raw as RawEventRecord[])
+})
+
+const fetchEvents = async (query?: string) => {
+  try {
+    const normalizedQuery = query?.trim()
+    const response = await getAllEvents(1, 18, normalizedQuery || undefined)
+    const pageItems = Array.isArray(response?.data) ? response?.data : []
+
+    if (pageItems.length) {
+      originalEvents.value = pageItems
+      return
+    }
+  } catch (apiError) {
+    console.warn('Failed to fetch events from Laravel API, using static data instead.', apiError)
+  }
+
+  originalEvents.value = staticEvents
+}
+
+const retryFetch = async () => {
+  await fetchEvents(searchQuery.value)
+  search(searchQuery.value)
 }
 
 // Global Route for Search
 const route = useRoute()
+const searchQuery = computed(() => typeof route.query.q === 'string' ? route.query.q : '')
 
-watch(() => route.query.q, (newQ) => {
-  const query = typeof newQ === 'string' ? newQ : ''
+watch(searchQuery, (query) => {
   search(query)
+  void fetchEvents(query)
 }, { immediate: true })
 
 
@@ -219,7 +266,7 @@ const setupIntersectionObserver = () => {
   observer = new IntersectionObserver((entries) => {
     // If visible and we have more data and not currently loading
     if (entries[0]?.isIntersecting && hasMore.value && !isLoading.value) {
-      loadMore()
+      void loadMore()
     }
   }, {
     root: null, // viewport
@@ -234,16 +281,27 @@ const setupIntersectionObserver = () => {
 
 onMounted(() => {
   setupIntersectionObserver()
-  // Initial load is handled by watch immediate or useLazyEvents onMounted
+})
+
+onBeforeUnmount(() => {
+  if (observer) {
+    observer.disconnect()
+    observer = null
+  }
 })
 
 const mergedEvents = computed<EventItem[]>(() => {
   const remote = Array.isArray(originalEvents.value) ? originalEvents.value : []
+  const lazy = Array.isArray(lazyEvents.value) ? lazyEvents.value : []
+  const primary = lazy.length ? lazy : remote
+
   console.log('🔍 Merging events:')
+  console.log('⚡ Lazy stream:', lazy.length, 'events')
   console.log('📡 Remote (Laravel):', remote.length, 'events')
   console.log('📄 Static (JSON):', staticEvents.length, 'events')
   console.log('💾 Local Storage:', normalizedLocalEvents.value.length, 'events')
-  const merged = mergeEventCollections([remote, staticEvents, normalizedLocalEvents.value])
+
+  const merged = mergeEventCollections([primary, staticEvents, normalizedLocalEvents.value])
   console.log('✅ Final merged:', merged.length, 'events')
   return merged
 })
@@ -272,27 +330,23 @@ const handleCardImageError = (domEvent: Event) => {
   }
 }
 
-// Fetch events on mount
-onMounted(async () => {
-  await fetchEvents();
-});
-
-const fetchEvents = async () => {
-  const response = await getAllEvents();
-  if (response && response.data) {
-    originalEvents.value = response.data;
-  }
-};
-
 // Handle event card click
-const handleEventClick = (event: typeof originalEvents[0]) => {
+const handleEventClick = (eventItem: EventItem) => {
   trackEventClick({
-    id: event.id,
-    title: event.title,
-    date: event.date,
-    community_id: event.community_id
-  });
-};
+    id: eventItem.id,
+    title: eventItem.title,
+    date: eventItem.date,
+    community_id: eventItem.community_id
+  })
+}
+
+const handleManualLoadMore = () => {
+  if (isLoading.value || !hasMore.value) {
+    return
+  }
+
+  void loadMore()
+}
 
 const startDate = ref<string | null>(null);
 const endDate = ref<string | null>(null);
@@ -389,7 +443,17 @@ const isEventOnline = (event: any) => {
 };
 
 const filteredEvents = computed(() => {
+  const query = searchQuery.value.trim().toLowerCase()
+
   return mergedEvents.value.filter((ev: EventItem) => {
+    if (query) {
+      const title = typeof ev.title === 'string' ? ev.title.toLowerCase() : ''
+      const description = typeof ev.description === 'string' ? ev.description.toLowerCase() : ''
+      if (!title.includes(query) && !description.includes(query)) {
+        return false
+      }
+    }
+
     // Type filter using chips: if both checked -> show all. If neither checked -> show all.
     if (!(onlineChecked.value && offlineChecked.value)) {
       // one of them might be false

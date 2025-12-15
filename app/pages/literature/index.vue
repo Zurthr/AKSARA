@@ -72,10 +72,9 @@ import BookSection from '~/components/Literature/BookSection.vue';
 import BookGrid from '~/components/Literature/BookGrid.vue';
 import LiteratureFilterSidebar from '~/components/Literature/LiteratureFilterSidebar.vue';
 import TrendingSidebar from '~/components/TrendingSidebar.vue';
-import { useLazyBooks } from '~/composables/useLazyBooks';
 
 // Literature API integration
-import { useLiterature } from '~/composables/useLiterature'
+import { useLiterature, useLazyBooks } from '~/composables/useLiterature'
 import type { LiteratureBook } from '~/composables/useLiterature'
 import { useLocalBooks } from '~/composables/useLocalBooks'
 import mockBooks from '../../../mock-backend/data/books.json'
@@ -89,6 +88,13 @@ const { getAllBooks, loading, error } = useLiterature()
 const originalBooks = ref<LiteratureBook[]>([])
 const staticBooks = normalizeBookCollection(mockBooks as RawBookRecord[])
 const { localBooks } = useLocalBooks()
+
+const {
+  books: lazyBooks,
+  isLoading: isLoadingBooks,
+  hasMore: hasMoreBooks,
+  loadMore: loadMoreBooks
+} = useLazyBooks()
 
 const normalizedLocalBooks = computed<LiteratureBook[]>(() => {
   const raw = Array.isArray(localBooks.value) ? localBooks.value : []
