@@ -44,7 +44,7 @@ export interface EventCreateData {
   price?: number
 }
 
-export interface EventUpdateData extends Partial<EventCreateData> {}
+export interface EventUpdateData extends Partial<EventCreateData> { }
 
 export interface EventsResponse {
   data: Event[]
@@ -59,19 +59,19 @@ export const useEvents = () => {
   const api = useApi()
   const loading = ref(false)
   const error = ref<string | null>(null)
-  
+
   const setLoading = (value: boolean) => {
     loading.value = value
   }
-  
+
   const setError = (err: string | null) => {
     error.value = err
   }
-  
+
   const getAllEvents = async (page: number = 1, perPage: number = 10): Promise<EventsResponse | null> => {
     setLoading(true)
     setError(null)
-    
+
     try {
       const response = await api.get<EventsResponse>(`/events?page=${page}&per_page=${perPage}`)
       return response
@@ -82,11 +82,11 @@ export const useEvents = () => {
       setLoading(false)
     }
   }
-  
+
   const getEventById = async (id: number | string): Promise<Event | null> => {
     setLoading(true)
     setError(null)
-    
+
     try {
       const encodedId = encodeURIComponent(String(id))
       const response = await api.get<{ data: Event }>(`/events/${encodedId}`)
@@ -98,11 +98,11 @@ export const useEvents = () => {
       setLoading(false)
     }
   }
-  
+
   const createEvent = async (eventData: EventCreateData): Promise<Event | null> => {
     setLoading(true)
     setError(null)
-    
+
     try {
       const response = await api.post<{ data: Event }>('/events', eventData)
       return response.data
@@ -113,11 +113,11 @@ export const useEvents = () => {
       setLoading(false)
     }
   }
-  
+
   const updateEvent = async (id: number | string, eventData: EventUpdateData): Promise<Event | null> => {
     setLoading(true)
     setError(null)
-    
+
     try {
       const encodedId = encodeURIComponent(String(id))
       const response = await api.post<{ data: Event }>(`/events/${encodedId}`, eventData)
@@ -129,11 +129,11 @@ export const useEvents = () => {
       setLoading(false)
     }
   }
-  
+
   const deleteEvent = async (id: number | string): Promise<boolean> => {
     setLoading(true)
     setError(null)
-    
+
     try {
       const encodedId = encodeURIComponent(String(id))
       await api.delete(`/events/${encodedId}`)
@@ -145,11 +145,11 @@ export const useEvents = () => {
       setLoading(false)
     }
   }
-  
+
   const clearError = () => {
     setError(null)
   }
-  
+
   return {
     loading: readonly(loading),
     error: readonly(error),
@@ -159,5 +159,70 @@ export const useEvents = () => {
     updateEvent,
     deleteEvent,
     clearError
+  }
+}
+
+/**
+ * Composable for lazy loading events with pagination
+ * Uses json-server pagination with _page and _limit params
+ */
+export function useLazyEvents(pageSize: number = 6) {
+  const events = ref<Event[]>([])
+  const isLoading = ref(false)
+  const hasMore = ref(true)
+  const currentPage = ref(0)
+  const error = ref<Error | null>(null)
+
+  const loadMore = async () => {
+    if (isLoading.value || !hasMore.value) return
+
+    isLoading.value = true
+    error.value = null
+    currentPage.value++
+
+    try {
+      const response = await $fetch<Event[]>(`http://localhost:3002/events`, {
+        params: {
+          _page: currentPage.value,
+          _limit: pageSize
+        }
+      })
+
+      if (response.length < pageSize) {
+        hasMore.value = false
+      }
+
+      if (response.length === 0) {
+        hasMore.value = false
+      } else {
+        events.value = [...events.value, ...response]
+      }
+    } catch (e) {
+      error.value = e as Error
+      console.error('Error loading events:', e)
+    } finally {
+      isLoading.value = false
+    }
+  }
+
+  const reset = () => {
+    events.value = []
+    currentPage.value = 0
+    hasMore.value = true
+    error.value = null
+  }
+
+  // Load initial batch on mount
+  onMounted(() => {
+    loadMore()
+  })
+
+  return {
+    events,
+    isLoading,
+    hasMore,
+    error,
+    loadMore,
+    reset
   }
 }

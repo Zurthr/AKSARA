@@ -1,6 +1,13 @@
 <template>
   <div class="profile-page">
-    <main class="feed-section">
+    <!-- Loading State -->
+    <div v-if="profileLoading" class="profile-loading">
+      <div class="loading-spinner-large"></div>
+      <p>Loading profile...</p>
+    </div>
+
+    <!-- Profile Content -->
+    <main v-else class="feed-section">
       <!-- Profile Header Section -->
       <div class="profile-header">
         <div class="profile-banner">
@@ -12,8 +19,9 @@
         
         <div class="profile-info-section">
           <div class="profile-name-section">
-            <h1 class="profile-name">Zurthr .zur</h1>
-            <p class="profile-tagline">'He's the girl in the bubble, his big shiny bubble'</p>
+            <h1 class="profile-name">{{ profileName }}</h1>
+            <p class="profile-tagline">{{ profileBio }}</p>
+            <span v-if="userRole === 'ADMIN'" class="role-badge">Admin</span>
           </div>
           
           <div class="profile-tabs">
@@ -106,33 +114,25 @@
         <div class="sidebar-card">
           <div class="profile-summary">
             <img src="https://via.placeholder.com/80/4CAF50/FFFFFF?text=Avatar" alt="Profile Avatar" class="summary-avatar">
-            <h3 class="summary-name">Zurthr .zur</h3>
-            <p class="summary-title">The Maestro</p>
+            <h3 class="summary-name">{{ profileName }}</h3>
+            <p class="summary-title">{{ userRole }}</p>
             <div class="summary-stats">
               <div class="stat-item">
-                <span class="stat-value">8213</span>
+                <span class="stat-value">{{ posts.length }}</span>
                 <span class="stat-label">Posts</span>
               </div>
               <div class="stat-item">
-                <span class="stat-value">123</span>
-                <span class="stat-label">Reads</span>
+                <span class="stat-value">{{ userBooks.length }}</span>
+                <span class="stat-label">Books</span>
               </div>
               <div class="stat-item">
-                <span class="stat-value">13232</span>
-                <span class="stat-label">Followers</span>
+                <span class="stat-value">{{ userCommunities.length }}</span>
+                <span class="stat-label">Communities</span>
               </div>
             </div>
-            <p class="summary-tagline">'He's the girl in the bubble, his big shiny bubble'</p>
+            <p class="summary-tagline">{{ profileBio }}</p>
             <div class="summary-actions">
-              <button class="btn-follow">Follow</button>
-              <button class="btn-chat">Chat</button>
-              <button class="btn-menu-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <line x1="3" y1="6" x2="21" y2="6"></line>
-                  <line x1="3" y1="12" x2="21" y2="12"></line>
-                  <line x1="3" y1="18" x2="21" y2="18"></line>
-                </svg>
-              </button>
+              <NuxtLink to="/interests" class="btn-follow">Edit Interests</NuxtLink>
             </div>
           </div>
         </div>
@@ -167,6 +167,51 @@
 import RightSideBar from '~/components/General/RightSideBar.vue';
 import ForumCard from '~/components/Forum/ForumCard.vue';
 import BookCard from '~/components/Literature/BookCard.vue';
+
+// Auth integration
+definePageMeta({
+  middleware: 'auth'
+})
+
+const { user, getProfile, isLoading } = useAuth()
+const profileLoading = ref(true)
+
+// Fetch fresh profile data on mount
+onMounted(async () => {
+  try {
+    if (!user.value) {
+      console.log('[Profile] Fetching user data...')
+      await getProfile()
+    }
+    console.log('[Profile] User data:', user.value)
+  } catch (error) {
+    console.error('[Profile] Error loading profile:', error)
+  } finally {
+    profileLoading.value = false
+  }
+})
+
+// Computed properties for user data
+const profileName = computed(() => {
+  if (!user.value) return 'Loading...'
+  
+  // API returns profile data in nested structure
+  const profileDisplayName = user.value.profile?.displayName
+  const legacyDisplayName = user.value.displayName
+  const fullName = `${user.value.firstName || ''} ${user.value.lastName || ''}`.trim()
+  
+  return profileDisplayName || legacyDisplayName || fullName || 'User'
+})
+
+const profileBio = computed(() => {
+  const nestedBio = user.value?.profile?.bio
+  const legacyBio = user.value?.bio
+  return nestedBio || legacyBio || `'He's the girl in the bubble, his big shiny bubble'`
+})
+
+const profileEmail = computed(() => user.value?.email || '')
+const userRole = computed(() => user.value?.role || 'USER')
+const interestScores = computed(() => user.value?.profile?.interestScores || user.value?.interestScores || {})
 
 const activeTab = ref('posts');
 
@@ -385,6 +430,18 @@ const posts = ref([
   color: var(--color-dark-gray);
   margin: 0;
   font-style: italic;
+}
+
+.role-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--color-yellow);
+  color: var(--color-black);
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 8px;
 }
 
 .profile-tabs {
@@ -711,5 +768,34 @@ const posts = ref([
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
   gap: 20px;
+}
+
+/* Loading State */
+.profile-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  gap: 16px;
+}
+
+.loading-spinner-large {
+  width: 48px;
+  height: 48px;
+  border: 4px solid #e2e8f0;
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.profile-loading p {
+  color: #64748b;
+  font-size: 16px;
+  font-weight: 500;
 }
 </style>
