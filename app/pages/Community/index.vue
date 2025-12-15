@@ -16,52 +16,58 @@
             class="community-card"
             @click="handleCommunityClick(community)"
           >
-            <div class="community-card-header">
-              <div
-                class="community-icon"
-                :style="{ backgroundColor: community.accent }"
-                aria-hidden="true"
-              >
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
+            <div class="community-card-banner" :style="{ backgroundImage: `url(${community.cover})` }">
+              <div class="banner-overlay"></div>
+            </div>
+            
+            <div class="community-card-content">
+              <div class="community-card-header">
+                <div
+                  class="community-icon"
+                  :style="{ backgroundColor: community.accent }"
+                  aria-hidden="true"
                 >
-                  <path :d="iconPaths[community.icon]" fill="currentColor" />
-                </svg>
-              </div>
-              <div>
-                <h2>{{ community.name }}</h2>
-                <div class="community-tags">
-                  <span v-for="tag in community.tags" :key="tag" class="tag">{{ tag }}</span>
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path :d="iconPaths[community.icon]" fill="currentColor" />
+                  </svg>
+                </div>
+                <div>
+                  <h2>{{ community.name }}</h2>
+                  <div class="community-tags">
+                    <span v-for="tag in community.tags" :key="tag" class="tag">{{ tag }}</span>
+                  </div>
                 </div>
               </div>
+
+              <p class="community-description">{{ community.description }}</p>
+
+              <div class="community-stats">
+                <span class="stat">
+                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5zm0 2c-3.33 0-10 1.67-10 5v3h20v-3c0-3.33-6.67-5-10-5z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                  {{ community.members }} members
+                </span>
+                <span class="stat">
+                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M20 3H4a1 1 0 0 0-1 1v15l4-4h13a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                  {{ community.postsToday }} Posts Today
+                </span>
+              </div>
+
+              <button type="button" class="join-button" @click.stop="handleCommunityClick(community)">Join Community</button>
             </div>
-
-            <p class="community-description">{{ community.description }}</p>
-
-            <div class="community-stats">
-              <span class="stat">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5zm0 2c-3.33 0-10 1.67-10 5v3h20v-3c0-3.33-6.67-5-10-5z"
-                    fill="currentColor"
-                  />
-                </svg>
-                {{ community.members }} members
-              </span>
-              <span class="stat">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M20 3H4a1 1 0 0 0-1 1v15l4-4h13a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1z"
-                    fill="currentColor"
-                  />
-                </svg>
-                {{ community.postsToday }} Posts Today
-              </span>
-            </div>
-
-            <button type="button" class="join-button" @click.stop="handleCommunityClick(community)">Join Community</button>
           </NuxtLink>
         </div>
 
@@ -75,18 +81,45 @@
                 <button type="button" class="clear-filters" @click="clearAllFilters">Clear all</button>
               </div>
             </header>
-            <div class="filter-list">
+            <div class="filter-dropdown">
               <button 
-                v-for="hashtag in hashtags" 
-                :key="hashtag" 
-                :class="['filter-tag', { 'active': activeFilters.includes(hashtag) }]"
-                @click="toggleFilter(hashtag)"
-                type="button"
+                type="button" 
+                class="dropdown-trigger" 
+                @click="isDropdownOpen = !isDropdownOpen"
+                :aria-expanded="isDropdownOpen"
               >
-                <span class="tag-icon">{{ getTagIcon(hashtag) }}</span>
-                <span class="tag-text">{{ hashtag }}</span>
-                <span v-if="activeFilters.includes(hashtag)" ></span>
+                <span>Filter by Tag</span>
+                <svg 
+                  width="20" 
+                  height="20" 
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  xmlns="http://www.w3.org/2000/svg"
+                  :class="{ 'rotate-180': isDropdownOpen }"
+                >
+                  <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
               </button>
+              
+              <div v-if="isDropdownOpen" class="dropdown-menu">
+                <button 
+                  v-for="tag in hashtags" 
+                  :key="tag" 
+                  class="dropdown-item"
+                  :class="{ 'active': activeFilters.includes(tag) }"
+                  @click="toggleFilter(tag)"
+                  type="button"
+                >
+                  <span class="tag-text">{{ tag }}</span>
+                  <span v-if="activeFilters.includes(tag)" class="check-icon">✓</span>
+                </button>
+                <div v-if="hashtags.length === 0" class="dropdown-item empty">
+                  No tags available
+                </div>
+              </div>
+              
+              <!-- Backdrop to close dropdown when clicking outside -->
+              <div v-if="isDropdownOpen" class="dropdown-backdrop" @click="isDropdownOpen = false"></div>
             </div>
           </section>
 
@@ -117,7 +150,6 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, watch } from 'vue';
 import { useClickTracking } from '~/composables/useClickTracking';
-import { useCommunities, type Community } from '~/composables/useCommunities';
 
 const { trackCommunityClick } = useClickTracking();
 const { 
@@ -129,14 +161,24 @@ const {
   hasMore 
 } = useCommunities(6); // Load 6 per page (grid is 2 columns, so 6 is good)
 
-// Use the communities from the composable
-// We don't filter client-side anymore, server does it based on 'q'
-const communities = computed(() => serverCommunities.value);
+// Filter state management
+const activeFilters = ref<string[]>([]);
 
-// Fetch on mount handled by watch
-// onMounted(() => {
-//   refetchCommunities();
-// });
+// Filtered communities based on active filters
+const communities = computed(() => {
+  if (activeFilters.value.length === 0) {
+    return serverCommunities.value;
+  }
+  
+  return serverCommunities.value.filter(community => {
+    // Check if community has any of the active filter tags
+    return activeFilters.value.some(filter => 
+      community.tags?.some((tag: string) => tag.toLowerCase().includes(filter.toLowerCase())) ||
+      community.name.toLowerCase().includes(filter.toLowerCase()) ||
+      community.description?.toLowerCase().includes(filter.toLowerCase())
+    );
+  });
+});
 
 // Handle community card click
 const handleCommunityClick = (community: Community) => {
@@ -148,28 +190,12 @@ const handleCommunityClick = (community: Community) => {
   });
 };
 
-// Filter state management
-const activeFilters = ref<string[]>([]);
-
 const iconPaths: Record<string, string> = {
   heart: 'M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5A4.5 4.5 0 0 1 6.5 4 4.49 4.49 0 0 1 12 6.09 4.49 4.49 0 0 1 17.5 4 4.5 4.5 0 0 1 22 8.5c0 3.78-3.4 6.86-8.55 11.54z',
   spark: 'M12 2l2.09 6.26L20 8.27l-5 3.64L16.18 18 12 14.77 7.82 18 9 11.91l-5-3.64 5.91-.01L12 2z',
   camera: 'M20 5h-3.17l-1.41-1.41A2 2 0 0 0 14.17 3H9.83a2 2 0 0 0-1.41.59L7 5H4a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm-8 12a4 4 0 1 1 0-8 4 4 0 0 1 0 8z',
   chat: 'M4 4h16a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H8l-4 4V5a1 1 0 0 1 1-1z'
 };
-
-// Watch filters to trigger server fetch
-watch(activeFilters, (newFilters) => {
-  const query = newFilters.join(' ');
-  refetchCommunities(query);
-}, { deep: true });
-
-// Watch route query for search
-const route = useRoute();
-watch(() => route.query.q, (newQ) => {
-  const query = typeof newQ === 'string' ? newQ : '';
-  refetchCommunities(query);
-}, { immediate: true });
 
 // Toggle filter function
 const toggleFilter = (tag: string) => {
@@ -197,7 +223,16 @@ const getTagIcon = (tag: string): string => {
   return '';
 };
 
-const hashtags = ['#HarryPotter', '#WIBU', '#ANIME', '#GAME', '#DEMONS', '#ANIMEX', 'Mindful'];
+const isDropdownOpen = ref(false);
+
+const hashtags = computed(() => {
+  const tagsSet = new Set<string>();
+  serverCommunities.value.forEach(c => {
+    c.tags?.forEach((tag: string) => tagsSet.add(tag));
+  });
+  // Filter out any potential empty or null tags just in case
+  return Array.from(tagsSet).filter(Boolean).sort();
+});
 
 const tweet = {
   initials: 'BS',
@@ -275,11 +310,125 @@ const relatedCommunities = [
   background: #fef2f2;
 }
 
-.filter-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+.filter-dropdown {
+  position: relative;
+  width: 100%;
 }
+
+.dropdown-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #0f172a;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.dropdown-trigger:hover {
+  border-color: #cbd5e1;
+  background-color: #f8fafc;
+}
+
+.dropdown-trigger svg {
+  transition: transform 0.2s ease;
+  color: #64748b;
+}
+
+.dropdown-trigger svg.rotate-180 {
+  transform: rotate(180deg);
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  width: 100%;
+  max-height: 280px;
+  overflow-y: auto;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  padding: 6px;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 12px;
+  border: none;
+  background: transparent;
+  color: #334155;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: left;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.dropdown-item:hover {
+  background-color: #f1f5f9;
+  color: #0f172a;
+}
+
+.dropdown-item.active {
+  background-color: #eff6ff;
+  color: #2563eb;
+  font-weight: 600;
+}
+
+.dropdown-item.empty {
+  color: #94a3b8;
+  justify-content: center;
+  cursor: default;
+}
+
+.dropdown-item.empty:hover {
+  background-color: transparent;
+}
+
+.check-icon {
+  font-weight: bold;
+  font-size: 12px;
+}
+
+/* Backdrop to handle click outside */
+.dropdown-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 40;
+  cursor: default;
+}
+
+/* Scrollbar styling for dropdown */
+.dropdown-menu::-webkit-scrollbar {
+  width: 6px;
+}
+.dropdown-menu::-webkit-scrollbar-track {
+  background: transparent;
+}
+.dropdown-menu::-webkit-scrollbar-thumb {
+  background-color: #cbd5e1;
+  border-radius: 20px;
+}
+
 
 .filter-tag {
   display: inline-flex;
@@ -593,20 +742,45 @@ const relatedCommunities = [
   background: #ffffff;
   border-radius: 20px;
   border: 1px solid #e2e8f0;
-  padding: 20px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
   box-shadow: 0 12px 24px rgba(15, 23, 42, 0.06);
   text-decoration: none;
   color: inherit;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   height: 100%;
+  overflow: hidden;
 }
 
 .community-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 16px 36px rgba(15, 23, 42, 0.12);
+}
+
+.community-card-banner {
+  width: 100%;
+  height: 140px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.banner-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.3) 100%);
+}
+
+.community-card-content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
 }
 
 .community-card-header {

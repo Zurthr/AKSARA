@@ -42,19 +42,15 @@
           <p v-if="filteredBooks.length === 0" class="no-results-text">No results found. Try adjusting your filters or search query.</p>
         </div>
 
-        <!-- All Books Section - Always visible at the bottom with lazy loading -->
+        <!-- All Books Section - Always visible at the bottom showing merged catalogue -->
         <div class="all-books-section">
           <BookGrid
             title="Our Library, just for you."
-            :books="lazyBooks"
+            :books="allBooks"
             see-more-link="/literature"
             section-type="top"
             title-prefix="Library"
             title-suffix="just for you."
-            :lazy-load="true"
-            :is-loading="isLoadingBooks"
-            :has-more="hasMoreBooks"
-            @load-more="loadMoreBooks"
           />
         </div>
       </div>
@@ -72,7 +68,6 @@ import BookSection from '~/components/Literature/BookSection.vue';
 import BookGrid from '~/components/Literature/BookGrid.vue';
 import LiteratureFilterSidebar from '~/components/Literature/LiteratureFilterSidebar.vue';
 import TrendingSidebar from '~/components/TrendingSidebar.vue';
-import { useLazyBooks } from '~/composables/useLiterature';
 
 // Literature API integration
 import { useLiterature } from '~/composables/useLiterature'
@@ -84,7 +79,7 @@ import { mergeBookCollections, normalizeBookCollection } from '~/utils/books-nor
 type RawBookRecord = Record<string, unknown>
 
 // Use Laravel API
-const { getAllBooks, loading, error } = useLiterature()
+const { getAllBooks } = useLiterature()
 
 // Use lazy loading for infinite scroll
 const { 
@@ -95,21 +90,39 @@ const {
 } = useLazyBooks()
 
 const originalBooks = ref<LiteratureBook[]>([])
-const staticBooks = normalizeBookCollection(mockBooks as RawBookRecord[])
+const mockApiBooks = ref<LiteratureBook[]>([])
+const staticBooks = normalizeBookCollection(mockBooks as RawBookRecord[]).map((book, index) => {
+  const candidateId = book.id
+  const resolvedId = candidateId && String(candidateId).trim() !== '' ? candidateId : `static-${index + 1}`
+  return {
+    ...book,
+    id: resolvedId,
+    source: 'json'
+  }
+})
 const { localBooks } = useLocalBooks()
 
 const normalizedLocalBooks = computed<LiteratureBook[]>(() => {
   const raw = Array.isArray(localBooks.value) ? localBooks.value : []
-  return normalizeBookCollection(raw as RawBookRecord[])
+  return normalizeBookCollection(raw as RawBookRecord[]).map((book, index) => {
+    const candidateId = book.id
+    const resolvedId = candidateId && String(candidateId).trim() !== '' ? candidateId : `local-${index + 1}`
+    return {
+      ...book,
+      id: resolvedId,
+      source: 'localStorage'
+    }
+  })
 })
 
 const mergedBooksData = computed<LiteratureBook[]>(() => {
   const remote = Array.isArray(originalBooks.value) ? originalBooks.value : []
+  const mockApi = Array.isArray(mockApiBooks.value) ? mockApiBooks.value : []
   const local = Array.isArray(normalizedLocalBooks.value) ? normalizedLocalBooks.value : []
   const static_books = Array.isArray(staticBooks) ? staticBooks : []
   
   // Ensure stable merge order and prevent duplicates
-  const merged = mergeBookCollections([static_books, local, remote])
+  const merged = mergeBookCollections([static_books, mockApi, local, remote])
   
   // Always ensure we have books available
   const result = merged.length > 0 ? merged : static_books
@@ -124,25 +137,48 @@ const mergedBooksData = computed<LiteratureBook[]>(() => {
 
 const route = useRoute()
 
-const fetchBooks = async () => {
+const fetchLaravelBooks = async (): Promise<LiteratureBook[]> => {
   try {
     const response = await getAllBooks()
-    
-    // Handle nested Laravel response structure: response.data.data
-    if (response && response.data && response.data.data) {
-      const laravelBooksWithUniqueIds = response.data.data.map((book, index) => ({
+
+    if (response && Array.isArray(response.data)) {
+      return response.data.map((book, index) => ({
         ...book,
         id: book.id || `laravel-${index + 1}`,
         source: 'laravel'
       }))
-      
-      originalBooks.value = laravelBooksWithUniqueIds
-    } else {
-      originalBooks.value = []
     }
   } catch (apiError) {
-    console.warn('Literature API not available, using local data only')
-    originalBooks.value = []
+    console.warn('Literature API not available, skipping Laravel merge.', apiError)
+  }
+
+  return []
+}
+
+const fetchMockBooks = async (): Promise<LiteratureBook[]> => {
+  try {
+    const response = await $fetch<RawBookRecord[]>('http://localhost:3002/books')
+    const normalized = normalizeBookCollection(response)
+
+    return normalized.map((book, index) => ({
+      ...book,
+      id: book.id || `mock-api-${index + 1}`,
+      source: 'mockApi'
+    }))
+  } catch (apiError) {
+    console.warn('Mock API books not available, skipping mock merge.', apiError)
+    return []
+  }
+}
+
+const fetchBooks = async () => {
+  const [laravelBooks, mockBooksData] = await Promise.all([fetchLaravelBooks(), fetchMockBooks()])
+
+  mockApiBooks.value = mockBooksData
+  originalBooks.value = laravelBooks.length ? laravelBooks : []
+
+  if (!originalBooks.value.length) {
+    originalBooks.value = Array.isArray(staticBooks) ? staticBooks : []
   }
 }
 
@@ -158,35 +194,61 @@ watch(() => route.fullPath, async () => {
 
 // Convert normalized books to UI format for compatibility
 const allBooks = computed(() => {
-  return mergedBooksData.value.map((book): Book => {
-    const tags = Array.isArray(book.tags) 
-      ? book.tags.map(tag => typeof tag === 'string' ? tag : tag.name)
+  const seenContentKeys = new Set<string>()
+  const usedDisplayIds = new Map<string, number>()
+
+  const deduplicated = mergedBooksData.value.filter((book) => {
+    const titleKey = (book.title || '').trim().toLowerCase()
+    const authorKey = (book.author || '').trim().toLowerCase()
+    const yearKey = book.year_edition ? String(book.year_edition).trim().toLowerCase() : ''
+    const hasIdentity = titleKey !== '' || authorKey !== ''
+    const dedupeKey = hasIdentity
+      ? `content:${titleKey}|${authorKey}|${yearKey}`
+      : `id:${String(book.id ?? '').trim()}`
+
+    if (!dedupeKey) {
+      return true
+    }
+
+    if (seenContentKeys.has(dedupeKey)) {
+      return false
+    }
+
+    seenContentKeys.add(dedupeKey)
+    return true
+  })
+
+  return deduplicated.map((book, index): Book => {
+    const tags = Array.isArray(book.tags)
+      ? book.tags.map((tag) => (typeof tag === 'string' ? tag : tag.name))
       : []
-    
+
     const copyType = book.copy_types
-      ? Object.keys(book.copy_types).map(key => normalizeKey(key)).filter(Boolean)
+      ? Object.keys(book.copy_types).map((key) => normalizeKey(key)).filter(Boolean)
       : []
-    
+
     const licensingType = book.licensing_type
       ? [normalizeKey(book.licensing_type)]
       : []
-    
+
     const sources = Array.isArray(book.sources)
-      ? book.sources.map(s => typeof s === 'string' ? s : s.name)
+      ? book.sources.map((s) => (typeof s === 'string' ? s : s.name))
       : []
-    
-    // Handle image URL with fallback and better filtering
+
     let imageUrl = book.cover || book.image_url
-    
-    // Only use placeholder for clearly invalid URLs
     if (!imageUrl || imageUrl === 'null' || imageUrl === 'undefined' || imageUrl.trim() === '') {
       imageUrl = '/images/book-cover-placeholder.svg'
     }
-    
-    // Let the BookCard component handle image loading errors gracefully
-    
+
+    const baseId = String(book.id ?? '').trim()
+    const fallbackId = `book-${index + 1}`
+    const rawDisplayId = baseId || fallbackId
+    const occurrence = usedDisplayIds.get(rawDisplayId)
+    const displayId = occurrence === undefined ? rawDisplayId : `${rawDisplayId}-${occurrence + 1}`
+    usedDisplayIds.set(rawDisplayId, (occurrence ?? 0) + 1)
+
     return {
-      id: typeof book.id === 'string' ? parseInt(book.id) || 0 : (book.id as number),
+      id: displayId,
       title: book.title,
       author: book.author,
       image: imageUrl,
@@ -201,7 +263,7 @@ const allBooks = computed(() => {
 })
 
 interface Book {
-  id: number
+  id: string
   title: string
   author?: string
   image: string

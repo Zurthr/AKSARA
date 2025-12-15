@@ -11,6 +11,7 @@ export interface Community {
   description: string
   members: string
   postsToday: number | string
+  cover?: string
   memberCount?: number
   isJoined?: boolean
 }
