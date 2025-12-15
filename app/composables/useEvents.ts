@@ -70,9 +70,6 @@ export const useEvents = () => {
     error.value = err
   }
 
-<<<<<<< HEAD
-  const getAllEvents = async (page: number = 1, perPage: number = 10): Promise<EventsResponse | null> => {
-=======
   const buildEventsQuery = (page: number, perPage: number, searchQuery?: string) => {
     const params = new URLSearchParams({
       page: String(page),
@@ -93,7 +90,6 @@ export const useEvents = () => {
     perPage: number = 10,
     searchQuery?: string
   ): Promise<EventsResponse | null> => {
->>>>>>> 70d2755c864acbe2d0138e865e31286264281b16
     setLoading(true)
     setError(null)
 

@@ -150,7 +150,6 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, watch } from 'vue';
 import { useClickTracking } from '~/composables/useClickTracking';
-import communitiesData from '@/../mock-backend/data/communities.json';
 
 const { trackCommunityClick } = useClickTracking();
 const { 
@@ -162,14 +161,24 @@ const {
   hasMore 
 } = useCommunities(6); // Load 6 per page (grid is 2 columns, so 6 is good)
 
-// Use the communities from the composable
-// We don't filter client-side anymore, server does it based on 'q'
-const communities = computed(() => serverCommunities.value);
+// Filter state management
+const activeFilters = ref<string[]>([]);
 
-// Fetch on mount handled by watch
-// onMounted(() => {
-//   refetchCommunities();
-// });
+// Filtered communities based on active filters
+const communities = computed(() => {
+  if (activeFilters.value.length === 0) {
+    return serverCommunities.value;
+  }
+  
+  return serverCommunities.value.filter(community => {
+    // Check if community has any of the active filter tags
+    return activeFilters.value.some(filter => 
+      community.tags?.some((tag: string) => tag.toLowerCase().includes(filter.toLowerCase())) ||
+      community.name.toLowerCase().includes(filter.toLowerCase()) ||
+      community.description?.toLowerCase().includes(filter.toLowerCase())
+    );
+  });
+});
 
 // Handle community card click
 const handleCommunityClick = (community: Community) => {
@@ -181,44 +190,12 @@ const handleCommunityClick = (community: Community) => {
   });
 };
 
-// Filter state management
-const activeFilters = ref<string[]>([]);
-
 const iconPaths: Record<string, string> = {
   heart: 'M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5A4.5 4.5 0 0 1 6.5 4 4.49 4.49 0 0 1 12 6.09 4.49 4.49 0 0 1 17.5 4 4.5 4.5 0 0 1 22 8.5c0 3.78-3.4 6.86-8.55 11.54z',
   spark: 'M12 2l2.09 6.26L20 8.27l-5 3.64L16.18 18 12 14.77 7.82 18 9 11.91l-5-3.64 5.91-.01L12 2z',
   camera: 'M20 5h-3.17l-1.41-1.41A2 2 0 0 0 14.17 3H9.83a2 2 0 0 0-1.41.59L7 5H4a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm-8 12a4 4 0 1 1 0-8 4 4 0 0 1 0 8z',
   chat: 'M4 4h16a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H8l-4 4V5a1 1 0 0 1 1-1z'
 };
-
-// Map communities data from JSON file (cover sudah ada di JSON)
-const allCommunities = (communitiesData as any[]).map((community) => ({
-  id: community.id,
-  name: community.name,
-  icon: community.icon || 'chat',
-  accent: community.accent || '#E6F2FF',
-  tags: community.tags || [],
-  description: community.description || '',
-  members: community.members || (community.memberCount ? `${community.memberCount}` : '0'),
-  postsToday: community.postsToday?.toString() || '0',
-  cover: community.cover || 'https://images.unsplash.com/photo-1557682250-33bd709cbe85?auto=format&fit=crop&w=1200&q=80'
-}));
-
-// Filtered communities based on active filters
-const communities = computed(() => {
-  if (activeFilters.value.length === 0) {
-    return allCommunities;
-  }
-  
-  return allCommunities.filter(community => {
-    // Check if community has any of the active filter tags
-    return activeFilters.value.some(filter => 
-      community.tags.some((tag: string) => tag.toLowerCase().includes(filter.toLowerCase())) ||
-      community.name.toLowerCase().includes(filter.toLowerCase()) ||
-      community.description.toLowerCase().includes(filter.toLowerCase())
-    );
-  });
-});
 
 // Toggle filter function
 const toggleFilter = (tag: string) => {
@@ -250,8 +227,8 @@ const isDropdownOpen = ref(false);
 
 const hashtags = computed(() => {
   const tagsSet = new Set<string>();
-  allCommunities.forEach(c => {
-    c.tags.forEach((tag: string) => tagsSet.add(tag));
+  serverCommunities.value.forEach(c => {
+    c.tags?.forEach((tag: string) => tagsSet.add(tag));
   });
   // Filter out any potential empty or null tags just in case
   return Array.from(tagsSet).filter(Boolean).sort();
