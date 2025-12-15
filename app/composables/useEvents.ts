@@ -1,4 +1,7 @@
 import { ref, readonly } from 'vue'
+import mockEventsData from 'mockData/events.json'
+import { normalizeEventCollection } from '~/utils/events-normalizer'
+import { normalizePaginatedCollection, type PaginatedCollection } from '~/utils/pagination'
 import { useApi } from './useApi'
 
 // TypeScript interfaces for Events API
@@ -47,13 +50,11 @@ export interface EventCreateData {
 
 export interface EventUpdateData extends Partial<EventCreateData> { }
 
-export interface EventsResponse {
-  data: Event[]
-  current_page: number
-  last_page: number
-  per_page: number
-  total: number
-}
+export type EventsResponse = PaginatedCollection<Event>
+
+const fallbackEvents = normalizeEventCollection(
+  Array.isArray(mockEventsData) ? (mockEventsData as Array<Record<string, unknown>>) : []
+)
 
 // Events API composable
 export const useEvents = () => {
@@ -69,13 +70,37 @@ export const useEvents = () => {
     error.value = err
   }
 
+<<<<<<< HEAD
   const getAllEvents = async (page: number = 1, perPage: number = 10): Promise<EventsResponse | null> => {
+=======
+  const buildEventsQuery = (page: number, perPage: number, searchQuery?: string) => {
+    const params = new URLSearchParams({
+      page: String(page),
+      per_page: String(perPage)
+    })
+
+    const normalizedQuery = searchQuery?.trim()
+    if (normalizedQuery) {
+      params.append('search', normalizedQuery)
+      params.append('q', normalizedQuery)
+    }
+
+    return params.toString()
+  }
+
+  const getAllEvents = async (
+    page: number = 1,
+    perPage: number = 10,
+    searchQuery?: string
+  ): Promise<EventsResponse | null> => {
+>>>>>>> 70d2755c864acbe2d0138e865e31286264281b16
     setLoading(true)
     setError(null)
 
     try {
-      const response = await api.get<EventsResponse>(`/events?page=${page}&per_page=${perPage}`)
-      return response
+      const queryString = buildEventsQuery(page, perPage, searchQuery)
+      const response = await api.get<unknown>(`/events?${queryString}`)
+      return normalizePaginatedCollection<Event>(response)
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to fetch events')
       return null
@@ -163,11 +188,16 @@ export const useEvents = () => {
   }
 }
 
+
+
+import { useLocalEvents } from './useLocalEvents'
+
 /**
- * Composable for lazy loading events with pagination
- * Uses json-server pagination with _page and _limit params
+ * Composable for lazy loading events with pagination against the primary API
+ * AND composes data from Mock JSON and Local Storage
  */
 export function useLazyEvents(pageSize: number = 6) {
+  const { getAllEvents } = useEvents()
   const events = ref<Event[]>([])
   const isLoading = ref(false)
   const hasMore = ref(true)
@@ -175,49 +205,118 @@ export function useLazyEvents(pageSize: number = 6) {
   const error = ref<Error | null>(null)
   const currentSearchQuery = ref('')
 
+  // Access local events manager
+  const { readLocalEvents } = useLocalEvents()
+
   const loadMore = async () => {
-    if (isLoading.value || !hasMore.value) return
+    if (isLoading.value || !hasMore.value) {
+      return
+    }
 
     isLoading.value = true
     error.value = null
-    currentPage.value++
+
+    const nextPage = currentPage.value + 1
+
+    // ---------------------------------------------------------
+    // 1. Prepare Static Data (Mock + Local)
+    // ---------------------------------------------------------
+    let staticEventsSlice: Event[] = []
+    let staticHasMore = false
 
     try {
-      const params: any = {
-        _page: currentPage.value,
-        _limit: pageSize
+      const localItems = (typeof window !== 'undefined') ? readLocalEvents() : []
+      // Combine Mock + Local
+      const allStaticEvents = [...localItems, ...fallbackEvents] as Event[]
+
+      // Filter by Search Query if present
+      let filteredStatic = allStaticEvents
+      const query = currentSearchQuery.value.trim().toLowerCase()
+      if (query) {
+        filteredStatic = allStaticEvents.filter((item) => {
+          const title = typeof item.title === 'string' ? item.title.toLowerCase() : ''
+          const description = typeof item.description === 'string' ? item.description.toLowerCase() : ''
+          return title.includes(query) || description.includes(query)
+        })
       }
 
-      if (currentSearchQuery.value) {
-        params.q = currentSearchQuery.value
-      }
+      const start = (nextPage - 1) * pageSize
+      const end = start + pageSize
+      const rawSlice = filteredStatic.slice(start, end)
 
-      const response = await $fetch<Event[]>(`http://localhost:3002/events`, {
-        params
+      // Map IDs to be unique (prefixed) to avoid collision with Backend IDs
+      staticEventsSlice = rawSlice.map(ev => {
+        // Determine source to apply correct prefix if not already present
+        // fallbackEvents come from events.json
+        // localItems come from localStorage
+
+        // We can check if it exists in localItems to know it's local
+        const isLocal = localItems.some((i: any) => i.id === ev.id)
+        const prefix = isLocal ? 'local-' : 'mock-'
+
+        // If ID is already string and has prefix, leave it. Otherwise prefix it.
+        const idStr = String(ev.id)
+        const newId = (idStr.startsWith('mock-') || idStr.startsWith('local-'))
+          ? idStr
+          : `${prefix}${idStr}`
+
+        return {
+          ...ev,
+          id: newId
+        }
       })
 
-      if (response.length < pageSize) {
-        hasMore.value = false
-      }
+      staticHasMore = end < filteredStatic.length
+    } catch (e) {
+      console.warn("Failed to process static events:", e)
+    }
 
-      if (response.length === 0) {
-        if (currentPage.value === 1) {
-          events.value = []
-        }
-        hasMore.value = false
-      } else {
-        if (currentPage.value === 1) {
-          events.value = response
-        } else {
-          events.value = [...events.value, ...response]
-        }
+    // ---------------------------------------------------------
+    // 2. Fetch API Data
+    // ---------------------------------------------------------
+    let apiEventsSlice: Event[] = []
+    let apiHasMore = false
+
+    try {
+      const response = await getAllEvents(nextPage, pageSize, currentSearchQuery.value || undefined)
+
+      if (response && Array.isArray(response.data)) {
+        apiEventsSlice = response.data
+
+        const resolvedPage = response.current_page || nextPage
+        const resolvedLast = response.last_page || resolvedPage
+
+        const explicitMore = resolvedPage < resolvedLast
+        const assumeMore = !response.last_page && apiEventsSlice.length === pageSize
+
+        apiHasMore = (apiEventsSlice.length > 0) && (explicitMore || assumeMore)
       }
     } catch (e) {
-      error.value = e as Error
-      console.error('Error loading events:', e)
-    } finally {
-      isLoading.value = false
+      console.error("Backend API load failed for events (using fallback logic):", e)
+      if (staticEventsSlice.length === 0 && nextPage === 1) {
+        error.value = e instanceof Error ? e : new Error("Failed to load events")
+      }
     }
+
+    // ---------------------------------------------------------
+    // 3. Merge & Update
+    // ---------------------------------------------------------
+    const newItems = [...apiEventsSlice, ...staticEventsSlice]
+
+    if (nextPage === 1) {
+      events.value = newItems
+    } else {
+      events.value = [...events.value, ...newItems]
+    }
+
+    currentPage.value = nextPage
+    hasMore.value = apiHasMore || staticHasMore
+
+    if (newItems.length === 0 && !apiHasMore && !staticHasMore) {
+      hasMore.value = false
+    }
+
+    isLoading.value = false
   }
 
   const reset = () => {
@@ -228,12 +327,10 @@ export function useLazyEvents(pageSize: number = 6) {
   }
 
   const search = (query: string) => {
-    currentSearchQuery.value = query
+    currentSearchQuery.value = query.trim()
     reset()
-    loadMore()
+    void loadMore()
   }
-
-
 
   return {
     events,

@@ -521,6 +521,7 @@
       "name": "JUMP FEST 2025 - BRED THROUGH",
       "icon": "spark",
       "accent": "#E6F2FF",
+      "cover": "https://images.unsplash.com/photo-1557682250-33bd709cbe85?auto=format&fit=crop&w=1200&q=80",
       "tags": [
         "#HarryPotter",
         "#WIBU",
@@ -539,6 +540,7 @@
       "name": "Literacy Circle",
       "icon": "heart",
       "accent": "#FFE5EC",
+      "cover": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80",
       "tags": [
         "Harry Potter",
         "LoTR",
@@ -558,6 +560,7 @@
       "name": "Wellness Warriors",
       "icon": "spark",
       "accent": "#E6F2FF",
+      "cover": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80",
       "tags": [
         "Mindful",
         "Balance",
@@ -576,6 +579,7 @@
       "name": "Photography Club",
       "icon": "camera",
       "accent": "#F0F9F5",
+      "cover": "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1200&q=80",
       "tags": [
         "Photo Walk",
         "Tips",
@@ -594,6 +598,7 @@
       "name": "Gaming Hub Indonesia",
       "icon": "chat",
       "accent": "#FFF8E1",
+      "cover": "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=1200&q=80",
       "tags": [
         "Esports",
         "Co-op",
@@ -612,6 +617,7 @@
       "name": "Creative Atelier",
       "icon": "heart",
       "accent": "#FEEAE6",
+      "cover": "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1200&q=80",
       "tags": [
         "Illustration",
         "UI/UX",
@@ -624,6 +630,538 @@
       "isJoined": true,
       "created_at": "2023-08-01T12:00:00Z",
       "updated_at": "2023-10-01T12:00:00Z"
+    },
+    {
+      "id": "book-lovers",
+      "name": "Book Lovers",
+      "icon": "heart",
+      "accent": "#F0E6FF",
+      "cover": "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1200&q=80",
+      "tags": [
+        "Books",
+        "Reading",
+        "Discussion"
+      ],
+      "description": "Tempat berkumpulnya para pecinta buku dari berbagai genre.",
+      "members": "1.1k",
+      "postsToday": 15,
+      "memberCount": 1100,
+      "isJoined": false,
+      "created_at": "2023-07-15T12:00:00Z",
+      "updated_at": "2023-10-01T12:00:00Z"
+    },
+    {
+      "id": "startup-founders",
+      "name": "Startup Founders",
+      "icon": "spark",
+      "accent": "#FFF3E6",
+      "cover": "https://images.unsplash.com/photo-1506452819137-0422416856b8?auto=format&fit=crop&w=1200&q=80",
+      "tags": [
+        "Startup",
+        "Pitch",
+        "Business"
+      ],
+      "description": "Komunitas untuk para pendiri startup saling berbagi pengalaman dan peluang.",
+      "members": "2.3k",
+      "postsToday": 34,
+      "memberCount": 2300,
+      "isJoined": false,
+      "created_at": "2023-06-20T12:00:00Z",
+      "updated_at": "2023-10-01T12:00:00Z"
+    },
+    {
+      "id": "coding-hub",
+      "name": "Coding Hub",
+      "icon": "chat",
+      "accent": "#E6FFF2",
+      "cover": "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=1200&q=80",
+      "tags": [
+        "Programming",
+        "WebDev",
+        "Hackathon"
+      ],
+      "description": "Belajar coding bareng, hackathon, dan sharing project open source.",
+      "members": "3.2k",
+      "postsToday": 40,
+      "memberCount": 3200,
+      "isJoined": true,
+      "created_at": "2023-05-10T12:00:00Z",
+      "updated_at": "2023-10-01T12:00:00Z"
+    },
+    {
+      "id": "anime-fans-id",
+      "name": "Anime Fans Indonesia",
+      "icon": "spark",
+      "accent": "#FFF0F6",
+      "cover": "https://images.unsplash.com/photo-1515169067868-5387ec356754?auto=format&fit=crop&w=1200&q=80",
+      "tags": [
+        "Anime",
+        "Manga",
+        "Cosplay"
+      ],
+      "description": "Komunitas penggemar anime dan manga terbesar di Indonesia.",
+      "members": "5.6k",
+      "postsToday": 55,
+      "memberCount": 5600,
+      "isJoined": false,
+      "created_at": "2023-04-01T12:00:00Z",
+      "updated_at": "2023-10-01T12:00:00Z"
+    },
+    {
+      "id": "kpopers-unite",
+      "name": "Kpopers Unite!",
+      "icon": "heart",
+      "accent": "#E6F7FF",
+      "tags": [
+        "Kpop",
+        "Dance",
+        "Fanart"
+      ],
+      "description": "Tempat para Kpopers berbagi info, dance cover, dan fanart.",
+      "members": "4.8k",
+      "postsToday": 60,
+      "memberCount": 4800,
+      "isJoined": true,
+      "created_at": "2023-03-15T12:00:00Z",
+      "updated_at": "2023-10-01T12:00:00Z",
+      "cover": "https://images.unsplash.com/photo-1557682250-33bd709cbe85?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+      "id": "esports-league",
+      "name": "Esports League",
+      "icon": "chat",
+      "accent": "#FFF9E6",
+      "tags": [
+        "Esports",
+        "Tournament",
+        "Game"
+      ],
+      "description": "Komunitas turnamen esports dan diskusi strategi game kompetitif.",
+      "members": "2.9k",
+      "postsToday": 38,
+      "memberCount": 2900,
+      "isJoined": false,
+      "created_at": "2023-02-10T12:00:00Z",
+      "updated_at": "2023-10-01T12:00:00Z",
+      "cover": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+      "id": "movie-maniacs",
+      "name": "Movie Maniacs",
+      "icon": "spark",
+      "accent": "#F0E6FF",
+      "tags": [
+        "Movie",
+        "Review",
+        "Premiere"
+      ],
+      "description": "Diskusi film terbaru, review, dan nonton bareng premiere.",
+      "members": "1.7k",
+      "postsToday": 22,
+      "memberCount": 1700,
+      "isJoined": false,
+      "created_at": "2023-01-20T12:00:00Z",
+      "updated_at": "2023-10-01T12:00:00Z",
+      "cover": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+      "id": "science-club",
+      "name": "Science Club",
+      "icon": "heart",
+      "accent": "#E6FFF7",
+      "tags": [
+        "Science",
+        "Experiment",
+        "Research"
+      ],
+      "description": "Eksperimen bareng, diskusi riset, dan lomba sains.",
+      "members": "2.2k",
+      "postsToday": 27,
+      "memberCount": 2200,
+      "isJoined": true,
+      "created_at": "2023-01-01T12:00:00Z",
+      "updated_at": "2023-10-01T12:00:00Z",
+      "cover": "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+      "id": "public-speaking-id",
+      "name": "Public Speaking ID",
+      "icon": "chat",
+      "accent": "#FFF0E6",
+      "tags": [
+        "Speaking",
+        "Debate",
+        "MC"
+      ],
+      "description": "Latihan public speaking, lomba debat, dan pelatihan MC.",
+      "members": "1.3k",
+      "postsToday": 19,
+      "memberCount": 1300,
+      "isJoined": false,
+      "created_at": "2022-12-10T12:00:00Z",
+      "updated_at": "2023-10-01T12:00:00Z",
+      "cover": "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+      "id": "math-enthusiasts",
+      "name": "Math Enthusiasts",
+      "icon": "spark",
+      "accent": "#F0FFF0",
+      "tags": [
+        "Math",
+        "Olympiad",
+        "Puzzle"
+      ],
+      "description": "Komunitas pecinta matematika, olimpiade, dan teka-teki logika.",
+      "members": "1.5k",
+      "postsToday": 25,
+      "memberCount": 1500,
+      "isJoined": true,
+      "created_at": "2022-11-15T12:00:00Z",
+      "updated_at": "2023-10-01T12:00:00Z",
+      "cover": "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+      "id": "history-forum",
+      "name": "History Forum",
+      "icon": "heart",
+      "accent": "#FFF0E6",
+      "tags": [
+        "History",
+        "Debate",
+        "Culture"
+      ],
+      "description": "Diskusi sejarah dunia, budaya, dan forum debat sejarah.",
+      "members": "1.8k",
+      "postsToday": 20,
+      "memberCount": 1800,
+      "isJoined": false,
+      "created_at": "2022-10-10T12:00:00Z",
+      "updated_at": "2023-10-01T12:00:00Z",
+      "cover": "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+      "id": "art-collective",
+      "name": "Art Collective",
+      "icon": "spark",
+      "accent": "#F0F0FF",
+      "tags": [
+        "Art",
+        "Gallery",
+        "Exhibition"
+      ],
+      "description": "Pameran seni, galeri online, dan diskusi karya visual.",
+      "members": "2.0k",
+      "postsToday": 18,
+      "memberCount": 2000,
+      "isJoined": true,
+      "created_at": "2022-09-01T12:00:00Z",
+      "updated_at": "2023-10-01T12:00:00Z",
+      "cover": "https://images.unsplash.com/photo-1506452819137-0422416856b8?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+      "id": "language-learners",
+      "name": "Language Learners",
+      "icon": "chat",
+      "accent": "#E6FFF0",
+      "tags": [
+        "Language",
+        "English",
+        "Japanese"
+      ],
+      "description": "Belajar bahasa asing bersama, sharing tips, dan practice speaking.",
+      "members": "2.7k",
+      "postsToday": 30,
+      "memberCount": 2700,
+      "isJoined": false,
+      "created_at": "2022-08-01T12:00:00Z",
+      "updated_at": "2023-10-01T12:00:00Z",
+      "cover": "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+      "id": "sportsmania",
+      "name": "Sportsmania",
+      "icon": "spark",
+      "accent": "#FFF0F0",
+      "tags": [
+        "Sports",
+        "Football",
+        "Basket"
+      ],
+      "description": "Komunitas olahraga, nobar, dan diskusi strategi tim favorit.",
+      "members": "3.5k",
+      "postsToday": 42,
+      "memberCount": 3500,
+      "isJoined": true,
+      "created_at": "2022-07-01T12:00:00Z",
+      "updated_at": "2023-10-01T12:00:00Z",
+      "cover": "https://images.unsplash.com/photo-1515169067868-5387ec356754?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+      "id": "culinary-club",
+      "name": "Culinary Club",
+      "icon": "heart",
+      "accent": "#FFF7E6",
+      "tags": [
+        "Cooking",
+        "Recipe",
+        "Food"
+      ],
+      "description": "Sharing resep, tips masak, dan review kuliner terbaru.",
+      "members": "1.9k",
+      "postsToday": 17,
+      "memberCount": 1900,
+      "isJoined": false,
+      "created_at": "2022-06-01T12:00:00Z",
+      "updated_at": "2023-10-01T12:00:00Z",
+      "cover": "https://images.unsplash.com/photo-1557682250-33bd709cbe85?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+      "id": "environmentalists",
+      "name": "Environmentalists",
+      "icon": "spark",
+      "accent": "#E6FFF7",
+      "tags": [
+        "Environment",
+        "Green",
+        "Climate"
+      ],
+      "description": "Aksi lingkungan, diskusi climate change, dan tips hidup hijau.",
+      "members": "2.4k",
+      "postsToday": 23,
+      "memberCount": 2400,
+      "isJoined": true,
+      "created_at": "2022-05-01T12:00:00Z",
+      "updated_at": "2023-10-01T12:00:00Z",
+      "cover": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+      "id": "startup-mentors",
+      "name": "Startup Mentors",
+      "icon": "chat",
+      "accent": "#F0FFF7",
+      "tags": [
+        "Mentor",
+        "Startup",
+        "Pitch"
+      ],
+      "description": "Mentoring startup, konsultasi bisnis, dan sharing pengalaman founder.",
+      "members": "1.6k",
+      "postsToday": 16,
+      "memberCount": 1600,
+      "isJoined": false,
+      "created_at": "2022-04-01T12:00:00Z",
+      "updated_at": "2023-10-01T12:00:00Z",
+      "cover": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+      "id": "parenting-forum",
+      "name": "Parenting Forum",
+      "icon": "heart",
+      "accent": "#FFF0F7",
+      "tags": [
+        "Parenting",
+        "Tips",
+        "Family"
+      ],
+      "description": "Diskusi parenting, tips keluarga, dan sharing pengalaman orang tua.",
+      "members": "1.2k",
+      "postsToday": 12,
+      "memberCount": 1200,
+      "isJoined": true,
+      "created_at": "2022-03-01T12:00:00Z",
+      "updated_at": "2023-10-01T12:00:00Z",
+      "cover": "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+      "id": "travelers-id",
+      "name": "Travelers ID",
+      "icon": "spark",
+      "accent": "#E6F0FF",
+      "tags": [
+        "Travel",
+        "Adventure",
+        "Tips"
+      ],
+      "description": "Komunitas traveling, sharing itinerary, dan tips backpacker.",
+      "members": "2.8k",
+      "postsToday": 28,
+      "memberCount": 2800,
+      "isJoined": false,
+      "created_at": "2022-02-01T12:00:00Z",
+      "updated_at": "2023-10-01T12:00:00Z",
+      "cover": "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+      "id": "pet-lovers",
+      "name": "Pet Lovers",
+      "icon": "heart",
+      "accent": "#FFF0E6",
+      "tags": [
+        "Pet",
+        "Cat",
+        "Dog"
+      ],
+      "description": "Sharing tips merawat hewan peliharaan dan adopsi.",
+      "members": "1.4k",
+      "postsToday": 14,
+      "memberCount": 1400,
+      "isJoined": true,
+      "created_at": "2022-01-01T12:00:00Z",
+      "updated_at": "2023-10-01T12:00:00Z",
+      "cover": "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+      "id": "finance-talks",
+      "name": "Finance Talks",
+      "icon": "chat",
+      "accent": "#F0FFF0",
+      "tags": [
+        "Finance",
+        "Investment",
+        "Saving"
+      ],
+      "description": "Diskusi investasi, tips menabung, dan edukasi keuangan.",
+      "members": "2.1k",
+      "postsToday": 21,
+      "memberCount": 2100,
+      "isJoined": false,
+      "created_at": "2021-12-01T12:00:00Z",
+      "updated_at": "2023-10-01T12:00:00Z",
+      "cover": "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+      "id": "career-center",
+      "name": "Career Center",
+      "icon": "spark",
+      "accent": "#FFF7F0",
+      "tags": [
+        "Career",
+        "Job",
+        "Internship"
+      ],
+      "description": "Info lowongan kerja, magang, dan tips karier.",
+      "members": "3.0k",
+      "postsToday": 35,
+      "memberCount": 3000,
+      "isJoined": true,
+      "created_at": "2021-11-01T12:00:00Z",
+      "updated_at": "2023-10-01T12:00:00Z",
+      "cover": "https://images.unsplash.com/photo-1506452819137-0422416856b8?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+      "id": "photobook-id",
+      "name": "Photobook ID",
+      "icon": "heart",
+      "accent": "#F0F7FF",
+      "tags": [
+        "Photography",
+        "Album",
+        "Gallery"
+      ],
+      "description": "Sharing album foto, tips editing, dan review kamera.",
+      "members": "1.6k",
+      "postsToday": 18,
+      "memberCount": 1600,
+      "isJoined": false,
+      "created_at": "2021-10-01T12:00:00Z",
+      "updated_at": "2023-10-01T12:00:00Z",
+      "cover": "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+      "id": "startup-ideas",
+      "name": "Startup Ideas",
+      "icon": "spark",
+      "accent": "#FFF0F7",
+      "tags": [
+        "Startup",
+        "Idea",
+        "Pitch"
+      ],
+      "description": "Sharing ide bisnis, diskusi peluang, dan validasi startup.",
+      "members": "2.5k",
+      "postsToday": 26,
+      "memberCount": 2500,
+      "isJoined": true,
+      "created_at": "2021-09-01T12:00:00Z",
+      "updated_at": "2023-10-01T12:00:00Z",
+      "cover": "https://images.unsplash.com/photo-1515169067868-5387ec356754?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+      "id": "youth-leaders",
+      "name": "Youth Leaders",
+      "icon": "chat",
+      "accent": "#F0FFF7",
+      "tags": [
+        "Youth",
+        "Leadership",
+        "Seminar"
+      ],
+      "description": "Komunitas pengembangan diri, seminar kepemudaan, dan leadership camp.",
+      "members": "2.0k",
+      "postsToday": 24,
+      "memberCount": 2000,
+      "isJoined": false,
+      "created_at": "2021-08-01T12:00:00Z",
+      "updated_at": "2023-10-01T12:00:00Z",
+      "cover": "https://images.unsplash.com/photo-1557682250-33bd709cbe85?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+      "id": "indie-musicians",
+      "name": "Indie Musicians",
+      "icon": "heart",
+      "accent": "#FFF0E6",
+      "tags": [
+        "Music",
+        "Indie",
+        "Band"
+      ],
+      "description": "Sharing karya musik indie, kolaborasi, dan review lagu.",
+      "members": "1.8k",
+      "postsToday": 20,
+      "memberCount": 1800,
+      "isJoined": true,
+      "created_at": "2021-07-01T12:00:00Z",
+      "updated_at": "2023-10-01T12:00:00Z",
+      "cover": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+      "id": "digital-marketers",
+      "name": "Digital Marketers",
+      "icon": "spark",
+      "accent": "#E6FFF0",
+      "tags": [
+        "Marketing",
+        "Digital",
+        "Ads"
+      ],
+      "description": "Diskusi strategi digital marketing, campaign, dan tips ads.",
+      "members": "2.6k",
+      "postsToday": 29,
+      "memberCount": 2600,
+      "isJoined": false,
+      "created_at": "2021-06-01T12:00:00Z",
+      "updated_at": "2023-10-01T12:00:00Z",
+      "cover": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+      "id": "women-empowerment",
+      "name": "Women Empowerment",
+      "icon": "heart",
+      "accent": "#FFF7F0",
+      "tags": [
+        "Women",
+        "Empowerment",
+        "Seminar"
+      ],
+      "description": "Komunitas pemberdayaan perempuan, seminar, dan sharing inspirasi.",
+      "members": "2.2k",
+      "postsToday": 23,
+      "memberCount": 2200,
+      "isJoined": true,
+      "created_at": "2021-05-01T12:00:00Z",
+      "updated_at": "2023-10-01T12:00:00Z",
+      "cover": "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1200&q=80"
     }
   ],
   "events": [
@@ -6118,7 +6656,6 @@
   ],
   "click_events": [
     {
-<<<<<<< HEAD
       "id": 1,
       "event_type": "event_click",
       "item_id": 6,
@@ -6180,56 +6717,10 @@
       ],
       "user_id": "anon_1765820660152_zcd813dkh",
       "timestamp": "2025-12-15T18:07:05.926Z",
-=======
-      "event_type": "post_click",
-      "item_id": 2,
-      "item_title": "Is 'Clean Code' still relevant in 2024?",
-      "item_tags": [
-        "#Discussion",
-        "#SoftwareEngineering"
-      ],
-      "user_id": "anon_1765639418926_ays8es5mw",
-      "timestamp": "2025-12-15T17:20:49.271Z",
-      "source_page": "/bookmarks",
-      "metadata": {
-        "author": "Mike Ross",
-        "stars": 128
-      },
-      "id": 1
-    },
-    {
-      "event_type": "post_click",
-      "item_id": 2,
-      "item_title": "Is 'Clean Code' still relevant in 2024?",
-      "item_tags": [
-        "#Discussion",
-        "#SoftwareEngineering"
-      ],
-      "user_id": "anon_1765639418926_ays8es5mw",
-      "timestamp": "2025-12-15T17:20:50.456Z",
-      "source_page": "/forums/2",
-      "metadata": {
-        "author": "Mike Ross",
-        "stars": 128
-      },
-      "id": 2
-    },
-    {
-      "event_type": "book_click",
-      "item_id": 36,
-      "item_title": "The Hunger Games",
-      "item_tags": [
-        "Dystopia",
-        "Fiction"
-      ],
-      "user_id": "anon_1765639418926_ays8es5mw",
-      "timestamp": "2025-12-15T17:32:02.347Z",
->>>>>>> origin/bookmark
       "source_page": "/literature",
       "metadata": {
         "author": "Suzanne Collins",
         "rating": 4.8
-<<<<<<< HEAD
       }
     },
     {
@@ -7590,10 +8081,6 @@
         "retweets": 5000,
         "likes": 18000
       }
-=======
-      },
-      "id": 3
->>>>>>> origin/bookmark
     }
   ]
 }

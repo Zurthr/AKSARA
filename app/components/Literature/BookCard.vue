@@ -63,7 +63,7 @@
 import { useClickTracking } from '~/composables/useClickTracking';
 
 export interface BookCardBook {
-  id: number;
+  id: string | number;
   title: string;
   author?: string;
   image: string;

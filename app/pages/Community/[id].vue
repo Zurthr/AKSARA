@@ -78,6 +78,7 @@ import RightSideBar from '~/components/General/RightSideBar.vue';
 import CommunitySidebar from '~/components/CommunitySidebar.vue';
 import ForumCard from '~/components/Forum/ForumCard.vue';
 import postsData from '../../../mock-backend/data/posts.json';
+import communitiesDataRaw from '../../../mock-backend/data/communities.json';
 
 interface ForumPost {
   id: number;
@@ -157,8 +158,7 @@ const communityDirectory: CommunityDetail[] = [
     name: 'JUMP FEST 2025 - BRED THROUGH',
     subtitle: 'Trending in Western Fiction',
     eventTag: 'JUMP FEST 2025',
-    cover:
-      'https://images.unsplash.com/photo-1582711012124-a56cf82307a0?q=80&w=1540&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    cover: 'https://images.unsplash.com/photo-1557682250-33bd709cbe85?auto=format&fit=crop&w=1200&q=80',
     location: 'Bedok, Singapore',
     date: '13 August, 2025',
     members: '21k',
@@ -522,8 +522,61 @@ const fallbackId = 'jump-fest-2025';
 
 const community = computed(() => {
   const targetId = String(route.params.id ?? fallbackId);
-  return communityDirectory.find((entry) => entry.id === targetId) ??
-    communityDirectory.find((entry) => entry.id === fallbackId)!;
+  
+  // 1. Try to find in hardcoded directory
+  const localCommunity = communityDirectory.find((entry) => entry.id === targetId);
+
+  // 2. Try to find in JSON data
+  const jsonCommunity = (communitiesDataRaw as any[]).find(c => c.id === targetId);
+
+  // If found locally, return it (with updated cover from JSON if available)
+  if (localCommunity) {
+    if (jsonCommunity && jsonCommunity.cover) {
+      return {
+        ...localCommunity,
+        cover: jsonCommunity.cover,
+        description: jsonCommunity.description || localCommunity.description,
+        members: jsonCommunity.members || localCommunity.members,
+        name: jsonCommunity.name || localCommunity.name
+      };
+    }
+    return localCommunity;
+  }
+
+  // If NOT found locally but found in JSON, construct a generic detail object
+  if (jsonCommunity) {
+    return {
+      id: jsonCommunity.id,
+      name: jsonCommunity.name,
+      subtitle: 'Community Group',
+      eventTag: jsonCommunity.tags?.[0] || 'Community',
+      cover: jsonCommunity.cover || 'https://images.unsplash.com/photo-1557682250-33bd709cbe85?auto=format&fit=crop&w=1200&q=80',
+      location: 'Indonesia',
+      date: 'Open Community',
+      members: jsonCommunity.members || '0',
+      description: jsonCommunity.description || '',
+      tags: jsonCommunity.tags || [],
+      posts: [],
+      activities: {
+        image: jsonCommunity.cover || 'https://images.unsplash.com/photo-1526481280695-3c46973ed205?auto=format&fit=crop&w=600&q=80',
+        list: [],
+        gallery: []
+      },
+      related: []
+    } as CommunityDetail;
+  }
+
+  // Fallback if absolutely nothing found
+  const fallback = communityDirectory.find((entry) => entry.id === fallbackId)!;
+  // Try to update fallback with its JSON data if possible, just in case
+  const fallbackJson = (communitiesDataRaw as any[]).find(c => c.id === fallbackId);
+  if (fallbackJson && fallbackJson.cover) {
+     return {
+        ...fallback,
+        cover: fallbackJson.cover
+     }
+  }
+  return fallback;
 });
 
 const heroBackgroundStyle = computed(() => ({
