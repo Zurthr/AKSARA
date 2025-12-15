@@ -126,6 +126,7 @@ declare global {
   const useId: typeof import('vue').useId
   const useLazyAsyncData: typeof import('../../node_modules/nuxt/dist/app/composables/asyncData').useLazyAsyncData
   const useLazyBooks: typeof import('../../app/composables/useLiterature').useLazyBooks
+  const useLazyEvents: typeof import('../../app/composables/useEvents').useLazyEvents
   const useLazyFetch: typeof import('../../node_modules/nuxt/dist/app/composables/fetch').useLazyFetch
   const useLazyPosts: typeof import('../../app/composables/useLazyPosts').useLazyPosts
   const useLink: typeof import('vue-router').useLink
@@ -352,6 +353,7 @@ declare module 'vue' {
     readonly useId: UnwrapRef<typeof import('vue')['useId']>
     readonly useLazyAsyncData: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/asyncData')['useLazyAsyncData']>
     readonly useLazyBooks: UnwrapRef<typeof import('../../app/composables/useLiterature')['useLazyBooks']>
+    readonly useLazyEvents: UnwrapRef<typeof import('../../app/composables/useEvents')['useLazyEvents']>
     readonly useLazyFetch: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/fetch')['useLazyFetch']>
     readonly useLazyPosts: UnwrapRef<typeof import('../../app/composables/useLazyPosts')['useLazyPosts']>
     readonly useLink: UnwrapRef<typeof import('vue-router')['useLink']>

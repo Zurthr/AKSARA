@@ -6,7 +6,7 @@
       <div class="events-body">
         <div class="events-content">
           <!-- Loading state -->
-          <div v-if="loading" class="loading-state">
+          <div v-if="isLoading && events.length === 0" class="loading-state">
             <div class="loading-spinner"></div>
             <p>Loading events...</p>
           </div>
@@ -14,7 +14,8 @@
           <!-- Error state -->
           <div v-else-if="error" class="error-state">
             <p class="error-message">{{ error }}</p>
-            <button @click="fetchEvents" class="retry-btn">Try Again</button>
+            <button @click="retryFetch" class="retry-btn">Try Again</button>
+
             <!-- Fallback: show local/file events if backend fails -->
             <div v-if="filteredEvents.length" class="events-grid" style="margin-top:32px;">
               <NuxtLink
@@ -151,19 +152,25 @@
         </div>
       </div>
 
-      <div class="load-more">
-        <button class="load-more-btn">Load More Events</button>
+      <div class="load-more" ref="loadMoreTrigger">
+        <div v-if="isLoading && events.length > 0" class="loading-more-indicator">
+          <div class="loading-spinner-small"></div>
+          <span>Loading more events...</span>
+        </div>
+        <div v-else-if="!hasMore && events.length > 0" class="no-more-events">
+          <p>You've reached the end of the list</p>
+        </div>
       </div>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 import { useRuntimeConfig } from '#imports'
 import { useClickTracking } from '~/composables/useClickTracking'
 
-import { useEvents } from '~/composables/useEvents'
+import { useLazyEvents } from '~/composables/useEvents'
 import type { Event as EventItem } from '~/composables/useEvents'
 
 const runtimeConfig = useRuntimeConfig()
@@ -184,40 +191,57 @@ const resolveAssetBaseUrl = () => {
 const assetBaseUrl = resolveAssetBaseUrl()
 const listFallbackImage = 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=900&q=80'
 
-// Use Laravel API
-const { getAllEvents, loading, error } = useEvents()
+// Use Lazy Events Composable
+const { events, isLoading, hasMore, loadMore, error, reset } = useLazyEvents(6)
 
 // Click tracking
 const { trackEventClick } = useClickTracking()
 
-// Direct fetch from mock-backend
-const allEvents = ref<EventItem[]>([])
-const fetchingFromMockBackend = ref(false)
+// Retry fetch
+const retryFetch = () => {
+  reset()
+  loadMore()
+}
 
-// Fetch events from mock-backend API
-const fetchEventsFromMockBackend = async () => {
-  fetchingFromMockBackend.value = true
+// Infinite Scroll Logic
+const loadMoreTrigger = ref<HTMLElement | null>(null)
+let observer: IntersectionObserver | null = null
+
+const setupIntersectionObserver = () => {
+  if (observer) observer.disconnect()
   
-  try {
-    const response = await $fetch<EventItem[]>('http://localhost:3002/events')
-    allEvents.value = response
-    console.log('✅ Fetched events from mock-backend:', response.length)
-  } catch (err) {
-    console.error('❌ Error fetching from mock-backend:', err)
-    allEvents.value = []
-  } finally {
-    fetchingFromMockBackend.value = false
+  observer = new IntersectionObserver((entries) => {
+    // If visible and we have more data and not currently loading
+    if (entries[0].isIntersecting && hasMore.value && !isLoading.value) {
+      loadMore()
+    }
+  }, {
+    root: null, // viewport
+    rootMargin: '100px', // load before updated bottom
+    threshold: 0.1
+  })
+  
+  if (loadMoreTrigger.value) {
+    observer.observe(loadMoreTrigger.value)
   }
 }
 
-// Fetch events on mount
-onMounted(async () => {
-  await fetchEventsFromMockBackend();
-});
+onMounted(() => {
+  setupIntersectionObserver()
+})
 
-// Merged events - now just uses mock-backend data
+onUnmounted(() => {
+  if (observer) observer.disconnect()
+})
+
+// Watch for element availability (e.g. if conditions change)
+watch(loadMoreTrigger, (el) => {
+  if (el) setupIntersectionObserver()
+})
+
+// Merged events - uses the lazy loaded events
 const mergedEvents = computed<EventItem[]>(() => {
-  return allEvents.value
+  return events.value
 })
 
 const resolveAbsoluteUrl = (raw?: string | null) => {
@@ -797,6 +821,36 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+}
+
+.loading-more-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: #64748b;
+  font-size: 14px;
+  padding: 20px 0;
+}
+
+.loading-spinner-small {
+  width: 24px;
+  height: 24px;
+  border: 2px solid #e2e8f0;
+  border-top-color: #3B5379;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.no-more-events {
+  text-align: center;
+  color: #94a3b8;
+  padding: 24px 0;
+  font-size: 14px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
 
 .tag {

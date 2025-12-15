@@ -294,5 +294,39 @@
       "author": "Orang Kmplang",
       "stars": 80
     }
+  },
+  {
+    "id": 19,
+    "event_type": "post_click",
+    "item_id": 18,
+    "item_title": "Photography and Composition",
+    "item_tags": [
+      "#Photography",
+      "#Composition"
+    ],
+    "user_id": "anon_1765778889929_d9abgzwr0",
+    "timestamp": "2025-12-15T06:08:09.929Z",
+    "source_page": "/forums",
+    "metadata": {
+      "author": "Sarah Chen",
+      "stars": 120
+    }
+  },
+  {
+    "id": 20,
+    "event_type": "post_click",
+    "item_id": 8,
+    "item_title": "The math behind Deep Learning",
+    "item_tags": [
+      "#AI",
+      "#Math"
+    ],
+    "user_id": "anon_1765778889929_d9abgzwr0",
+    "timestamp": "2025-12-15T06:08:16.521Z",
+    "source_page": "/forums",
+    "metadata": {
+      "author": "John Doe",
+      "stars": 112
+    }
   }
 ]

@@ -34,7 +34,7 @@ export { useApi } from '../app/composables/useApi';
 export { useAuth, User, AuthTokens, LoginCredentials, RegisterData, UpdateProfileData, AuthResponse, RefreshResponse, ProfileResponse, ApiError } from '../app/composables/useAuth';
 export { useClickTracking, ClickEvent } from '../app/composables/useClickTracking';
 export { useCommunities, Community, CommunityPost, CommunityCreateData, CommunityUpdateData, CommunitiesResponse } from '../app/composables/useCommunities';
-export { useEvents, Event, EventCreateData, EventUpdateData, EventsResponse } from '../app/composables/useEvents';
+export { useEvents, useLazyEvents, Event, EventCreateData, EventUpdateData, EventsResponse } from '../app/composables/useEvents';
 export { useLazyPosts, PostAuthor, PostTag, Post } from '../app/composables/useLazyPosts';
 export { mapToNormalizedBook, useLiterature, useLazyBooks, LiteratureBook, NormalizedBook, LiteratureBookCreateData, LiteratureBookUpdateData, LiteratureBooksResponse } from '../app/composables/useLiterature';
 export { LOCAL_BOOKS_STORAGE_KEY, useLocalBooks } from '../app/composables/useLocalBooks';
