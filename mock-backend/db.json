@@ -6118,6 +6118,7 @@
   ],
   "click_events": [
     {
+<<<<<<< HEAD
       "id": 1,
       "event_type": "event_click",
       "item_id": 6,
@@ -6179,10 +6180,56 @@
       ],
       "user_id": "anon_1765820660152_zcd813dkh",
       "timestamp": "2025-12-15T18:07:05.926Z",
+=======
+      "event_type": "post_click",
+      "item_id": 2,
+      "item_title": "Is 'Clean Code' still relevant in 2024?",
+      "item_tags": [
+        "#Discussion",
+        "#SoftwareEngineering"
+      ],
+      "user_id": "anon_1765639418926_ays8es5mw",
+      "timestamp": "2025-12-15T17:20:49.271Z",
+      "source_page": "/bookmarks",
+      "metadata": {
+        "author": "Mike Ross",
+        "stars": 128
+      },
+      "id": 1
+    },
+    {
+      "event_type": "post_click",
+      "item_id": 2,
+      "item_title": "Is 'Clean Code' still relevant in 2024?",
+      "item_tags": [
+        "#Discussion",
+        "#SoftwareEngineering"
+      ],
+      "user_id": "anon_1765639418926_ays8es5mw",
+      "timestamp": "2025-12-15T17:20:50.456Z",
+      "source_page": "/forums/2",
+      "metadata": {
+        "author": "Mike Ross",
+        "stars": 128
+      },
+      "id": 2
+    },
+    {
+      "event_type": "book_click",
+      "item_id": 36,
+      "item_title": "The Hunger Games",
+      "item_tags": [
+        "Dystopia",
+        "Fiction"
+      ],
+      "user_id": "anon_1765639418926_ays8es5mw",
+      "timestamp": "2025-12-15T17:32:02.347Z",
+>>>>>>> origin/bookmark
       "source_page": "/literature",
       "metadata": {
         "author": "Suzanne Collins",
         "rating": 4.8
+<<<<<<< HEAD
       }
     },
     {
@@ -7543,6 +7590,10 @@
         "retweets": 5000,
         "likes": 18000
       }
+=======
+      },
+      "id": 3
+>>>>>>> origin/bookmark
     }
   ]
 }

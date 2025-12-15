@@ -99,56 +99,23 @@
         </div>
 
         <div class="events-insights" aria-label="Event highlights">
-          <section class="sidebar-card filter-card">
-              <h3>Filter Events</h3>
-              <div class="filter-form">
-                <div class="filter-row">
-                  <label class="filter-label">Start date</label>
-                  <div class="input-with-icon">
-                    <input ref="startInput" class="filter-input" type="date" v-model="startDate" />
-                    <button type="button" class="input-icon" @click="openStartPicker" aria-label="Open start date picker">
-                      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 10h5v5H7z" fill="currentColor" opacity="0.2"/><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z" fill="currentColor"/></svg>
-                    </button>
-                  </div>
-                </div>
+          <EventsFilter />
 
-                <div class="filter-row">
-                  <label class="filter-label">End date</label>
-                  <div class="input-with-icon">
-                    <input ref="endInput" class="filter-input" type="date" v-model="endDate" />
-                    <button type="button" class="input-icon" @click="openEndPicker" aria-label="Open end date picker">
-                      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 10h5v5H7z" fill="currentColor" opacity="0.2"/><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2zm0 16H5V8h14v11zM7 10h5v5H7z" fill="currentColor"/></svg>
-                    </button>
-                  </div>
-                </div>
-
-                <div class="filter-row">
-                  <label class="filter-label">Type</label>
-                  <div class="chip-group">
-                    <button type="button" :class="['chip', { 'chip-active': onlineChecked }]" @click="onlineChecked = !onlineChecked">Online</button>
-                    <button type="button" :class="['chip', { 'chip-active': offlineChecked }]" @click="offlineChecked = !offlineChecked">Offline</button>
-                  </div>
-                </div>
-
-                <div class="filter-row filter-actions">
-                  <button class="clear-btn" @click.prevent="clearFilters">Clear Filters</button>
-                </div>
-              </div>
-            </section>
-
-            <section class="sidebar-card">
-              <h3>Most Popular Tags</h3>
-              <div class="tags-grid">
-                <span v-for="tag in popularTags" :key="tag.name" class="tag" :class="tag.class">{{ tag.name }}</span>
-              </div>
-            </section>
+          <section class="sidebar-card">
+            <h3>Most Popular Tags</h3>
+            <div class="tags-grid">
+              <span v-for="tag in popularTags" :key="tag.name" class="tag" :class="tag.class">
+                {{ tag.name }}
+              </span>
+            </div>
+          </section>
 
           <section class="sidebar-card">
             <NuxtLink to="/events/create" class="initiate-btn">
               <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" fill="currentColor"/>
+                <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" fill="currentColor" />
               </svg>
-              Initiate a Event
+              Initiate an Event
             </NuxtLink>
           </section>
         </div>
@@ -171,6 +138,7 @@
 import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 import { useRuntimeConfig } from '#imports'
 import { useClickTracking } from '~/composables/useClickTracking'
+import EventsFilter from '~/components/Events/EventsFilter.vue'
 
 import { useLazyEvents } from '~/composables/useEvents'
 import type { Event as EventItem } from '~/composables/useEvents'
@@ -223,7 +191,7 @@ const setupIntersectionObserver = () => {
   
   observer = new IntersectionObserver((entries) => {
     // If visible and we have more data and not currently loading
-    if (entries[0].isIntersecting && hasMore.value && !isLoading.value) {
+    if (entries[0] && entries[0].isIntersecting && hasMore.value && !isLoading.value) {
       loadMore()
     }
   }, {
@@ -291,36 +259,8 @@ const handleEventClick = (event: EventItem) => {
   });
 };
 
-const startDate = ref<string | null>(null);
-const endDate = ref<string | null>(null);
-// chip-style selection: can select one, both, or none.
-// Default: both unchecked (no visual active). When neither is checked we treat as "show all".
-const onlineChecked = ref<boolean>(false);
-const offlineChecked = ref<boolean>(false);
-
-// refs to the native date inputs so we can trigger the picker from the icon
-const startInput = ref<HTMLInputElement | null>(null);
-const endInput = ref<HTMLInputElement | null>(null);
-
-const openPicker = (elRef: typeof startInput) => {
-  const el = elRef.value as (HTMLInputElement & { showPicker?: () => void }) | null;
-  if (!el) return;
-  // modern browsers expose showPicker()
-  try {
-    if (typeof el.showPicker === 'function') {
-      el.showPicker();
-      return;
-    }
-  } catch (e) {
-    // ignore and fallback
-  }
-  // fallback: focus + click
-  el.focus();
-  try { el.click(); } catch (e) { /* ignore */ }
-};
-
-const openStartPicker = () => openPicker(startInput);
-const openEndPicker = () => openPicker(endInput);
+const normalizeKey = (value: unknown) =>
+  (value ?? '').toString().trim().toLowerCase();
 
 const parseEventDate = (dateStr?: string | null): Date | null => {
   if (!dateStr) return null;
@@ -386,46 +326,63 @@ const isEventOnline = (event: any) => {
 };
 
 const filteredEvents = computed(() => {
+  const startQ = route.query.startDate as string | undefined;
+  const endQ = route.query.endDate as string | undefined;
+
+  const eventTypes = (Array.isArray(route.query.eventType)
+    ? route.query.eventType
+    : route.query.eventType
+    ? [route.query.eventType]
+    : []
+  ).map(normalizeKey);
+
+  const tagFilters = (Array.isArray(route.query.tags)
+    ? route.query.tags
+    : route.query.tags
+    ? [route.query.tags]
+    : []
+  ).map(normalizeKey);
+
+  const start = startQ ? new Date(startQ) : null;
+  const endRaw = endQ ? new Date(endQ) : null;
+  const end = endRaw ? new Date(endRaw.setHours(23, 59, 59, 999)) : null;
+
   return mergedEvents.value.filter((ev: EventItem) => {
-    // Type filter using chips: if both checked -> show all. If neither checked -> show all.
-    if (!(onlineChecked.value && offlineChecked.value)) {
-      // one of them might be false
-      if (onlineChecked.value && !offlineChecked.value) {
-        if (!isEventOnline(ev)) return false;
-      } else if (!onlineChecked.value && offlineChecked.value) {
-        if (isEventOnline(ev)) return false;
-      } else {
-        // neither checked -> treat as all (show everything)
-      }
+    // type filter (online/offline from query)
+    if (eventTypes.length) {
+      const isOnline = isEventOnline(ev);
+      if (eventTypes.includes('online') && !eventTypes.includes('offline') && !isOnline) return false;
+      if (!eventTypes.includes('online') && eventTypes.includes('offline') && isOnline) return false;
     }
 
-    // Date filters
-    if (startDate.value || endDate.value) {
+    // date filters
+    if (start || end) {
       const evDate = parseEventDate(ev.date);
       if (!evDate) return false;
 
-      if (startDate.value) {
-        const s = new Date(startDate.value);
-        if (evDate < s) return false;
-      }
-      if (endDate.value) {
-        const e = new Date(endDate.value);
-        e.setHours(23, 59, 59, 999);
-        if (evDate > e) return false;
-      }
+      if (start && evDate < start) return false;
+      if (end && evDate > end) return false;
+    }
+
+    // tag filters (any match)
+    if (tagFilters.length) {
+      const eventTags = Array.isArray(ev.tags)
+        ? ev.tags
+            .map((t: any) =>
+              typeof t === 'string' ? t : t.name || t.label || ''
+            )
+            .map(normalizeKey)
+        : [];
+
+      const allMatch = tagFilters.every((t) =>
+        eventTags.some((et) => et.includes(t))
+      );
+      if (!allMatch) return false;
     }
 
     return true;
   });
 });
-
-const clearFilters = () => {
-  startDate.value = null;
-  endDate.value = null;
-  // reset chips back to default (both unselected). If neither selected we show all events.
-  onlineChecked.value = false;
-  offlineChecked.value = false;
-};
 
 const popularTags = [
   { name: 'Harry Potter', class: 'tag-secondary' },
