@@ -194,9 +194,47 @@ const originalEvents = ref<EventItem[]>([])
 const staticEvents = normalizeEventCollection(mockEvents as RawEventRecord[])
 const { localEvents } = useLocalEvents()
 
-const normalizedLocalEvents = computed<EventItem[]>(() => {
-  const raw = Array.isArray(localEvents.value) ? localEvents.value : []
-  return normalizeEventCollection(raw as RawEventRecord[])
+// Retry fetch
+const retryFetch = () => {
+  reset()
+  loadMore()
+}
+
+// Global Route for Search
+const route = useRoute()
+
+watch(() => route.query.q, (newQ) => {
+  const query = typeof newQ === 'string' ? newQ : ''
+  search(query)
+}, { immediate: true })
+
+
+// Infinite Scroll Logic
+const loadMoreTrigger = ref<HTMLElement | null>(null)
+let observer: IntersectionObserver | null = null
+
+const setupIntersectionObserver = () => {
+  if (observer) observer.disconnect()
+  
+  observer = new IntersectionObserver((entries) => {
+    // If visible and we have more data and not currently loading
+    if (entries[0]?.isIntersecting && hasMore.value && !isLoading.value) {
+      loadMore()
+    }
+  }, {
+    root: null, // viewport
+    rootMargin: '100px', // load before updated bottom
+    threshold: 0.1
+  })
+  
+  if (loadMoreTrigger.value && observer) {
+    observer.observe(loadMoreTrigger.value)
+  }
+}
+
+onMounted(() => {
+  setupIntersectionObserver()
+  // Initial load is handled by watch immediate or useLazyEvents onMounted
 })
 
 const mergedEvents = computed<EventItem[]>(() => {

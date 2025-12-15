@@ -1,4 +1,6 @@
-﻿import { ref, readonly } from "vue"
+﻿import { ref, readonly, onMounted } from "vue"
+import { normalizePaginatedCollection, type PaginatedCollection } from "~/utils/pagination"
+import mockBooksData from "mockData/books.json"
 import { useApi } from "./useApi"
 
 export interface LiteratureBook {
@@ -36,33 +38,87 @@ export interface LiteratureBookCreateData {
 
 export interface LiteratureBookUpdateData extends Partial<LiteratureBookCreateData> {}
 
-export interface LiteratureBooksResponse {
-  status?: boolean
-  message?: string
-  data: {
-    data: LiteratureBook[]
-    current_page?: number
-    last_page?: number
-    per_page?: number
-    total?: number
-    links?: {
-      first?: string
-      last?: string
-      prev?: string | null
-      next?: string | null
+export type LiteratureBooksResponse = PaginatedCollection<LiteratureBook>
+
+// Helper function to normalize keys (for copy types, licensing, etc)
+const normalizeKey = (value: string | undefined | null): string => {
+  return (value || '')
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, '-')
+}
+
+// Helper function to map raw book to normalized format for UI
+const resolveBookId = (book: LiteratureBook): number => {
+  if (typeof book.id === "number" && Number.isFinite(book.id)) {
+    return book.id
+  }
+
+  if (typeof book.id === "string") {
+    const parsed = Number(book.id)
+    if (Number.isFinite(parsed)) {
+      return parsed
     }
-    meta?: {
-      current_page?: number
-      from?: number
-      last_page?: number
-      path?: string
-      per_page?: number
-      to?: number
-      total?: number
+
+    let hash = 0
+    for (let index = 0; index < book.id.length; index += 1) {
+      hash = (hash << 5) - hash + book.id.charCodeAt(index)
+      hash |= 0
     }
+    return Math.abs(hash)
+  }
+
+  return 0
+}
+
+export const mapToNormalizedBook = (book: LiteratureBook): NormalizedBook => {
+  // Handle tags - can be string[] or Array<{name: string}>
+  const tags: string[] = (book.tags || []).map((tag) =>
+    typeof tag === 'string' ? tag : tag.name
+  )
+
+  // Handle copy_types
+  const copyType = book.copy_types
+    ? Object.keys(book.copy_types).map((key) => normalizeKey(key)).filter(Boolean)
+    : []
+
+  const licensingType = book.licensing_type
+    ? [normalizeKey(book.licensing_type)]
+    : []
+
+  const sourceNames: string[] = []
+
+  if (book.sources) {
+    sourceNames.push(...book.sources.map((source) => source.name))
+  }
+
+  // Handle copy_types sources with proper type checking
+  if (book.copy_types) {
+    Object.values(book.copy_types).forEach((copyTypeEntry) => {
+      const entry = copyTypeEntry as { sources?: Array<{ name: string }> }
+      if (entry.sources) {
+        sourceNames.push(...entry.sources.map((source) => source.name))
+      }
+    })
+  }
+
+  return {
+    id: resolveBookId(book),
+    title: book.title,
+    author: book.author,
+    image: book.cover || book.image_url || '',
+    tags,
+    rating: book.rating,
+    bookmarks: book.total_bookmarked,
+    copyType,
+    licensingType,
+    sources: Array.from(new Set(sourceNames))
   }
 }
 
+const fallbackBooks = Array.isArray(mockBooksData) ? (mockBooksData as LiteratureBook[]) : []
+
+// Main composable for literature/books API operations
 export const useLiterature = () => {
   const api = useApi()
   const loading = ref(false)
@@ -76,13 +132,46 @@ export const useLiterature = () => {
     error.value = err
   }
 
-  const getAllBooks = async (page: number = 1, perPage: number = 20): Promise<LiteratureBooksResponse | null> => {
+  const buildBooksQuery = (
+    page: number,
+    perPage: number,
+    extraParams?: Record<string, unknown>
+  ) => {
+    const params = new URLSearchParams({
+      page: String(page),
+      per_page: String(perPage)
+    })
+
+    if (extraParams) {
+      Object.entries(extraParams).forEach(([key, value]) => {
+        if (value === undefined || value === null) {
+          return
+        }
+
+        const stringValue = String(value)
+        if (stringValue.trim() === "") {
+          return
+        }
+
+        params.append(key, stringValue)
+      })
+    }
+
+    return params.toString()
+  }
+
+  const getAllBooks = async (
+    page: number = 1,
+    perPage: number = 20,
+    extraParams?: Record<string, unknown>
+  ): Promise<LiteratureBooksResponse | null> => {
     setLoading(true)
     setError(null)
 
     try {
-      const response = await api.get<LiteratureBooksResponse>(`/literatures?page=${page}&per_page=${perPage}`)
-      return response
+      const queryString = buildBooksQuery(page, perPage, extraParams)
+      const response = await api.get<unknown>(`/literatures?${queryString}`)
+      return normalizePaginatedCollection<LiteratureBook>(response)
     } catch (err) {
       const errorMsg = err instanceof Error ? err.message : "Failed to fetch books"
       setError(errorMsg)
@@ -122,8 +211,8 @@ export const useLiterature = () => {
           }
         })
       }
-      const response = await api.get<LiteratureBooksResponse>(`/books/search?${params.toString()}`)
-      return response
+      const response = await api.get<unknown>(`/books/search?${params.toString()}`)
+      return normalizePaginatedCollection<LiteratureBook>(response)
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to search books")
       return null
@@ -195,3 +284,110 @@ export const useLiterature = () => {
     clearError
   }
 }
+
+/**
+ * Composable for lazy loading books with pagination against the Laravel backend
+ *
+ * @param pageSize - Number of books to load per page (default: 12)
+ */
+export function useLazyBooks(pageSize: number = 12) {
+  const api = useApi()
+  const books = ref<NormalizedBook[]>([])
+  const isLoading = ref(false)
+  const hasMore = ref(true)
+  const currentPage = ref(0)
+  const error = ref<Error | null>(null)
+
+  const loadMore = async () => {
+    if (isLoading.value || !hasMore.value) {
+      return
+    }
+
+    isLoading.value = true
+    error.value = null
+
+    const nextPage = currentPage.value + 1
+
+    try {
+      const response = await api.get<unknown>(`/literatures?page=${nextPage}&per_page=${pageSize}`)
+      const normalized = normalizePaginatedCollection<LiteratureBook>(response)
+      const pageItems = normalized.data ?? []
+      const enrichedItems = pageItems.map((book, index) => {
+        const hasValidId = book.id !== undefined && book.id !== null && String(book.id).trim() !== ""
+        if (hasValidId) {
+          return book
+        }
+
+        const fallbackId = nextPage * 10000 + (index + 1)
+        return { ...book, id: fallbackId }
+      })
+      const mappedBooks = enrichedItems.map(mapToNormalizedBook)
+
+      if (nextPage === 1) {
+        books.value = mappedBooks
+      } else {
+        books.value = [...books.value, ...mappedBooks]
+      }
+
+      currentPage.value = normalized.current_page || nextPage
+
+      const explicitMore = normalized.current_page < normalized.last_page
+      const assumeMore = !normalized.last_page && pageItems.length === pageSize
+      const reachedEnd = pageItems.length === 0
+
+      hasMore.value = !reachedEnd && (explicitMore || assumeMore)
+
+      if (reachedEnd) {
+        hasMore.value = false
+      }
+    } catch (err) {
+      console.error("Failed to load books:", err)
+
+      const fallbackStartIndex = (nextPage - 1) * pageSize
+      const fallbackSlice = fallbackBooks.slice(fallbackStartIndex, fallbackStartIndex + pageSize)
+
+      if (fallbackSlice.length > 0) {
+        const mappedBooks = fallbackSlice.map(mapToNormalizedBook)
+
+        if (nextPage === 1) {
+          books.value = mappedBooks
+        } else {
+          books.value = [...books.value, ...mappedBooks]
+        }
+
+        currentPage.value = nextPage
+        const consumed = fallbackStartIndex + fallbackSlice.length
+        hasMore.value = consumed < fallbackBooks.length
+        error.value = null
+        return
+      }
+
+      error.value = err instanceof Error ? err : new Error("Failed to load books")
+      hasMore.value = false
+    } finally {
+      isLoading.value = false
+    }
+  }
+
+  const reset = () => {
+    books.value = []
+    currentPage.value = 0
+    hasMore.value = true
+    error.value = null
+  }
+
+  // Load initial batch on mount
+  onMounted(() => {
+    loadMore()
+  })
+
+  return {
+    books,
+    isLoading,
+    hasMore,
+    error,
+    loadMore,
+    reset
+  }
+}
+

@@ -1,4 +1,7 @@
 import { ref, readonly } from 'vue'
+import mockEventsData from 'mockData/events.json'
+import { normalizeEventCollection } from '~/utils/events-normalizer'
+import { normalizePaginatedCollection, type PaginatedCollection } from '~/utils/pagination'
 import { useApi } from './useApi'
 
 // TypeScript interfaces for Events API
@@ -46,13 +49,11 @@ export interface EventCreateData {
 
 export interface EventUpdateData extends Partial<EventCreateData> {}
 
-export interface EventsResponse {
-  data: Event[]
-  current_page: number
-  last_page: number
-  per_page: number
-  total: number
-}
+export type EventsResponse = PaginatedCollection<Event>
+
+const fallbackEvents = normalizeEventCollection(
+  Array.isArray(mockEventsData) ? (mockEventsData as Array<Record<string, unknown>>) : []
+)
 
 // Events API composable
 export const useEvents = () => {
@@ -67,14 +68,34 @@ export const useEvents = () => {
   const setError = (err: string | null) => {
     error.value = err
   }
-  
-  const getAllEvents = async (page: number = 1, perPage: number = 10): Promise<EventsResponse | null> => {
+
+  const buildEventsQuery = (page: number, perPage: number, searchQuery?: string) => {
+    const params = new URLSearchParams({
+      page: String(page),
+      per_page: String(perPage)
+    })
+
+    const normalizedQuery = searchQuery?.trim()
+    if (normalizedQuery) {
+      params.append('search', normalizedQuery)
+      params.append('q', normalizedQuery)
+    }
+
+    return params.toString()
+  }
+
+  const getAllEvents = async (
+    page: number = 1,
+    perPage: number = 10,
+    searchQuery?: string
+  ): Promise<EventsResponse | null> => {
     setLoading(true)
     setError(null)
     
     try {
-      const response = await api.get<EventsResponse>(`/events?page=${page}&per_page=${perPage}`)
-      return response
+      const queryString = buildEventsQuery(page, perPage, searchQuery)
+      const response = await api.get<unknown>(`/events?${queryString}`)
+      return normalizePaginatedCollection<Event>(response)
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to fetch events')
       return null
@@ -159,5 +180,125 @@ export const useEvents = () => {
     updateEvent,
     deleteEvent,
     clearError
+  }
+}
+
+/**
+ * Composable for lazy loading events with pagination against the primary API
+ */
+export function useLazyEvents(pageSize: number = 6) {
+  const { getAllEvents } = useEvents()
+  const events = ref<Event[]>([])
+  const isLoading = ref(false)
+  const hasMore = ref(true)
+  const currentPage = ref(0)
+  const error = ref<Error | null>(null)
+  const currentSearchQuery = ref('')
+
+  const applyFallback = (page: number) => {
+    const normalizedQuery = currentSearchQuery.value.trim().toLowerCase()
+    const filteredFallback = normalizedQuery
+      ? fallbackEvents.filter((item) => {
+          const title = typeof item.title === 'string' ? item.title.toLowerCase() : ''
+          const description = typeof item.description === 'string' ? item.description.toLowerCase() : ''
+          return title.includes(normalizedQuery) || description.includes(normalizedQuery)
+        })
+      : fallbackEvents
+
+    const fallbackStartIndex = (page - 1) * pageSize
+    const fallbackSlice = filteredFallback.slice(fallbackStartIndex, fallbackStartIndex + pageSize)
+
+    if (fallbackSlice.length === 0) {
+      return false
+    }
+
+    if (page === 1) {
+      events.value = fallbackSlice
+    } else {
+      events.value = [...events.value, ...fallbackSlice]
+    }
+
+    currentPage.value = page
+    const consumed = fallbackStartIndex + fallbackSlice.length
+    hasMore.value = consumed < filteredFallback.length
+    error.value = null
+    return true
+  }
+
+  const loadMore = async () => {
+    if (isLoading.value || !hasMore.value) {
+      return
+    }
+
+    isLoading.value = true
+    error.value = null
+
+    const nextPage = currentPage.value + 1
+
+    try {
+      const response = await getAllEvents(nextPage, pageSize, currentSearchQuery.value || undefined)
+
+      if (!response) {
+        if (!applyFallback(nextPage)) {
+          error.value = new Error('Failed to fetch events')
+          hasMore.value = false
+        }
+        return
+      }
+
+      const pageItems = Array.isArray(response.data) ? response.data : []
+      const resolvedPage = response.current_page || nextPage
+      const resolvedLastPage = response.last_page || resolvedPage
+
+      if (nextPage === 1) {
+        events.value = pageItems
+      } else {
+        events.value = [...events.value, ...pageItems]
+      }
+
+      currentPage.value = resolvedPage
+
+      const explicitMore = resolvedPage < resolvedLastPage
+      const assumeMore = !response.last_page && pageItems.length === pageSize
+      const reachedEnd = pageItems.length === 0
+
+      hasMore.value = !reachedEnd && (explicitMore || assumeMore)
+
+      if (reachedEnd) {
+        hasMore.value = false
+      }
+    } catch (err) {
+      console.error('Failed to load events:', err)
+
+      if (!applyFallback(nextPage)) {
+        error.value = err instanceof Error ? err : new Error('Failed to load events')
+        hasMore.value = false
+      }
+    } finally {
+      isLoading.value = false
+    }
+  }
+
+  const reset = () => {
+    events.value = []
+    currentPage.value = 0
+    hasMore.value = true
+    error.value = null
+  }
+
+  const search = (query: string) => {
+    currentSearchQuery.value = query.trim()
+    reset()
+    void loadMore()
+  }
+
+  return {
+    events,
+    isLoading,
+    hasMore,
+    error,
+    loadMore,
+    reset,
+    search
   }
 }

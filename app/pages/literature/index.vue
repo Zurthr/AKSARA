@@ -120,21 +120,20 @@ const fetchBooks = async () => {
   try {
     const response = await getAllBooks()
     
-    // Handle nested Laravel response structure: response.data.data
-    if (response && response.data && response.data.data) {
-      const laravelBooksWithUniqueIds = response.data.data.map((book, index) => ({
+    if (response && Array.isArray(response.data)) {
+      const laravelBooksWithUniqueIds = response.data.map((book, index) => ({
         ...book,
         id: book.id || `laravel-${index + 1}`,
         source: 'laravel'
       }))
-      
+
       originalBooks.value = laravelBooksWithUniqueIds
     } else {
       originalBooks.value = []
     }
   } catch (apiError) {
     console.warn('Literature API not available, using local data only')
-    originalBooks.value = []
+    originalBooks.value = Array.isArray(staticBooks) ? staticBooks : []
   }
 }
 
