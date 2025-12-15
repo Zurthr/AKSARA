@@ -84,7 +84,7 @@
       <ForumRightSidebar 
         :related-community="relatedCommunity"
         :related-books="relatedBooks"
-        :social-mentions="post?.social_mentions"
+        :social-mentions="socialMentions"
       />
     </div>
   </div>
@@ -93,6 +93,29 @@
 <script setup lang="ts">
 const route = useRoute();
 const postId = route.params.id;
+
+interface SocialMention {
+  id: number;
+  platform: 'twitter' | 'reddit';
+  topic?: string;
+  author_name?: string;
+  author_handle?: string;
+  author_avatar?: string;
+  content?: string;
+  date?: string;
+  url?: string;
+  stats?: {
+    replies: number | string;
+    retweets: number | string;
+    likes: number | string;
+  };
+  subreddit?: string;
+  subreddit_members?: string;
+  subreddit_icon?: string;
+  title?: string;
+  image?: string;
+  comment_count?: string;
+}
 
 interface Post {
   id: number;
@@ -110,26 +133,8 @@ interface Post {
   related_books?: number[];
   created_at: string;
   updated_at: string;
-  social_mentions?: Array<{
-    platform: 'twitter' | 'reddit';
-    author_name?: string;
-    author_handle?: string;
-    author_avatar?: string;
-    content?: string;
-    date?: string;
-    stats?: {
-      replies: number | string;
-      retweets: number | string;
-      likes: number | string;
-    };
-    subreddit?: string;
-    subreddit_members?: string;
-    subreddit_icon?: string;
-    title?: string;
-    image?: string;
-    comment_count?: string;
-    url?: string;
-  }>;
+  social_mention_ids?: number[];
+  social_mentions?: SocialMention[];
 }
 
 const { data: post, error } = await useFetch<Post>(`http://localhost:3002/posts/${postId}`);
@@ -138,6 +143,19 @@ if (error.value) {
   console.error('Error fetching post:', error.value);
 }
 
+// Fetch social mentions from sosmed.json if post has social_mention_ids
+const socialMentions = ref<SocialMention[]>([]);
+if (post.value?.social_mention_ids?.length) {
+  const { data: sosmedData } = await useFetch<{ social_mentions: SocialMention[] }>('http://localhost:3002/sosmed');
+  if (sosmedData.value?.social_mentions) {
+    socialMentions.value = sosmedData.value.social_mentions.filter(
+      (mention) => post.value?.social_mention_ids?.includes(mention.id)
+    );
+  }
+} else if (post.value?.social_mentions) {
+  // Fallback for old format with embedded social_mentions
+  socialMentions.value = post.value.social_mentions as SocialMention[];
+}
 
 // Fetch related community
 const relatedCommunity = ref<Community | null>(null);
@@ -189,6 +207,7 @@ interface Book {
   rating: number;
 }
 </script>
+
 
 
 <style scoped>

@@ -23,6 +23,7 @@
                 :key="event.id"
                 :to="`/events/${event.id}`"
                 class="event-card"
+                @click="handleEventClick(event)"
               >
                 <div class="event-image">
                   <img :src="getEventImageSrc(event)" :alt="event.title" @error="handleCardImageError" />
@@ -63,6 +64,7 @@
               :key="event.id"
               :to="`/events/${event.id}`"
               class="event-card"
+              @click="handleEventClick(event)"
             >
               <div class="event-image">
                 <img :src="getEventImageSrc(event)" :alt="event.title" @error="handleCardImageError" />

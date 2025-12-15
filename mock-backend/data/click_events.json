@@ -379,5 +379,372 @@
       "author": "Louis Litt",
       "stars": 190
     }
+  },
+  {
+    "id": 24,
+    "event_type": "community_click",
+    "item_id": "jump-fest-2025",
+    "item_title": "JUMP FEST 2025 - BRED THROUGH",
+    "item_tags": [
+      "#HarryPotter",
+      "#WIBU",
+      "#AnimeX"
+    ],
+    "user_id": "anon_1765794588639_1hfm6g405",
+    "timestamp": "2025-12-15T11:51:13.920Z",
+    "source_page": "/community",
+    "metadata": {
+      "members": 21
+    }
+  },
+  {
+    "id": 25,
+    "event_type": "post_click",
+    "item_id": 1,
+    "item_title": "Applying 'Atomic Habits' to Learning to Code",
+    "item_tags": [
+      "#Productivity",
+      "#Coding"
+    ],
+    "user_id": "anon_1765794588639_1hfm6g405",
+    "timestamp": "2025-12-15T11:51:45.080Z",
+    "source_page": "/",
+    "metadata": {
+      "author": "Sarah Chen",
+      "stars": 342
+    }
+  },
+  {
+    "id": 26,
+    "event_type": "event_click",
+    "item_id": 1,
+    "item_title": "Photo Walk Jakarta",
+    "user_id": "anon_1765794588639_1hfm6g405",
+    "timestamp": "2025-12-15T11:52:00.078Z",
+    "source_page": "/",
+    "metadata": {
+      "date": "2023-10-15T08:00:00Z",
+      "community_id": "photography-club"
+    }
+  },
+  {
+    "id": 27,
+    "event_type": "post_click",
+    "item_id": 3,
+    "item_title": "The cozy beginning of The Hobbit",
+    "item_tags": [
+      "#Tolkien",
+      "#Fantasy"
+    ],
+    "user_id": "anon_1765794588639_1hfm6g405",
+    "timestamp": "2025-12-15T11:52:20.103Z",
+    "source_page": "/",
+    "metadata": {
+      "author": "Jane Smith",
+      "stars": 560
+    }
+  },
+  {
+    "id": 28,
+    "event_type": "event_click",
+    "item_id": 3,
+    "item_title": "Wellness Workshop: Mindfulness Basics",
+    "user_id": "anon_1765794588639_1hfm6g405",
+    "timestamp": "2025-12-15T11:52:33.190Z",
+    "source_page": "/",
+    "metadata": {
+      "date": "2023-09-28T09:00:00Z",
+      "community_id": "wellness-warriors"
+    }
+  },
+  {
+    "id": 29,
+    "event_type": "post_click",
+    "item_id": 1,
+    "item_title": "Applying 'Atomic Habits' to Learning to Code",
+    "item_tags": [
+      "#Productivity",
+      "#Coding"
+    ],
+    "user_id": "anon_1765794588639_1hfm6g405",
+    "timestamp": "2025-12-15T14:21:21.354Z",
+    "source_page": "/forums",
+    "metadata": {
+      "author": "Sarah Chen",
+      "stars": 342
+    }
+  },
+  {
+    "id": 30,
+    "event_type": "post_click",
+    "item_id": 2,
+    "item_title": "Is 'Clean Code' still relevant in 2024?",
+    "item_tags": [
+      "#Discussion",
+      "#SoftwareEngineering"
+    ],
+    "user_id": "anon_1765794588639_1hfm6g405",
+    "timestamp": "2025-12-15T14:39:43.958Z",
+    "source_page": "/forums",
+    "metadata": {
+      "author": "Mike Ross",
+      "stars": 128
+    }
+  },
+  {
+    "id": 31,
+    "event_type": "book_click",
+    "item_id": 36,
+    "item_title": "The Hunger Games",
+    "item_tags": [
+      "Dystopia",
+      "Fiction"
+    ],
+    "user_id": "anon_1765794588639_1hfm6g405",
+    "timestamp": "2025-12-15T14:54:51.838Z",
+    "source_page": "/literature",
+    "metadata": {
+      "author": "Suzanne Collins",
+      "rating": 4.8
+    }
+  },
+  {
+    "id": 32,
+    "event_type": "book_click",
+    "item_id": 15,
+    "item_title": "Vue.js: Up and Running",
+    "item_tags": [
+      "Web Development",
+      "JavaScript",
+      "Vue.js",
+      "Frontend Frameworks",
+      "Single Page Applications"
+    ],
+    "user_id": "anon_1765794588639_1hfm6g405",
+    "timestamp": "2025-12-15T14:54:59.380Z",
+    "source_page": "/literature",
+    "metadata": {
+      "author": "Callum Macrae",
+      "rating": 4.1
+    }
+  },
+  {
+    "id": 33,
+    "event_type": "post_click",
+    "item_id": 1,
+    "item_title": "Applying 'Atomic Habits' to Learning to Code",
+    "item_tags": [
+      "#Productivity",
+      "#Coding"
+    ],
+    "user_id": "anon_1765816209483_p6fv4rbvg",
+    "timestamp": "2025-12-15T16:30:09.483Z",
+    "source_page": "/forums",
+    "metadata": {
+      "author": "Sarah Chen",
+      "stars": 342
+    }
+  },
+  {
+    "id": 34,
+    "event_type": "post_click",
+    "item_id": 6,
+    "item_title": "MVP vs Polished Product",
+    "item_tags": [
+      "#Business",
+      "#Startup"
+    ],
+    "user_id": "anon_1765816209483_p6fv4rbvg",
+    "timestamp": "2025-12-15T16:30:15.624Z",
+    "source_page": "/forums",
+    "metadata": {
+      "author": "Harvey Specter",
+      "stars": 445
+    }
+  },
+  {
+    "id": 35,
+    "event_type": "post_click",
+    "item_id": 2,
+    "item_title": "Is 'Clean Code' still relevant in 2024?",
+    "item_tags": [
+      "#Discussion",
+      "#SoftwareEngineering"
+    ],
+    "user_id": "anon_1765816209483_p6fv4rbvg",
+    "timestamp": "2025-12-15T16:30:21.320Z",
+    "source_page": "/forums",
+    "metadata": {
+      "author": "Mike Ross",
+      "stars": 128
+    }
+  },
+  {
+    "id": 36,
+    "event_type": "post_click",
+    "item_id": 3,
+    "item_title": "The cozy beginning of The Hobbit",
+    "item_tags": [
+      "#Tolkien",
+      "#Fantasy"
+    ],
+    "user_id": "anon_1765816209483_p6fv4rbvg",
+    "timestamp": "2025-12-15T16:30:26.771Z",
+    "source_page": "/forums",
+    "metadata": {
+      "author": "Jane Smith",
+      "stars": 560
+    }
+  },
+  {
+    "id": 37,
+    "event_type": "post_click",
+    "item_id": 1,
+    "item_title": "Pentingnya Literasi Digital untuk Generasi Muda Indonesia",
+    "item_tags": [
+      "#LiterasiDigital",
+      "#Edukasi"
+    ],
+    "user_id": "anon_1765816209483_p6fv4rbvg",
+    "timestamp": "2025-12-15T16:31:23.796Z",
+    "source_page": "/forums",
+    "metadata": {
+      "author": "Andi Pratama",
+      "stars": 456
+    }
+  },
+  {
+    "id": 38,
+    "event_type": "post_click",
+    "item_id": 3,
+    "item_title": "Literasi AI untuk Santri: Inisiatif XLSMART yang Patut Diapresiasi",
+    "item_tags": [
+      "#AI",
+      "#Edukasi"
+    ],
+    "user_id": "anon_1765816209483_p6fv4rbvg",
+    "timestamp": "2025-12-15T16:31:32.870Z",
+    "source_page": "/forums",
+    "metadata": {
+      "author": "Budi Santoso",
+      "stars": 567
+    }
+  },
+  {
+    "id": 39,
+    "event_type": "post_click",
+    "item_id": 11,
+    "item_title": "Major JavaScript Library Breach: What You Need to Know",
+    "item_tags": [
+      "#Security",
+      "#JavaScript"
+    ],
+    "user_id": "anon_1765816209483_p6fv4rbvg",
+    "timestamp": "2025-12-15T16:31:41.443Z",
+    "source_page": "/forums",
+    "metadata": {
+      "author": "Nina Thompson",
+      "stars": 1890
+    }
+  },
+  {
+    "id": 40,
+    "event_type": "community_click",
+    "item_id": "jump-fest-2025",
+    "item_title": "JUMP FEST 2025 - BRED THROUGH",
+    "item_tags": [
+      "#HarryPotter",
+      "#WIBU",
+      "#AnimeX"
+    ],
+    "user_id": "anon_1765820660152_zcd813dkh",
+    "timestamp": "2025-12-15T17:44:20.152Z",
+    "source_page": "/community",
+    "metadata": {
+      "members": 21
+    }
+  },
+  {
+    "id": 41,
+    "event_type": "community_click",
+    "item_id": "photography-club",
+    "item_title": "Photography Club",
+    "item_tags": [
+      "Photo Walk",
+      "Tips",
+      "Critique"
+    ],
+    "user_id": "anon_1765820660152_zcd813dkh",
+    "timestamp": "2025-12-15T17:44:27.328Z",
+    "source_page": "/community",
+    "metadata": {
+      "members": 287
+    }
+  },
+  {
+    "id": 42,
+    "event_type": "community_join",
+    "item_id": "photography-club",
+    "item_title": "Photography Club",
+    "item_tags": [
+      "#PhotoWalk",
+      "#Tips",
+      "#Critique",
+      "#Photography"
+    ],
+    "user_id": "anon_1765820660152_zcd813dkh",
+    "timestamp": "2025-12-15T17:44:35.595Z",
+    "source_page": "/community/photography-club",
+    "metadata": {
+      "members": "287"
+    }
+  },
+  {
+    "id": 43,
+    "event_type": "book_click",
+    "item_id": 37,
+    "item_title": "Catching Fire",
+    "item_tags": [
+      "General"
+    ],
+    "user_id": "anon_1765820660152_zcd813dkh",
+    "timestamp": "2025-12-15T17:44:43.808Z",
+    "source_page": "/literature",
+    "metadata": {
+      "author": "Suzanne Collins",
+      "rating": 4.8
+    }
+  },
+  {
+    "id": 44,
+    "event_type": "event_click",
+    "item_id": 2,
+    "item_title": "Book Club: Harry Potter Marathon",
+    "item_tags": [
+      "#Books",
+      "#Harry Potter",
+      "#Reading",
+      "#Community"
+    ],
+    "user_id": "anon_1765820660152_zcd813dkh",
+    "timestamp": "2025-12-15T17:49:13.976Z",
+    "source_page": "/events",
+    "metadata": {
+      "date": "2023-10-20T14:00:00Z",
+      "community_id": "literacy-circle"
+    }
+  },
+  {
+    "id": 45,
+    "event_type": "event_click",
+    "item_id": 1,
+    "item_title": "Photo Walk Jakarta",
+    "user_id": "anon_1765820660152_zcd813dkh",
+    "timestamp": "2025-12-15T17:49:25.591Z",
+    "source_page": "/",
+    "metadata": {
+      "date": "2023-10-15T08:00:00Z",
+      "community_id": "photography-club"
+    }
   }
 ]
