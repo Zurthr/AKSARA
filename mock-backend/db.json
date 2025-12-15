@@ -7065,88 +7065,54 @@
   "click_events": [
     {
       "event_type": "post_click",
-      "item_id": 1,
-      "item_title": "Applying 'Atomic Habits' to Learning to Code",
+      "item_id": 2,
+      "item_title": "Is 'Clean Code' still relevant in 2024?",
       "item_tags": [
-        "#Productivity",
-        "#Coding"
+        "#Discussion",
+        "#SoftwareEngineering"
       ],
       "user_id": "anon_1765639418926_ays8es5mw",
-      "timestamp": "2025-12-15T14:37:56.428Z",
-      "source_page": "/forums",
+      "timestamp": "2025-12-15T17:20:49.271Z",
+      "source_page": "/bookmarks",
       "metadata": {
-        "author": "Sarah Chen",
-        "stars": 342
+        "author": "Mike Ross",
+        "stars": 128
       },
       "id": 1
     },
     {
       "event_type": "post_click",
-      "item_id": 1,
-      "item_title": "Applying 'Atomic Habits' to Learning to Code",
+      "item_id": 2,
+      "item_title": "Is 'Clean Code' still relevant in 2024?",
       "item_tags": [
-        "#Productivity",
-        "#Coding"
+        "#Discussion",
+        "#SoftwareEngineering"
       ],
       "user_id": "anon_1765639418926_ays8es5mw",
-      "timestamp": "2025-12-15T14:37:58.359Z",
-      "source_page": "/forums/1",
+      "timestamp": "2025-12-15T17:20:50.456Z",
+      "source_page": "/forums/2",
       "metadata": {
-        "author": "Sarah Chen",
-        "stars": 342
+        "author": "Mike Ross",
+        "stars": 128
       },
       "id": 2
     },
     {
-      "event_type": "community_click",
-      "item_id": "wellness-warriors",
-      "item_title": "Wellness Warriors",
+      "event_type": "book_click",
+      "item_id": 36,
+      "item_title": "The Hunger Games",
       "item_tags": [
-        "Mindful",
-        "Balance",
-        "Habits"
+        "Dystopia",
+        "Fiction"
       ],
       "user_id": "anon_1765639418926_ays8es5mw",
-      "timestamp": "2025-12-15T15:26:29.808Z",
-      "source_page": "/community",
+      "timestamp": "2025-12-15T17:32:02.347Z",
+      "source_page": "/literature",
       "metadata": {
-        "members": 512
+        "author": "Suzanne Collins",
+        "rating": 4.8
       },
       "id": 3
-    },
-    {
-      "event_type": "community_click",
-      "item_id": "jump-fest-2025",
-      "item_title": "JUMP FEST 2025 - BRED THROUGH",
-      "item_tags": [
-        "#HarryPotter",
-        "#WIBU",
-        "#AnimeX"
-      ],
-      "user_id": "anon_1765639418926_ays8es5mw",
-      "timestamp": "2025-12-15T16:14:43.351Z",
-      "source_page": "/community",
-      "metadata": {
-        "members": 21
-      },
-      "id": 4
-    },
-    {
-      "event_type": "community_click",
-      "item_id": "wellness-warriors",
-      "item_title": "Wellness Warriors",
-      "item_tags": [
-        "Mindful",
-        "Balance",
-        "Habits"
-      ],
-      "user_id": "anon_1765639418926_ays8es5mw",
-      "timestamp": "2025-12-15T16:14:58.429Z",
-      "source_page": "/community",
-      "metadata": {
-        "members": 512
-      },
-      "id": 5
     }
   ]
 }

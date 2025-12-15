@@ -15,7 +15,6 @@
           :post="post"
         />
 
-        <!-- Non-post bookmarks (literature, events) -->
         <article
           v-for="item in visibleNonPostBookmarks"
           :key="item.id"
@@ -70,7 +69,7 @@
     <RightSideBar>
       <section class="sidebar-card">
         <h3>Your Bookmarks</h3>
-        <p class="sidebar-quote">'a placeholder quote'</p>
+        <p class="sidebar-quote">All your favorite posts, in one place.</p>
         <div class="bookmark-tabs" role="tablist" aria-label="Bookmark types">
           <button
             type="button"
@@ -168,118 +167,288 @@ const ensureArray = (value: unknown): string[] => {
 const normalizeKey = (value: string) => value.trim().toLowerCase();
 
 const bookmarkItems = ref<BookmarkItem[]>([
+  // Forum posts – shaped after entries in mock-backend/db.json "posts"
   {
     id: 'bm-post-1',
-    refId: 'forum-101',
+    refId: 'post-1',
     type: 'post',
-    title: 'LF Best Books for Aspiring Web Developers',
-    content: 'Hey everyone! I’ve been diving deeper into web development lately, and I realized there’s a ton of great books out there that can really help you level up beyond just YouTube tutorials.',
-    timeAgo: 'an hr ago',
-    stars: 80,
-    link: '/forums/101',
-    tags: ['Web Dev', '#NewDev', '#WebDev', '#Stacking'],
+    title: "Applying 'Atomic Habits' to Learning to Code",
+    content:
+      "I've been struggling to stay consistent with my Vue.js learning. I started applying the '2-minute rule' from James Clear's book. Instead of saying 'I will code for 2 hours', I just say 'I will open VS Code'. It's surprisingly effective.",
+    timeAgo: '2 hours ago',
+    stars: 342,
+    link: '/forums/1',
+    tags: ['#Productivity', '#Coding'],
     author: {
-      name: 'Orang Kmplang',
-      tagline: 'A stupid one',
-      avatar: 'https://i.pravatar.cc/96?img=12',
+      name: 'Sarah Chen',
+      tagline: 'Product Designer',
+      avatar: 'https://i.pravatar.cc/150?u=sarah',
     },
   },
   {
     id: 'bm-post-2',
-    refId: 'forum-204',
+    refId: 'post-2',
     type: 'post',
-    title: 'Building a learning path beyond tutorials',
-    content: 'Collecting the best references for folks who want to move from watching to doing. What helped you the most?',
-    timeAgo: '2 hrs ago',
-    stars: 64,
-    link: '/forums/204',
-    tags: ['A Level', 'Web Dev', '#WebDev', '#Stacking'],
+    title: "Is 'Clean Code' still relevant in 2024?",
+    content:
+      "Uncle Bob's examples are in Java, and some people say the advice is outdated. However, I feel the core principles of meaningful naming and small functions are timeless. Thoughts?",
+    timeAgo: '4 hours ago',
+    stars: 128,
+    link: '/forums/2',
+    tags: ['#Discussion', '#SoftwareEngineering'],
     author: {
-      name: 'Orang Kmplang',
-      tagline: 'A stupid one',
-      avatar: 'https://i.pravatar.cc/96?img=32',
+      name: 'Mike Ross',
+      tagline: 'Backend Dev',
+      avatar: 'https://i.pravatar.cc/150?u=mike',
     },
   },
   {
-    id: 'bm-lit-1',
-    refId: 'literature-501',
-    type: 'literature',
-    title: 'Designing Data-Intensive Applications',
-    content: 'A must-read for system design fundamentals, distributed patterns, and trade-offs.',
-    timeAgo: 'yesterday',
-    stars: 112,
-    link: '/literature/501',
-    tags: ['Systems', 'Data', 'Architecture'],
+    id: 'bm-post-3',
+    refId: 'post-3',
+    type: 'post',
+    title: 'The cozy beginning of The Hobbit',
+    content:
+      'Re-reading The Hobbit this weekend. I forgot how whimsical the opening chapter is compared to the epic scale of LOTR. Bilbo fretting over his doilies while Gandalf plots an adventure is peak comedy.',
+    timeAgo: '5 hours ago',
+    stars: 560,
+    link: '/forums/3',
+    tags: ['#Tolkien', '#Fantasy'],
     author: {
-      name: 'Martin Kleppmann',
-      tagline: 'Author',
-      badge: 'Writer',
-      avatar: 'https://i.pravatar.cc/96?img=47',
+      name: 'Jane Smith',
+      tagline: 'Fantasy Reader',
+      avatar: 'https://i.pravatar.cc/150?u=jane',
     },
-    copyType: ['online', 'physical'],
-    licensingType: ['pay-to-own'],
-    sources: ['IEEE', 'OReilly'],
+  },
+  {
+    id: 'bm-post-4',
+    refId: 'post-4',
+    type: 'post',
+    title: 'Why you should master Vanilla JS before Frameworks',
+    content:
+      "Reading 'JavaScript: The Good Parts' reminded me why understanding closures and prototypes is crucial, even if you use React or Vue every day. Don't skip the basics, guys.",
+    timeAgo: '6 hours ago',
+    stars: 210,
+    link: '/forums/4',
+    tags: ['#JavaScript', '#Advice'],
+    author: {
+      name: 'Alfan Gunadar',
+      tagline: 'Frontend Ninja',
+      avatar: 'https://i.pravatar.cc/150?u=alfan',
+    },
+  },
+  {
+    id: 'bm-post-5',
+    refId: 'post-5',
+    type: 'post',
+    title: 'HCI principles in modern Game UI',
+    content:
+      "I've been analyzing the inventory systems in RPGs. The principles from the 'Human-Computer Interaction' book regarding cognitive load are totally applicable here. Minimalist UI isn't just aesthetic; it's functional.",
+    timeAgo: '8 hours ago',
+    stars: 89,
+    link: '/forums/5',
+    tags: ['#UXDesign', '#Gaming'],
+    author: {
+      name: 'Donna Paulsen',
+      tagline: 'UX Researcher',
+      avatar: 'https://i.pravatar.cc/150?u=donna',
+    },
+  },
+  {
+    id: 'bm-post-6',
+    refId: 'post-6',
+    type: 'post',
+    title: 'MVP vs Polished Product',
+    content:
+      'The Lean Startup methodology saved my latest project. We were about to spend 6 months building a feature nobody wanted. "Build-Measure-Learn" is the only way to go.',
+    timeAgo: '10 hours ago',
+    stars: 445,
+    link: '/forums/6',
+    tags: ['#Business', '#Startup'],
+    author: {
+      name: 'Harvey Specter',
+      tagline: 'Startup Founder',
+      avatar: 'https://i.pravatar.cc/150?u=harvey',
+    },
+  },
+  {
+    id: 'bm-post-7',
+    refId: 'post-7',
+    type: 'post',
+    title: 'Growth Mindset changed how I study',
+    content:
+      "I used to think I was just 'bad at math'. After reading Carol Dweck's book, I realized I just hadn't found the right method yet. It's a subtle shift but it changes everything.",
+    timeAgo: '12 hours ago',
+    stars: 670,
+    link: '/forums/7',
+    tags: ['#Psychology', '#Studying'],
+    author: {
+      name: 'Rachel Zane',
+      tagline: 'Student',
+      avatar: 'https://i.pravatar.cc/150?u=rachel',
+    },
+  },
+  {
+    id: 'bm-post-8',
+    refId: 'post-8',
+    type: 'post',
+    title: 'The math behind Deep Learning',
+    content:
+      "Finally diving into the 'Deep Learning' book by Goodfellow. The linear algebra chapter is dense but necessary. Anyone else working through this text?",
+    timeAgo: '14 hours ago',
+    stars: 112,
+    link: '/forums/8',
+    tags: ['#AI', '#Math'],
+    author: {
+      name: 'John Doe',
+      tagline: 'AI Enthusiast',
+      avatar: 'https://i.pravatar.cc/150?u=john',
+    },
+  },
+
+  // Literature – shaped after entries in mock-backend/db.json "books"
+  {
+    id: 'bm-lit-1',
+    refId: 'book-1',
+    type: 'literature',
+    title: 'Clean Code: A Handbook of Agile Software Craftsmanship',
+    content:
+      "Even bad code can function. But if code isn't clean, it can bring a development organization to its knees. Every year, countless hours and significant resources are lost because of poorly written code.",
+    timeAgo: '2 days ago',
+    stars: 3420,
+    link: '/literature/1',
+    tags: ['Software Engineering', 'Programming', 'Best Practices', 'Code Quality'],
+    author: {
+      name: 'Robert C. Martin',
+      tagline: 'Author',
+      badge: 'Book',
+      avatar: 'https://i.pravatar.cc/150?u=unclebob',
+    },
+    copyType: ['Physical', 'Digital'],
+    licensingType: ['Pay-to-own'],
+    sources: ['IEEE Xplore', 'Springer', 'ACM Digital Library'],
   },
   {
     id: 'bm-lit-2',
-    refId: 'literature-872',
+    refId: 'book-2',
     type: 'literature',
-    title: 'Learning Vue 3 by Building',
-    content: 'Step-by-step projects to get comfortable with the composition API and real-world UI states.',
+    title: 'The Hobbit',
+    content:
+      'Bilbo Baggins is a hobbit who enjoys a comfortable, unambitious life, but his contentment is disturbed when Gandalf and a company of dwarves arrive to take him on an adventure to the Lonely Mountain.',
     timeAgo: '3 days ago',
-    stars: 74,
-    link: '/literature/872',
-    tags: ['Vue', 'Frontend', 'NewDev'],
+    stars: 8934,
+    link: '/literature/2',
+    tags: ['Fantasy', 'Adventure', 'Classic Literature', 'Epic'],
     author: {
-      name: 'Vue School',
-      tagline: 'Educator',
-      avatar: 'https://i.pravatar.cc/96?img=21',
+      name: 'J.R.R. Tolkien',
+      tagline: 'Author',
+      badge: 'Book',
+      avatar: 'https://i.pravatar.cc/150?u=tolkien',
     },
-    copyType: ['online'],
-    licensingType: ['free'],
-    sources: ['VueSchool'],
+    copyType: ['Physical', 'Audio', 'Digital'],
+    licensingType: ['Pay-to-own'],
+    sources: ['Amazon', 'Audible', 'Internet Archive'],
   },
   {
-    id: 'bm-event-1',
-    refId: 'event-3201',
-    type: 'event',
-    title: 'Modern Vue Summit 2025',
-    content: 'Live workshop covering Nuxt server routes, composables, and deployment.',
+    id: 'bm-lit-3',
+    refId: 'book-3',
+    type: 'literature',
+    title: 'Atomic Habits: An Easy & Proven Way to Build Good Habits & Break Bad Ones',
+    content:
+      'Atomic Habits offers a proven framework for improving every day, with practical strategies for forming good habits, breaking bad ones, and mastering tiny behaviors that lead to remarkable results.',
     timeAgo: '4 days ago',
-    stars: 58,
-    link: '/events/3201',
-    tags: ['Vue', 'Workshop', 'Online'],
+    stars: 15678,
+    link: '/literature/3',
+    tags: ['Self-Help', 'Personal Development', 'Productivity', 'Psychology'],
     author: {
-      name: 'AKSARA Community',
-      tagline: 'Host',
-      badge: 'Event',
-      avatar: 'https://i.pravatar.cc/96?img=55',
+      name: 'James Clear',
+      tagline: 'Author',
+      badge: 'Book',
+      avatar: 'https://i.pravatar.cc/150?u=jamesclear',
     },
-    eventDate: '2025-12-29',
-    access: 'online',
+    copyType: ['Physical', 'Digital', 'Subscription'],
+    licensingType: ['Rent'],
+    sources: ['Amazon Kindle', 'Apple Books', 'Scribd'],
+  },
+  {
+    id: 'bm-lit-4',
+    refId: 'book-5',
+    type: 'literature',
+    title: 'The Pragmatic Programmer: Your Journey to Mastery',
+    content:
+      'Written as a series of self-contained sections with anecdotes and examples, The Pragmatic Programmer illustrates best approaches and major pitfalls across many aspects of software development.',
+    timeAgo: '5 days ago',
+    stars: 8912,
+    link: '/literature/5',
+    tags: ['Programming', 'Career Development', 'Software Development', 'Best Practices'],
+    author: {
+      name: 'David Thomas & Andrew Hunt',
+      tagline: 'Authors',
+      badge: 'Book',
+      avatar: 'https://i.pravatar.cc/150?u=pragprog',
+    },
+    copyType: ['Physical', 'Digital', 'Academic'],
+    licensingType: ['Pay-to-own'],
+    sources: ['Amazon', "O'Reilly", 'ACM Digital Library'],
+  },
+
+  // Events – shaped after entries in mock-backend/db.json "events"
+  {
+    id: 'bm-event-1',
+    refId: 'event-1',
+    type: 'event',
+    title: 'Photo Walk Jakarta',
+    content:
+      "Join us for a morning photo walk through the historic streets of Kota Tua. We'll explore colonial architecture, street photography techniques, and end with a gallery review session at a local café.",
+    timeAgo: 'upcoming',
+    stars: 12,
+    link: '/events/1',
+    tags: ['#Photography', '#Jakarta', '#Walking', '#Learning'],
+    author: {
+      name: 'Photography Club',
+      tagline: 'Community Event',
+      badge: 'Event',
+      avatar: 'https://i.pravatar.cc/150?u=photography-club',
+    },
+    eventDate: '2023-10-15T08:00:00Z',
+    access: 'offline',
   },
   {
     id: 'bm-event-2',
-    refId: 'event-1188',
+    refId: 'event-2',
     type: 'event',
-    title: 'Jakarta Tech Readers Meetup',
-    content: 'In-person book swap and lightning talks on recent engineering reads.',
-    timeAgo: 'a week ago',
-    stars: 33,
-    link: '/events/1188',
-    tags: ['Community', 'Offline', 'Book'],
+    title: 'Book Club: Harry Potter Marathon',
+    content:
+      'A full day marathon discussing all seven Harry Potter books. Bring your favorite theories and cosplay as your favorite character!',
+    timeAgo: 'upcoming',
+    stars: 8,
+    link: '/events/2',
+    tags: ['#Books', '#Harry Potter', '#Reading', '#Community'],
     author: {
-      name: 'Local Chapter',
-      tagline: 'Organizer',
-      avatar: 'https://i.pravatar.cc/96?img=5',
+      name: 'Literacy Circle',
+      tagline: 'Book Club Community',
+      badge: 'Event',
+      avatar: 'https://i.pravatar.cc/150?u=literacy-circle',
     },
-    eventDate: '2025-12-20',
+    eventDate: '2023-10-20T14:00:00Z',
     access: 'offline',
   },
 ]);
 
-// Placeholder: which real posts are bookmarked
-const bookmarkedPostIds = ref<number[]>([1, 2, 3]);
+// Which real posts are bookmarked, derived from bookmarkItems mock data
+const bookmarkedPostIds = computed<number[]>(() =>
+  bookmarkItems.value
+    .filter((b) => b.type === 'post')
+    .map((b) => {
+      // Prefer parsing from refId, e.g. "post-2"
+      const refMatch = b.refId.match(/^post-(\d+)$/);
+      if (refMatch) return Number(refMatch[1]);
+
+      // Fallback: parse from link, e.g. "/forums/2"
+      const linkMatch = b.link.match(/\/forums\/(\d+)$/);
+      return linkMatch ? Number(linkMatch[1]) : NaN;
+    })
+    .filter((id) => !Number.isNaN(id))
+);
 
 const bookmarkedPosts = computed<Post[]>(() => {
   const idSet = new Set(bookmarkedPostIds.value.map(String));
@@ -764,16 +933,15 @@ const typeLabel = (type: BookmarkType) => {
 
 .bookmark-tab.active {
   border-color: var(--color-primary, #2563eb);
-  background: #eff6ff;
+  background: var(--color-primary, #2563eb);
 }
 
 .bookmark-tab.active .tab-label {
-  color: var(--color-primary, #2563eb);
+  color: #ffffff;
 }
 
 .bookmark-tab.active .tab-count {
-  background: var(--color-primary, #2563eb);
-  color: #ffffff;
+  background: var(--color-tertiary, #2563eb);
 }
 
 .filter-card {

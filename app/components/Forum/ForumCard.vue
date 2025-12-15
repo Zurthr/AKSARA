@@ -91,7 +91,7 @@ const navigateToDetail = () => {
   background: none;
   border-radius: 16px;
   padding: 24px;
-  margin-bottom: 24px;
+  margin-bottom: 8px;
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s;
   border-bottom: #e2e8f0 1.6px solid;
