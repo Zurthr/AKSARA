@@ -32,6 +32,7 @@ export const LiteratureBookGrid: typeof import("../app/components/Literature/Boo
 export const LiteratureBookSection: typeof import("../app/components/Literature/BookSection.vue")['default']
 export const LiteratureFilterSidebar: typeof import("../app/components/Literature/LiteratureFilterSidebar.vue")['default']
 export const LiteratureReadsSection: typeof import("../app/components/Literature/ReadsSection.vue")['default']
+export const LiteratureSourcingOptions: typeof import("../app/components/Literature/SourcingOptions.vue")['default']
 export const Navbar: typeof import("../app/components/Navbar.vue")['default']
 export const NotFoundContent: typeof import("../app/components/NotFoundContent.vue")['default']
 export const NotificationModal: typeof import("../app/components/NotificationModal.vue")['default']
@@ -41,6 +42,7 @@ export const RichTextEditor: typeof import("../app/components/RichTextEditor.vue
 export const Sidebar: typeof import("../app/components/Sidebar.vue")['default']
 export const Slug: typeof import("../app/components/Slug.vue")['default']
 export const TrendingSidebar: typeof import("../app/components/TrendingSidebar.vue")['default']
+export const WorkInProgress: typeof import("../app/components/WorkInProgress.vue")['default']
 export const NuxtWelcome: typeof import("../node_modules/nuxt/dist/app/components/welcome.vue")['default']
 export const NuxtLayout: typeof import("../node_modules/nuxt/dist/app/components/nuxt-layout")['default']
 export const NuxtErrorBoundary: typeof import("../node_modules/nuxt/dist/app/components/nuxt-error-boundary.vue")['default']
@@ -82,6 +84,7 @@ export const LazyLiteratureBookGrid: LazyComponent<typeof import("../app/compone
 export const LazyLiteratureBookSection: LazyComponent<typeof import("../app/components/Literature/BookSection.vue")['default']>
 export const LazyLiteratureFilterSidebar: LazyComponent<typeof import("../app/components/Literature/LiteratureFilterSidebar.vue")['default']>
 export const LazyLiteratureReadsSection: LazyComponent<typeof import("../app/components/Literature/ReadsSection.vue")['default']>
+export const LazyLiteratureSourcingOptions: LazyComponent<typeof import("../app/components/Literature/SourcingOptions.vue")['default']>
 export const LazyNavbar: LazyComponent<typeof import("../app/components/Navbar.vue")['default']>
 export const LazyNotFoundContent: LazyComponent<typeof import("../app/components/NotFoundContent.vue")['default']>
 export const LazyNotificationModal: LazyComponent<typeof import("../app/components/NotificationModal.vue")['default']>
@@ -91,6 +94,7 @@ export const LazyRichTextEditor: LazyComponent<typeof import("../app/components/
 export const LazySidebar: LazyComponent<typeof import("../app/components/Sidebar.vue")['default']>
 export const LazySlug: LazyComponent<typeof import("../app/components/Slug.vue")['default']>
 export const LazyTrendingSidebar: LazyComponent<typeof import("../app/components/TrendingSidebar.vue")['default']>
+export const LazyWorkInProgress: LazyComponent<typeof import("../app/components/WorkInProgress.vue")['default']>
 export const LazyNuxtWelcome: LazyComponent<typeof import("../node_modules/nuxt/dist/app/components/welcome.vue")['default']>
 export const LazyNuxtLayout: LazyComponent<typeof import("../node_modules/nuxt/dist/app/components/nuxt-layout")['default']>
 export const LazyNuxtErrorBoundary: LazyComponent<typeof import("../node_modules/nuxt/dist/app/components/nuxt-error-boundary.vue")['default']>

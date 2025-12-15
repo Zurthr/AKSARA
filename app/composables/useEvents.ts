@@ -172,6 +172,7 @@ export function useLazyEvents(pageSize: number = 6) {
   const hasMore = ref(true)
   const currentPage = ref(0)
   const error = ref<Error | null>(null)
+  const currentSearchQuery = ref('')
 
   const loadMore = async () => {
     if (isLoading.value || !hasMore.value) return
@@ -181,11 +182,17 @@ export function useLazyEvents(pageSize: number = 6) {
     currentPage.value++
 
     try {
+      const params: any = {
+        _page: currentPage.value,
+        _limit: pageSize
+      }
+
+      if (currentSearchQuery.value) {
+        params.q = currentSearchQuery.value
+      }
+
       const response = await $fetch<Event[]>(`http://localhost:3002/events`, {
-        params: {
-          _page: currentPage.value,
-          _limit: pageSize
-        }
+        params
       })
 
       if (response.length < pageSize) {
@@ -193,9 +200,16 @@ export function useLazyEvents(pageSize: number = 6) {
       }
 
       if (response.length === 0) {
+        if (currentPage.value === 1) {
+          events.value = []
+        }
         hasMore.value = false
       } else {
-        events.value = [...events.value, ...response]
+        if (currentPage.value === 1) {
+          events.value = response
+        } else {
+          events.value = [...events.value, ...response]
+        }
       }
     } catch (e) {
       error.value = e as Error
@@ -212,10 +226,13 @@ export function useLazyEvents(pageSize: number = 6) {
     error.value = null
   }
 
-  // Load initial batch on mount
-  onMounted(() => {
+  const search = (query: string) => {
+    currentSearchQuery.value = query
+    reset()
     loadMore()
-  })
+  }
+
+
 
   return {
     events,
@@ -223,6 +240,7 @@ export function useLazyEvents(pageSize: number = 6) {
     hasMore,
     error,
     loadMore,
-    reset
+    reset,
+    search
   }
 }

@@ -133,10 +133,10 @@ const {
 // We don't filter client-side anymore, server does it based on 'q'
 const communities = computed(() => serverCommunities.value);
 
-// Fetch on mount
-onMounted(() => {
-  refetchCommunities();
-});
+// Fetch on mount handled by watch
+// onMounted(() => {
+//   refetchCommunities();
+// });
 
 // Handle community card click
 const handleCommunityClick = (community: Community) => {
@@ -163,6 +163,13 @@ watch(activeFilters, (newFilters) => {
   const query = newFilters.join(' ');
   refetchCommunities(query);
 }, { deep: true });
+
+// Watch route query for search
+const route = useRoute();
+watch(() => route.query.q, (newQ) => {
+  const query = typeof newQ === 'string' ? newQ : '';
+  refetchCommunities(query);
+}, { immediate: true });
 
 // Toggle filter function
 const toggleFilter = (tag: string) => {

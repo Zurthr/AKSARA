@@ -32,6 +32,7 @@ interface _GlobalComponents {
   'LiteratureBookSection': typeof import("../../app/components/Literature/BookSection.vue")['default']
   'LiteratureFilterSidebar': typeof import("../../app/components/Literature/LiteratureFilterSidebar.vue")['default']
   'LiteratureReadsSection': typeof import("../../app/components/Literature/ReadsSection.vue")['default']
+  'LiteratureSourcingOptions': typeof import("../../app/components/Literature/SourcingOptions.vue")['default']
   'Navbar': typeof import("../../app/components/Navbar.vue")['default']
   'NotFoundContent': typeof import("../../app/components/NotFoundContent.vue")['default']
   'NotificationModal': typeof import("../../app/components/NotificationModal.vue")['default']
@@ -41,6 +42,7 @@ interface _GlobalComponents {
   'Sidebar': typeof import("../../app/components/Sidebar.vue")['default']
   'Slug': typeof import("../../app/components/Slug.vue")['default']
   'TrendingSidebar': typeof import("../../app/components/TrendingSidebar.vue")['default']
+  'WorkInProgress': typeof import("../../app/components/WorkInProgress.vue")['default']
   'NuxtWelcome': typeof import("../../node_modules/nuxt/dist/app/components/welcome.vue")['default']
   'NuxtLayout': typeof import("../../node_modules/nuxt/dist/app/components/nuxt-layout")['default']
   'NuxtErrorBoundary': typeof import("../../node_modules/nuxt/dist/app/components/nuxt-error-boundary.vue")['default']
@@ -82,6 +84,7 @@ interface _GlobalComponents {
   'LazyLiteratureBookSection': LazyComponent<typeof import("../../app/components/Literature/BookSection.vue")['default']>
   'LazyLiteratureFilterSidebar': LazyComponent<typeof import("../../app/components/Literature/LiteratureFilterSidebar.vue")['default']>
   'LazyLiteratureReadsSection': LazyComponent<typeof import("../../app/components/Literature/ReadsSection.vue")['default']>
+  'LazyLiteratureSourcingOptions': LazyComponent<typeof import("../../app/components/Literature/SourcingOptions.vue")['default']>
   'LazyNavbar': LazyComponent<typeof import("../../app/components/Navbar.vue")['default']>
   'LazyNotFoundContent': LazyComponent<typeof import("../../app/components/NotFoundContent.vue")['default']>
   'LazyNotificationModal': LazyComponent<typeof import("../../app/components/NotificationModal.vue")['default']>
@@ -91,6 +94,7 @@ interface _GlobalComponents {
   'LazySidebar': LazyComponent<typeof import("../../app/components/Sidebar.vue")['default']>
   'LazySlug': LazyComponent<typeof import("../../app/components/Slug.vue")['default']>
   'LazyTrendingSidebar': LazyComponent<typeof import("../../app/components/TrendingSidebar.vue")['default']>
+  'LazyWorkInProgress': LazyComponent<typeof import("../../app/components/WorkInProgress.vue")['default']>
   'LazyNuxtWelcome': LazyComponent<typeof import("../../node_modules/nuxt/dist/app/components/welcome.vue")['default']>
   'LazyNuxtLayout': LazyComponent<typeof import("../../node_modules/nuxt/dist/app/components/nuxt-layout")['default']>
   'LazyNuxtErrorBoundary': LazyComponent<typeof import("../../node_modules/nuxt/dist/app/components/nuxt-error-boundary.vue")['default']>

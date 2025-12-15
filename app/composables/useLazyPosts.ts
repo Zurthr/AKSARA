@@ -33,6 +33,7 @@ export function useLazyPosts(pageSize: number = 10) {
     const hasMore = ref(true)
     const currentPage = ref(0)
     const error = ref<Error | null>(null)
+    const currentSearchQuery = ref('')
 
     const loadMore = async () => {
         if (isLoading.value || !hasMore.value) return
@@ -42,11 +43,17 @@ export function useLazyPosts(pageSize: number = 10) {
         currentPage.value++
 
         try {
+            const params: any = {
+                _page: currentPage.value,
+                _limit: pageSize
+            }
+
+            if (currentSearchQuery.value) {
+                params.q = currentSearchQuery.value
+            }
+
             const response = await $fetch<Post[]>(`http://localhost:3002/posts`, {
-                params: {
-                    _page: currentPage.value,
-                    _limit: pageSize
-                }
+                params
             })
 
             if (response.length < pageSize) {
@@ -54,9 +61,17 @@ export function useLazyPosts(pageSize: number = 10) {
             }
 
             if (response.length === 0) {
+                // If it's the first page and no results, we still want to indicate "no more"
+                if (currentPage.value === 1) {
+                    posts.value = []
+                }
                 hasMore.value = false
             } else {
-                posts.value = [...posts.value, ...response]
+                if (currentPage.value === 1) {
+                    posts.value = response
+                } else {
+                    posts.value = [...posts.value, ...response]
+                }
             }
         } catch (e) {
             error.value = e as Error
@@ -73,10 +88,13 @@ export function useLazyPosts(pageSize: number = 10) {
         error.value = null
     }
 
-    // Load initial batch on mount
-    onMounted(() => {
+    const search = (query: string) => {
+        currentSearchQuery.value = query
+        reset()
         loadMore()
-    })
+    }
+
+
 
     return {
         posts,
@@ -84,6 +102,8 @@ export function useLazyPosts(pageSize: number = 10) {
         hasMore,
         error,
         loadMore,
-        reset
+        reset,
+        search,
+        currentSearchQuery
     }
 }

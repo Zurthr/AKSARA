@@ -192,7 +192,7 @@ const assetBaseUrl = resolveAssetBaseUrl()
 const listFallbackImage = 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=900&q=80'
 
 // Use Lazy Events Composable
-const { events, isLoading, hasMore, loadMore, error, reset } = useLazyEvents(6)
+const { events, isLoading, hasMore, loadMore, error, reset, search } = useLazyEvents(6)
 
 // Click tracking
 const { trackEventClick } = useClickTracking()
@@ -202,6 +202,15 @@ const retryFetch = () => {
   reset()
   loadMore()
 }
+
+// Global Route for Search
+const route = useRoute()
+
+watch(() => route.query.q, (newQ) => {
+  const query = typeof newQ === 'string' ? newQ : ''
+  search(query)
+}, { immediate: true })
+
 
 // Infinite Scroll Logic
 const loadMoreTrigger = ref<HTMLElement | null>(null)
@@ -221,13 +230,14 @@ const setupIntersectionObserver = () => {
     threshold: 0.1
   })
   
-  if (loadMoreTrigger.value) {
+  if (loadMoreTrigger.value && observer) {
     observer.observe(loadMoreTrigger.value)
   }
 }
 
 onMounted(() => {
   setupIntersectionObserver()
+  // Initial load is handled by watch immediate or useLazyEvents onMounted
 })
 
 onUnmounted(() => {

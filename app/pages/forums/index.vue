@@ -38,13 +38,29 @@ import RightSideBar from '~/components/General/RightSideBar.vue';
 import { useLazyPosts } from '~/composables/useLazyPosts';
 
 // Use lazy loading for posts
-const { posts, isLoading, hasMore, loadMore } = useLazyPosts(10);
+const { posts, isLoading, hasMore, loadMore, search } = useLazyPosts(10);
+const route = useRoute();
 
 // Intersection Observer for infinite scroll
 const sentinelRef = ref<HTMLElement | null>(null);
 let observer: IntersectionObserver | null = null;
 
+// Handle search query changes
+watch(() => route.query.q, (newQuery) => {
+  const query = typeof newQuery === 'string' ? newQuery : '';
+  search(query);
+}, { immediate: true });
+
 onMounted(() => {
+  // Initial load is now handled by the watch immediate: true
+  // or we can keep it if query is empty, but watch handles it better.
+  // Actually, watch immediate runs before mount? 
+  // If we rely on watch, we might not need separate onMounted loadMore if query is present.
+  // But useLazyPosts mounts loadMore automatically? Let's check useLazyPosts.
+  // useLazyPosts calls loadMore onMounted.
+  // If we call search(), it resets and loadMore().
+  // We should be careful about double loading.
+  
   if (typeof window !== 'undefined') {
     observer = new IntersectionObserver(
       (entries) => {

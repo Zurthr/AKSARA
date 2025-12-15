@@ -83,15 +83,25 @@ watch(() => route.query, (newQuery) => {
 
 const handleSearch = () => {
   if (searchQuery.value.trim()) {
-    // Redirect to literature page with search query
-    // You can add logic here to determine content type (literature, forums, events, etc.)
-    // For now, defaulting to literature
-    const query: Record<string, string | string[]> = {
-      q: searchQuery.value.trim()
-    };
+    const queryTerm = searchQuery.value.trim();
+    const currentPath = route.path;
 
-    // Preserve filter params if already on literature page
-    if (route.path === '/literature') {
+    // Determine target route based on current section
+    let targetPath = '/literature';
+    let query: Record<string, string | string[]> = { q: queryTerm };
+
+    if (currentPath.startsWith('/forums')) {
+      targetPath = '/forums';
+    } else if (currentPath.startsWith('/community')) {
+      targetPath = '/community';
+      // For community, we might want to map this to a hash or just generic search
+      // But keeping it simple with q param as planned
+    } else if (currentPath.startsWith('/events')) {
+      targetPath = '/events';
+    }
+
+    // Preserve filter params if staying on the same page type (mainly for literature for now)
+    if (currentPath === '/literature' && targetPath === '/literature') {
       if (route.query.copyType) {
         query.copyType = Array.isArray(route.query.copyType)
           ? route.query.copyType as string[]
@@ -112,18 +122,18 @@ const handleSearch = () => {
 
     // Track search query
     trackSearch({
-      query: searchQuery.value.trim(),
-      source_page: route.path,
-      filters: {
+      query: queryTerm,
+      source_page: currentPath,
+      filters: targetPath === '/literature' ? {
         copyType: query.copyType,
         licensingType: query.licensingType,
         tags: query.tags,
         sources: query.sources
-      }
+      } : undefined
     });
 
     router.push({
-      path: '/literature',
+      path: targetPath,
       query
     });
   }
