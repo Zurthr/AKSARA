@@ -6,6 +6,3 @@ mock-backend/node_modules/
 .output
 .nitro
 .cache
-
-mock-backend/db.json
-mock-backend/data/click_events.json
