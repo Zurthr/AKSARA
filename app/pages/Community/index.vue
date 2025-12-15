@@ -16,52 +16,58 @@
             class="community-card"
             @click="handleCommunityClick(community)"
           >
-            <div class="community-card-header">
-              <div
-                class="community-icon"
-                :style="{ backgroundColor: community.accent }"
-                aria-hidden="true"
-              >
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
+            <div class="community-card-banner" :style="{ backgroundImage: `url(${community.cover})` }">
+              <div class="banner-overlay"></div>
+            </div>
+            
+            <div class="community-card-content">
+              <div class="community-card-header">
+                <div
+                  class="community-icon"
+                  :style="{ backgroundColor: community.accent }"
+                  aria-hidden="true"
                 >
-                  <path :d="iconPaths[community.icon]" fill="currentColor" />
-                </svg>
-              </div>
-              <div>
-                <h2>{{ community.name }}</h2>
-                <div class="community-tags">
-                  <span v-for="tag in community.tags" :key="tag" class="tag">{{ tag }}</span>
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path :d="iconPaths[community.icon]" fill="currentColor" />
+                  </svg>
+                </div>
+                <div>
+                  <h2>{{ community.name }}</h2>
+                  <div class="community-tags">
+                    <span v-for="tag in community.tags" :key="tag" class="tag">{{ tag }}</span>
+                  </div>
                 </div>
               </div>
+
+              <p class="community-description">{{ community.description }}</p>
+
+              <div class="community-stats">
+                <span class="stat">
+                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5zm0 2c-3.33 0-10 1.67-10 5v3h20v-3c0-3.33-6.67-5-10-5z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                  {{ community.members }} members
+                </span>
+                <span class="stat">
+                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M20 3H4a1 1 0 0 0-1 1v15l4-4h13a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                  {{ community.postsToday }} Posts Today
+                </span>
+              </div>
+
+              <button type="button" class="join-button" @click.stop="handleCommunityClick(community)">Join Community</button>
             </div>
-
-            <p class="community-description">{{ community.description }}</p>
-
-            <div class="community-stats">
-              <span class="stat">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5zm0 2c-3.33 0-10 1.67-10 5v3h20v-3c0-3.33-6.67-5-10-5z"
-                    fill="currentColor"
-                  />
-                </svg>
-                {{ community.members }} members
-              </span>
-              <span class="stat">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M20 3H4a1 1 0 0 0-1 1v15l4-4h13a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1z"
-                    fill="currentColor"
-                  />
-                </svg>
-                {{ community.postsToday }} Posts Today
-              </span>
-            </div>
-
-            <button type="button" class="join-button" @click.stop="handleCommunityClick(community)">Join Community</button>
           </NuxtLink>
         </div>
 
@@ -109,6 +115,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import { useClickTracking } from '~/composables/useClickTracking';
+import communitiesData from '@/../mock-backend/data/communities.json';
 
 const { trackCommunityClick } = useClickTracking();
 
@@ -132,75 +139,18 @@ const iconPaths: Record<string, string> = {
   chat: 'M4 4h16a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H8l-4 4V5a1 1 0 0 1 1-1z'
 };
 
-// All communities data
-const allCommunities = [
-  {
-    id: 'jump-fest-2025',
-    name: 'JUMP FEST 2025 - BRED THROUGH',
-    icon: 'spark',
-    accent: '#E6F2FF',
-    tags: ['#HarryPotter', '#WIBU', '#AnimeX'],
-    description:
-      'Festival fandom terbesar tahun ini. Dapatkan bocoran rilis anime, sesi temu kreator, dan event eksklusif lainnya.',
-    members: '21k',
-    postsToday: '42'
-  },
-  {
-    id: 'literacy-circle',
-    name: 'Literacy Circle',
-    icon: 'heart',
-    accent: '#FFE5EC',
-    tags: ['#HarryPotter', 'LoTR', 'Book Talk', 'Reading'],
-    description:
-      'Komunitas pecinta buku untuk diskusi sastra, review, dan menemukan penulis baru.',
-    members: '324',
-    postsToday: '18'
-  },
-  {
-    id: 'wellness-warriors',
-    name: 'Wellness Warriors',
-    icon: 'spark',
-    accent: '#E6F2FF',
-    tags: ['Mindful', 'Balance', 'Habits'],
-    description:
-      'Berbagi rutinitas sehat, dukung perjalanan mindfulness, dan saling menguatkan.',
-    members: '512',
-    postsToday: '24'
-  },
-  {
-    id: 'photography-club',
-    name: 'Photography Club',
-    icon: 'camera',
-    accent: '#F0F9F5',
-    tags: ['Photo Walk', 'Tips', 'Critique'],
-    description:
-      'Belajar teknik fotografi, ikut photo walk, dan diskusi kritik konstruktif setiap minggu.',
-    members: '287',
-    postsToday: '12'
-  },
-  {
-    id: 'gaming-hub',
-    name: 'Gaming Hub Indonesia',
-    icon: 'chat',
-    accent: '#FFF8E1',
-    tags: ['Esports', 'Co-op', 'Livestream'],
-    description:
-      'Tempat berkumpulnya gamer untuk mabar, update turnamen, dan berbagi tips build meta.',
-    members: '1.2k',
-    postsToday: '33'
-  },
-  {
-    id: 'creative-atelier',
-    name: 'Creative Atelier',
-    icon: 'heart',
-    accent: '#FEEAE6',
-    tags: ['Illustration', 'UI/UX', 'Workshop'],
-    description:
-      'Komunitas kreator visual. Ada feedback session, challenge mingguan, dan kelas desain gratis.',
-    members: '648',
-    postsToday: '21'
-  }
-];
+// Map communities data from JSON file (cover sudah ada di JSON)
+const allCommunities = (communitiesData as any[]).map((community) => ({
+  id: community.id,
+  name: community.name,
+  icon: community.icon || 'chat',
+  accent: community.accent || '#E6F2FF',
+  tags: community.tags || [],
+  description: community.description || '',
+  members: community.members || (community.memberCount ? `${community.memberCount}` : '0'),
+  postsToday: community.postsToday?.toString() || '0',
+  cover: community.cover || 'https://images.unsplash.com/photo-1557682250-33bd709cbe85?auto=format&fit=crop&w=1200&q=80'
+}));
 
 // Filtered communities based on active filters
 const communities = computed(() => {
@@ -211,7 +161,7 @@ const communities = computed(() => {
   return allCommunities.filter(community => {
     // Check if community has any of the active filter tags
     return activeFilters.value.some(filter => 
-      community.tags.some(tag => tag.toLowerCase().includes(filter.toLowerCase())) ||
+      community.tags.some((tag: string) => tag.toLowerCase().includes(filter.toLowerCase())) ||
       community.name.toLowerCase().includes(filter.toLowerCase()) ||
       community.description.toLowerCase().includes(filter.toLowerCase())
     );
@@ -635,20 +585,45 @@ const relatedCommunities = [
   background: #ffffff;
   border-radius: 20px;
   border: 1px solid #e2e8f0;
-  padding: 20px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
   box-shadow: 0 12px 24px rgba(15, 23, 42, 0.06);
   text-decoration: none;
   color: inherit;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   height: 100%;
+  overflow: hidden;
 }
 
 .community-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 16px 36px rgba(15, 23, 42, 0.12);
+}
+
+.community-card-banner {
+  width: 100%;
+  height: 140px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.banner-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.3) 100%);
+}
+
+.community-card-content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
 }
 
 .community-card-header {
