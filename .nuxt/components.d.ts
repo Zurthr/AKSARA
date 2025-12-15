@@ -20,6 +20,7 @@ export const CreateEmbedModal: typeof import("../app/components/CreateEmbedModal
 export const CreateThreadSidebar: typeof import("../app/components/CreateThreadSidebar.vue")['default']
 export const EmbedCard: typeof import("../app/components/EmbedCard.vue")['default']
 export const EmbedOverviewStats: typeof import("../app/components/EmbedOverviewStats.vue")['default']
+export const EventsFilter: typeof import("../app/components/Events/EventsFilter.vue")['default']
 export const EventsSection: typeof import("../app/components/Events/EventsSection.vue")['default']
 export const EventsSidebar: typeof import("../app/components/EventsSidebar.vue")['default']
 export const FileUploader: typeof import("../app/components/FileUploader.vue")['default']
@@ -72,6 +73,7 @@ export const LazyCreateEmbedModal: LazyComponent<typeof import("../app/component
 export const LazyCreateThreadSidebar: LazyComponent<typeof import("../app/components/CreateThreadSidebar.vue")['default']>
 export const LazyEmbedCard: LazyComponent<typeof import("../app/components/EmbedCard.vue")['default']>
 export const LazyEmbedOverviewStats: LazyComponent<typeof import("../app/components/EmbedOverviewStats.vue")['default']>
+export const LazyEventsFilter: LazyComponent<typeof import("../app/components/Events/EventsFilter.vue")['default']>
 export const LazyEventsSection: LazyComponent<typeof import("../app/components/Events/EventsSection.vue")['default']>
 export const LazyEventsSidebar: LazyComponent<typeof import("../app/components/EventsSidebar.vue")['default']>
 export const LazyFileUploader: LazyComponent<typeof import("../app/components/FileUploader.vue")['default']>

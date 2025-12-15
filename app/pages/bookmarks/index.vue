@@ -108,61 +108,7 @@
         </div>
       </section>
 
-      <section class="sidebar-card filter-card">
-        <h3>Filter Events</h3>
-        <div class="filter-form">
-          <div class="filter-row">
-            <label class="filter-label">Start date</label>
-            <div class="input-with-icon">
-              <input
-                ref="startInput"
-                class="filter-input"
-                type="date"
-                v-model="startDate"
-                @change="syncEventFilters"
-              />
-              <button type="button" class="input-icon" @click="openStartPicker" aria-label="Open start date picker">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M7 10h5v5H7z" fill="currentColor" opacity="0.2"/>
-                  <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z" fill="currentColor"/>
-                </svg>
-              </button>
-            </div>
-          </div>
-
-          <div class="filter-row">
-            <label class="filter-label">End date</label>
-            <div class="input-with-icon">
-              <input
-                ref="endInput"
-                class="filter-input"
-                type="date"
-                v-model="endDate"
-                @change="syncEventFilters"
-              />
-              <button type="button" class="input-icon" @click="openEndPicker" aria-label="Open end date picker">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M7 10h5v5H7z" fill="currentColor" opacity="0.2"/>
-                  <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z" fill="currentColor"/>
-                </svg>
-              </button>
-            </div>
-          </div>
-
-          <div class="filter-row">
-            <label class="filter-label">Type</label>
-            <div class="chip-group">
-              <button type="button" :class="['chip', { 'chip-active': onlineChecked }]" @click="toggleEventType('online')">Online</button>
-              <button type="button" :class="['chip', { 'chip-active': offlineChecked }]" @click="toggleEventType('offline')">Offline</button>
-            </div>
-          </div>
-
-          <div class="filter-row filter-actions">
-            <button class="clear-btn" type="button" @click="clearEventFilters">Clear Filters</button>
-          </div>
-        </div>
-      </section>
-
+      <EventsFilter />
       <LiteratureFilterSidebar />
     </RightSideBar>
   </div>
@@ -172,6 +118,7 @@
 import type { LocationQueryRaw } from 'vue-router';
 import RightSideBar from '~/components/General/RightSideBar.vue';
 import LiteratureFilterSidebar from '~/components/Literature/LiteratureFilterSidebar.vue';
+import EventsFilter from '~/components/Events/EventsFilter.vue';
 import ForumCard from '~/components/Forum/ForumCard.vue';
 import { useLazyPosts, type Post } from '~/composables/useLazyPosts';
 
@@ -344,12 +291,6 @@ const activeTab = ref<BookmarkType>('post');
 const searchTerm = ref((route.query.q as string) || '');
 const typeFilters = ref<string[]>(ensureArray(route.query.type));
 
-const startDate = ref<string | null>((route.query.startDate as string) || null);
-const endDate = ref<string | null>((route.query.endDate as string) || null);
-const eventTypesFromQuery = ensureArray(route.query.eventType).map(normalizeKey);
-const onlineChecked = ref(eventTypesFromQuery.includes('online'));
-const offlineChecked = ref(eventTypesFromQuery.includes('offline'));
-
 const typeChips = [
   { label: 'Forum Posts', value: 'post' },
   { label: 'Literature Material', value: 'literature' },
@@ -410,56 +351,6 @@ const formatDisplayDate = (value?: string) => {
   if (!d) return '';
   return d.toLocaleDateString(undefined, { day: '2-digit', month: 'short', year: 'numeric' });
 };
-
-const syncEventFilters = () => {
-  const types: string[] = [];
-  if (onlineChecked.value) types.push('online');
-  if (offlineChecked.value) types.push('offline');
-  updateQuery({
-    startDate: startDate.value || undefined,
-    endDate: endDate.value || undefined,
-    eventType: types,
-  });
-};
-
-const toggleEventType = (type: 'online' | 'offline') => {
-  if (type === 'online') onlineChecked.value = !onlineChecked.value;
-  if (type === 'offline') offlineChecked.value = !offlineChecked.value;
-  syncEventFilters();
-};
-
-const clearEventFilters = () => {
-  startDate.value = null;
-  endDate.value = null;
-  onlineChecked.value = false;
-  offlineChecked.value = false;
-  syncEventFilters();
-};
-
-const startInput = ref<HTMLInputElement | null>(null);
-const endInput = ref<HTMLInputElement | null>(null);
-
-const openPicker = (elRef: typeof startInput) => {
-  const el = elRef.value as (HTMLInputElement & { showPicker?: () => void }) | null;
-  if (!el) return;
-  try {
-    if (typeof el.showPicker === 'function') {
-      el.showPicker();
-      return;
-    }
-  } catch {
-    // ignore and fallback
-  }
-  el.focus();
-  try {
-    el.click();
-  } catch {
-    // ignore
-  }
-};
-
-const openStartPicker = () => openPicker(startInput);
-const openEndPicker = () => openPicker(endInput);
 
 const filteredBookmarks = computed(() => {
   const q = searchTerm.value.trim().toLowerCase();
@@ -889,79 +780,5 @@ const typeLabel = (type: BookmarkType) => {
   border: 1px solid #e2e8f0;
 }
 
-.filter-form {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-.filter-row {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.filter-label {
-  font-size: 13px;
-  font-weight: 600;
-  color: #0f172a;
-}
-
-.input-with-icon {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  padding: 8px 10px;
-}
-
-.filter-input {
-  flex: 1;
-  border: none;
-  outline: none;
-  font-size: 14px;
-}
-
-.input-icon {
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  color: #94a3b8;
-}
-
-.chip-group {
-  display: flex;
-  gap: 8px;
-}
-
-.chip {
-  padding: 8px 12px;
-  border-radius: 999px;
-  border: 1px solid #e2e8f0;
-  background: #ffffff;
-  color: #334155;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.chip-active {
-  background: var(--color-primary, #2563eb);
-  color: #ffffff;
-  border-color: var(--color-primary, #2563eb);
-}
-
-.filter-actions {
-  margin-top: 4px;
-}
-
-.clear-btn {
-  padding: 10px 12px;
-  border-radius: 8px;
-  border: 1px solid #e2e8f0;
-  background: #f8fafc;
-  color: #334155;
-  cursor: pointer;
-}
+/* Event filter styles moved to components/Events/EventsFilter.vue */
 </style>

@@ -20,6 +20,7 @@ interface _GlobalComponents {
   'CreateThreadSidebar': typeof import("../../app/components/CreateThreadSidebar.vue")['default']
   'EmbedCard': typeof import("../../app/components/EmbedCard.vue")['default']
   'EmbedOverviewStats': typeof import("../../app/components/EmbedOverviewStats.vue")['default']
+  'EventsFilter': typeof import("../../app/components/Events/EventsFilter.vue")['default']
   'EventsSection': typeof import("../../app/components/Events/EventsSection.vue")['default']
   'EventsSidebar': typeof import("../../app/components/EventsSidebar.vue")['default']
   'FileUploader': typeof import("../../app/components/FileUploader.vue")['default']
@@ -72,6 +73,7 @@ interface _GlobalComponents {
   'LazyCreateThreadSidebar': LazyComponent<typeof import("../../app/components/CreateThreadSidebar.vue")['default']>
   'LazyEmbedCard': LazyComponent<typeof import("../../app/components/EmbedCard.vue")['default']>
   'LazyEmbedOverviewStats': LazyComponent<typeof import("../../app/components/EmbedOverviewStats.vue")['default']>
+  'LazyEventsFilter': LazyComponent<typeof import("../../app/components/Events/EventsFilter.vue")['default']>
   'LazyEventsSection': LazyComponent<typeof import("../../app/components/Events/EventsSection.vue")['default']>
   'LazyEventsSidebar': LazyComponent<typeof import("../../app/components/EventsSidebar.vue")['default']>
   'LazyFileUploader': LazyComponent<typeof import("../../app/components/FileUploader.vue")['default']>
