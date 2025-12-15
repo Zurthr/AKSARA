@@ -313,6 +313,31 @@ const fetchEvent = async (rawId: string | string[] | undefined) => {
 
   const idKey = String(idParam)
   clearError()
+
+  // 1. Check for Prefixed IDs (Mock or Local)
+  // This avoids calling the Backend for known local/mock items
+  if (idKey.startsWith('mock-')) {
+    const originalId = idKey.replace(/^mock-/, '')
+    const fallback = findEventById(originalId, [staticEvents])
+    if (fallback) {
+      event.value = fallback
+      await loadRelatedEvents(fallback, []) // Load related from static only ideally, or mixed
+      return
+    }
+  }
+
+  if (idKey.startsWith('local-')) {
+    const originalId = idKey.replace(/^local-/, '')
+    const localSnapshot = readLocalEventsSnapshot(LOCAL_EVENTS_STORAGE_KEY)
+    const fallback = findEventById(originalId, [localSnapshot])
+    if (fallback) {
+      event.value = fallback
+      await loadRelatedEvents(fallback, localSnapshot)
+      return
+    }
+  }
+
+  // 2. Try Backend API
   const remote = await getEventById(idParam)
   if (remote) {
     event.value = remote
@@ -321,6 +346,7 @@ const fetchEvent = async (rawId: string | string[] | undefined) => {
     return
   }
 
+  // 3. Fallback for un-prefixed collisions (e.g. if URL was manually entered or legacy)
   const localSnapshot = readLocalEventsSnapshot(LOCAL_EVENTS_STORAGE_KEY)
   const fallback = findEventById(idKey, [staticEvents, localSnapshot])
   if (fallback) {

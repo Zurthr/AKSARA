@@ -36,7 +36,7 @@ export interface LiteratureBookCreateData {
   sources?: Array<{ name: string; url: string }>
 }
 
-export interface LiteratureBookUpdateData extends Partial<LiteratureBookCreateData> {}
+export interface LiteratureBookUpdateData extends Partial<LiteratureBookCreateData> { }
 
 export type LiteratureBooksResponse = PaginatedCollection<LiteratureBook>
 
@@ -298,8 +298,13 @@ export const useLiterature = () => {
   }
 }
 
+
+
+import { useLocalBooks } from './useLocalBooks'
+
 /**
  * Composable for lazy loading books with pagination against the Laravel backend
+ * AND composes data from Mock JSON and Local Storage
  *
  * @param pageSize - Number of books to load per page (default: 12)
  */
@@ -311,6 +316,10 @@ export function useLazyBooks(pageSize: number = 12) {
   const currentPage = ref(0)
   const error = ref<Error | null>(null)
 
+  // Instance of local books helper
+  // We use this to get the latest state of local books when fetching
+  const { readLocalBooks } = useLocalBooks()
+
   const loadMore = async () => {
     if (isLoading.value || !hasMore.value) {
       return
@@ -321,65 +330,96 @@ export function useLazyBooks(pageSize: number = 12) {
 
     const nextPage = currentPage.value + 1
 
+    // ---------------------------------------------------------
+    // 1. Prepare Static Data (Mock + Local)
+    // ---------------------------------------------------------
+    let staticBooksSlice: NormalizedBook[] = []
+    let staticHasMore = false
+
     try {
+      // Get current local books (safe for SSR usually, but best wrapped or checked)
+      // Note: readLocalBooks checks localStorage internally with try-catch
+      const localItems = (typeof window !== 'undefined') ? readLocalBooks() : []
+
+      // Combine: Local Books First, then Mock Books
+      // We cast them to LiteratureBook to ensure type compatibility
+      const allStaticData = [...localItems, ...fallbackBooks] as LiteratureBook[]
+
+      const startIndex = (nextPage - 1) * pageSize
+      const endIndex = startIndex + pageSize
+      const rawSlice = allStaticData.slice(startIndex, endIndex)
+
+      staticBooksSlice = rawSlice.map(mapToNormalizedBook)
+      staticHasMore = endIndex < allStaticData.length
+    } catch (err) {
+      console.warn('Failed to load static books fallback:', err)
+    }
+
+    // ---------------------------------------------------------
+    // 2. Fetch API Data
+    // ---------------------------------------------------------
+    let apiBooksSlice: NormalizedBook[] = []
+    let apiHasMore = false
+
+    try {
+      // Attempt to fetch from Laravel Backend
       const response = await api.get<unknown>(`/literatures?page=${nextPage}&per_page=${pageSize}`)
       const normalized = normalizePaginatedCollection<LiteratureBook>(response)
+
+      // Map API Items
       const pageItems = normalized.data ?? []
-      const enrichedItems = pageItems.map((book, index) => {
-        const hasValidId = book.id !== undefined && book.id !== null && String(book.id).trim() !== ""
-        if (hasValidId) {
-          return book
-        }
+      apiBooksSlice = pageItems.map(mapToNormalizedBook)
 
-        const fallbackId = nextPage * 10000 + (index + 1)
-        return { ...book, id: fallbackId }
-      })
-      const mappedBooks = enrichedItems.map(mapToNormalizedBook)
-
-      if (nextPage === 1) {
-        books.value = mappedBooks
-      } else {
-        books.value = [...books.value, ...mappedBooks]
-      }
-
-      currentPage.value = normalized.current_page || nextPage
-
-      const explicitMore = normalized.current_page < normalized.last_page
+      // Determine if API has more pages
+      const resolvedPage = normalized.current_page || nextPage
+      const lastPage = normalized.last_page || resolvedPage
+      const explicitMore = resolvedPage < lastPage
+      // Fallback logic if API doesn't return meta correctly but returns full page
       const assumeMore = !normalized.last_page && pageItems.length === pageSize
-      const reachedEnd = pageItems.length === 0
 
-      hasMore.value = !reachedEnd && (explicitMore || assumeMore)
+      apiHasMore = (pageItems.length > 0) && (explicitMore || assumeMore)
 
-      if (reachedEnd) {
-        hasMore.value = false
-      }
     } catch (err) {
-      console.error("Failed to load books:", err)
-
-      const fallbackStartIndex = (nextPage - 1) * pageSize
-      const fallbackSlice = fallbackBooks.slice(fallbackStartIndex, fallbackStartIndex + pageSize)
-
-      if (fallbackSlice.length > 0) {
-        const mappedBooks = fallbackSlice.map(mapToNormalizedBook)
-
-        if (nextPage === 1) {
-          books.value = mappedBooks
-        } else {
-          books.value = [...books.value, ...mappedBooks]
-        }
-
-        currentPage.value = nextPage
-        const consumed = fallbackStartIndex + fallbackSlice.length
-        hasMore.value = consumed < fallbackBooks.length
-        error.value = null
-        return
+      console.error("Backend API load failed (using fallback/static data only):", err)
+      // If API fails, we just don't have API items. We do NOT block the UI.
+      // We only show error if we have ZERO data from anywhere.
+      if (staticBooksSlice.length === 0 && nextPage === 1) {
+        error.value = err instanceof Error ? err : new Error("Failed to load books")
       }
-
-      error.value = err instanceof Error ? err : new Error("Failed to load books")
-      hasMore.value = false
-    } finally {
-      isLoading.value = false
     }
+
+    // ---------------------------------------------------------
+    // 3. Merge & Update State
+    // ---------------------------------------------------------
+
+    // Combined items for this page
+    const newItems = [...apiBooksSlice, ...staticBooksSlice]
+
+    // Deduplicate by ID if necessary? 
+    // Usually Backend IDs (integrity) and Mock IDs (random/fixed) might clash.
+    // For now we trust the "gabungan" requirement means show them all.
+    // But Vue requires unique keys. resolveBookId generates numbers.
+    // If we have duplicates, it might cause issues. 
+    // We can filter duplicates by ID if strictly required, but let's blindly append first as requested.
+
+    if (nextPage === 1) {
+      books.value = newItems
+    } else {
+      books.value = [...books.value, ...newItems]
+    }
+
+    currentPage.value = nextPage
+
+    // Determine overall 'Has More'
+    // If either source has more data, we keep going.
+    hasMore.value = apiHasMore || staticHasMore
+
+    // If we got nothing from anywhere, stop.
+    if (newItems.length === 0 && !apiHasMore && !staticHasMore) {
+      hasMore.value = false
+    }
+
+    isLoading.value = false
   }
 
   const reset = () => {

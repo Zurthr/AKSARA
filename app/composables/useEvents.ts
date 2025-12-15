@@ -47,7 +47,7 @@ export interface EventCreateData {
   price?: number
 }
 
-export interface EventUpdateData extends Partial<EventCreateData> {}
+export interface EventUpdateData extends Partial<EventCreateData> { }
 
 export type EventsResponse = PaginatedCollection<Event>
 
@@ -60,11 +60,11 @@ export const useEvents = () => {
   const api = useApi()
   const loading = ref(false)
   const error = ref<string | null>(null)
-  
+
   const setLoading = (value: boolean) => {
     loading.value = value
   }
-  
+
   const setError = (err: string | null) => {
     error.value = err
   }
@@ -91,7 +91,7 @@ export const useEvents = () => {
   ): Promise<EventsResponse | null> => {
     setLoading(true)
     setError(null)
-    
+
     try {
       const queryString = buildEventsQuery(page, perPage, searchQuery)
       const response = await api.get<unknown>(`/events?${queryString}`)
@@ -103,11 +103,11 @@ export const useEvents = () => {
       setLoading(false)
     }
   }
-  
+
   const getEventById = async (id: number | string): Promise<Event | null> => {
     setLoading(true)
     setError(null)
-    
+
     try {
       const encodedId = encodeURIComponent(String(id))
       const response = await api.get<{ data: Event }>(`/events/${encodedId}`)
@@ -119,11 +119,11 @@ export const useEvents = () => {
       setLoading(false)
     }
   }
-  
+
   const createEvent = async (eventData: EventCreateData): Promise<Event | null> => {
     setLoading(true)
     setError(null)
-    
+
     try {
       const response = await api.post<{ data: Event }>('/events', eventData)
       return response.data
@@ -134,11 +134,11 @@ export const useEvents = () => {
       setLoading(false)
     }
   }
-  
+
   const updateEvent = async (id: number | string, eventData: EventUpdateData): Promise<Event | null> => {
     setLoading(true)
     setError(null)
-    
+
     try {
       const encodedId = encodeURIComponent(String(id))
       const response = await api.post<{ data: Event }>(`/events/${encodedId}`, eventData)
@@ -150,11 +150,11 @@ export const useEvents = () => {
       setLoading(false)
     }
   }
-  
+
   const deleteEvent = async (id: number | string): Promise<boolean> => {
     setLoading(true)
     setError(null)
-    
+
     try {
       const encodedId = encodeURIComponent(String(id))
       await api.delete(`/events/${encodedId}`)
@@ -166,11 +166,11 @@ export const useEvents = () => {
       setLoading(false)
     }
   }
-  
+
   const clearError = () => {
     setError(null)
   }
-  
+
   return {
     loading: readonly(loading),
     error: readonly(error),
@@ -183,8 +183,13 @@ export const useEvents = () => {
   }
 }
 
+
+
+import { useLocalEvents } from './useLocalEvents'
+
 /**
  * Composable for lazy loading events with pagination against the primary API
+ * AND composes data from Mock JSON and Local Storage
  */
 export function useLazyEvents(pageSize: number = 6) {
   const { getAllEvents } = useEvents()
@@ -195,35 +200,8 @@ export function useLazyEvents(pageSize: number = 6) {
   const error = ref<Error | null>(null)
   const currentSearchQuery = ref('')
 
-  const applyFallback = (page: number) => {
-    const normalizedQuery = currentSearchQuery.value.trim().toLowerCase()
-    const filteredFallback = normalizedQuery
-      ? fallbackEvents.filter((item) => {
-          const title = typeof item.title === 'string' ? item.title.toLowerCase() : ''
-          const description = typeof item.description === 'string' ? item.description.toLowerCase() : ''
-          return title.includes(normalizedQuery) || description.includes(normalizedQuery)
-        })
-      : fallbackEvents
-
-    const fallbackStartIndex = (page - 1) * pageSize
-    const fallbackSlice = filteredFallback.slice(fallbackStartIndex, fallbackStartIndex + pageSize)
-
-    if (fallbackSlice.length === 0) {
-      return false
-    }
-
-    if (page === 1) {
-      events.value = fallbackSlice
-    } else {
-      events.value = [...events.value, ...fallbackSlice]
-    }
-
-    currentPage.value = page
-    const consumed = fallbackStartIndex + fallbackSlice.length
-    hasMore.value = consumed < filteredFallback.length
-    error.value = null
-    return true
-  }
+  // Access local events manager
+  const { readLocalEvents } = useLocalEvents()
 
   const loadMore = async () => {
     if (isLoading.value || !hasMore.value) {
@@ -235,48 +213,105 @@ export function useLazyEvents(pageSize: number = 6) {
 
     const nextPage = currentPage.value + 1
 
+    // ---------------------------------------------------------
+    // 1. Prepare Static Data (Mock + Local)
+    // ---------------------------------------------------------
+    let staticEventsSlice: Event[] = []
+    let staticHasMore = false
+
+    try {
+      const localItems = (typeof window !== 'undefined') ? readLocalEvents() : []
+      // Combine Mock + Local
+      const allStaticEvents = [...localItems, ...fallbackEvents] as Event[]
+
+      // Filter by Search Query if present
+      let filteredStatic = allStaticEvents
+      const query = currentSearchQuery.value.trim().toLowerCase()
+      if (query) {
+        filteredStatic = allStaticEvents.filter((item) => {
+          const title = typeof item.title === 'string' ? item.title.toLowerCase() : ''
+          const description = typeof item.description === 'string' ? item.description.toLowerCase() : ''
+          return title.includes(query) || description.includes(query)
+        })
+      }
+
+      const start = (nextPage - 1) * pageSize
+      const end = start + pageSize
+      const rawSlice = filteredStatic.slice(start, end)
+
+      // Map IDs to be unique (prefixed) to avoid collision with Backend IDs
+      staticEventsSlice = rawSlice.map(ev => {
+        // Determine source to apply correct prefix if not already present
+        // fallbackEvents come from events.json
+        // localItems come from localStorage
+
+        // We can check if it exists in localItems to know it's local
+        const isLocal = localItems.some((i: any) => i.id === ev.id)
+        const prefix = isLocal ? 'local-' : 'mock-'
+
+        // If ID is already string and has prefix, leave it. Otherwise prefix it.
+        const idStr = String(ev.id)
+        const newId = (idStr.startsWith('mock-') || idStr.startsWith('local-'))
+          ? idStr
+          : `${prefix}${idStr}`
+
+        return {
+          ...ev,
+          id: newId
+        }
+      })
+
+      staticHasMore = end < filteredStatic.length
+    } catch (e) {
+      console.warn("Failed to process static events:", e)
+    }
+
+    // ---------------------------------------------------------
+    // 2. Fetch API Data
+    // ---------------------------------------------------------
+    let apiEventsSlice: Event[] = []
+    let apiHasMore = false
+
     try {
       const response = await getAllEvents(nextPage, pageSize, currentSearchQuery.value || undefined)
 
-      if (!response) {
-        if (!applyFallback(nextPage)) {
-          error.value = new Error('Failed to fetch events')
-          hasMore.value = false
-        }
-        return
+      if (response && Array.isArray(response.data)) {
+        apiEventsSlice = response.data
+
+        const resolvedPage = response.current_page || nextPage
+        const resolvedLast = response.last_page || resolvedPage
+
+        const explicitMore = resolvedPage < resolvedLast
+        const assumeMore = !response.last_page && apiEventsSlice.length === pageSize
+
+        apiHasMore = (apiEventsSlice.length > 0) && (explicitMore || assumeMore)
       }
-
-      const pageItems = Array.isArray(response.data) ? response.data : []
-      const resolvedPage = response.current_page || nextPage
-      const resolvedLastPage = response.last_page || resolvedPage
-
-      if (nextPage === 1) {
-        events.value = pageItems
-      } else {
-        events.value = [...events.value, ...pageItems]
+    } catch (e) {
+      console.error("Backend API load failed for events (using fallback logic):", e)
+      if (staticEventsSlice.length === 0 && nextPage === 1) {
+        error.value = e instanceof Error ? e : new Error("Failed to load events")
       }
-
-      currentPage.value = resolvedPage
-
-      const explicitMore = resolvedPage < resolvedLastPage
-      const assumeMore = !response.last_page && pageItems.length === pageSize
-      const reachedEnd = pageItems.length === 0
-
-      hasMore.value = !reachedEnd && (explicitMore || assumeMore)
-
-      if (reachedEnd) {
-        hasMore.value = false
-      }
-    } catch (err) {
-      console.error('Failed to load events:', err)
-
-      if (!applyFallback(nextPage)) {
-        error.value = err instanceof Error ? err : new Error('Failed to load events')
-        hasMore.value = false
-      }
-    } finally {
-      isLoading.value = false
     }
+
+    // ---------------------------------------------------------
+    // 3. Merge & Update
+    // ---------------------------------------------------------
+    const newItems = [...apiEventsSlice, ...staticEventsSlice]
+
+    if (nextPage === 1) {
+      events.value = newItems
+    } else {
+      events.value = [...events.value, ...newItems]
+    }
+
+    currentPage.value = nextPage
+    hasMore.value = apiHasMore || staticHasMore
+
+    if (newItems.length === 0 && !apiHasMore && !staticHasMore) {
+      hasMore.value = false
+    }
+
+    isLoading.value = false
   }
 
   const reset = () => {

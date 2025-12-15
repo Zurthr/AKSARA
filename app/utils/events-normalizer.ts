@@ -142,16 +142,60 @@ export const normalizeEventCollection = (records: Array<Record<string, unknown>>
 
 export const mergeEventCollections = (collections: Array<Iterable<EventItem>>): EventItem[] => {
   const merged = new Map<string, EventItem>()
+  const sourcePriority = {
+    json: 0,
+    mockApi: 1,
+    localStorage: 2,
+    laravel: 3,
+    laravelLazy: 4
+  } as const
+
+  type SourceKey = keyof typeof sourcePriority
+
+  const resolvePriority = (rawSource: unknown): number => {
+    if (typeof rawSource === 'string' && rawSource in sourcePriority) {
+      return sourcePriority[rawSource as SourceKey]
+    }
+    return sourcePriority.json
+  }
+
+  const buildKey = (item: EventItem): string => {
+    const idCandidate = item?.id
+    if (idCandidate !== undefined && idCandidate !== null) {
+      const trimmed = String(idCandidate).trim()
+      if (trimmed) {
+        return `id:${trimmed}`
+      }
+    }
+
+    const title = ensureString(item?.title, '').toLowerCase()
+    const date = ensureString(item?.date, '').toLowerCase()
+    const location = ensureString(item?.location, '').toLowerCase()
+    return `content:${title}|${date}|${location}`
+  }
+
   for (const collection of collections) {
     for (const item of collection) {
-      const key = item?.id !== undefined ? String(item.id) : ''
+      const key = buildKey(item)
       if (!key) {
         continue
       }
-      // Last-win strategy: always overwrite with newer data
-      merged.set(key, item)
+
+      const existing = merged.get(key)
+      if (!existing) {
+        merged.set(key, item)
+        continue
+      }
+
+      const nextPriority = resolvePriority((item as any).source)
+      const currentPriority = resolvePriority((existing as any).source)
+
+      if (nextPriority >= currentPriority) {
+        merged.set(key, item)
+      }
     }
   }
+
   return Array.from(merged.values())
 }
 

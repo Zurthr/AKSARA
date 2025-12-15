@@ -155,27 +155,44 @@ export const normalizeBookCollection = (records: Array<Record<string, unknown>>)
 
 export const mergeBookCollections = (collections: Array<Iterable<BookItem>>): BookItem[] => {
   const merged = new Map<string, BookItem>()
-  const sourceOrder = ['json', 'localStorage', 'laravel'] // Priority order
-  
+  const sourcePriority = {
+    json: 0,
+    mockApi: 1,
+    localStorage: 2,
+    laravel: 3
+  } as const
+
+  type SourceKey = keyof typeof sourcePriority
+
+  const resolvePriority = (rawSource: unknown): number => {
+    if (typeof rawSource === 'string' && rawSource in sourcePriority) {
+      return sourcePriority[rawSource as SourceKey]
+    }
+    return sourcePriority.json
+  }
+
   for (const collection of collections) {
     for (const item of collection) {
       const key = item?.id !== undefined ? String(item.id) : ''
       if (!key) {
         continue
       }
-      
+
       const existingItem = merged.get(key)
-      const itemSource = (item as any).source || 'json'
-      const existingSource = existingItem ? ((existingItem as any).source || 'json') : null
-      
-      // Only overwrite if new source has higher priority or same priority but newer
-      if (!existingItem || 
-          sourceOrder.indexOf(itemSource) >= sourceOrder.indexOf(existingSource)) {
+      if (!existingItem) {
+        merged.set(key, item)
+        continue
+      }
+
+      const itemPriority = resolvePriority((item as any).source)
+      const existingPriority = resolvePriority((existingItem as any).source)
+
+      if (itemPriority >= existingPriority) {
         merged.set(key, item)
       }
     }
   }
-  
+
   return Array.from(merged.values())
 }
 

@@ -216,29 +216,86 @@ const combinedError = computed(() => {
 })
 
 const originalEvents = ref<EventItem[]>([])
-const staticEvents = normalizeEventCollection(mockEvents as RawEventRecord[])
+const mockApiEvents = ref<EventItem[]>([])
+const staticEvents = normalizeEventCollection(mockEvents as RawEventRecord[]).map((event, index) => {
+  const candidateId = event.id
+  const resolvedId = candidateId && String(candidateId).trim() !== '' ? candidateId : `static-${index + 1}`
+  return {
+    ...event,
+    id: resolvedId,
+    source: 'json'
+  }
+})
 const { localEvents } = useLocalEvents()
 
 const normalizedLocalEvents = computed<EventItem[]>(() => {
   const raw = Array.isArray(localEvents.value) ? localEvents.value : []
-  return normalizeEventCollection(raw as RawEventRecord[])
+  return normalizeEventCollection(raw as RawEventRecord[]).map((event, index) => {
+    const candidateId = event.id
+    const resolvedId = candidateId && String(candidateId).trim() !== '' ? candidateId : `local-${index + 1}`
+    return {
+      ...event,
+      id: resolvedId,
+      source: 'localStorage'
+    }
+  })
 })
 
-const fetchEvents = async (query?: string) => {
+const fetchLaravelEvents = async (query?: string): Promise<EventItem[]> => {
   try {
-    const normalizedQuery = query?.trim()
-    const response = await getAllEvents(1, 18, normalizedQuery || undefined)
-    const pageItems = Array.isArray(response?.data) ? response?.data : []
+    const response = await getAllEvents(1, 18, query || undefined)
+    const pageItems = Array.isArray(response?.data) ? response.data : []
 
-    if (pageItems.length) {
-      originalEvents.value = pageItems
-      return
-    }
+    return pageItems.map((event, index) => ({
+      ...event,
+      id: event.id || `laravel-${index + 1}`,
+      source: 'laravel'
+    }))
   } catch (apiError) {
-    console.warn('Failed to fetch events from Laravel API, using static data instead.', apiError)
+    console.warn('Failed to fetch events from Laravel API, skipping Laravel merge.', apiError)
+    return []
   }
+}
 
-  originalEvents.value = staticEvents
+const fetchMockEvents = async (query?: string): Promise<EventItem[]> => {
+  try {
+    const url = new URL('http://localhost:3002/events')
+    if (query) {
+      url.searchParams.set('q', query)
+    }
+
+    const response = await $fetch<Array<Record<string, unknown>>>(url.toString())
+    const normalized = normalizeEventCollection(response)
+
+    return normalized.map((event, index) => {
+      const candidateId = event.id
+      const resolvedId = candidateId && String(candidateId).trim() !== '' ? candidateId : `mock-api-${index + 1}`
+      return {
+        ...event,
+        id: resolvedId,
+        source: 'mockApi'
+      }
+    })
+  } catch (apiError) {
+    console.warn('Failed to fetch events from mock API, skipping mock merge.', apiError)
+    return []
+  }
+}
+
+const fetchEvents = async (query?: string) => {
+  const normalizedQuery = query?.trim() || undefined
+
+  const [laravelEvents, mockEventsData] = await Promise.all([
+    fetchLaravelEvents(normalizedQuery),
+    fetchMockEvents(normalizedQuery)
+  ])
+
+  mockApiEvents.value = mockEventsData
+  originalEvents.value = laravelEvents.length ? laravelEvents : []
+
+  if (!originalEvents.value.length) {
+    originalEvents.value = staticEvents
+  }
 }
 
 const retryFetch = async () => {
@@ -292,16 +349,27 @@ onBeforeUnmount(() => {
 
 const mergedEvents = computed<EventItem[]>(() => {
   const remote = Array.isArray(originalEvents.value) ? originalEvents.value : []
+  const mockApi = Array.isArray(mockApiEvents.value) ? mockApiEvents.value : []
   const lazy = Array.isArray(lazyEvents.value) ? lazyEvents.value : []
-  const primary = lazy.length ? lazy : remote
+  const primarySource = lazy.length ? 'laravelLazy' : 'laravel'
+  const primary = (lazy.length ? lazy : remote).map((event, index) => {
+    const candidateId = event.id
+    const resolvedId = candidateId && String(candidateId).trim() !== '' ? candidateId : `${primarySource}-${index + 1}`
+    return {
+      ...event,
+      id: resolvedId,
+      source: primarySource
+    }
+  })
 
   console.log('🔍 Merging events:')
   console.log('⚡ Lazy stream:', lazy.length, 'events')
   console.log('📡 Remote (Laravel):', remote.length, 'events')
+  console.log('🧪 Mock API:', mockApi.length, 'events')
   console.log('📄 Static (JSON):', staticEvents.length, 'events')
   console.log('💾 Local Storage:', normalizedLocalEvents.value.length, 'events')
 
-  const merged = mergeEventCollections([staticEvents, normalizedLocalEvents.value, primary])
+  const merged = mergeEventCollections([staticEvents, mockApi, normalizedLocalEvents.value, primary])
   console.log('✅ Final merged:', merged.length, 'events')
   return merged
 })
