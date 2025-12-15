@@ -5,6 +5,7 @@ const books = require('./data/books.json');
 const reviews = require('./data/reviews.json');
 const comments = require('./data/comments.json');
 const trending = require('./data/trending.json');
+const click_events = require('./data/click_events.json');
 
 module.exports = () => ({
   posts,
@@ -13,5 +14,6 @@ module.exports = () => ({
   books,
   reviews,
   comments,
-  trending
+  trending,
+  click_events
 });

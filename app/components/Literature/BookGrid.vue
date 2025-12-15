@@ -2,9 +2,23 @@
   <div class="book-grid-section">
     <div class="section-header">
       <div class="section-title">
-        {{ title }}
+        <template v-if="sectionType === 'search'">
+          <span v-if="titlePrefix">Our</span>
+          <span class="title-highlight">{{ titlePrefix || 'Results' }}</span>
+          <span>for '</span>
+          <span v-if="highlightedQuery" class="tag-highlight">{{ highlightedQuery }}</span>
+          <span v-if="titleSuffix">{{ titleSuffix }}</span>
+        </template>
+        <template v-else-if="sectionType === 'top'">
+          <span v-if="titlePrefix && title.includes('Our')">Our </span>
+          <span class="title-highlight">{{ titlePrefix }}</span>
+          <span v-if="titleSuffix" style="margin-left:-6px;">, {{ titleSuffix }}</span>
+        </template>
+        <template v-else>
+          {{ title }}
+        </template>
       </div>
-      <div class="section-actions">
+      <!-- <div class="section-actions">
         <NuxtLink :to="seeMoreLink" class="see-more-link">
           <span>See more</span>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -16,7 +30,7 @@
             <path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z" fill="currentColor"/>
           </svg>
         </button>
-      </div>
+      </div> -->
     </div>
 
     <div class="books-grid">
@@ -25,78 +39,88 @@
         :key="book.id"
         class="book-card"
       >
-        <NuxtLink :to="`/literature/${book.id}`" class="book-link">
-          <div class="book-cover">
-            <img :src="book.image" :alt="book.title || `Book ${book.id}`" />
-          </div>
-          <div class="book-info">
-            <h4 class="book-title">{{ book.title }}</h4>
-            <p class="book-author" v-if="book.author">by {{ book.author }}</p>
-            <div class="book-tags">
-              <span 
-                v-for="tag in book.tags" 
-                :key="tag" 
-                class="book-tag"
-              >
-                {{ tag }}
-              </span>
-            </div>
-            <div class="book-rating" v-if="book.rating">
-              <span class="rating-number">{{ book.rating.toFixed(1) }}</span>
-              <div class="stars-container">
-                <div
-                  v-for="starIndex in 5"
-                  :key="starIndex"
-                  class="star-wrapper"
-                >
-                  <img 
-                    v-if="starIndex > book.rating"
-                    src="~/assets/icons/StarDark.svg" 
-                    alt="star" 
-                    class="star star-empty" 
-                  />
-                  <template v-else>
-                    <img 
-                      src="~/assets/icons/StarDark.svg" 
-                      alt="star" 
-                      class="star star-background" 
-                    />
-                    <img 
-                      src="~/assets/icons/Star.svg" 
-                      alt="star" 
-                      class="star star-filled" 
-                      :style="{ 
-                        clipPath: starIndex < book.rating
-                          ? 'inset(0 0% 0 0)' 
-                          : `inset(0 ${100 - ((book.rating - (starIndex - 1)) * 100)}% 0 0)` 
-                      }"
-                    />
-                  </template>
-                </div>
-              </div>
-            </div>
-          </div>
-        </NuxtLink>
+        <BookCard :book="book" />
       </div>
+    </div>
+
+    <!-- Lazy Load Section with Infinite Scroll -->
+    <div v-if="lazyLoad" class="lazy-load-section">
+      <div v-if="isLoading" class="loading-indicator">
+        <div class="spinner"></div>
+        <span>Loading more books...</span>
+      </div>
+      <!-- Invisible sentinel element that triggers auto-load when scrolled into view -->
+      <div 
+        v-else-if="hasMore" 
+        ref="sentinelRef"
+        class="scroll-sentinel"
+      ></div>
+      <p v-else class="no-more-items">You've reached the end of the library</p>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-interface Book {
-  id: number;
-  title: string;
-  author?: string;
-  image: string;
-  tags: string[];
-  rating?: number;
-}
+import BookCard, { type BookCardBook } from '~/components/Literature/BookCard.vue';
+
+interface Book extends BookCardBook {}
 
 const props = defineProps<{
   title: string;
   books: Book[];
   seeMoreLink?: string;
+  sectionType?: 'top' | 'search' | 'default';
+  titlePrefix?: string;
+  titleSuffix?: string;
+  highlightedQuery?: string;
+  // Lazy loading props
+  lazyLoad?: boolean;
+  isLoading?: boolean;
+  hasMore?: boolean;
 }>();
+
+const emit = defineEmits<{
+  (e: 'loadMore'): void;
+}>();
+
+// Intersection Observer for infinite scroll
+const sentinelRef = ref<HTMLElement | null>(null);
+let observer: IntersectionObserver | null = null;
+
+onMounted(() => {
+  if (props.lazyLoad && typeof window !== 'undefined') {
+    observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && props.hasMore && !props.isLoading) {
+            emit('loadMore');
+          }
+        });
+      },
+      {
+        root: null,
+        rootMargin: '100px', // Load when 100px before reaching the sentinel
+        threshold: 0
+      }
+    );
+  }
+});
+
+// Watch for sentinel ref changes to observe/unobserve
+watch(sentinelRef, (newRef, oldRef) => {
+  if (oldRef && observer) {
+    observer.unobserve(oldRef);
+  }
+  if (newRef && observer) {
+    observer.observe(newRef);
+  }
+});
+
+onUnmounted(() => {
+  if (observer) {
+    observer.disconnect();
+  }
+});
 
 const refresh = () => {
   // Emit refresh event or reload data
@@ -126,6 +150,49 @@ const refresh = () => {
   font-weight: 400;
   color: #111827;
   margin: 0;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.title-highlight {
+  margin-left: -6px;
+  margin-right: -6px;
+  background-color: var(--color-highlight);
+  text-decoration: underline;
+  color: #000;
+  font-family: Inter;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+  text-decoration-skip-ink: auto;
+  text-decoration-thickness: auto;
+  text-underline-offset: auto;
+  text-underline-position: from-font;
+  margin-right: -4px;
+}
+
+.tag-highlight {
+  margin-left: -6px;
+  margin-right: -6px;
+  background-color: var(--color-secondary);
+  color: var(--color-white);
+  font-weight: 600;
+  font-family: Inter;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-decoration-style: solid;
+  text-decoration-skip-ink: auto;
+  text-decoration-thickness: auto;
+  text-underline-offset: auto;
+  text-underline-position: from-font;
 }
 
 .section-actions {
@@ -322,6 +389,51 @@ const refresh = () => {
   .book-card {
     flex: 0 0 100%;
   }
+}
+
+/* Lazy Load Styles */
+.lazy-load-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px 0;
+  width: 100%;
+}
+
+.loading-indicator {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.spinner {
+  width: 24px;
+  height: 24px;
+  border: 3px solid #e2e8f0;
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.scroll-sentinel {
+  width: 100%;
+  height: 1px;
+  visibility: hidden;
+}
+
+.no-more-items {
+  color: #94a3b8;
+  font-size: 14px;
+  font-style: italic;
+  margin: 0;
 }
 </style>
 

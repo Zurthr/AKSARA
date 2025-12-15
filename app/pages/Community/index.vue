@@ -14,6 +14,7 @@
             :key="community.id"
             :to="`/community/${community.id}`"
             class="community-card"
+            @click="handleCommunityClick(community)"
           >
             <div class="community-card-header">
               <div
@@ -60,18 +61,32 @@
               </span>
             </div>
 
-            <button type="button" class="join-button" @click.stop>Join Community</button>
+            <button type="button" class="join-button" @click.stop="handleCommunityClick(community)">Join Community</button>
           </NuxtLink>
         </div>
 
         <div class="community-insights" aria-label="Community highlights">
           <section class="insights-card">
             <header>
-              <h3>Communities</h3>
-              <p>Discover and join communities that match your interests</p>
+              <h3>Filter Communities</h3>
+              <p>Filter communities by topics and interests</p>
+              <div class="filter-stats" v-if="activeFilters.length > 0">
+                <span class="active-filters">{{ activeFilters.length }} filter{{ activeFilters.length > 1 ? 's' : '' }} active</span>
+                <button type="button" class="clear-filters" @click="clearAllFilters">Clear all</button>
+              </div>
             </header>
-            <div class="hashtag-list">
-              <span v-for="hashtag in hashtags" :key="hashtag" class="hashtag">{{ hashtag }}</span>
+            <div class="filter-list">
+              <button 
+                v-for="hashtag in hashtags" 
+                :key="hashtag" 
+                :class="['filter-tag', { 'active': activeFilters.includes(hashtag) }]"
+                @click="toggleFilter(hashtag)"
+                type="button"
+              >
+                <span class="tag-icon">{{ getTagIcon(hashtag) }}</span>
+                <span class="tag-text">{{ hashtag }}</span>
+                <span v-if="activeFilters.includes(hashtag)" ></span>
+              </button>
             </div>
           </section>
 
@@ -86,12 +101,56 @@
       </div>
       
 
-      <button type="button" class="load-more">Load More Communities</button>
+      <button 
+        type="button" 
+        class="load-more" 
+        @click="handleLoadMore"
+        v-if="hasMore"
+        :disabled="loading"
+      >
+        {{ loading ? 'Loading...' : 'Load More Communities' }}
+      </button>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
+import { ref, computed, onMounted, watch } from 'vue';
+import { useClickTracking } from '~/composables/useClickTracking';
+import { useCommunities, type Community } from '~/composables/useCommunities';
+
+const { trackCommunityClick } = useClickTracking();
+const { 
+  communities: serverCommunities, 
+  loading, 
+  error, 
+  loadMoreCommunities, 
+  refetchCommunities,
+  hasMore 
+} = useCommunities(6); // Load 6 per page (grid is 2 columns, so 6 is good)
+
+// Use the communities from the composable
+// We don't filter client-side anymore, server does it based on 'q'
+const communities = computed(() => serverCommunities.value);
+
+// Fetch on mount
+onMounted(() => {
+  refetchCommunities();
+});
+
+// Handle community card click
+const handleCommunityClick = (community: Community) => {
+  trackCommunityClick({
+    id: community.id,
+    name: community.name,
+    tags: community.tags,
+    members: parseInt(community.members.replace(/[^0-9]/g, ''), 10) || community.memberCount || 0
+  });
+};
+
+// Filter state management
+const activeFilters = ref<string[]>([]);
+
 const iconPaths: Record<string, string> = {
   heart: 'M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5A4.5 4.5 0 0 1 6.5 4 4.49 4.49 0 0 1 12 6.09 4.49 4.49 0 0 1 17.5 4 4.5 4.5 0 0 1 22 8.5c0 3.78-3.4 6.86-8.55 11.54z',
   spark: 'M12 2l2.09 6.26L20 8.27l-5 3.64L16.18 18 12 14.77 7.82 18 9 11.91l-5-3.64 5.91-.01L12 2z',
@@ -99,76 +158,39 @@ const iconPaths: Record<string, string> = {
   chat: 'M4 4h16a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H8l-4 4V5a1 1 0 0 1 1-1z'
 };
 
-const communities = [
-  {
-    id: 'jump-fest-2025',
-    name: 'JUMP FEST 2025 - BRED THROUGH',
-    icon: 'spark',
-    accent: '#E6F2FF',
-    tags: ['#HarryPotter', '#WIBU', '#AnimeX'],
-    description:
-      'Festival fandom terbesar tahun ini. Dapatkan bocoran rilis anime, sesi temu kreator, dan event eksklusif lainnya.',
-    members: '21k',
-    postsToday: '42'
-  },
-  {
-    id: 'literacy-circle',
-    name: 'Literacy Circle',
-    icon: 'heart',
-    accent: '#FFE5EC',
-    tags: ['Harry Potter', 'LoTR', 'Book Talk', 'Reading'],
-    description:
-      'Komunitas pecinta buku untuk diskusi sastra, review, dan menemukan penulis baru.',
-    members: '324',
-    postsToday: '18'
-  },
-  {
-    id: 'wellness-warriors',
-    name: 'Wellness Warriors',
-    icon: 'spark',
-    accent: '#E6F2FF',
-    tags: ['Mindful', 'Balance', 'Habits'],
-    description:
-      'Berbagi rutinitas sehat, dukung perjalanan mindfulness, dan saling menguatkan.',
-    members: '512',
-    postsToday: '24'
-  },
-  {
-    id: 'photography-club',
-    name: 'Photography Club',
-    icon: 'camera',
-    accent: '#F0F9F5',
-    tags: ['Photo Walk', 'Tips', 'Critique'],
-    description:
-      'Belajar teknik fotografi, ikut photo walk, dan diskusi kritik konstruktif setiap minggu.',
-    members: '287',
-    postsToday: '12'
-  },
-  {
-    id: 'gaming-hub',
-    name: 'Gaming Hub Indonesia',
-    icon: 'chat',
-    accent: '#FFF8E1',
-    tags: ['Esports', 'Co-op', 'Livestream'],
-    description:
-      'Tempat berkumpulnya gamer untuk mabar, update turnamen, dan berbagi tips build meta.',
-    members: '1.2k',
-    postsToday: '33'
-  },
-  {
-    id: 'creative-atelier',
-    name: 'Creative Atelier',
-    icon: 'heart',
-    accent: '#FEEAE6',
-    tags: ['Illustration', 'UI/UX', 'Workshop'],
-    description:
-      'Komunitas kreator visual. Ada feedback session, challenge mingguan, dan kelas desain gratis.',
-    members: '648',
-    postsToday: '21'
-  }
-];
+// Watch filters to trigger server fetch
+watch(activeFilters, (newFilters) => {
+  const query = newFilters.join(' ');
+  refetchCommunities(query);
+}, { deep: true });
 
-const hashtags = ['#HarryPotter', '#WIBU', '#ANIME', '#GAME', '#DEMONS', '#ANIMEX'];
+// Toggle filter function
+const toggleFilter = (tag: string) => {
+  const index = activeFilters.value.indexOf(tag);
+  if (index > -1) {
+    activeFilters.value.splice(index, 1);
+  } else {
+    activeFilters.value.push(tag);
+  }
+};
+
+// Clear all filters
+const clearAllFilters = () => {
+  activeFilters.value = [];
+};
+
+const handleLoadMore = () => {
+  const query = activeFilters.value.join(' ');
+  loadMoreCommunities(query);
+};
+
+// Get icon for different tag types (disabled for cleaner look)
+const getTagIcon = (tag: string): string => {
+  // Return empty string to remove all icons
+  return '';
+};
+
+const hashtags = ['#HarryPotter', '#WIBU', '#ANIME', '#GAME', '#DEMONS', '#ANIMEX', 'Mindful'];
 
 const tweet = {
   initials: 'BS',
@@ -213,6 +235,119 @@ const relatedCommunities = [
 .insights-card header p {
   color: #475569;
   font-size: 14px;
+}
+
+.filter-stats {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.active-filters {
+  font-size: 12px;
+  color: #6366f1;
+  font-weight: 600;
+}
+
+.clear-filters {
+  font-size: 12px;
+  color: #ef4444;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+}
+
+.clear-filters:hover {
+  background: #fef2f2;
+}
+
+.filter-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.filter-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  background-color: #2C3542;
+  border: 1.5px solid #3B5379;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.filter-tag::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.filter-tag:hover::before {
+  left: 100%;
+}
+
+.filter-tag:hover {
+  background-color: #3B5379;
+  border-color: #475569;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 83, 121, 0.25);
+}
+
+.filter-tag.active {
+  background-color: #3B5379;
+  border-color: #475569;
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 83, 121, 0.4);
+}
+
+.filter-tag.active:hover {
+  background-color: #475569;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(59, 83, 121, 0.5);
+}
+
+.tag-icon {
+  font-size: 14px;
+  line-height: 1;
+}
+
+.tag-text {
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+.tag-check {
+  font-size: 12px;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 2px;
 }
 
 .hashtag-list {
@@ -426,6 +561,7 @@ const relatedCommunities = [
   gap: 26px;
   position: sticky;
   top: 70px;
+  padding-right: 40px;
 }
 
 .community-title h1 {
@@ -515,6 +651,7 @@ const relatedCommunities = [
   line-height: 1.6;
   display: -webkit-box;
   -webkit-line-clamp: 3;
+  line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
   min-height: 68px;

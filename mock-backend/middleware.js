@@ -79,8 +79,8 @@ module.exports = (req, res, next) => {
         }
       }
 
-      // Event validation
-      if (req.path.includes('/events') || req.path.includes('events')) {
+      // Event validation (exclude click_events from this validation)
+      if ((req.path.includes('/events') || req.path.includes('events')) && !req.path.includes('click_events')) {
         if (!body.title || typeof body.title !== 'string' || body.title.trim().length === 0) {
           return res.status(400).json({
             success: false,
@@ -247,6 +247,36 @@ module.exports = (req, res, next) => {
           res.setHeader('X-Total-Pages', totalPages);
           res.setHeader('X-Current-Page', page);
           res.setHeader('X-Per-Page', limit);
+        }
+        return originalJson.call(this, data);
+      };
+    }
+
+    // Custom error responses for common scenarios
+    const originalStatus = res.status;
+    res.status = function (code) {
+      if (code === 404) {
+        return originalStatus.call(this, 404).json({
+          success: false,
+          message: "Resource not found."
+        });
+      }
+
+      if (code === 500) {
+        return originalStatus.call(this, 500).json({
+          success: false,
+          message: "Internal server error. Please try again later."
+        });
+      }
+
+      return originalStatus.call(this, code);
+    };
+
+    // Smart search and relevance scoring for books
+    if (req.path.includes('/books') && req.method === 'GET') {
+      const originalJson = res.json;
+      res.json = function (data) {
+        if (Array.isArray(data)) {
           data = enhanceBookSearchResults(data, req.query);
         }
         return originalJson.call(this, data);

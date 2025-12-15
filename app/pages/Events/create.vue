@@ -100,22 +100,76 @@
           </div>
         </div>
 
+        <div class="form-row">
+          <div class="form-section">
+            <label for="location">Location</label>
+            <input
+              id="location"
+              type="text"
+              :placeholder="locationPlaceholder"
+              v-model="formData.location"
+              required
+            />
+          </div>
+
+          <div class="form-section">
+            <label for="organizer">Organizer</label>
+            <input
+              id="organizer"
+              type="text"
+              placeholder="Nama penyelenggara"
+              v-model="formData.organizer"
+              required
+            />
+          </div>
+        </div>
+
         <div class="form-section">
-          <label>Event Banner Image</label>
-          <div class="file-upload">
-            <div class="upload-area">
-              <div class="upload-icon">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  <polyline points="14,2 14,8 20,8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  <line x1="16" y1="13" x2="8" y2="13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  <line x1="16" y1="17" x2="8" y2="17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  <polyline points="10,9 9,9 8,9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </div>
-              <p>Click to upload banner image</p>
-              <p class="file-hint">PNG, JPG up to 10MB</p>
-            </div>
+          <label>Ticket Type</label>
+          <div class="radio-group">
+            <label class="radio-option">
+              <input type="radio" :value="true" v-model="formData.isFree" />
+              <span>Gratis</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" :value="false" v-model="formData.isFree" />
+              <span>Berbayar</span>
+            </label>
+          </div>
+        </div>
+
+        <div v-if="!formData.isFree" class="form-section">
+          <label for="price">Ticket Price (IDR)</label>
+          <input
+            id="price"
+            type="number"
+            min="0"
+            placeholder="cth. 50000"
+            v-model="formData.price"
+          />
+          <p class="hint">Masukkan harga dalam Rupiah tanpa tanda titik atau koma.</p>
+        </div>
+
+        <div class="form-row">
+          <div class="form-section">
+            <label for="capacity">Capacity (optional)</label>
+            <input
+              id="capacity"
+              type="number"
+              min="0"
+              placeholder="cth. 100"
+              v-model="formData.capacity"
+            />
+          </div>
+
+          <div class="form-section">
+            <label for="imageUrl">Banner Image URL</label>
+            <input
+              id="imageUrl"
+              type="url"
+              placeholder="https://contoh.com/banner.jpg"
+              v-model="formData.imageUrl"
+            />
           </div>
         </div>
 
@@ -141,19 +195,42 @@
       </div>
 
       <div class="form-actions">
-        <button type="button" class="button ghost" @click="cancel">Cancel</button>
-        <button type="submit" class="button primary" :disabled="isSubmitting">
-          {{ isSubmitting ? 'Creating...' : 'Create Event' }}
-        </button>
+        <p v-if="submissionError" class="form-error">{{ submissionError }}</p>
+        <div class="actions-group">
+          <button type="button" class="button ghost" @click="cancel">Cancel</button>
+          <button type="submit" class="button primary" :disabled="isSubmitting">
+            {{ isSubmitting ? 'Creating...' : 'Create Event' }}
+          </button>
+        </div>
       </div>
     </form>
   </section>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, computed, watch } from 'vue'
+import { navigateTo } from '#imports'
 
-const formData = ref({
+import { useLocalEvents } from '~/composables/useLocalEvents'
+// import { useEvents, type EventCreateData } from '~/composables/useEvents'
+
+interface CreateEventForm {
+  title: string
+  description: string
+  category: string
+  community: string
+  date: string
+  time: string
+  locationType: 'online' | 'onsite'
+  location: string
+  organizer: string
+  capacity: string
+  isFree: boolean
+  price: string
+  imageUrl: string
+}
+
+const formData = ref<CreateEventForm>({
   title: '',
   description: '',
   category: '',
@@ -161,12 +238,49 @@ const formData = ref({
   date: '',
   time: '',
   locationType: 'online',
-  bannerImage: null
-});
+  location: '',
+  organizer: '',
+  capacity: '',
+  isFree: true,
+  price: '',
+  imageUrl: ''
+})
 
-const selectedTags = ref([]);
-const currentTag = ref('');
-const isSubmitting = ref(false);
+const selectedTags = ref<string[]>([])
+const currentTag = ref('')
+
+
+const { addLocalEvent } = useLocalEvents()
+const isSubmitting = ref(false)
+const submissionError = ref<string | null>(null)
+
+watch(
+  () => formData.value.isFree,
+  (isFree) => {
+    if (isFree) {
+      formData.value.price = ''
+    }
+  }
+)
+
+watch(
+  () => formData.value.locationType,
+  (type) => {
+    if (type === 'online' && !formData.value.location.trim()) {
+      formData.value.location = 'Online'
+    }
+    if (type === 'onsite' && formData.value.location === 'Online') {
+      formData.value.location = ''
+    }
+  },
+  { immediate: true }
+)
+
+const locationPlaceholder = computed(() =>
+  formData.value.locationType === 'online'
+    ? 'Tambahkan tautan atau platform (Zoom, Google Meet, dll)'
+    : 'Masukkan alamat venue atau lokasi acara'
+)
 
 const categories = [
   'Workshop',
@@ -188,50 +302,76 @@ const communities = [
   'Student Union'
 ];
 
-const addTag = (event) => {
-  event.preventDefault();
-  const tag = currentTag.value.trim();
+const addTag = (event: KeyboardEvent) => {
+  event.preventDefault()
+  const tag = currentTag.value.trim()
   if (tag && !selectedTags.value.includes(tag)) {
-    selectedTags.value.push(tag);
-    currentTag.value = '';
+    selectedTags.value.push(tag)
+    currentTag.value = ''
   }
-};
+}
 
-const removeTag = (tagToRemove) => {
-  selectedTags.value = selectedTags.value.filter(tag => tag !== tagToRemove);
-};
+const removeTag = (tagToRemove: string) => {
+  selectedTags.value = selectedTags.value.filter((tag) => tag !== tagToRemove)
+}
 
-const handleSubmit = async (event) => {
-  event.preventDefault();
-  
-  if (isSubmitting.value) return;
-  
+const handleSubmit = async (event: Event) => {
+  event.preventDefault()
+  if (isSubmitting.value) {
+    return
+  }
+  submissionError.value = null
+  isSubmitting.value = true
+
+  if (!formData.value.location.trim()) {
+    submissionError.value = 'Lokasi acara wajib diisi.'
+    isSubmitting.value = false
+    return
+  }
+
+  if (!formData.value.organizer.trim()) {
+    submissionError.value = 'Nama penyelenggara wajib diisi.'
+    isSubmitting.value = false
+    return
+  }
+
+  // Generate unique id (timestamp + random)
+  const id = `local-${Date.now()}-${Math.floor(Math.random() * 10000)}`
+
+  // Map form data to event object
+  const newEvent = {
+    id,
+    title: formData.value.title.trim(),
+    description: formData.value.description.trim(),
+    date: formData.value.date,
+    time: formData.value.time || undefined,
+    location: formData.value.location.trim(),
+    organizer: formData.value.organizer.trim(),
+    is_free: formData.value.isFree,
+    price: formData.value.isFree ? 0 : Number(formData.value.price) || 0,
+    capacity: formData.value.capacity ? Number(formData.value.capacity) : undefined,
+    category: formData.value.category,
+    community: formData.value.community,
+    image_url: formData.value.imageUrl?.trim() || '',
+    tags: selectedTags.value,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+    // Add any other fields as needed
+  }
+
   try {
-    isSubmitting.value = true;
-    
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    // Here you would normally send data to API
-    console.log('Event data:', {
-      ...formData.value,
-      tags: selectedTags.value
-    });
-    
-    // Navigate to events page or show success message
-    await navigateTo('/events');
-    
-  } catch (error) {
-    console.error('Failed to create event:', error);
-    alert('Gagal membuat event. Silakan coba lagi.');
+    addLocalEvent(newEvent)
+    await navigateTo('/events')
+  } catch (e) {
+    submissionError.value = 'Gagal menyimpan event lokal.'
   } finally {
-    isSubmitting.value = false;
+    isSubmitting.value = false
   }
-};
+}
 
 const cancel = () => {
-  navigateTo('/events');
-};
+  void navigateTo('/events')
+}
 </script>
 
 <style scoped>
@@ -322,6 +462,7 @@ const cancel = () => {
 .radio-group {
   display: flex;
   gap: 16px;
+  flex-wrap: wrap;
 }
 
 .radio-option {
@@ -334,39 +475,6 @@ const cancel = () => {
 .radio-option input[type="radio"] {
   width: 16px;
   height: 16px;
-}
-
-.file-upload {
-  border: 2px dashed #d1d5db;
-  border-radius: 12px;
-  padding: 32px;
-  text-align: center;
-  background: #f9fafb;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.file-upload:hover {
-  border-color: #3b82f6;
-  background: #f0f9ff;
-}
-
-.upload-area {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-}
-
-.upload-icon {
-  width: 48px;
-  height: 48px;
-  color: #9ca3af;
-}
-
-.file-hint {
-  font-size: 13px;
-  color: #6b7280;
 }
 
 .tag-input-container {
@@ -426,10 +534,23 @@ const cancel = () => {
 
 .form-actions {
   display: flex;
+  flex-direction: column;
   gap: 12px;
-  justify-content: flex-end;
+  align-items: flex-end;
   padding-top: 20px;
   border-top: 1px solid #e5e7eb;
+}
+
+.actions-group {
+  display: flex;
+  gap: 12px;
+}
+
+.form-error {
+  color: #dc2626;
+  font-size: 14px;
+  margin: 0;
+  align-self: stretch;
 }
 
 .button {
@@ -481,6 +602,18 @@ const cancel = () => {
   
   .page-header h1 {
     font-size: 24px;
+  }
+
+  .form-actions {
+    align-items: stretch;
+  }
+
+  .actions-group {
+    flex-direction: column;
+  }
+
+  .actions-group .button {
+    width: 100%;
   }
 }
 </style>

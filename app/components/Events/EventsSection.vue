@@ -19,7 +19,7 @@
             class="event-card"
           >
             <div class="event-image-wrapper">
-              <img :src="event.image" :alt="event.title" class="event-background" />
+              <img :src="event.image || event.image_url" :alt="event.title" class="event-background" />
               <div class="event-overlay">
                 <h3 class="event-title-overlay">{{ event.subtitle }}</h3>
               </div>
@@ -46,7 +46,7 @@
                 </div>
               </div>
             </div>
-              <NuxtLink :to="`/events/${event.id}`" class="explore-btn">
+              <NuxtLink :to="`/events/${event.id}`" class="explore-btn" @click="trackEvent(event)">
                 Explore Event
               </NuxtLink>
             </div>
@@ -92,19 +92,33 @@
 </template>
 
 <script setup lang="ts">
-import eventsData from '~/data/events.json';
+import { useClickTracking } from '~/composables/useClickTracking';
+import { useLazyEvents } from '~/composables/useEvents';
 
-const events = eventsData;
+const { events, isLoading } = useLazyEvents(7);
 const currentIndex = ref(0);
 let autoPlayInterval: ReturnType<typeof setInterval> | null = null;
 
+const { trackEventClick } = useClickTracking();
+
+// Track event click
+const trackEvent = (event: typeof events.value[0]) => {
+  trackEventClick({
+    id: event.id,
+    title: event.title,
+    date: event.date,
+    community_id: event.community_id
+  });
+};
+
+
 const nextSlide = () => {
-  currentIndex.value = (currentIndex.value + 1) % events.length;
+  currentIndex.value = (currentIndex.value + 1) % events.value.length;
   resetAutoPlay();
 };
 
 const previousSlide = () => {
-  currentIndex.value = (currentIndex.value - 1 + events.length) % events.length;
+  currentIndex.value = (currentIndex.value - 1 + events.value.length) % events.value.length;
   resetAutoPlay();
 };
 
@@ -115,7 +129,9 @@ const goToSlide = (index: number) => {
 
 const startAutoPlay = () => {
   autoPlayInterval = setInterval(() => {
-    currentIndex.value = (currentIndex.value + 1) % events.length;
+    if (events.value.length > 0) {
+      currentIndex.value = (currentIndex.value + 1) % events.value.length;
+    }
   }, 10000); // 10 seconds
 };
 

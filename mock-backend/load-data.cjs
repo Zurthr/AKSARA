@@ -9,7 +9,7 @@ const books = require('./data/books.json');
 const reviews = require('./data/reviews.json');
 const comments = require('./data/comments.json');
 const trending = require('./data/trending.json');
-const external_posts = require('./data/external_posts.json');
+const click_events = require('./data/click_events.json');
 
 // Combine all data into a single object
 const db = {
@@ -20,7 +20,7 @@ const db = {
   reviews,
   comments,
   trending,
-  "external-posts": external_posts
+  click_events
 };
 
 // Write the combined data to db.json

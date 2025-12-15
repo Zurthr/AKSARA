@@ -1,19 +1,15 @@
 <template>
   <div class="literature-page">
       <div class="literature-main">
-        <header class="literature-header" v-if="searchQuery">
-          <h1>Search Results for "{{ searchQuery }}"</h1>
-          <p v-if="filteredBooks.length > 0">
-            Found {{ filteredBooks.length }} result{{ filteredBooks.length !== 1 ? 's' : '' }}
-          </p>
-          <p v-else>No results found. Try adjusting your filters or search query.</p>
-        </header>
 
         <div v-if="!searchQuery && !hasActiveFilters" class="literature-sections">
           <BookSection
-            title="Top Books For you"
+            title="Top Books for you"
             :books="topBooks"
             see-more-link="/literature?sort=top"
+            section-type="top"
+            title-prefix="Top Books"
+            title-suffix="for you"
           />
           
           <BookSection
@@ -21,38 +17,44 @@
             :title="`Looking for ${suggestedTag}?`"
             :books="suggestedBooks"
             :see-more-link="`/literature?tag=${suggestedTag}`"
+            section-type="recommendation"
+            :highlighted-tag="suggestedTag"
           />
         </div>
 
         <div v-else-if="searchQuery || hasActiveFilters" class="search-results">
           <BookGrid
-            :title="searchQuery ? `Results for '${searchQuery}'` : 'Filtered Results'"
+            v-if="searchQuery"
+            :title="`Our results for '${searchQuery}'`"
+            :books="filteredBooks"
+            see-more-link="/literature"
+            section-type="search"
+            title-prefix="results"
+            :highlighted-query="searchQuery"
+            title-suffix="'"
+          />
+          <BookGrid
+            v-else
+            title="Filtered Results"
             :books="filteredBooks"
             see-more-link="/literature"
           />
+          <p v-if="filteredBooks.length === 0" class="no-results-text">No results found. Try adjusting your filters or search query.</p>
         </div>
 
-        <div v-else class="literature-sections">
-          <BookSection
-            title="Top Books For you"
-            :books="topBooks"
-            see-more-link="/literature?sort=top"
-          />
-          
-          <BookSection
-            v-if="suggestedTag"
-            :title="`Looking for ${suggestedTag}?`"
-            :books="suggestedBooks"
-            :see-more-link="`/literature?tag=${suggestedTag}`"
-          />
-        </div>
-
-        <!-- All Books Section - Always visible at the bottom -->
+        <!-- All Books Section - Always visible at the bottom with lazy loading -->
         <div class="all-books-section">
           <BookGrid
-            title="A Library of Books to See"
-            :books="allBooks"
+            title="Our Library, just for you."
+            :books="lazyBooks"
             see-more-link="/literature"
+            section-type="top"
+            title-prefix="Library"
+            title-suffix="just for you."
+            :lazy-load="true"
+            :is-loading="isLoadingBooks"
+            :has-more="hasMoreBooks"
+            @load-more="loadMoreBooks"
           />
         </div>
       </div>
@@ -70,114 +72,153 @@ import BookSection from '~/components/Literature/BookSection.vue';
 import BookGrid from '~/components/Literature/BookGrid.vue';
 import LiteratureFilterSidebar from '~/components/Literature/LiteratureFilterSidebar.vue';
 import TrendingSidebar from '~/components/TrendingSidebar.vue';
+import { useLazyBooks } from '~/composables/useLiterature';
 
-// Use the real books data from the mock backend JSON
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore - JSON module typing is handled by the bundler
-import rawBooksData from '../../../mock-backend/data/books.json';
+// Literature API integration
+import { useLiterature } from '~/composables/useLiterature'
+import type { LiteratureBook } from '~/composables/useLiterature'
+import { useLocalBooks } from '~/composables/useLocalBooks'
+import mockBooks from '../../../mock-backend/data/books.json'
+import { mergeBookCollections, normalizeBookCollection } from '~/utils/books-normalizer'
 
-interface RawBookTag {
-  name: string;
-  type?: string;
+type RawBookRecord = Record<string, unknown>
+
+// Use Laravel API
+const { getAllBooks, loading, error } = useLiterature()
+
+// Use lazy loading for infinite scroll
+const { 
+  books: lazyBooks, 
+  isLoading: isLoadingBooks, 
+  hasMore: hasMoreBooks, 
+  loadMore: loadMoreBooks 
+} = useLazyBooks()
+
+const originalBooks = ref<LiteratureBook[]>([])
+const staticBooks = normalizeBookCollection(mockBooks as RawBookRecord[])
+const { localBooks } = useLocalBooks()
+
+const normalizedLocalBooks = computed<LiteratureBook[]>(() => {
+  const raw = Array.isArray(localBooks.value) ? localBooks.value : []
+  return normalizeBookCollection(raw as RawBookRecord[])
+})
+
+const mergedBooksData = computed<LiteratureBook[]>(() => {
+  const remote = Array.isArray(originalBooks.value) ? originalBooks.value : []
+  const local = Array.isArray(normalizedLocalBooks.value) ? normalizedLocalBooks.value : []
+  const static_books = Array.isArray(staticBooks) ? staticBooks : []
+  
+  // Ensure stable merge order and prevent duplicates
+  const merged = mergeBookCollections([static_books, local, remote])
+  
+  // Always ensure we have books available
+  const result = merged.length > 0 ? merged : static_books
+  
+  // Stable sort to prevent flickering
+  return result.sort((a, b) => {
+    const idA = typeof a.id === 'string' ? parseInt(a.id) || 0 : (a.id as number)
+    const idB = typeof b.id === 'string' ? parseInt(b.id) || 0 : (b.id as number)
+    return idA - idB
+  })
+})
+
+const route = useRoute()
+
+const fetchBooks = async () => {
+  try {
+    const response = await getAllBooks()
+    
+    // Handle nested Laravel response structure: response.data.data
+    if (response && response.data && response.data.data) {
+      const laravelBooksWithUniqueIds = response.data.data.map((book, index) => ({
+        ...book,
+        id: book.id || `laravel-${index + 1}`,
+        source: 'laravel'
+      }))
+      
+      originalBooks.value = laravelBooksWithUniqueIds
+    } else {
+      originalBooks.value = []
+    }
+  } catch (apiError) {
+    console.warn('Literature API not available, using local data only')
+    originalBooks.value = []
+  }
 }
 
-interface RawBookSource {
-  name: string;
-  url: string;
-}
+// Ensure books are fetched when component is mounted and on route change
+onMounted(async () => {
+  await fetchBooks()
+})
 
-interface RawCopyTypeSource {
-  name: string;
-  url: string;
-  type?: string;
-  shipping_available?: boolean;
-}
+// Refetch when route changes
+watch(() => route.fullPath, async () => {
+  await fetchBooks()
+}, { immediate: false })
 
-interface RawCopyType {
-  description: string;
-  sources?: RawCopyTypeSource[];
-}
-
-interface RawBook {
-  id: number;
-  title: string;
-  author?: string;
-  cover: string;
-  rating?: number;
-  description?: string;
-  year_edition?: string;
-  total_bookmarked?: number;
-  tags?: RawBookTag[];
-  copy_types?: Record<string, RawCopyType>;
-  licensing_type?: string;
-  sources?: RawBookSource[];
-}
+// Convert normalized books to UI format for compatibility
+const allBooks = computed(() => {
+  return mergedBooksData.value.map((book): Book => {
+    const tags = Array.isArray(book.tags) 
+      ? book.tags.map(tag => typeof tag === 'string' ? tag : tag.name)
+      : []
+    
+    const copyType = book.copy_types
+      ? Object.keys(book.copy_types).map(key => normalizeKey(key)).filter(Boolean)
+      : []
+    
+    const licensingType = book.licensing_type
+      ? [normalizeKey(book.licensing_type)]
+      : []
+    
+    const sources = Array.isArray(book.sources)
+      ? book.sources.map(s => typeof s === 'string' ? s : s.name)
+      : []
+    
+    // Handle image URL with fallback and better filtering
+    let imageUrl = book.cover || book.image_url
+    
+    // Only use placeholder for clearly invalid URLs
+    if (!imageUrl || imageUrl === 'null' || imageUrl === 'undefined' || imageUrl.trim() === '') {
+      imageUrl = '/images/book-cover-placeholder.svg'
+    }
+    
+    // Let the BookCard component handle image loading errors gracefully
+    
+    return {
+      id: typeof book.id === 'string' ? parseInt(book.id) || 0 : (book.id as number),
+      title: book.title,
+      author: book.author,
+      image: imageUrl,
+      tags,
+      rating: book.rating,
+      bookmarks: book.total_bookmarked,
+      copyType,
+      licensingType,
+      sources
+    }
+  })
+})
 
 interface Book {
-  id: number;
-  title: string;
-  author?: string;
-  image: string;
-  tags: string[];
-  rating?: number;
-  bookmarks?: number;
-  copyType?: string[];
-  licensingType?: string[];
-  sources?: string[];
+  id: number
+  title: string
+  author?: string
+  image: string
+  tags: string[]
+  rating?: number
+  bookmarks?: number
+  copyType?: string[]
+  licensingType?: string[]
+  sources?: string[]
 }
-
-const route = useRoute();
 
 const normalizeKey = (value: string | undefined | null) => {
   return (value || '')
     .trim()
     .toLowerCase()
-    .replace(/\s+/g, '-');
-};
-
-const rawBooks = rawBooksData as RawBook[];
-
-// Map backend books.json structure into the simpler Book shape used by the UI
-const allBooks: Book[] = (rawBooks || []).map((book) => {
-  const tags = (book.tags || []).map((tag) => tag.name);
-
-  const copyType = book.copy_types
-    ? Object.keys(book.copy_types).map((key) => normalizeKey(key)).filter(Boolean)
-    : [];
-
-  const licensingType = book.licensing_type
-    ? [normalizeKey(book.licensing_type)]
-    : [];
-
-  const sourceNames: string[] = [];
-
-  if (book.sources) {
-    sourceNames.push(...book.sources.map((source) => source.name));
-  }
-
-  if (book.copy_types) {
-    Object.values(book.copy_types).forEach((copyTypeEntry) => {
-      if (copyTypeEntry.sources) {
-        sourceNames.push(...copyTypeEntry.sources.map((source) => source.name));
-      }
-    });
-  }
-
-  return {
-    id: book.id,
-    title: book.title,
-    author: book.author,
-    image: book.cover,
-    tags,
-    rating: book.rating,
-    bookmarks: book.total_bookmarked,
-    copyType,
-    licensingType,
-    sources: Array.from(new Set(sourceNames))
-  };
-});
-
-const searchQuery = computed(() => route.query.q as string || route.query.search as string || '');
+    .replace(/\s+/g, '-')
+}
 
 const filters = computed(() => ({
   copyType: Array.isArray(route.query.copyType) 
@@ -198,6 +239,8 @@ const filters = computed(() => ({
       : []
 }));
 
+const searchQuery = computed(() => route.query.q as string || route.query.search as string || '');
+
 const hasActiveFilters = computed(() => {
   return filters.value.copyType.length > 0 || 
          filters.value.licensingType.length > 0 || 
@@ -207,7 +250,7 @@ const hasActiveFilters = computed(() => {
 
 // Filter books based on search query and filters
 const filteredBooks = computed(() => {
-  let books = [...allBooks];
+  let books = [...allBooks.value];
 
   // Filter by search query
   if (searchQuery.value) {
@@ -278,21 +321,35 @@ const filteredBooks = computed(() => {
 
 // Top books for user (sorted by rating)
 const topBooks = computed(() => {
-  return allBooks
+  return allBooks.value
     .sort((a, b) => (b.rating || 0) - (a.rating || 0))
     .slice(0, 8);
 });
 
-// Get user's most searched tag from search history
-// In production, this would come from user's search history/analytics
-const getUserSearchHistory = (): string[] => {
-  // Simulated search history - in production, fetch from localStorage/API
-  // This would track user's frequent searches
-  const searchHistory = ['PHP', 'Vue', 'JavaScript', 'Python', 'React'];
-  return searchHistory;
-};
+// Tags to cycle through for suggested books
+const suggestedTagsCycle = ['PHP', 'Web Development', 'Programming', 'Fantasy', 'Non-Fiction', 'Dystopia'];
 
-// Suggested tag based on user's search history
+// Current tag index - cycles on every page refresh
+const currentTagIndex = ref(0);
+
+// Initialize tag index on mount - cycles through tags on each refresh
+onMounted(() => {
+  if (process.client) {
+    // Use sessionStorage to track and cycle through tags on each refresh
+    const storedIndex = sessionStorage.getItem('suggestedTagIndex');
+    let index = storedIndex ? parseInt(storedIndex, 10) : 0;
+    
+    // Increment index and cycle back to 0 when reaching the end
+    index = (index + 1) % suggestedTagsCycle.length;
+    
+    // Store the new index for next refresh
+    sessionStorage.setItem('suggestedTagIndex', index.toString());
+    
+    currentTagIndex.value = index;
+  }
+});
+
+// Suggested tag - cycles through predefined tags on each refresh
 const suggestedTag = computed(() => {
   if (filters.value.tags.length > 0) {
     return filters.value.tags[0];
@@ -300,16 +357,15 @@ const suggestedTag = computed(() => {
   if (searchQuery.value) {
     return searchQuery.value;
   }
-  // Get most frequent tag from user's search history
-  const searchHistory = getUserSearchHistory();
-  return searchHistory[0] || 'PHP'; // Default to first item in history or fallback
+  // Cycle through the predefined tags on each page refresh
+  return suggestedTagsCycle[currentTagIndex.value];
 });
 
 // Suggested books based on tag
 const suggestedBooks = computed(() => {
   const tag = suggestedTag.value;
   if (!tag) return [];
-  return allBooks
+  return allBooks.value
     .filter(book => book.tags.some(bookTag => 
       bookTag.toLowerCase().includes(tag.toLowerCase())
     ))
@@ -322,7 +378,8 @@ const suggestedBooks = computed(() => {
   display: flex;
   flex-direction: row;
   gap: 8px;
-  width: 100%;
+  max-width: 100%;
+  flex:1;
 }
 
 .literature-content {
@@ -364,13 +421,26 @@ const suggestedBooks = computed(() => {
 
 .search-results {
   display: flex;
+  width:920px;
   flex-direction: column;
   gap: 20px;
 }
 
-@media (max-width: 1024px) {
+.no-results-text {
+  color: #64748b;
+  font-size: 16px;
+  line-height: 1.6;
+  text-align: center;
+  margin: 32px 0;
+  padding: 24px;
+  background: #f8fafc;
+  border-radius: 8px;
+}
+
+@media (max-width: 768px) {
   .literature-content {
-    flex-direction: column;
+   flex-direction: column;
+    padding: 16px;
   }
   
   .literature-main {
