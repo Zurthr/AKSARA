@@ -7062,5 +7062,195 @@
       "engagement": "4.5k"
     }
   ],
-  "click_events": []
+  "click_events": [
+    {
+      "event_type": "community_click",
+      "item_id": "jump-fest-2025",
+      "item_title": "JUMP FEST 2025 - BRED THROUGH",
+      "item_tags": [
+        "#HarryPotter",
+        "#WIBU",
+        "#AnimeX"
+      ],
+      "user_id": "anon_1765640280316_dw5wdzb07",
+      "timestamp": "2025-12-15T18:57:47.304Z",
+      "source_page": "/community",
+      "metadata": {
+        "members": 21
+      },
+      "id": 1
+    },
+    {
+      "event_type": "community_click",
+      "item_id": "literacy-circle",
+      "item_title": "Literacy Circle",
+      "item_tags": [
+        "Harry Potter",
+        "LoTR",
+        "Book Talk",
+        "Reading"
+      ],
+      "user_id": "anon_1765640280316_dw5wdzb07",
+      "timestamp": "2025-12-15T18:57:53.031Z",
+      "source_page": "/community",
+      "metadata": {
+        "members": 324
+      },
+      "id": 2
+    },
+    {
+      "event_type": "community_click",
+      "item_id": "jump-fest-2025",
+      "item_title": "JUMP FEST 2025 - BRED THROUGH",
+      "item_tags": [
+        "#HarryPotter",
+        "#WIBU",
+        "#AnimeX"
+      ],
+      "user_id": "anon_1765640280316_dw5wdzb07",
+      "timestamp": "2025-12-15T19:00:36.449Z",
+      "source_page": "/community",
+      "metadata": {
+        "members": 21
+      },
+      "id": 3
+    },
+    {
+      "event_type": "community_click",
+      "item_id": "travelers-id",
+      "item_title": "Travelers ID",
+      "item_tags": [
+        "Travel",
+        "Adventure",
+        "Tips"
+      ],
+      "user_id": "anon_1765640280316_dw5wdzb07",
+      "timestamp": "2025-12-15T19:00:41.184Z",
+      "source_page": "/community",
+      "metadata": {
+        "members": 28
+      },
+      "id": 4
+    },
+    {
+      "event_type": "community_click",
+      "item_id": "photography-club",
+      "item_title": "Photography Club",
+      "item_tags": [
+        "Photo Walk",
+        "Tips",
+        "Critique"
+      ],
+      "user_id": "anon_1765640280316_dw5wdzb07",
+      "timestamp": "2025-12-15T19:00:46.332Z",
+      "source_page": "/community",
+      "metadata": {
+        "members": 287
+      },
+      "id": 5
+    },
+    {
+      "event_type": "post_click",
+      "item_id": 18,
+      "item_title": "Photography and Composition",
+      "item_tags": [
+        "#Photography",
+        "#Composition"
+      ],
+      "user_id": "anon_1765640280316_dw5wdzb07",
+      "timestamp": "2025-12-15T19:00:48.195Z",
+      "source_page": "/community/photography-club",
+      "metadata": {
+        "author": "Sarah Chen",
+        "stars": 120
+      },
+      "id": 6
+    },
+    {
+      "event_type": "community_click",
+      "item_id": "digital-marketers",
+      "item_title": "Digital Marketers",
+      "item_tags": [
+        "Marketing",
+        "Digital",
+        "Ads"
+      ],
+      "user_id": "anon_1765640280316_dw5wdzb07",
+      "timestamp": "2025-12-15T19:00:51.637Z",
+      "source_page": "/community",
+      "metadata": {
+        "members": 26
+      },
+      "id": 7
+    },
+    {
+      "event_type": "community_click",
+      "item_id": "jump-fest-2025",
+      "item_title": "JUMP FEST 2025 - BRED THROUGH",
+      "item_tags": [
+        "#HarryPotter",
+        "#WIBU",
+        "#AnimeX"
+      ],
+      "user_id": "anon_1765640280316_dw5wdzb07",
+      "timestamp": "2025-12-15T19:02:48.968Z",
+      "source_page": "/community",
+      "metadata": {
+        "members": 21
+      },
+      "id": 8
+    },
+    {
+      "event_type": "community_click",
+      "item_id": "esports-league",
+      "item_title": "Esports League",
+      "item_tags": [
+        "Esports",
+        "Tournament",
+        "Game"
+      ],
+      "user_id": "anon_1765640280316_dw5wdzb07",
+      "timestamp": "2025-12-15T19:02:53.694Z",
+      "source_page": "/community",
+      "metadata": {
+        "members": 29
+      },
+      "id": 9
+    },
+    {
+      "event_type": "community_click",
+      "item_id": "literacy-circle",
+      "item_title": "Literacy Circle",
+      "item_tags": [
+        "Harry Potter",
+        "LoTR",
+        "Book Talk",
+        "Reading"
+      ],
+      "user_id": "anon_1765640280316_dw5wdzb07",
+      "timestamp": "2025-12-15T19:02:58.305Z",
+      "source_page": "/community",
+      "metadata": {
+        "members": 324
+      },
+      "id": 10
+    },
+    {
+      "event_type": "community_click",
+      "item_id": "digital-marketers",
+      "item_title": "Digital Marketers",
+      "item_tags": [
+        "Marketing",
+        "Digital",
+        "Ads"
+      ],
+      "user_id": "anon_1765640280316_dw5wdzb07",
+      "timestamp": "2025-12-15T19:03:04.114Z",
+      "source_page": "/community",
+      "metadata": {
+        "members": 26
+      },
+      "id": 11
+    }
+  ]
 }

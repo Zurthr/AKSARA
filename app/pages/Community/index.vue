@@ -81,18 +81,45 @@
                 <button type="button" class="clear-filters" @click="clearAllFilters">Clear all</button>
               </div>
             </header>
-            <div class="filter-list">
+            <div class="filter-dropdown">
               <button 
-                v-for="hashtag in hashtags" 
-                :key="hashtag" 
-                :class="['filter-tag', { 'active': activeFilters.includes(hashtag) }]"
-                @click="toggleFilter(hashtag)"
-                type="button"
+                type="button" 
+                class="dropdown-trigger" 
+                @click="isDropdownOpen = !isDropdownOpen"
+                :aria-expanded="isDropdownOpen"
               >
-                <span class="tag-icon">{{ getTagIcon(hashtag) }}</span>
-                <span class="tag-text">{{ hashtag }}</span>
-                <span v-if="activeFilters.includes(hashtag)" ></span>
+                <span>Filter by Tag</span>
+                <svg 
+                  width="20" 
+                  height="20" 
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  xmlns="http://www.w3.org/2000/svg"
+                  :class="{ 'rotate-180': isDropdownOpen }"
+                >
+                  <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
               </button>
+              
+              <div v-if="isDropdownOpen" class="dropdown-menu">
+                <button 
+                  v-for="tag in hashtags" 
+                  :key="tag" 
+                  class="dropdown-item"
+                  :class="{ 'active': activeFilters.includes(tag) }"
+                  @click="toggleFilter(tag)"
+                  type="button"
+                >
+                  <span class="tag-text">{{ tag }}</span>
+                  <span v-if="activeFilters.includes(tag)" class="check-icon">✓</span>
+                </button>
+                <div v-if="hashtags.length === 0" class="dropdown-item empty">
+                  No tags available
+                </div>
+              </div>
+              
+              <!-- Backdrop to close dropdown when clicking outside -->
+              <div v-if="isDropdownOpen" class="dropdown-backdrop" @click="isDropdownOpen = false"></div>
             </div>
           </section>
 
@@ -189,7 +216,16 @@ const getTagIcon = (tag: string): string => {
   return '';
 };
 
-const hashtags = ['#HarryPotter', '#WIBU', '#ANIME', '#GAME', '#DEMONS', '#ANIMEX', 'Mindful'];
+const isDropdownOpen = ref(false);
+
+const hashtags = computed(() => {
+  const tagsSet = new Set<string>();
+  allCommunities.forEach(c => {
+    c.tags.forEach((tag: string) => tagsSet.add(tag));
+  });
+  // Filter out any potential empty or null tags just in case
+  return Array.from(tagsSet).filter(Boolean).sort();
+});
 
 const tweet = {
   initials: 'BS',
@@ -267,11 +303,125 @@ const relatedCommunities = [
   background: #fef2f2;
 }
 
-.filter-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+.filter-dropdown {
+  position: relative;
+  width: 100%;
 }
+
+.dropdown-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #0f172a;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.dropdown-trigger:hover {
+  border-color: #cbd5e1;
+  background-color: #f8fafc;
+}
+
+.dropdown-trigger svg {
+  transition: transform 0.2s ease;
+  color: #64748b;
+}
+
+.dropdown-trigger svg.rotate-180 {
+  transform: rotate(180deg);
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  width: 100%;
+  max-height: 280px;
+  overflow-y: auto;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  padding: 6px;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 12px;
+  border: none;
+  background: transparent;
+  color: #334155;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: left;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.dropdown-item:hover {
+  background-color: #f1f5f9;
+  color: #0f172a;
+}
+
+.dropdown-item.active {
+  background-color: #eff6ff;
+  color: #2563eb;
+  font-weight: 600;
+}
+
+.dropdown-item.empty {
+  color: #94a3b8;
+  justify-content: center;
+  cursor: default;
+}
+
+.dropdown-item.empty:hover {
+  background-color: transparent;
+}
+
+.check-icon {
+  font-weight: bold;
+  font-size: 12px;
+}
+
+/* Backdrop to handle click outside */
+.dropdown-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 40;
+  cursor: default;
+}
+
+/* Scrollbar styling for dropdown */
+.dropdown-menu::-webkit-scrollbar {
+  width: 6px;
+}
+.dropdown-menu::-webkit-scrollbar-track {
+  background: transparent;
+}
+.dropdown-menu::-webkit-scrollbar-thumb {
+  background-color: #cbd5e1;
+  border-radius: 20px;
+}
+
 
 .filter-tag {
   display: inline-flex;
