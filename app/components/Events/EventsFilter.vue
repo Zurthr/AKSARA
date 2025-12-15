@@ -237,6 +237,8 @@ watch(
 <style scoped>
 .filter-card {
   border: 1px solid #e2e8f0;
+  padding:20px;
+  border-radius:16px;
 }
 
 .filter-form {

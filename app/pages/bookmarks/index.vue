@@ -20,45 +20,59 @@
           :key="item.id"
           class="bookmark-card"
         >
-          <div class="card-header">
-            <div class="author">
-              <img :src="item.author.avatar" :alt="item.author.name" class="avatar" />
-              <div>
-                <div class="author-row">
-                  <span class="author-name">{{ item.author.name }}</span>
-                  <span v-if="item.author.badge" class="author-badge">{{ item.author.badge }}</span>
-                  <span class="type-pill" :class="item.type">{{ typeLabel(item.type) }}</span>
+          <div
+            class="card-body"
+            :class="{ 'card-body--with-cover': item.type === 'literature' }"
+          >
+            <div v-if="item.type === 'literature'" class="book-cover-wrap">
+              <img
+                v-if="getBookCover(item)"
+                :src="getBookCover(item)"
+                :alt="`Cover of ${item.title}`"
+                class="book-cover"
+              />
+            </div>
+
+            <div class="card-body-main">
+              <div class="card-header">
+                <div class="author">
+                  <img :src="item.author.avatar" :alt="item.author.name" class="avatar" />
+                  <div>
+                    <div class="author-row">
+                      <span class="author-name">{{ item.author.name }}</span>
+                      <span v-if="item.author.badge" class="author-badge">{{ item.author.badge }}</span>
+                      <span class="type-pill" :class="item.type">{{ typeLabel(item.type) }}</span>
+                    </div>
+                    <p class="author-tagline">{{ item.author.tagline }}</p>
+                  </div>
                 </div>
-                <p class="author-tagline">{{ item.author.tagline }}</p>
               </div>
-            </div>
-          </div>
 
-          <div class="card-body">
-            <div class="title-row">
-              <h2 class="card-title">{{ item.title }}</h2>
-              <NuxtLink :to="item.link" class="ref-link">
-                View {{ typeLabel(item.type) }}
-              </NuxtLink>
-            </div>
-            <p class="card-content">{{ item.content }}</p>
-
-            <div class="tags">
-              <span v-for="tag in item.tags" :key="tag" class="tag">{{ tag }}</span>
-            </div>
-
-            <div class="card-footer">
-              <div class="stats">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="star-icon">
-                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                </svg>
-                <span class="star-count">{{ item.stars }}</span>
-                <span v-if="item.type === 'event' && item.eventDate" class="event-date">
-                  • {{ formatDisplayDate(item.eventDate) }}
-                </span>
+              <div class="title-row">
+                <h2 class="card-title">{{ item.title }}</h2>
+                <NuxtLink :to="item.link" class="ref-link">
+                  View {{ typeLabel(item.type) }}
+                </NuxtLink>
               </div>
-              <div class="ref-id">
-                Saved from ID: <span class="ref">{{ item.refId }}</span>
+              <p class="card-content">{{ item.content }}</p>
+
+              <div class="tags">
+                <span v-for="tag in item.tags" :key="tag" class="tag">{{ tag }}</span>
+              </div>
+
+              <div class="card-footer">
+                <div class="stats">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="star-icon">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                  </svg>
+                  <span class="star-count">{{ item.stars }}</span>
+                  <span v-if="item.type === 'event' && item.eventDate" class="event-date">
+                    • {{ formatDisplayDate(item.eventDate) }}
+                  </span>
+                </div>
+                <div class="ref-id">
+                  Saved from ID: <span class="ref">{{ item.refId }}</span>
+                </div>
               </div>
             </div>
           </div>
@@ -69,7 +83,7 @@
     <RightSideBar>
       <section class="sidebar-card">
         <h3>Your Bookmarks</h3>
-        <p class="sidebar-quote">All your favorite posts, in one place.</p>
+        <p class="sidebar-quote">All your little things—from posts to <br>events—in one petite place.🐝</p>
         <div class="bookmark-tabs" role="tablist" aria-label="Bookmark types">
           <button
             type="button"
@@ -107,8 +121,8 @@
         </div>
       </section>
 
-      <EventsFilter />
-      <LiteratureFilterSidebar />
+      <EventsFilter v-if="activeTab === 'event'" />
+      <LiteratureFilterSidebar v-if="activeTab === 'literature'" />
     </RightSideBar>
   </div>
 </template>
@@ -119,6 +133,7 @@ import RightSideBar from '~/components/General/RightSideBar.vue';
 import LiteratureFilterSidebar from '~/components/Literature/LiteratureFilterSidebar.vue';
 import EventsFilter from '~/components/Events/EventsFilter.vue';
 import ForumCard from '~/components/Forum/ForumCard.vue';
+import books from '~/../mock-backend/data/books.json';
 import { useLazyPosts, type Post } from '~/composables/useLazyPosts';
 
 type BookmarkType = 'post' | 'literature' | 'event';
@@ -146,6 +161,11 @@ interface BookmarkItem {
   sources?: string[];
 }
 
+type Book = {
+  id: number;
+  cover: string;
+};
+
 const route = useRoute();
 const router = useRouter();
 
@@ -165,6 +185,26 @@ const ensureArray = (value: unknown): string[] => {
 };
 
 const normalizeKey = (value: string) => value.trim().toLowerCase();
+
+const bookCoverById = new Map<number, string>(
+  (books as Book[]).map((b) => [b.id, b.cover])
+);
+
+const getBookCover = (item: BookmarkItem): string | undefined => {
+  if (item.type !== 'literature') return undefined;
+  // Prefer parsing from refId, e.g. "book-3"
+  const refMatch = item.refId.match(/^book-(\d+)$/);
+  const idFromRef = refMatch ? Number(refMatch[1]) : NaN;
+
+  // Fallback: parse from link, e.g. "/literature/3"
+  const linkMatch = item.link.match(/\/literature\/(\d+)$/);
+  const idFromLink = linkMatch ? Number(linkMatch[1]) : NaN;
+
+  const id = !Number.isNaN(idFromRef) ? idFromRef : idFromLink;
+  if (Number.isNaN(id)) return undefined;
+
+  return bookCoverById.get(id);
+};
 
 const bookmarkItems = ref<BookmarkItem[]>([
   // Forum posts – shaped after entries in mock-backend/db.json "posts"
@@ -676,6 +716,19 @@ const typeLabel = (type: BookmarkType) => {
   display: flex;
   flex-direction: column;
   gap: 18px;
+  margin-top:20px;
+}
+
+
+.book-cover-wrap {
+  flex: 0 0 200px;
+}
+
+.book-cover{
+  width:200px;
+  height:300px;
+  object-fit: cover;
+  border-radius:12px;
 }
 
 .bookmark-card {
@@ -777,6 +830,12 @@ const typeLabel = (type: BookmarkType) => {
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+
+.card-body--with-cover {
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 16px;
 }
 
 .title-row {
@@ -886,9 +945,9 @@ const typeLabel = (type: BookmarkType) => {
 
 .sidebar-card h3 {
   margin: 0 0 12px;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--color-black);
 }
 
 .sidebar-quote {
@@ -946,6 +1005,14 @@ const typeLabel = (type: BookmarkType) => {
 
 .filter-card {
   border: 1px solid #e2e8f0;
+  padding:20px;
+  border-radius:16px;
+}
+
+.card-body-main {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 /* Event filter styles moved to components/Events/EventsFilter.vue */
