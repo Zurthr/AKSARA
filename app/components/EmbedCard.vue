@@ -3,20 +3,13 @@
     <div class="card-main">
       <div class="card-left">
         <div class="thumbnail-container">
-          <img
-            v-if="embed.thumbnailUrl"
-            :src="embed.thumbnailUrl"
-            :alt="embed.title"
-            class="thumbnail"
-            @error="handleImageError"
-          />
-          <div v-else class="thumbnail-placeholder">
+          <div class="thumbnail-placeholder">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
               <circle cx="8.5" cy="8.5" r="1.5"></circle>
               <polyline points="21 15 16 10 5 21"></polyline>
             </svg>
-            <span>Preview</span>
+            <span>Embed</span>
           </div>
         </div>
       </div>
@@ -24,35 +17,38 @@
       <div class="card-content">
         <div class="embed-info">
           <div class="title-row">
-            <h3 class="embed-title">{{ embed.title }}</h3>
-            <div class="status-badge" :class="embed.type">
-              {{ embed.type === 'active' ? 'Active' : 'Draft' }}
+            <h3 class="embed-title">{{ embed.name }}</h3>
+            <div class="status-badge active">
+              Active
             </div>
           </div>
           <div class="category-row">
-            <span class="category-tag">{{ embed.category }}</span>
+            <span class="category-tag">{{ embed.type === 'RESOURCE_LIST' ? 'Books & Resources' : 'Events & Workshops' }}</span>
           </div>
-          <p class="embed-description">{{ embed.description }}</p>
+          <p class="embed-description">
+            {{ getTypeDescription(embed.type) }} • {{ embed.limit || 5 }} items • {{ embed.theme || 'light' }} theme
+            <span v-if="embed.filterTags && embed.filterTags.length > 0"> • {{ embed.filterTags.join(', ') }}</span>
+          </p>
         </div>
 
         <div class="stats-and-actions">
           <div class="stats-row">
             <div class="stat-item">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                <circle cx="12" cy="12" r="3"></circle>
-              </svg>
-              <span class="stat-value">{{ formatNumber(embed.views) }}</span>
-              <span class="stat-label">views</span>
-            </div>
-            <div class="stat-item">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
                 <polyline points="10 17 15 12 10 7"></polyline>
                 <line x1="15" y1="12" x2="3" y2="12"></line>
               </svg>
-              <span class="stat-value">{{ formatNumber(embed.clicks) }}</span>
-              <span class="stat-label">clicks</span>
+              <span class="stat-value">{{ embed.limit || 5 }}</span>
+              <span class="stat-label">items</span>
+            </div>
+            <div class="stat-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+              <span class="stat-value">{{ embed.sortBy || 'rating' }}</span>
+              <span class="stat-label">sort</span>
             </div>
             <div class="stat-item">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -80,32 +76,8 @@
             </button>
 
             <button
-              class="btn-action btn-duplicate"
-              @click="$emit('duplicate', embed)"
-              title="Duplicate embed"
-            >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-              </svg>
-              <span>Duplicate</span>
-            </button>
-
-            <button
-              class="btn-action btn-edit"
-              @click="$emit('edit', embed)"
-              title="Edit embed"
-            >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-              </svg>
-              <span>Edit</span>
-            </button>
-
-            <button
               class="btn-action btn-delete"
-              @click="$emit('delete', embed)"
+              @click="$emit('delete', embed.id)"
               title="Delete embed"
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -125,22 +97,26 @@
 const props = defineProps<{
   embed: {
     id: string;
-    title: string;
-    description: string;
-    category: string;
-    type: 'draft' | 'active';
+    name: string;
+    type: "RESOURCE_LIST" | "EVENT_LIST";
+    filterTags?: string[];
+    limit?: number;
+    sortBy?: string;
+    theme?: string;
+    showThumbnail?: boolean;
+    allowedDomains?: string[];
     createdAt: string;
-    views: number;
-    clicks: number;
-    thumbnailUrl?: string;
-    embedUrl?: string;
+    updatedAt?: string;
+    creator?: {
+      id: string;
+      name: string;
+    };
+    embedUrl: string;
   }
 }>();
 
 const emit = defineEmits<{
-  edit: [embed: typeof props.embed];
-  duplicate: [embed: typeof props.embed];
-  delete: [embed: typeof props.embed];
+  delete: [embedId: string];
   'get-link': [embed: typeof props.embed];
 }>();
 
@@ -160,6 +136,10 @@ const formatNumber = (num: number) => {
   if (num >= 1000000) return `${(num / 1000000).toFixed(1)}M`;
   if (num >= 1000) return `${(num / 1000).toFixed(1)}K`;
   return num.toString();
+};
+
+const getTypeDescription = (type: string) => {
+  return type === 'RESOURCE_LIST' ? 'Books & Resources' : 'Events & Workshops';
 };
 
 const handleImageError = (event: Event) => {

@@ -3,7 +3,7 @@
     <div class="modal-content" @click.stop>
       <div class="modal-header">
         <h2 class="modal-title">
-          {{ isEditing ? 'Edit Embed' : 'Create New Embed' }}
+          {{ isEditing ? 'Edit Embed Widget' : 'Create New Embed Widget' }}
         </h2>
         <button class="btn-close" @click="$emit('close')">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -15,109 +15,115 @@
 
       <form @submit.prevent="handleSubmit" class="modal-form">
         <div class="form-group">
-          <label for="title" class="form-label">Title *</label>
+          <label for="name" class="form-label">Widget Name *</label>
           <input
-            id="title"
-            v-model="formData.title"
+            id="name"
+            v-model="formData.name"
             type="text"
             class="form-input"
-            placeholder="Enter embed title"
+            placeholder="e.g. My Science Books Widget"
             required
             :maxlength="100"
           />
           <div class="form-hint">
-            {{ formData.title.length }}/100 characters
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="description" class="form-label">Description</label>
-          <textarea
-            id="description"
-            v-model="formData.description"
-            class="form-textarea"
-            placeholder="Describe what this embed does"
-            rows="3"
-            :maxlength="500"
-          />
-          <div class="form-hint">
-            {{ formData.description.length }}/500 characters
+            This is for your internal reference
           </div>
         </div>
 
         <div class="form-row">
           <div class="form-group">
-            <label for="category" class="form-label">Category *</label>
-            <select
-              id="category"
-              v-model="formData.category"
-              class="form-select"
-              required
-            >
-              <option value="">Select category</option>
-              <option value="Marketing">Marketing</option>
-              <option value="Lead Generation">Lead Generation</option>
-              <option value="Social">Social</option>
-              <option value="E-commerce">E-commerce</option>
-              <option value="Education">Education</option>
-              <option value="Entertainment">Entertainment</option>
-              <option value="Utility">Utility</option>
-              <option value="Other">Other</option>
-            </select>
-          </div>
-
-          <div class="form-group" v-if="isEditing">
-            <label for="type" class="form-label">Status</label>
+            <label for="type" class="form-label">Content Type *</label>
             <select
               id="type"
               v-model="formData.type"
               class="form-select"
+              required
             >
-              <option value="draft">Draft</option>
-              <option value="active">Active</option>
+              <option value="RESOURCE_LIST">Books & Resources</option>
+              <option value="EVENT_LIST">Events & Workshops</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="limit" class="form-label">Items to Show *</label>
+            <input
+              id="limit"
+              v-model.number="formData.limit"
+              type="number"
+              class="form-input"
+              min="1"
+              max="20"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="filterTags" class="form-label">Filter Tags</label>
+          <input
+            id="filterTags"
+            v-model="tagsInput"
+            type="text"
+            class="form-input"
+            placeholder="e.g. science, history, technology"
+          />
+          <div class="form-hint">
+            Comma-separated tags to filter content. Leave empty to show all.
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="sortBy" class="form-label">Sort By *</label>
+            <select
+              id="sortBy"
+              v-model="formData.sortBy"
+              class="form-select"
+              required
+            >
+              <option value="rating">Highest Rated</option>
+              <option value="newest">Newest First</option>
+              <option value="title">Alphabetical (A-Z)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="theme" class="form-label">Theme *</label>
+            <select
+              id="theme"
+              v-model="formData.theme"
+              class="form-select"
+              required
+            >
+              <option value="light">Light</option>
+              <option value="dark">Dark</option>
+              <option value="blue">Blue</option>
             </select>
           </div>
         </div>
 
-        <div class="form-group" v-if="!isEditing">
-          <label class="form-label">Embed Type</label>
-          <div class="embed-type-options">
-            <label class="radio-option">
-              <input
-                v-model="formData.embedType"
-                type="radio"
-                value="widget"
-                class="radio-input"
-              />
-              <div class="radio-content">
-                <div class="radio-title">Widget</div>
-                <div class="radio-description">Interactive widget for your site</div>
-              </div>
-            </label>
-            <label class="radio-option">
-              <input
-                v-model="formData.embedType"
-                type="radio"
-                value="form"
-                class="radio-input"
-              />
-              <div class="radio-content">
-                <div class="radio-title">Form</div>
-                <div class="radio-description">Contact or signup form</div>
-              </div>
-            </label>
-            <label class="radio-option">
-              <input
-                v-model="formData.embedType"
-                type="radio"
-                value="content"
-                class="radio-input"
-              />
-              <div class="radio-content">
-                <div class="radio-title">Content</div>
-                <div class="radio-description">Display content or media</div>
-              </div>
-            </label>
+        <div class="form-group">
+          <label class="checkbox-label">
+            <input
+              v-model="formData.showThumbnail"
+              type="checkbox"
+              class="checkbox-input"
+            />
+            <span class="checkbox-text">Show cover images</span>
+          </label>
+        </div>
+
+        <div class="form-group">
+          <label for="allowedDomains" class="form-label">Allowed Domains</label>
+          <input
+            id="allowedDomains"
+            v-model="domainsInput"
+            type="text"
+            class="form-input"
+            placeholder="e.g. https://myschool.edu, https://partner.com"
+          />
+          <div class="form-hint">
+            Comma-separated domains that can embed this widget. Leave empty to allow all domains.
           </div>
         </div>
 
@@ -135,7 +141,7 @@
             :disabled="isSubmitting"
           >
             <span v-if="isSubmitting" class="btn-spinner"></span>
-            {{ isSubmitting ? 'Saving...' : (isEditing ? 'Save Changes' : 'Create Embed') }}
+            {{ isSubmitting ? 'Saving...' : (isEditing ? 'Save Changes' : 'Create Widget') }}
           </button>
         </div>
       </form>
@@ -144,56 +150,81 @@
 </template>
 
 <script setup lang="ts">
+interface EmbedConfig {
+  id?: string;
+  name: string;
+  type: "RESOURCE_LIST" | "EVENT_LIST";
+  filterTags: string[];
+  limit: number;
+  sortBy: string;
+  theme: string;
+  showThumbnail: boolean;
+  allowedDomains: string[];
+}
+
 const props = defineProps<{
-  embed?: {
-    id: string;
-    title: string;
-    description: string;
-    category: string;
-    type: 'draft' | 'active';
-  } | null;
+  embed?: EmbedConfig | null;
 }>();
 
 const emit = defineEmits<{
   close: [];
-  save: [embedData: {
-    title?: string;
-    description?: string;
-    category?: string;
-    type?: 'draft' | 'active';
-    embedType?: string;
-  }];
+  save: [embedData: EmbedConfig];
 }>();
 
 const isEditing = computed(() => !!props.embed);
 const isSubmitting = ref(false);
 
-const formData = ref({
-  title: props.embed?.title || '',
-  description: props.embed?.description || '',
-  category: props.embed?.category || '',
-  type: props.embed?.type || 'draft',
-  embedType: 'widget'
+// Reactive form data
+const formData = ref<EmbedConfig>({
+  name: props.embed?.name || '',
+  type: props.embed?.type || 'RESOURCE_LIST',
+  filterTags: props.embed?.filterTags ? [...props.embed.filterTags] : [],
+  limit: props.embed?.limit || 5,
+  sortBy: props.embed?.sortBy || 'rating',
+  theme: props.embed?.theme || 'light',
+  showThumbnail: props.embed?.showThumbnail ?? true,
+  allowedDomains: props.embed?.allowedDomains ? [...props.embed.allowedDomains] : [],
+});
+
+// Computed inputs for comma-separated values
+const tagsInput = computed({
+  get: () => formData.value.filterTags.join(', '),
+  set: (value: string) => {
+    formData.value.filterTags = value
+      .split(',')
+      .map(tag => tag.trim())
+      .filter(tag => tag.length > 0);
+  }
+});
+
+const domainsInput = computed({
+  get: () => formData.value.allowedDomains.join(', '),
+  set: (value: string) => {
+    formData.value.allowedDomains = value
+      .split(',')
+      .map(domain => domain.trim())
+      .filter(domain => domain.length > 0);
+  }
 });
 
 const handleSubmit = async () => {
   isSubmitting.value = true;
 
   try {
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    // Validate form data
+    if (!formData.value.name.trim()) {
+      throw new Error('Widget name is required');
+    }
 
-    const saveData = {
-      title: formData.value.title,
-      description: formData.value.description,
-      category: formData.value.category,
-      ...(isEditing.value ? { type: formData.value.type } : { embedType: formData.value.embedType })
-    };
+    if (formData.value.limit < 1 || formData.value.limit > 20) {
+      throw new Error('Limit must be between 1 and 20');
+    }
 
-    emit('save', saveData);
+    // Emit the save event with the form data
+    emit('save', { ...formData.value });
   } catch (error) {
-    console.error('Error saving embed:', error);
-    // You could show an error message here
+    console.error('Error validating embed:', error);
+    alert(error instanceof Error ? error.message : 'Validation failed');
   } finally {
     isSubmitting.value = false;
   }
@@ -238,7 +269,7 @@ onMounted(() => {
 .modal-content {
   background: white;
   border-radius: 16px;
-  max-width: 600px;
+  max-width: 650px;
   width: 100%;
   max-height: 90vh;
   overflow-y: auto;
@@ -301,7 +332,6 @@ onMounted(() => {
 }
 
 .form-input,
-.form-textarea,
 .form-select {
   border: 1px solid #d1d5db;
   border-radius: 8px;
@@ -312,77 +342,44 @@ onMounted(() => {
 }
 
 .form-input:focus,
-.form-textarea:focus,
 .form-select:focus {
   outline: none;
   border-color: var(--color-primary);
   box-shadow: 0 0 0 3px rgba(59, 83, 121, 0.1);
 }
 
-.form-textarea {
-  resize: vertical;
-  min-height: 80px;
-  font-family: inherit;
-}
-
 .form-hint {
   font-size: 12px;
   color: #64748b;
   margin-top: 4px;
-  text-align: right;
 }
 
-.embed-type-options {
+.checkbox-label {
   display: flex;
-  flex-direction: column;
+  align-items: center;
   gap: 8px;
-}
-
-.radio-option {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  padding: 12px;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
   cursor: pointer;
-  transition: all 0.2s;
-}
-
-.radio-option:hover {
-  border-color: #d1d5db;
-  background: #f9fafb;
-}
-
-.radio-option:has(.radio-input:checked) {
-  border-color: var(--color-primary);
-  background: #eff6ff;
-}
-
-.radio-input {
-  margin-top: 2px;
-}
-
-.radio-content {
-  flex: 1;
-}
-
-.radio-title {
-  font-weight: 600;
+  font-size: 14px;
   color: var(--color-primary);
-  margin-bottom: 2px;
 }
 
-.radio-description {
-  font-size: 13px;
-  color: #64748b;
+.checkbox-input {
+  width: 16px;
+  height: 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.checkbox-text {
+  user-select: none;
 }
 
 .form-actions {
   display: flex;
   gap: 12px;
   justify-content: flex-end;
-  padding-top: 8px;
+  padding-top: 16px;
   border-top: 1px solid #f3f4f6;
   margin-top: 8px;
 }
