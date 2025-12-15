@@ -13,6 +13,7 @@ export interface Event {
   capacity?: number
   registered_count?: number
   image_url?: string
+  image?: string
   category?: string
   is_free: boolean
   price?: number

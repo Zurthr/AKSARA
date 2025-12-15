@@ -95,7 +95,7 @@
 import { useClickTracking } from '~/composables/useClickTracking';
 import { useLazyEvents } from '~/composables/useEvents';
 
-const { events, isLoading } = useLazyEvents(7);
+const { events, isLoading, loadMore } = useLazyEvents(7);
 const currentIndex = ref(0);
 let autoPlayInterval: ReturnType<typeof setInterval> | null = null;
 
@@ -143,6 +143,7 @@ const resetAutoPlay = () => {
 };
 
 onMounted(() => {
+  loadMore();
   startAutoPlay();
 });
 
