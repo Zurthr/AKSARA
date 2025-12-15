@@ -1,23 +1,56 @@
 <template>
   <div class="embeds-index">
     <main class="embeds-content">
-      <div class="embeds-grid">
-        <EmbedCard
-          v-for="embed in paginatedEmbeds"
-          :key="embed.id"
-          :embed="embed"
-          @edit="handleEditEmbed"
-          @duplicate="handleDuplicateEmbed"
-          @delete="handleDeleteEmbed"
-          @get-link="handleGetLink"
-        />
+      <!-- Loading state -->
+      <div v-if="loading" class="flex items-center justify-center py-12">
+        <div class="text-center">
+          <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p class="text-gray-600">Loading your embeds...</p>
+        </div>
       </div>
 
-      <Pagination
-        :current-page="currentPage"
-        :total-pages="totalPages"
-        @page-change="handlePageChange"
-      />
+      <!-- Error state -->
+      <div v-else-if="error" class="flex items-center justify-center py-12">
+        <div class="text-center">
+          <div class="text-red-500 text-xl mb-4">⚠️</div>
+          <p class="text-red-600 mb-4">{{ error }}</p>
+          <button
+            @click="fetchEmbeds"
+            class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+          >
+            Try Again
+          </button>
+        </div>
+      </div>
+
+      <!-- Empty state -->
+      <div v-else-if="embeds.length === 0" class="flex items-center justify-center py-12">
+        <div class="text-center">
+          <div class="text-gray-400 text-4xl mb-4">📦</div>
+          <h3 class="text-lg font-medium text-gray-900 mb-2">No embeds yet</h3>
+          <p class="text-gray-600 mb-4">Create your first embed widget to get started</p>
+          <CreateEmbedCTA @create="handleCreateEmbed" />
+        </div>
+      </div>
+
+      <!-- Content state -->
+      <div v-else>
+        <div class="embeds-grid">
+          <EmbedCard
+            v-for="embed in paginatedEmbeds"
+            :key="embed.id"
+            :embed="embed"
+            @delete="handleDeleteEmbed"
+            @get-link="handleGetLink"
+          />
+        </div>
+
+        <Pagination
+          :current-page="currentPage"
+          :total-pages="totalPages"
+          @page-change="handlePageChange"
+        />
+      </div>
     </main>
 
     <RightSideBar>
@@ -49,15 +82,21 @@ interface EmbedStats {
 
 interface Embed {
   id: string;
-  title: string;
-  description: string;
-  category: string;
-  type: "draft" | "active";
+  name: string;
+  type: "RESOURCE_LIST" | "EVENT_LIST";
+  filterTags?: string[];
+  limit?: number;
+  sortBy?: string;
+  theme?: string;
+  showThumbnail?: boolean;
+  allowedDomains?: string[];
   createdAt: string;
-  views: number;
-  clicks: number;
-  thumbnailUrl?: string;
-  embedUrl?: string;
+  updatedAt?: string;
+  creator?: {
+    id: string;
+    name: string;
+  };
+  embedUrl: string;
 }
 
 // Page meta
@@ -66,177 +105,57 @@ definePageMeta({
   description: "Manage and track your embedded content",
 });
 
-// Helper function to get thumbnail URL based on category
-const getThumbnailUrl = (category: string): string => {
-  const categoryMap: Record<string, string> = {
-    'Literature': '/images/embeds/literature-placeholder.svg',
-    'Events': '/images/embeds/events-placeholder.svg',
-    'Community': '/images/embeds/community-placeholder.svg',
-    'Learning': '/images/embeds/learning-placeholder.svg',
-    'Technology': '/images/embeds/technology-placeholder.svg',
+// Helper function to get thumbnail URL based on embed type
+const getThumbnailUrl = (type: string): string => {
+  const typeMap: Record<string, string> = {
+    'RESOURCE_LIST': '/images/embeds/literature-placeholder.svg',
+    'EVENT_LIST': '/images/embeds/events-placeholder.svg',
   };
-  return categoryMap[category] || '/images/embeds/default-placeholder.svg';
+  return typeMap[type] || '/images/embeds/default-placeholder.svg';
 };
 
-// Mock data - replace with actual API call
-const embeds = ref<Embed[]>([
-  {
-    id: "1",
-    title: "Featured Books Widget",
-    description: "Showcase top-rated literature from AKSARA's collection",
-    category: "Literature",
-    type: "active",
-    createdAt: "2024-01-15T10:30:00Z",
-    views: 3420,
-    clicks: 287,
-    thumbnailUrl: getThumbnailUrl("Literature"),
-    embedUrl: "https://aksara.io/embed/featured-books",
-  },
-  {
-    id: "2",
-    title: "Upcoming Events Countdown",
-    description: "Display countdown timer for community workshops and meetups",
-    category: "Events",
-    type: "active",
-    createdAt: "2024-01-10T14:20:00Z",
-    views: 2156,
-    clicks: 423,
-    thumbnailUrl: getThumbnailUrl("Events"),
-    embedUrl: "https://aksara.io/embed/events-countdown",
-  },
-  {
-    id: "3",
-    title: "Community Discussion Thread",
-    description: "Embed trending forum discussions about web development",
-    category: "Community",
-    type: "active",
-    createdAt: "2024-01-08T16:45:00Z",
-    views: 1876,
-    clicks: 156,
-    thumbnailUrl: getThumbnailUrl("Community"),
-    embedUrl: "https://aksara.io/embed/discussion-thread",
-  },
-  {
-    id: "4",
-    title: "Book Recommendation Engine",
-    description: "AI-powered book suggestions based on reading preferences",
-    category: "Learning",
-    type: "active",
-    createdAt: "2024-01-05T09:15:00Z",
-    views: 983,
-    clicks: 78,
-    thumbnailUrl: getThumbnailUrl("Learning"),
-    embedUrl: "https://aksara.io/embed/book-recommendations",
-  },
-  {
-    id: "5",
-    title: "Reading Progress Tracker",
-    description: "Track and display reading goals and achievements",
-    category: "Learning",
-    type: "draft",
-    createdAt: "2024-01-03T11:30:00Z",
-    views: 245,
-    clicks: 18,
-    thumbnailUrl: getThumbnailUrl("Learning"),
-    embedUrl: "https://aksara.io/embed/reading-progress",
-  },
-  {
-    id: "6",
-    title: "Top Web Development Books",
-    description: "Curated list of essential programming and development books",
-    category: "Technology",
-    type: "active",
-    createdAt: "2024-01-01T13:20:00Z",
-    views: 4123,
-    clicks: 567,
-    thumbnailUrl: getThumbnailUrl("Technology"),
-    embedUrl: "https://aksara.io/embed/dev-books",
-  },
-  {
-    id: "7",
-    title: "Fantasy Literature Showcase",
-    description: "Display trending fantasy and sci-fi books from the community",
-    category: "Literature",
-    type: "active",
-    createdAt: "2023-12-28T09:45:00Z",
-    views: 2789,
-    clicks: 342,
-    thumbnailUrl: getThumbnailUrl("Literature"),
-    embedUrl: "https://aksara.io/embed/fantasy-books",
-  },
-  {
-    id: "8",
-    title: "Member Directory Widget",
-    description: "Showcase active community members and their contributions",
-    category: "Community",
-    type: "active",
-    createdAt: "2023-12-25T14:20:00Z",
-    views: 1523,
-    clicks: 89,
-    thumbnailUrl: getThumbnailUrl("Community"),
-    embedUrl: "https://aksara.io/embed/member-directory",
-  },
-  {
-    id: "9",
-    title: "JavaScript Learning Path",
-    description: "Interactive roadmap for mastering JavaScript development",
-    category: "Learning",
-    type: "active",
-    createdAt: "2023-12-20T11:15:00Z",
-    views: 3456,
-    clicks: 278,
-    thumbnailUrl: getThumbnailUrl("Learning"),
-    embedUrl: "https://aksara.io/embed/js-learning-path",
-  },
-  {
-    id: "10",
-    title: "Book Club Event Calendar",
-    description: "Monthly book club meetings and reading schedules",
-    category: "Events",
-    type: "draft",
-    createdAt: "2023-12-18T16:30:00Z",
-    views: 567,
-    clicks: 45,
-    thumbnailUrl: getThumbnailUrl("Events"),
-    embedUrl: "https://aksara.io/embed/book-club-calendar",
-  },
-  {
-    id: "11",
-    title: "Author Spotlight Widget",
-    description: "Featured authors with their top-rated books and bio",
-    category: "Literature",
-    type: "active",
-    createdAt: "2023-12-15T10:00:00Z",
-    views: 2234,
-    clicks: 198,
-    thumbnailUrl: getThumbnailUrl("Literature"),
-    embedUrl: "https://aksara.io/embed/author-spotlight",
-  },
-  {
-    id: "12",
-    title: "Vue.js Tutorial Series",
-    description: "Step-by-step Vue.js development tutorials and examples",
-    category: "Technology",
-    type: "active",
-    createdAt: "2023-12-12T13:45:00Z",
-    views: 4890,
-    clicks: 612,
-    thumbnailUrl: getThumbnailUrl("Technology"),
-    embedUrl: "https://aksara.io/embed/vue-tutorials",
-  },
-  {
-    id: "13",
-    title: "Reading Challenge Tracker",
-    description: "Annual reading challenge progress and community rankings",
-    category: "Learning",
-    type: "active",
-    createdAt: "2023-12-10T09:20:00Z",
-    views: 1876,
-    clicks: 234,
-    thumbnailUrl: getThumbnailUrl("Learning"),
-    embedUrl: "https://aksara.io/embed/reading-challenge",
-  },
-]);
+// API integration
+const { getEmbeds, createEmbed, updateEmbed, deleteEmbed } = useEmbedApi()
+
+// State management
+const embeds = ref<Embed[]>([])
+const loading = ref(true)
+const error = ref<string | null>(null)
+
+// Fetch embeds from API
+const fetchEmbeds = async () => {
+  try {
+    loading.value = true
+    error.value = null
+    const response = await getEmbeds<{ success: boolean; data: Embed[] }>()
+
+    if (response.success) {
+      // Transform API response to include embedUrl and set defaults for missing fields
+      embeds.value = response.data.map(embed => ({
+        ...embed,
+        embedUrl: `${window.location.origin}/embed/${embed.id}`,
+        filterTags: embed.filterTags || [],
+        limit: embed.limit || 5,
+        sortBy: embed.sortBy || 'rating',
+        theme: embed.theme || 'light',
+        showThumbnail: embed.showThumbnail ?? true,
+        allowedDomains: embed.allowedDomains || []
+      }))
+    } else {
+      throw new Error('Failed to fetch embeds')
+    }
+  } catch (err) {
+    error.value = err instanceof Error ? err.message : 'Failed to load embeds'
+    console.error('Error fetching embeds:', err)
+  } finally {
+    loading.value = false
+  }
+}
+
+// Load embeds on mount
+onMounted(() => {
+  fetchEmbeds()
+})
 
 // Pagination state
 const currentPage = ref(1);
@@ -255,11 +174,11 @@ const totalPages = computed(() => {
 
 const overviewStats = computed<EmbedStats>(() => ({
   totalEmbeds: embeds.value.length,
-  activeEmbeds: embeds.value.filter((e) => e.type === "active").length,
-  views30d: embeds.value.reduce((sum, e) => sum + e.views, 0),
-  clicks30d: embeds.value.reduce((sum, e) => sum + e.clicks, 0),
-  viewsTrend: 12.5, // Mock trend data
-  clicksTrend: -3.2,
+  activeEmbeds: embeds.value.length, // All embeds are considered active in the new API
+  views30d: 0, // Will be implemented when analytics are available
+  clicks30d: 0, // Will be implemented when analytics are available
+  viewsTrend: 0,
+  clicksTrend: 0,
 }));
 
 const showModal = ref(false);
@@ -275,27 +194,21 @@ const handleCreateEmbed = () => {
   showModal.value = true;
 };
 
-const handleEditEmbed = (embed: Embed) => {
-  editingEmbed.value = embed;
-  showModal.value = true;
-};
-
-const handleDuplicateEmbed = (embed: Embed) => {
-  const newEmbed = {
-    ...embed,
-    id: Date.now().toString(),
-    title: `${embed.title} (Copy)`,
-    createdAt: new Date().toISOString(),
-    views: 0,
-    clicks: 0,
-    type: "draft" as const,
-  };
-  embeds.value.push(newEmbed);
-};
-
-const handleDeleteEmbed = (embedId: string) => {
+const handleDeleteEmbed = async (embedId: string) => {
   if (confirm("Are you sure you want to delete this embed?")) {
-    embeds.value = embeds.value.filter((e) => e.id !== embedId);
+    try {
+      const response = await deleteEmbed<{ success: boolean }>(embedId);
+
+      if (response.success) {
+        await fetchEmbeds(); // Refresh the list
+        // You could add a success toast here
+      } else {
+        throw new Error('Failed to delete embed');
+      }
+    } catch (err) {
+      console.error('Error deleting embed:', err);
+      alert('Failed to delete embed');
+    }
   }
 };
 
@@ -312,31 +225,36 @@ const handleCloseModal = () => {
   editingEmbed.value = null;
 };
 
-const handleSaveEmbed = (embedData: Partial<Embed>) => {
-  if (editingEmbed.value) {
-    // Update existing embed
-    const index = embeds.value.findIndex(
-      (e) => e.id === editingEmbed.value!.id,
-    );
-    if (index !== -1) {
-      embeds.value[index] = { ...embeds.value[index], ...embedData };
+const handleSaveEmbed = async (embedData: any) => {
+  try {
+    // Log the data being sent for debugging
+    console.log('Saving embed data:', embedData);
+
+    let response;
+
+    if (editingEmbed.value) {
+      // Update existing embed
+      response = await updateEmbed<{ success: boolean; data: Embed }>(
+        editingEmbed.value.id,
+        embedData
+      );
+    } else {
+      // Create new embed
+      response = await createEmbed<{ success: boolean; data: Embed }>(embedData);
     }
-  } else {
-    // Create new embed
-    const newEmbed: Embed = {
-      id: Date.now().toString(),
-      title: embedData.title || "New Embed",
-      description: embedData.description || "",
-      category: embedData.category || "General",
-      type: "draft",
-      createdAt: new Date().toISOString(),
-      views: 0,
-      clicks: 0,
-      ...embedData,
-    };
-    embeds.value.push(newEmbed);
+
+    if (response.success) {
+      await fetchEmbeds(); // Refresh the list
+      handleCloseModal();
+      // You could add a success toast here
+    } else {
+      throw new Error(editingEmbed.value ? 'Failed to update embed' : 'Failed to create embed');
+    }
+  } catch (err) {
+    console.error('Error saving embed:', err);
+    console.error('Error details:', err.message);
+    alert(editingEmbed.value ? 'Failed to update embed' : 'Failed to create embed');
   }
-  handleCloseModal();
 };
 </script>
 
