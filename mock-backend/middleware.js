@@ -233,11 +233,21 @@ module.exports = (req, res, next) => {
       }
     }
 
-    // Add pagination metadata for GET requests
-    if (req.method === 'GET' && req.path.includes('/')) {
+
+    // Add pagination metadata and smart search for GET requests
+    if (req.method === 'GET') {
       const originalJson = res.json;
+      let jsonOverridden = false;
+
       res.json = function (data) {
-        if (Array.isArray(data)) {
+        // Prevent double override
+        if (jsonOverridden) {
+          return originalJson.call(this, data);
+        }
+        jsonOverridden = true;
+
+        // Add pagination headers for array responses
+        if (Array.isArray(data) && (req.query._page || req.query._limit)) {
           const page = parseInt(req.query._page) || 1;
           const limit = parseInt(req.query._limit) || 10;
           const totalCount = data.length;
@@ -248,40 +258,16 @@ module.exports = (req, res, next) => {
           res.setHeader('X-Current-Page', page);
           res.setHeader('X-Per-Page', limit);
         }
-        return originalJson.call(this, data);
-      };
-    }
 
-    // Custom error responses for common scenarios
-    const originalStatus = res.status;
-    res.status = function (code) {
-      if (code === 404) {
-        return originalStatus.call(this, 404).json({
-          success: false,
-          message: "Resource not found."
-        });
-      }
-
-      if (code === 500) {
-        return originalStatus.call(this, 500).json({
-          success: false,
-          message: "Internal server error. Please try again later."
-        });
-      }
-
-      return originalStatus.call(this, code);
-    };
-
-    // Smart search and relevance scoring for books
-    if (req.path.includes('/books') && req.method === 'GET') {
-      const originalJson = res.json;
-      res.json = function (data) {
-        if (Array.isArray(data)) {
+        // Apply book search enhancement
+        if (req.path.includes('/books') && Array.isArray(data)) {
           data = enhanceBookSearchResults(data, req.query);
         }
+
         return originalJson.call(this, data);
       };
     }
+
 
     next();
   }, delay);

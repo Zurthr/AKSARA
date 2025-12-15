@@ -1,1 +1,356 @@
-﻿[]
+[
+  {
+    "id": 1,
+    "event_type": "event_click",
+    "item_id": 6,
+    "item_title": "Math Olympiad Preparation Class",
+    "item_tags": [
+      "#Math",
+      "#Olympiad",
+      "#Competition"
+    ],
+    "user_id": "anon_1765820660152_zcd813dkh",
+    "timestamp": "2025-12-15T18:06:47.842Z",
+    "source_page": "/events",
+    "metadata": {
+      "date": "2023-11-03T13:00:00Z",
+      "community_id": "math-club"
+    }
+  },
+  {
+    "id": 2,
+    "event_type": "community_click",
+    "item_id": "gaming-hub",
+    "item_title": "Gaming Hub Indonesia",
+    "item_tags": [
+      "Esports",
+      "Co-op",
+      "Livestream"
+    ],
+    "user_id": "anon_1765820660152_zcd813dkh",
+    "timestamp": "2025-12-15T18:06:56.390Z",
+    "source_page": "/community",
+    "metadata": {
+      "members": 12
+    }
+  },
+  {
+    "id": 3,
+    "event_type": "community_join",
+    "item_id": "gaming-hub",
+    "item_title": "Gaming Hub Indonesia",
+    "item_tags": [
+      "#Esports",
+      "#Coop",
+      "#Livestream"
+    ],
+    "user_id": "anon_1765820660152_zcd813dkh",
+    "timestamp": "2025-12-15T18:07:01.253Z",
+    "source_page": "/community/gaming-hub",
+    "metadata": {
+      "members": "1.2k"
+    }
+  },
+  {
+    "id": 4,
+    "event_type": "book_click",
+    "item_id": 37,
+    "item_title": "Catching Fire",
+    "item_tags": [
+      "General"
+    ],
+    "user_id": "anon_1765820660152_zcd813dkh",
+    "timestamp": "2025-12-15T18:07:05.926Z",
+    "source_page": "/literature",
+    "metadata": {
+      "author": "Suzanne Collins",
+      "rating": 4.8
+    }
+  },
+  {
+    "id": 5,
+    "event_type": "post_click",
+    "item_id": 4,
+    "item_title": "Is Web Development Still a Good Career in 2026?",
+    "item_tags": [
+      "#WebDev",
+      "#Career"
+    ],
+    "user_id": "anon_1765820660152_zcd813dkh",
+    "timestamp": "2025-12-15T18:07:10.535Z",
+    "source_page": "/forums",
+    "metadata": {
+      "author": "Sarah Chen",
+      "stars": 890
+    }
+  },
+  {
+    "id": 6,
+    "event_type": "post_click",
+    "item_id": 2,
+    "item_title": "Melawan Hoaks di Era WhatsApp: Tantangan Literasi Digital",
+    "item_tags": [
+      "#AntiHoaks",
+      "#LiterasiDigital"
+    ],
+    "user_id": "anon_1765820660152_zcd813dkh",
+    "timestamp": "2025-12-15T18:07:20.369Z",
+    "source_page": "/",
+    "metadata": {
+      "author": "Dewi Kusuma",
+      "stars": 389
+    }
+  },
+  {
+    "id": 7,
+    "event_type": "post_click",
+    "item_id": 3,
+    "item_title": "Literasi AI untuk Santri: Inisiatif XLSMART yang Patut Diapresiasi",
+    "item_tags": [
+      "#AI",
+      "#Edukasi"
+    ],
+    "user_id": "anon_1765820660152_zcd813dkh",
+    "timestamp": "2025-12-15T18:07:32.720Z",
+    "source_page": "/",
+    "metadata": {
+      "author": "Budi Santoso",
+      "stars": 567
+    }
+  },
+  {
+    "id": 8,
+    "event_type": "post_click",
+    "item_id": 4,
+    "item_title": "Is Web Development Still a Good Career in 2026?",
+    "item_tags": [
+      "#WebDev",
+      "#Career"
+    ],
+    "user_id": "anon_1765820660152_zcd813dkh",
+    "timestamp": "2025-12-15T18:07:58.361Z",
+    "source_page": "/",
+    "metadata": {
+      "author": "Sarah Chen",
+      "stars": 890
+    }
+  },
+  {
+    "id": 9,
+    "event_type": "event_click",
+    "item_id": 1,
+    "item_title": "Photo Walk Jakarta",
+    "user_id": "anon_1765820660152_zcd813dkh",
+    "timestamp": "2025-12-15T18:08:08.605Z",
+    "source_page": "/",
+    "metadata": {
+      "date": "2023-10-15T08:00:00Z",
+      "community_id": "photography-club"
+    }
+  },
+  {
+    "id": 10,
+    "event_type": "event_click",
+    "item_id": 1,
+    "item_title": "Photo Walk Jakarta",
+    "user_id": "anon_1765820660152_zcd813dkh",
+    "timestamp": "2025-12-15T18:11:55.800Z",
+    "source_page": "/",
+    "metadata": {
+      "date": "2023-10-15T08:00:00Z",
+      "community_id": "photography-club"
+    }
+  },
+  {
+    "id": 11,
+    "event_type": "book_click",
+    "item_id": 10,
+    "item_title": "The Art of Computer Programming",
+    "item_tags": [
+      "Computer Science",
+      "Algorithms",
+      "Programming Theory",
+      "Mathematical Foundations"
+    ],
+    "user_id": "anon_1765820660152_zcd813dkh",
+    "timestamp": "2025-12-15T18:12:11.817Z",
+    "source_page": "/",
+    "metadata": {
+      "author": "Donald E. Knuth",
+      "rating": 4.6
+    }
+  },
+  {
+    "id": 12,
+    "event_type": "post_click",
+    "item_id": 2,
+    "item_title": "Melawan Hoaks di Era WhatsApp: Tantangan Literasi Digital",
+    "item_tags": [
+      "#AntiHoaks",
+      "#LiterasiDigital"
+    ],
+    "user_id": "anon_1765820660152_zcd813dkh",
+    "timestamp": "2025-12-15T18:12:28.095Z",
+    "source_page": "/",
+    "metadata": {
+      "author": "Dewi Kusuma",
+      "stars": 389
+    }
+  },
+  {
+    "id": 13,
+    "event_type": "post_click",
+    "item_id": 8,
+    "item_title": "Why Laravel is Still the King of Backend in 2026",
+    "item_tags": [
+      "#Laravel",
+      "#Backend"
+    ],
+    "user_id": "anon_1765820660152_zcd813dkh",
+    "timestamp": "2025-12-15T18:12:37.403Z",
+    "source_page": "/forums",
+    "metadata": {
+      "author": "David Kim",
+      "stars": 756
+    }
+  },
+  {
+    "id": 14,
+    "event_type": "book_click",
+    "item_id": 47,
+    "item_title": "The Kite Runner",
+    "item_tags": [
+      "Non-Fiction",
+      "History"
+    ],
+    "user_id": "anon_1765820660152_zcd813dkh",
+    "timestamp": "2025-12-15T18:12:44.929Z",
+    "source_page": "/literature",
+    "metadata": {
+      "author": "Khaled Hosseini",
+      "rating": 4.5
+    }
+  },
+  {
+    "id": 15,
+    "event_type": "book_click",
+    "item_id": 12,
+    "item_title": "JavaScript: The Good Parts",
+    "item_tags": [
+      "Web Development",
+      "JavaScript",
+      "Frontend Development",
+      "Programming Languages"
+    ],
+    "user_id": "anon_1765820660152_zcd813dkh",
+    "timestamp": "2025-12-15T18:12:51.361Z",
+    "source_page": "/literature",
+    "metadata": {
+      "author": "Douglas Crockford",
+      "rating": 4
+    }
+  },
+  {
+    "id": 16,
+    "event_type": "community_click",
+    "item_id": "photography-club",
+    "item_title": "Photography Club",
+    "item_tags": [
+      "Photo Walk",
+      "Tips",
+      "Critique"
+    ],
+    "user_id": "anon_1765820660152_zcd813dkh",
+    "timestamp": "2025-12-15T18:12:56.478Z",
+    "source_page": "/community",
+    "metadata": {
+      "members": 287
+    }
+  },
+  {
+    "id": 17,
+    "event_type": "event_click",
+    "item_id": 6,
+    "item_title": "Math Olympiad Preparation Class",
+    "item_tags": [
+      "#Math",
+      "#Olympiad",
+      "#Competition"
+    ],
+    "user_id": "anon_1765820660152_zcd813dkh",
+    "timestamp": "2025-12-15T18:13:03.674Z",
+    "source_page": "/events",
+    "metadata": {
+      "date": "2023-11-03T13:00:00Z",
+      "community_id": "math-club"
+    }
+  },
+  {
+    "id": 18,
+    "event_type": "post_click",
+    "item_id": 5,
+    "item_title": "Web Performance Optimization: From 5s to 1.5s Load Time",
+    "item_tags": [
+      "#Performance",
+      "#WebDev"
+    ],
+    "user_id": "anon_1765820660152_zcd813dkh",
+    "timestamp": "2025-12-15T18:13:11.128Z",
+    "source_page": "/forums",
+    "metadata": {
+      "author": "Mike Johnson",
+      "stars": 678
+    }
+  },
+  {
+    "id": 19,
+    "event_type": "post_click",
+    "item_id": 3,
+    "item_title": "Literasi AI untuk Santri: Inisiatif XLSMART yang Patut Diapresiasi",
+    "item_tags": [
+      "#AI",
+      "#Edukasi"
+    ],
+    "user_id": "anon_1765820660152_zcd813dkh",
+    "timestamp": "2025-12-15T18:16:17.636Z",
+    "source_page": "/forums",
+    "metadata": {
+      "author": "Budi Santoso",
+      "stars": 567
+    }
+  },
+  {
+    "id": 20,
+    "event_type": "post_click",
+    "item_id": 9,
+    "item_title": "Backend Security: Why Payment Verification Belongs on the Server",
+    "item_tags": [
+      "#Security",
+      "#Backend"
+    ],
+    "user_id": "anon_1765820660152_zcd813dkh",
+    "timestamp": "2025-12-15T18:16:32.019Z",
+    "source_page": "/forums",
+    "metadata": {
+      "author": "Emma Wilson",
+      "stars": 623
+    }
+  },
+  {
+    "id": 21,
+    "event_type": "post_click",
+    "item_id": 10,
+    "item_title": "Building My First Weather App with JavaScript Fetch API",
+    "item_tags": [
+      "#JavaScript",
+      "#Beginner"
+    ],
+    "user_id": "anon_1765820660152_zcd813dkh",
+    "timestamp": "2025-12-15T18:19:02.360Z",
+    "source_page": "/forums",
+    "metadata": {
+      "author": "Ryan Park",
+      "stars": 345
+    }
+  }
+]

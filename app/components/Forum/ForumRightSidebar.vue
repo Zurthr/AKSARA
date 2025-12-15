@@ -39,12 +39,20 @@
       
       <div v-for="(mention, index) in socialMentions" :key="index">
         <!-- Twitter Card -->
-        <div v-if="mention.platform === 'twitter'" class="social-card twitter-card">
+        <a 
+          v-if="mention.platform === 'twitter'" 
+          :href="mention.url || '#'" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="social-card twitter-card"
+          :class="{ 'clickable-card': mention.url }"
+        >
           <div class="card-header">
             <span class="platform-icon twitter-icon">
               <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.84 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
             </span>
             <span class="platform-name">Twitter</span>
+            <span v-if="mention.url" class="external-link-icon">↗</span>
           </div>
           <div class="tweet-content">
             <div class="user-info">
@@ -53,7 +61,7 @@
                 <span class="name">{{ mention.author_name }}</span>
                 <span class="handle">{{ mention.author_handle }}</span>
               </div>
-              <button class="btn-follow">Follow</button>
+              <button class="btn-follow" @click.prevent>Follow</button>
             </div>
             <p class="tweet-text">{{ mention.content }}</p>
             <span class="tweet-date">{{ mention.date }}</span>
@@ -63,7 +71,7 @@
               <span><i class="icon-like"></i> {{ mention.stats.likes }}</span>
             </div>
           </div>
-        </div>
+        </a>
 
         <!-- Reddit Card -->
         <div v-if="mention.platform === 'reddit'" class="social-card reddit-card">
@@ -260,11 +268,26 @@ const handleCommunityClick = () => {
 }
 
 .social-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
   background: #f8fafc;
   border-radius: 16px;
   padding: 16px;
   margin-bottom: 16px;
   border: 1px solid #e2e8f0;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+a.social-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.external-link-icon {
+  margin-left: auto;
+  font-size: 14px;
+  color: #64748b;
 }
 
 .card-header {

@@ -3,323 +3,154 @@
     {
       "id": 1,
       "author": {
-        "name": "Sarah Chen",
-        "avatar": "https://i.pravatar.cc/150?u=sarah",
-        "tagline": "Product Designer"
+        "name": "Andi Pratama",
+        "avatar": "https://i.pravatar.cc/150?u=andipratama",
+        "tagline": "Digital Educator"
       },
       "timeAgo": "2 hours ago",
-      "title": "Applying 'Atomic Habits' to Learning to Code",
-      "content": "I've been struggling to stay consistent with my Vue.js learning. I started applying the '2-minute rule' from James Clear's book. Instead of saying 'I will code for 2 hours', I just say 'I will open VS Code'. It's surprisingly effective.",
+      "title": "Pentingnya Literasi Digital untuk Generasi Muda Indonesia",
+      "content": "Di era digital ini, literasi digital bukan lagi pilihan tapi keharusan. Melihat banyaknya kasus hoaks dan cyberbullying, kita perlu membekali generasi muda dengan kemampuan berpikir kritis terhadap informasi online. PP Tunas adalah langkah bagus, tapi butuh gerakan bersama dari semua pihak.",
       "tags": [
         {
-          "label": "#Productivity",
+          "label": "#LiterasiDigital",
           "type": "topic"
         },
         {
-          "label": "#Coding",
+          "label": "#Edukasi",
           "type": "topic"
         }
       ],
-      "stars": 342,
-      "community_id": "wellness-warriors",
+      "stars": 456,
+      "community_id": "literacy-circle",
       "related_books": [
         3,
-        15
+        9
       ],
-      "created_at": "2023-11-01T08:00:00Z",
-      "updated_at": "2023-11-01T08:00:00Z",
-      "social_mentions": [
-        {
-          "platform": "twitter",
-          "author_name": "James Clear",
-          "author_handle": "@JamesClear",
-          "author_avatar": "https://i.pravatar.cc/150?u=james",
-          "content": "You do not rise to the level of your goals. You fall to the level of your systems.",
-          "date": "10:30 AM Oct 25, 2023",
-          "stats": {
-            "replies": 120,
-            "retweets": 3400,
-            "likes": 15000
-          }
-        },
-        {
-          "platform": "reddit",
-          "subreddit": "r/getdisciplined",
-          "subreddit_members": "1.2M members",
-          "subreddit_icon": "https://i.pravatar.cc/150?u=disciplined",
-          "title": "The 2-minute rule changed my life",
-          "image": "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&w=500&q=60",
-          "comment_count": "540 comments",
-          "url": "#"
-        }
+      "created_at": "2025-12-15T08:00:00Z",
+      "updated_at": "2025-12-15T08:00:00Z",
+      "social_mention_ids": [
+        1,
+        2,
+        31
       ]
     },
     {
       "id": 2,
       "author": {
-        "name": "Mike Ross",
-        "avatar": "https://i.pravatar.cc/150?u=mike",
-        "tagline": "Backend Dev"
+        "name": "Dewi Kusuma",
+        "avatar": "https://i.pravatar.cc/150?u=dewikusuma",
+        "tagline": "Cybersecurity Advocate"
       },
-      "timeAgo": "4 hours ago",
-      "title": "Is 'Clean Code' still relevant in 2024?",
-      "content": "Uncle Bob's examples are in Java, and some people say the advice is outdated. However, I feel the core principles of meaningful naming and small functions are timeless. Thoughts?",
+      "timeAgo": "3 hours ago",
+      "title": "Melawan Hoaks di Era WhatsApp: Tantangan Literasi Digital",
+      "content": "Hoaks menyebar sangat cepat di WhatsApp karena sifatnya yang private dan trusted. Kita butuh pendekatan berbeda untuk mengedukasi masyarakat tentang cara memverifikasi informasi sebelum share. Literasi digital harus masuk kurikulum wajib!",
       "tags": [
         {
-          "label": "#Discussion",
+          "label": "#AntiHoaks",
           "type": "topic"
         },
         {
-          "label": "#SoftwareEngineering",
+          "label": "#LiterasiDigital",
           "type": "topic"
         }
       ],
-      "stars": 128,
-      "community_id": "creative-atelier",
+      "stars": 389,
+      "community_id": "literacy-circle",
       "related_books": [
-        1,
-        5
+        6,
+        8
       ],
-      "created_at": "2023-11-01T10:00:00Z",
-      "updated_at": "2023-11-01T10:00:00Z",
-      "social_mentions": [
-        {
-          "platform": "twitter",
-          "author_name": "TechLead",
-          "author_handle": "@techleadofficial",
-          "author_avatar": "https://i.pravatar.cc/150?u=techlead",
-          "content": "Clean code is a myth. If it works, ship it. That's how you become a millionaire. (as a millionaire)",
-          "date": "1:00 PM Nov 01, 2023",
-          "stats": {
-            "replies": 5000,
-            "retweets": 200,
-            "likes": 800
-          }
-        },
-        {
-          "platform": "reddit",
-          "subreddit": "r/ProgrammerHumor",
-          "subreddit_members": "2.5M members",
-          "subreddit_icon": "https://i.pravatar.cc/150?u=humor",
-          "title": "When you try to write clean code but end up with 50 classes",
-          "image": "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=500&q=60",
-          "comment_count": "2.1k comments",
-          "url": "#"
-        }
+      "created_at": "2025-12-15T07:00:00Z",
+      "updated_at": "2025-12-15T07:00:00Z",
+      "social_mention_ids": [
+        6,
+        7,
+        8
       ]
     },
     {
       "id": 3,
       "author": {
-        "name": "Jane Smith",
-        "avatar": "https://i.pravatar.cc/150?u=jane",
-        "tagline": "Fantasy Reader"
+        "name": "Budi Santoso",
+        "avatar": "https://i.pravatar.cc/150?u=budisantoso",
+        "tagline": "AI & Tech Enthusiast"
       },
-      "timeAgo": "5 hours ago",
-      "title": "The cozy beginning of The Hobbit",
-      "content": "Re-reading The Hobbit this weekend. I forgot how whimsical the opening chapter is compared to the epic scale of LOTR. Bilbo fretting over his doilies while Gandalf plots an adventure is peak comedy.",
-      "tags": [
-        {
-          "label": "#Tolkien",
-          "type": "topic"
-        },
-        {
-          "label": "#Fantasy",
-          "type": "topic"
-        }
-      ],
-      "stars": 560,
-      "community_id": "literacy-circle",
-      "related_books": [
-        2
-      ],
-      "created_at": "2023-11-01T11:00:00Z",
-      "updated_at": "2023-11-01T11:00:00Z"
-    },
-    {
-      "id": 4,
-      "author": {
-        "name": "Alfan Gunadar",
-        "avatar": "https://i.pravatar.cc/150?u=alfan",
-        "tagline": "Frontend Ninja"
-      },
-      "timeAgo": "6 hours ago",
-      "title": "Why you should master Vanilla JS before Frameworks",
-      "content": "Reading 'JavaScript: The Good Parts' reminded me why understanding closures and prototypes is crucial, even if you use React or Vue every day. Don't skip the basics, guys.",
-      "tags": [
-        {
-          "label": "#JavaScript",
-          "type": "topic"
-        },
-        {
-          "label": "#Advice",
-          "type": "topic"
-        }
-      ],
-      "stars": 210,
-      "community_id": "creative-atelier",
-      "related_books": [
-        12,
-        15
-      ],
-      "created_at": "2023-11-01T12:00:00Z",
-      "updated_at": "2023-11-01T12:00:00Z"
-    },
-    {
-      "id": 5,
-      "author": {
-        "name": "Donna Paulsen",
-        "avatar": "https://i.pravatar.cc/150?u=donna",
-        "tagline": "UX Researcher"
-      },
-      "timeAgo": "8 hours ago",
-      "title": "HCI principles in modern Game UI",
-      "content": "I've been analyzing the inventory systems in RPGs. The principles from the 'Human-Computer Interaction' book regarding cognitive load are totally applicable here. Minimalist UI isn't just aesthetic; it's functional.",
-      "tags": [
-        {
-          "label": "#UXDesign",
-          "type": "topic"
-        },
-        {
-          "label": "#Gaming",
-          "type": "topic"
-        }
-      ],
-      "stars": 89,
-      "community_id": "gaming-hub",
-      "related_books": [
-        8,
-        14
-      ],
-      "created_at": "2023-11-01T14:00:00Z",
-      "updated_at": "2023-11-01T14:00:00Z"
-    },
-    {
-      "id": 6,
-      "author": {
-        "name": "Harvey Specter",
-        "avatar": "https://i.pravatar.cc/150?u=harvey",
-        "tagline": "Startup Founder"
-      },
-      "timeAgo": "10 hours ago",
-      "title": "MVP vs Polished Product",
-      "content": "The Lean Startup methodology saved my latest project. We were about to spend 6 months building a feature nobody wanted. 'Build-Measure-Learn' is the only way to go.",
-      "tags": [
-        {
-          "label": "#Business",
-          "type": "topic"
-        },
-        {
-          "label": "#Startup",
-          "type": "topic"
-        }
-      ],
-      "stars": 445,
-      "community_id": "creative-atelier",
-      "related_books": [
-        7
-      ],
-      "created_at": "2023-11-01T15:00:00Z",
-      "updated_at": "2023-11-01T15:00:00Z"
-    },
-    {
-      "id": 7,
-      "author": {
-        "name": "Rachel Zane",
-        "avatar": "https://i.pravatar.cc/150?u=rachel",
-        "tagline": "Student"
-      },
-      "timeAgo": "12 hours ago",
-      "title": "Growth Mindset changed how I study",
-      "content": "I used to think I was just 'bad at math'. After reading Carol Dweck's book, I realized I just hadn't found the right method yet. It's a subtle shift but it changes everything.",
-      "tags": [
-        {
-          "label": "#Psychology",
-          "type": "topic"
-        },
-        {
-          "label": "#Studying",
-          "type": "topic"
-        }
-      ],
-      "stars": 670,
-      "community_id": "wellness-warriors",
-      "related_books": [
-        9
-      ],
-      "created_at": "2023-11-01T16:00:00Z",
-      "updated_at": "2023-11-01T16:00:00Z"
-    },
-    {
-      "id": 8,
-      "author": {
-        "name": "John Doe",
-        "avatar": "https://i.pravatar.cc/150?u=john",
-        "tagline": "AI Enthusiast"
-      },
-      "timeAgo": "14 hours ago",
-      "title": "The math behind Deep Learning",
-      "content": "Finally diving into the 'Deep Learning' book by Goodfellow. The linear algebra chapter is dense but necessary. Anyone else working through this text?",
+      "timeAgo": "4 hours ago",
+      "title": "Literasi AI untuk Santri: Inisiatif XLSMART yang Patut Diapresiasi",
+      "content": "Senang melihat program seperti XLSMART yang mengajarkan AI dan literasi digital ke 175 santri di Demak. Ini contoh bagus bagaimana teknologi bisa menjangkau semua kalangan. Generasi muda Indonesia harus siap menghadapi era AI!",
       "tags": [
         {
           "label": "#AI",
           "type": "topic"
         },
         {
-          "label": "#Math",
+          "label": "#Edukasi",
           "type": "topic"
         }
       ],
-      "stars": 112,
+      "stars": 567,
       "community_id": "creative-atelier",
       "related_books": [
         6,
         10
       ],
-      "created_at": "2023-11-01T17:00:00Z",
-      "updated_at": "2023-11-01T17:00:00Z"
+      "created_at": "2025-12-15T06:00:00Z",
+      "updated_at": "2025-12-15T06:00:00Z",
+      "social_mention_ids": [
+        3,
+        4,
+        5
+      ]
     },
     {
-      "id": 9,
+      "id": 4,
       "author": {
-        "name": "Orang Kmplang",
-        "avatar": "https://i.pravatar.cc/150?u=kmplang",
-        "tagline": "Casual Reader"
+        "name": "Sarah Chen",
+        "avatar": "https://i.pravatar.cc/150?u=sarahchen",
+        "tagline": "Full Stack Developer"
       },
-      "timeAgo": "1 day ago",
-      "title": "Design Patterns for Game Dev",
-      "content": "Observer pattern and Singleton are everywhere in Unity development. The Gang of Four book is dry, but the concepts are fundamental if you want scalable game architecture.",
+      "timeAgo": "5 hours ago",
+      "title": "Is Web Development Still a Good Career in 2026?",
+      "content": "With AI tools like Bolt and v0 automating frontend work, many ask if web dev is dying. My take: the fundamentals matter more than ever. Understanding how server-side logic works, optimizing performance, and building scalable systems are skills AI can't fully replace yet.",
       "tags": [
         {
-          "label": "#GameDev",
+          "label": "#WebDev",
           "type": "topic"
         },
         {
-          "label": "#Architecture",
+          "label": "#Career",
           "type": "topic"
         }
       ],
-      "stars": 230,
-      "community_id": "gaming-hub",
+      "stars": 890,
+      "community_id": "creative-atelier",
       "related_books": [
-        4
+        1,
+        5,
+        12
       ],
-      "created_at": "2023-11-01T18:00:00Z",
-      "updated_at": "2023-11-01T18:00:00Z"
+      "created_at": "2025-12-15T05:00:00Z",
+      "updated_at": "2025-12-15T05:00:00Z",
+      "social_mention_ids": [
+        9,
+        10,
+        12,
+        32
+      ]
     },
     {
-      "id": 10,
+      "id": 5,
       "author": {
-        "name": "Louis Litt",
-        "avatar": "https://i.pravatar.cc/150?u=louis",
-        "tagline": "History Buff"
+        "name": "Mike Johnson",
+        "avatar": "https://i.pravatar.cc/150?u=mikejohnson",
+        "tagline": "Senior Web Developer"
       },
-      "timeAgo": "1 day ago",
-      "title": "PHP isn't dead, seriously.",
-      "content": "With Modern PHP practices and Laravel, the ecosystem is thriving. Stop hating on it if you haven't used it since 2010. 'Modern PHP' by Josh Lockhart is a great refresher.",
+      "timeAgo": "6 hours ago",
+      "title": "Web Performance Optimization: From 5s to 1.5s Load Time",
+      "content": "Just finished optimizing a client's site and cut load time from 5s to 1.5s. Key wins: proper image optimization, CSS/JS minification, CDN setup, and aggressive caching. Result? 20% boost in bookings. Performance is not optional, it's essential for business.",
       "tags": [
         {
-          "label": "#PHP",
+          "label": "#Performance",
           "type": "topic"
         },
         {
@@ -327,310 +158,69 @@
           "type": "topic"
         }
       ],
-      "stars": 190,
+      "stars": 678,
       "community_id": "creative-atelier",
       "related_books": [
+        14,
+        15
+      ],
+      "created_at": "2025-12-15T04:00:00Z",
+      "updated_at": "2025-12-15T04:00:00Z",
+      "social_mention_ids": [
+        11,
         13,
-        11
-      ],
-      "created_at": "2023-11-01T19:00:00Z",
-      "updated_at": "2023-11-01T19:00:00Z"
-    },
-    {
-      "id": 11,
-      "author": {
-        "name": "Sarah Chen",
-        "avatar": "https://i.pravatar.cc/150?u=sarah",
-        "tagline": "Product Designer"
-      },
-      "timeAgo": "1 day ago",
-      "title": "HTML semantics matter!",
-      "content": "Just finished Jon Duckett's HTML & CSS book. The visual explanation of the box model is the best I've seen. Beginners, please stop using divs for everything.",
-      "tags": [
-        {
-          "label": "#WebDesign",
-          "type": "topic"
-        },
-        {
-          "label": "#Beginner",
-          "type": "topic"
-        }
-      ],
-      "stars": 300,
-      "community_id": "creative-atelier",
-      "related_books": [
         14
-      ],
-      "created_at": "2023-10-30T09:00:00Z",
-      "updated_at": "2023-10-30T09:00:00Z"
+      ]
     },
     {
-      "id": 12,
+      "id": 6,
       "author": {
-        "name": "Mike Ross",
-        "avatar": "https://i.pravatar.cc/150?u=mike",
-        "tagline": "Backend Dev"
+        "name": "Lisa Wang",
+        "avatar": "https://i.pravatar.cc/150?u=lisawang",
+        "tagline": "UI/UX Designer"
       },
-      "timeAgo": "2 days ago",
-      "title": "Algorithms are hard.",
-      "content": "Donald Knuth's 'Art of Computer Programming' is intimidating. I treat it more like an encyclopedia than a reading book. Has anyone actually read it cover to cover?",
+      "timeAgo": "7 hours ago",
+      "title": "Frontend-Only Jobs Are Dying? Here's My Take",
+      "content": "Hot take: If you're ONLY doing frontend, you might be replaceable. AI builds landing pages in minutes now. But here's the thing - frontend engineers who can DESIGN, not just code, are irreplaceable. The future is about understanding user psychology, not just writing CSS.",
       "tags": [
         {
-          "label": "#CS",
+          "label": "#Frontend",
           "type": "topic"
         },
-        {
-          "label": "#Hardcore",
-          "type": "topic"
-        }
-      ],
-      "stars": 540,
-      "community_id": "creative-atelier",
-      "related_books": [
-        10
-      ],
-      "created_at": "2023-10-29T10:00:00Z",
-      "updated_at": "2023-10-29T10:00:00Z"
-    },
-    {
-      "id": 13,
-      "author": {
-        "name": "Jane Smith",
-        "avatar": "https://i.pravatar.cc/150?u=jane",
-        "tagline": "Fantasy Reader"
-      },
-      "timeAgo": "2 days ago",
-      "title": "Habit Stacking for Readers",
-      "content": "Using Atomic Habits techniques: After I pour my morning coffee (current habit), I will read one page of a book (new habit). It's helping me get through my TBR pile.",
-      "tags": [
-        {
-          "label": "#ReadingTips",
-          "type": "topic"
-        },
-        {
-          "label": "#Habits",
-          "type": "topic"
-        }
-      ],
-      "stars": 412,
-      "community_id": "literacy-circle",
-      "related_books": [
-        3
-      ],
-      "created_at": "2023-10-28T11:00:00Z",
-      "updated_at": "2023-10-28T11:00:00Z"
-    },
-    {
-      "id": 14,
-      "author": {
-        "name": "Alfan Gunadar",
-        "avatar": "https://i.pravatar.cc/150?u=alfan",
-        "tagline": "Frontend Ninja"
-      },
-      "timeAgo": "3 days ago",
-      "title": "The Pragmatic Programmer is a career guide",
-      "content": "The advice about 'Stone Soup and Boiled Frogs' explains so much about corporate software development. It's not just code; it's about responsibility.",
-      "tags": [
         {
           "label": "#Career",
           "type": "topic"
-        },
-        {
-          "label": "#DevLife",
-          "type": "topic"
         }
       ],
-      "stars": 288,
-      "community_id": "creative-atelier",
-      "related_books": [
-        5
-      ],
-      "created_at": "2023-10-27T12:00:00Z",
-      "updated_at": "2023-10-27T12:00:00Z"
-    },
-    {
-      "id": 15,
-      "author": {
-        "name": "Donna Paulsen",
-        "avatar": "https://i.pravatar.cc/150?u=donna",
-        "tagline": "UX Researcher"
-      },
-      "timeAgo": "3 days ago",
-      "title": "Mental Models in Design",
-      "content": "Reading 'Design Patterns' made me realize we have similar patterns in UI. Users expect certain behaviors (like hamburger menus on mobile). Breaking these patterns causes friction.",
-      "tags": [
-        {
-          "label": "#Design",
-          "type": "topic"
-        },
-        {
-          "label": "#UI",
-          "type": "topic"
-        }
-      ],
-      "stars": 156,
+      "stars": 1234,
       "community_id": "creative-atelier",
       "related_books": [
         4,
-        8
-      ],
-      "created_at": "2023-10-26T13:00:00Z",
-      "updated_at": "2023-10-26T13:00:00Z"
-    },
-    {
-      "id": 16,
-      "author": {
-        "name": "Harvey Specter",
-        "avatar": "https://i.pravatar.cc/150?u=harvey",
-        "tagline": "Startup Founder"
-      },
-      "timeAgo": "3 days ago",
-      "title": "Mindset in Negotiation",
-      "content": "Fixed mindset says 'I am a bad negotiator'. Growth mindset says 'I can learn negotiation'. Dweck's research applies heavily to business strategy.",
-      "tags": [
-        {
-          "label": "#Business",
-          "type": "topic"
-        },
-        {
-          "label": "#Psychology",
-          "type": "topic"
-        }
-      ],
-      "stars": 610,
-      "community_id": "wellness-warriors",
-      "related_books": [
-        9
-      ],
-      "created_at": "2023-10-25T14:00:00Z",
-      "updated_at": "2023-10-25T14:00:00Z"
-    },
-    {
-      "id": 17,
-      "author": {
-        "name": "Orang Kmplang",
-        "avatar": "https://i.pravatar.cc/150?u=kmplang",
-        "tagline": "Casual Reader"
-      },
-      "timeAgo": "4 days ago",
-      "title": "Jump Fest 2025 Hype!",
-      "content": "Anyone else excited for the new shonen announcements? I'm hoping for some good fantasy adaptations, something with world-building like The Hobbit but anime style.",
-      "tags": [
-        {
-          "label": "#Anime",
-          "type": "topic"
-        },
-        {
-          "label": "#Events",
-          "type": "topic"
-        }
-      ],
-      "stars": 890,
-      "community_id": "jump-fest-2025",
-      "related_books": [
-        2
-      ],
-      "created_at": "2023-10-24T15:00:00Z",
-      "updated_at": "2023-10-24T15:00:00Z"
-    },
-    {
-      "id": 18,
-      "author": {
-        "name": "Sarah Chen",
-        "avatar": "https://i.pravatar.cc/150?u=sarah",
-        "tagline": "Product Designer"
-      },
-      "timeAgo": "4 days ago",
-      "title": "Photography and Composition",
-      "content": "Just like in 'HTML & CSS', structure is everything. I'm trying to apply the rule of thirds from my design books to my weekend photography shots.",
-      "tags": [
-        {
-          "label": "#Photography",
-          "type": "topic"
-        },
-        {
-          "label": "#Composition",
-          "type": "topic"
-        }
-      ],
-      "stars": 120,
-      "community_id": "photography-club",
-      "related_books": [
+        8,
         14
       ],
-      "created_at": "2023-10-23T16:00:00Z",
-      "updated_at": "2023-10-23T16:00:00Z"
+      "created_at": "2025-12-15T03:00:00Z",
+      "updated_at": "2025-12-15T03:00:00Z",
+      "social_mention_ids": [
+        15,
+        16,
+        18,
+        33
+      ]
     },
     {
-      "id": 19,
+      "id": 7,
       "author": {
-        "name": "John Doe",
-        "avatar": "https://i.pravatar.cc/150?u=john",
-        "tagline": "AI Enthusiast"
+        "name": "Alex Rivera",
+        "avatar": "https://i.pravatar.cc/150?u=alexrivera",
+        "tagline": "Frontend Engineer"
       },
-      "timeAgo": "5 days ago",
-      "title": "AI generated code vs Clean Code",
-      "content": "Copilot is great, but it often violates 'Clean Code' principles. It repeats logic and creates massive functions. We still need to refactor AI output.",
+      "timeAgo": "8 hours ago",
+      "title": "AI-Powered Frontend Workflows: My Experience with Bolt",
+      "content": "What used to take days now takes minutes. I rebuilt a full landing page in just 3 shots using Bolt. The output was shockingly accurate - animated header, high-quality grids, mobile responsive. AI is changing the game for frontend developers.",
       "tags": [
         {
           "label": "#AI",
-          "type": "topic"
-        },
-        {
-          "label": "#Refactoring",
-          "type": "topic"
-        }
-      ],
-      "stars": 333,
-      "community_id": "creative-atelier",
-      "related_books": [
-        1,
-        6
-      ],
-      "created_at": "2023-10-22T17:00:00Z",
-      "updated_at": "2023-10-22T17:00:00Z"
-    },
-    {
-      "id": 20,
-      "author": {
-        "name": "Louis Litt",
-        "avatar": "https://i.pravatar.cc/150?u=louis",
-        "tagline": "History Buff"
-      },
-      "timeAgo": "5 days ago",
-      "title": "Legacy Code Nightmares",
-      "content": "I inherited a project with zero comments and variables named 'x', 'y', 'temp'. 'Working Effectively with Legacy Code' is my bible right now, alongside 'Clean Code'.",
-      "tags": [
-        {
-          "label": "#DevStruggles",
-          "type": "topic"
-        },
-        {
-          "label": "#Legacy",
-          "type": "topic"
-        }
-      ],
-      "stars": 245,
-      "community_id": "creative-atelier",
-      "related_books": [
-        1
-      ],
-      "created_at": "2023-10-21T18:00:00Z",
-      "updated_at": "2023-10-21T18:00:00Z"
-    },
-    {
-      "id": 21,
-      "author": {
-        "name": "Alfan Gunadar",
-        "avatar": "https://i.pravatar.cc/150?u=alfan",
-        "tagline": "Frontend Ninja"
-      },
-      "timeAgo": "5 days ago",
-      "title": "Vue 3 Composition API",
-      "content": "The new syntax in Vue 3 is so much cleaner. Reading 'Vue.js: Up and Running' helped bridge the gap from Options API for me.",
-      "tags": [
-        {
-          "label": "#VueJS",
           "type": "topic"
         },
         {
@@ -638,827 +228,291 @@
           "type": "topic"
         }
       ],
-      "stars": 167,
+      "stars": 945,
       "community_id": "creative-atelier",
       "related_books": [
+        6,
         15
       ],
-      "created_at": "2023-10-21T10:00:00Z",
-      "updated_at": "2023-10-21T10:00:00Z"
+      "created_at": "2025-12-15T02:00:00Z",
+      "updated_at": "2025-12-15T02:00:00Z",
+      "social_mention_ids": [
+        16,
+        17,
+        19
+      ]
     },
     {
-      "id": 22,
+      "id": 8,
       "author": {
-        "name": "Jane Smith",
-        "avatar": "https://i.pravatar.cc/150?u=jane",
-        "tagline": "Fantasy Reader"
+        "name": "David Kim",
+        "avatar": "https://i.pravatar.cc/150?u=davidkim",
+        "tagline": "Backend Architect"
       },
-      "timeAgo": "6 days ago",
-      "title": "World Building 101",
-      "content": "Tolkien didn't just write a story; he created languages, maps, and histories. That's the standard for high fantasy. Any recommendations for books with similar depth?",
+      "timeAgo": "9 hours ago",
+      "title": "Why Laravel is Still the King of Backend in 2026",
+      "content": "Laravel is not 'just another PHP framework.' It's one of the most productive, scalable, and future-ready backend frameworks out there. Eloquent ORM, built-in auth, queue system, and amazing community. If you're starting backend dev, Laravel is a solid choice.",
       "tags": [
         {
-          "label": "#Writing",
+          "label": "#Laravel",
           "type": "topic"
         },
         {
-          "label": "#Fantasy",
+          "label": "#Backend",
           "type": "topic"
         }
       ],
-      "stars": 490,
-      "community_id": "literacy-circle",
-      "related_books": [
-        2
-      ],
-      "created_at": "2023-10-20T11:00:00Z",
-      "updated_at": "2023-10-20T11:00:00Z"
-    },
-    {
-      "id": 23,
-      "author": {
-        "name": "Mike Ross",
-        "avatar": "https://i.pravatar.cc/150?u=mike",
-        "tagline": "Backend Dev"
-      },
-      "timeAgo": "1 week ago",
-      "title": "Database normalization",
-      "content": "Reviewing 'PHP and MySQL Web Development'. The chapter on database normalization is a great refresher. Many devs skip this and regret it later.",
-      "tags": [
-        {
-          "label": "#Database",
-          "type": "topic"
-        },
-        {
-          "label": "#SQL",
-          "type": "topic"
-        }
-      ],
-      "stars": 88,
+      "stars": 756,
       "community_id": "creative-atelier",
       "related_books": [
-        11
+        11,
+        13
       ],
-      "created_at": "2023-10-19T12:00:00Z",
-      "updated_at": "2023-10-19T12:00:00Z"
+      "created_at": "2025-12-15T01:00:00Z",
+      "updated_at": "2025-12-15T01:00:00Z",
+      "social_mention_ids": [
+        20,
+        22,
+        34
+      ]
     },
     {
-      "id": 24,
+      "id": 9,
       "author": {
-        "name": "Donna Paulsen",
-        "avatar": "https://i.pravatar.cc/150?u=donna",
-        "tagline": "UX Researcher"
+        "name": "Emma Wilson",
+        "avatar": "https://i.pravatar.cc/150?u=emmawilson",
+        "tagline": "Security Engineer"
       },
-      "timeAgo": "1 week ago",
-      "title": "Accessibility in Web Design",
-      "content": "Semantic HTML is the first step to accessibility. Screen readers rely on header tags and aria-labels. Duckett's book touches on this, but we need to go deeper.",
+      "timeAgo": "10 hours ago",
+      "title": "Backend Security: Why Payment Verification Belongs on the Server",
+      "content": "If you verify payments in the frontend, you aren't running a SaaS. You're running a donation box. Always verify signatures on the backend. Math > Trust. This is non-negotiable for any serious application.",
       "tags": [
         {
-          "label": "#a11y",
+          "label": "#Security",
           "type": "topic"
         },
         {
-          "label": "#HTML",
+          "label": "#Backend",
           "type": "topic"
         }
       ],
-      "stars": 312,
+      "stars": 623,
       "community_id": "creative-atelier",
       "related_books": [
-        14
-      ],
-      "created_at": "2023-10-18T13:00:00Z",
-      "updated_at": "2023-10-18T13:00:00Z"
-    },
-    {
-      "id": 25,
-      "author": {
-        "name": "Harvey Specter",
-        "avatar": "https://i.pravatar.cc/150?u=harvey",
-        "tagline": "Startup Founder"
-      },
-      "timeAgo": "1 week ago",
-      "title": "Pivoting your idea",
-      "content": "We realized our initial hypothesis was wrong. Following 'The Lean Startup', we pivoted instead of persevering on a dead end. Hard decision, but necessary.",
-      "tags": [
-        {
-          "label": "#Entrepreneurship",
-          "type": "topic"
-        },
-        {
-          "label": "#Strategy",
-          "type": "topic"
-        }
-      ],
-      "stars": 505,
-      "community_id": "creative-atelier",
-      "related_books": [
-        7
-      ],
-      "created_at": "2023-10-17T14:00:00Z",
-      "updated_at": "2023-10-17T14:00:00Z"
-    },
-    {
-      "id": 26,
-      "author": {
-        "name": "Rachel Zane",
-        "avatar": "https://i.pravatar.cc/150?u=rachel",
-        "tagline": "Student"
-      },
-      "timeAgo": "1 week ago",
-      "title": "Dealing with burnout",
-      "content": "Programming is mentally exhausting. I'm using techniques from 'Mindset' to view this burnout as a signal to rest, not a sign of incompetence.",
-      "tags": [
-        {
-          "label": "#MentalHealth",
-          "type": "topic"
-        },
-        {
-          "label": "#Dev",
-          "type": "topic"
-        }
-      ],
-      "stars": 780,
-      "community_id": "wellness-warriors",
-      "related_books": [
-        9
-      ],
-      "created_at": "2023-10-16T15:00:00Z",
-      "updated_at": "2023-10-16T15:00:00Z"
-    },
-    {
-      "id": 27,
-      "author": {
-        "name": "Orang Kmplang",
-        "avatar": "https://i.pravatar.cc/150?u=kmplang",
-        "tagline": "Casual Reader"
-      },
-      "timeAgo": "2 weeks ago",
-      "title": "Gaming marathons vs Habits",
-      "content": "I love gaming, but it eats my time. Trying to use 'Atomic Habits' to limit sessions to 2 hours. Identity shift: 'I am a gamer who also sleeps'.",
-      "tags": [
-        {
-          "label": "#Gaming",
-          "type": "topic"
-        },
-        {
-          "label": "#LifeBalance",
-          "type": "topic"
-        }
-      ],
-      "stars": 340,
-      "community_id": "gaming-hub",
-      "related_books": [
-        3
-      ],
-      "created_at": "2023-10-15T16:00:00Z",
-      "updated_at": "2023-10-15T16:00:00Z"
-    },
-    {
-      "id": 28,
-      "author": {
-        "name": "John Doe",
-        "avatar": "https://i.pravatar.cc/150?u=john",
-        "tagline": "AI Enthusiast"
-      },
-      "timeAgo": "2 weeks ago",
-      "title": "Neural Networks for Dummies",
-      "content": "Even if you are a web dev, understanding basic Neural Networks is becoming essential. The introductory chapters of 'Deep Learning' are approachable.",
-      "tags": [
-        {
-          "label": "#FutureTech",
-          "type": "topic"
-        },
-        {
-          "label": "#Learning",
-          "type": "topic"
-        }
-      ],
-      "stars": 215,
-      "community_id": "creative-atelier",
-      "related_books": [
-        6
-      ],
-      "created_at": "2023-10-14T17:00:00Z",
-      "updated_at": "2023-10-14T17:00:00Z"
-    },
-    {
-      "id": 29,
-      "author": {
-        "name": "Sarah Chen",
-        "avatar": "https://i.pravatar.cc/150?u=sarah",
-        "tagline": "Product Designer"
-      },
-      "timeAgo": "2 weeks ago",
-      "title": "DRY Principle in Design",
-      "content": "Don't Repeat Yourself isn't just for code. In UI design, using components (like in 'Pragmatic Programmer') saves so much time when clients ask for changes.",
-      "tags": [
-        {
-          "label": "#DesignSystems",
-          "type": "topic"
-        },
-        {
-          "label": "#Workflow",
-          "type": "topic"
-        }
-      ],
-      "stars": 145,
-      "community_id": "creative-atelier",
-      "related_books": [
-        5,
-        4
-      ],
-      "created_at": "2023-10-13T18:00:00Z",
-      "updated_at": "2023-10-13T18:00:00Z"
-    },
-    {
-      "id": 30,
-      "author": {
-        "name": "Louis Litt",
-        "avatar": "https://i.pravatar.cc/150?u=louis",
-        "tagline": "History Buff"
-      },
-      "timeAgo": "2 weeks ago",
-      "title": "History of Computing",
-      "content": "Reading Knuth's work gives you such an appreciation for the pioneers. Sorting algorithms we take for granted took years to perfect.",
-      "tags": [
-        {
-          "label": "#History",
-          "type": "topic"
-        },
-        {
-          "label": "#Algorithms",
-          "type": "topic"
-        }
-      ],
-      "stars": 99,
-      "community_id": "literacy-circle",
-      "related_books": [
-        10
-      ],
-      "created_at": "2023-10-12T19:00:00Z",
-      "updated_at": "2023-10-12T19:00:00Z"
-    },
-    {
-      "id": 31,
-      "author": {
-        "name": "Alfan Gunadar",
-        "avatar": "https://i.pravatar.cc/150?u=alfan",
-        "tagline": "Frontend Ninja"
-      },
-      "timeAgo": "3 weeks ago",
-      "title": "CSS Grid is magic",
-      "content": "Remember float clearing? Dark times. Modern CSS is so powerful. If you are still using Bootstrap for everything, read a modern CSS book.",
-      "tags": [
-        {
-          "label": "#CSS",
-          "type": "topic"
-        },
-        {
-          "label": "#Web",
-          "type": "topic"
-        }
-      ],
-      "stars": 367,
-      "community_id": "creative-atelier",
-      "related_books": [
-        14
-      ],
-      "created_at": "2023-10-11T10:00:00Z",
-      "updated_at": "2023-10-11T10:00:00Z"
-    },
-    {
-      "id": 32,
-      "author": {
-        "name": "Jane Smith",
-        "avatar": "https://i.pravatar.cc/150?u=jane",
-        "tagline": "Fantasy Reader"
-      },
-      "timeAgo": "3 weeks ago",
-      "title": "Comfort characters",
-      "content": "Bilbo Baggins is the ultimate comfort character. He doesn't want to be a hero, he just wants his tea. Relatable.",
-      "tags": [
-        {
-          "label": "#Characters",
-          "type": "topic"
-        },
-        {
-          "label": "#Books",
-          "type": "topic"
-        }
-      ],
-      "stars": 520,
-      "community_id": "literacy-circle",
-      "related_books": [
-        2
-      ],
-      "created_at": "2023-10-10T11:00:00Z",
-      "updated_at": "2023-10-10T11:00:00Z"
-    },
-    {
-      "id": 33,
-      "author": {
-        "name": "Mike Ross",
-        "avatar": "https://i.pravatar.cc/150?u=mike",
-        "tagline": "Backend Dev"
-      },
-      "timeAgo": "3 weeks ago",
-      "title": "Factory Pattern use cases",
-      "content": "I used to think Design Patterns were academic fluff. Then I had to build a notification system supporting Email, SMS, and Push. Factory Pattern to the rescue.",
-      "tags": [
-        {
-          "label": "#Code",
-          "type": "topic"
-        },
-        {
-          "label": "#DesignPatterns",
-          "type": "topic"
-        }
-      ],
-      "stars": 255,
-      "community_id": "creative-atelier",
-      "related_books": [
-        4
-      ],
-      "created_at": "2023-10-09T12:00:00Z",
-      "updated_at": "2023-10-09T12:00:00Z"
-    },
-    {
-      "id": 34,
-      "author": {
-        "name": "Donna Paulsen",
-        "avatar": "https://i.pravatar.cc/150?u=donna",
-        "tagline": "UX Researcher"
-      },
-      "timeAgo": "3 weeks ago",
-      "title": "Forms are hard.",
-      "content": "Designing good forms is an art. 'Human-Computer Interaction' has a whole section on error recovery. Don't just show 'Invalid Error', tell users HOW to fix it.",
-      "tags": [
-        {
-          "label": "#UX",
-          "type": "topic"
-        },
-        {
-          "label": "#Forms",
-          "type": "topic"
-        }
-      ],
-      "stars": 340,
-      "community_id": "creative-atelier",
-      "related_books": [
-        8
-      ],
-      "created_at": "2023-10-08T13:00:00Z",
-      "updated_at": "2023-10-08T13:00:00Z"
-    },
-    {
-      "id": 35,
-      "author": {
-        "name": "Harvey Specter",
-        "avatar": "https://i.pravatar.cc/150?u=harvey",
-        "tagline": "Startup Founder"
-      },
-      "timeAgo": "1 month ago",
-      "title": "Validating assumptions",
-      "content": "The hardest part of 'The Lean Startup' is admitting you might be wrong. We utilize A/B testing for everything now.",
-      "tags": [
-        {
-          "label": "#DataDriven",
-          "type": "topic"
-        },
-        {
-          "label": "#Growth",
-          "type": "topic"
-        }
-      ],
-      "stars": 460,
-      "community_id": "creative-atelier",
-      "related_books": [
-        7
-      ],
-      "created_at": "2023-10-07T14:00:00Z",
-      "updated_at": "2023-10-07T14:00:00Z"
-    },
-    {
-      "id": 36,
-      "author": {
-        "name": "Rachel Zane",
-        "avatar": "https://i.pravatar.cc/150?u=rachel",
-        "tagline": "Student"
-      },
-      "timeAgo": "1 month ago",
-      "title": "Consistency > Intensity",
-      "content": "Atomic Habits key takeaway: You don't rise to the level of your goals, you fall to the level of your systems. I'm building a system for my finals.",
-      "tags": [
-        {
-          "label": "#StudyHacks",
-          "type": "topic"
-        },
-        {
-          "label": "#Motivation",
-          "type": "topic"
-        }
-      ],
-      "stars": 710,
-      "community_id": "wellness-warriors",
-      "related_books": [
-        3
-      ],
-      "created_at": "2023-10-06T15:00:00Z",
-      "updated_at": "2023-10-06T15:00:00Z"
-    },
-    {
-      "id": 37,
-      "author": {
-        "name": "John Doe",
-        "avatar": "https://i.pravatar.cc/150?u=john",
-        "tagline": "AI Enthusiast"
-      },
-      "timeAgo": "1 month ago",
-      "title": "Ethics in AI",
-      "content": "Deep Learning is powerful, but we need to talk about bias in datasets. Goodfellow touches on this, but it needs more discussion in our community.",
-      "tags": [
-        {
-          "label": "#Ethics",
-          "type": "topic"
-        },
-        {
-          "label": "#AI",
-          "type": "topic"
-        }
-      ],
-      "stars": 198,
-      "community_id": "creative-atelier",
-      "related_books": [
-        6
-      ],
-      "created_at": "2023-10-05T16:00:00Z",
-      "updated_at": "2023-10-05T16:00:00Z"
-    },
-    {
-      "id": 38,
-      "author": {
-        "name": "Orang Kmplang",
-        "avatar": "https://i.pravatar.cc/150?u=kmplang",
-        "tagline": "Casual Reader"
-      },
-      "timeAgo": "1 month ago",
-      "title": "JS vs PHP for freelancing",
-      "content": "Hot take: PHP (Laravel) is still faster for whipping up a quick freelance project than a full JS stack. 'Modern PHP' proves it's robust enough.",
-      "tags": [
-        {
-          "label": "#Freelance",
-          "type": "topic"
-        },
-        {
-          "label": "#TechStack",
-          "type": "topic"
-        }
-      ],
-      "stars": 275,
-      "community_id": "creative-atelier",
-      "related_books": [
-        13,
-        12
-      ],
-      "created_at": "2023-10-04T17:00:00Z",
-      "updated_at": "2023-10-04T17:00:00Z"
-    },
-    {
-      "id": 39,
-      "author": {
-        "name": "Sarah Chen",
-        "avatar": "https://i.pravatar.cc/150?u=sarah",
-        "tagline": "Product Designer"
-      },
-      "timeAgo": "1 month ago",
-      "title": "Affordances in real life",
-      "content": "After reading about HCI, I can't stop seeing bad design everywhere. Doors you pull but look like push doors (Norman Doors). Design matters!",
-      "tags": [
-        {
-          "label": "#RealLife",
-          "type": "topic"
-        },
-        {
-          "label": "#Design",
-          "type": "topic"
-        }
-      ],
-      "stars": 380,
-      "community_id": "creative-atelier",
-      "related_books": [
-        8
-      ],
-      "created_at": "2023-10-03T18:00:00Z",
-      "updated_at": "2023-10-03T18:00:00Z"
-    },
-    {
-      "id": 40,
-      "author": {
-        "name": "Louis Litt",
-        "avatar": "https://i.pravatar.cc/150?u=louis",
-        "tagline": "History Buff"
-      },
-      "timeAgo": "1 month ago",
-      "title": "The mythical man-month",
-      "content": "Not on the list, but 'The Pragmatic Programmer' references it. Adding manpower to a late software project makes it later. Classic.",
-      "tags": [
-        {
-          "label": "#Management",
-          "type": "topic"
-        },
-        {
-          "label": "#Classics",
-          "type": "topic"
-        }
-      ],
-      "stars": 220,
-      "community_id": "creative-atelier",
-      "related_books": [
+        1,
         5
       ],
-      "created_at": "2023-10-02T19:00:00Z",
-      "updated_at": "2023-10-02T19:00:00Z"
+      "created_at": "2025-12-14T23:00:00Z",
+      "updated_at": "2025-12-14T23:00:00Z",
+      "social_mention_ids": [
+        21,
+        23,
+        24
+      ]
     },
     {
-      "id": 41,
+      "id": 10,
       "author": {
-        "name": "Alfan Gunadar",
-        "avatar": "https://i.pravatar.cc/150?u=alfan",
-        "tagline": "Frontend Ninja"
+        "name": "Ryan Park",
+        "avatar": "https://i.pravatar.cc/150?u=ryanpark",
+        "tagline": "JavaScript Developer"
       },
-      "timeAgo": "1 month ago",
-      "title": "State Management in 2024",
-      "content": "Vue's Pinia is so much simpler than Vuex. The 'Vue.js: Up and Running' concepts about state flow still apply, but the boilerplate is gone.",
+      "timeAgo": "12 hours ago",
+      "title": "Building My First Weather App with JavaScript Fetch API",
+      "content": "Just finished building my first weather app using vanilla JavaScript and Fetch API. Learned a lot about async/await, error handling, and working with real-time data. The feeling when your code actually works with a live API is incredible!",
       "tags": [
         {
-          "label": "#Vue",
+          "label": "#JavaScript",
           "type": "topic"
         },
         {
-          "label": "#State",
+          "label": "#Beginner",
           "type": "topic"
         }
       ],
-      "stars": 155,
+      "stars": 345,
       "community_id": "creative-atelier",
       "related_books": [
+        12,
         15
       ],
-      "created_at": "2023-10-01T10:00:00Z",
-      "updated_at": "2023-10-01T10:00:00Z"
+      "created_at": "2025-12-14T20:00:00Z",
+      "updated_at": "2025-12-14T20:00:00Z",
+      "social_mention_ids": [
+        25,
+        26,
+        35
+      ]
     },
     {
-      "id": 42,
+      "id": 11,
       "author": {
-        "name": "Jane Smith",
-        "avatar": "https://i.pravatar.cc/150?u=jane",
-        "tagline": "Fantasy Reader"
+        "name": "Nina Thompson",
+        "avatar": "https://i.pravatar.cc/150?u=ninathompson",
+        "tagline": "Tech Lead"
       },
-      "timeAgo": "1 month ago",
-      "title": "Riddles in the Dark",
-      "content": "The chapter with Gollum in The Hobbit is a masterclass in tension. It's a children's book but that scene is genuinely creepy.",
+      "timeAgo": "14 hours ago",
+      "title": "Major JavaScript Library Breach: What You Need to Know",
+      "content": "Security alert! A major npm package vulnerability was discovered that could affect crypto websites. This is a reminder to always audit your dependencies, use lockfiles, and stay updated on security advisories. Never blindly trust third-party code.",
       "tags": [
         {
-          "label": "#Storytelling",
+          "label": "#Security",
           "type": "topic"
         },
         {
-          "label": "#Suspense",
+          "label": "#JavaScript",
           "type": "topic"
         }
       ],
-      "stars": 600,
-      "community_id": "literacy-circle",
-      "related_books": [
-        2
-      ],
-      "created_at": "2023-09-30T11:00:00Z",
-      "updated_at": "2023-09-30T11:00:00Z"
-    },
-    {
-      "id": 43,
-      "author": {
-        "name": "Mike Ross",
-        "avatar": "https://i.pravatar.cc/150?u=mike",
-        "tagline": "Backend Dev"
-      },
-      "timeAgo": "2 months ago",
-      "title": "Bad comments vs Clean Code",
-      "content": "Don't write comments that repeat the code. 'i++ // increment i'. Clean Code taught me that code should express itself. Comments are for 'Why', not 'What'.",
-      "tags": [
-        {
-          "label": "#BestPractices",
-          "type": "topic"
-        },
-        {
-          "label": "#Coding",
-          "type": "topic"
-        }
-      ],
-      "stars": 410,
+      "stars": 1890,
       "community_id": "creative-atelier",
       "related_books": [
-        1
+        1,
+        5
       ],
-      "created_at": "2023-09-29T12:00:00Z",
-      "updated_at": "2023-09-29T12:00:00Z"
+      "created_at": "2025-12-14T18:00:00Z",
+      "updated_at": "2025-12-14T18:00:00Z",
+      "social_mention_ids": [
+        27,
+        28,
+        35
+      ]
     },
     {
-      "id": 44,
+      "id": 12,
       "author": {
-        "name": "Donna Paulsen",
-        "avatar": "https://i.pravatar.cc/150?u=donna",
-        "tagline": "UX Researcher"
+        "name": "Chris Lee",
+        "avatar": "https://i.pravatar.cc/150?u=chrislee",
+        "tagline": "Junior Developer"
       },
-      "timeAgo": "2 months ago",
-      "title": "Color Psychology",
-      "content": "Discussing color theory in web design. It's not just CSS hex codes; it's about emotion. HTML & CSS covers syntax, but we need to study art too.",
+      "timeAgo": "16 hours ago",
+      "title": "JavaScript vs TypeScript: Trust Me vs Prove It",
+      "content": "Saw this quote today: 'JavaScript: Trust me. TypeScript: Prove it.' So true! After switching to TypeScript, I catch so many bugs at compile time that would have been runtime errors. The learning curve is worth it.",
       "tags": [
         {
-          "label": "#Color",
+          "label": "#TypeScript",
           "type": "topic"
         },
         {
-          "label": "#Art",
+          "label": "#JavaScript",
           "type": "topic"
         }
       ],
-      "stars": 290,
+      "stars": 567,
       "community_id": "creative-atelier",
       "related_books": [
-        14
+        12,
+        15
       ],
-      "created_at": "2023-09-28T13:00:00Z",
-      "updated_at": "2023-09-28T13:00:00Z"
+      "created_at": "2025-12-14T16:00:00Z",
+      "updated_at": "2025-12-14T16:00:00Z",
+      "social_mention_ids": [
+        29,
+        30
+      ]
     },
     {
-      "id": 45,
+      "id": 13,
       "author": {
-        "name": "Harvey Specter",
-        "avatar": "https://i.pravatar.cc/150?u=harvey",
-        "tagline": "Startup Founder"
+        "name": "Maria Santos",
+        "avatar": "https://i.pravatar.cc/150?u=mariasantos",
+        "tagline": "3D Web Developer"
       },
-      "timeAgo": "2 months ago",
-      "title": "Vanity Metrics",
-      "content": "Page views don't pay the bills. 'The Lean Startup' warns against vanity metrics. We focus on conversion and retention now.",
+      "timeAgo": "18 hours ago",
+      "title": "3D in the Web with Three.js: My First Configurator",
+      "content": "Just finished my first 3D Lamp Configurator using JavaScript + GSAP + Three.js. 3D in the web is SO fun! The possibilities are endless - product configurators, immersive experiences, interactive portfolios. Excited to explore more!",
       "tags": [
         {
-          "label": "#Metrics",
+          "label": "#ThreeJS",
           "type": "topic"
         },
         {
-          "label": "#Business",
+          "label": "#3DWeb",
           "type": "topic"
         }
       ],
-      "stars": 550,
+      "stars": 789,
       "community_id": "creative-atelier",
       "related_books": [
-        7
+        14,
+        15
       ],
-      "created_at": "2023-09-27T14:00:00Z",
-      "updated_at": "2023-09-27T14:00:00Z"
+      "created_at": "2025-12-14T14:00:00Z",
+      "updated_at": "2025-12-14T14:00:00Z",
+      "social_mention_ids": [
+        26,
+        28
+      ]
     },
     {
-      "id": 46,
+      "id": 14,
       "author": {
-        "name": "Rachel Zane",
-        "avatar": "https://i.pravatar.cc/150?u=rachel",
-        "tagline": "Student"
+        "name": "Tara Nguyen",
+        "avatar": "https://i.pravatar.cc/150?u=taranguyen",
+        "tagline": "Digital Literacy Trainer"
       },
-      "timeAgo": "2 months ago",
-      "title": "The power of 'Yet'",
-      "content": "I don't understand recursion... YET. That simple word from Dweck's 'Mindset' keeps me going when algorithms get tough.",
+      "timeAgo": "1 day ago",
+      "title": "Karir di Era Digital 2026: Skill yang Harus Dimiliki",
+      "content": "Berdasarkan tren karir 2026, pertimbangkan jadi spesialis AI, analis data, ahli keamanan siber, atau pakar energi hijau. Skill kunci: literasi digital dan pemahaman data. Mulai belajar sekarang!",
       "tags": [
         {
-          "label": "#Learning",
+          "label": "#Karir",
           "type": "topic"
         },
         {
-          "label": "#Growth",
+          "label": "#LiterasiDigital",
           "type": "topic"
         }
       ],
-      "stars": 680,
+      "stars": 1023,
       "community_id": "wellness-warriors",
       "related_books": [
+        3,
         9
       ],
-      "created_at": "2023-09-26T15:00:00Z",
-      "updated_at": "2023-09-26T15:00:00Z"
+      "created_at": "2025-12-14T08:00:00Z",
+      "updated_at": "2025-12-14T08:00:00Z",
+      "social_mention_ids": [
+        4,
+        8,
+        31
+      ]
     },
     {
-      "id": 47,
+      "id": 15,
       "author": {
-        "name": "Orang Kmplang",
-        "avatar": "https://i.pravatar.cc/150?u=kmplang",
-        "tagline": "Casual Reader"
+        "name": "James Cooper",
+        "avatar": "https://i.pravatar.cc/150?u=jamescooper",
+        "tagline": "Engineering Manager"
       },
-      "timeAgo": "2 months ago",
-      "title": "Gaming Community Toxicity",
-      "content": "We need better community management in esports. Maybe applying some 'HCI' social computing principles could help reduce toxicity in chat?",
+      "timeAgo": "1 day ago",
+      "title": "Full Stack Development: More Than Just Frontend + Backend",
+      "content": "I don't just build websites. I build systems. 6+ years in web development taught me that understanding APIs, payments, wallets, automation, and platforms that are meant to scale is what separates good developers from great ones.",
       "tags": [
         {
-          "label": "#Community",
+          "label": "#FullStack",
           "type": "topic"
         },
         {
-          "label": "#Esports",
+          "label": "#Career",
           "type": "topic"
         }
       ],
-      "stars": 420,
-      "community_id": "gaming-hub",
-      "related_books": [
-        8
-      ],
-      "created_at": "2023-09-25T16:00:00Z",
-      "updated_at": "2023-09-25T16:00:00Z"
-    },
-    {
-      "id": 48,
-      "author": {
-        "name": "John Doe",
-        "avatar": "https://i.pravatar.cc/150?u=john",
-        "tagline": "AI Enthusiast"
-      },
-      "timeAgo": "2 months ago",
-      "title": "Backpropagation explained",
-      "content": "The chapter on backprop in 'Deep Learning' is the best technical explanation I've found. It's just chain rule, but applied at scale.",
-      "tags": [
-        {
-          "label": "#Math",
-          "type": "topic"
-        },
-        {
-          "label": "#DeepLearning",
-          "type": "topic"
-        }
-      ],
-      "stars": 180,
+      "stars": 678,
       "community_id": "creative-atelier",
       "related_books": [
-        6
+        1,
+        5,
+        11
       ],
-      "created_at": "2023-09-24T17:00:00Z",
-      "updated_at": "2023-09-24T17:00:00Z"
-    },
-    {
-      "id": 49,
-      "author": {
-        "name": "Sarah Chen",
-        "avatar": "https://i.pravatar.cc/150?u=sarah",
-        "tagline": "Product Designer"
-      },
-      "timeAgo": "2 months ago",
-      "title": "JavaScript weirdness",
-      "content": "Type coercion in JS is a nightmare. 'The Good Parts' suggests using === always. It's a simple rule that saved me so many bugs.",
-      "tags": [
-        {
-          "label": "#JS",
-          "type": "topic"
-        },
-        {
-          "label": "#Tips",
-          "type": "topic"
-        }
-      ],
-      "stars": 299,
-      "community_id": "creative-atelier",
-      "related_books": [
-        12
-      ],
-      "created_at": "2023-09-23T18:00:00Z",
-      "updated_at": "2023-09-23T18:00:00Z"
-    },
-    {
-      "id": 50,
-      "author": {
-        "name": "Louis Litt",
-        "avatar": "https://i.pravatar.cc/150?u=louis",
-        "tagline": "History Buff"
-      },
-      "timeAgo": "3 months ago",
-      "title": "Reading Code",
-      "content": "We spend more time reading code than writing it. That's the main takeaway from 'Clean Code'. Write for humans, not for the compiler.",
-      "tags": [
-        {
-          "label": "#Philosophy",
-          "type": "topic"
-        },
-        {
-          "label": "#Coding",
-          "type": "topic"
-        }
-      ],
-      "stars": 500,
-      "community_id": "creative-atelier",
-      "related_books": [
-        1
-      ],
-      "created_at": "2023-09-22T19:00:00Z",
-      "updated_at": "2023-09-22T19:00:00Z"
+      "created_at": "2025-12-14T06:00:00Z",
+      "updated_at": "2025-12-14T06:00:00Z",
+      "social_mention_ids": [
+        10,
+        14,
+        20,
+        32
+      ]
     }
   ],
   "communities": [
@@ -7062,5 +6116,1433 @@
       "engagement": "4.5k"
     }
   ],
-  "click_events": []
+  "click_events": [
+    {
+      "id": 1,
+      "event_type": "event_click",
+      "item_id": 6,
+      "item_title": "Math Olympiad Preparation Class",
+      "item_tags": [
+        "#Math",
+        "#Olympiad",
+        "#Competition"
+      ],
+      "user_id": "anon_1765820660152_zcd813dkh",
+      "timestamp": "2025-12-15T18:06:47.842Z",
+      "source_page": "/events",
+      "metadata": {
+        "date": "2023-11-03T13:00:00Z",
+        "community_id": "math-club"
+      }
+    },
+    {
+      "id": 2,
+      "event_type": "community_click",
+      "item_id": "gaming-hub",
+      "item_title": "Gaming Hub Indonesia",
+      "item_tags": [
+        "Esports",
+        "Co-op",
+        "Livestream"
+      ],
+      "user_id": "anon_1765820660152_zcd813dkh",
+      "timestamp": "2025-12-15T18:06:56.390Z",
+      "source_page": "/community",
+      "metadata": {
+        "members": 12
+      }
+    },
+    {
+      "id": 3,
+      "event_type": "community_join",
+      "item_id": "gaming-hub",
+      "item_title": "Gaming Hub Indonesia",
+      "item_tags": [
+        "#Esports",
+        "#Coop",
+        "#Livestream"
+      ],
+      "user_id": "anon_1765820660152_zcd813dkh",
+      "timestamp": "2025-12-15T18:07:01.253Z",
+      "source_page": "/community/gaming-hub",
+      "metadata": {
+        "members": "1.2k"
+      }
+    },
+    {
+      "id": 4,
+      "event_type": "book_click",
+      "item_id": 37,
+      "item_title": "Catching Fire",
+      "item_tags": [
+        "General"
+      ],
+      "user_id": "anon_1765820660152_zcd813dkh",
+      "timestamp": "2025-12-15T18:07:05.926Z",
+      "source_page": "/literature",
+      "metadata": {
+        "author": "Suzanne Collins",
+        "rating": 4.8
+      }
+    },
+    {
+      "id": 5,
+      "event_type": "post_click",
+      "item_id": 4,
+      "item_title": "Is Web Development Still a Good Career in 2026?",
+      "item_tags": [
+        "#WebDev",
+        "#Career"
+      ],
+      "user_id": "anon_1765820660152_zcd813dkh",
+      "timestamp": "2025-12-15T18:07:10.535Z",
+      "source_page": "/forums",
+      "metadata": {
+        "author": "Sarah Chen",
+        "stars": 890
+      }
+    },
+    {
+      "id": 6,
+      "event_type": "post_click",
+      "item_id": 2,
+      "item_title": "Melawan Hoaks di Era WhatsApp: Tantangan Literasi Digital",
+      "item_tags": [
+        "#AntiHoaks",
+        "#LiterasiDigital"
+      ],
+      "user_id": "anon_1765820660152_zcd813dkh",
+      "timestamp": "2025-12-15T18:07:20.369Z",
+      "source_page": "/",
+      "metadata": {
+        "author": "Dewi Kusuma",
+        "stars": 389
+      }
+    },
+    {
+      "id": 7,
+      "event_type": "post_click",
+      "item_id": 3,
+      "item_title": "Literasi AI untuk Santri: Inisiatif XLSMART yang Patut Diapresiasi",
+      "item_tags": [
+        "#AI",
+        "#Edukasi"
+      ],
+      "user_id": "anon_1765820660152_zcd813dkh",
+      "timestamp": "2025-12-15T18:07:32.720Z",
+      "source_page": "/",
+      "metadata": {
+        "author": "Budi Santoso",
+        "stars": 567
+      }
+    },
+    {
+      "id": 8,
+      "event_type": "post_click",
+      "item_id": 4,
+      "item_title": "Is Web Development Still a Good Career in 2026?",
+      "item_tags": [
+        "#WebDev",
+        "#Career"
+      ],
+      "user_id": "anon_1765820660152_zcd813dkh",
+      "timestamp": "2025-12-15T18:07:58.361Z",
+      "source_page": "/",
+      "metadata": {
+        "author": "Sarah Chen",
+        "stars": 890
+      }
+    },
+    {
+      "id": 9,
+      "event_type": "event_click",
+      "item_id": 1,
+      "item_title": "Photo Walk Jakarta",
+      "user_id": "anon_1765820660152_zcd813dkh",
+      "timestamp": "2025-12-15T18:08:08.605Z",
+      "source_page": "/",
+      "metadata": {
+        "date": "2023-10-15T08:00:00Z",
+        "community_id": "photography-club"
+      }
+    },
+    {
+      "id": 10,
+      "event_type": "event_click",
+      "item_id": 1,
+      "item_title": "Photo Walk Jakarta",
+      "user_id": "anon_1765820660152_zcd813dkh",
+      "timestamp": "2025-12-15T18:11:55.800Z",
+      "source_page": "/",
+      "metadata": {
+        "date": "2023-10-15T08:00:00Z",
+        "community_id": "photography-club"
+      }
+    },
+    {
+      "id": 11,
+      "event_type": "book_click",
+      "item_id": 10,
+      "item_title": "The Art of Computer Programming",
+      "item_tags": [
+        "Computer Science",
+        "Algorithms",
+        "Programming Theory",
+        "Mathematical Foundations"
+      ],
+      "user_id": "anon_1765820660152_zcd813dkh",
+      "timestamp": "2025-12-15T18:12:11.817Z",
+      "source_page": "/",
+      "metadata": {
+        "author": "Donald E. Knuth",
+        "rating": 4.6
+      }
+    },
+    {
+      "id": 12,
+      "event_type": "post_click",
+      "item_id": 2,
+      "item_title": "Melawan Hoaks di Era WhatsApp: Tantangan Literasi Digital",
+      "item_tags": [
+        "#AntiHoaks",
+        "#LiterasiDigital"
+      ],
+      "user_id": "anon_1765820660152_zcd813dkh",
+      "timestamp": "2025-12-15T18:12:28.095Z",
+      "source_page": "/",
+      "metadata": {
+        "author": "Dewi Kusuma",
+        "stars": 389
+      }
+    },
+    {
+      "id": 13,
+      "event_type": "post_click",
+      "item_id": 8,
+      "item_title": "Why Laravel is Still the King of Backend in 2026",
+      "item_tags": [
+        "#Laravel",
+        "#Backend"
+      ],
+      "user_id": "anon_1765820660152_zcd813dkh",
+      "timestamp": "2025-12-15T18:12:37.403Z",
+      "source_page": "/forums",
+      "metadata": {
+        "author": "David Kim",
+        "stars": 756
+      }
+    },
+    {
+      "id": 14,
+      "event_type": "book_click",
+      "item_id": 47,
+      "item_title": "The Kite Runner",
+      "item_tags": [
+        "Non-Fiction",
+        "History"
+      ],
+      "user_id": "anon_1765820660152_zcd813dkh",
+      "timestamp": "2025-12-15T18:12:44.929Z",
+      "source_page": "/literature",
+      "metadata": {
+        "author": "Khaled Hosseini",
+        "rating": 4.5
+      }
+    },
+    {
+      "id": 15,
+      "event_type": "book_click",
+      "item_id": 12,
+      "item_title": "JavaScript: The Good Parts",
+      "item_tags": [
+        "Web Development",
+        "JavaScript",
+        "Frontend Development",
+        "Programming Languages"
+      ],
+      "user_id": "anon_1765820660152_zcd813dkh",
+      "timestamp": "2025-12-15T18:12:51.361Z",
+      "source_page": "/literature",
+      "metadata": {
+        "author": "Douglas Crockford",
+        "rating": 4
+      }
+    },
+    {
+      "id": 16,
+      "event_type": "community_click",
+      "item_id": "photography-club",
+      "item_title": "Photography Club",
+      "item_tags": [
+        "Photo Walk",
+        "Tips",
+        "Critique"
+      ],
+      "user_id": "anon_1765820660152_zcd813dkh",
+      "timestamp": "2025-12-15T18:12:56.478Z",
+      "source_page": "/community",
+      "metadata": {
+        "members": 287
+      }
+    },
+    {
+      "id": 17,
+      "event_type": "event_click",
+      "item_id": 6,
+      "item_title": "Math Olympiad Preparation Class",
+      "item_tags": [
+        "#Math",
+        "#Olympiad",
+        "#Competition"
+      ],
+      "user_id": "anon_1765820660152_zcd813dkh",
+      "timestamp": "2025-12-15T18:13:03.674Z",
+      "source_page": "/events",
+      "metadata": {
+        "date": "2023-11-03T13:00:00Z",
+        "community_id": "math-club"
+      }
+    },
+    {
+      "id": 18,
+      "event_type": "post_click",
+      "item_id": 5,
+      "item_title": "Web Performance Optimization: From 5s to 1.5s Load Time",
+      "item_tags": [
+        "#Performance",
+        "#WebDev"
+      ],
+      "user_id": "anon_1765820660152_zcd813dkh",
+      "timestamp": "2025-12-15T18:13:11.128Z",
+      "source_page": "/forums",
+      "metadata": {
+        "author": "Mike Johnson",
+        "stars": 678
+      }
+    },
+    {
+      "id": 19,
+      "event_type": "post_click",
+      "item_id": 3,
+      "item_title": "Literasi AI untuk Santri: Inisiatif XLSMART yang Patut Diapresiasi",
+      "item_tags": [
+        "#AI",
+        "#Edukasi"
+      ],
+      "user_id": "anon_1765820660152_zcd813dkh",
+      "timestamp": "2025-12-15T18:16:17.636Z",
+      "source_page": "/forums",
+      "metadata": {
+        "author": "Budi Santoso",
+        "stars": 567
+      }
+    },
+    {
+      "id": 20,
+      "event_type": "post_click",
+      "item_id": 9,
+      "item_title": "Backend Security: Why Payment Verification Belongs on the Server",
+      "item_tags": [
+        "#Security",
+        "#Backend"
+      ],
+      "user_id": "anon_1765820660152_zcd813dkh",
+      "timestamp": "2025-12-15T18:16:32.019Z",
+      "source_page": "/forums",
+      "metadata": {
+        "author": "Emma Wilson",
+        "stars": 623
+      }
+    },
+    {
+      "id": 21,
+      "event_type": "post_click",
+      "item_id": 10,
+      "item_title": "Building My First Weather App with JavaScript Fetch API",
+      "item_tags": [
+        "#JavaScript",
+        "#Beginner"
+      ],
+      "user_id": "anon_1765820660152_zcd813dkh",
+      "timestamp": "2025-12-15T18:19:02.360Z",
+      "source_page": "/forums",
+      "metadata": {
+        "author": "Ryan Park",
+        "stars": 345
+      }
+    }
+  ],
+  "sosmed": {
+    "social_mentions": [
+      {
+        "id": 1,
+        "platform": "twitter",
+        "topic": "literasi digital",
+        "author_name": "Radio Elshinta",
+        "author_handle": "@RadioElshinta",
+        "author_avatar": "https://i.pravatar.cc/150?u=RadioElshinta",
+        "content": "PP Tunas bukan sekadar aturan, tapi gerakan bersama. Dengan literasi digital, pengawasan yang tepat, dan ekosistem digital yang ramah anak, kita bisa membangun generasi yang berkarakter kuat.",
+        "date": "Dec 15, 2025",
+        "url": "https://twitter.com/RadioElshinta/status/2000536320427618590",
+        "stats": {
+          "replies": 45,
+          "retweets": 120,
+          "likes": 500
+        }
+      },
+      {
+        "id": 2,
+        "platform": "twitter",
+        "topic": "literasi digital",
+        "author_name": "Girl Up Semarang",
+        "author_handle": "@girlupsemarang",
+        "author_avatar": "https://i.pravatar.cc/150?u=girlupsemarang",
+        "content": "Jejak digital yang nyaris abadi membuat korban sulit dilupakan. Karena itu, literasi digital, etika teknologi, dan perlindungan hak korban harus jadi perhatian bersama.",
+        "date": "Dec 15, 2025",
+        "url": "https://twitter.com/girlupsemarang/status/2000535997533286484",
+        "stats": {
+          "replies": 28,
+          "retweets": 85,
+          "likes": 320
+        }
+      },
+      {
+        "id": 3,
+        "platform": "twitter",
+        "topic": "literasi digital",
+        "author_name": "IDN Times Jateng",
+        "author_handle": "@IDNTimesJateng",
+        "author_avatar": "https://i.pravatar.cc/150?u=IDNTimesJateng",
+        "content": "XLSMART Ajari 175 Santri di Demak Gunakan AI dan Literasi Digital",
+        "date": "Dec 15, 2025",
+        "url": "https://twitter.com/IDNTimesJateng/status/2000509952994250893",
+        "stats": {
+          "replies": 15,
+          "retweets": 45,
+          "likes": 180
+        }
+      },
+      {
+        "id": 4,
+        "platform": "twitter",
+        "topic": "literasi digital",
+        "author_name": "Indosat Ooredoo Hutchison",
+        "author_handle": "@indosat",
+        "author_avatar": "https://i.pravatar.cc/150?u=indosat",
+        "content": "Indosat dan Nokia kembali melangkah maju untuk menghadirkan literasi AI yang lebih inklusif bagi generasi muda Indonesia. Lewat GenSi, kami ingin membangun rasa percaya diri digital yang nyata.",
+        "date": "Dec 15, 2025",
+        "url": "https://twitter.com/indosat/status/2000503656454701546",
+        "stats": {
+          "replies": 67,
+          "retweets": 234,
+          "likes": 890
+        }
+      },
+      {
+        "id": 5,
+        "platform": "twitter",
+        "topic": "literasi digital",
+        "author_name": "DISKOMINFO JATIM",
+        "author_handle": "@KominfoJatim",
+        "author_avatar": "https://i.pravatar.cc/150?u=KominfoJatim",
+        "content": "Program CERDIG (Cerdas Digital) mengangkat tema Cyber Sexual Harassment: Lawan Pelecehan Seksual, Ciptakan Internet yang Aman. Kegiatan ini diikuti ratusan siswa SMP.",
+        "date": "Dec 15, 2025",
+        "url": "https://twitter.com/KominfoJatim/status/2000449267077714298",
+        "stats": {
+          "replies": 32,
+          "retweets": 156,
+          "likes": 445
+        }
+      },
+      {
+        "id": 6,
+        "platform": "twitter",
+        "topic": "literasi digital",
+        "author_name": "Harian Kompas",
+        "author_handle": "@hariankompas",
+        "author_avatar": "https://i.pravatar.cc/150?u=hariankompas",
+        "content": "Baca Opini: Mengatasi Hoaks Bencana - ditulis oleh Novi Kurnia, Dosen dan Aktivis Literasi Digital",
+        "date": "Dec 13, 2025",
+        "url": "https://twitter.com/hariankompas/status/1999769944071016477",
+        "stats": {
+          "replies": 89,
+          "retweets": 312,
+          "likes": 1200
+        }
+      },
+      {
+        "id": 7,
+        "platform": "twitter",
+        "topic": "literasi digital",
+        "author_name": "NETRALNEWS",
+        "author_handle": "@netralnews",
+        "author_avatar": "https://i.pravatar.cc/150?u=netralnews",
+        "content": "Kenapa Hoaks Mudah Menyebar di WhatsApp? Ini Tantangan Literasi Digital Masyarakat",
+        "date": "Dec 13, 2025",
+        "url": "https://twitter.com/netralnews/status/1999734799553167776",
+        "stats": {
+          "replies": 54,
+          "retweets": 189,
+          "likes": 567
+        }
+      },
+      {
+        "id": 8,
+        "platform": "twitter",
+        "topic": "literasi digital",
+        "author_name": "Grok",
+        "author_handle": "@grok",
+        "author_avatar": "https://i.pravatar.cc/150?u=grok",
+        "content": "Berdasarkan tren karir 2026 di Indonesia, coba pertimbangkan jadi spesialis AI, analis data, ahli keamanan siber, atau pakar energi hijau. Skill kunci: literasi digital dan pemahaman data.",
+        "date": "Dec 14, 2025",
+        "url": "https://twitter.com/grok/status/2000046556339229114",
+        "stats": {
+          "replies": 234,
+          "retweets": 567,
+          "likes": 2100
+        }
+      },
+      {
+        "id": 9,
+        "platform": "twitter",
+        "topic": "web development",
+        "author_name": "SitePoint",
+        "author_handle": "@sitepointdotcom",
+        "author_avatar": "https://i.pravatar.cc/150?u=sitepointdotcom",
+        "content": "Before frameworks, generators, and 'one-click' tools, a guestbook was how many developers really learned web development. This classic ASP.NET exercise is a good reminder of how server-side logic works.",
+        "date": "Dec 15, 2025",
+        "url": "https://twitter.com/sitepointdotcom/status/2000524441772548569",
+        "stats": {
+          "replies": 78,
+          "retweets": 234,
+          "likes": 890
+        }
+      },
+      {
+        "id": 10,
+        "platform": "twitter",
+        "topic": "web development",
+        "author_name": "Smashing Magazine",
+        "author_handle": "@smashingmag",
+        "author_avatar": "https://i.pravatar.cc/150?u=smashingmag",
+        "content": "Our Person of the Week is a front-end developer who switched from building websites to creating tools that make web development more effective. Drumroll, please, for Kilian Valkhof!",
+        "date": "Dec 15, 2025",
+        "url": "https://twitter.com/smashingmag/status/2000505871391211576",
+        "stats": {
+          "replies": 45,
+          "retweets": 189,
+          "likes": 756
+        }
+      },
+      {
+        "id": 11,
+        "platform": "twitter",
+        "topic": "web development",
+        "author_name": "Quicktechtv",
+        "author_handle": "@quicktechtvblog",
+        "author_avatar": "https://i.pravatar.cc/150?u=quicktechtvblog",
+        "content": "Slow sites lose users & rankings! My guide to optimizing web performance: images, CSS/JS minification, CDNs, caching & more. Cut load times from 5s to 1.5s & boosted bookings 20%!",
+        "date": "Dec 15, 2025",
+        "url": "https://twitter.com/quicktechtvblog/status/2000547587099951448",
+        "stats": {
+          "replies": 34,
+          "retweets": 145,
+          "likes": 567
+        }
+      },
+      {
+        "id": 12,
+        "platform": "twitter",
+        "topic": "web development",
+        "author_name": "Dynamic Methods",
+        "author_handle": "@1DynamicMethods",
+        "author_avatar": "https://i.pravatar.cc/150?u=1DynamicMethods",
+        "content": "Is Web Development a Good Career in 2026? High demand, evolving skills & exciting future — yes!",
+        "date": "Dec 15, 2025",
+        "url": "https://twitter.com/1DynamicMethods/status/2000544837599408361",
+        "stats": {
+          "replies": 56,
+          "retweets": 234,
+          "likes": 890
+        }
+      },
+      {
+        "id": 13,
+        "platform": "twitter",
+        "topic": "web development",
+        "author_name": "jQueryScript",
+        "author_handle": "@jqueryscript",
+        "author_avatar": "https://i.pravatar.cc/150?u=jqueryscript",
+        "content": "The latest issue of Web Dev Weekly is live! With the year ending, we decided to audit and update our massive 'Top 10' JavaScript lists. We've verified that these libraries are maintained and ready for your 2026 projects.",
+        "date": "Dec 15, 2025",
+        "url": "https://twitter.com/jqueryscript/status/2000543864734793768",
+        "stats": {
+          "replies": 23,
+          "retweets": 89,
+          "likes": 345
+        }
+      },
+      {
+        "id": 14,
+        "platform": "twitter",
+        "topic": "web development",
+        "author_name": "Cletus Kingdom",
+        "author_handle": "@cletuskingdom",
+        "author_avatar": "https://i.pravatar.cc/150?u=cletuskingdom",
+        "content": "I don't just build websites. I build systems. 6+ years in web development, mostly backend—Laravel, Node.js, and Next.js. APIs, payments, wallets, automation, and platforms that are meant to scale.",
+        "date": "Dec 15, 2025",
+        "url": "https://twitter.com/cletuskingdom/status/2000528768147054808",
+        "stats": {
+          "replies": 67,
+          "retweets": 178,
+          "likes": 623
+        }
+      },
+      {
+        "id": 15,
+        "platform": "twitter",
+        "topic": "frontend",
+        "author_name": "Meet Sethu",
+        "author_handle": "@meet_sethu",
+        "author_avatar": "https://i.pravatar.cc/150?u=meet_sethu",
+        "content": "Frontend-only jobs are dying. AI builds landing pages in 10 minutes. Figma-to-code? Automated. Responsive design? One prompt. If you're ONLY doing frontend, you're replaceable. Go full-stack. Learn backend. Add AI to your skillset. That's survival.",
+        "date": "Dec 15, 2025",
+        "url": "https://twitter.com/meet_sethu/status/2000539766568407213",
+        "stats": {
+          "replies": 234,
+          "retweets": 567,
+          "likes": 2100
+        }
+      },
+      {
+        "id": 16,
+        "platform": "twitter",
+        "topic": "frontend",
+        "author_name": "Wasim",
+        "author_handle": "@WasimShips",
+        "author_avatar": "https://i.pravatar.cc/150?u=WasimShips",
+        "content": "What used to take days now takes minutes. I rebuilt a full landing page in just 3 shots using Bolt, and the output was shockingly accurate. AI-powered frontend workflows are changing the game.",
+        "date": "Dec 15, 2025",
+        "url": "https://twitter.com/WasimShips/status/2000536321778131217",
+        "stats": {
+          "replies": 89,
+          "retweets": 312,
+          "likes": 1200
+        }
+      },
+      {
+        "id": 17,
+        "platform": "twitter",
+        "topic": "frontend",
+        "author_name": "Divyansh.dev",
+        "author_handle": "@Divyansh1669506",
+        "author_avatar": "https://i.pravatar.cc/150?u=Divyansh1669506",
+        "content": "If you're starting web dev, don't build UI from scratch. 21st.dev offers free components like headers, footers, hero sections, buttons, CTAs, shaders & more. It helps beginners ship faster, focus on logic, and stay motivated.",
+        "date": "Dec 15, 2025",
+        "url": "https://twitter.com/Divyansh1669506/status/2000543880337563717",
+        "stats": {
+          "replies": 45,
+          "retweets": 156,
+          "likes": 567
+        }
+      },
+      {
+        "id": 18,
+        "platform": "twitter",
+        "topic": "frontend",
+        "author_name": "Mohit",
+        "author_handle": "@arkaldev",
+        "author_avatar": "https://i.pravatar.cc/150?u=arkaldev",
+        "content": "Frontend was never about just creating landing pages. Frontend engineers will shift to designing, and that is something which AI still struggles with.",
+        "date": "Dec 15, 2025",
+        "url": "https://twitter.com/arkaldev/status/2000534147190931834",
+        "stats": {
+          "replies": 123,
+          "retweets": 345,
+          "likes": 1456
+        }
+      },
+      {
+        "id": 19,
+        "platform": "twitter",
+        "topic": "frontend",
+        "author_name": "Malay Patel",
+        "author_handle": "@pmalay694",
+        "author_avatar": "https://i.pravatar.cc/150?u=pmalay694",
+        "content": "Just published my first blog in my portfolio regarding Next.js page transition for both entry and exit animations using GSAP. Would love to hear your thoughts!",
+        "date": "Dec 15, 2025",
+        "url": "https://twitter.com/pmalay694/status/2000536326299631987",
+        "stats": {
+          "replies": 34,
+          "retweets": 89,
+          "likes": 345
+        }
+      },
+      {
+        "id": 20,
+        "platform": "twitter",
+        "topic": "backend",
+        "author_name": "LaraconIN",
+        "author_handle": "@LaraconIN",
+        "author_avatar": "https://i.pravatar.cc/150?u=LaraconIN",
+        "content": "Laravel is not 'just another PHP framework.' In 2026, it's one of the most productive, scalable, and future-ready backend frameworks out there. 10 strong reasons why developers & companies continue to choose Laravel.",
+        "date": "Dec 15, 2025",
+        "url": "https://twitter.com/LaraconIN/status/2000538827333738644",
+        "stats": {
+          "replies": 156,
+          "retweets": 456,
+          "likes": 1890
+        }
+      },
+      {
+        "id": 21,
+        "platform": "twitter",
+        "topic": "backend",
+        "author_name": "Prajjawal Mishra",
+        "author_handle": "@Prajjawal2005",
+        "author_avatar": "https://i.pravatar.cc/150?u=Prajjawal2005",
+        "content": "If you verify payments in the frontend, you aren't running a SaaS. You're running a donation box. Now, if the backend can't cryptographically verify the signature, the transaction doesn't exist. Math > Trust.",
+        "date": "Dec 15, 2025",
+        "url": "https://twitter.com/Prajjawal2005/status/2000548804538536204",
+        "stats": {
+          "replies": 89,
+          "retweets": 234,
+          "likes": 890
+        }
+      },
+      {
+        "id": 22,
+        "platform": "twitter",
+        "topic": "backend",
+        "author_name": "GoLang Trends",
+        "author_handle": "@GolangTrends",
+        "author_avatar": "https://i.pravatar.cc/150?u=GolangTrends",
+        "content": "1M+ Req/s Heavy-Read API in Go. Production Lessons Learned. #golang #backend #redis #k8s",
+        "date": "Dec 15, 2025",
+        "url": "https://twitter.com/GolangTrends/status/2000542858034438198",
+        "stats": {
+          "replies": 67,
+          "retweets": 189,
+          "likes": 756
+        }
+      },
+      {
+        "id": 23,
+        "platform": "twitter",
+        "topic": "backend",
+        "author_name": "Simplita.ai",
+        "author_handle": "@Simplita",
+        "author_avatar": "https://i.pravatar.cc/150?u=Simplita",
+        "content": "We built Simplita.ai — a visual agentic AI full-stack builder that helps teams turn workflows into real apps. We're solving the pain of stitching workflows across multiple tools by bringing UI, backend, agents, and exportable code into one visual space.",
+        "date": "Dec 15, 2025",
+        "url": "https://twitter.com/Simplita/status/2000540568586502647",
+        "stats": {
+          "replies": 45,
+          "retweets": 134,
+          "likes": 567
+        }
+      },
+      {
+        "id": 24,
+        "platform": "twitter",
+        "topic": "backend",
+        "author_name": "Singh Neeraj",
+        "author_handle": "@_NeerajSinghh",
+        "author_avatar": "https://i.pravatar.cc/150?u=NeerajSinghh",
+        "content": "Next Big One: I've worked with basic backend concepts and APIs. Starting The Complete Node.js Course – Code with Mosh to strengthen fundamentals and learn production-level backend practices.",
+        "date": "Dec 15, 2025",
+        "url": "https://twitter.com/_NeerajSinghh/status/2000543955239518711",
+        "stats": {
+          "replies": 23,
+          "retweets": 67,
+          "likes": 234
+        }
+      },
+      {
+        "id": 25,
+        "platform": "twitter",
+        "topic": "javascript",
+        "author_name": "Hamza khan",
+        "author_handle": "@devHamza03",
+        "author_avatar": "https://i.pravatar.cc/150?u=devHamza03",
+        "content": "Built my first Weather App using JavaScript and Fetch API. Async and Await, Error handling, Real time weather data, Clean UI. Learning by building!",
+        "date": "Dec 15, 2025",
+        "url": "https://twitter.com/devHamza03/status/2000522746158039380",
+        "stats": {
+          "replies": 34,
+          "retweets": 89,
+          "likes": 345
+        }
+      },
+      {
+        "id": 26,
+        "platform": "twitter",
+        "topic": "javascript",
+        "author_name": "Ghislain",
+        "author_handle": "@redicreate",
+        "author_avatar": "https://i.pravatar.cc/150?u=redicreate",
+        "content": "First look at my first 3D Lamp Configurator! Built with JavaScript + GSAP + Three.js. 3D in the web is so fun. Excited to work on improving it.",
+        "date": "Dec 15, 2025",
+        "url": "https://twitter.com/redicreate/status/2000547200024420777",
+        "stats": {
+          "replies": 56,
+          "retweets": 178,
+          "likes": 678
+        }
+      },
+      {
+        "id": 27,
+        "platform": "twitter",
+        "topic": "javascript",
+        "author_name": "CryptoNewsZ",
+        "author_handle": "@cryptonewsz_",
+        "author_avatar": "https://i.pravatar.cc/150?u=cryptonewsz_",
+        "content": "Major JavaScript Library Breach Puts Crypto Websites on High Alert. Security vulnerabilities discovered in popular npm packages.",
+        "date": "Dec 15, 2025",
+        "url": "https://twitter.com/cryptonewsz_/status/2000522467660775844",
+        "stats": {
+          "replies": 123,
+          "retweets": 456,
+          "likes": 1890
+        }
+      },
+      {
+        "id": 28,
+        "platform": "twitter",
+        "topic": "javascript",
+        "author_name": "Zsolt Tövis",
+        "author_handle": "@toviszsolt",
+        "author_avatar": "https://i.pravatar.cc/150?u=toviszsolt",
+        "content": "What is React.js? A powerful JavaScript library for building fast, interactive user interfaces — used by Facebook, Netflix & Airbnb to create scalable, dynamic web apps efficiently!",
+        "date": "Dec 15, 2025",
+        "url": "https://twitter.com/toviszsolt/status/2000536316799242539",
+        "stats": {
+          "replies": 45,
+          "retweets": 156,
+          "likes": 567
+        }
+      },
+      {
+        "id": 29,
+        "platform": "twitter",
+        "topic": "javascript",
+        "author_name": "Navneet Rajput",
+        "author_handle": "@navneet_code",
+        "author_avatar": "https://i.pravatar.cc/150?u=navneet_code",
+        "content": "Javascript: Difference between map and WeakMap. If map has keys as an object and we do obj=null but map still contains that obj as a key. But in weakMap it will erase obj as a key as soon as it's assigned as null.",
+        "date": "Dec 15, 2025",
+        "url": "https://twitter.com/navneet_code/status/2000548340149461341",
+        "stats": {
+          "replies": 34,
+          "retweets": 89,
+          "likes": 345
+        }
+      },
+      {
+        "id": 30,
+        "platform": "twitter",
+        "topic": "javascript",
+        "author_name": "Tushar Varshney",
+        "author_handle": "@Tushar_Jsx",
+        "author_avatar": "https://i.pravatar.cc/150?u=Tushar_Jsx",
+        "content": "JavaScript: Trust me. TypeScript: Prove it.",
+        "date": "Dec 15, 2025",
+        "url": "https://twitter.com/Tushar_Jsx/status/2000526260934517198",
+        "stats": {
+          "replies": 178,
+          "retweets": 567,
+          "likes": 2345
+        }
+      },
+      {
+        "id": 31,
+        "platform": "reddit",
+        "topic": "literasi digital",
+        "subreddit": "r/indonesia",
+        "subreddit_members": "850K members",
+        "subreddit_icon": "https://i.pravatar.cc/150?u=rindonesia",
+        "title": "Pentingnya literasi digital untuk generasi muda Indonesia",
+        "image": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=500&q=60",
+        "comment_count": "234 comments",
+        "url": "https://reddit.com/r/indonesia/comments/literasi"
+      },
+      {
+        "id": 32,
+        "platform": "reddit",
+        "topic": "web development",
+        "subreddit": "r/webdev",
+        "subreddit_members": "2.1M members",
+        "subreddit_icon": "https://i.pravatar.cc/150?u=rwebdev",
+        "title": "The state of web development in 2026 - what skills matter most?",
+        "image": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=500&q=60",
+        "comment_count": "567 comments",
+        "url": "https://reddit.com/r/webdev/comments/state2026"
+      },
+      {
+        "id": 33,
+        "platform": "reddit",
+        "topic": "frontend",
+        "subreddit": "r/Frontend",
+        "subreddit_members": "456K members",
+        "subreddit_icon": "https://i.pravatar.cc/150?u=rfrontend",
+        "title": "Is frontend development dying with AI tools like Bolt and v0?",
+        "image": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=500&q=60",
+        "comment_count": "890 comments",
+        "url": "https://reddit.com/r/Frontend/comments/aidying"
+      },
+      {
+        "id": 34,
+        "platform": "reddit",
+        "topic": "backend",
+        "subreddit": "r/backend",
+        "subreddit_members": "234K members",
+        "subreddit_icon": "https://i.pravatar.cc/150?u=rbackend",
+        "title": "Laravel vs Node.js in 2026 - which one to choose for new projects?",
+        "image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=500&q=60",
+        "comment_count": "456 comments",
+        "url": "https://reddit.com/r/backend/comments/laravelvsnode"
+      },
+      {
+        "id": 35,
+        "platform": "reddit",
+        "topic": "javascript",
+        "subreddit": "r/javascript",
+        "subreddit_members": "2.5M members",
+        "subreddit_icon": "https://i.pravatar.cc/150?u=rjavascript",
+        "title": "Major npm security breach - what you need to know",
+        "image": "https://images.unsplash.com/photo-1627398242454-45a1465c2479?auto=format&fit=crop&w=500&q=60",
+        "comment_count": "1.2k comments",
+        "url": "https://reddit.com/r/javascript/comments/npmsecurity"
+      }
+    ]
+  },
+  "external_posts": [
+    {
+      "id": 1,
+      "post_id": 1,
+      "platform": "twitter",
+      "user": {
+        "name": "James Clear",
+        "handle": "@JamesClear",
+        "avatar": "https://i.pravatar.cc/150?u=james"
+      },
+      "content": "You do not rise to the level of your goals. You fall to the level of your systems. Focus on the 2-minute version of your habit first.",
+      "date": "8:00 AM Oct 30, 2023",
+      "stats": {
+        "replies": 450,
+        "retweets": 12000,
+        "likes": 56000
+      }
+    },
+    {
+      "id": 2,
+      "post_id": 2,
+      "platform": "twitter",
+      "user": {
+        "name": "Uncle Bob Martin",
+        "handle": "@unclebobmartin",
+        "avatar": "https://i.pravatar.cc/150?u=bob"
+      },
+      "content": "The only way to go fast, is to go well. Messy code slows you down. Always.",
+      "date": "10:15 AM Oct 29, 2023",
+      "subreddit": {
+        "name": "r/ProgrammerHumor",
+        "members": "3M members",
+        "avatar": "https://i.pravatar.cc/150?u=ph"
+      },
+      "title": "When you git blame the legacy code and it turns out it was you 3 years ago.",
+      "image": "https://images.unsplash.com/photo-1580894894513-541e068a3e2b?auto=format&fit=crop&w=500&q=60",
+      "stats": {
+        "comments": "1.2k"
+      }
+    },
+    {
+      "id": 21,
+      "post_id": 21,
+      "platform": "twitter",
+      "user": {
+        "name": "Evan You",
+        "handle": "@youyuxi",
+        "avatar": "https://i.pravatar.cc/150?u=evan"
+      },
+      "content": "The Composition API isn't just a new syntax; it's a way to organize logic by feature, not by options.",
+      "date": "9:00 AM Oct 20, 2023",
+      "stats": {
+        "replies": 150,
+        "retweets": 800,
+        "likes": 4000
+      }
+    },
+    {
+      "id": 22,
+      "post_id": 22,
+      "platform": "reddit",
+      "subreddit": {
+        "name": "r/fantasywriters",
+        "members": "500k members",
+        "avatar": "https://i.pravatar.cc/150?u=write"
+      },
+      "title": "How Tolkien created depth: It's not just the map, it's the linguistic history behind the names.",
+      "image": "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=500&q=60",
+      "stats": {
+        "comments": "230"
+      }
+    },
+    {
+      "id": 23,
+      "post_id": 23,
+      "platform": "twitter",
+      "user": {
+        "name": "SQL Tips",
+        "handle": "@sqltips",
+        "avatar": "https://i.pravatar.cc/150?u=sql"
+      },
+      "content": "If you are storing comma-separated values in a single column, you are hurting your database's feelings. Normalize your data.",
+      "date": "1:00 PM Oct 18, 2023",
+      "stats": {
+        "replies": 120,
+        "retweets": 500,
+        "likes": 1800
+      }
+    },
+    {
+      "id": 24,
+      "post_id": 24,
+      "platform": "twitter",
+      "user": {
+        "name": "A11y Project",
+        "handle": "@A11YProject",
+        "avatar": "https://i.pravatar.cc/150?u=a11y"
+      },
+      "content": "Semantic HTML isn't 'extra'. It is the baseline. <h1> is for headings, not just big text.",
+      "date": "10:00 AM Oct 17, 2023",
+      "stats": {
+        "replies": 45,
+        "retweets": 300,
+        "likes": 1200
+      }
+    },
+    {
+      "id": 25,
+      "post_id": 25,
+      "platform": "reddit",
+      "subreddit": {
+        "name": "r/startups",
+        "members": "1.1M members",
+        "avatar": "https://i.pravatar.cc/150?u=start"
+      },
+      "title": "We spent 6 months building a feature nobody wanted. Learn from our mistake: Pivot early.",
+      "image": null,
+      "stats": {
+        "comments": "450"
+      }
+    },
+    {
+      "id": 26,
+      "post_id": 26,
+      "platform": "twitter",
+      "user": {
+        "name": "Dev Burnout",
+        "handle": "@dev_struggles",
+        "avatar": "https://i.pravatar.cc/150?u=dev"
+      },
+      "content": "Friendly reminder: You are a human being, not a code generator. Take a break. Touch grass.",
+      "date": "5:00 PM Oct 15, 2023",
+      "stats": {
+        "replies": 200,
+        "retweets": 1500,
+        "likes": 6000
+      }
+    },
+    {
+      "id": 27,
+      "post_id": 27,
+      "platform": "twitter",
+      "user": {
+        "name": "Twitch Streamer",
+        "handle": "@GamerLife",
+        "avatar": "https://i.pravatar.cc/150?u=gamer"
+      },
+      "content": "Balance is key. Grinding rank is fun, but sleeping 8 hours is the real meta.",
+      "date": "11:00 PM Oct 14, 2023",
+      "stats": {
+        "replies": 150,
+        "retweets": 400,
+        "likes": 3000
+      }
+    },
+    {
+      "id": 28,
+      "post_id": 28,
+      "platform": "youtube",
+      "user": {
+        "name": "3Blue1Brown",
+        "handle": "@3blue1brown",
+        "avatar": "https://i.pravatar.cc/150?u=3b1b"
+      },
+      "content": "Neural Networks: The core math is simpler than you think (Chain Rule & Derivatives)",
+      "image": "https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=500&q=60",
+      "stats": {
+        "views": "4.2M"
+      }
+    },
+    {
+      "id": 29,
+      "post_id": 29,
+      "platform": "twitter",
+      "user": {
+        "name": "Figma Tips",
+        "handle": "@figmadesign",
+        "avatar": "https://i.pravatar.cc/150?u=figma"
+      },
+      "content": "DRY (Don't Repeat Yourself) applies to design too. If you are copying and pasting the same button 50 times, make it a Component.",
+      "date": "2:00 PM Oct 12, 2023",
+      "stats": {
+        "replies": 60,
+        "retweets": 500,
+        "likes": 2500
+      }
+    },
+    {
+      "id": 30,
+      "post_id": 30,
+      "platform": "twitter",
+      "user": {
+        "name": "Computer History",
+        "handle": "@ComputerHistory",
+        "avatar": "https://i.pravatar.cc/150?u=history"
+      },
+      "content": "On this day in 1968, Donald Knuth released the first volume of 'The Art of Computer Programming'. A monumental achievement.",
+      "date": "8:00 AM Oct 11, 2023",
+      "stats": {
+        "replies": 100,
+        "retweets": 800,
+        "likes": 3500
+      }
+    },
+    {
+      "id": 31,
+      "post_id": 31,
+      "platform": "reddit",
+      "subreddit": {
+        "name": "r/webdev",
+        "members": "1.5M members",
+        "avatar": "https://i.pravatar.cc/150?u=web"
+      },
+      "title": "I finally understand CSS Grid and I feel like a god. Goodbye Bootstrap!",
+      "image": "https://images.unsplash.com/photo-1507721999472-8ed4421c4af2?auto=format&fit=crop&w=500&q=60",
+      "stats": {
+        "comments": "670"
+      }
+    },
+    {
+      "id": 32,
+      "post_id": 32,
+      "platform": "twitter",
+      "user": {
+        "name": "Cozy Fantasy Art",
+        "handle": "@cozyfantasy",
+        "avatar": "https://i.pravatar.cc/150?u=art"
+      },
+      "content": "Sometimes you just want to sit in a hobbit hole, drink tea, and eat seed cake. No dragons, please.",
+      "date": "4:00 PM Oct 09, 2023",
+      "stats": {
+        "replies": 120,
+        "retweets": 2000,
+        "likes": 12000
+      }
+    },
+    {
+      "id": 33,
+      "post_id": 33,
+      "platform": "twitter",
+      "user": {
+        "name": "Code Wisdom",
+        "handle": "@CodeWisdom",
+        "avatar": "https://i.pravatar.cc/150?u=wisdom"
+      },
+      "content": "The Factory Pattern: Because sometimes you don't know what object you need until runtime.",
+      "date": "10:00 AM Oct 08, 2023",
+      "stats": {
+        "replies": 45,
+        "retweets": 300,
+        "likes": 1500
+      }
+    },
+    {
+      "id": 34,
+      "post_id": 34,
+      "platform": "youtube",
+      "user": {
+        "name": "NNgroup",
+        "handle": "@nngroup",
+        "avatar": "https://i.pravatar.cc/150?u=nng"
+      },
+      "content": "10 Usability Heuristics for User Interface Design: Error Prevention and Recovery",
+      "image": "https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&w=500&q=60",
+      "stats": {
+        "views": "200k"
+      }
+    },
+    {
+      "id": 35,
+      "post_id": 35,
+      "platform": "twitter",
+      "user": {
+        "name": "Paul Graham",
+        "handle": "@paulg",
+        "avatar": "https://i.pravatar.cc/150?u=paul"
+      },
+      "content": "Vanity metrics make you feel good. Actionable metrics make you make decisions. Know the difference.",
+      "date": "9:00 AM Oct 06, 2023",
+      "stats": {
+        "replies": 120,
+        "retweets": 1500,
+        "likes": 6000
+      }
+    },
+    {
+      "id": 36,
+      "post_id": 36,
+      "platform": "reddit",
+      "subreddit": {
+        "name": "r/GetDisciplined",
+        "members": "1.3M members",
+        "avatar": "https://i.pravatar.cc/150?u=discipline"
+      },
+      "title": "It's not about motivation, it's about systems. My 30-day progress using the Atomic Habits framework.",
+      "image": "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=500&q=60",
+      "stats": {
+        "comments": "560"
+      }
+    },
+    {
+      "id": 37,
+      "post_id": 37,
+      "platform": "twitter",
+      "user": {
+        "name": "Tech Crunch",
+        "handle": "@TechCrunch",
+        "avatar": "https://i.pravatar.cc/150?u=tc"
+      },
+      "content": "Study reveals significant racial bias in facial recognition algorithms used by law enforcement.",
+      "date": "1:00 PM Oct 04, 2023",
+      "stats": {
+        "replies": 800,
+        "retweets": 4000,
+        "likes": 10000
+      }
+    },
+    {
+      "id": 38,
+      "post_id": 38,
+      "platform": "twitter",
+      "user": {
+        "name": "Indie Hacker",
+        "handle": "@indiehacker",
+        "avatar": "https://i.pravatar.cc/150?u=indie"
+      },
+      "content": "Unpopular opinion: I made $50k last year building boring CRUD apps with PHP and jQuery. You don't always need the latest stack.",
+      "date": "11:00 AM Oct 03, 2023",
+      "stats": {
+        "replies": 300,
+        "retweets": 1000,
+        "likes": 5000
+      }
+    },
+    {
+      "id": 39,
+      "post_id": 39,
+      "platform": "youtube",
+      "user": {
+        "name": "Vox",
+        "handle": "@Vox",
+        "avatar": "https://i.pravatar.cc/150?u=vox"
+      },
+      "content": "It's not you. Bad doors are everywhere. (The Norman Door explained)",
+      "image": "https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?auto=format&fit=crop&w=500&q=60",
+      "stats": {
+        "views": "5.6M"
+      }
+    },
+    {
+      "id": 40,
+      "post_id": 40,
+      "platform": "reddit",
+      "subreddit": {
+        "name": "r/ProjectManagement",
+        "members": "100k members",
+        "avatar": "https://i.pravatar.cc/150?u=pm"
+      },
+      "title": "Brooks' Law in action: Management added 3 devs to our late project, and now we are even later.",
+      "image": null,
+      "stats": {
+        "comments": "150"
+      }
+    },
+    {
+      "id": 41,
+      "post_id": 41,
+      "platform": "twitter",
+      "user": {
+        "name": "Vue.js News",
+        "handle": "@VueNews",
+        "avatar": "https://i.pravatar.cc/150?u=vuenews"
+      },
+      "content": "Goodbye Vuex, Hello Pinia! Here is a cheat sheet for migrating your state management.",
+      "date": "10:00 AM Sep 30, 2023",
+      "stats": {
+        "replies": 60,
+        "retweets": 500,
+        "likes": 2000
+      }
+    },
+    {
+      "id": 42,
+      "post_id": 42,
+      "platform": "twitter",
+      "user": {
+        "name": "LOTR Facts",
+        "handle": "@LOTRfacts",
+        "avatar": "https://i.pravatar.cc/150?u=gandalf"
+      },
+      "content": "The 'Riddles in the Dark' chapter was significantly rewritten by Tolkien after LOTR was published to align the Ring's behavior.",
+      "date": "3:00 PM Sep 29, 2023",
+      "stats": {
+        "replies": 80,
+        "retweets": 1200,
+        "likes": 6000
+      }
+    },
+    {
+      "id": 43,
+      "post_id": 43,
+      "platform": "reddit",
+      "subreddit": {
+        "name": "r/badcode",
+        "members": "200k members",
+        "avatar": "https://i.pravatar.cc/150?u=bad"
+      },
+      "title": "Found this gem in production today. Comments explaining the obvious.",
+      "image": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=500&q=60",
+      "stats": {
+        "comments": "450"
+      }
+    },
+    {
+      "id": 44,
+      "post_id": 44,
+      "platform": "twitter",
+      "user": {
+        "name": "Color Palette",
+        "handle": "@colors",
+        "avatar": "https://i.pravatar.cc/150?u=color"
+      },
+      "content": "Blue instills trust. Red creates urgency. Green implies growth. Know your color psychology before opening Figma.",
+      "date": "1:00 PM Sep 27, 2023",
+      "stats": {
+        "replies": 50,
+        "retweets": 800,
+        "likes": 3200
+      }
+    },
+    {
+      "id": 45,
+      "post_id": 45,
+      "platform": "twitter",
+      "user": {
+        "name": "SaaS Metrics",
+        "handle": "@saasmetrics",
+        "avatar": "https://i.pravatar.cc/150?u=saas"
+      },
+      "content": "Acquisition is vanity. Retention is sanity. If they don't stick around, you don't have a business.",
+      "date": "9:00 AM Sep 26, 2023",
+      "stats": {
+        "replies": 90,
+        "retweets": 600,
+        "likes": 2500
+      }
+    },
+    {
+      "id": 46,
+      "post_id": 46,
+      "platform": "youtube",
+      "user": {
+        "name": "TED",
+        "handle": "@TEDTalks",
+        "avatar": "https://i.pravatar.cc/150?u=ted"
+      },
+      "content": "The power of believing that you can improve | Carol Dweck",
+      "image": "https://images.unsplash.com/photo-1475721027760-74c99ec8d40d?auto=format&fit=crop&w=500&q=60",
+      "stats": {
+        "views": "14M"
+      }
+    },
+    {
+      "id": 47,
+      "post_id": 47,
+      "platform": "reddit",
+      "subreddit": {
+        "name": "r/LeagueOfLegends",
+        "members": "6M members",
+        "avatar": "https://i.pravatar.cc/150?u=lol"
+      },
+      "title": "Pro player discusses the mental toll of toxicity in solo queue and suggests system changes.",
+      "image": null,
+      "stats": {
+        "comments": "3.5k"
+      }
+    },
+    {
+      "id": 48,
+      "post_id": 48,
+      "platform": "twitter",
+      "user": {
+        "name": "Math Visuals",
+        "handle": "@mathvis",
+        "avatar": "https://i.pravatar.cc/150?u=math"
+      },
+      "content": "Backpropagation is just the Chain Rule applied over and over again. Here is a GIF that makes it click.",
+      "date": "2:00 PM Sep 23, 2023",
+      "stats": {
+        "replies": 100,
+        "retweets": 2500,
+        "likes": 9000
+      }
+    },
+    {
+      "id": 49,
+      "post_id": 49,
+      "platform": "twitter",
+      "user": {
+        "name": "JS Daily",
+        "handle": "@JavaScriptDaily",
+        "avatar": "https://i.pravatar.cc/150?u=js"
+      },
+      "content": "Why does [] + [] = '' but {} + [] = 0? JavaScript type coercion explained.",
+      "date": "11:00 AM Sep 22, 2023",
+      "stats": {
+        "replies": 200,
+        "retweets": 1200,
+        "likes": 5000
+      }
+    },
+    {
+      "id": 50,
+      "post_id": 50,
+      "platform": "twitter",
+      "user": {
+        "name": "Martin Fowler",
+        "handle": "@martinfowler",
+        "avatar": "https://i.pravatar.cc/150?u=martin"
+      },
+      "content": "Any fool can write code that a computer can understand. Good programmers write code that humans can understand.",
+      "date": "8:00 AM Sep 21, 2023",
+      "stats": {
+        "replies": 150,
+        "retweets": 5000,
+        "likes": 18000
+      }
+    }
+  ]
 }

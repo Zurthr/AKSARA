@@ -1,8 +1,12 @@
 node_modules/
 mock-backend/node_modules/
+<<<<<<< HEAD
 
 # Nuxt
 .nuxt
 .output
 .nitro
 .cache
+=======
+.nuxt/
+>>>>>>> clickEvent

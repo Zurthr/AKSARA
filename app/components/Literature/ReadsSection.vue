@@ -31,6 +31,7 @@
             :key="book.id"
             :to="`/literature/${book.id}`"
             class="book-card book-link"
+            @click="trackBook(book)"
           >
             <div class="book-cover">
               <img :src="book.image" :alt="`Book ${book.id}`" />
@@ -92,8 +93,21 @@
 
 <script setup lang="ts">
 import { useLazyBooks } from '~/composables/useLiterature';
+import { useClickTracking } from '~/composables/useClickTracking';
 
 const { books: lazyBooks, isLoading } = useLazyBooks(12);
+const { trackBookClick } = useClickTracking();
+
+// Track book click
+const trackBook = (book: typeof lazyBooks.value[0]) => {
+  trackBookClick({
+    id: book.id,
+    title: book.title,
+    tags: book.tags,
+    author: book.author,
+    rating: book.rating
+  });
+};
 
 // Map/Compute books to ensure they match the template expectations, if needed.
 // NormalizedBook has `tags: string[]`. Template expects `tag: string`.

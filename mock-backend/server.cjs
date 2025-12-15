@@ -23,7 +23,11 @@ server.post('/click_events', (req, res) => {
     // Read existing click events from persistent file
     let clickEvents = [];
     if (fs.existsSync(clickEventPath)) {
-      const data = fs.readFileSync(clickEventPath, 'utf-8');
+      let data = fs.readFileSync(clickEventPath, 'utf-8');
+      // Remove BOM if present (fixes "Unexpected token '﻿'" error)
+      if (data.charCodeAt(0) === 0xFEFF) {
+        data = data.slice(1);
+      }
       clickEvents = JSON.parse(data);
     }
 

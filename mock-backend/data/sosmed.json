@@ -1,0 +1,544 @@
+{
+    "social_mentions": [
+        {
+            "id": 1,
+            "platform": "twitter",
+            "topic": "literasi digital",
+            "author_name": "Radio Elshinta",
+            "author_handle": "@RadioElshinta",
+            "author_avatar": "https://i.pravatar.cc/150?u=RadioElshinta",
+            "content": "PP Tunas bukan sekadar aturan, tapi gerakan bersama. Dengan literasi digital, pengawasan yang tepat, dan ekosistem digital yang ramah anak, kita bisa membangun generasi yang berkarakter kuat.",
+            "date": "Dec 15, 2025",
+            "url": "https://twitter.com/RadioElshinta/status/2000536320427618590",
+            "stats": {
+                "replies": 45,
+                "retweets": 120,
+                "likes": 500
+            }
+        },
+        {
+            "id": 2,
+            "platform": "twitter",
+            "topic": "literasi digital",
+            "author_name": "Girl Up Semarang",
+            "author_handle": "@girlupsemarang",
+            "author_avatar": "https://i.pravatar.cc/150?u=girlupsemarang",
+            "content": "Jejak digital yang nyaris abadi membuat korban sulit dilupakan. Karena itu, literasi digital, etika teknologi, dan perlindungan hak korban harus jadi perhatian bersama.",
+            "date": "Dec 15, 2025",
+            "url": "https://twitter.com/girlupsemarang/status/2000535997533286484",
+            "stats": {
+                "replies": 28,
+                "retweets": 85,
+                "likes": 320
+            }
+        },
+        {
+            "id": 3,
+            "platform": "twitter",
+            "topic": "literasi digital",
+            "author_name": "IDN Times Jateng",
+            "author_handle": "@IDNTimesJateng",
+            "author_avatar": "https://i.pravatar.cc/150?u=IDNTimesJateng",
+            "content": "XLSMART Ajari 175 Santri di Demak Gunakan AI dan Literasi Digital",
+            "date": "Dec 15, 2025",
+            "url": "https://twitter.com/IDNTimesJateng/status/2000509952994250893",
+            "stats": {
+                "replies": 15,
+                "retweets": 45,
+                "likes": 180
+            }
+        },
+        {
+            "id": 4,
+            "platform": "twitter",
+            "topic": "literasi digital",
+            "author_name": "Indosat Ooredoo Hutchison",
+            "author_handle": "@indosat",
+            "author_avatar": "https://i.pravatar.cc/150?u=indosat",
+            "content": "Indosat dan Nokia kembali melangkah maju untuk menghadirkan literasi AI yang lebih inklusif bagi generasi muda Indonesia. Lewat GenSi, kami ingin membangun rasa percaya diri digital yang nyata.",
+            "date": "Dec 15, 2025",
+            "url": "https://twitter.com/indosat/status/2000503656454701546",
+            "stats": {
+                "replies": 67,
+                "retweets": 234,
+                "likes": 890
+            }
+        },
+        {
+            "id": 5,
+            "platform": "twitter",
+            "topic": "literasi digital",
+            "author_name": "DISKOMINFO JATIM",
+            "author_handle": "@KominfoJatim",
+            "author_avatar": "https://i.pravatar.cc/150?u=KominfoJatim",
+            "content": "Program CERDIG (Cerdas Digital) mengangkat tema Cyber Sexual Harassment: Lawan Pelecehan Seksual, Ciptakan Internet yang Aman. Kegiatan ini diikuti ratusan siswa SMP.",
+            "date": "Dec 15, 2025",
+            "url": "https://twitter.com/KominfoJatim/status/2000449267077714298",
+            "stats": {
+                "replies": 32,
+                "retweets": 156,
+                "likes": 445
+            }
+        },
+        {
+            "id": 6,
+            "platform": "twitter",
+            "topic": "literasi digital",
+            "author_name": "Harian Kompas",
+            "author_handle": "@hariankompas",
+            "author_avatar": "https://i.pravatar.cc/150?u=hariankompas",
+            "content": "Baca Opini: Mengatasi Hoaks Bencana - ditulis oleh Novi Kurnia, Dosen dan Aktivis Literasi Digital",
+            "date": "Dec 13, 2025",
+            "url": "https://twitter.com/hariankompas/status/1999769944071016477",
+            "stats": {
+                "replies": 89,
+                "retweets": 312,
+                "likes": 1200
+            }
+        },
+        {
+            "id": 7,
+            "platform": "twitter",
+            "topic": "literasi digital",
+            "author_name": "NETRALNEWS",
+            "author_handle": "@netralnews",
+            "author_avatar": "https://i.pravatar.cc/150?u=netralnews",
+            "content": "Kenapa Hoaks Mudah Menyebar di WhatsApp? Ini Tantangan Literasi Digital Masyarakat",
+            "date": "Dec 13, 2025",
+            "url": "https://twitter.com/netralnews/status/1999734799553167776",
+            "stats": {
+                "replies": 54,
+                "retweets": 189,
+                "likes": 567
+            }
+        },
+        {
+            "id": 8,
+            "platform": "twitter",
+            "topic": "literasi digital",
+            "author_name": "Grok",
+            "author_handle": "@grok",
+            "author_avatar": "https://i.pravatar.cc/150?u=grok",
+            "content": "Berdasarkan tren karir 2026 di Indonesia, coba pertimbangkan jadi spesialis AI, analis data, ahli keamanan siber, atau pakar energi hijau. Skill kunci: literasi digital dan pemahaman data.",
+            "date": "Dec 14, 2025",
+            "url": "https://twitter.com/grok/status/2000046556339229114",
+            "stats": {
+                "replies": 234,
+                "retweets": 567,
+                "likes": 2100
+            }
+        },
+        {
+            "id": 9,
+            "platform": "twitter",
+            "topic": "web development",
+            "author_name": "SitePoint",
+            "author_handle": "@sitepointdotcom",
+            "author_avatar": "https://i.pravatar.cc/150?u=sitepointdotcom",
+            "content": "Before frameworks, generators, and 'one-click' tools, a guestbook was how many developers really learned web development. This classic ASP.NET exercise is a good reminder of how server-side logic works.",
+            "date": "Dec 15, 2025",
+            "url": "https://twitter.com/sitepointdotcom/status/2000524441772548569",
+            "stats": {
+                "replies": 78,
+                "retweets": 234,
+                "likes": 890
+            }
+        },
+        {
+            "id": 10,
+            "platform": "twitter",
+            "topic": "web development",
+            "author_name": "Smashing Magazine",
+            "author_handle": "@smashingmag",
+            "author_avatar": "https://i.pravatar.cc/150?u=smashingmag",
+            "content": "Our Person of the Week is a front-end developer who switched from building websites to creating tools that make web development more effective. Drumroll, please, for Kilian Valkhof!",
+            "date": "Dec 15, 2025",
+            "url": "https://twitter.com/smashingmag/status/2000505871391211576",
+            "stats": {
+                "replies": 45,
+                "retweets": 189,
+                "likes": 756
+            }
+        },
+        {
+            "id": 11,
+            "platform": "twitter",
+            "topic": "web development",
+            "author_name": "Quicktechtv",
+            "author_handle": "@quicktechtvblog",
+            "author_avatar": "https://i.pravatar.cc/150?u=quicktechtvblog",
+            "content": "Slow sites lose users & rankings! My guide to optimizing web performance: images, CSS/JS minification, CDNs, caching & more. Cut load times from 5s to 1.5s & boosted bookings 20%!",
+            "date": "Dec 15, 2025",
+            "url": "https://twitter.com/quicktechtvblog/status/2000547587099951448",
+            "stats": {
+                "replies": 34,
+                "retweets": 145,
+                "likes": 567
+            }
+        },
+        {
+            "id": 12,
+            "platform": "twitter",
+            "topic": "web development",
+            "author_name": "Dynamic Methods",
+            "author_handle": "@1DynamicMethods",
+            "author_avatar": "https://i.pravatar.cc/150?u=1DynamicMethods",
+            "content": "Is Web Development a Good Career in 2026? High demand, evolving skills & exciting future — yes!",
+            "date": "Dec 15, 2025",
+            "url": "https://twitter.com/1DynamicMethods/status/2000544837599408361",
+            "stats": {
+                "replies": 56,
+                "retweets": 234,
+                "likes": 890
+            }
+        },
+        {
+            "id": 13,
+            "platform": "twitter",
+            "topic": "web development",
+            "author_name": "jQueryScript",
+            "author_handle": "@jqueryscript",
+            "author_avatar": "https://i.pravatar.cc/150?u=jqueryscript",
+            "content": "The latest issue of Web Dev Weekly is live! With the year ending, we decided to audit and update our massive 'Top 10' JavaScript lists. We've verified that these libraries are maintained and ready for your 2026 projects.",
+            "date": "Dec 15, 2025",
+            "url": "https://twitter.com/jqueryscript/status/2000543864734793768",
+            "stats": {
+                "replies": 23,
+                "retweets": 89,
+                "likes": 345
+            }
+        },
+        {
+            "id": 14,
+            "platform": "twitter",
+            "topic": "web development",
+            "author_name": "Cletus Kingdom",
+            "author_handle": "@cletuskingdom",
+            "author_avatar": "https://i.pravatar.cc/150?u=cletuskingdom",
+            "content": "I don't just build websites. I build systems. 6+ years in web development, mostly backend—Laravel, Node.js, and Next.js. APIs, payments, wallets, automation, and platforms that are meant to scale.",
+            "date": "Dec 15, 2025",
+            "url": "https://twitter.com/cletuskingdom/status/2000528768147054808",
+            "stats": {
+                "replies": 67,
+                "retweets": 178,
+                "likes": 623
+            }
+        },
+        {
+            "id": 15,
+            "platform": "twitter",
+            "topic": "frontend",
+            "author_name": "Meet Sethu",
+            "author_handle": "@meet_sethu",
+            "author_avatar": "https://i.pravatar.cc/150?u=meet_sethu",
+            "content": "Frontend-only jobs are dying. AI builds landing pages in 10 minutes. Figma-to-code? Automated. Responsive design? One prompt. If you're ONLY doing frontend, you're replaceable. Go full-stack. Learn backend. Add AI to your skillset. That's survival.",
+            "date": "Dec 15, 2025",
+            "url": "https://twitter.com/meet_sethu/status/2000539766568407213",
+            "stats": {
+                "replies": 234,
+                "retweets": 567,
+                "likes": 2100
+            }
+        },
+        {
+            "id": 16,
+            "platform": "twitter",
+            "topic": "frontend",
+            "author_name": "Wasim",
+            "author_handle": "@WasimShips",
+            "author_avatar": "https://i.pravatar.cc/150?u=WasimShips",
+            "content": "What used to take days now takes minutes. I rebuilt a full landing page in just 3 shots using Bolt, and the output was shockingly accurate. AI-powered frontend workflows are changing the game.",
+            "date": "Dec 15, 2025",
+            "url": "https://twitter.com/WasimShips/status/2000536321778131217",
+            "stats": {
+                "replies": 89,
+                "retweets": 312,
+                "likes": 1200
+            }
+        },
+        {
+            "id": 17,
+            "platform": "twitter",
+            "topic": "frontend",
+            "author_name": "Divyansh.dev",
+            "author_handle": "@Divyansh1669506",
+            "author_avatar": "https://i.pravatar.cc/150?u=Divyansh1669506",
+            "content": "If you're starting web dev, don't build UI from scratch. 21st.dev offers free components like headers, footers, hero sections, buttons, CTAs, shaders & more. It helps beginners ship faster, focus on logic, and stay motivated.",
+            "date": "Dec 15, 2025",
+            "url": "https://twitter.com/Divyansh1669506/status/2000543880337563717",
+            "stats": {
+                "replies": 45,
+                "retweets": 156,
+                "likes": 567
+            }
+        },
+        {
+            "id": 18,
+            "platform": "twitter",
+            "topic": "frontend",
+            "author_name": "Mohit",
+            "author_handle": "@arkaldev",
+            "author_avatar": "https://i.pravatar.cc/150?u=arkaldev",
+            "content": "Frontend was never about just creating landing pages. Frontend engineers will shift to designing, and that is something which AI still struggles with.",
+            "date": "Dec 15, 2025",
+            "url": "https://twitter.com/arkaldev/status/2000534147190931834",
+            "stats": {
+                "replies": 123,
+                "retweets": 345,
+                "likes": 1456
+            }
+        },
+        {
+            "id": 19,
+            "platform": "twitter",
+            "topic": "frontend",
+            "author_name": "Malay Patel",
+            "author_handle": "@pmalay694",
+            "author_avatar": "https://i.pravatar.cc/150?u=pmalay694",
+            "content": "Just published my first blog in my portfolio regarding Next.js page transition for both entry and exit animations using GSAP. Would love to hear your thoughts!",
+            "date": "Dec 15, 2025",
+            "url": "https://twitter.com/pmalay694/status/2000536326299631987",
+            "stats": {
+                "replies": 34,
+                "retweets": 89,
+                "likes": 345
+            }
+        },
+        {
+            "id": 20,
+            "platform": "twitter",
+            "topic": "backend",
+            "author_name": "LaraconIN",
+            "author_handle": "@LaraconIN",
+            "author_avatar": "https://i.pravatar.cc/150?u=LaraconIN",
+            "content": "Laravel is not 'just another PHP framework.' In 2026, it's one of the most productive, scalable, and future-ready backend frameworks out there. 10 strong reasons why developers & companies continue to choose Laravel.",
+            "date": "Dec 15, 2025",
+            "url": "https://twitter.com/LaraconIN/status/2000538827333738644",
+            "stats": {
+                "replies": 156,
+                "retweets": 456,
+                "likes": 1890
+            }
+        },
+        {
+            "id": 21,
+            "platform": "twitter",
+            "topic": "backend",
+            "author_name": "Prajjawal Mishra",
+            "author_handle": "@Prajjawal2005",
+            "author_avatar": "https://i.pravatar.cc/150?u=Prajjawal2005",
+            "content": "If you verify payments in the frontend, you aren't running a SaaS. You're running a donation box. Now, if the backend can't cryptographically verify the signature, the transaction doesn't exist. Math > Trust.",
+            "date": "Dec 15, 2025",
+            "url": "https://twitter.com/Prajjawal2005/status/2000548804538536204",
+            "stats": {
+                "replies": 89,
+                "retweets": 234,
+                "likes": 890
+            }
+        },
+        {
+            "id": 22,
+            "platform": "twitter",
+            "topic": "backend",
+            "author_name": "GoLang Trends",
+            "author_handle": "@GolangTrends",
+            "author_avatar": "https://i.pravatar.cc/150?u=GolangTrends",
+            "content": "1M+ Req/s Heavy-Read API in Go. Production Lessons Learned. #golang #backend #redis #k8s",
+            "date": "Dec 15, 2025",
+            "url": "https://twitter.com/GolangTrends/status/2000542858034438198",
+            "stats": {
+                "replies": 67,
+                "retweets": 189,
+                "likes": 756
+            }
+        },
+        {
+            "id": 23,
+            "platform": "twitter",
+            "topic": "backend",
+            "author_name": "Simplita.ai",
+            "author_handle": "@Simplita",
+            "author_avatar": "https://i.pravatar.cc/150?u=Simplita",
+            "content": "We built Simplita.ai — a visual agentic AI full-stack builder that helps teams turn workflows into real apps. We're solving the pain of stitching workflows across multiple tools by bringing UI, backend, agents, and exportable code into one visual space.",
+            "date": "Dec 15, 2025",
+            "url": "https://twitter.com/Simplita/status/2000540568586502647",
+            "stats": {
+                "replies": 45,
+                "retweets": 134,
+                "likes": 567
+            }
+        },
+        {
+            "id": 24,
+            "platform": "twitter",
+            "topic": "backend",
+            "author_name": "Singh Neeraj",
+            "author_handle": "@_NeerajSinghh",
+            "author_avatar": "https://i.pravatar.cc/150?u=NeerajSinghh",
+            "content": "Next Big One: I've worked with basic backend concepts and APIs. Starting The Complete Node.js Course – Code with Mosh to strengthen fundamentals and learn production-level backend practices.",
+            "date": "Dec 15, 2025",
+            "url": "https://twitter.com/_NeerajSinghh/status/2000543955239518711",
+            "stats": {
+                "replies": 23,
+                "retweets": 67,
+                "likes": 234
+            }
+        },
+        {
+            "id": 25,
+            "platform": "twitter",
+            "topic": "javascript",
+            "author_name": "Hamza khan",
+            "author_handle": "@devHamza03",
+            "author_avatar": "https://i.pravatar.cc/150?u=devHamza03",
+            "content": "Built my first Weather App using JavaScript and Fetch API. Async and Await, Error handling, Real time weather data, Clean UI. Learning by building!",
+            "date": "Dec 15, 2025",
+            "url": "https://twitter.com/devHamza03/status/2000522746158039380",
+            "stats": {
+                "replies": 34,
+                "retweets": 89,
+                "likes": 345
+            }
+        },
+        {
+            "id": 26,
+            "platform": "twitter",
+            "topic": "javascript",
+            "author_name": "Ghislain",
+            "author_handle": "@redicreate",
+            "author_avatar": "https://i.pravatar.cc/150?u=redicreate",
+            "content": "First look at my first 3D Lamp Configurator! Built with JavaScript + GSAP + Three.js. 3D in the web is so fun. Excited to work on improving it.",
+            "date": "Dec 15, 2025",
+            "url": "https://twitter.com/redicreate/status/2000547200024420777",
+            "stats": {
+                "replies": 56,
+                "retweets": 178,
+                "likes": 678
+            }
+        },
+        {
+            "id": 27,
+            "platform": "twitter",
+            "topic": "javascript",
+            "author_name": "CryptoNewsZ",
+            "author_handle": "@cryptonewsz_",
+            "author_avatar": "https://i.pravatar.cc/150?u=cryptonewsz_",
+            "content": "Major JavaScript Library Breach Puts Crypto Websites on High Alert. Security vulnerabilities discovered in popular npm packages.",
+            "date": "Dec 15, 2025",
+            "url": "https://twitter.com/cryptonewsz_/status/2000522467660775844",
+            "stats": {
+                "replies": 123,
+                "retweets": 456,
+                "likes": 1890
+            }
+        },
+        {
+            "id": 28,
+            "platform": "twitter",
+            "topic": "javascript",
+            "author_name": "Zsolt Tövis",
+            "author_handle": "@toviszsolt",
+            "author_avatar": "https://i.pravatar.cc/150?u=toviszsolt",
+            "content": "What is React.js? A powerful JavaScript library for building fast, interactive user interfaces — used by Facebook, Netflix & Airbnb to create scalable, dynamic web apps efficiently!",
+            "date": "Dec 15, 2025",
+            "url": "https://twitter.com/toviszsolt/status/2000536316799242539",
+            "stats": {
+                "replies": 45,
+                "retweets": 156,
+                "likes": 567
+            }
+        },
+        {
+            "id": 29,
+            "platform": "twitter",
+            "topic": "javascript",
+            "author_name": "Navneet Rajput",
+            "author_handle": "@navneet_code",
+            "author_avatar": "https://i.pravatar.cc/150?u=navneet_code",
+            "content": "Javascript: Difference between map and WeakMap. If map has keys as an object and we do obj=null but map still contains that obj as a key. But in weakMap it will erase obj as a key as soon as it's assigned as null.",
+            "date": "Dec 15, 2025",
+            "url": "https://twitter.com/navneet_code/status/2000548340149461341",
+            "stats": {
+                "replies": 34,
+                "retweets": 89,
+                "likes": 345
+            }
+        },
+        {
+            "id": 30,
+            "platform": "twitter",
+            "topic": "javascript",
+            "author_name": "Tushar Varshney",
+            "author_handle": "@Tushar_Jsx",
+            "author_avatar": "https://i.pravatar.cc/150?u=Tushar_Jsx",
+            "content": "JavaScript: Trust me. TypeScript: Prove it.",
+            "date": "Dec 15, 2025",
+            "url": "https://twitter.com/Tushar_Jsx/status/2000526260934517198",
+            "stats": {
+                "replies": 178,
+                "retweets": 567,
+                "likes": 2345
+            }
+        },
+        {
+            "id": 31,
+            "platform": "reddit",
+            "topic": "literasi digital",
+            "subreddit": "r/indonesia",
+            "subreddit_members": "850K members",
+            "subreddit_icon": "https://i.pravatar.cc/150?u=rindonesia",
+            "title": "Pentingnya literasi digital untuk generasi muda Indonesia",
+            "image": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=500&q=60",
+            "comment_count": "234 comments",
+            "url": "https://reddit.com/r/indonesia/comments/literasi"
+        },
+        {
+            "id": 32,
+            "platform": "reddit",
+            "topic": "web development",
+            "subreddit": "r/webdev",
+            "subreddit_members": "2.1M members",
+            "subreddit_icon": "https://i.pravatar.cc/150?u=rwebdev",
+            "title": "The state of web development in 2026 - what skills matter most?",
+            "image": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=500&q=60",
+            "comment_count": "567 comments",
+            "url": "https://reddit.com/r/webdev/comments/state2026"
+        },
+        {
+            "id": 33,
+            "platform": "reddit",
+            "topic": "frontend",
+            "subreddit": "r/Frontend",
+            "subreddit_members": "456K members",
+            "subreddit_icon": "https://i.pravatar.cc/150?u=rfrontend",
+            "title": "Is frontend development dying with AI tools like Bolt and v0?",
+            "image": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=500&q=60",
+            "comment_count": "890 comments",
+            "url": "https://reddit.com/r/Frontend/comments/aidying"
+        },
+        {
+            "id": 34,
+            "platform": "reddit",
+            "topic": "backend",
+            "subreddit": "r/backend",
+            "subreddit_members": "234K members",
+            "subreddit_icon": "https://i.pravatar.cc/150?u=rbackend",
+            "title": "Laravel vs Node.js in 2026 - which one to choose for new projects?",
+            "image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=500&q=60",
+            "comment_count": "456 comments",
+            "url": "https://reddit.com/r/backend/comments/laravelvsnode"
+        },
+        {
+            "id": 35,
+            "platform": "reddit",
+            "topic": "javascript",
+            "subreddit": "r/javascript",
+            "subreddit_members": "2.5M members",
+            "subreddit_icon": "https://i.pravatar.cc/150?u=rjavascript",
+            "title": "Major npm security breach - what you need to know",
+            "image": "https://images.unsplash.com/photo-1627398242454-45a1465c2479?auto=format&fit=crop&w=500&q=60",
+            "comment_count": "1.2k comments",
+            "url": "https://reddit.com/r/javascript/comments/npmsecurity"
+        }
+    ]
+}
