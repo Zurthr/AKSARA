@@ -32,10 +32,11 @@ body {
   --embed-text: #0f172a;
   --embed-subtle: #475569;
   --embed-accent: #3557ff;
+  --embed-max-width: 100%;
   min-height: 100vh;
   padding: 24px 18px 28px;
-  display: flex;
-  justify-content: center;
+  display: block;
+  width: 100%;
   background:
     radial-gradient(180% 120% at 10% 10%, rgba(53, 87, 255, 0.08), transparent 45%),
     radial-gradient(150% 120% at 90% 0%, rgba(14, 165, 233, 0.06), transparent 40%),
@@ -64,7 +65,8 @@ body {
 }
 
 .embed-root .embed-frame {
-  width: min(780px, 100%);
+  width: 100%;
+  max-width: var(--embed-max-width);
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0)), var(--embed-surface);
   border: 1px solid var(--embed-border);
   border-radius: 18px;
