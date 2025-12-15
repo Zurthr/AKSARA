@@ -301,7 +301,7 @@ const mergedEvents = computed<EventItem[]>(() => {
   console.log('📄 Static (JSON):', staticEvents.length, 'events')
   console.log('💾 Local Storage:', normalizedLocalEvents.value.length, 'events')
 
-  const merged = mergeEventCollections([primary, staticEvents, normalizedLocalEvents.value])
+  const merged = mergeEventCollections([staticEvents, normalizedLocalEvents.value, primary])
   console.log('✅ Final merged:', merged.length, 'events')
   return merged
 })

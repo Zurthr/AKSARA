@@ -350,7 +350,7 @@ const loadRelatedEvents = async (current: Event | null, localSnapshot?: Event[])
   try {
     const response = await getAllEvents(1, 40)
     const remote = response?.data ?? []
-    relatedRaw.value = mergeEventCollections([remote, staticEvents, localEvents])
+    relatedRaw.value = mergeEventCollections([staticEvents, localEvents, remote])
   } catch {
     relatedRaw.value = mergeEventCollections([staticEvents, localEvents])
   } finally {

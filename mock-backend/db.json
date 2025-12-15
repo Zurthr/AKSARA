@@ -7205,6 +7205,32 @@
         "community_id": "academic-support"
       },
       "id": 9
+    },
+    {
+      "event_type": "event_click",
+      "item_id": 1,
+      "item_title": "Photo Walk Jakarta",
+      "user_id": "anon_1765640280316_dw5wdzb07",
+      "timestamp": "2025-12-15T15:16:41.746Z",
+      "source_page": "/events",
+      "metadata": {
+        "date": "2023-10-15T08:00:00Z",
+        "community_id": "photography-club"
+      },
+      "id": 10
+    },
+    {
+      "event_type": "event_click",
+      "item_id": 1,
+      "item_title": "Laravel Workshop: Building Modern Web Applications",
+      "user_id": "anon_1765640280316_dw5wdzb07",
+      "timestamp": "2025-12-15T15:18:31.335Z",
+      "source_page": "/events",
+      "metadata": {
+        "date": "2025-12-20T10:00:00.000000Z",
+        "community_id": "COM1001"
+      },
+      "id": 11
     }
   ]
 }
