@@ -260,7 +260,6 @@ onUnmounted(() => {
   width:50vw;
   max-width: 800px;
   min-width: 420px;
-  margin-left: 92px;
   background-color: var(--color-light-blue);
 }
 

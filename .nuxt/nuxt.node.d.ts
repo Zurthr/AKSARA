@@ -5,7 +5,7 @@
 /// <reference path="types/app.config.d.ts" />
 /// <reference types="nuxt" />
 /// <reference types="../node_modules/@nuxt/vite-builder/dist/index.mjs" />
-/// <reference types="D:/belajar_coding/AKSARA/AKSARA/node_modules/@nuxt/nitro-server/dist/index.mjs" />
+/// <reference types="D:/Codingan/AKSARA/node_modules/@nuxt/nitro-server/dist/index.mjs" />
 /// <reference path="types/nitro-middleware.d.ts" />
 /// <reference path="schema/nuxt.schema.d.ts" />
 

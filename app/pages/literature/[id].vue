@@ -459,6 +459,7 @@ const handleImageError = (event: Event) => {
   display: flex;
   gap: 32px;
   margin-bottom: 32px;
+  margin-top:20px;
   background: white;
   padding: 32px;
   border-radius: 16px;
