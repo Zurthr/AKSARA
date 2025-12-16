@@ -79,7 +79,7 @@ const performRequest = async <T>(method: HttpMethod, url: string, data?: unknown
 
 export const useEmbedApi = () => {
   const config = useRuntimeConfig()
-  const baseUrl = config.public.apiBaseUrl || 'http://localhost:3001/api'
+  const baseUrl = config.public.embedApiUrl || '/proxy-embed'
 
   const request = async <T>(method: HttpMethod, path: string, data?: unknown, options?: FetchOptions) => {
     const url = buildUrl(baseUrl, path)
