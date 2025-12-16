@@ -22,7 +22,7 @@ export default defineNuxtConfig({
   nitro: {
     routeRules: {
       '/api/auth/**': {
-        proxy: 'http://localhost:8000/api/auth/**'
+        proxy: 'https://aksara-api.fruz.xyz/api/auth/**'
       }
       // Note: /api/embeds/** will be handled directly by useEmbedApi
     }

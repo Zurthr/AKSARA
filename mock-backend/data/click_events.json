@@ -875,5 +875,86 @@
       "date": "2025-12-25T19:00:00.000000Z",
       "community_id": "COM1002"
     }
+  },
+  {
+    "id": 55,
+    "event_type": "search_query",
+    "item_id": "bahasa",
+    "item_title": "bahasa",
+    "user_id": "anon_1765840344205_pt3mrshkz",
+    "timestamp": "2025-12-16T00:43:32.040Z",
+    "source_page": "/literature",
+    "metadata": {
+      "filters": {}
+    }
+  },
+  {
+    "id": 56,
+    "event_type": "book_click",
+    "item_id": "2",
+    "item_title": "Bahasa Indonesia SMA Kelas XI",
+    "item_tags": [
+      "Bahasa Indonesia",
+      "Sastra",
+      "Teks Eksplanasi",
+      "SMA"
+    ],
+    "user_id": "anon_1765840344205_pt3mrshkz",
+    "timestamp": "2025-12-16T00:43:35.320Z",
+    "source_page": "/literature",
+    "metadata": {
+      "author": "Suherli, dkk",
+      "rating": 4
+    }
+  },
+  {
+    "id": 57,
+    "event_type": "search_query",
+    "item_id": "bahasa",
+    "item_title": "bahasa",
+    "user_id": "anon_1765840344205_pt3mrshkz",
+    "timestamp": "2025-12-16T00:43:40.137Z",
+    "source_page": "/literature",
+    "metadata": {
+      "filters": {}
+    }
+  },
+  {
+    "id": 58,
+    "event_type": "book_click",
+    "item_id": "2",
+    "item_title": "Bahasa Indonesia SMA Kelas XI",
+    "item_tags": [
+      "Bahasa Indonesia",
+      "Sastra",
+      "Teks Eksplanasi",
+      "SMA"
+    ],
+    "user_id": "anon_1765840344205_pt3mrshkz",
+    "timestamp": "2025-12-16T00:43:41.721Z",
+    "source_page": "/literature",
+    "metadata": {
+      "author": "Suherli, dkk",
+      "rating": 4
+    }
+  },
+  {
+    "id": 59,
+    "event_type": "book_click",
+    "item_id": "2",
+    "item_title": "Bahasa Indonesia SMA Kelas XI",
+    "item_tags": [
+      "Bahasa Indonesia",
+      "Sastra",
+      "Teks Eksplanasi",
+      "SMA"
+    ],
+    "user_id": "anon_1765840344205_pt3mrshkz",
+    "timestamp": "2025-12-16T00:43:46.116Z",
+    "source_page": "/literature",
+    "metadata": {
+      "author": "Suherli, dkk",
+      "rating": 4
+    }
   }
 ]
