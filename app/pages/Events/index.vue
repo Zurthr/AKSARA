@@ -266,7 +266,6 @@ const fetchEvents = async (query?: string) => {
 }
 
 const retryFetch = async () => {
-  await fetchEvents(searchQuery.value)
   search(searchQuery.value)
 }
 
@@ -281,9 +280,15 @@ const start = ref<Date | null>(null)
 const end = ref<Date | null>(null)
 const tagFilters = ref<string[]>([])
 
-watch(searchQuery, (query) => {
-  search(query)
-  void fetchEvents(query)
+// Track if initial load has happened to avoid multiple resets
+const isInitialLoad = ref(true)
+
+watch(searchQuery, (query, oldQuery) => {
+  // Only trigger search if query actually changed (not on initial mount with empty query)
+  if (!isInitialLoad.value || query !== '') {
+    search(query)
+  }
+  isInitialLoad.value = false
 }, { immediate: true })
 
 

@@ -7469,6 +7469,68 @@
         "date": "2026-02-18T19:00:00.000000Z",
         "community_id": "COM1023"
       }
+    },
+    {
+      "id": 50,
+      "event_type": "event_click",
+      "item_id": 30,
+      "item_title": "Training: Cloud Computing Fundamentals",
+      "user_id": "anon_1765840344205_pt3mrshkz",
+      "timestamp": "2025-12-16T00:41:03.001Z",
+      "source_page": "/events",
+      "metadata": {
+        "date": "2025-12-16T09:52:00.000000Z",
+        "community_id": "COM2645"
+      }
+    },
+    {
+      "id": 51,
+      "event_type": "event_click",
+      "item_id": "mock-14",
+      "item_title": "Business Case Competition Training",
+      "user_id": "anon_1765840344205_pt3mrshkz",
+      "timestamp": "2025-12-16T00:41:46.722Z",
+      "source_page": "/events",
+      "metadata": {
+        "date": "2023-11-14T09:00:00Z",
+        "community_id": "business-club"
+      }
+    },
+    {
+      "id": 52,
+      "event_type": "event_click",
+      "item_id": 1,
+      "item_title": "Laravel Workshop: Building Modern Web Applications",
+      "user_id": "anon_1765840344205_pt3mrshkz",
+      "timestamp": "2025-12-16T00:41:52.478Z",
+      "source_page": "/events",
+      "metadata": {
+        "date": "2025-12-20T10:00:00.000000Z",
+        "community_id": "COM1001"
+      }
+    },
+    {
+      "id": 53,
+      "event_type": "search_query",
+      "item_id": "vue",
+      "item_title": "vue",
+      "user_id": "anon_1765840344205_pt3mrshkz",
+      "timestamp": "2025-12-16T00:42:01.689Z",
+      "source_page": "/events",
+      "metadata": {}
+    },
+    {
+      "id": 54,
+      "event_type": "event_click",
+      "item_id": 2,
+      "item_title": "Vue.js Meetup Jakarta",
+      "user_id": "anon_1765840344205_pt3mrshkz",
+      "timestamp": "2025-12-16T00:42:03.384Z",
+      "source_page": "/events",
+      "metadata": {
+        "date": "2025-12-25T19:00:00.000000Z",
+        "community_id": "COM1002"
+      }
     }
   ],
   "sosmed": {
