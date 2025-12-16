@@ -254,6 +254,11 @@ const relatedCommunities = [
   { initials: 'RB', name: 'Ruang Belajar Bersama', members: '324' },
   { initials: 'CN', name: 'CodeNesia', members: '324' }
 ];
+
+// Load initial communities on mount
+onMounted(() => {
+  loadMoreCommunities();
+});
 </script>
 
 <style scoped>

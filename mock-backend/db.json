@@ -7266,6 +7266,196 @@
         "author": "Wardiyatmoko",
         "rating": 4.2
       }
+    },
+    {
+      "id": 38,
+      "event_type": "event_click",
+      "item_id": "mock-1",
+      "item_title": "Photo Walk Jakarta",
+      "user_id": "anon_1765840344205_pt3mrshkz",
+      "timestamp": "2025-12-15T23:35:59.178Z",
+      "source_page": "/",
+      "metadata": {
+        "date": "2023-10-15T08:00:00Z",
+        "community_id": "photography-club"
+      }
+    },
+    {
+      "id": 39,
+      "event_type": "post_click",
+      "item_id": 1,
+      "item_title": "Pentingnya Literasi Digital untuk Generasi Muda Indonesia",
+      "item_tags": [
+        "#LiterasiDigital",
+        "#Edukasi"
+      ],
+      "user_id": "anon_1765840344205_pt3mrshkz",
+      "timestamp": "2025-12-15T23:36:03.235Z",
+      "source_page": "/",
+      "metadata": {
+        "author": "Andi Pratama",
+        "stars": 456
+      }
+    },
+    {
+      "id": 40,
+      "event_type": "book_click",
+      "item_id": 5,
+      "item_title": "The Pragmatic Programmer: Your Journey to Mastery",
+      "item_tags": [
+        "Programming",
+        "Career Development",
+        "Software Development",
+        "Best Practices"
+      ],
+      "user_id": "anon_1765840344205_pt3mrshkz",
+      "timestamp": "2025-12-15T23:36:07.230Z",
+      "source_page": "/",
+      "metadata": {
+        "author": "David Thomas, Andrew Hunt",
+        "rating": 4.4
+      }
+    },
+    {
+      "id": 41,
+      "event_type": "post_click",
+      "item_id": 1,
+      "item_title": "Pentingnya Literasi Digital untuk Generasi Muda Indonesia",
+      "item_tags": [
+        "#LiterasiDigital",
+        "#Edukasi"
+      ],
+      "user_id": "anon_1765840344205_pt3mrshkz",
+      "timestamp": "2025-12-15T23:36:12.332Z",
+      "source_page": "/forums",
+      "metadata": {
+        "author": "Andi Pratama",
+        "stars": 456
+      }
+    },
+    {
+      "id": 42,
+      "event_type": "book_click",
+      "item_id": "37",
+      "item_title": "Catching Fire",
+      "item_tags": [
+        "General"
+      ],
+      "user_id": "anon_1765840344205_pt3mrshkz",
+      "timestamp": "2025-12-15T23:36:16.003Z",
+      "source_page": "/literature",
+      "metadata": {
+        "author": "Suzanne Collins",
+        "rating": 4.8
+      }
+    },
+    {
+      "id": 43,
+      "event_type": "book_click",
+      "item_id": "11",
+      "item_title": "PHP and MySQL Web Development",
+      "item_tags": [
+        "Web Development",
+        "PHP",
+        "MySQL",
+        "Backend Development",
+        "Database"
+      ],
+      "user_id": "anon_1765840344205_pt3mrshkz",
+      "timestamp": "2025-12-15T23:36:21.178Z",
+      "source_page": "/literature",
+      "metadata": {
+        "author": "Luke Welling, Laura Thomson",
+        "rating": 4.2
+      }
+    },
+    {
+      "id": 44,
+      "event_type": "book_click",
+      "item_id": "33",
+      "item_title": "Dracula",
+      "item_tags": [
+        "General"
+      ],
+      "user_id": "anon_1765840344205_pt3mrshkz",
+      "timestamp": "2025-12-15T23:36:42.744Z",
+      "source_page": "/literature",
+      "metadata": {
+        "author": "Bram Stoker",
+        "rating": 4.2
+      }
+    },
+    {
+      "id": 45,
+      "event_type": "community_click",
+      "item_id": "jump-fest-2025",
+      "item_title": "JUMP FEST 2025 - BRED THROUGH",
+      "item_tags": [
+        "#HarryPotter",
+        "#WIBU",
+        "#AnimeX"
+      ],
+      "user_id": "anon_1765840344205_pt3mrshkz",
+      "timestamp": "2025-12-15T23:36:49.433Z",
+      "source_page": "/community",
+      "metadata": {
+        "members": 21
+      }
+    },
+    {
+      "id": 46,
+      "event_type": "community_join",
+      "item_id": "jump-fest-2025",
+      "item_title": "JUMP FEST 2025 - BRED THROUGH",
+      "item_tags": [
+        "#HarryPotter",
+        "#WIBU",
+        "#ANIME",
+        "#GAME",
+        "#DEMONS",
+        "#ANIMEX"
+      ],
+      "user_id": "anon_1765840344205_pt3mrshkz",
+      "timestamp": "2025-12-15T23:37:00.217Z",
+      "source_page": "/community/jump-fest-2025",
+      "metadata": {
+        "members": "21k"
+      }
+    },
+    {
+      "id": 47,
+      "event_type": "book_click",
+      "item_id": "37",
+      "item_title": "Catching Fire",
+      "item_tags": [
+        "General"
+      ],
+      "user_id": "anon_1765840344205_pt3mrshkz",
+      "timestamp": "2025-12-15T23:38:29.092Z",
+      "source_page": "/literature",
+      "metadata": {
+        "author": "Suzanne Collins",
+        "rating": 4.8
+      }
+    },
+    {
+      "id": 48,
+      "event_type": "book_click",
+      "item_id": "4",
+      "item_title": "Kimia SMA Kelas XI",
+      "item_tags": [
+        "Kimia",
+        "Struktur Atom",
+        "Ikatan Kimia",
+        "SMA"
+      ],
+      "user_id": "anon_1765840344205_pt3mrshkz",
+      "timestamp": "2025-12-16T00:30:52.662Z",
+      "source_page": "/literature",
+      "metadata": {
+        "author": "Michael Purba",
+        "rating": 4.1
+      }
     }
   ],
   "sosmed": {
