@@ -800,5 +800,18 @@
       "author": "Michael Purba",
       "rating": 4.1
     }
+  },
+  {
+    "id": 49,
+    "event_type": "event_click",
+    "item_id": 23,
+    "item_title": "Serverless Architecture Meetup",
+    "user_id": "anon_1765840344205_pt3mrshkz",
+    "timestamp": "2025-12-16T00:36:50.553Z",
+    "source_page": "/events",
+    "metadata": {
+      "date": "2026-02-18T19:00:00.000000Z",
+      "community_id": "COM1023"
+    }
   }
 ]

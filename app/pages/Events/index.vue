@@ -274,6 +274,13 @@ const retryFetch = async () => {
 const route = useRoute()
 const searchQuery = computed(() => typeof route.query.q === 'string' ? route.query.q : '')
 
+// Filter state variables (used by filteredEvents)
+const onlineChecked = ref(true)
+const offlineChecked = ref(true)
+const start = ref<Date | null>(null)
+const end = ref<Date | null>(null)
+const tagFilters = ref<string[]>([])
+
 watch(searchQuery, (query) => {
   search(query)
   void fetchEvents(query)
@@ -484,16 +491,16 @@ const filteredEvents = computed(() => {
     }
 
     // date filters
-    if (start || end) {
+    if (start.value || end.value) {
       const evDate = parseEventDate(ev.date);
       if (!evDate) return false;
 
-      if (start && evDate < start) return false;
-      if (end && evDate > end) return false;
+      if (start.value && evDate < start.value) return false;
+      if (end.value && evDate > end.value) return false;
     }
 
     // tag filters (any match)
-    if (tagFilters.length) {
+    if (tagFilters.value.length) {
       const eventTags = Array.isArray(ev.tags)
         ? ev.tags
             .map((t: any) =>
@@ -502,7 +509,7 @@ const filteredEvents = computed(() => {
             .map(normalizeKey)
         : [];
 
-      const allMatch = tagFilters.every((t) =>
+      const allMatch = tagFilters.value.every((t: string) =>
         eventTags.some((et) => et.includes(t))
       );
       if (!allMatch) return false;
