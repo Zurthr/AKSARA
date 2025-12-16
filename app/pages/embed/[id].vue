@@ -2,10 +2,11 @@
 const route = useRoute()
 const configId = route.params.id as string
 
-// 1. Fetch Data (Public Endpoint)
-// We use useFetch which works great with SSR
-const { data, error, pending } = await useFetch(`/embeds/${configId}`, {
-  baseURL: 'http://localhost:3001/api'
+// 1. Fetch Data (Public Endpoint - client-side only to avoid SSR caching issues)
+// This endpoint is public and doesn't require auth
+const { data, error, pending } = useLazyFetch(`/embeds/${configId}`, {
+  baseURL: 'https://aksara-api.fruz.xyz/api',
+  server: false // Only fetch on client-side to avoid SSR issues
 })
 
 // 2. Theme helpers

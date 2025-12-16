@@ -7612,6 +7612,53 @@
         "author": "Suherli, dkk",
         "rating": 4
       }
+    },
+    {
+      "id": 60,
+      "event_type": "post_click",
+      "item_id": 2,
+      "item_title": "Melawan Hoaks di Era WhatsApp: Tantangan Literasi Digital",
+      "item_tags": [
+        "#AntiHoaks",
+        "#LiterasiDigital"
+      ],
+      "user_id": "anon_1765851458723_t2wwlrdki",
+      "timestamp": "2025-12-16T02:40:25.830Z",
+      "source_page": "/forums",
+      "metadata": {
+        "author": "Dewi Kusuma",
+        "stars": 389
+      }
+    },
+    {
+      "id": 61,
+      "event_type": "community_click",
+      "item_id": 5,
+      "item_title": "DevOps Indonesia",
+      "item_tags": [
+        "DevOps",
+        "Docker",
+        "Kubernetes"
+      ],
+      "user_id": "anon_1765851458723_t2wwlrdki",
+      "timestamp": "2025-12-16T02:47:02.281Z",
+      "source_page": "/community",
+      "metadata": {
+        "members": 92
+      }
+    },
+    {
+      "id": 62,
+      "event_type": "event_click",
+      "item_id": 7,
+      "item_title": "Public Lecture: Renewable Energy Systems",
+      "user_id": "anon_1765851458723_t2wwlrdki",
+      "timestamp": "2025-12-16T02:47:13.296Z",
+      "source_page": "/events",
+      "metadata": {
+        "date": "2023-11-18T10:00:00Z",
+        "community_id": "engineering-faculty"
+      }
     }
   ],
   "sosmed": {
