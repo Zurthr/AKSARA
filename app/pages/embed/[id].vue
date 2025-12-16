@@ -8,43 +8,26 @@ const { data, error, pending } = await useFetch(`/embeds/${configId}`, {
   baseURL: 'http://localhost:3001/api'
 })
 
-// 2. Computed Theme Classes
+// 2. Theme helpers
+const themeName = computed(() => data.value?.meta?.theme || 'light')
 const themeClasses = computed(() => {
-  const mode = data.value?.meta?.theme || 'light'
-  if (mode === 'dark') return 'bg-gray-900 text-white'
-  if (mode === 'blue') return 'bg-slate-800 text-blue-50'
+  if (themeName.value === 'dark') return 'bg-gray-900 text-white'
+  if (themeName.value === 'blue') return 'bg-slate-800 text-blue-50'
   return 'bg-white text-gray-900'
 })
+const toneClass = computed(() => `theme-${themeName.value}`)
 
-// 3. Computed Card Classes (for the books/events)
-const cardClasses = computed(() => {
-  const mode = data.value?.meta?.theme || 'light'
-  return mode === 'light' ? 'border-gray-100 hover:bg-gray-50' : 'border-gray-700 hover:bg-white/5'
-})
-
-// 4. Format item display based on type
-const formatItemData = (item: any) => {
-  if (data.value?.meta?.type === 'EVENT_LIST') {
-    return {
-      title: item.title,
-      description: item.description,
-      date: item.date ? new Date(item.date).toLocaleDateString() : null,
-      location: item.location,
-      status: item.status,
-      attendees: item.attendees || 0,
-      community: item.community
-    }
-  } else {
-    // RESOURCE_LIST
-    return {
-      title: item.title,
-      description: item.description,
-      author: item.author,
-      rating: item.rating || 0,
-      tags: item.tags || []
-    }
+// 3. Display helpers
+const embedLabel = computed(() => data.value?.meta?.type === 'EVENT_LIST' ? 'Events & Workshops' : 'Reading List')
+const filterSummary = computed(() => {
+  const tags = data.value?.meta?.filterTags || []
+  if (tags.length === 1) return `Focused on ${tags[0]}`
+  if (tags.length > 1) {
+    const [first, second, ...rest] = tags
+    return `Focused on ${[first, second].filter(Boolean).join(' · ')}${rest.length ? ` +${rest.length} more` : ''}`
   }
-}
+  return 'Curated picks from the AKSARA community.'
+})
 </script>
 
 <template>
@@ -56,94 +39,110 @@ const formatItemData = (item: any) => {
     Widget unavailable
   </div>
 
-  <div v-else :class="['w-full h-full min-h-screen p-4 transition-colors', themeClasses]">
+  <div v-else :class="['w-full h-full min-h-screen transition-colors embed-shell', themeClasses, toneClass]">
 
-    <div class="flex justify-between items-center mb-4 border-b border-opacity-10 pb-2" :class="themeClasses">
-      <h2 class="text-xs font-bold uppercase tracking-widest opacity-70">
-        {{ data?.meta?.name || 'Recommended' }}
-      </h2>
-      <a href="/" target="_blank" class="text-[10px] opacity-50 hover:opacity-100 transition-opacity">
-        Powered by Aksara
-      </a>
-    </div>
-
-    <div class="grid gap-3">
-      <!-- Event List Display -->
-      <a
-        v-for="item in data?.data"
-        v-if="data?.meta?.type === 'EVENT_LIST'"
-        :key="item.id"
-        :href="`/events/${item.id}`"
-        target="_blank"
-        class="flex gap-3 items-start p-2 rounded-lg border transition-all group"
-        :class="cardClasses"
-      >
-        <div class="flex-1 min-w-0">
-          <h3 class="text-sm font-semibold truncate leading-tight mb-1">
-            {{ item.title }}
-          </h3>
-          <p class="text-xs opacity-70 truncate mb-1">{{ item.description }}</p>
-
-          <div class="flex gap-2 items-center text-[10px] flex-wrap">
-            <span v-if="item.date" class="opacity-70">
-              📅 {{ new Date(item.date).toLocaleDateString() }}
-            </span>
-            <span v-if="item.location" class="opacity-70">
-              📍 {{ item.location }}
-            </span>
-            <span v-if="item.community" class="opacity-70 bg-opacity-10 px-1 rounded border border-current">
-              {{ item.community }}
-            </span>
-            <span v-if="item.status" class="opacity-70" :class="{
-              'text-green-500': item.status === 'upcoming',
-              'text-blue-500': item.status === 'ongoing',
-              'text-gray-500': item.status === 'completed'
-            }">
-              {{ item.status }}
-            </span>
+    <div class="embed-frame">
+      <div class="embed-header">
+        <div class="embed-identity">
+          <span class="signal-dot" aria-hidden="true"></span>
+          <div>
+            <p class="embed-eyebrow">{{ embedLabel }}</p>
+            <h2 class="embed-heading">
+              {{ data?.meta?.name || 'AKSARA Picks' }}
+            </h2>
           </div>
         </div>
-      </a>
+        <a href="/" target="_blank" class="powered-chip" aria-label="Powered by AKSARA">
+          <span class="powered-logo">A</span>
+          <span class="powered-text">Powered by AKSARA</span>
+        </a>
+      </div>
 
-      <!-- Resource List Display -->
-      <a
-        v-for="item in data?.data"
-        v-else
-        :key="item.id"
-        :href="`/literature/${item.id}`"
-        target="_blank"
-        class="flex gap-3 items-start p-2 rounded-lg border transition-all group"
-        :class="cardClasses"
-      >
-        <img
-          v-if="data.meta.showThumbnail && item.cover"
-          :src="item.cover"
-          class="w-12 h-16 object-cover rounded shadow-sm group-hover:shadow-md transition-all"
-          alt="Cover image"
-        />
+      <p class="embed-subtitle">
+        {{ filterSummary }}
+      </p>
 
-        <div class="flex-1 min-w-0">
-          <h3 class="text-sm font-semibold truncate leading-tight mb-1">
-            {{ item.title }}
-          </h3>
-          <p class="text-xs opacity-70 truncate mb-1">{{ item.author }}</p>
+      <div class="embed-grid">
+        <!-- Event List Display -->
+        <a
+          v-for="item in data?.data"
+          v-if="data?.meta?.type === 'EVENT_LIST'"
+          :key="item.id"
+          :href="`/events/${item.id}`"
+          target="_blank"
+          class="embed-card event-card"
+        >
+          <div class="card-body">
+            <div class="card-heading">
+              <h3 class="card-title">
+                {{ item.title }}
+              </h3>
+              <span v-if="item.status" class="status-pill" :data-status="item.status">
+                {{ item.status }}
+              </span>
+            </div>
+            <p class="card-description">{{ item.description }}</p>
 
-          <div class="flex gap-2 items-center text-[10px]">
-            <span v-if="item.rating > 0" class="text-yellow-500 font-bold">
-              ★ {{ item.rating }}
-            </span>
-            <span v-for="tag in (item.tags || []).slice(0, 2)" :key="tag" class="opacity-50 bg-opacity-10 px-1 rounded border border-current">
-              {{ tag }}
-            </span>
+            <div class="card-meta">
+              <span v-if="item.date" class="meta-chip">
+                {{ new Date(item.date).toLocaleDateString() }}
+              </span>
+              <span v-if="item.location" class="meta-chip">
+                {{ item.location }}
+              </span>
+              <span v-if="item.community" class="meta-chip subtle-chip">
+                {{ item.community }}
+              </span>
+              <span v-if="item.attendees" class="meta-chip subtle-chip">
+                {{ item.attendees }} attending
+              </span>
+            </div>
           </div>
-        </div>
-      </a>
-    </div>
+        </a>
 
-    <!-- Empty state -->
-    <div v-if="data?.data?.length === 0" class="text-center py-8 opacity-50">
-      <div class="text-2xl mb-2">📚</div>
-      <p class="text-sm">No items found</p>
+        <!-- Resource List Display -->
+        <a
+          v-for="item in data?.data"
+          v-else
+          :key="item.id"
+          :href="`/literature/${item.id}`"
+          target="_blank"
+          class="embed-card resource-card"
+        >
+          <img
+            v-if="data?.meta?.showThumbnail && item.cover"
+            :src="item.cover"
+            class="cover-thumb"
+            alt="Cover image"
+          />
+
+          <div class="card-body">
+            <div class="card-heading">
+              <h3 class="card-title">
+                {{ item.title }}
+              </h3>
+              <span v-if="item.rating > 0" class="rating-chip">
+                ★ {{ item.rating }}
+              </span>
+            </div>
+            <p class="card-description">
+              {{ item.author || 'From the AKSARA library' }}
+            </p>
+
+            <div class="card-meta">
+              <span v-for="tag in (item.tags || []).slice(0, 3)" :key="tag" class="meta-chip subtle-chip">
+                {{ tag }}
+              </span>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <!-- Empty state -->
+      <div v-if="data?.data?.length === 0" class="empty-state">
+        <div class="emoji">📚</div>
+        <p>No items found</p>
+      </div>
     </div>
   </div>
 </template>
