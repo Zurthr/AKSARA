@@ -31,7 +31,7 @@ const normalizeCommunity = (raw: Record<string, unknown>, source: string = 'unkn
     tags: Array.isArray(raw.tags) ? raw.tags : [],
     description: (raw.description as string) || '',
     members: (raw.members as string) || (raw.memberCount ? `${raw.memberCount}` : '0'),
-    postsToday: raw.postsToday ?? 0,
+    postsToday: (raw.postsToday as number | string) ?? 0,
     cover: (raw.cover as string) || '',
     memberCount: (raw.memberCount as number) || 0,
     isJoined: (raw.isJoined as boolean) || false,
@@ -179,5 +179,43 @@ export const useCommunities = (pageSize: number = 10) => {
     hasMore: readonly(hasMore),
     loadMoreCommunities,
     refetchCommunities
+  }
+}
+
+export const useCommunity = () => {
+  const api = useApi()
+
+  const getCommunity = async (id: string | number): Promise<Community | null> => {
+    // Run fetches in parallel to avoid waiting for timeouts sequentially
+    const fetchLaravel = api.get<any>(`/communities/${id}`)
+      .then(res => ({ source: 'laravel' as const, data: res }))
+      .catch(() => null);
+
+    const fetchMock = $fetch<Record<string, unknown>>(`http://localhost:3002/communities/${id}`)
+      .then(res => ({ source: 'mock' as const, data: res }))
+      .catch(() => null);
+
+    const [laravelRes, mockRes] = await Promise.all([fetchLaravel, fetchMock]);
+
+    // Priority 1: Laravel API
+    if (laravelRes && laravelRes.data) {
+      const raw = laravelRes.data.data || laravelRes.data;
+      return normalizeCommunity(raw as Record<string, unknown>, 'laravel');
+    }
+
+    // Priority 2: Mock Backend
+    if (mockRes && mockRes.data) {
+      return normalizeCommunity(mockRes.data, 'mock');
+    }
+
+    // Priority 3: Fallback JSON
+    const found = fallbackCommunities.find(c => String(c.id) === String(id))
+    if (found) return found
+
+    return null
+  }
+
+  return {
+    getCommunity
   }
 }

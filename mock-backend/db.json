@@ -7659,6 +7659,601 @@
         "date": "2023-11-18T10:00:00Z",
         "community_id": "engineering-faculty"
       }
+    },
+    {
+      "event_type": "event_click",
+      "item_id": 1,
+      "item_title": "Photo Walk Jakarta",
+      "user_id": "anon_1765850447232_ffrdf4h8j",
+      "timestamp": "2025-12-20T09:46:32.158Z",
+      "source_page": "/events",
+      "metadata": {
+        "date": "2023-10-15T08:00:00Z",
+        "community_id": "photography-club"
+      },
+      "id": 63
+    },
+    {
+      "event_type": "community_click",
+      "item_id": 16,
+      "item_title": "Hodkiewicz-McKenzie",
+      "item_tags": [
+        "placeat",
+        "quam",
+        "voluptatem",
+        "fugit"
+      ],
+      "user_id": "anon_1765850447232_ffrdf4h8j",
+      "timestamp": "2025-12-20T09:46:41.055Z",
+      "source_page": "/community",
+      "metadata": {
+        "members": 19960
+      },
+      "id": 64
+    },
+    {
+      "event_type": "community_click",
+      "item_id": 2,
+      "item_title": "Vue.js Indonesia",
+      "item_tags": [
+        "Vue.js",
+        "JavaScript",
+        "Frontend"
+      ],
+      "user_id": "anon_1765850447232_ffrdf4h8j",
+      "timestamp": "2025-12-20T09:46:46.586Z",
+      "source_page": "/community",
+      "metadata": {
+        "members": 85
+      },
+      "id": 65
+    },
+    {
+      "event_type": "community_click",
+      "item_id": 16,
+      "item_title": "Hodkiewicz-McKenzie",
+      "item_tags": [
+        "placeat",
+        "quam",
+        "voluptatem",
+        "fugit"
+      ],
+      "user_id": "anon_1766224478050_kgodsllk3",
+      "timestamp": "2025-12-20T09:54:38.050Z",
+      "source_page": "/community",
+      "metadata": {
+        "members": 19960
+      },
+      "id": 66
+    },
+    {
+      "event_type": "community_click",
+      "item_id": 16,
+      "item_title": "Hodkiewicz-McKenzie",
+      "item_tags": [
+        "placeat",
+        "quam",
+        "voluptatem",
+        "fugit"
+      ],
+      "user_id": "anon_1766224478050_kgodsllk3",
+      "timestamp": "2025-12-20T09:54:47.525Z",
+      "source_page": "/community",
+      "metadata": {
+        "members": 19960
+      },
+      "id": 67
+    },
+    {
+      "event_type": "community_click",
+      "item_id": 16,
+      "item_title": "Hodkiewicz-McKenzie",
+      "item_tags": [
+        "placeat",
+        "quam",
+        "voluptatem",
+        "fugit"
+      ],
+      "user_id": "anon_1766224478050_kgodsllk3",
+      "timestamp": "2025-12-20T09:57:21.599Z",
+      "source_page": "/community",
+      "metadata": {
+        "members": 19960
+      },
+      "id": 68
+    },
+    {
+      "event_type": "community_click",
+      "item_id": 16,
+      "item_title": "Hodkiewicz-McKenzie",
+      "item_tags": [
+        "placeat",
+        "quam",
+        "voluptatem",
+        "fugit"
+      ],
+      "user_id": "anon_1766224478050_kgodsllk3",
+      "timestamp": "2025-12-20T09:58:53.704Z",
+      "source_page": "/community",
+      "metadata": {
+        "members": 19960
+      },
+      "id": 69
+    },
+    {
+      "event_type": "community_click",
+      "item_id": 11,
+      "item_title": "Laravel Indonesia",
+      "item_tags": [
+        "Laravel",
+        "PHP",
+        "Backend"
+      ],
+      "user_id": "anon_1766224478050_kgodsllk3",
+      "timestamp": "2025-12-20T09:59:05.592Z",
+      "source_page": "/community",
+      "metadata": {
+        "members": 12
+      },
+      "id": 70
+    },
+    {
+      "event_type": "community_click",
+      "item_id": 12,
+      "item_title": "Vue.js Indonesia",
+      "item_tags": [
+        "Vue.js",
+        "JavaScript",
+        "Frontend"
+      ],
+      "user_id": "anon_1766224478050_kgodsllk3",
+      "timestamp": "2025-12-20T09:59:25.111Z",
+      "source_page": "/community",
+      "metadata": {
+        "members": 85
+      },
+      "id": 71
+    },
+    {
+      "event_type": "community_click",
+      "item_id": 11,
+      "item_title": "Laravel Indonesia",
+      "item_tags": [
+        "Laravel",
+        "PHP",
+        "Backend"
+      ],
+      "user_id": "anon_1766224478050_kgodsllk3",
+      "timestamp": "2025-12-20T10:01:14.424Z",
+      "source_page": "/community",
+      "metadata": {
+        "members": 12
+      },
+      "id": 72
+    },
+    {
+      "event_type": "community_click",
+      "item_id": 11,
+      "item_title": "Laravel Indonesia",
+      "item_tags": [
+        "Laravel",
+        "PHP",
+        "Backend"
+      ],
+      "user_id": "anon_1766224478050_kgodsllk3",
+      "timestamp": "2025-12-20T10:01:15.822Z",
+      "source_page": "/community/11",
+      "metadata": {
+        "members": 12
+      },
+      "id": 73
+    },
+    {
+      "event_type": "community_click",
+      "item_id": 16,
+      "item_title": "Hodkiewicz-McKenzie",
+      "item_tags": [
+        "placeat",
+        "quam",
+        "voluptatem",
+        "fugit"
+      ],
+      "user_id": "anon_1766224478050_kgodsllk3",
+      "timestamp": "2025-12-20T10:08:45.650Z",
+      "source_page": "/community",
+      "metadata": {
+        "members": 19960
+      },
+      "id": 74
+    },
+    {
+      "event_type": "community_click",
+      "item_id": 11,
+      "item_title": "Laravel Indonesia",
+      "item_tags": [
+        "Laravel",
+        "PHP",
+        "Backend"
+      ],
+      "user_id": "anon_1766224478050_kgodsllk3",
+      "timestamp": "2025-12-20T10:11:38.214Z",
+      "source_page": "/community",
+      "metadata": {
+        "members": 12
+      },
+      "id": 75
+    },
+    {
+      "event_type": "community_click",
+      "item_id": 14,
+      "item_title": "Python Indonesia",
+      "item_tags": [
+        "Python",
+        "Data Science",
+        "Backend"
+      ],
+      "user_id": "anon_1766224478050_kgodsllk3",
+      "timestamp": "2025-12-20T10:12:37.310Z",
+      "source_page": "/community",
+      "metadata": {
+        "members": 22
+      },
+      "id": 76
+    },
+    {
+      "event_type": "community_click",
+      "item_id": 11,
+      "item_title": "Laravel Indonesia",
+      "item_tags": [
+        "Laravel",
+        "PHP",
+        "Backend"
+      ],
+      "user_id": "anon_1766224478050_kgodsllk3",
+      "timestamp": "2025-12-20T10:12:44.724Z",
+      "source_page": "/community",
+      "metadata": {
+        "members": 12
+      },
+      "id": 77
+    },
+    {
+      "event_type": "community_click",
+      "item_id": "jump-fest-2025",
+      "item_title": "JUMP FEST 2025 - BRED THROUGH",
+      "item_tags": [
+        "#HarryPotter",
+        "#WIBU",
+        "#AnimeX"
+      ],
+      "user_id": "anon_1766224478050_kgodsllk3",
+      "timestamp": "2025-12-20T10:13:16.850Z",
+      "source_page": "/community",
+      "metadata": {
+        "members": 21
+      },
+      "id": 78
+    },
+    {
+      "event_type": "community_click",
+      "item_id": "jump-fest-2025",
+      "item_title": "JUMP FEST 2025 - BRED THROUGH",
+      "item_tags": [
+        "#HarryPotter",
+        "#WIBU",
+        "#AnimeX"
+      ],
+      "user_id": "anon_1766224478050_kgodsllk3",
+      "timestamp": "2025-12-20T10:13:19.726Z",
+      "source_page": "/community/jump-fest-2025",
+      "metadata": {
+        "members": 21
+      },
+      "id": 79
+    },
+    {
+      "event_type": "community_click",
+      "item_id": "jump-fest-2025",
+      "item_title": "JUMP FEST 2025 - BRED THROUGH",
+      "item_tags": [
+        "#HarryPotter",
+        "#WIBU",
+        "#AnimeX"
+      ],
+      "user_id": "anon_1766224478050_kgodsllk3",
+      "timestamp": "2025-12-20T10:13:22.925Z",
+      "source_page": "/community/jump-fest-2025",
+      "metadata": {
+        "members": 21
+      },
+      "id": 80
+    },
+    {
+      "event_type": "community_click",
+      "item_id": "jump-fest-2025",
+      "item_title": "JUMP FEST 2025 - BRED THROUGH",
+      "item_tags": [
+        "#HarryPotter",
+        "#WIBU",
+        "#AnimeX"
+      ],
+      "user_id": "anon_1766224478050_kgodsllk3",
+      "timestamp": "2025-12-20T10:13:27.283Z",
+      "source_page": "/community/jump-fest-2025",
+      "metadata": {
+        "members": 21
+      },
+      "id": 81
+    },
+    {
+      "event_type": "community_click",
+      "item_id": "jump-fest-2025",
+      "item_title": "JUMP FEST 2025 - BRED THROUGH",
+      "item_tags": [
+        "#HarryPotter",
+        "#WIBU",
+        "#AnimeX"
+      ],
+      "user_id": "anon_1766224478050_kgodsllk3",
+      "timestamp": "2025-12-20T10:13:28.367Z",
+      "source_page": "/community/jump-fest-2025",
+      "metadata": {
+        "members": 21
+      },
+      "id": 82
+    },
+    {
+      "event_type": "community_click",
+      "item_id": "creative-atelier",
+      "item_title": "Creative Atelier",
+      "item_tags": [
+        "Illustration",
+        "UI/UX",
+        "Workshop"
+      ],
+      "user_id": "anon_1766224478050_kgodsllk3",
+      "timestamp": "2025-12-20T10:14:11.200Z",
+      "source_page": "/community",
+      "metadata": {
+        "members": 648
+      },
+      "id": 83
+    },
+    {
+      "event_type": "post_click",
+      "item_id": 13,
+      "item_title": "3D in the Web with Three.js: My First Configurator",
+      "item_tags": [
+        "#ThreeJS",
+        "#3DWeb"
+      ],
+      "user_id": "anon_1766224478050_kgodsllk3",
+      "timestamp": "2025-12-20T10:14:14.957Z",
+      "source_page": "/community/creative-atelier",
+      "metadata": {
+        "author": "Maria Santos",
+        "stars": 789
+      },
+      "id": 84
+    },
+    {
+      "event_type": "community_click",
+      "item_id": "wellness-warriors",
+      "item_title": "Wellness Warriors",
+      "item_tags": [
+        "Mindful",
+        "Balance",
+        "Habits"
+      ],
+      "user_id": "anon_1766224478050_kgodsllk3",
+      "timestamp": "2025-12-20T10:14:28.464Z",
+      "source_page": "/community",
+      "metadata": {
+        "members": 512
+      },
+      "id": 85
+    },
+    {
+      "event_type": "community_click",
+      "item_id": 11,
+      "item_title": "Laravel Indonesia",
+      "item_tags": [
+        "Laravel",
+        "PHP",
+        "Backend"
+      ],
+      "user_id": "anon_1765850447232_ffrdf4h8j",
+      "timestamp": "2025-12-20T10:29:38.643Z",
+      "source_page": "/community",
+      "metadata": {
+        "members": 12
+      },
+      "id": 86
+    },
+    {
+      "event_type": "community_click",
+      "item_id": 11,
+      "item_title": "Laravel Indonesia",
+      "item_tags": [
+        "Laravel",
+        "PHP",
+        "Backend"
+      ],
+      "user_id": "anon_1765850447232_ffrdf4h8j",
+      "timestamp": "2025-12-20T10:29:40.709Z",
+      "source_page": "/community/11",
+      "metadata": {
+        "members": 12
+      },
+      "id": 87
+    },
+    {
+      "event_type": "community_click",
+      "item_id": 12,
+      "item_title": "Vue.js Indonesia",
+      "item_tags": [
+        "Vue.js",
+        "JavaScript",
+        "Frontend"
+      ],
+      "user_id": "anon_1765850447232_ffrdf4h8j",
+      "timestamp": "2025-12-20T10:30:04.940Z",
+      "source_page": "/community",
+      "metadata": {
+        "members": 85
+      },
+      "id": 88
+    },
+    {
+      "event_type": "community_click",
+      "item_id": 19,
+      "item_title": "Bednar, Marks and Rolfson",
+      "item_tags": [
+        "soluta",
+        "doloribus",
+        "dignissimos",
+        "quaerat",
+        "voluptate"
+      ],
+      "user_id": "anon_1765850447232_ffrdf4h8j",
+      "timestamp": "2025-12-20T10:31:00.875Z",
+      "source_page": "/community",
+      "metadata": {
+        "members": 13415
+      },
+      "id": 89
+    },
+    {
+      "event_type": "community_click",
+      "item_id": 2,
+      "item_title": "Vue.js Indonesia",
+      "item_tags": [
+        "Vue.js",
+        "JavaScript",
+        "Frontend"
+      ],
+      "user_id": "anon_1765850447232_ffrdf4h8j",
+      "timestamp": "2025-12-20T10:31:14.570Z",
+      "source_page": "/community",
+      "metadata": {
+        "members": 85
+      },
+      "id": 90
+    },
+    {
+      "event_type": "community_click",
+      "item_id": 17,
+      "item_title": "Carroll-Kiehn",
+      "item_tags": [
+        "in",
+        "perferendis",
+        "consequatur"
+      ],
+      "user_id": "anon_1766224478050_kgodsllk3",
+      "timestamp": "2025-12-20T10:37:24.560Z",
+      "source_page": "/community",
+      "metadata": {
+        "members": 21594
+      },
+      "id": 91
+    },
+    {
+      "event_type": "community_click",
+      "item_id": 11,
+      "item_title": "Laravel Indonesia",
+      "item_tags": [
+        "Laravel",
+        "PHP",
+        "Backend"
+      ],
+      "user_id": "anon_1766224478050_kgodsllk3",
+      "timestamp": "2025-12-20T10:40:30.881Z",
+      "source_page": "/community",
+      "metadata": {
+        "members": 12
+      },
+      "id": 92
+    },
+    {
+      "event_type": "community_click",
+      "item_id": 11,
+      "item_title": "Laravel Indonesia",
+      "item_tags": [
+        "Laravel",
+        "PHP",
+        "Backend"
+      ],
+      "user_id": "anon_1766224478050_kgodsllk3",
+      "timestamp": "2025-12-20T10:40:34.502Z",
+      "source_page": "/community/11",
+      "metadata": {
+        "members": 12
+      },
+      "id": 93
+    },
+    {
+      "event_type": "community_click",
+      "item_id": "gaming-hub",
+      "item_title": "Gaming Hub Indonesia",
+      "item_tags": [
+        "Esports",
+        "Co-op",
+        "Livestream"
+      ],
+      "user_id": "anon_1766224478050_kgodsllk3",
+      "timestamp": "2025-12-20T10:40:50.260Z",
+      "source_page": "/community",
+      "metadata": {
+        "members": 12
+      },
+      "id": 94
+    },
+    {
+      "event_type": "event_click",
+      "item_id": 10,
+      "item_title": "Career Talk: Pathways in Software Engineering",
+      "user_id": "anon_1766224478050_kgodsllk3",
+      "timestamp": "2025-12-20T10:41:50.764Z",
+      "source_page": "/events",
+      "metadata": {
+        "date": "2023-11-22T14:00:00Z",
+        "community_id": "career-services"
+      },
+      "id": 95
+    },
+    {
+      "event_type": "community_click",
+      "item_id": 11,
+      "item_title": "Laravel Indonesia",
+      "item_tags": [
+        "Laravel",
+        "PHP",
+        "Backend"
+      ],
+      "user_id": "anon_1766224478050_kgodsllk3",
+      "timestamp": "2025-12-20T10:51:38.727Z",
+      "source_page": "/community",
+      "metadata": {
+        "members": 12
+      },
+      "id": 96
+    },
+    {
+      "event_type": "community_click",
+      "item_id": "wellness-warriors",
+      "item_title": "Wellness Warriors",
+      "item_tags": [
+        "Mindful",
+        "Balance",
+        "Habits"
+      ],
+      "user_id": "anon_1766224478050_kgodsllk3",
+      "timestamp": "2025-12-20T10:52:01.638Z",
+      "source_page": "/community",
+      "metadata": {
+        "members": 512
+      },
+      "id": 97
     }
   ],
   "sosmed": {

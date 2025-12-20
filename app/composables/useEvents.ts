@@ -168,6 +168,50 @@ export const useEvents = () => {
     }
   }
 
+  const getEventsByCommunityId = async (
+    communityId: number | string,
+    page: number = 1,
+    perPage: number = 10
+  ): Promise<EventsResponse | null> => {
+    setLoading(true)
+    setError(null)
+
+    try {
+      // 1. Try fetching from API
+      // Assuming GET /events supports ?community_id=...
+      const queryString = new URLSearchParams({
+        community_id: String(communityId),
+        page: String(page),
+        per_page: String(perPage)
+      }).toString()
+
+      const response = await api.get<unknown>(`/events?${queryString}`)
+      return normalizePaginatedCollection<Event>(response)
+    } catch (err) {
+      console.warn('API failed for community events, using fallback:', err)
+
+      // 2. Fallback to mock data
+      // Filter fallbackEvents by community_id
+      const filtered = fallbackEvents.filter(e =>
+        String(e.community_id) === String(communityId)
+      )
+
+      const start = (page - 1) * perPage
+      const end = start + perPage
+      const paginatedData = filtered.slice(start, end)
+
+      return {
+        data: paginatedData,
+        current_page: page,
+        last_page: Math.ceil(filtered.length / perPage) || 1,
+        per_page: perPage,
+        total: filtered.length
+      }
+    } finally {
+      setLoading(false)
+    }
+  }
+
   const clearError = () => {
     setError(null)
   }
@@ -180,7 +224,8 @@ export const useEvents = () => {
     createEvent,
     updateEvent,
     deleteEvent,
-    clearError
+    clearError,
+    getEventsByCommunityId
   }
 }
 

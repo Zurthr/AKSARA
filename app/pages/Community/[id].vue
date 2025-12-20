@@ -37,6 +37,23 @@
           </div>
         </article>
 
+        <section v-if="communityEvents && communityEvents.data.length > 0" class="community-events">
+          <header>
+            <h2>Upcoming Events</h2>
+            <p>Events hosted by {{ community.name }}</p>
+          </header>
+          
+          <EventsCarousel :events="communityEvents.data" />
+        </section>
+
+        <section v-else-if="relatedEvents && relatedEvents.data.length > 0" class="community-events">
+           <header>
+            <h2>Related Events</h2>
+            <p>Events you might be interested in</p>
+          </header>
+          <EventsCarousel :events="relatedEvents.data" />
+        </section>
+
         <section class="community-posts">
           <header>
             <h2>latest discussion</h2>
@@ -77,11 +94,13 @@ import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import RightSideBar from '~/components/General/RightSideBar.vue';
 import CommunitySidebar from '~/components/CommunitySidebar.vue';
 import ForumCard from '~/components/Forum/ForumCard.vue';
+import EventsCarousel from '~/components/Events/EventsCarousel.vue';
 import postsData from '../../../mock-backend/data/posts.json';
 import communitiesDataRaw from '../../../mock-backend/data/communities.json';
 
 interface ForumPost {
   id: number;
+// ... (rest of interfaces)
   author: {
     name: string;
     avatar: string;
@@ -520,45 +539,54 @@ const communityDirectory: CommunityDetail[] = [
 
 const fallbackId = 'jump-fest-2025';
 
+const { getCommunity } = useCommunity();
+const { getEventsByCommunityId, getAllEvents } = useEvents();
+
+const { data: apiCommunity } = await useAsyncData(`community-${route.params.id}`, () => getCommunity(String(route.params.id ?? fallbackId)));
+
+const { data: communityEvents } = await useAsyncData(`community-events-${route.params.id}`, () => 
+  getEventsByCommunityId(String(route.params.id ?? fallbackId))
+);
+
+const { data: relatedEvents } = await useAsyncData(`related-events-${route.params.id}`, () => 
+  getAllEvents(1, 5)
+);
+
 const community = computed(() => {
   const targetId = String(route.params.id ?? fallbackId);
   
-  // 1. Try to find in hardcoded directory
+  // 1. Try to find in hardcoded directory (rich data)
   const localCommunity = communityDirectory.find((entry) => entry.id === targetId);
-
-  // 2. Try to find in JSON data
-  const jsonCommunity = (communitiesDataRaw as any[]).find(c => c.id === targetId);
-
-  // If found locally, return it (with updated cover from JSON if available)
   if (localCommunity) {
-    if (jsonCommunity && jsonCommunity.cover) {
-      return {
-        ...localCommunity,
-        cover: jsonCommunity.cover,
-        description: jsonCommunity.description || localCommunity.description,
-        members: jsonCommunity.members || localCommunity.members,
-        name: jsonCommunity.name || localCommunity.name
-      };
+    // If we have API data too, maybe update member count, but usually local is preferred for demo
+    if (apiCommunity.value && apiCommunity.value.id === targetId) {
+       return {
+         ...localCommunity,
+         members: apiCommunity.value.members || localCommunity.members,
+         name: apiCommunity.value.name || localCommunity.name,
+         description: apiCommunity.value.description || localCommunity.description
+       }
     }
     return localCommunity;
   }
 
-  // If NOT found locally but found in JSON, construct a generic detail object
-  if (jsonCommunity) {
+  // 2. Use API/Mock data if found
+  if (apiCommunity.value) {
+    const c = apiCommunity.value;
     return {
-      id: jsonCommunity.id,
-      name: jsonCommunity.name,
+      id: String(c.id),
+      name: c.name,
       subtitle: 'Community Group',
-      eventTag: jsonCommunity.tags?.[0] || 'Community',
-      cover: jsonCommunity.cover || 'https://images.unsplash.com/photo-1557682250-33bd709cbe85?auto=format&fit=crop&w=1200&q=80',
+      eventTag: c.tags?.[0] || 'Community',
+      cover: c.cover || 'https://images.unsplash.com/photo-1557682250-33bd709cbe85?auto=format&fit=crop&w=1200&q=80',
       location: 'Indonesia',
       date: 'Open Community',
-      members: jsonCommunity.members || '0',
-      description: jsonCommunity.description || '',
-      tags: jsonCommunity.tags || [],
-      posts: [],
+      members: c.members || '0',
+      description: c.description || '',
+      tags: c.tags || [],
+      posts: [], // Empty posts for non-hardcoded communities
       activities: {
-        image: jsonCommunity.cover || 'https://images.unsplash.com/photo-1526481280695-3c46973ed205?auto=format&fit=crop&w=600&q=80',
+        image: c.cover || 'https://images.unsplash.com/photo-1526481280695-3c46973ed205?auto=format&fit=crop&w=600&q=80',
         list: [],
         gallery: []
       },
@@ -566,16 +594,8 @@ const community = computed(() => {
     } as CommunityDetail;
   }
 
-  // Fallback if absolutely nothing found
+  // 3. Fallback if absolutely nothing found
   const fallback = communityDirectory.find((entry) => entry.id === fallbackId)!;
-  // Try to update fallback with its JSON data if possible, just in case
-  const fallbackJson = (communitiesDataRaw as any[]).find(c => c.id === fallbackId);
-  if (fallbackJson && fallbackJson.cover) {
-     return {
-        ...fallback,
-        cover: fallbackJson.cover
-     }
-  }
   return fallback;
 });
 
@@ -1325,5 +1345,119 @@ onBeforeUnmount(() => {
   .post-card {
     padding: 16px;
   }
+}
+
+.community-events {
+  background: #ffffff;
+  border-radius: 20px;
+  border: 1px solid #e2e8f0;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+.community-events header h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-black);
+  text-transform: capitalize;
+  margin: 0;
+}
+.community-events header p {
+   color: #64748b;
+   font-size: 14px;
+   margin-top: 4px;
+   margin-bottom: 0;
+}
+.events-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+}
+.event-card-item {
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+}
+.event-card-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+}
+.event-thumb {
+  height: 140px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+.event-date-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 6px 10px;
+  border-radius: 10px;
+  text-align: center;
+  font-weight: 700;
+  color: var(--color-black);
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+  font-size: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.event-date-badge span {
+  font-size: 10px;
+  text-transform: uppercase;
+  color: #64748b;
+  margin-top: 2px;
+  font-weight: 600;
+}
+.event-info {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+.event-info h3 {
+  font-size: 15px;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.4;
+  color: var(--color-black);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.event-meta {
+  color: #64748b;
+  font-size: 13px;
+  margin-bottom: auto;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.view-event-btn {
+  margin-top: 12px;
+  text-align: center;
+  background: #f1f5f9;
+  color: #334155;
+  font-weight: 600;
+  padding: 8px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-size: 13px;
+  transition: all 0.2s;
+}
+.view-event-btn:hover {
+  background: var(--color-black);
+  color: #fff;
 }
 </style>
