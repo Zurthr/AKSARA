@@ -197,7 +197,7 @@ export const useLiterature = () => {
 
     try {
       const queryString = buildBooksQuery(page, perPage, extraParams)
-      const response = await api.get<unknown>(`/literatures?${queryString}`)
+      const response = await api.get<unknown>(`/resources?${queryString}`)
       return normalizePaginatedCollection<LiteratureBook>(response)
     } catch (err) {
       const errorMsg =
@@ -397,7 +397,7 @@ export function useLazyBooks(pageSize: number = 12) {
 
     try {
       // Attempt to fetch from Laravel Backend
-      const response = await api.get<unknown>(`/literatures?page=${nextPage}&per_page=${pageSize}`)
+      const response = await api.get<unknown>(`/resources?page=${nextPage}&per_page=${pageSize}`)
       const normalized = normalizePaginatedCollection<LiteratureBook>(response)
 
       // Map API Items

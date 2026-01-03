@@ -97,10 +97,7 @@ export const useAuth = () => {
   // Computed
   const isAuthenticated = computed(() => !!accessToken.value && !!user.value)
 
-  // Helper function for API calls
-  const apiCall = async <T>(endpoint: string, options: RequestInit = {}): Promise<T> => {
-    const url = `${baseURL}${endpoint}`
-
+  const buildRequestConfig = (options: RequestInit = {}) => {
     const defaultHeaders: Record<string, string> = {
       'Content-Type': 'application/json'
     }
@@ -109,15 +106,23 @@ export const useAuth = () => {
       defaultHeaders.Authorization = `Bearer ${accessToken.value}`
     }
 
-    const config = {
+    return {
       ...options,
       headers: {
         ...defaultHeaders,
         ...options.headers
       }
     }
+  }
 
-    const response = await fetch(url, config)
+  // Helper function for API calls
+  const apiCall = async <T>(
+    endpoint: string,
+    options: RequestInit = {},
+    allowRefresh: boolean = true
+  ): Promise<T> => {
+    const url = `${baseURL}${endpoint}`
+    const response = await fetch(url, buildRequestConfig(options))
     let data: any = null
 
     try {
@@ -130,6 +135,13 @@ export const useAuth = () => {
     }
 
     if (!response.ok) {
+      if (response.status === 401 && allowRefresh && refreshToken.value) {
+        const refreshed = await refreshAccessToken()
+        if (refreshed) {
+          return apiCall<T>(endpoint, options, false)
+        }
+      }
+
       const validationMessage = data?.errors
         ? Object.values<string[]>(data.errors)[0]?.[0]
         : null
@@ -309,7 +321,7 @@ export const useAuth = () => {
       const response = await apiCall<RefreshResponse>('/auth/refresh', {
         method: 'POST',
         body: JSON.stringify({ refreshToken: refreshToken.value })
-      })
+      }, false)
 
       accessToken.value = response.data.accessToken
 

@@ -1,8 +1,7 @@
 export const useAuthApiBase = () => {
   const config = useRuntimeConfig()
-  const fallback = 'http://localhost:8000/api'
-  const configuredBase = config.public.externalApiUrl || fallback
-  const baseUrl = process.dev ? '/api' : configuredBase
+  const fallback = 'http://localhost:3001/api'
+  const baseUrl = config.public.apiBaseUrl || fallback
 
   return baseUrl.replace(/\/$/, '')
 }
