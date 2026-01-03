@@ -193,6 +193,7 @@ const staticEvents = normalizeEventCollection(mockEvents as RawEventRecord[]).ma
     source: 'json'
   }
 })
+const contentApiBase = useContentApiBase()
 const { localEvents } = useLocalEvents()
 
 const normalizedLocalEvents = computed<EventItem[]>(() => {
@@ -226,7 +227,7 @@ const fetchLaravelEvents = async (query?: string): Promise<EventItem[]> => {
 
 const fetchMockEvents = async (query?: string): Promise<EventItem[]> => {
   try {
-    const url = new URL('http://localhost:3002/events')
+    const url = new URL(`${contentApiBase}/events`)
     if (query) {
       url.searchParams.set('q', query)
     }

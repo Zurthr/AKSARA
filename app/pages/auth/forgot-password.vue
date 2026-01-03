@@ -52,6 +52,7 @@ const email = ref('');
 const loading = ref(false);
 const error = ref('');
 const success = ref('');
+const authApiBase = useAuthApiBase();
 
 const handleReset = async () => {
   error.value = '';
@@ -59,7 +60,7 @@ const handleReset = async () => {
   loading.value = true;
   
   try {
-    const response = await $fetch('/api/auth/forgot-password', {
+    const response = await $fetch(`${authApiBase}/auth/forgot-password`, {
       method: 'POST',
       body: {
         email: email.value

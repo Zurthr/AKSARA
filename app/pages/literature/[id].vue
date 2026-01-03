@@ -274,6 +274,7 @@ const staticBooks = normalizeBookCollection(mockBooks as RawBookRecord[])
 
 const book = ref<RawBook | null>(null);
 const bookError = ref<string | null>(null);
+const contentApiBase = useContentApiBase()
 
 // Fetch related posts
 const relatedPosts = ref<Post[]>([]);
@@ -286,7 +287,7 @@ const fetchRelatedPosts = async () => {
 
   try {
     const query = book.value.related_posts.map(id => `id=${id}`).join('&');
-    const data = await $fetch<Post[]>(`http://localhost:3002/posts?${query}`);
+    const data = await $fetch<Post[]>(`${contentApiBase}/posts?${query}`);
     relatedPosts.value = data || [];
   } catch (err) {
     console.error('Error fetching related posts:', err);
@@ -818,4 +819,3 @@ const handleImageError = (event: Event) => {
   }
 }
 </style>
-

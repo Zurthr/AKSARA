@@ -47,6 +47,7 @@ const fallbackCommunities: Community[] = Array.isArray(mockCommunitiesData)
 // Communities API composable with lazy loading and dual-source fetching
 export const useCommunities = (pageSize: number = 10) => {
   const api = useApi()
+  const contentApiBase = useContentApiBase()
   const communities = ref<Community[]>([])
   const loading = ref(false)
   const error = ref<string | null>(null)
@@ -110,7 +111,7 @@ export const useCommunities = (pageSize: number = 10) => {
         mockParams.q = filterQuery
       }
 
-      const response = await $fetch<Community[]>('http://localhost:3002/communities', {
+      const response = await $fetch<Community[]>(`${contentApiBase}/communities`, {
         params: mockParams
       })
 

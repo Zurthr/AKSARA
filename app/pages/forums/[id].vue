@@ -137,7 +137,8 @@ interface Post {
   social_mentions?: SocialMention[];
 }
 
-const { data: post, error } = await useFetch<Post>(`http://localhost:3002/posts/${postId}`);
+const contentApiBase = useContentApiBase()
+const { data: post, error } = await useFetch<Post>(`${contentApiBase}/posts/${postId}`);
 
 if (error.value) {
   console.error('Error fetching post:', error.value);
@@ -146,7 +147,7 @@ if (error.value) {
 // Fetch social mentions from sosmed.json if post has social_mention_ids
 const socialMentions = ref<SocialMention[]>([]);
 if (post.value?.social_mention_ids?.length) {
-  const { data: sosmedData } = await useFetch<{ social_mentions: SocialMention[] }>('http://localhost:3002/sosmed');
+  const { data: sosmedData } = await useFetch<{ social_mentions: SocialMention[] }>(`${contentApiBase}/sosmed`);
   if (sosmedData.value?.social_mentions) {
     socialMentions.value = sosmedData.value.social_mentions.filter(
       (mention) => post.value?.social_mention_ids?.includes(mention.id)
@@ -160,7 +161,7 @@ if (post.value?.social_mention_ids?.length) {
 // Fetch related community
 const relatedCommunity = ref<Community | null>(null);
 if (post.value?.community_id) {
-  const { data } = await useFetch<Community>(`http://localhost:3002/communities/${post.value.community_id}`);
+  const { data } = await useFetch<Community>(`${contentApiBase}/communities/${post.value.community_id}`);
   relatedCommunity.value = data.value ?? null;
 }
 
@@ -168,7 +169,7 @@ if (post.value?.community_id) {
 const relatedBooks = ref<Book[] | null>(null);
 if (post.value?.related_books?.length) {
   const query = post.value.related_books.map(id => `id=${id}`).join('&');
-  const { data } = await useFetch<Book[]>(`http://localhost:3002/books?${query}`);
+  const { data } = await useFetch<Book[]>(`${contentApiBase}/books?${query}`);
   relatedBooks.value = data.value ?? null;
 }
 
@@ -186,7 +187,7 @@ interface Comment {
   replies: Comment[];
 }
 
-const { data: comments, error: commentsError } = await useFetch<Comment[]>(`http://localhost:3002/posts/${postId}/comments`);
+const { data: comments, error: commentsError } = await useFetch<Comment[]>(`${contentApiBase}/posts/${postId}/comments`);
 
 if (commentsError.value) {
   console.error('Error fetching comments:', commentsError.value);
@@ -234,7 +235,7 @@ interface ExternalPost {
 }
 
 // Fetch external posts
-const { data: externalPosts } = await useFetch<ExternalPost[]>(`http://localhost:3002/external-posts?post_id=${postId}`);
+const { data: externalPosts } = await useFetch<ExternalPost[]>(`${contentApiBase}/external-posts?post_id=${postId}`);
 </script>
 
 

@@ -81,7 +81,6 @@ export interface ApiError {
 }
 
 export const useAuth = () => {
-  const config = useRuntimeConfig()
   const router = useRouter()
 
   // Shared auth state across app instances
@@ -93,9 +92,7 @@ export const useAuth = () => {
   const isInitialized = useState<boolean>('auth_is_initialized', () => false)
 
   // Base API URL - Use proxy in development to avoid CORS
-  const baseURL = process.dev
-    ? '/api'  // Use proxy in development
-    : (config.public.authApiUrl || 'https://aksara-api.fruz.xyz/api')
+  const baseURL = useAuthApiBase()
 
   // Computed
   const isAuthenticated = computed(() => !!accessToken.value && !!user.value)

@@ -136,6 +136,7 @@ const mergedBooksData = computed<LiteratureBook[]>(() => {
 })
 
 const route = useRoute()
+const contentApiBase = useContentApiBase()
 
 const fetchLaravelBooks = async (): Promise<LiteratureBook[]> => {
   try {
@@ -157,7 +158,7 @@ const fetchLaravelBooks = async (): Promise<LiteratureBook[]> => {
 
 const fetchMockBooks = async (): Promise<LiteratureBook[]> => {
   try {
-    const response = await $fetch<RawBookRecord[]>('http://localhost:3002/books')
+    const response = await $fetch<RawBookRecord[]>(`${contentApiBase}/books`)
     const normalized = normalizeBookCollection(response)
 
     return normalized.map((book, index) => ({
@@ -510,4 +511,3 @@ const suggestedBooks = computed(() => {
   }
 }
 </style>
-

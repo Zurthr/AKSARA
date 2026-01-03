@@ -3,6 +3,10 @@
 // npm install -D @types/node
 import { fileURLToPath } from "node:url";
 
+const apiBaseUrl = process.env.NUXT_PUBLIC_API_BASE_URL || 'http://localhost:3001/api'
+const externalApiUrl = (process.env.NUXT_PUBLIC_EXTERNAL_API_URL || 'http://localhost:8000/api').replace(/\/$/, '')
+const embedApiUrl = process.env.NUXT_PUBLIC_EMBED_API_URL || '/proxy-embed'
+
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
@@ -14,17 +18,17 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      apiBaseUrl: process.env.NUXT_PUBLIC_API_BASE_URL || 'http://localhost:8000/api',
-      authApiUrl: process.env.NUXT_PUBLIC_AUTH_API_URL || 'https://aksara-api.fruz.xyz/api',
+      apiBaseUrl,
+      externalApiUrl,
       // Use proxy path for embeds to bypass CORS in development
-      embedApiUrl: process.env.NUXT_PUBLIC_EMBED_API_URL || '/proxy-embed'
+      embedApiUrl
     }
   },
   // Configure proxy for external APIs in development to bypass CORS
   nitro: {
     routeRules: {
       '/api/auth/**': {
-        proxy: 'https://aksara-api.fruz.xyz/api/auth/**'
+        proxy: `${externalApiUrl}/auth/**`
       },
       '/proxy-embed/**': {
         proxy: 'https://aksara-api.fruz.xyz/api/**'

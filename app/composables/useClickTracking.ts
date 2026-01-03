@@ -23,9 +23,6 @@ export interface ClickEvent {
 // Session ID key in localStorage
 const SESSION_ID_KEY = 'aksara_session_id'
 
-// API endpoint
-const API_ENDPOINT = 'http://localhost:3002/click_events'
-
 /**
  * Generate or retrieve anonymous session ID
  */
@@ -58,7 +55,7 @@ function getCurrentPage(): string {
 /**
  * Send event immediately using sendBeacon (works during navigation) or fetch as fallback
  */
-function sendEvent(event: ClickEvent): void {
+function sendEvent(apiEndpoint: string, event: ClickEvent): void {
     if (typeof window === 'undefined') return
 
     const payload = JSON.stringify(event)
@@ -66,7 +63,7 @@ function sendEvent(event: ClickEvent): void {
     // Try sendBeacon first (works even during page navigation)
     if (navigator.sendBeacon) {
         const blob = new Blob([payload], { type: 'application/json' })
-        const sent = navigator.sendBeacon(API_ENDPOINT, blob)
+        const sent = navigator.sendBeacon(apiEndpoint, blob)
         if (sent) {
             console.log(`[ClickTracking] Sent via beacon: ${event.event_type}`, event.item_title)
             return
@@ -74,7 +71,7 @@ function sendEvent(event: ClickEvent): void {
     }
 
     // Fallback to fetch (fire and forget)
-    fetch(API_ENDPOINT, {
+    fetch(apiEndpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: payload,
@@ -107,6 +104,9 @@ function createEvent(
 }
 
 export function useClickTracking() {
+    const contentApiBase = useContentApiBase()
+    const apiEndpoint = `${contentApiBase}/click_events`
+
     /**
      * Track book click
      */
@@ -124,7 +124,7 @@ export function useClickTracking() {
             book.tags,
             { author: book.author, rating: book.rating }
         )
-        sendEvent(event)
+        sendEvent(apiEndpoint, event)
     }
 
     /**
@@ -145,7 +145,7 @@ export function useClickTracking() {
             tags,
             { author: post.author?.name, stars: post.stars }
         )
-        sendEvent(event)
+        sendEvent(apiEndpoint, event)
     }
 
     /**
@@ -164,7 +164,7 @@ export function useClickTracking() {
             community.tags,
             { members: community.members }
         )
-        sendEvent(event)
+        sendEvent(apiEndpoint, event)
     }
 
     /**
@@ -184,7 +184,7 @@ export function useClickTracking() {
             eventItem.tags,
             { date: eventItem.date, community_id: eventItem.community_id }
         )
-        sendEvent(event)
+        sendEvent(apiEndpoint, event)
     }
 
     /**
@@ -206,7 +206,7 @@ export function useClickTracking() {
         if (search.source_page) {
             event.source_page = search.source_page
         }
-        sendEvent(event)
+        sendEvent(apiEndpoint, event)
     }
 
     /**
@@ -225,7 +225,7 @@ export function useClickTracking() {
             community.tags,
             { members: community.members }
         )
-        sendEvent(event)
+        sendEvent(apiEndpoint, event)
     }
 
     return {

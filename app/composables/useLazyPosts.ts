@@ -34,6 +34,7 @@ export function useLazyPosts(pageSize: number = 10) {
     const currentPage = ref(0)
     const error = ref<Error | null>(null)
     const currentSearchQuery = ref('')
+    const contentApiBase = useContentApiBase()
 
     const loadMore = async () => {
         if (isLoading.value || !hasMore.value) return
@@ -52,7 +53,7 @@ export function useLazyPosts(pageSize: number = 10) {
                 params.q = currentSearchQuery.value
             }
 
-            const response = await $fetch<Post[]>(`http://localhost:3002/posts`, {
+            const response = await $fetch<Post[]>(`${contentApiBase}/posts`, {
                 params
             })
 
