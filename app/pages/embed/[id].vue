@@ -1,11 +1,12 @@
 <script setup lang="ts">
 const route = useRoute()
+const config = useRuntimeConfig()
 const configId = route.params.id as string
 
 // 1. Fetch Data (Public Endpoint - client-side only to avoid SSR caching issues)
 // This endpoint is public and doesn't require auth
 const { data, error, pending } = useLazyFetch(`/embeds/${configId}`, {
-  baseURL: 'https://aksara-api.fruz.xyz/api',
+  baseURL: config.public.apiBaseUrl,
   server: false // Only fetch on client-side to avoid SSR issues
 })
 

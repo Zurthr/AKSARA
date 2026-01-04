@@ -24,12 +24,25 @@
       </div>
 
       <!-- Empty state -->
-      <div v-else-if="embeds.length === 0" class="flex items-center justify-center py-12">
-        <div class="text-center">
-          <div class="text-gray-400 text-4xl mb-4">📦</div>
-          <h3 class="text-lg font-medium text-gray-900 mb-2">No embeds yet</h3>
-          <p class="text-gray-600 mb-4">Create your first embed widget to get started</p>
-          <CreateEmbedCTA @create="handleCreateEmbed" />
+      <div v-else-if="embeds.length === 0" class="empty-state">
+        <div class="empty-illustration" aria-hidden="true">
+          <div class="empty-card empty-card-primary"></div>
+          <div class="empty-card empty-card-secondary"></div>
+          <div class="empty-card empty-card-tertiary"></div>
+          <div class="empty-glow"></div>
+        </div>
+        <div class="empty-copy">
+          <span class="empty-kicker">Embeds</span>
+          <h3>Start with a curated widget</h3>
+          <p>
+            Your embed library is empty. Use the create button in the sidebar to publish
+            resource lists or event highlights.
+          </p>
+          <div class="empty-tags">
+            <span>Resource lists</span>
+            <span>Event picks</span>
+            <span>Custom filters</span>
+          </div>
         </div>
       </div>
 
@@ -300,6 +313,109 @@ const handleSaveEmbed = async (embedData: any) => {
   gap: 16px;
 }
 
+.empty-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  padding: 48px 24px;
+  background: linear-gradient(135deg, #fef9e7, #eef2ff);
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+  flex-wrap: wrap;
+}
+
+.empty-illustration {
+  position: relative;
+  width: 220px;
+  height: 180px;
+}
+
+.empty-card {
+  position: absolute;
+  width: 150px;
+  height: 110px;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 18px 30px rgba(15, 23, 42, 0.15);
+}
+
+.empty-card-primary {
+  top: 20px;
+  left: 20px;
+  border: 1px solid #fde68a;
+}
+
+.empty-card-secondary {
+  top: 45px;
+  left: 50px;
+  background: #111827;
+  opacity: 0.9;
+}
+
+.empty-card-tertiary {
+  top: 70px;
+  left: 0;
+  border: 1px dashed #94a3b8;
+  background: #f8fafc;
+}
+
+.empty-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(251, 191, 36, 0.25), transparent 60%);
+  filter: blur(12px);
+  z-index: -1;
+}
+
+.empty-copy {
+  max-width: 360px;
+  color: #0f172a;
+}
+
+.empty-kicker {
+  display: inline-flex;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #fff7cc;
+  color: #92400e;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.empty-copy h3 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.empty-copy p {
+  color: #475569;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.empty-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.empty-tags span {
+  padding: 6px 12px;
+  background: #ffffff;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #1f2937;
+  border: 1px solid #e2e8f0;
+}
+
 @media (max-width: 768px) {
   .embeds-index {
     flex-direction: column;
@@ -312,6 +428,19 @@ const handleSaveEmbed = async (embedData: any) => {
 
   .page-subtitle {
     font-size: 1rem;
+  }
+
+  .empty-state {
+    padding: 32px 16px;
+    text-align: center;
+  }
+
+  .empty-copy {
+    max-width: 100%;
+  }
+
+  .empty-tags {
+    justify-content: center;
   }
 }
 </style>

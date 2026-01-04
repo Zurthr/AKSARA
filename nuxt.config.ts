@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 
 const apiBaseUrl = process.env.NUXT_PUBLIC_API_BASE_URL || 'http://localhost:3001/api'
 const externalApiUrl = (process.env.NUXT_PUBLIC_EXTERNAL_API_URL || 'http://localhost:8000/api').replace(/\/$/, '')
-const embedApiUrl = process.env.NUXT_PUBLIC_EMBED_API_URL || '/proxy-embed'
+const embedApiUrl = process.env.NUXT_PUBLIC_EMBED_API_URL || apiBaseUrl
 
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
@@ -20,7 +20,6 @@ export default defineNuxtConfig({
     public: {
       apiBaseUrl,
       externalApiUrl,
-      // Use proxy path for embeds to bypass CORS in development
       embedApiUrl
     }
   },
@@ -29,9 +28,6 @@ export default defineNuxtConfig({
     routeRules: {
       '/api/auth/**': {
         proxy: `${externalApiUrl}/auth/**`
-      },
-      '/proxy-embed/**': {
-        proxy: 'https://aksara-api.fruz.xyz/api/**'
       }
     }
   }

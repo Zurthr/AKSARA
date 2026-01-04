@@ -158,7 +158,7 @@ const fetchLaravelBooks = async (): Promise<LiteratureBook[]> => {
 
 const fetchMockBooks = async (): Promise<LiteratureBook[]> => {
   try {
-    const response = await $fetch<RawBookRecord[]>(`${contentApiBase}/books`)
+    const response = await $fetch<RawBookRecord[]>(`${contentApiBase}/resources`)
     const normalized = normalizeBookCollection(response)
 
     return normalized.map((book, index) => ({
