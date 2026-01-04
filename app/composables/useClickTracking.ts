@@ -22,6 +22,8 @@ export interface ClickEvent {
 
 // Session ID key in localStorage
 const SESSION_ID_KEY = 'aksara_session_id'
+const RECENT_EVENTS_KEY = 'aksara_recent_events'
+const MAX_RECENT_EVENTS = 25
 
 /**
  * Generate or retrieve anonymous session ID
@@ -50,6 +52,29 @@ function getCurrentPage(): string {
         return '/'
     }
     return window.location.pathname
+}
+
+type RecommendationEvent = {
+    event_type: string
+    item_id: string | number
+    item_type: 'post' | 'book' | 'event' | 'community'
+    timestamp: string
+}
+
+const storeRecentEvent = (eventType: RecommendationEvent['event_type'], itemId: string | number, itemType: RecommendationEvent['item_type']) => {
+    if (typeof window === 'undefined') return
+
+    const recentRaw = localStorage.getItem(RECENT_EVENTS_KEY)
+    const recent = recentRaw ? JSON.parse(recentRaw) as RecommendationEvent[] : []
+    const entry: RecommendationEvent = {
+        event_type: eventType,
+        item_id: itemId,
+        item_type: itemType,
+        timestamp: new Date().toISOString()
+    }
+
+    const next = [entry, ...recent].slice(0, MAX_RECENT_EVENTS)
+    localStorage.setItem(RECENT_EVENTS_KEY, JSON.stringify(next))
 }
 
 /**
@@ -124,6 +149,7 @@ export function useClickTracking() {
             book.tags,
             { author: book.author, rating: book.rating }
         )
+        storeRecentEvent('book_click', book.id, 'book')
         sendEvent(apiEndpoint, event)
     }
 
@@ -145,6 +171,7 @@ export function useClickTracking() {
             tags,
             { author: post.author?.name, stars: post.stars }
         )
+        storeRecentEvent('post_click', post.id, 'post')
         sendEvent(apiEndpoint, event)
     }
 
@@ -164,6 +191,7 @@ export function useClickTracking() {
             community.tags,
             { members: community.members }
         )
+        storeRecentEvent('community_click', community.id, 'community')
         sendEvent(apiEndpoint, event)
     }
 
@@ -184,6 +212,7 @@ export function useClickTracking() {
             eventItem.tags,
             { date: eventItem.date, community_id: eventItem.community_id }
         )
+        storeRecentEvent('event_click', eventItem.id, 'event')
         sendEvent(apiEndpoint, event)
     }
 
@@ -225,6 +254,7 @@ export function useClickTracking() {
             community.tags,
             { members: community.members }
         )
+        storeRecentEvent('community_join', community.id, 'community')
         sendEvent(apiEndpoint, event)
     }
 
@@ -235,5 +265,20 @@ export function useClickTracking() {
         trackEventClick,
         trackSearch,
         trackCommunityJoin
+    }
+}
+
+export const getRecentRecommendationEvents = (): RecommendationEvent[] => {
+    if (typeof window === 'undefined') return []
+
+    const recentRaw = localStorage.getItem(RECENT_EVENTS_KEY)
+    if (!recentRaw) return []
+
+    try {
+        const parsed = JSON.parse(recentRaw)
+        return Array.isArray(parsed) ? parsed : []
+    } catch (err) {
+        console.error('Failed to parse recent events:', err)
+        return []
     }
 }

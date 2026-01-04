@@ -79,6 +79,8 @@ const performRequest = async <T>(method: HttpMethod, url: string, data?: unknown
 
 export const useEmbedApi = () => {
   const config = useRuntimeConfig()
+  const auth = useAuth()
+  const accessToken = useState<string | null>('auth_access_token')
   const baseUrl = config.public.embedApiUrl || '/proxy-embed'
 
   const request = async <T>(method: HttpMethod, path: string, data?: unknown, options?: FetchOptions) => {
@@ -94,11 +96,16 @@ export const useEmbedApi = () => {
 
   // Add authentication if token is available
   const getAuthHeaders = () => {
-    if (typeof window !== 'undefined') {
-      const token = localStorage.getItem('accessToken')
-      return token ? { Authorization: `Bearer ${token}` } : {}
+    const token = accessToken.value
+    return token ? { Authorization: `Bearer ${token}` } : {}
+  }
+
+  const ensureAuthHeaders = async () => {
+    const sessionOk = await auth.ensureValidSession()
+    if (!sessionOk) {
+      return {}
     }
-    return {}
+    return getAuthHeaders()
   }
 
   return {
@@ -107,27 +114,27 @@ export const useEmbedApi = () => {
       request<T>('GET', `/embeds/${id}`, undefined, options),
 
     // Authenticated endpoints
-    getEmbeds: <T>(options?: FetchOptions) =>
+    getEmbeds: async <T>(options?: FetchOptions) =>
       request<T>('GET', '/embeds', undefined, {
-        headers: { ...getAuthHeaders(), ...options?.headers },
+        headers: { ...(await ensureAuthHeaders()), ...options?.headers },
         ...options
       }),
 
-    createEmbed: <T>(data: unknown, options?: FetchOptions) =>
+    createEmbed: async <T>(data: unknown, options?: FetchOptions) =>
       request<T>('POST', '/embeds', data, {
-        headers: { ...getAuthHeaders(), ...options?.headers },
+        headers: { ...(await ensureAuthHeaders()), ...options?.headers },
         ...options
       }),
 
-    updateEmbed: <T>(id: string, data: unknown, options?: FetchOptions) =>
+    updateEmbed: async <T>(id: string, data: unknown, options?: FetchOptions) =>
       request<T>('PUT', `/embeds/${id}`, data, {
-        headers: { ...getAuthHeaders(), ...options?.headers },
+        headers: { ...(await ensureAuthHeaders()), ...options?.headers },
         ...options
       }),
 
-    deleteEmbed: <T>(id: string, options?: FetchOptions) =>
+    deleteEmbed: async <T>(id: string, options?: FetchOptions) =>
       request<T>('DELETE', `/embeds/${id}`, undefined, {
-        headers: { ...getAuthHeaders(), ...options?.headers },
+        headers: { ...(await ensureAuthHeaders()), ...options?.headers },
         ...options
       }),
   }

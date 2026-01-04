@@ -4,6 +4,17 @@
 
         <div v-if="!searchQuery && !hasActiveFilters" class="literature-sections">
           <BookSection
+            v-if="recommendationsLoaded && recommendedBooks.length"
+            title="Recommended Reads"
+            :books="recommendedBooks"
+            section-type="default"
+          />
+          <div v-else-if="recommendationsLoaded && !recommendedBooks.length" class="recommendations-empty">
+            <span class="empty-pill">Recommendations</span>
+            <h3>No personalized reads yet</h3>
+            <p>Explore a few titles and we will curate tailored picks for you.</p>
+          </div>
+          <BookSection
             title="Top Books for you"
             :books="topBooks"
             see-more-link="/literature?sort=top"
@@ -68,6 +79,8 @@ import BookSection from '~/components/Literature/BookSection.vue';
 import BookGrid from '~/components/Literature/BookGrid.vue';
 import LiteratureFilterSidebar from '~/components/Literature/LiteratureFilterSidebar.vue';
 import TrendingSidebar from '~/components/TrendingSidebar.vue';
+import { mapToNormalizedBook } from '~/composables/useLiterature'
+import { useRecommendations } from '~/composables/useRecommendations'
 
 // Literature API integration
 import { useLiterature } from '~/composables/useLiterature'
@@ -135,6 +148,41 @@ const mergedBooksData = computed<LiteratureBook[]>(() => {
   })
 })
 
+const { fetchRecommendations } = useRecommendations()
+const recommendedBooks = ref<ReturnType<typeof mapToNormalizedBook>[]>([])
+const recommendationsLoaded = ref(false)
+
+type ResourceResponse = {
+  success: boolean;
+  data: LiteratureBook;
+};
+
+const fetchRecommendedBooks = async () => {
+  recommendationsLoaded.value = false
+  const baseUrl = useRuntimeConfig().public.apiBaseUrl
+
+  try {
+    const items = await fetchRecommendations('book', 6)
+    if (!items.length) {
+      recommendedBooks.value = []
+      return
+    }
+
+    const details = await Promise.all(
+      items.map(item => $fetch<ResourceResponse>(`${baseUrl}/resources/${item.id}`))
+    )
+
+    recommendedBooks.value = details
+      .filter(detail => detail?.success && detail.data)
+      .map(detail => mapToNormalizedBook(detail.data))
+  } catch (err) {
+    console.error('Failed to load recommended books:', err)
+    recommendedBooks.value = []
+  } finally {
+    recommendationsLoaded.value = true
+  }
+}
+
 const route = useRoute()
 const contentApiBase = useContentApiBase()
 
@@ -186,6 +234,7 @@ const fetchBooks = async () => {
 // Ensure books are fetched when component is mounted and on route change
 onMounted(async () => {
   await fetchBooks()
+  await fetchRecommendedBooks()
 })
 
 // Refetch when route changes
@@ -480,6 +529,39 @@ const suggestedBooks = computed(() => {
   display: flex;
   flex-direction: column;
   gap: 20px;
+}
+
+.recommendations-empty {
+  margin-left: 16px;
+  background: linear-gradient(135deg, #fff7d6, #eef2ff);
+  border-radius: 16px;
+  padding: 24px;
+  border: 1px solid #e2e8f0;
+  color: #0f172a;
+}
+
+.recommendations-empty h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 12px 0 8px;
+}
+
+.recommendations-empty p {
+  font-size: 14px;
+  color: #475569;
+  margin: 0;
+}
+
+.empty-pill {
+  display: inline-flex;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: #fff1a8;
+  color: #92400e;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
 
 .search-results {

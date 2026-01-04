@@ -58,6 +58,34 @@
 
           <!-- Events grid -->
           <div v-else class="events-grid">
+            <section v-if="recommendationsLoaded && recommendedEvents.length" class="recommendations-panel">
+              <div class="recommendations-header">
+                <div>
+                  <h3>Events for you</h3>
+                  <p>Curated from your recent activity</p>
+                </div>
+              </div>
+              <div class="recommendations-grid">
+                <NuxtLink
+                  v-for="eventItem in recommendedEvents"
+                  :key="eventItem.id"
+                  :to="`/events/${eventItem.id}`"
+                  class="recommendation-card"
+                  @click="handleEventClick(eventItem)"
+                >
+                  <div class="rec-title">{{ eventItem.title }}</div>
+                  <div class="rec-meta">
+                    <span v-if="eventItem.date">{{ formatEventDate(eventItem.date).short }}</span>
+                    <span v-if="eventItem.location">{{ eventItem.location }}</span>
+                  </div>
+                </NuxtLink>
+              </div>
+            </section>
+            <section v-else-if="recommendationsLoaded && !recommendedEvents.length" class="recommendations-empty">
+              <span class="empty-pill">Recommendations</span>
+              <h3>No event picks yet</h3>
+              <p>Browse a few events and we will surface personalized suggestions here.</p>
+            </section>
             <NuxtLink
               v-for="eventItem in filteredEvents"
               :key="eventItem.id"
@@ -144,6 +172,7 @@ import { useLocalEvents } from '~/composables/useLocalEvents'
 import mockEvents from 'mockData/events.json'
 import { mergeEventCollections, normalizeEventCollection } from '~/utils/events-normalizer'
 import { useClickTracking } from '~/composables/useClickTracking'
+import { useRecommendations } from '~/composables/useRecommendations'
 
 const runtimeConfig = useRuntimeConfig()
 
@@ -166,6 +195,7 @@ const listFallbackImage = 'https://images.unsplash.com/photo-1498050108023-c5249
 // Use Laravel API
 const { getAllEvents, loading, error } = useEvents()
 const { trackEventClick } = useClickTracking()
+const { fetchRecommendations } = useRecommendations()
 
 const {
   events: lazyEvents,
@@ -250,6 +280,40 @@ const fetchMockEvents = async (query?: string): Promise<EventItem[]> => {
   }
 }
 
+const recommendedEvents = ref<EventItem[]>([])
+const recommendationsLoaded = ref(false)
+
+type EventResponse = {
+  success: boolean;
+  data: EventItem;
+};
+
+const fetchRecommendedEvents = async () => {
+  recommendationsLoaded.value = false
+  const baseUrl = runtimeConfig.public.apiBaseUrl
+
+  try {
+    const items = await fetchRecommendations('event', 4)
+    if (!items.length) {
+      recommendedEvents.value = []
+      return
+    }
+
+    const details = await Promise.all(
+      items.map(item => $fetch<EventResponse>(`${baseUrl}/events/${item.id}`))
+    )
+
+    recommendedEvents.value = details
+      .filter(detail => detail?.success && detail.data)
+      .map(detail => detail.data)
+  } catch (err) {
+    console.error('Failed to load recommended events:', err)
+    recommendedEvents.value = []
+  } finally {
+    recommendationsLoaded.value = true
+  }
+}
+
 const fetchEvents = async (query?: string) => {
   const normalizedQuery = query?.trim() || undefined
 
@@ -318,6 +382,7 @@ const setupIntersectionObserver = () => {
 
 onMounted(() => {
   setupIntersectionObserver()
+  fetchRecommendedEvents()
 })
 
 onBeforeUnmount(() => {
@@ -586,6 +651,94 @@ const popularTags = [
   flex-direction: column;
   gap: 20px;
   margin-left: 31px;
+}
+
+.recommendations-panel {
+  background: linear-gradient(135deg, #fff7d6, #eef2ff);
+  border-radius: 18px;
+  padding: 20px;
+  border: 1px solid #e2e8f0;
+}
+
+.recommendations-header h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 6px;
+}
+
+.recommendations-header p {
+  margin: 0 0 16px;
+  color: #64748b;
+  font-size: 13px;
+}
+
+.recommendations-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.recommendation-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 14px 16px;
+  border: 1px solid #e2e8f0;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.recommendation-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 18px rgba(15, 23, 42, 0.12);
+}
+
+.rec-title {
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 8px;
+}
+
+.rec-meta {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-size: 12px;
+  color: #64748b;
+}
+
+.recommendations-empty {
+  margin-top: 8px;
+  background: linear-gradient(135deg, #fff7d6, #eef2ff);
+  border-radius: 16px;
+  padding: 20px;
+  border: 1px solid #e2e8f0;
+  color: #0f172a;
+}
+
+.recommendations-empty h3 {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 12px 0 6px;
+}
+
+.recommendations-empty p {
+  font-size: 13px;
+  color: #475569;
+  margin: 0;
+}
+
+.empty-pill {
+  display: inline-flex;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: #fff1a8;
+  color: #92400e;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
 
 .event-card {
