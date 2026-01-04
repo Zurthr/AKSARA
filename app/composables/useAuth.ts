@@ -94,8 +94,26 @@ export const useAuth = () => {
   // Base API URL - Use proxy in development to avoid CORS
   const baseURL = useAuthApiBase()
 
+  const getTokenExpiryMs = (token: string) => {
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]))
+      if (!payload?.exp) return null
+      return payload.exp * 1000
+    } catch (err) {
+      console.error('Failed to decode access token:', err)
+      return null
+    }
+  }
+
+  const isAccessTokenExpired = () => {
+    if (!accessToken.value) return true
+    const expiry = getTokenExpiryMs(accessToken.value)
+    if (!expiry) return true
+    return Date.now() >= expiry
+  }
+
   // Computed
-  const isAuthenticated = computed(() => !!accessToken.value && !!user.value)
+  const isAuthenticated = computed(() => !!accessToken.value && !!user.value && !isAccessTokenExpired())
 
   const buildRequestConfig = (options: RequestInit = {}) => {
     const defaultHeaders: Record<string, string> = {
@@ -122,6 +140,12 @@ export const useAuth = () => {
     allowRefresh: boolean = true
   ): Promise<T> => {
     const url = `${baseURL}${endpoint}`
+    if (allowRefresh && refreshToken.value && isAccessTokenExpired()) {
+      const refreshed = await refreshAccessToken()
+      if (!refreshed) {
+        throw new Error('Session expired')
+      }
+    }
     const response = await fetch(url, buildRequestConfig(options))
     let data: any = null
 
@@ -338,6 +362,16 @@ export const useAuth = () => {
     }
   }
 
+  const ensureValidSession = async () => {
+    if (!accessToken.value || !user.value) return false
+    if (!isAccessTokenExpired()) return true
+    if (!refreshToken.value) {
+      clearAuthData()
+      return false
+    }
+    return refreshAccessToken()
+  }
+
   // Logout user
   const logout = async () => {
     try {
@@ -364,19 +398,13 @@ export const useAuth = () => {
   // Check if token needs refresh (optional enhancement)
   const checkTokenExpiry = () => {
     if (!accessToken.value) return
+    const expiry = getTokenExpiryMs(accessToken.value)
+    if (!expiry) return
 
-    try {
-      // Decode JWT payload (basic check)
-      const payload = JSON.parse(atob(accessToken.value.split('.')[1]))
-      const expiry = payload.exp * 1000 // Convert to milliseconds
-      const now = Date.now()
-
-      // If token expires in less than 5 minutes, refresh it
-      if (expiry - now < 5 * 60 * 1000) {
-        refreshAccessToken()
-      }
-    } catch (err) {
-      console.error('Token validation failed:', err)
+    const now = Date.now()
+    // If token expires in less than 5 minutes, refresh it
+    if (expiry - now < 5 * 60 * 1000) {
+      refreshAccessToken()
     }
   }
 
@@ -394,6 +422,7 @@ export const useAuth = () => {
     getProfile,
     updateProfile,
     refreshAccessToken,
+    ensureValidSession,
     restoreSession,
     clearError,
     checkTokenExpiry

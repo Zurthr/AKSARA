@@ -1,8 +1,10 @@
-export default defineNuxtRouteMiddleware((to) => {
-  const { isAuthenticated } = useAuth()
-  
+export default defineNuxtRouteMiddleware(async (to) => {
+  const { ensureValidSession } = useAuth()
+
+  const hasSession = await ensureValidSession()
+
   // If user is not authenticated, redirect to login
-  if (!isAuthenticated.value) {
+  if (!hasSession) {
     return navigateTo('/auth/login')
   }
 })
