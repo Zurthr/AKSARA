@@ -9,6 +9,8 @@ This guide documents how to call the recommendations API and render results.
 Query params:
 - `limit` (number, optional): max items to return, default 5, max 50.
 - `type` (string, optional): `book`, `event`, `post`, `community`.
+- `tag` (string, optional): single tag to filter/boost results.
+- `tags` (string, optional): comma-separated tags (e.g. `tags=typescript,javascript`).
 
 Auth:
 - If the request is authenticated, the backend uses recent activity logs.
@@ -60,3 +62,10 @@ Use the `type` field to decide which detail endpoint to call:
 `GET /api/recommendations/health`
 
 Use this for health checks or UI fallbacks.
+
+## Tag Suggestions (Personalized)
+
+`GET /api/recommendations/tags?limit=6`
+
+Returns a list of tags based on the user profile interest scores. If scores are empty,
+it falls back to recent activity + engine tags.

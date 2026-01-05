@@ -171,10 +171,6 @@ const fetchRecommendedBooks = async () => {
     );
 
     recommendedBooks.value = details.map(({ item, detail }) => {
-      console.log("[ReadsSection] Recommendation detail", {
-        item,
-        detail,
-      });
       if (detail?.success && detail.data) {
         const normalized = mapToNormalizedBook(detail.data);
         const title = normalized.title?.trim()

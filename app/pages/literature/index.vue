@@ -18,13 +18,25 @@
           </div>
           
           <BookSection
-            v-if="suggestedTag"
+            v-if="suggestedTag && suggestedBooks.length"
             :title="`Looking for ${suggestedTag}?`"
             :books="suggestedBooks"
             :see-more-link="`/literature?tag=${suggestedTag}`"
             section-type="recommendation"
             :highlighted-tag="suggestedTag"
           />
+          <div v-else-if="suggestedTag && tagRecommendationsLoaded" class="tag-empty">
+            <span class="empty-pill">Looking for {{ suggestedTag }}</span>
+            <h3>Still narrowing it down</h3>
+            <p>Keep exploring books and we'll tailor this section with better matches.</p>
+          </div>
+          <div v-else-if="!suggestedTag && tagRecommendationsLoaded" class="tag-empty">
+            <div class="section-title">
+              <span>Looking for</span>
+              <span class="tag-highlight">?</span>
+            </div>
+            <p>Open a few books so we can learn what you like and personalize this section.</p>
+          </div>
         </div>
 
         <div v-else-if="searchQuery || hasActiveFilters" class="search-results">
@@ -142,9 +154,12 @@ const mergedBooksData = computed<LiteratureBook[]>(() => {
   })
 })
 
-const { fetchRecommendations } = useRecommendations()
+const { fetchRecommendations, fetchTagSuggestions } = useRecommendations()
 const recommendedBooks = ref<ReturnType<typeof mapToNormalizedBook>[]>([])
 const recommendationsLoaded = ref(false)
+const tagRecommendations = ref<ReturnType<typeof mapToNormalizedBook>[]>([])
+const tagRecommendationsLoaded = ref(false)
+const suggestedTagFromApi = ref<string | null>(null)
 
 const topBooksForYou = computed(() => {
   if (recommendationsLoaded.value && recommendedBooks.value.length) {
@@ -181,6 +196,80 @@ const fetchRecommendedBooks = async () => {
     recommendedBooks.value = []
   } finally {
     recommendationsLoaded.value = true
+  }
+}
+
+const mapRecommendationItemsToBooks = async (items: Array<{ id: string; title: string }>) => {
+  const baseUrl = useRuntimeConfig().public.apiBaseUrl
+
+  const details = await Promise.all(
+    items.map(item =>
+      $fetch<ResourceResponse>(`${baseUrl}/resources/${item.id}`)
+        .then(detail => ({ item, detail }))
+        .catch(() => ({ item, detail: null }))
+    )
+  )
+
+  return details.map(({ item, detail }) => {
+    if (detail?.success && detail.data) {
+      const normalized = mapToNormalizedBook(detail.data)
+      const title = normalized.title?.trim() ? normalized.title : (item.title || 'Recommended')
+      return {
+        ...normalized,
+        id: item.id,
+        title
+      }
+    }
+
+    return {
+      id: item.id,
+      title: item.title || 'Recommended',
+      author: '',
+      image: '/images/book-cover-placeholder.svg',
+      tags: [],
+      rating: 0
+    }
+  })
+}
+
+const fetchSuggestedTags = async () => {
+  const tags = await fetchTagSuggestions(6)
+  if (!tags.length) {
+    return
+  }
+
+  for (const tag of tags) {
+    const items = await fetchRecommendations('book', 8, { tag })
+    if (!items.length) {
+      continue
+    }
+
+    suggestedTagFromApi.value = tag
+    tagRecommendationsLoaded.value = false
+    tagRecommendations.value = await mapRecommendationItemsToBooks(items)
+    tagRecommendationsLoaded.value = true
+    return
+  }
+
+  tagRecommendationsLoaded.value = true
+}
+
+const fetchTagRecommendations = async (tag: string) => {
+  tagRecommendationsLoaded.value = false
+
+  try {
+    const items = await fetchRecommendations('book', 8, { tag })
+    if (!items.length) {
+      tagRecommendations.value = []
+      return
+    }
+
+    tagRecommendations.value = await mapRecommendationItemsToBooks(items)
+  } catch (err) {
+    console.error('Failed to load tag recommendations:', err)
+    tagRecommendations.value = []
+  } finally {
+    tagRecommendationsLoaded.value = true
   }
 }
 
@@ -236,12 +325,17 @@ const fetchBooks = async () => {
 onMounted(async () => {
   await fetchBooks()
   await fetchRecommendedBooks()
+  await fetchSuggestedTags()
+  if (suggestedTag.value && !(searchQuery.value || hasActiveFilters.value)) {
+    await fetchTagRecommendations(suggestedTag.value)
+  }
 })
 
 // Refetch when route changes
 watch(() => route.fullPath, async () => {
   await fetchBooks()
 }, { immediate: false })
+
 
 // Convert normalized books to UI format for compatibility
 const allBooks = computed(() => {
@@ -439,29 +533,6 @@ const topBooks = computed(() => {
     .slice(0, 8);
 });
 
-// Tags to cycle through for suggested books
-const suggestedTagsCycle = ['PHP', 'Web Development', 'Programming', 'Fantasy', 'Non-Fiction', 'Dystopia'];
-
-// Current tag index - cycles on every page refresh
-const currentTagIndex = ref(0);
-
-// Initialize tag index on mount - cycles through tags on each refresh
-onMounted(() => {
-  if (process.client) {
-    // Use sessionStorage to track and cycle through tags on each refresh
-    const storedIndex = sessionStorage.getItem('suggestedTagIndex');
-    let index = storedIndex ? parseInt(storedIndex, 10) : 0;
-    
-    // Increment index and cycle back to 0 when reaching the end
-    index = (index + 1) % suggestedTagsCycle.length;
-    
-    // Store the new index for next refresh
-    sessionStorage.setItem('suggestedTagIndex', index.toString());
-    
-    currentTagIndex.value = index;
-  }
-});
-
 // Suggested tag - cycles through predefined tags on each refresh
 const suggestedTag = computed(() => {
   if (filters.value.tags.length > 0) {
@@ -470,20 +541,34 @@ const suggestedTag = computed(() => {
   if (searchQuery.value) {
     return searchQuery.value;
   }
-  // Cycle through the predefined tags on each page refresh
-  return suggestedTagsCycle[currentTagIndex.value];
+  if (suggestedTagFromApi.value) {
+    return suggestedTagFromApi.value;
+  }
+  return null;
 });
 
 // Suggested books based on tag
 const suggestedBooks = computed(() => {
   const tag = suggestedTag.value;
   if (!tag) return [];
+  if (tagRecommendationsLoaded.value && tagRecommendations.value.length) {
+    return tagRecommendations.value.slice(0, 8)
+  }
   return allBooks.value
     .filter(book => book.tags.some(bookTag => 
       bookTag.toLowerCase().includes(tag.toLowerCase())
     ))
     .slice(0, 8);
 });
+
+watch(suggestedTag, async (tag) => {
+  if (!tag) return
+  if (searchQuery.value || hasActiveFilters.value) return
+  if (tag === suggestedTagFromApi.value && tagRecommendationsLoaded.value) {
+    return
+  }
+  await fetchTagRecommendations(tag)
+})
 </script>
 
 <style scoped>
@@ -563,6 +648,43 @@ const suggestedBooks = computed(() => {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
+}
+
+.tag-empty {
+  margin-left: 16px;
+  padding: 18px 24px;
+  border-radius: 16px;
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+.tag-empty h3 {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 12px 0 6px;
+}
+
+.tag-empty p {
+  margin: 0;
+  font-size: 13px;
+  color: #64748b;
+}
+
+.tag-empty .section-title {
+  font-size: 18px;
+  font-weight: 400;
+  color: #111827;
+  margin: 0 0 8px;
+  display: flex;
+  gap: 8px;
+}
+
+.tag-empty .tag-highlight {
+  background-color: var(--color-secondary);
+  color: var(--color-white);
+  font-weight: 400;
+  font-size: 18px;
+  margin-left: -2px;
 }
 
 

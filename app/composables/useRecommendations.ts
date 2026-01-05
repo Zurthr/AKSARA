@@ -9,13 +9,31 @@ export interface RecommendationItem {
   score: number
 }
 
+type RecommendationOptions = {
+  tag?: string
+  tags?: string[]
+}
+
 export const useRecommendations = () => {
   const config = useRuntimeConfig()
   const auth = useAuth()
   const accessToken = useState<string | null>('auth_access_token')
 
-  const fetchRecommendations = async (type: RecommendationType, limit: number) => {
-    const url = `${config.public.apiBaseUrl}/recommendations?limit=${limit}&type=${type}`
+  const buildRecommendationsUrl = (type: RecommendationType, limit: number, options?: RecommendationOptions) => {
+    const url = new URL(`${config.public.apiBaseUrl}/recommendations`)
+    url.searchParams.set('limit', String(limit))
+    url.searchParams.set('type', type)
+    if (options?.tag) {
+      url.searchParams.set('tag', options.tag)
+    }
+    if (options?.tags?.length) {
+      url.searchParams.set('tags', options.tags.join(','))
+    }
+    return url.toString()
+  }
+
+  const fetchRecommendations = async (type: RecommendationType, limit: number, options?: RecommendationOptions) => {
+    const url = buildRecommendationsUrl(type, limit, options)
     const headers: Record<string, string> = { 'Content-Type': 'application/json' }
     let body: Record<string, unknown> | undefined
 
@@ -49,6 +67,26 @@ export const useRecommendations = () => {
   }
 
   return {
-    fetchRecommendations
+    fetchRecommendations,
+    fetchTagSuggestions: async (limit: number = 6) => {
+      const url = `${config.public.apiBaseUrl}/recommendations/tags?limit=${limit}`
+      const headers: Record<string, string> = {}
+      const sessionOk = await auth.ensureValidSession()
+      if (sessionOk && accessToken.value) {
+        headers.Authorization = `Bearer ${accessToken.value}`
+      }
+
+      try {
+        const response = await $fetch<{ success?: boolean; data?: string[] }>(url, {
+          method: 'GET',
+          headers
+        })
+        const tags = Array.isArray(response?.data) ? response.data : []
+        return tags.filter((tag) => typeof tag === 'string')
+      } catch (err) {
+        console.error('Failed to load tag suggestions:', err)
+        return []
+      }
+    }
   }
 }
