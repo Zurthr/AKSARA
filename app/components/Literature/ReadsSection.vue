@@ -4,7 +4,7 @@
       <div class="section-title">
         <div style="background-color: var(--color-highlight); width:fit-content; text-decoration: underline;">Reads</div> you may enjoy
       </div>
-      <NuxtLink to="/reads" class="see-more-link">
+      <NuxtLink to="/literature" class="see-more-link">
         <span>See more</span>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M4 12a8 8 0 0 1 8-8 8 8 0 0 1 8 8 8 8 0 0 1-8 8 8 8 0 0 1-8-8zm2 0a6 6 0 0 0 6 6 6 6 0 0 0 6-6 6 6 0 0 0-6-6 6 6 0 0 0-6 6zm5-3l3 3-3 3v-2H8v-2h3V9z" fill="currentColor"/>
@@ -37,6 +37,7 @@
               <img :src="book.image" :alt="`Book ${book.id}`" />
             </div>
             <div class="book-info">
+              <div class="book-title">{{ book.title }}</div>
               <div class="book-tag">{{ book.tag }}</div>
               <div class="book-rating">
                 <span class="rating-number">{{ book.rating.toFixed(1) }}</span>
@@ -92,20 +93,25 @@
 </template>
 
 <script setup lang="ts">
-import { useLazyBooks } from '~/composables/useLiterature';
-import { useClickTracking } from '~/composables/useClickTracking';
+import { useLazyBooks, mapToNormalizedBook } from "~/composables/useLiterature";
+import type { LiteratureBook } from "~/composables/useLiterature";
+import { useClickTracking } from "~/composables/useClickTracking";
+import { useRecommendations } from "~/composables/useRecommendations";
 
-const { books: lazyBooks, isLoading } = useLazyBooks(12);
+const { books: lazyBooks, loadMore } = useLazyBooks(12);
 const { trackBookClick } = useClickTracking();
+const { fetchRecommendations } = useRecommendations();
+const runtimeConfig = useRuntimeConfig();
+const recommendedBooks = ref<ReturnType<typeof mapToNormalizedBook>[]>([]);
 
 // Track book click
-const trackBook = (book: typeof lazyBooks.value[0]) => {
+const trackBook = (book: (typeof lazyBooks.value)[0]) => {
   trackBookClick({
     id: book.id,
     title: book.title,
     tags: book.tags,
     author: book.author,
-    rating: book.rating
+    rating: book.rating,
   });
 };
 
@@ -113,14 +119,20 @@ const trackBook = (book: typeof lazyBooks.value[0]) => {
 // NormalizedBook has `tags: string[]`. Template expects `tag: string`.
 // Also filtering by rating > 0.
 const books = computed(() => {
-  return lazyBooks.value
-    .filter(book => (book.rating || 0) > 0)
-    .sort((a, b) => (b.rating || 0) - (a.rating || 0))
-    .map(book => ({
-      ...book,
-      tag: book.tags[0] || 'General',
-      rating: book.rating || 0
-    }));
+  const source = recommendedBooks.value.length
+    ? recommendedBooks.value
+    : lazyBooks.value;
+  const sorted = [...source].sort((a, b) => (b.rating || 0) - (a.rating || 0));
+  const filtered = recommendedBooks.value.length
+    ? sorted
+    : sorted.filter((book) => (book.rating || 0) > 0);
+
+  return filtered.map((book) => ({
+    ...book,
+    image: book.image || "/images/book-cover-placeholder.svg",
+    tag: book.tags[0] || "Recommended",
+    rating: book.rating || 0,
+  }));
 });
 
 const currentIndex = ref(0);
@@ -135,6 +147,66 @@ const nextSlide = () => {
 const previousSlide = () => {
   currentIndex.value = Math.max(0, currentIndex.value - 1);
 };
+
+type ResourceResponse = {
+  success: boolean;
+  data: LiteratureBook;
+};
+
+const fetchRecommendedBooks = async () => {
+  const baseUrl = runtimeConfig.public.apiBaseUrl;
+
+  try {
+    const items = await fetchRecommendations("book", 12);
+    if (!items.length) {
+      return;
+    }
+
+    const details = await Promise.all(
+      items.map((item) =>
+        $fetch<ResourceResponse>(`${baseUrl}/resources/${item.id}`)
+          .then((detail) => ({ item, detail }))
+          .catch(() => ({ item, detail: null })),
+      ),
+    );
+
+    recommendedBooks.value = details.map(({ item, detail }) => {
+      console.log("[ReadsSection] Recommendation detail", {
+        item,
+        detail,
+      });
+      if (detail?.success && detail.data) {
+        const normalized = mapToNormalizedBook(detail.data);
+        const title = normalized.title?.trim()
+          ? normalized.title
+          : item.title || "Recommended";
+        return {
+          ...normalized,
+          id: item.id,
+          title,
+        };
+      }
+
+      return {
+        id: item.id,
+        title: item.title || "Recommended",
+        author: "",
+        image: "/images/book-cover-placeholder.svg",
+        tags: [],
+        rating: 0,
+      };
+    });
+  } catch (err) {
+    console.error("Failed to load book recommendations:", err);
+  }
+};
+
+onMounted(async () => {
+  await fetchRecommendedBooks();
+  if (!recommendedBooks.value.length) {
+    loadMore();
+  }
+});
 </script>
 
 <style scoped>
@@ -245,6 +317,19 @@ const previousSlide = () => {
   margin-top: 4px;
 }
 
+.book-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-black);
+  text-align: center;
+  line-height: 1.3;
+  max-width: 140px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 .book-rating {
   display: flex;
   width:fit-content;
@@ -342,4 +427,3 @@ const previousSlide = () => {
   cursor: not-allowed;
 }
 </style>
-

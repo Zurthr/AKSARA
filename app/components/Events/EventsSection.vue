@@ -14,7 +14,7 @@
       <div class="events-carousel">
         <div class="carousel-container" :style="{ transform: `translateX(-${currentIndex * 100}%)` }">
           <div
-            v-for="event in events"
+            v-for="event in displayEvents"
             :key="event.id"
             class="event-card"
           >
@@ -66,7 +66,7 @@
         </button>
         <div class="carousel-dots">
           <button
-            v-for="(evt, index) in events"
+            v-for="(evt, index) in displayEvents"
             :key="evt.id"
             class="dot"
             :class="{ active: index === currentIndex }"
@@ -94,15 +94,24 @@
 <script setup lang="ts">
 import { useClickTracking } from '~/composables/useClickTracking';
 import { useLazyEvents } from '~/composables/useEvents';
+import type { Event as EventItem } from '~/composables/useEvents';
+import { useRecommendations } from '~/composables/useRecommendations';
 
-const { events, isLoading, loadMore } = useLazyEvents(7);
+const { events, loadMore } = useLazyEvents(7);
 const currentIndex = ref(0);
 let autoPlayInterval: ReturnType<typeof setInterval> | null = null;
+const { fetchRecommendations } = useRecommendations();
+const runtimeConfig = useRuntimeConfig();
+const recommendedEvents = ref<EventItem[]>([]);
 
 const { trackEventClick } = useClickTracking();
 
+const displayEvents = computed(() => {
+  return recommendedEvents.value.length ? recommendedEvents.value : events.value;
+});
+
 // Track event click
-const trackEvent = (event: typeof events.value[0]) => {
+const trackEvent = (event: EventItem) => {
   trackEventClick({
     id: event.id,
     title: event.title,
@@ -113,12 +122,14 @@ const trackEvent = (event: typeof events.value[0]) => {
 
 
 const nextSlide = () => {
-  currentIndex.value = (currentIndex.value + 1) % events.value.length;
+  if (!displayEvents.value.length) return;
+  currentIndex.value = (currentIndex.value + 1) % displayEvents.value.length;
   resetAutoPlay();
 };
 
 const previousSlide = () => {
-  currentIndex.value = (currentIndex.value - 1 + events.value.length) % events.value.length;
+  if (!displayEvents.value.length) return;
+  currentIndex.value = (currentIndex.value - 1 + displayEvents.value.length) % displayEvents.value.length;
   resetAutoPlay();
 };
 
@@ -129,8 +140,8 @@ const goToSlide = (index: number) => {
 
 const startAutoPlay = () => {
   autoPlayInterval = setInterval(() => {
-    if (events.value.length > 0) {
-      currentIndex.value = (currentIndex.value + 1) % events.value.length;
+    if (displayEvents.value.length > 0) {
+      currentIndex.value = (currentIndex.value + 1) % displayEvents.value.length;
     }
   }, 10000); // 10 seconds
 };
@@ -142,8 +153,32 @@ const resetAutoPlay = () => {
   startAutoPlay();
 };
 
-onMounted(() => {
-  loadMore();
+const fetchRecommendedEvents = async () => {
+  const baseUrl = runtimeConfig.public.apiBaseUrl;
+
+  try {
+    const items = await fetchRecommendations('event', 7);
+    if (!items.length) {
+      return;
+    }
+
+    const details = await Promise.all(
+      items.map(item => $fetch<{ success: boolean; data: EventItem }>(`${baseUrl}/events/${item.id}`))
+    );
+
+    recommendedEvents.value = details
+      .filter(detail => detail?.success && detail.data)
+      .map(detail => detail.data);
+  } catch (err) {
+    console.error('Failed to load event recommendations:', err);
+  }
+};
+
+onMounted(async () => {
+  await fetchRecommendedEvents();
+  if (!recommendedEvents.value.length) {
+    loadMore();
+  }
   startAutoPlay();
 });
 
