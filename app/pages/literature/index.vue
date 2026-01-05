@@ -4,24 +4,18 @@
 
         <div v-if="!searchQuery && !hasActiveFilters" class="literature-sections">
           <BookSection
-            v-if="recommendationsLoaded && recommendedBooks.length"
-            title="Recommended Reads"
-            :books="recommendedBooks"
-            section-type="default"
-          />
-          <div v-else-if="recommendationsLoaded && !recommendedBooks.length" class="recommendations-empty">
-            <span class="empty-pill">Recommendations</span>
-            <h3>No personalized reads yet</h3>
-            <p>Explore a few titles and we will curate tailored picks for you.</p>
-          </div>
-          <BookSection
             title="Top Books for you"
-            :books="topBooks"
+            :books="topBooksForYou"
             see-more-link="/literature?sort=top"
             section-type="top"
             title-prefix="Top Books"
             title-suffix="for you"
           />
+          <div v-if="recommendationsLoaded && !recommendedBooks.length" class="recommendations-empty">
+            <span class="empty-pill">Recommendations</span>
+            <h3>Still learning your taste</h3>
+            <p>Browse a few books and we will personalize this section for you.</p>
+          </div>
           
           <BookSection
             v-if="suggestedTag"
@@ -151,6 +145,13 @@ const mergedBooksData = computed<LiteratureBook[]>(() => {
 const { fetchRecommendations } = useRecommendations()
 const recommendedBooks = ref<ReturnType<typeof mapToNormalizedBook>[]>([])
 const recommendationsLoaded = ref(false)
+
+const topBooksForYou = computed(() => {
+  if (recommendationsLoaded.value && recommendedBooks.value.length) {
+    return recommendedBooks.value.slice(0, 8)
+  }
+  return topBooks.value
+})
 
 type ResourceResponse = {
   success: boolean;
@@ -535,19 +536,19 @@ const suggestedBooks = computed(() => {
   margin-left: 16px;
   background: linear-gradient(135deg, #fff7d6, #eef2ff);
   border-radius: 16px;
-  padding: 24px;
+  padding: 20px 24px;
   border: 1px solid #e2e8f0;
   color: #0f172a;
 }
 
 .recommendations-empty h3 {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 700;
-  margin: 12px 0 8px;
+  margin: 12px 0 6px;
 }
 
 .recommendations-empty p {
-  font-size: 14px;
+  font-size: 13px;
   color: #475569;
   margin: 0;
 }
@@ -558,11 +559,12 @@ const suggestedBooks = computed(() => {
   border-radius: 999px;
   background: #fff1a8;
   color: #92400e;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
+
 
 .search-results {
   display: flex;
