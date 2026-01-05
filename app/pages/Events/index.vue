@@ -273,15 +273,50 @@ const retryFetch = async () => {
 const route = useRoute()
 const searchQuery = computed(() => typeof route.query.q === 'string' ? route.query.q : '')
 
-// Filter state variables (used by filteredEvents)
-const onlineChecked = ref(true)
-const offlineChecked = ref(true)
-const start = ref<Date | null>(null)
-const end = ref<Date | null>(null)
-const tagFilters = ref<string[]>([])
+// Helper functions for parsing query
+const ensureArray = (value: unknown): string[] => {
+  if (Array.isArray(value)) return value.filter(Boolean).map(String)
+  if (value === undefined || value === null || value === '') return []
+  return [String(value)]
+}
+
+const normalizeKey = (value: string | number | null | undefined) =>
+  (value ?? '').toString().trim().toLowerCase()
+
+// Parse initial filter state from URL query
+const eventTypesFromQuery = ensureArray(route.query.eventType).map(normalizeKey)
+const initialTags = ensureArray(route.query.tags)
+const initialStartDate = route.query.startDate as string || null
+const initialEndDate = route.query.endDate as string || null
+
+// Filter state variables (used by filteredEvents) - synchronized with URL query
+const onlineChecked = ref(eventTypesFromQuery.length === 0 || eventTypesFromQuery.includes('online'))
+const offlineChecked = ref(eventTypesFromQuery.length === 0 || eventTypesFromQuery.includes('offline'))
+const start = ref<Date | null>(initialStartDate ? new Date(initialStartDate) : null)
+const end = ref<Date | null>(initialEndDate ? new Date(initialEndDate) : null)
+const tagFilters = ref<string[]>(initialTags.map(normalizeKey))
 
 // Track if initial load has happened to avoid multiple resets
 const isInitialLoad = ref(true)
+
+// Watch for query parameter changes and update filter state accordingly
+watch(
+  () => route.query,
+  (query) => {
+    const eventTypes = ensureArray(query.eventType).map(normalizeKey)
+    const tags = ensureArray(query.tags)
+    const startDateStr = query.startDate as string || null
+    const endDateStr = query.endDate as string || null
+
+    // Update filter state from query parameters
+    onlineChecked.value = eventTypes.length === 0 || eventTypes.includes('online')
+    offlineChecked.value = eventTypes.length === 0 || eventTypes.includes('offline')
+    start.value = startDateStr ? new Date(startDateStr) : null
+    end.value = endDateStr ? new Date(endDateStr) : null
+    tagFilters.value = tags.map(normalizeKey)
+  },
+  { deep: true }
+)
 
 watch(searchQuery, (query, oldQuery) => {
   // Only trigger search if query actually changed (not on initial mount with empty query)
@@ -405,9 +440,6 @@ const handleManualLoadMore = () => {
   void loadMore()
 }
 
-const normalizeKey = (value: unknown) =>
-  (value ?? '').toString().trim().toLowerCase();
-
 const parseEventDate = (dateStr?: string | null): Date | null => {
   if (!dateStr) return null;
   
@@ -474,7 +506,17 @@ const isEventOnline = (event: any) => {
 const filteredEvents = computed(() => {
   const query = searchQuery.value.trim().toLowerCase()
 
-  return mergedEvents.value.filter((ev: EventItem) => {
+  console.log('🔍 Filtering events with:', {
+    query,
+    onlineChecked: onlineChecked.value,
+    offlineChecked: offlineChecked.value,
+    start: start.value,
+    end: end.value,
+    tagFilters: tagFilters.value,
+    totalEvents: mergedEvents.value.length
+  })
+
+  const filtered = mergedEvents.value.filter((ev: EventItem) => {
     if (query) {
       const title = typeof ev.title === 'string' ? ev.title.toLowerCase() : ''
       const description = typeof ev.description === 'string' ? ev.description.toLowerCase() : ''
@@ -522,6 +564,9 @@ const filteredEvents = computed(() => {
 
     return true;
   });
+
+  console.log('✅ Filtered events:', filtered.length, 'out of', mergedEvents.value.length)
+  return filtered
 });
 
 const popularTags = [
