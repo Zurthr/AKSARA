@@ -163,12 +163,31 @@ const fetchRecommendedEvents = async () => {
     }
 
     const details = await Promise.all(
-      items.map(item => $fetch<{ success: boolean; data: EventItem }>(`${baseUrl}/events/${item.id}`))
+      items.map(item =>
+        $fetch<{ success: boolean; data: EventItem }>(`${baseUrl}/events/${item.id}`)
+          .then(detail => ({ item, detail }))
+          .catch(() => ({ item, detail: null }))
+      )
     );
 
-    recommendedEvents.value = details
-      .filter(detail => detail?.success && detail.data)
-      .map(detail => detail.data);
+    recommendedEvents.value = details.map(({ item, detail }) => {
+      if (detail?.data) {
+        return detail.data;
+      }
+
+      return {
+        id: item.id,
+        title: item.title,
+        description: '',
+        date: '',
+        location: '',
+        image_url: '/images/embeds/events-placeholder.svg',
+        is_free: true,
+        status: 'upcoming',
+        created_at: '',
+        updated_at: ''
+      } as EventItem;
+    });
   } catch (err) {
     console.error('Failed to load event recommendations:', err);
   }
