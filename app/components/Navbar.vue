@@ -41,21 +41,30 @@
         />
       </div>
       <div class="profile-wrapper">
-        <button
-          type="button"
-          class="icon-button"
-          @click="toggleProfileDropdown"
-          :class="{ 'active': showProfileDropdown }"
-          aria-label="Profile"
+        <NuxtLink
+          v-if="!isAuthenticated"
+          to="/auth/login"
+          class="login-button"
         >
-          <img src="~/assets/icons/Person.svg" alt="Profile" style="width: 20px; height: 20px;">
-        </button>
+          Login
+        </NuxtLink>
+        <template v-else>
+          <button
+            type="button"
+            class="icon-button"
+            @click="toggleProfileDropdown"
+            :class="{ 'active': showProfileDropdown }"
+            aria-label="Profile"
+          >
+            <img src="~/assets/icons/Person.svg" alt="Profile" style="width: 20px; height: 20px;">
+          </button>
 
-        <!-- Profile Dropdown -->
-        <ProfileDropdown
-          v-if="showProfileDropdown"
-          @close="closeProfileDropdown"
-        />
+          <!-- Profile Dropdown -->
+          <ProfileDropdown
+            v-if="showProfileDropdown"
+            @close="closeProfileDropdown"
+          />
+        </template>
       </div>
     </div>
   </header>
@@ -64,8 +73,11 @@
 <script setup lang="ts">
 const route = useRoute();
 const router = useRouter();
+const { isAuthenticated } = useAuth();
 
-const searchQuery = ref<string>((route.query.q as string) || (route.query.search as string) || '');
+const searchQuery = ref<string>(
+  (route.query.q as string) || (route.query.search as string) || "",
+);
 
 // Notification modal state
 const showNotificationModal = ref(false);
@@ -77,9 +89,14 @@ const showProfileDropdown = ref(false);
 const { trackSearch } = useClickTracking();
 
 // Update search query from URL when route changes
-watch(() => route.query, (newQuery) => {
-  searchQuery.value = (newQuery.q as string) || (newQuery.search as string) || '';
-}, { immediate: true });
+watch(
+  () => route.query,
+  (newQuery) => {
+    searchQuery.value =
+      (newQuery.q as string) || (newQuery.search as string) || "";
+  },
+  { immediate: true },
+);
 
 const handleSearch = () => {
   if (searchQuery.value.trim()) {
@@ -87,36 +104,38 @@ const handleSearch = () => {
     const currentPath = route.path;
 
     // Determine target route based on current section
-    let targetPath = '/literature';
+    let targetPath = "/literature";
     let query: Record<string, string | string[]> = { q: queryTerm };
 
-    if (currentPath.startsWith('/forums')) {
-      targetPath = '/forums';
-    } else if (currentPath.startsWith('/community')) {
-      targetPath = '/community';
+    if (currentPath.startsWith("/forums")) {
+      targetPath = "/forums";
+    } else if (currentPath.startsWith("/community")) {
+      targetPath = "/community";
       // For community, we might want to map this to a hash or just generic search
       // But keeping it simple with q param as planned
-    } else if (currentPath.startsWith('/events')) {
-      targetPath = '/events';
+    } else if (currentPath.startsWith("/events")) {
+      targetPath = "/events";
     }
 
     // Preserve filter params if staying on the same page type (mainly for literature for now)
-    if (currentPath === '/literature' && targetPath === '/literature') {
+    if (currentPath === "/literature" && targetPath === "/literature") {
       if (route.query.copyType) {
         query.copyType = Array.isArray(route.query.copyType)
-          ? route.query.copyType as string[]
+          ? (route.query.copyType as string[])
           : [route.query.copyType as string];
       }
       if (route.query.licensingType) {
         query.licensingType = Array.isArray(route.query.licensingType)
-          ? route.query.licensingType as string[]
+          ? (route.query.licensingType as string[])
           : [route.query.licensingType as string];
       }
       if (route.query.sources) query.sources = route.query.sources as string;
       if (route.query.tags) {
         query.tags = Array.isArray(route.query.tags)
-          ? route.query.tags as string[]
-          : route.query.tags as string ? [route.query.tags as string] : [];
+          ? (route.query.tags as string[])
+          : (route.query.tags as string)
+            ? [route.query.tags as string]
+            : [];
       }
     }
 
@@ -124,36 +143,39 @@ const handleSearch = () => {
     trackSearch({
       query: queryTerm,
       source_page: currentPath,
-      filters: targetPath === '/literature' ? {
-        copyType: query.copyType,
-        licensingType: query.licensingType,
-        tags: query.tags,
-        sources: query.sources
-      } : undefined
+      filters:
+        targetPath === "/literature"
+          ? {
+              copyType: query.copyType,
+              licensingType: query.licensingType,
+              tags: query.tags,
+              sources: query.sources,
+            }
+          : undefined,
     });
 
     router.push({
       path: targetPath,
-      query
+      query,
     });
   }
 };
 
 const clearSearch = () => {
-  searchQuery.value = '';
+  searchQuery.value = "";
 
   const query: Record<string, string | string[]> = {};
 
   // If we're on the literature page, preserve filters but drop search params
-  if (route.path === '/literature') {
+  if (route.path === "/literature") {
     if (route.query.copyType) {
       query.copyType = Array.isArray(route.query.copyType)
-        ? route.query.copyType as string[]
+        ? (route.query.copyType as string[])
         : [route.query.copyType as string];
     }
     if (route.query.licensingType) {
       query.licensingType = Array.isArray(route.query.licensingType)
-        ? route.query.licensingType as string[]
+        ? (route.query.licensingType as string[])
         : [route.query.licensingType as string];
     }
     if (route.query.sources) {
@@ -161,18 +183,20 @@ const clearSearch = () => {
     }
     if (route.query.tags) {
       query.tags = Array.isArray(route.query.tags)
-        ? route.query.tags as string[]
-        : (route.query.tags as string ? [route.query.tags as string] : []);
+        ? (route.query.tags as string[])
+        : (route.query.tags as string)
+          ? [route.query.tags as string]
+          : [];
     }
 
     router.push({
-      path: '/literature',
-      query
+      path: "/literature",
+      query,
     });
   } else {
     // From any other page, go to root literature without search
     router.push({
-      path: '/literature'
+      path: "/literature",
     });
   }
 };
@@ -192,6 +216,11 @@ const closeNotificationModal = () => {
 
 // Profile dropdown functions
 const toggleProfileDropdown = () => {
+  if (!isAuthenticated.value) {
+    showProfileDropdown.value = false;
+    router.push("/auth/login");
+    return;
+  }
   showProfileDropdown.value = !showProfileDropdown.value;
   // Close notification dropdown when opening profile
   if (showProfileDropdown.value) {
@@ -206,8 +235,8 @@ const closeProfileDropdown = () => {
 // Close dropdowns when clicking outside
 const handleClickOutside = (event: Event) => {
   const target = event.target as HTMLElement;
-  const notificationWrapper = target.closest('.notification-wrapper');
-  const profileWrapper = target.closest('.profile-wrapper');
+  const notificationWrapper = target.closest(".notification-wrapper");
+  const profileWrapper = target.closest(".profile-wrapper");
 
   if (!notificationWrapper && showNotificationModal.value) {
     closeNotificationModal();
@@ -219,19 +248,22 @@ const handleClickOutside = (event: Event) => {
 };
 
 // Add and remove click outside listener
-watch([showNotificationModal, showProfileDropdown], ([notificationOpen, profileOpen]) => {
-  if (notificationOpen || profileOpen) {
-    nextTick(() => {
-      document.addEventListener('click', handleClickOutside);
-    });
-  } else {
-    document.removeEventListener('click', handleClickOutside);
-  }
-});
+watch(
+  [showNotificationModal, showProfileDropdown],
+  ([notificationOpen, profileOpen]) => {
+    if (notificationOpen || profileOpen) {
+      nextTick(() => {
+        document.addEventListener("click", handleClickOutside);
+      });
+    } else {
+      document.removeEventListener("click", handleClickOutside);
+    }
+  },
+);
 
 // Clean up on unmount
 onUnmounted(() => {
-  document.removeEventListener('click', handleClickOutside);
+  document.removeEventListener("click", handleClickOutside);
 });
 </script>
 
@@ -356,6 +388,34 @@ onUnmounted(() => {
   border: 1px solid var(--color-primary);
 }
 
+.login-button {
+  height: 40px;
+  padding: 0 16px;
+  border-radius: 12px;
+  background: var(--color-primary);
+  color: var(--color-white);
+  border: 1px solid var(--color-primary);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.12);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.login-button:hover {
+  filter: brightness(0.95);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.18);
+}
+
+.login-button:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
 
 @media screen and (max-width: 1040px) {
   .search-center {
@@ -370,4 +430,3 @@ onUnmounted(() => {
   outline-offset: 2px;
 }
 </style>
-

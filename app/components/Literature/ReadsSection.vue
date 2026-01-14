@@ -33,8 +33,15 @@
             class="book-card book-link"
             @click="trackBook(book)"
           >
-            <div class="book-cover">
-              <img :src="book.image" :alt="`Book ${book.id}`" />
+            <div class="book-cover" :class="{ 'is-loading': !loadedMap[book.id] }">
+              <img
+                :src="book.image"
+                :alt="`Book ${book.id}`"
+                :class="{ 'is-loading': !loadedMap[book.id] }"
+                loading="lazy"
+                @load="markImageLoaded(book.id)"
+                @error="handleImageError(book.id, $event)"
+              />
             </div>
             <div class="book-info">
               <div class="book-title">{{ book.title }}</div>
@@ -103,6 +110,8 @@ const { trackBookClick } = useClickTracking();
 const { fetchRecommendations } = useRecommendations();
 const runtimeConfig = useRuntimeConfig();
 const recommendedBooks = ref<ReturnType<typeof mapToNormalizedBook>[]>([]);
+const placeholderSrc = "/images/book-cover-placeholder.svg";
+const loadedMap = reactive<Record<string, boolean>>({});
 
 // Track book click
 const trackBook = (book: (typeof lazyBooks.value)[0]) => {
@@ -113,6 +122,21 @@ const trackBook = (book: (typeof lazyBooks.value)[0]) => {
     author: book.author,
     rating: book.rating,
   });
+};
+
+const markImageLoaded = (bookId: string) => {
+  loadedMap[bookId] = true;
+};
+
+const handleImageError = (bookId: string, event: Event) => {
+  const target = event.target as HTMLImageElement | null;
+  if (!target || target.dataset.fallbackApplied) {
+    return;
+  }
+
+  target.src = placeholderSrc;
+  target.dataset.fallbackApplied = "true";
+  loadedMap[bookId] = true;
 };
 
 // Map/Compute books to ensure they match the template expectations, if needed.
@@ -129,7 +153,7 @@ const books = computed(() => {
 
   return filtered.map((book) => ({
     ...book,
-    image: book.image || "/images/book-cover-placeholder.svg",
+    image: book.image || placeholderSrc,
     tag: book.tags[0] || "Recommended",
     rating: book.rating || 0,
   }));
@@ -296,12 +320,42 @@ onMounted(async () => {
   overflow: hidden;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   background: #f3f4f6;
+  position: relative;
 }
 
 .book-cover img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: opacity 0.3s ease, filter 0.3s ease;
+}
+
+.book-cover.is-loading::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, #e5e7eb 0%, #f3f4f6 40%, #e5e7eb 80%);
+  background-size: 200% 100%;
+  animation: shimmer 1.2s ease-in-out infinite;
+}
+
+.book-cover.is-loading img {
+  opacity: 0;
+  filter: blur(8px);
+}
+
+.book-cover img:not(.is-loading) {
+  opacity: 1;
+  filter: blur(0);
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
 }
 
 .book-info {

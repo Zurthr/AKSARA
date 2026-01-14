@@ -4,6 +4,7 @@
 
         <div v-if="!searchQuery && !hasActiveFilters" class="literature-sections">
           <BookSection
+            v-if="hasTopRecommendations"
             title="Top Books for you"
             :books="topBooksForYou"
             see-more-link="/literature?sort=top"
@@ -11,7 +12,11 @@
             title-prefix="Top Books"
             title-suffix="for you"
           />
-          <div v-if="recommendationsLoaded && !recommendedBooks.length" class="recommendations-empty">
+          <div
+            v-if="recommendationsLoaded && !recommendedBooks.length"
+            class="recommendations-empty"
+            :class="{ 'recommendations-empty--spaced': !hasTopRecommendations }"
+          >
             <span class="empty-pill">Recommendations</span>
             <h3>Still learning your taste</h3>
             <p>Browse a few books and we will personalize this section for you.</p>
@@ -59,7 +64,7 @@
           <p v-if="filteredBooks.length === 0" class="no-results-text">No results found. Try adjusting your filters or search query.</p>
         </div>
 
-        <!-- All Books Section - Always visible at the bottom showing merged catalogue -->
+        <!-- All Books Section - Always visible at the bottom -->
         <div class="all-books-section">
           <BookGrid
             title="Our Library, just for you."
@@ -91,68 +96,11 @@ import { useRecommendations } from '~/composables/useRecommendations'
 // Literature API integration
 import { useLiterature } from '~/composables/useLiterature'
 import type { LiteratureBook } from '~/composables/useLiterature'
-import { useLocalBooks } from '~/composables/useLocalBooks'
-import mockBooks from '../../../mock-backend/data/books.json'
-import { mergeBookCollections, normalizeBookCollection } from '~/utils/books-normalizer'
-
-type RawBookRecord = Record<string, unknown>
 
 // Use Laravel API
 const { getAllBooks } = useLiterature()
 
-// Use lazy loading for infinite scroll
-const { 
-  books: lazyBooks, 
-  isLoading: isLoadingBooks, 
-  hasMore: hasMoreBooks, 
-  loadMore: loadMoreBooks 
-} = useLazyBooks()
-
-const originalBooks = ref<LiteratureBook[]>([])
-const mockApiBooks = ref<LiteratureBook[]>([])
-const staticBooks = normalizeBookCollection(mockBooks as RawBookRecord[]).map((book, index) => {
-  const candidateId = book.id
-  const resolvedId = candidateId && String(candidateId).trim() !== '' ? candidateId : `static-${index + 1}`
-  return {
-    ...book,
-    id: resolvedId,
-    source: 'json'
-  }
-})
-const { localBooks } = useLocalBooks()
-
-const normalizedLocalBooks = computed<LiteratureBook[]>(() => {
-  const raw = Array.isArray(localBooks.value) ? localBooks.value : []
-  return normalizeBookCollection(raw as RawBookRecord[]).map((book, index) => {
-    const candidateId = book.id
-    const resolvedId = candidateId && String(candidateId).trim() !== '' ? candidateId : `local-${index + 1}`
-    return {
-      ...book,
-      id: resolvedId,
-      source: 'localStorage'
-    }
-  })
-})
-
-const mergedBooksData = computed<LiteratureBook[]>(() => {
-  const remote = Array.isArray(originalBooks.value) ? originalBooks.value : []
-  const mockApi = Array.isArray(mockApiBooks.value) ? mockApiBooks.value : []
-  const local = Array.isArray(normalizedLocalBooks.value) ? normalizedLocalBooks.value : []
-  const static_books = Array.isArray(staticBooks) ? staticBooks : []
-  
-  // Ensure stable merge order and prevent duplicates
-  const merged = mergeBookCollections([static_books, mockApi, local, remote])
-  
-  // Always ensure we have books available
-  const result = merged.length > 0 ? merged : static_books
-  
-  // Stable sort to prevent flickering
-  return result.sort((a, b) => {
-    const idA = typeof a.id === 'string' ? parseInt(a.id) || 0 : (a.id as number)
-    const idB = typeof b.id === 'string' ? parseInt(b.id) || 0 : (b.id as number)
-    return idA - idB
-  })
-})
+const apiBooks = ref<LiteratureBook[]>([])
 
 const { fetchRecommendations, fetchTagSuggestions } = useRecommendations()
 const recommendedBooks = ref<ReturnType<typeof mapToNormalizedBook>[]>([])
@@ -160,6 +108,10 @@ const recommendationsLoaded = ref(false)
 const tagRecommendations = ref<ReturnType<typeof mapToNormalizedBook>[]>([])
 const tagRecommendationsLoaded = ref(false)
 const suggestedTagFromApi = ref<string | null>(null)
+
+const hasTopRecommendations = computed(() => {
+  return recommendationsLoaded.value && recommendedBooks.value.length > 0
+})
 
 const topBooksForYou = computed(() => {
   if (recommendationsLoaded.value && recommendedBooks.value.length) {
@@ -274,11 +226,9 @@ const fetchTagRecommendations = async (tag: string) => {
 }
 
 const route = useRoute()
-const contentApiBase = useContentApiBase()
-
 const fetchLaravelBooks = async (): Promise<LiteratureBook[]> => {
   try {
-    const response = await getAllBooks()
+    const response = await getAllBooks(1, 100)
 
     if (response && Array.isArray(response.data)) {
       return response.data.map((book, index) => ({
@@ -288,37 +238,15 @@ const fetchLaravelBooks = async (): Promise<LiteratureBook[]> => {
       }))
     }
   } catch (apiError) {
-    console.warn('Literature API not available, skipping Laravel merge.', apiError)
+    console.warn('Literature API not available.', apiError)
   }
 
   return []
 }
 
-const fetchMockBooks = async (): Promise<LiteratureBook[]> => {
-  try {
-    const response = await $fetch<RawBookRecord[]>(`${contentApiBase}/resources`)
-    const normalized = normalizeBookCollection(response)
-
-    return normalized.map((book, index) => ({
-      ...book,
-      id: book.id || `mock-api-${index + 1}`,
-      source: 'mockApi'
-    }))
-  } catch (apiError) {
-    console.warn('Mock API books not available, skipping mock merge.', apiError)
-    return []
-  }
-}
-
 const fetchBooks = async () => {
-  const [laravelBooks, mockBooksData] = await Promise.all([fetchLaravelBooks(), fetchMockBooks()])
-
-  mockApiBooks.value = mockBooksData
-  originalBooks.value = laravelBooks.length ? laravelBooks : []
-
-  if (!originalBooks.value.length) {
-    originalBooks.value = Array.isArray(staticBooks) ? staticBooks : []
-  }
+  const laravelBooks = await fetchLaravelBooks()
+  apiBooks.value = laravelBooks.length ? laravelBooks : []
 }
 
 // Ensure books are fetched when component is mounted and on route change
@@ -342,7 +270,7 @@ const allBooks = computed(() => {
   const seenContentKeys = new Set<string>()
   const usedDisplayIds = new Map<string, number>()
 
-  const deduplicated = mergedBooksData.value.filter((book) => {
+  const deduplicated = apiBooks.value.filter((book) => {
     const titleKey = (book.title || '').trim().toLowerCase()
     const authorKey = (book.author || '').trim().toLowerCase()
     const yearKey = book.year_edition ? String(book.year_edition).trim().toLowerCase() : ''
@@ -624,6 +552,10 @@ watch(suggestedTag, async (tag) => {
   padding: 20px 24px;
   border: 1px solid #e2e8f0;
   color: #0f172a;
+}
+
+.recommendations-empty--spaced {
+  margin-top: 8px;
 }
 
 .recommendations-empty h3 {

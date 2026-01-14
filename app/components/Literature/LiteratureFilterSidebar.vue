@@ -122,39 +122,8 @@
 const route = useRoute();
 const router = useRouter();
 
-// Use the real books data from the mock backend JSON to drive filter options
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore - JSON module typing is handled by the bundler
-import rawBooksData from '../../../mock-backend/data/books.json';
-
-interface RawBookTag {
-  name: string;
-  type?: string;
-}
-
-interface RawBookSource {
-  name: string;
-  url: string;
-}
-
-interface RawCopyTypeSource {
-  name: string;
-  url: string;
-  type?: string;
-}
-
-interface RawCopyType {
-  description: string;
-  sources?: RawCopyTypeSource[];
-}
-
-interface RawBook {
-  id: number;
-  tags?: RawBookTag[];
-  copy_types?: Record<string, RawCopyType>;
-  licensing_type?: string;
-  sources?: RawBookSource[];
-}
+import { useLiterature } from '~/composables/useLiterature';
+import type { LiteratureBook } from '~/composables/useLiterature';
 
 interface Filters {
   copyType: string[];
@@ -178,14 +147,15 @@ const toTitleCaseFromKey = (value: string) => {
     .join(' ');
 };
 
-const rawBooks = rawBooksData as unknown as RawBook[];
+const { getAllBooks } = useLiterature();
+const rawBooks = ref<LiteratureBook[]>([]);
 
 const unique = <T>(items: T[]) => Array.from(new Set(items));
 
 const copyTypeOptions = computed(() => {
   const keys: string[] = [];
 
-  rawBooks.forEach((book) => {
+  rawBooks.value.forEach((book) => {
     if (book.copy_types) {
       keys.push(...Object.keys(book.copy_types));
     }
@@ -204,7 +174,7 @@ const copyTypeOptions = computed(() => {
 const licensingTypeOptions = computed(() => {
   const rawValues: string[] = [];
 
-  rawBooks.forEach((book) => {
+  rawBooks.value.forEach((book) => {
     if (book.licensing_type) {
       rawValues.push(book.licensing_type);
     }
@@ -221,15 +191,16 @@ const licensingTypeOptions = computed(() => {
 const sourceOptions = computed(() => {
   const names: string[] = [];
 
-  rawBooks.forEach((book) => {
+  rawBooks.value.forEach((book) => {
     if (book.sources) {
       names.push(...book.sources.map((source) => source.name));
     }
 
     if (book.copy_types) {
       Object.values(book.copy_types).forEach((copyTypeEntry) => {
-        if (copyTypeEntry.sources) {
-          names.push(...copyTypeEntry.sources.map((source) => source.name));
+        const entry = copyTypeEntry as { sources?: Array<{ name: string }> };
+        if (entry.sources) {
+          names.push(...entry.sources.map((source) => source.name));
         }
       });
     }
@@ -241,9 +212,9 @@ const sourceOptions = computed(() => {
 const tagOptions = computed(() => {
   const names: string[] = [];
 
-  rawBooks.forEach((book) => {
+  rawBooks.value.forEach((book) => {
     if (book.tags) {
-      names.push(...book.tags.map((tag) => tag.name));
+      names.push(...book.tags.map((tag) => (typeof tag === 'string' ? tag : tag.name)));
     }
   });
 
@@ -443,6 +414,16 @@ watch(() => route.query, (newQuery) => {
         : []
   };
 }, { deep: true });
+
+onMounted(async () => {
+  try {
+    const response = await getAllBooks(1, 200);
+    rawBooks.value = Array.isArray(response?.data) ? response.data : [];
+  } catch (err) {
+    console.warn('Failed to load books for filter options:', err);
+    rawBooks.value = [];
+  }
+});
 </script>
 
 <style scoped>

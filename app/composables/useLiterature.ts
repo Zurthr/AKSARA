@@ -162,8 +162,8 @@ export const useLiterature = () => {
     extraParams?: Record<string, unknown>
   ) => {
     const params = new URLSearchParams({
-      page: String(page),
-      per_page: String(perPage)
+      _page: String(page),
+      _limit: String(perPage)
     })
 
     if (extraParams) {

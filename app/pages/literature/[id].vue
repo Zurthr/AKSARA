@@ -15,6 +15,18 @@
     
     <!-- Book content -->
     <main v-else-if="book" class="book-main">
+        <nav class="book-nav">
+          <NuxtLink to="/literature" class="back-link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </NuxtLink>
+          <div class="breadcrumb">
+            <NuxtLink to="/literature" class="breadcrumb-link">Literature</NuxtLink>
+            <span class="breadcrumb-separator">/</span>
+            <span class="breadcrumb-current">{{ book.title }}</span>
+          </div>
+        </nav>
         <!-- Book Header Section -->
         <div class="book-header">
           <div class="book-cover-section">
@@ -128,13 +140,17 @@
         </div>
 
         <!-- Tags -->
-        <div class="sidebar-section" v-if="book.tags && book.tags.length > 0">
+        <div class="sidebar-section" v-if="normalizedTags.length > 0">
           <h4 class="sidebar-section-title">Related Tags</h4>
           <div class="tags-list">
             <span
-              v-for="tag in book.tags"
+              v-for="tag in normalizedTags"
               :key="tag.name"
               class="tag-item"
+              :class="{
+                'tag-item--primary': tag.type === 'primary',
+                'tag-item--secondary': tag.type === 'secondary'
+              }"
             >
               {{ tag.name }}
             </span>
@@ -192,17 +208,22 @@
 </template>
 
 <script setup lang="ts">
-import RightSideBar from '~/components/General/RightSideBar.vue';
-import ForumCard from '~/components/Forum/ForumCard.vue';
-import SourcingOptions from '~/components/Literature/SourcingOptions.vue';
+import RightSideBar from "~/components/General/RightSideBar.vue";
+import ForumCard from "~/components/Forum/ForumCard.vue";
+import SourcingOptions from "~/components/Literature/SourcingOptions.vue";
 
 // Literature API integration
-import { useLiterature } from '~/composables/useLiterature'
-import { LOCAL_BOOKS_STORAGE_KEY } from '~/composables/useLocalBooks'
-import mockBooks from '../../../mock-backend/data/books.json'
-import { findBookById, mergeBookCollections, normalizeBookCollection, readLocalBooksSnapshot } from '~/utils/books-normalizer'
+import { useLiterature } from "~/composables/useLiterature";
+import { LOCAL_BOOKS_STORAGE_KEY } from "~/composables/useLocalBooks";
+import mockBooks from "../../../mock-backend/data/books.json";
+import {
+  findBookById,
+  mergeBookCollections,
+  normalizeBookCollection,
+  readLocalBooksSnapshot,
+} from "~/utils/books-normalizer";
 
-type RawBookRecord = Record<string, unknown>
+type RawBookRecord = Record<string, unknown>;
 
 const route = useRoute();
 const bookId = route.params.id;
@@ -256,25 +277,48 @@ interface Post {
   timeAgo: string;
   title: string;
   content: string;
-  tags: Array<{ label: string; type: 'category' | 'topic' }>;
+  tags: Array<{ label: string; type: "category" | "topic" }>;
   stars: number;
 }
 
-const activeTab = ref<'posts' | 'reviews' | 'sourcing'>('posts');
+const activeTab = ref<"posts" | "reviews" | "sourcing">("posts");
 
 const tabs = [
-  { id: 'posts' as const, label: 'Related Posts' },
-  { id: 'reviews' as const, label: 'Reviews' },
-  { id: 'sourcing' as const, label: 'Sourcing Options' },
+  { id: "posts" as const, label: "Related Posts" },
+  { id: "reviews" as const, label: "Reviews" },
+  { id: "sourcing" as const, label: "Sourcing Options" },
 ];
 
 // Fetch book data from Laravel API with fallback
-const { getBookById, loading, error, clearError } = useLiterature()
-const staticBooks = normalizeBookCollection(mockBooks as RawBookRecord[])
+const { getBookById, loading, error, clearError } = useLiterature();
+const staticBooks = normalizeBookCollection(mockBooks as RawBookRecord[]);
 
 const book = ref<RawBook | null>(null);
 const bookError = ref<string | null>(null);
-const contentApiBase = useContentApiBase()
+const contentApiBase = useContentApiBase();
+const normalizedTags = computed(() => {
+  const tagDetails = (book.value as { tag_details?: RawBookTag[] } | null)
+    ?.tag_details;
+  if (Array.isArray(tagDetails) && tagDetails.length) {
+    return tagDetails
+      .map((tag) => ({ name: tag.name, type: tag.type }))
+      .filter((tag) => typeof tag.name === "string" && tag.name.trim() !== "");
+  }
+
+  const tags = (book.value as { tags?: Array<RawBookTag | string> } | null)
+    ?.tags;
+  if (!Array.isArray(tags)) {
+    return [];
+  }
+
+  return tags
+    .map((tag) =>
+      typeof tag === "string"
+        ? { name: tag }
+        : { name: tag.name, type: tag.type },
+    )
+    .filter((tag) => typeof tag.name === "string" && tag.name.trim() !== "");
+});
 
 // Fetch related posts
 const relatedPosts = ref<Post[]>([]);
@@ -286,11 +330,11 @@ const fetchRelatedPosts = async () => {
   }
 
   try {
-    const query = book.value.related_posts.map(id => `id=${id}`).join('&');
+    const query = book.value.related_posts.map((id) => `id=${id}`).join("&");
     const data = await $fetch<Post[]>(`${contentApiBase}/posts?${query}`);
     relatedPosts.value = data || [];
   } catch (err) {
-    console.error('Error fetching related posts:', err);
+    console.error("Error fetching related posts:", err);
     relatedPosts.value = [];
   }
 };
@@ -298,15 +342,23 @@ const fetchRelatedPosts = async () => {
 // Fetch book with fallback mechanism
 const fetchBook = async () => {
   bookError.value = null;
-  
+
   try {
     // Check if ID exists in our available data first
     const localSnapshot = readLocalBooksSnapshot(LOCAL_BOOKS_STORAGE_KEY);
-    const allAvailableBooks = mergeBookCollections([staticBooks, localSnapshot]);
-    const bookExists = allAvailableBooks.find(book => String(book.id) === String(bookId));
-    
+    const allAvailableBooks = mergeBookCollections([
+      staticBooks,
+      localSnapshot,
+    ]);
+    const bookExists = allAvailableBooks.find(
+      (book) => String(book.id) === String(bookId),
+    );
+
     // Only try Laravel API if book might exist there or we haven't found it locally
-    if (!bookExists || (bookExists && (bookExists as any).source === 'laravel')) {
+    if (
+      !bookExists ||
+      (bookExists && (bookExists as any).source === "laravel")
+    ) {
       clearError();
       const remote = await getBookById(bookId as string);
       if (remote) {
@@ -315,22 +367,26 @@ const fetchBook = async () => {
         return;
       }
     }
-    
+
     // Fallback to static + local storage
-    const fallback = findBookById(bookId as string, [staticBooks, localSnapshot]);
+    const fallback = findBookById(bookId as string, [
+      staticBooks,
+      localSnapshot,
+    ]);
     if (fallback) {
       book.value = fallback as RawBook;
       clearError();
       await fetchRelatedPosts();
       return;
     }
-    
+
     // If no fallback found
     book.value = null;
-    bookError.value = 'Book not found';
+    bookError.value = "Book not found";
   } catch (err) {
-    bookError.value = err instanceof Error ? err.message : 'Failed to load book';
-    console.error('Error fetching book:', err);
+    bookError.value =
+      err instanceof Error ? err.message : "Failed to load book";
+    console.error("Error fetching book:", err);
   }
 };
 
@@ -339,36 +395,44 @@ onMounted(() => {
   fetchBook();
 });
 
-watch(() => route.params.id, () => {
-  fetchBook();
-});
-
+watch(
+  () => route.params.id,
+  () => {
+    fetchBook();
+  },
+);
 
 const purchaseOptions = computed(() => {
   const options = [];
-  
+
   if (!book?.value?.copy_types) {
     // If no copy_types, return default options
     options.push(
-      { label: 'No Preview Available', url: null, primary: false, disabled: true },
-      { label: 'Buy on Amazon', url: null, primary: false, disabled: false },
-      { label: 'Other Options', url: null, primary: false, disabled: false }
+      {
+        label: "No Preview Available",
+        url: null,
+        primary: false,
+        disabled: true,
+      },
+      { label: "Buy on Amazon", url: null, primary: false, disabled: false },
+      { label: "Other Options", url: null, primary: false, disabled: false },
     );
     return options;
   }
-  
+
   // 1. Find Preview option (highlighted/primary)
   // Check for preview, free, or free_download types
   let previewSource = null;
   const digitalCopy = book.value.copy_types.Digital;
   if (digitalCopy?.sources) {
-    previewSource = digitalCopy.sources.find(source => 
-      source.type === 'preview' || 
-      source.type === 'free' || 
-      source.type === 'free_download'
+    previewSource = digitalCopy.sources.find(
+      (source) =>
+        source.type === "preview" ||
+        source.type === "free" ||
+        source.type === "free_download",
     );
   }
-  
+
   if (previewSource) {
     options.push({
       label: `Read Book on ${previewSource.name}`,
@@ -378,28 +442,32 @@ const purchaseOptions = computed(() => {
     });
   } else {
     options.push({
-      label: 'No Preview Available',
+      label: "No Preview Available",
       url: null,
       primary: false,
       disabled: true,
     });
   }
-  
+
   // 2. Find Purchase option
   // First, check for Digital copy with type "purchase"
   let purchaseSource = null;
   if (digitalCopy?.sources) {
-    purchaseSource = digitalCopy.sources.find(source => source.type === 'purchase');
+    purchaseSource = digitalCopy.sources.find(
+      (source) => source.type === "purchase",
+    );
   }
-  
+
   // If no Digital purchase, check Physical copy with type "online_retailer"
   if (!purchaseSource) {
     const physicalCopy = book.value.copy_types.Physical;
     if (physicalCopy?.sources) {
-      purchaseSource = physicalCopy.sources.find(source => source.type === 'online_retailer');
+      purchaseSource = physicalCopy.sources.find(
+        (source) => source.type === "online_retailer",
+      );
     }
   }
-  
+
   if (purchaseSource) {
     options.push({
       label: `Buy on ${purchaseSource.name}`,
@@ -409,33 +477,38 @@ const purchaseOptions = computed(() => {
     });
   } else {
     options.push({
-      label: 'Buy on Amazon',
+      label: "Buy on Amazon",
       url: null,
       primary: false,
       disabled: false,
     });
   }
-  
+
   // 3. Add "Other Options"
   options.push({
-    label: 'Other Options',
+    label: "Other Options",
     url: null,
     primary: false,
     disabled: false,
   });
-  
+
   return options;
 });
 
-const handlePurchaseClick = (option: { label: string; url: string | null; primary: boolean; disabled: boolean }) => {
+const handlePurchaseClick = (option: {
+  label: string;
+  url: string | null;
+  primary: boolean;
+  disabled: boolean;
+}) => {
   if (option.url && !option.disabled) {
-    window.open(option.url, '_blank', 'noopener,noreferrer');
+    window.open(option.url, "_blank", "noopener,noreferrer");
   }
 };
 
 const handleImageError = (event: Event) => {
   const img = event.target as HTMLImageElement;
-  img.src = '/images/book-cover-placeholder.svg';
+  img.src = "/images/book-cover-placeholder.svg";
 };
 </script>
 
@@ -454,6 +527,59 @@ const handleImageError = (event: Event) => {
 .book-main {
   flex: 1;
   min-width: 0;
+}
+
+.book-nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #64748b;
+}
+
+.breadcrumb-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.breadcrumb-link:hover {
+  color: var(--color-primary);
+  text-decoration: underline;
+}
+
+.breadcrumb-separator {
+  color: #cbd5f5;
+}
+
+.breadcrumb-current {
+  color: var(--color-black);
+  font-weight: 600;
+  max-width: 320px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .book-header {
@@ -709,11 +835,22 @@ const handleImageError = (event: Event) => {
 .tag-item {
   display: inline-block;
   padding: 6px 12px;
-  background-color: var(--color-primary);
-  color: white;
+  background-color: #e8f2ff;
+  color: var(--color-primary);
   border-radius: 16px;
   font-size: 12px;
   font-weight: 600;
+}
+
+.tag-item--primary {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+.tag-item--secondary {
+  background-color: #f1f5f9;
+  color: #0f172a;
+  border: 1px solid #e2e8f0;
 }
 
 .licensing-list,
