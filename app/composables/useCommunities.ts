@@ -1,7 +1,6 @@
 import { ref, readonly, onMounted } from 'vue'
 import { useApi } from './useApi'
 import { normalizePaginatedCollection, type PaginatedCollection } from '~/utils/pagination'
-import mockCommunitiesData from 'mockData/communities.json'
 
 // Interface matching Community/index.vue expectation
 export interface Community {
@@ -39,12 +38,7 @@ const normalizeCommunity = (raw: Record<string, unknown>, source: string = 'unkn
   }
 }
 
-// Fallback data from mock JSON
-const fallbackCommunities: Community[] = Array.isArray(mockCommunitiesData)
-  ? mockCommunitiesData.map((c, i) => normalizeCommunity(c as Record<string, unknown>, 'json'))
-  : []
-
-// Communities API composable with lazy loading and dual-source fetching
+// Communities API composable with lazy loading
 export const useCommunities = (pageSize: number = 10) => {
   const api = useApi()
   const contentApiBase = useContentApiBase()
@@ -126,15 +120,7 @@ export const useCommunities = (pageSize: number = 10) => {
       console.warn('Mock backend failed for communities:', err)
     }
 
-    // 3. Fallback to static JSON if both fail on first page
-    if (apiCommunities.length === 0 && mockCommunities.length === 0 && page.value === 1) {
-      const start = 0
-      const end = pageSize
-      mockCommunities = fallbackCommunities.slice(start, end)
-      mockHasMore = end < fallbackCommunities.length
-    }
-
-    // 4. Merge results (dedupe by id)
+    // 3. Merge results (dedupe by id)
     const seenIds = new Set<string>()
     const merged: Community[] = []
 

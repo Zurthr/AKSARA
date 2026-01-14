@@ -169,7 +169,6 @@ import { useRuntimeConfig, useRoute } from '#imports'
 import { useEvents, useLazyEvents } from '~/composables/useEvents'
 import type { Event as EventItem } from '~/composables/useEvents'
 import { useLocalEvents } from '~/composables/useLocalEvents'
-import mockEvents from 'mockData/events.json'
 import { mergeEventCollections, normalizeEventCollection } from '~/utils/events-normalizer'
 import { useClickTracking } from '~/composables/useClickTracking'
 import { useRecommendations } from '~/composables/useRecommendations'
@@ -214,15 +213,6 @@ const combinedError = computed(() => {
 
 const originalEvents = ref<EventItem[]>([])
 const mockApiEvents = ref<EventItem[]>([])
-const staticEvents = normalizeEventCollection(mockEvents as RawEventRecord[]).map((event, index) => {
-  const candidateId = event.id
-  const resolvedId = candidateId && String(candidateId).trim() !== '' ? candidateId : `static-${index + 1}`
-  return {
-    ...event,
-    id: resolvedId,
-    source: 'json'
-  }
-})
 const contentApiBase = useContentApiBase()
 const { localEvents } = useLocalEvents()
 
@@ -324,10 +314,6 @@ const fetchEvents = async (query?: string) => {
 
   mockApiEvents.value = mockEventsData
   originalEvents.value = laravelEvents.length ? laravelEvents : []
-
-  if (!originalEvents.value.length) {
-    originalEvents.value = staticEvents
-  }
 }
 
 const retryFetch = async () => {
@@ -421,10 +407,9 @@ const mergedEvents = computed<EventItem[]>(() => {
   console.log('⚡ Lazy stream:', lazy.length, 'events')
   console.log('📡 Remote (Laravel):', remote.length, 'events')
   console.log('🧪 Mock API:', mockApi.length, 'events')
-  console.log('📄 Static (JSON):', staticEvents.length, 'events')
   console.log('💾 Local Storage:', normalizedLocalEvents.value.length, 'events')
 
-  const merged = mergeEventCollections([staticEvents, mockApi, normalizedLocalEvents.value, primary])
+  const merged = mergeEventCollections([mockApi, normalizedLocalEvents.value, primary])
   console.log('✅ Final merged:', merged.length, 'events')
   return merged
 })

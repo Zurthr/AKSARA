@@ -1,5 +1,4 @@
 import { ref, readonly } from 'vue'
-import mockEventsData from 'mockData/events.json'
 import { normalizeEventCollection } from '~/utils/events-normalizer'
 import { normalizePaginatedCollection, type PaginatedCollection } from '~/utils/pagination'
 import { useApi } from './useApi'
@@ -51,10 +50,6 @@ export interface EventCreateData {
 export interface EventUpdateData extends Partial<EventCreateData> { }
 
 export type EventsResponse = PaginatedCollection<Event>
-
-const fallbackEvents = normalizeEventCollection(
-  Array.isArray(mockEventsData) ? (mockEventsData as Array<Record<string, unknown>>) : []
-)
 
 // Events API composable
 export const useEvents = () => {
@@ -215,21 +210,19 @@ export function useLazyEvents(pageSize: number = 6) {
     const nextPage = currentPage.value + 1
 
     // ---------------------------------------------------------
-    // 1. Prepare Static Data (Mock + Local)
+    // 1. Prepare Local Data
     // ---------------------------------------------------------
-    let staticEventsSlice: Event[] = []
-    let staticHasMore = false
+    let localEventsSlice: Event[] = []
+    let localHasMore = false
 
     try {
       const localItems = (typeof window !== 'undefined') ? readLocalEvents() : []
-      // Combine Mock + Local
-      const allStaticEvents = [...localItems, ...fallbackEvents] as Event[]
 
       // Filter by Search Query if present
-      let filteredStatic = allStaticEvents
+      let filteredLocal = localItems
       const query = currentSearchQuery.value.trim().toLowerCase()
       if (query) {
-        filteredStatic = allStaticEvents.filter((item) => {
+        filteredLocal = localItems.filter((item) => {
           const title = typeof item.title === 'string' ? item.title.toLowerCase() : ''
           const description = typeof item.description === 'string' ? item.description.toLowerCase() : ''
           return title.includes(query) || description.includes(query)
@@ -238,33 +231,21 @@ export function useLazyEvents(pageSize: number = 6) {
 
       const start = (nextPage - 1) * pageSize
       const end = start + pageSize
-      const rawSlice = filteredStatic.slice(start, end)
+      const rawSlice = filteredLocal.slice(start, end)
 
-      // Map IDs to be unique (prefixed) to avoid collision with Backend IDs
-      staticEventsSlice = rawSlice.map(ev => {
-        // Determine source to apply correct prefix if not already present
-        // fallbackEvents come from events.json
-        // localItems come from localStorage
-
-        // We can check if it exists in localItems to know it's local
-        const isLocal = localItems.some((i: any) => i.id === ev.id)
-        const prefix = isLocal ? 'local-' : 'mock-'
-
-        // If ID is already string and has prefix, leave it. Otherwise prefix it.
+      // Prefix local event IDs to avoid collision with Backend IDs
+      localEventsSlice = rawSlice.map(ev => {
         const idStr = String(ev.id)
-        const newId = (idStr.startsWith('mock-') || idStr.startsWith('local-'))
-          ? idStr
-          : `${prefix}${idStr}`
-
+        const newId = idStr.startsWith('local-') ? idStr : `local-${idStr}`
         return {
           ...ev,
           id: newId
         }
       })
 
-      staticHasMore = end < filteredStatic.length
+      localHasMore = end < filteredLocal.length
     } catch (e) {
-      console.warn("Failed to process static events:", e)
+      console.warn("Failed to process local events:", e)
     }
 
     // ---------------------------------------------------------
@@ -288,8 +269,8 @@ export function useLazyEvents(pageSize: number = 6) {
         apiHasMore = (apiEventsSlice.length > 0) && (explicitMore || assumeMore)
       }
     } catch (e) {
-      console.error("Backend API load failed for events (using fallback logic):", e)
-      if (staticEventsSlice.length === 0 && nextPage === 1) {
+      console.error("Backend API load failed for events:", e)
+      if (localEventsSlice.length === 0 && nextPage === 1) {
         error.value = e instanceof Error ? e : new Error("Failed to load events")
       }
     }
@@ -297,7 +278,7 @@ export function useLazyEvents(pageSize: number = 6) {
     // ---------------------------------------------------------
     // 3. Merge & Update
     // ---------------------------------------------------------
-    const newItems = [...apiEventsSlice, ...staticEventsSlice]
+    const newItems = [...apiEventsSlice, ...localEventsSlice]
 
     if (nextPage === 1) {
       events.value = newItems
@@ -306,9 +287,9 @@ export function useLazyEvents(pageSize: number = 6) {
     }
 
     currentPage.value = nextPage
-    hasMore.value = apiHasMore || staticHasMore
+    hasMore.value = apiHasMore || localHasMore
 
-    if (newItems.length === 0 && !apiHasMore && !staticHasMore) {
+    if (newItems.length === 0 && !apiHasMore && !localHasMore) {
       hasMore.value = false
     }
 

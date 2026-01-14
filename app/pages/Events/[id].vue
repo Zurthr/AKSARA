@@ -175,7 +175,6 @@ import { computed, ref, watch, onBeforeUnmount } from 'vue'
 import { useRoute, useRuntimeConfig } from '#imports'
 import { useEvents } from '~/composables/useEvents'
 import type { Event } from '~/composables/useEvents'
-import mockEvents from 'mockData/events.json'
 import { LOCAL_EVENTS_STORAGE_KEY } from '~/composables/useLocalEvents'
 import { findEventById, mergeEventCollections, normalizeEventCollection, readLocalEventsSnapshot } from '~/utils/events-normalizer'
 
@@ -206,8 +205,6 @@ const eventApi = useEvents()
 const relatedApi = useEvents()
 const { getEventById, loading, error, clearError } = eventApi
 const { getAllEvents } = relatedApi
-
-const staticEvents = normalizeEventCollection(mockEvents as RawEventRecord[])
 
 const event = ref<Event | null>(null)
 const notFound = ref(false)
@@ -314,18 +311,8 @@ const fetchEvent = async (rawId: string | string[] | undefined) => {
   const idKey = String(idParam)
   clearError()
 
-  // 1. Check for Prefixed IDs (Mock or Local)
-  // This avoids calling the Backend for known local/mock items
-  if (idKey.startsWith('mock-')) {
-    const originalId = idKey.replace(/^mock-/, '')
-    const fallback = findEventById(originalId, [staticEvents])
-    if (fallback) {
-      event.value = fallback
-      await loadRelatedEvents(fallback, []) // Load related from static only ideally, or mixed
-      return
-    }
-  }
-
+  // 1. Check for Prefixed IDs (Local)
+  // This avoids calling the Backend for known local items
   if (idKey.startsWith('local-')) {
     const originalId = idKey.replace(/^local-/, '')
     const localSnapshot = readLocalEventsSnapshot(LOCAL_EVENTS_STORAGE_KEY)
@@ -348,7 +335,7 @@ const fetchEvent = async (rawId: string | string[] | undefined) => {
 
   // 3. Fallback for un-prefixed collisions (e.g. if URL was manually entered or legacy)
   const localSnapshot = readLocalEventsSnapshot(LOCAL_EVENTS_STORAGE_KEY)
-  const fallback = findEventById(idKey, [staticEvents, localSnapshot])
+  const fallback = findEventById(idKey, [localSnapshot])
   if (fallback) {
     event.value = fallback
     clearError()
@@ -376,9 +363,9 @@ const loadRelatedEvents = async (current: Event | null, localSnapshot?: Event[])
   try {
     const response = await getAllEvents(1, 40)
     const remote = response?.data ?? []
-    relatedRaw.value = mergeEventCollections([staticEvents, localEvents, remote])
+    relatedRaw.value = mergeEventCollections([localEvents, remote])
   } catch {
-    relatedRaw.value = mergeEventCollections([staticEvents, localEvents])
+    relatedRaw.value = mergeEventCollections([localEvents])
   } finally {
     isRelatedLoading.value = false
   }

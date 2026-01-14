@@ -1,11 +1,6 @@
 /**
  * Click Events Tracking Composable
- * Tracks user interactions for curation algorithm
- * 
- * Features:
- * - Anonymous session ID (stored in localStorage)
- * - Immediate sending using sendBeacon (works during navigation)
- * - Supports: book_click, post_click, community_click, event_click
+ * Tracks user interactions for curation algorithm (local storage only).
  */
 
 export interface ClickEvent {
@@ -78,34 +73,8 @@ const storeRecentEvent = (eventType: RecommendationEvent['event_type'], itemId: 
 }
 
 /**
- * Send event immediately using sendBeacon (works during navigation) or fetch as fallback
+ * Store event locally for unauthenticated recommendation requests.
  */
-function sendEvent(apiEndpoint: string, event: ClickEvent): void {
-    if (typeof window === 'undefined') return
-
-    const payload = JSON.stringify(event)
-
-    // Try sendBeacon first (works even during page navigation)
-    if (navigator.sendBeacon) {
-        const blob = new Blob([payload], { type: 'application/json' })
-        const sent = navigator.sendBeacon(apiEndpoint, blob)
-        if (sent) {
-            console.log(`[ClickTracking] Sent via beacon: ${event.event_type}`, event.item_title)
-            return
-        }
-    }
-
-    // Fallback to fetch (fire and forget)
-    fetch(apiEndpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: payload,
-        keepalive: true // Helps with navigation
-    })
-        .then(() => console.log(`[ClickTracking] Sent via fetch: ${event.event_type}`, event.item_title))
-        .catch(err => console.error('[ClickTracking] Failed:', err))
-}
-
 /**
  * Create a click event object
  */
@@ -129,8 +98,6 @@ function createEvent(
 }
 
 export function useClickTracking() {
-    const contentApiBase = useContentApiBase()
-    const apiEndpoint = `${contentApiBase}/click_events`
 
     /**
      * Track book click
@@ -150,7 +117,6 @@ export function useClickTracking() {
             { author: book.author, rating: book.rating }
         )
         storeRecentEvent('book_click', book.id, 'book')
-        sendEvent(apiEndpoint, event)
     }
 
     /**
@@ -172,7 +138,6 @@ export function useClickTracking() {
             { author: post.author?.name, stars: post.stars }
         )
         storeRecentEvent('post_click', post.id, 'post')
-        sendEvent(apiEndpoint, event)
     }
 
     /**
@@ -192,7 +157,6 @@ export function useClickTracking() {
             { members: community.members }
         )
         storeRecentEvent('community_click', community.id, 'community')
-        sendEvent(apiEndpoint, event)
     }
 
     /**
@@ -213,7 +177,6 @@ export function useClickTracking() {
             { date: eventItem.date, community_id: eventItem.community_id }
         )
         storeRecentEvent('event_click', eventItem.id, 'event')
-        sendEvent(apiEndpoint, event)
     }
 
     /**
@@ -235,7 +198,6 @@ export function useClickTracking() {
         if (search.source_page) {
             event.source_page = search.source_page
         }
-        sendEvent(apiEndpoint, event)
     }
 
     /**
@@ -255,7 +217,6 @@ export function useClickTracking() {
             { members: community.members }
         )
         storeRecentEvent('community_join', community.id, 'community')
-        sendEvent(apiEndpoint, event)
     }
 
     return {

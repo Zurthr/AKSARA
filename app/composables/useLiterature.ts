@@ -1,6 +1,5 @@
 ﻿import { ref, readonly, onMounted } from "vue"
 import { normalizePaginatedCollection, type PaginatedCollection } from "~/utils/pagination"
-import mockBooksData from "mockData/books.json"
 import { useApi } from "./useApi"
 
 export interface LiteratureBook {
@@ -142,8 +141,6 @@ export const mapToNormalizedBook = (book: LiteratureBook): NormalizedBook => {
     sources: Array.from(new Set(sourceNames))
   }
 }
-
-const fallbackBooks = Array.isArray(mockBooksData) ? (mockBooksData as LiteratureBook[]) : []
 
 // Main composable for literature/books API operations
 export const useLiterature = () => {
@@ -365,28 +362,24 @@ export function useLazyBooks(pageSize: number = 12) {
     const nextPage = currentPage.value + 1
 
     // ---------------------------------------------------------
-    // 1. Prepare Static Data (Mock + Local)
+    // 1. Prepare Local Data
     // ---------------------------------------------------------
-    let staticBooksSlice: NormalizedBook[] = []
-    let staticHasMore = false
+    let localBooksSlice: NormalizedBook[] = []
+    let localHasMore = false
 
     try {
       // Get current local books (safe for SSR usually, but best wrapped or checked)
       // Note: readLocalBooks checks localStorage internally with try-catch
       const localItems = (typeof window !== 'undefined') ? readLocalBooks() : []
 
-      // Combine: Local Books First, then Mock Books
-      // We cast them to LiteratureBook to ensure type compatibility
-      const allStaticData = [...localItems, ...fallbackBooks] as LiteratureBook[]
-
       const startIndex = (nextPage - 1) * pageSize
       const endIndex = startIndex + pageSize
-      const rawSlice = allStaticData.slice(startIndex, endIndex)
+      const rawSlice = localItems.slice(startIndex, endIndex)
 
-      staticBooksSlice = rawSlice.map(mapToNormalizedBook)
-      staticHasMore = endIndex < allStaticData.length
+      localBooksSlice = rawSlice.map(mapToNormalizedBook)
+      localHasMore = endIndex < localItems.length
     } catch (err) {
-      console.warn('Failed to load static books fallback:', err)
+      console.warn('Failed to load local books:', err)
     }
 
     // ---------------------------------------------------------
@@ -414,10 +407,10 @@ export function useLazyBooks(pageSize: number = 12) {
       apiHasMore = (pageItems.length > 0) && (explicitMore || assumeMore)
 
     } catch (err) {
-      console.error("Backend API load failed (using fallback/static data only):", err)
+      console.error("Backend API load failed for books:", err)
       // If API fails, we just don't have API items. We do NOT block the UI.
       // We only show error if we have ZERO data from anywhere.
-      if (staticBooksSlice.length === 0 && nextPage === 1) {
+      if (localBooksSlice.length === 0 && nextPage === 1) {
         error.value = err instanceof Error ? err : new Error("Failed to load books")
       }
     }
@@ -427,7 +420,7 @@ export function useLazyBooks(pageSize: number = 12) {
     // ---------------------------------------------------------
 
     // Combined items for this page
-    const newItems = [...apiBooksSlice, ...staticBooksSlice]
+    const newItems = [...apiBooksSlice, ...localBooksSlice]
 
     // Deduplicate by ID if necessary? 
     // Usually Backend IDs (integrity) and Mock IDs (random/fixed) might clash.
@@ -446,10 +439,10 @@ export function useLazyBooks(pageSize: number = 12) {
 
     // Determine overall 'Has More'
     // If either source has more data, we keep going.
-    hasMore.value = apiHasMore || staticHasMore
+    hasMore.value = apiHasMore || localHasMore
 
     // If we got nothing from anywhere, stop.
-    if (newItems.length === 0 && !apiHasMore && !staticHasMore) {
+    if (newItems.length === 0 && !apiHasMore && !localHasMore) {
       hasMore.value = false
     }
 
