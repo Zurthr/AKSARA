@@ -15,8 +15,8 @@ export default defineNuxtConfig({
     head: {
       title: "Aksara | Window to the World",
       link: [
-        { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
-        { rel: "icon", href: "/favicon.ico" }
+        { rel: "icon", type: "image/svg+xml", href: "/favicon.svg?v=1" },
+        { rel: "shortcut icon", href: "/favicon.svg?v=1" }
       ]
     }
   },
