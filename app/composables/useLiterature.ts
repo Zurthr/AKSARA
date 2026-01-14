@@ -24,7 +24,7 @@ export interface LiteratureBook {
 
 // Normalized book interface for UI consumption (used by lazy loading)
 export interface NormalizedBook {
-  id: number;
+  id: number | string;
   title: string;
   author?: string;
   image: string;
@@ -55,7 +55,7 @@ export interface LiteratureBookUpdateData
 export type LiteratureBooksResponse = PaginatedCollection<LiteratureBook>
 
 export interface NormalizedBook {
-  id: number
+  id: number | string
   title: string
   author?: string
   image: string
@@ -129,7 +129,7 @@ export const mapToNormalizedBook = (book: LiteratureBook): NormalizedBook => {
   }
 
   return {
-    id: resolveBookId(book),
+    id: book.id,
     title: book.title,
     author: book.author,
     image: book.cover || book.image_url || "",

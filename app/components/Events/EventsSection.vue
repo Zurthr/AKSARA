@@ -13,10 +13,12 @@
     <div class="events-carousel-wrapper">
       <div class="events-carousel">
         <div class="carousel-container" :style="{ transform: `translateX(-${currentIndex * 100}%)` }">
-          <div
+          <NuxtLink
             v-for="event in displayEvents"
             :key="event.id"
+            :to="`/events/${event.id}`"
             class="event-card"
+            @click="trackEvent(event)"
           >
             <div class="event-image-wrapper">
               <img :src="event.image || event.image_url" :alt="event.title" class="event-background" />
@@ -24,12 +26,12 @@
                 <h3 class="event-title-overlay">{{ event.subtitle }}</h3>
               </div>
             </div>
-            
+
             <div class="event-content">
               <div>
               <h3 class="event-title">{{ event.title }} - {{ event.subtitle }}</h3>
               <p class="event-description">{{ event.description }}</p>
-              
+
               <div class="event-details">
                 <div class="event-location">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -37,7 +39,7 @@
                   </svg>
                   {{ event.location }}
                 </div>
-                
+
                 <div class="event-date">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z" fill="currentColor"/>
@@ -46,11 +48,11 @@
                 </div>
               </div>
             </div>
-              <NuxtLink :to="`/events/${event.id}`" class="explore-btn" @click="trackEvent(event)">
+              <div class="explore-btn">
                 Explore Event
-              </NuxtLink>
+              </div>
             </div>
-          </div>
+          </NuxtLink>
         </div>
       </div>
 
@@ -279,6 +281,15 @@ onUnmounted(() => {
   background: #ffffff;
   border-radius: 16px;
   overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.event-card:hover {
+  transform: scale(1.01);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
 @media (max-width: 1040px) {
