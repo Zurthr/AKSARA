@@ -47,15 +47,6 @@
       </button>
     </form>
 
-    <div class="divider">
-      <span>Or continue with</span>
-    </div>
-
-    <button type="button" class="btn-google">
-      <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" class="google-icon">
-      Sign in with Google
-    </button>
-
     <p class="footer-text">
       Don't have an account? 
       <NuxtLink to="/auth/register" class="link">Sign up</NuxtLink>
@@ -243,49 +234,6 @@ watchEffect(() => {
   padding: 12px;
   border-radius: 8px;
   font-size: 14px;
-}
-
-.divider {
-  display: flex;
-  align-items: center;
-  text-align: center;
-  color: #94a3b8;
-  font-size: 12px;
-}
-
-.divider::before,
-.divider::after {
-  content: '';
-  flex: 1;
-  border-bottom: 1px solid #e2e8f0;
-}
-
-.divider span {
-  padding: 0 12px;
-}
-
-.btn-google {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  background-color: white;
-  border: 1px solid #e2e8f0;
-  color: #0f172a;
-  font-weight: 600;
-  padding: 12px;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.btn-google:hover {
-  background-color: #f8fafc;
-}
-
-.google-icon {
-  width: 20px;
-  height: 20px;
 }
 
 .footer-text {

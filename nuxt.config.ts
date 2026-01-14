@@ -11,6 +11,15 @@ export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
   css: ["~/assets/global.css"],
+  app: {
+    head: {
+      title: "Aksara | Window to the World",
+      link: [
+        { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
+        { rel: "icon", href: "/favicon.ico" }
+      ]
+    }
+  },
   alias: {
     images: fileURLToPath(new URL("./assets/images", import.meta.url)),
     style: fileURLToPath(new URL("./assets/style", import.meta.url)),

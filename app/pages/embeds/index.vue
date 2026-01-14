@@ -116,6 +116,7 @@ interface Embed {
 definePageMeta({
   title: "Embeds",
   description: "Manage and track your embedded content",
+  middleware: 'auth'
 });
 
 // Helper function to get thumbnail URL based on embed type
