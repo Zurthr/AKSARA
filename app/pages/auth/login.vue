@@ -47,6 +47,31 @@
       </button>
     </form>
 
+    <div class="demo-credentials">
+      <div class="demo-list">
+        <button
+          v-for="user in demoUsers"
+          :key="user.email"
+          type="button"
+          class="demo-card"
+          @click="applyDemoUser(user)"
+        >
+          <span class="demo-role">{{ user.role }}</span>
+          <span class="demo-email">{{ user.email }}</span>
+          <span class="demo-password">Password: {{ user.password }}</span>
+          <span class="demo-actions">
+            <button
+              type="button"
+              class="demo-copy"
+              @click.stop="copyDemoCredentials(user)"
+            >
+              Copy credentials
+            </button>
+          </span>
+        </button>
+      </div>
+    </div>
+
     <p class="footer-text">
       Don't have an account? 
       <NuxtLink to="/auth/register" class="link">Sign up</NuxtLink>
@@ -56,77 +81,137 @@
 
 <script setup lang="ts">
 definePageMeta({
-  layout: 'auth'
+  layout: "auth",
 });
 
-const auth = useAuth()
-const router = useRouter()
+const auth = useAuth();
+const router = useRouter();
 
 const form = ref({
-  email: '',
-  password: '',
-  rememberMe: false
+  email: "",
+  password: "",
+  rememberMe: false,
 });
 
-const localError = ref('')
-const loading = computed(() => auth.isLoading.value)
+const localError = ref("");
+const loading = computed(() => auth.isLoading.value);
+
+const demoUsers = [
+  {
+    role: "Admin",
+    email: "admin@aksara.com",
+    password: "admin123",
+  },
+  {
+    role: "Student",
+    email: "john.doe@aksara.com",
+    password: "password123",
+  },
+];
+
+const applyDemoUser = (user: { email: string; password: string }) => {
+  form.value.email = user.email;
+  form.value.password = user.password;
+};
+
+const copyDemoCredentials = async (user: {
+  email: string;
+  password: string;
+}) => {
+  const text = `Email: ${user.email}\nPassword: ${user.password}`;
+  try {
+    await navigator.clipboard.writeText(text);
+  } catch {
+    const textarea = document.createElement("textarea");
+    textarea.value = text;
+    textarea.setAttribute("readonly", "");
+    textarea.style.position = "absolute";
+    textarea.style.left = "-9999px";
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand("copy");
+    document.body.removeChild(textarea);
+  }
+};
 
 function mapAuthErrorMessage(message: string): string {
-  const normalized = message.toLowerCase()
+  const normalized = message.toLowerCase();
 
-  if (normalized.includes('credential') || normalized.includes('password') || normalized.includes('unauthorized')) {
-    return 'Email atau kata sandi yang Anda masukkan salah. Silakan periksa kembali.'
+  if (
+    normalized.includes("credential") ||
+    normalized.includes("password") ||
+    normalized.includes("unauthorized")
+  ) {
+    return "Email atau kata sandi yang Anda masukkan salah. Silakan periksa kembali.";
   }
 
-  if (normalized.includes('email') && (normalized.includes('not') || normalized.includes('exist') || normalized.includes('found'))) {
-    return 'Kami tidak menemukan akun dengan email tersebut. Silakan daftar terlebih dahulu.'
+  if (
+    normalized.includes("email") &&
+    (normalized.includes("not") ||
+      normalized.includes("exist") ||
+      normalized.includes("found"))
+  ) {
+    return "Kami tidak menemukan akun dengan email tersebut. Silakan daftar terlebih dahulu.";
   }
 
-  if (normalized.includes('inactive') || normalized.includes('verify') || normalized.includes('unverified')) {
-    return 'Akun Anda belum aktif. Periksa email Anda untuk menyelesaikan verifikasi.'
+  if (
+    normalized.includes("inactive") ||
+    normalized.includes("verify") ||
+    normalized.includes("unverified")
+  ) {
+    return "Akun Anda belum aktif. Periksa email Anda untuk menyelesaikan verifikasi.";
   }
 
-  if (normalized.includes('throttle') || normalized.includes('too many') || normalized.includes('attempt')) {
-    return 'Terlalu banyak percobaan login. Coba lagi dalam beberapa menit.'
+  if (
+    normalized.includes("throttle") ||
+    normalized.includes("too many") ||
+    normalized.includes("attempt")
+  ) {
+    return "Terlalu banyak percobaan login. Coba lagi dalam beberapa menit.";
   }
 
-  if (normalized.includes('network') || normalized.includes('status 5') || normalized.includes('server')) {
-    return 'Terjadi masalah pada server. Silakan coba lagi nanti.'
+  if (
+    normalized.includes("network") ||
+    normalized.includes("status 5") ||
+    normalized.includes("server")
+  ) {
+    return "Terjadi masalah pada server. Silakan coba lagi nanti.";
   }
 
-  return message
+  return message;
 }
 
 const displayError = computed(() => {
-  const message = localError.value || auth.error.value || ''
-  return message ? mapAuthErrorMessage(message) : ''
-})
+  const message = localError.value || auth.error.value || "";
+  return message ? mapAuthErrorMessage(message) : "";
+});
 
 const handleLogin = async () => {
-  localError.value = ''
-  auth.clearError()
+  localError.value = "";
+  auth.clearError();
 
   const success = await auth.login({
     email: form.value.email,
-    password: form.value.password
-  })
+    password: form.value.password,
+  });
 
   if (success) {
-    const redirectTo = router.currentRoute.value.query.redirect as string || '/'
-    await router.push(redirectTo)
-    return
+    const redirectTo =
+      (router.currentRoute.value.query.redirect as string) || "/";
+    await router.push(redirectTo);
+    return;
   }
 
-  const fallbackMessage = auth.error.value || 'Login gagal. Silakan coba lagi.'
-  localError.value = fallbackMessage
-}
+  const fallbackMessage = auth.error.value || "Login gagal. Silakan coba lagi.";
+  localError.value = fallbackMessage;
+};
 
 // Redirect if already authenticated
 watchEffect(() => {
   if (auth.isAuthenticated.value) {
-    router.push('/')
+    router.push("/");
   }
-})
+});
 </script>
 
 <style scoped>
@@ -246,5 +331,75 @@ watchEffect(() => {
   color: #0f172a;
   font-weight: 700;
   text-decoration: none;
+}
+
+.demo-credentials {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.demo-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #475569;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-align: center;
+}
+
+.demo-list {
+  display: grid;
+  gap: 12px;
+}
+
+.demo-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  background-color: #f8fafc;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.2s, transform 0.1s;
+}
+
+.demo-card:hover {
+  border-color: #FFDA49;
+}
+
+.demo-card:active {
+  transform: scale(0.99);
+}
+
+.demo-role {
+  font-size: 13px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.demo-email,
+.demo-password {
+  font-size: 13px;
+  color: #475569;
+}
+
+.demo-actions {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 4px;
+}
+
+.demo-copy {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: #0f172a;
+  text-decoration: underline;
+  cursor: pointer;
 }
 </style>
