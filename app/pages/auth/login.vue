@@ -49,12 +49,15 @@
 
     <div class="demo-credentials">
       <div class="demo-list">
-        <button
+        <div
           v-for="user in demoUsers"
           :key="user.email"
-          type="button"
           class="demo-card"
           @click="applyDemoUser(user)"
+          @keydown.enter="applyDemoUser(user)"
+          @keydown.space.prevent="applyDemoUser(user)"
+          role="button"
+          tabindex="0"
         >
           <span class="demo-role">{{ user.role }}</span>
           <span class="demo-email">{{ user.email }}</span>
@@ -67,8 +70,14 @@
             >
               Copy credentials
             </button>
+            <span
+              class="demo-copied"
+              :class="{ 'is-visible': copiedEmail === user.email }"
+            >
+              Copied
+            </span>
           </span>
-        </button>
+        </div>
       </div>
     </div>
 
@@ -114,6 +123,9 @@ const applyDemoUser = (user: { email: string; password: string }) => {
   form.value.password = user.password;
 };
 
+const copiedEmail = ref<string | null>(null);
+let copiedTimeout: ReturnType<typeof setTimeout> | null = null;
+
 const copyDemoCredentials = async (user: {
   email: string;
   password: string;
@@ -132,6 +144,14 @@ const copyDemoCredentials = async (user: {
     document.execCommand("copy");
     document.body.removeChild(textarea);
   }
+
+  copiedEmail.value = user.email;
+  if (copiedTimeout) {
+    clearTimeout(copiedTimeout);
+  }
+  copiedTimeout = setTimeout(() => {
+    copiedEmail.value = null;
+  }, 2000);
 };
 
 function mapAuthErrorMessage(message: string): string {
@@ -401,5 +421,19 @@ watchEffect(() => {
   color: #0f172a;
   text-decoration: underline;
   cursor: pointer;
+}
+
+.demo-copied {
+  font-size: 12px;
+  font-weight: 600;
+  color: #16a34a;
+  opacity: 0;
+  transform: translateY(-2px);
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.demo-copied.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 </style>
